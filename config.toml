@@ -1,4 +1,4 @@
-baseURL = "https://project-hop.org/"
+baseURL = "https://hop.apache.org/"
 languageCode = "en-us"
 title = "Hop"
 relativeURLs = true
