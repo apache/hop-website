@@ -1,0 +1,79 @@
+---
+title: "Roundup April 2020"
+date: 2020-05-03T12:01:56+02:00
+draft: false
+---
+
+# Roundup April 2020
+
+Another month has passed time for a new roundup! Previous month has been a hectic one, we had our first preview version (0.10) and are currently getting close to releasing 0.20!
+
+We would like to thank everyone that tested 0.10 and created feature requests and issues, we have not yet been able to solve all of them but so many changes were made we feel like 0.20 is at its place.
+
+We have continued to walk the path of major code cleanup and refactoring. Because we don't want to bore you with the technical stuff (those interested in the technical stuff come and ask in our https://chat.project-hop.org[#dev channel] ) here is an overview of what you can see.
+
+
+## UI
+
+This topic will keep popping up the next months because so much is changing here!
+
+Some of you may have noticed, but there was no context menu yet when selecting a hop in HOP, this has now been resolved.
+
+image:/img/Roundup-2020-04/roundup-2020-04-0001.png[Interface 1 , 50% , align="left" , link="/img/Roundup-2020-04/roundup-2020-04-0001.png"]
+
+You will also notice some new functionality has been added to manage environments and unit tests, more on this later.
+
+image:/img/Roundup-2020-04/roundup-2020-04-0002.png[Interface 2 , 50% , align="left" , link="/img/Roundup-2020-04/roundup-2020-04-0002.png"]
+
+
+## Plugins
+
+The effort of integrating more transforms in HOP is moving at a steady pace! We found a highly trained monkey that is doing most of the work! (Thanks Bart!)
+As the API is changing during the migration of the transforms the process is getting a bit more complex but we are getting closer.
+
+Current status:
+
+* Database plugins: all done
+* Workflow actions: all done
+* Transform actions: 90 done (+50 from previous overview), about 50 to go
+
+
+## Environments
+
+The concept of using Environments is not new, the idea has been around for a while. For those of you that work in a setting where you have multiple set-ups/environments it has always been a hassle. You had to copy around properties files and change database connections when switching between systems or teams. The environments solve this! It allows you to create multiple set-ups and you can switch between them without restarting the GUI.
+It even remembers which tabs you were working on previously and re-opens them for you.
+
+image:/img/Roundup-2020-04/roundup-2020-04-0003.png[Interface 2 , 50% , align="left" , link="/img/Roundup-2020-04/roundup-2020-04-0003.png"]
+
+To see the Environments in action you can watch following short video:
+
+video::Z-00mluzwuA[youtube, width=50%, height=400px]
+
+## Unit testing
+
+Unit testing is a process where you check if your code, or in this case your data pipelines, respond the way you intended them to do. This is done by adding a sample dataset to a pipeline and then validating the result against another dataset. When the result matches your "Golden Data" the test passes, when it doesn't you raise an error. This is a great way to see if all your special use cases are covered by the pipeline. It can also be used to make upgrading to a new version of the software hassle free.
+
+We added this testing framework because we believe your data pipelines should be managed like regular software projects, and these require testing and validation. We will also be using this to add another layer to our own code quality. Not all checks and tests can be done using regular Unit tests so we are planning to check every transform with a unit test. Spotting regressions and before they reach the final product.
+
+Following video shows unit testing in action:
+
+video::rH5eLMB06xM[youtube, width=50%, height=400px]
+
+
+## Documentation
+
+The last couple of weeks we have been hearing the same question multiple times. And we feel the same! 
+Currently our Documentation is, how should we put it... A bit lacking... We have been focussing mainly on code to get you this 0.10 and now 0.20 release.
+
+We do have a great link:../../manual/latest/getting-started.html[getting started] but our link:../../manual/latest/[user manual] is currently falling a bit short.
+After the 0.20 release we will focus on catching up on documentation, a search engine will also be integrated in the docs.
+
+If there is anyone willing to help write documentation contact us and we will be happy to get you started.
+
+
+## Future
+
+In the near future you can expect a 0.20 release, we continue our cleanup of the code and bug hunt! 
+
+Next up is a configuration system to change and manage options, and of course porting those final transforms. After that we will be adding VFS in HOP.
+

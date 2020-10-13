@@ -1,0 +1,118 @@
+---
+title: "Roundup June 2020"
+date: 2020-06-27T12:01:56+02:00
+draft: false
+---
+
+# Roundup June 2020
+
+Another month has passed, so here we are with a new roundup!
+
+A lot of work has been done in the last couple of weeks. A huge thanks to https://twitter.com/mattcasters[Matt], who implemented most of the functionality that was added this month.
+
+Here's what happened in June!
+
+## Environments -> Projects, Environments and Purposes
+
+The environments system, introduced earlier this year, was significantly extended.
+
+* a **project** is a set of workflows and pipelines with their datasets, tests etc.
+* **environments** contain configurations for the environments you want to run a project's workflows and pipelines. Each environment has a **purpose**: Development, Testing, Acceptance, Production, Continuous Integration or Common Build
+
+Projects and environments inherit variables and configuration from higher levels, but can can also have their own.
+
+All functionality to list, create, edit and delete projects, environments and their purpose is available in the `hop-config` command line tool as well.
+
+image:/img/Roundup-2020-06/hop-config.png[Hop Config, 65% , align="left" , link="/img/Roundup-2020-06/hop-config.png"]
+
+## Apache VFS support
+
+Hop now has support for Apache VFS, which provides a single API for accessing various different file systems.
+As always, VFS support is implemented as plugins. The first plugins for AWS S3 and Google Drive are available, with support for Azure, Google Storage and HDFS on the way.
+
+## New File Dialog
+
+Hop now comes with a new file and folder dialog that does a lot more than just browsing for files and folders:
+
+* project aware: the dialog 'knows' your project directory and navigates to that folder by default
+* supports bookmarks for your favorite files and folders
+* shows file details in the bottom section, greyed out for inaccessible files etc
+* keeps full history of your activities
+
+image:/img/Roundup-2020-06/hop-file-dialog.png[Hop File Dialog, 65% , align="left" , link="/img/Roundup-2020-06/hop-file-dialog.png"]
+
+## Hop Git
+
+Hop Gui now comes with git integrated.
+Pull, commit, push, all without having to leave Hop Gui, and without interruption to the flow of your work.
+
+This is a first but functional implementation, based on the SpoonGit plugin originally written by https://twitter.com/HiromuHota[Hiromu Hota]
+
+image:/img/Roundup-2020-06/hop-git.png[Hop Git, 65% , align="left" , link="/img/Roundup-2020-06/hop-git.png"]
+
+## WebHop
+
+WebHop is another area that has seen a lot of progress in the last month. The code was moved from https://twitter.com/HiromuHota[Hiromu]'s fork to a separate https://github.com/project-hop/hop/tree/web[web] branch in the Hop repository.
+
+In earlier builds, workflows and pipelines couldn't be opened or saved in WebHop. That issue is now resolved with the new file dialog.
+
+With the scaling and overall user interface improvements, Hop Web is taking shape to become a viable alternative to the default Hop Gui. Since both environments serve different purposed, we'll continue to work on both Hop Gui and WebHop.
+
+image:/img/Roundup-2020-06/hop-web.png[Hop Web, 65% , align="left" , link="/img/Roundup-2020-06/hop-web.png"]
+
+## Search Perspective
+
+From anywhere in Hop-Gui, hit CTRL-F. This universal shortcut opens the brand new Hop search perspective.
+
+The 'Location' dropdown lets you search objects currently loaded in Hop Gui or in all of Project Hop. The search string (optionally) handles regular expressions and case sensitivity.
+
+From the search results, double clicking an item directly opens the selected object.
+
+As projects grow, search becomes a necessity instead of an option. As such, we're confident the Search perspective will become an indispensable tool in your day-to-day Hop work.
+
+image:/img/Roundup-2020-06/hop-ctrl-f.png[Hop Search, 65% , align="left" , link="/img/Roundup-2020-06/hop-ctrl-f.png"]
+
+## Hop Preview
+
+The last addition to Hop Gui in this list is a small (in size) but very useful new data preview feature.
+
+The transforms now come with tiny icons at their bottom right corner. When clicked, the icons show a preview of the data at that transform's processing in the pipeline.
+
+image:/img/Roundup-2020-06/hop-preview.png[Hop Preview, 65% , align="left" , link="/img/Roundup-2020-06/hop-preview.png"]
+
+The preview (number of rows, none, first, last, random) can be configured in the local run configuration.
+
+image:/img/Roundup-2020-06/hop-preview-config.png[Hop Preview Config, 65% , align="left" , link="/img/Roundup-2020-06/hop-preview-config.png"]
+
+## Metastore -> Hop Metadata
+
+While reviewing our licensing in preparation for the Apache incubation process, we found the Metastore to be LGPL-licensed.
+
+This LGPL module created a licensing conflict (as is still the case in Kettle) with the rest of the (APL2.0 licensed) Hop code.
+
+As we've gotten used to turn problems into opportunities, we decided to get rid of the Metastore entirely.
+
+Exit Metastore, enter Hop Metadata, a much more lightweight and flexible serialization component for all Hop metadata objects. All Hop Metadata objects are now plugins, serialized in JSON.
+
+## Plugins
+
+The most important plugins have now been ported.
+
+We'll continue existing Kettle steps to Hop and will start to include third party steps on a per-need basis.
+
+
+## Documentation
+
+Documentation writing has started, but is a tedious and time-consuming task, so bear with us.
+
+Feel free to take a look at the documentation we currently have, and https://chat.project-hop.org/[reach out] if you'd like to contribute documentation.
+We consider any error or incorrect information in the documentation to be a bug. Please create a https://jira.project-hop.org[ticket] if you run into an issue.
+
+https://twitter.com/usbrandon[Brandon] contributed a first video on how to download, install and run Hop on Windows to our https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA[YouTube channel]. Thanks a lot, Brandon!
+
+
+video::RMIOTmZK-YE[youtube, width=75%, height=400px]
+
+## Future
+
+While we're preparing for a 0.30 release, we'll continue our code cleanup, bug hunting and documentation efforts!

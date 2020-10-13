@@ -1,0 +1,16 @@
+---
+title: Cookies used by this site
+---
+
+=== First Party cookies
+We use cookies to store website settings they contain following items:
+
+* acceptance of our cookie banner
+
+
+=== Third Party cookies
+
+
+When accepting the cookie banner this website uses cookies to monitor website performance, to do this Google Analytics is used. When your browser supports doNotTrack no cookies are placed on your computer and you will not see a cookie banner from this website. Rejecting our cookies will not result in less functionality on the website.
+
+We do encourage to accept these cookies, they provide valuable information on how the website is used and what pages need extra attention.

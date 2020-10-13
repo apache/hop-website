@@ -1,0 +1,112 @@
+---
+title: "Documentation Contribution Guide"
+---
+
+Good documentation is crucial for any kind of software. This is especially true for sophisticated software systems such as distributed data processing engines like Project Hop. The Project Hop community aims to provide concise, precise, and complete documentation and welcomes any contribution to improve Project Hop’s documentation.
+
+====
+Our documentation is not yet fully implemented
+
+ideas and contributions are very welcome, come discuss with us on our https://chat.project-hop.org[chat].
+====
+
+. <<doc-types, Types of documentation>>
+. <<obtain-docs, Obtain the documentation sources>>
+. <<before-start, Before you start start working on the documentation...>>
+. <<update-or-extend, Update or extend the documentation>>
+. <<multi-lang-doc, Documentation translations>>
+. <<submit-doc, Submit your contribution>>
+
+
+== anchor:doc-types[]Types of documentation
+
+Project Hop has multiple types of documentation, each type is directed to a different audience and covers other use cases. We are maintaining a user manual which contains basic and more advanced instructions on how to use and set up Hop. 
+
+=== User manual
+The goal for the user manual is to give a general feeling to how the application works, which transforms and actions are available and a guide on how to use them. A default template is used to explain how transforms and actions work, an Archetype is included in the repository to use as a template.
+
+=== Technical documentation
+Technical documentation contains best practices and general guidelines on how to use Hop in several environments and use cases.
+
+=== API documentation
+This is code documentation and only needed when you want to explore the internals of Hop or contribute code.
+
+
+== anchor:obtain-docs[]Obtain the documentation sources
+
+Depending on the type of documentation the project Hop documentation is maintained in the separate git repository as the code base.
+
+=== User manual and Technical documentation
+
+The easiest way to contribute documentation is to fork Hop’s repository on GitHub into your own GitHub account by clicking on the fork button at the top right. If you have no GitHub account, you can create one for free.
+
+Next, clone your fork to your local machine.
+
+[frame=topbot]
+|===
+|git clone https://github.com/<your-user-name>/hop-doc.git
+|===
+
+The user manual documentation is located in the hop-user-manual/ subdirectory.
+The technical documentation is located in the hop-technical-documentation/ subdirectory.
+
+
+=== API documentation
+To contribute to the API and code documentation create a fork of Hop's code repository.
+
+[frame=topbot]
+|===
+|git clone https://github.com/<your-user-name>/hop.git
+|===
+
+The API documentation is located in the docs/ subdirectory
+
+
+== anchor:before-start[]Before you start start working on the documentation...
+
+… please make sure there exists a Jira issue that corresponds to your contribution. We require all documentation changes to refer to a Jira issue, except for trivial fixes such as typos.
+
+== anchor:update-or-extend[]Update or extend the documentation
+
+The Hop documentation is written in Asciidoc. Asciidoc is a lightweight markup language which can be translated to HTML.
+
+In order to update or extend the documentation you have to modify the Asciidoc (.adoc) files.
+For more information on Asciidoc check out http://asciidoc.org/[this] website.
+
+====
+Still working on a way to validate the user manual and technical documentation in a stand alone mode
+see https://project-hop.atlassian.net/browse/HOP-30[HOP-30]
+====
+
+//[frame=topbot]
+//|===
+//|cd docs
+//|./build_docs.sh -p
+//|===
+//
+//The script compiles the Markdown files into static HTML pages and starts a local webserver. Open your browser at http://localhost:4000 to view the compiled documentation including your changes. The served documentation is automatically re-compiled and updated when you modify and save Markdown files and refresh your browser.
+
+Please feel free to ask any questions you have on the developer chat channel.
+
+
+== anchor:multi-lang-doc[] Documentation translations
+
+We are planning on providing all documentation in multiple languages. We are looking for contributors that want to work with us and make this possible! If you are interested to maintain a translation language feel free to contact us on our https://chat.project-hop.org[chat].
+
+
+
+== anchor:submit-doc[]Submit your contribution
+
+Project Hop accepts documentation contributions through the GitHub as Pull Requests. Pull requests are a simple way of offering a patch by providing a pointer to a code branch that contains the changes.
+
+To prepare and submit a pull request follow these steps.
+
+Commit your changes to your local git repository. The commit message should point to the corresponding Jira issue by starting with [HOP-XXXX].
+
+Push your committed contribution to your fork of the Hop repository at GitHub.
+
+git push origin myBranch
+
+Go to the website of your repository fork (https://github.com/<your-user-name>/hop-doc) and use the “Create Pull Request” button to start creating a pull request. Make sure that the base fork is hop master and the head fork selects the branch with your changes. Give the pull request a meaningful description and submit it.
+
+It is also possible to attach a patch to a Jira issue.

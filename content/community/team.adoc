@@ -1,0 +1,23 @@
+---
+title: "Team"
+---
+
+This page lists who we are. By all means add yourself to the list - lets sort it in alphabetical order (based on last name)
+
+== Committers
+
+
+|===
+| Name  | ID | Organisation | Social
+
+| Matt Casters | mattcasters | Neo4j | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/mattcasters", window="_blank"]
+| Bart Maertens | bamaer | Know.bi | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/bartmaer", window="_blank"]
+| Hans Van Akelyen | hansva | Know.bi | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/hans_va", window="_blank"]
+|===
+
+== Contributors
+
+|===
+| Name  | ID | Organisation | Social
+|===
+

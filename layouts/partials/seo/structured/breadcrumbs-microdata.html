@@ -1,0 +1,26 @@
+{{ $url := replace .Permalink .Site.BaseURL "" }}
+{{ $local := newScratch }}
+{{ $local.Add "path" .Site.BaseURL }}
+{{ $local.Add "breadcrumb" (slice (dict "url" .Site.BaseURL "name" .Site.Title "position" 1 )) }}
+{{ range $index, $element := split $url "/" }}
+  {{ $local.Add "path" $element }}
+  {{ $local.Add "path" "/" }}
+  {{ if ne $element "" }}
+    {{ $local.Add "breadcrumb" (slice (dict "url" ($local.Get "path") "name" . "position" (add $index 2))) }}
+  {{ end }}
+{{ end }}
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{{ range $local.Get "breadcrumb" }}{{ if ne .position 1 }},{{ end }}{
+        "@type": "ListItem",
+        "position": {{ .position }},
+        "item": {
+          "@id": {{ .url }},
+          "name": "{{ .name }}"
+        }
+    }{{ end }}]
+}
+</script>

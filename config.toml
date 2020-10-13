@@ -1,0 +1,121 @@
+baseURL = "https://project-hop.org/"
+languageCode = "en-us"
+title = "Hop"
+relativeURLs = true
+disablePathToLower = true
+staticDir = ["static", "documentation"]
+disableKinds = ["taxonomyTerm"]
+enableRobotsTXT = true
+
+[params]
+    socialProfiles = ["https://twitter.com/projhop"]
+    organizationLogo = "/img/hop-logo.svg"
+    organizationDescription = "Hop"
+
+[Author]
+    name = "The Hop Team"
+
+[[menu.main]]
+    name = "Documentation"
+    identifier = "docs"
+    weight = 1
+
+[[menu.main]]
+    name = "Getting started"
+    parent = "docs"
+    weight = 1
+    identifier = "docs-getting-started"
+    url = "/manual/latest/getting-started.html"
+
+[[menu.main]]
+    name = "User manual"
+    parent = "docs"
+    weight = 2
+    identifier = "docs-user-manual"
+    url = "/manual/latest/"
+
+[[menu.main]]
+    name = "Technical Documentation"
+    parent = "docs"
+    weight = 3
+    identifier = "docs-tech-manual"
+    url = "/tech-manual/latest/"
+
+[[menu.main]]
+    name = "Developer Documentation"
+    parent = "docs"
+    weight = 4
+    identifier = "docs-dev-manual"
+    url = "/dev-manual/latest/"
+
+[[menu.main]]
+    name = "Architecture"
+    parent = "docs"
+    weight = 5
+    identifier = "docs-architecture"
+    url = "/docs/architecture/"
+
+[[menu.main]]
+    name = "Roadmap"
+    parent = "docs"
+    weight = 6
+    identifier = "docs-roadmap"
+    url = "/docs/roadmap/"
+
+[[menu.main]]
+    name = "Q&A"
+    parent = "docs"
+    weight = 7
+    identifier = "docs-qa"
+    url = "/docs/qa"
+
+[[menu.main]]
+    name = "Community"
+    identifier = "community"
+    weight = 2
+
+[[menu.main]]
+    name = "Contributing"
+    parent = "community"
+    weight = 1
+    identifier = "community-contributing"
+    url = "/community/contributing/"
+
+[[menu.main]]
+    name = "Tools"
+    parent = "community"
+    weight = 2
+    identifier = "community-tools"
+    url = "/community/tools/"
+
+[[menu.main]]
+    name = "Team"
+    parent = "community"
+    weight = 3
+    identifier = "community-team"
+    url = "/community/team/"
+
+[[menu.main]]
+    name = "Download"
+    weight = 3
+    identifier = "download"
+    url = "/download/download/"
+
+[[menu.main]]
+    name = "About"
+    identifier = "about"
+    weight = 4
+
+[[menu.main]]
+    name = "License"
+    parent = "about"
+    weight = 1
+    identifier = "about-license"
+    url = "https://www.apache.org/licenses/LICENSE-2.0"
+
+
+[module]
+
+  [[module.mounts]]
+    source = "documentation/_/data"
+    target = "data"

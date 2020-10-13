@@ -1,0 +1,15 @@
+---
+title: "Q&A"
+---
+
+* Is this a fork?
+** Yes this is a fork, in the sense that we used Kettle 8.2.0.7 as a starting point for Project Hop. Project Hop wants to used that as a starting point to explore the future of data integration. Check out the link:../roadmap/[Roadmap] and link:../architecture/[Architecture] sections.
+* Is this a hostile fork?
+** By all means no! Kettle will remain a stable and trustworthy platform for data integration. Project Hop is a way to decouple the risk of experimentation and refactoring from the stability needs of Pentaho Data Integration.  As such we’ve invited Hitachi Vantara to contribute to Project Hop, just like we invite every individual in the entire Kettle and data engineering community to contribute.  We sincerely hope that cool innovations from this project will find its way into other codebases if they pan out.
+* Will Hop remain open source?
+** Hop is and will always be open source.  Project Hop will start incubation with the Apache Software Foundation as soon as this is possible.  This means when the code is different enough from the existing Kettle codebase and when a certain stability in and size of the project team has been reached.
+* Can I contribute to Project Hop?
+** link:../../community/contributing/[Contributing]
+* What are the plans for Project Hop
+** link:../roadmap/[Roadmap]
+

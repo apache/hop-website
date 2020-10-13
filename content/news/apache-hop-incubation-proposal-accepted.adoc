@@ -1,0 +1,66 @@
+---
+title: ""
+date: 2020-09-08T12:01:56+02:00
+draft: false
+:imagesdir: /
+---
+
+## Apache Hop - Incubation Proposal Submitted
+
+From the very start with Hop, we haven't exactly been secretive about our intention to join the https://apache.org[Apache Software Foundation (ASF)] and donate Project Hop to the ASF as Apache Hop.
+
+After almost a year of work on Project Hop, we're very happy to announce we've reached a first milestone: the Apache Hop https://cwiki.apache.org/confluence/display/INCUBATOR/HopProposal[proposal] was https://mail-archives.apache.org/mod_mbox/incubator-general/202009.mbox/browser[submitted] to the incubator mailing list on September, 9th and has been accepted!
+
+As Apache Hop and as part of the Apache Software Foundation, we believe we'll be able to reach more people, work together with many other projects and organizations, and allow Hop to make a bigger dent than we could do on our own.
+
+## Great news, but what does this mean?
+
+Most people are at least somewhat familiar with what the ASF is and what it does, but there may be some uncertainties or doubts.
+
+Let's walk through a couple of questions:
+
+image:/img/asf_logo_wide.png[Apache Software Foundation, 85% , align="left" , link="/img/asf_logo_wide.png"]]
+
+### Why Apache Hop, what will happen to Project Hop?
+
+By donating Project Hop to the ASF, we'll guarantee that no individual or organization has full control over the software and make sure Hop will remain free (https://en.wikipedia.org/wiki/Gratis_versus_libre#%22Free_beer%22_vs_%22freedom_of_speech%22_distinction[as in speech]) forever.
+
+By getting Hop out to a larger audience, we believe the ASF will enable Hop to reach a much larger audience and user base and attract contributions from individuals and organizations that would be reluctant without the Apache brand.
+
+After the incubation process, _podlings_ (incubating projects) graduate as Top Level Projects (TLP). Let's work together to make Hop graduate as a TLP as soon as possible!
+
+We look forward to working closely with the Apache Software Foundation, and to increase our collaboration with Apache projects like Beam, Spark, Flink and many, many more.
+In the meantime, keep an eye on https://hop.apache.org[hop.apache.org] ;-)
+
+### What is the incubator, and what happens in the incubation process?
+
+There won't be any direct changes to the Hop software, we expect any code changes we need to make because of the incubation process to be improvements!
+
+Joining the ASF Incubator will be mainly about learning to work the Apache way. Our roadmap and long term functional goals remain unchanged. If anything changes, we expect it to be an acceleration in our pace of development with more users, testers and contributors.
+
+We'll be supported by a champion and a number of mentors to guide us through the entire incubation process.
+
+* **champion**: our champion is https://twitter.com/stadtlegende[Maximilian Michels], who has successfully guided Apache Flink and Apache Beam through the incubation process.
+* mentors: https://twitter.com/julianhyde[Julian Hyde], https://twitter.com/magicaltrout[Tom Barber] and https://github.com/djkevincr[Kevin Ratnasekera] (pending).
+
+By joining the ASF, we'll need to move a couple of operational changes. Once we start migrating our infrastructure, we'll provide all the necessary information to update your bookmarks
+
+* **license checks**: ASF code needs to be APL 2.0 or compatible. Since we intended to join the ASF from day 1, we've spent a lot of time and effort checking all aspects of Project Hop for license issues, and removed or rewrote any areas where we found issues. We've recently added https://creadur.apache.org/rat/[Apache Rat] to the Hop build to automate these license checks, so we don't expect any major issues here.
+* **email** needs to be used for formal communication. We'll provide more information about the mailing lists you can join to keep track of Hop and the incubation process once we've been accepted into the Incubator.
+* our **source code**, **JIRA** and **infrastructure** will move to ASF hosted repositories and systems.
+
+### About the Apache Software Foundation?
+
+From https://en.wikipedia.org/wiki/The_Apache_Software_Foundation[Wikipedia]:
+
+[quote]
+____
+The Apache Software Foundation /əˈpætʃi/ (ASF) is an American nonprofit corporation (classified as a 501(c)(3) organization in the United States) to support Apache software projects, including the Apache HTTP Server. The ASF was formed from the Apache Group and incorporated on March 25, 1999.
+
+The Apache Software Foundation is a decentralized open source community of developers. The software they produce is distributed under the terms of the Apache License and is free and open-source software (FOSS). The Apache projects are characterized by a collaborative, consensus-based development process and an open and pragmatic software license. Each project is managed by a self-selected team of technical experts who are active contributors to the project. The ASF is a meritocracy, implying that membership of the foundation is granted only to volunteers who have actively contributed to Apache projects. The ASF is considered a second generation open-source organization, in that commercial support is provided without the risk of platform lock-in.
+
+Among the ASF's objectives are: to provide legal protection to volunteers working on Apache projects; to prevent the Apache brand name from being used by other organizations without permission.
+
+The ASF also holds several ApacheCon conferences each year, highlighting Apache projects and related technology.
+____
+

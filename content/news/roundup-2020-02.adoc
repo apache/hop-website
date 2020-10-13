@@ -1,0 +1,61 @@
+---
+title: "Roundup February 2020"
+date: 2020-03-08T12:38:42+01:00
+draft: false
+---
+
+# Roundup February 2020
+
+Currently we are working on creating a first public preview version of the **Hop Orchestration Platform**.
+Expect this version to give you a first overview of what the future of Hop will be offering, we are not following a specific roadmap and are working on all fronts. The main focus of the preview version is UI changes.
+
+Following items contain the biggest changes but much more is happening.
+
+## UI
+We are completely rewriting the Hop UI, creating a new experience on how to create data pipelines. Main focus is to create a fully pluggable interface which can be extended using plugins. We aim to reduce the amount of actions that are required to create and alter pipelines, reduce wasted space on the canvas and make the interface more friendly for thin clients/web clients/touch clients.
+
+Preview Images of the new UI:
+
+Canvas:
+
+image:/img/Roundup-2020-02/roundup-2020-02-0003.png[Interface 3 , 50% , align="left" , link="/img/Roundup-2020-02/roundup-2020-02-0003.png"]
+
+New Transform:
+
+image:/img/Roundup-2020-02/roundup-2020-02-0001.png[Interface 1, 50% , align="left" , link="/img/Roundup-2020-02/roundup-2020-02-0001.png"]
+
+Edit step:
+
+image:/img/Roundup-2020-02/roundup-2020-02-0002.png[Interface 2 , 50% , align="left" , link="/img/Roundup-2020-02/roundup-2020-02-0002.png"]
+
+Database Window:
+
+image:/img/Roundup-2020-02/roundup-2020-02-0004.png[Interface 4 , 50% , align="left" , link="/img/Roundup-2020-02/roundup-2020-02-0004.png"]
+
+
+## Plugins
+
+Plugins, plugins, plugins! That will be the motto for Hop. The goal is to make everything pluggable. You want a new menu item? Create a plugin, new data type? Create a plugin, new engine? You can guess the answer... Create a plugin!
+
+We are stripping all non needed functionality from the core, engine and UI and moving them to plugins. this means the footprint and resources used by Hop are dropping at a rapid pace! And it opens the gates to create distributions and packages catered at specific needs. You only need 1 database connection type? Why have 40 types included in hop core?
+
+* Status Database types: we have moved almost all types to plugins, there are a couple of deeper nested types that are still stuck in core. Planning to move them soon!
+
+* Status Step/Job entries, Transform/Actions: Removed almost all types from the engine, currently in the process of turning them into plugins
+
+* Status Engines: not yet started but will definitely happen! 
+
+## Dependency cleanup
+
+We are looking at every dependency that is being used in Hop and examining if they are still needed and if they are compliant for our future ASF plans, this has resulted in a big dependency upgrade and cleanup, we are also moving to the latest version of each and every dependency. We are also moving the dependencies to the plugins this means that the hop core and engine are smaller, a lot smaller! Installation without plugins currently only takes 95MB, Hop with all its dependencies only takes 180MB!
+
+## Metastore
+
+Slowly all objects are moving to the metastore, it is currently not our main priority but it is happening. First up are the database connections, they are currently being stored in the metastore but in the end all objects will be stored there to create a clean and portable environment. No more hard coded connections inside pipeline!
+
+## Future
+
+In the next month we are focussing on creating the first preview version and continue moving all transforms and actions to plugins. We will also use this moment to evaluate which transforms and actions are no longer useful or need some cleaning up.
+
+When the first preview version is there we will announce it and request as much feedback as possible!
+

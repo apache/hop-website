@@ -1,0 +1,55 @@
+---
+title: "Translation Contribution Guide"
+---
+
+Translating Hop to your language is an easy and code free contribution that adds a lot of value to our user community.
+The Hop Translator makes the process of translating Hop (or extending an existing translation) a breeze.
+
+== anchor:hop-translator[]Hop Translator
+
+The Hop Translator is a single dialog application.
+
+== anchor:hop-translator-how-to-run[]How to run
+You'll need the source code if you want to run the Hop Translator.
+Clone the repository from https://github.com/project-hop/hop
+
+Build Hop:
+[source,bash]
+mvn clean install
+
+After a successful build:
+[source,bash]
+cd assemblies/client/target
+unzip hop-assemblies-client-0.1.0-SNAPSHOT.zip
+cd hop
+
+From your new Hop build:
+[source,bash]
+ ./hop-translator.sh translator.xml <PATH_TO_YOUR_CLONED_HOP_SOURCE_CODE>
+
+The Hop Translator will start, and you'll see a dialog similar to the one below:
+
+image::/img/translator.png[Hop Translator Dialog]
+
+=== anchor:hop-translator-how-it-works[]How it works
+1. You select the locale to translate in the upper-left corner (fr_FR in our example)
+2. You select the package (org.apache.hop.databases.googlebigquery) to translate (the "GoogleBigQueryDatabaseMeta.UnsupportedTableOutputMessage" messages in our example)
+At that time you will be shown a list of all the keys that need translation (for the selected locale and messages package).
+
+From that list you can select the key to translate, and the right side of the dialog will be filled in:
+
+* The key at the top (read-only), so you can copy-paste it
+* The main (en_US) translation for use as a reference point (read-only)
+* The translation text box where you can enter the actual translation
+* The line of source code for the selected key, again for reference (read-only)
+
+All you need to do then is type in the translation and click on the Apply button or hit CTRL-A.  At that time the translated key will be removed from the TODO list and you will be presented the next key in the list.
+
+When you're done, you can hit the "Save" button, and the changed messages files will be written do disk.
+
+=== Searching
+If you hit the "Search" button next the Main translation text box, you can search for strings in the translations for the keys in the TODO list. (the search is case insensitive)
+If an occurrence is found, the key in which it is found will be selected in the list.  You can then select the "Next" button right below to search for the next occurrence.
+
+The "Search" button next to the Translation text box does exactly the same thing but for the already translated keys.  Obviously this is only useful if you check the "Show all keys, not just the TODO list" option.
+

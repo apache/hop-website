@@ -1,0 +1,7 @@
+'use strict'
+
+const manifest = <%= manifest %>
+
+module.exports = (resource) => {
+  return '/' +  manifest[resource]
+}

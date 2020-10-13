@@ -1,0 +1,85 @@
+---
+title: "Roundup July, August 2020"
+date: 2020-06-27T12:01:56+02:00
+draft: false
+---
+
+# Roundup July and August 2020
+
+We released 0.30 in late July, followed by a couple of weeks of slower progress because of summer holidays, but here we are with a roundup for July and August.
+
+After all the heavy lifting we did in the first half of the year, Project Hop now entered a feature-freeze phase.
+The focus now is on bug fixing, documentation and hardening the platform. Minor new features may continue to appear, just don't expect any spectacular new functionality for now.
+
+Here's what happened over the last two months!
+
+## 0.30 Release
+
+The highlights of the 0.30 release:
+
+* Apache Beam support: run your workflows and pipelines on the Hop engine (local or remote), or pipelines on Apache Spark, Apache Flink or Google DataFlow through Apache Beam
+* projects, environments and purposes to support developers and administrators in Hop project lifecycle management
+* containers: run Hop in Docker or Kubernetes
+* UI improvements: a new file dialog
+* WebHop improvements
+* Metastore was rewritten to Metadata
+* continued code cleanup and refactoring
+* continued porting of transform plugins
+
+Check the link:../release-preview-0-30/[0.30 summary] to find out what was include in the release.
+
+
+## Documentation
+
+Documentation is starting to take shape.
+
+Documentation for databases, actions and transforms, a getting started guide etc were already in place.
+
+Over the summer, we've started documenting:
+
+* link:../../manual/latest/hop-gui/index.html[Hop Gui]: the process of creating, running and debugging workflows and pipelines, each with their run configurations
+* link:../../manual/latest/hop-vs-kettle/index.html[Kettle -> Hop]: a comparison between Kettle/PDI and Hop to make transitioning from Kettle/PDI to Hop easier
+
+Documentation that is high on our todo list:
+
+* extended documentation on how to run Hop on Beam
+* access different file systems over Apache VFS with Hop
+* developer documentation
+
+As always, ping us on https://chat.project-hop.org[mattermost] to discuss documentation, and create https://jira.project-hop.org[tickets] if you find any missing or incorrect information in the docs. Documentation is code, we take bugs in the documentation just as serious as bugs in the code.
+
+## Metadata Injection
+
+The metadata injection transform finally made it to Hop.
+
+Injection support needs to be reimplemented for transforms that still used the old and deprecated metadata injection api, which was removed in Hop.
+
+image:/img/Roundup-2020-08/metadata-injection.png[Metadata Injection, 65% , align="left" , link="/img/Roundup-2020-08/metadata-injection.png"]
+
+
+## Transform Plugins
+
+All database and action plugins were ported quite a while ago.
+
+Two major transform ports (User Defined Java Class and Data Validator) are still work in progress, all other core transforms have been ported.
+
+Community members regularly point us to Kettle/PDI steps that are available on github and other places.
+Please don't hesitate to point us to your favorite plugin that is still missing in Hop.
+If the license permits a port to Hop, and the original developers agree, we'll be happy to port Kettle/PDI plugins to transforms or actions.
+
+Check the link:../../dev-manual/latest/porting-kettle-plugins.html[plugin porting guide] to find out how you can port plugins yourself.
+
+## Apache Beam Summit
+
+Last week (August, 27th), Matt had a speaking slot at the Beam Summit. In his talk, he gave an overview of what Hop is and showed how easy it is to build and run pipelines on Apache Beam with Hop.
+Check out the recording of the talk https://www.crowdcast.io/e/beamsummit/26[here].
+
+image:/img/Roundup-2020-08/beam-summit.jpeg[Beam Summit, 65%, align="left", link="/img/Roundup-2020-08/beam-summit.jpeg"]
+
+## Future
+
+Our main focus for the coming weeks is on bug hunting and documentation!
+
+In the meantime, we're getting really close to start the ASF incubation process, and hope to see Apache Hop as a podling in the https://incubator.apache.org/[ASF Incubator list] really soon.
+
+While building Project Hop up to the point where we are now and with the valueable feedback we've received from the community, we'll update the link:../../docs/roadmap/[roadmap] with plans for future releases.

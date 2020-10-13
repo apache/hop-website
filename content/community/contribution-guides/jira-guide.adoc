@@ -1,0 +1,81 @@
+---
+title: "Jira Guidelines"
+---
+
+Jira is the issue tracker that is being used to track all changes and implementation of new code or documentation in Project Hop. This document serves to explain the workflow that is used and what can happen after a ticket has been created. The second purpose is to explain what you need to do to create an complete ticket, doing so helps the developers to understand the request and work on it.
+
+[%hardbreaks]
+. <<create-ticket, Creating a Jira Ticket>>
+. <<workflow, Hop Jira Workflow>>
+. <<voting, Voting on a ticket>>
+
+
+
+== anchor:create-ticket[]Creating a Jira Ticket
+
+Writing a good Jira ticket can be a difficult task, these guidelines should help you with writing a useful ticket that is easy to comprehend by the developer that will handle the task.
+
+These criteria are only applicable when we are talking about bugs or small changes to the code. When you have a great new idea or major change for the product please start a discussion on our dev chat channel first, for more info on this please take a look at our link:../code-contribution-guide/[Code Contribution Guide].
+
+When writing a ticket for a *Feature* please take into account following steps:
+
+. The actor - the person using the feature
+. The something - what the user needs the feature for
+. The Goal - why do you need this feature
+
+____
+As [the actor], I want [the something] so I can [the goal].
+____
+
+
+When writing a ticker for a *Bug* following template is preferred:
+
+. Scenario - the steps you have taken
+. Expected result - what result were you expecting
+. Actual result - what actually happened when following the scenario
+. General information - version used and system information
+____
+*Scenario* +
+When using transform "x" and setting option "a" +
+*Expected result* +
+I expect the result of the transform to contain the result "abc" +
+*Actual result* +
+But I am receiving "def" +
+*General information* +
+I tried this using Hop version xx on ubuntu 19.10
+____
+
+If possible include a sample pipeline and sample data to reproduce the situation, this will greatly improve our efficiency. If you would like to include error logs, attach them using a file or pastebin and do not paste them in the description of the issue.
+
+
+
+
+== anchor:workflow[]Hop Jira Workflow
+
+The Jira workflow that is using in the development process of Project Hop is the following.
+
+image::/img/Jira-Workflow.png[Workflow]
+
+* All new issues will first get the triage status, there one of the committers will check if all needed information is included in the ticket or if a duplicate ticket already exists. This process can have multiple outcomes
+** The ticket is complete and added to the backlog
+** Additional information is requested
+** The ticket is out of scope or reporter fails to reply to questions then it will be labeled as "won't fix"
+
+
+The committer will always add a comment to the ticket stating his reasoning, why the ticket will not be handled
+
+* When a release of Project Hop has finished the committers will go over the backlog and decide which tickets will be added to the following release. These tickets are then added to the ready for development list. Each ticket in this list is linked to a release version and the goal is to add them to the following release. When this list has been created it is not final, following exceptions can occur
+** A severe or critical bug has been created, these can get fast tracked and added to a current release
+** The reporter wants to work on the issue, when the reporter wants to be contributor for the code the ticket can be added to the current release. A committer will add the contributor to the ticket, the contributor tries to create a pull request in the same time frame as the rest of the developers.
+
+* When a committer or contributor is working on a ticket it will be placed in the In progress state, only committers can move tickets so if you are contributing you have to ask a committer to move your ticket.
+
+* After the development is finished and you created a pull request the ticket will be placed In Review, one of the committers will look at the code and merge it with master if it is conforming our guidelines.
+
+* When a ticket is done it is ready for release
+
+== anchor:voting[]Voting on a Jira Ticket
+
+====
+until following issue has been resolved voting is not possible on our jira tickets https://jira.atlassian.com/browse/JRACLOUD-71251[JRACLOUD-71251]
+====
