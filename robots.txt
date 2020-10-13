@@ -1,4 +1,4 @@
 User-agent: *
 
-Sitemap: https://project-hop.org/sitemap.xml
+Sitemap: https://hop.apache.org/sitemap.xml
 

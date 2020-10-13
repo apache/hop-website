@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Downloads on Hop</title>
-    <link>https://project-hop.org/download/</link>
+    <link>https://hop.apache.org/download/</link>
     <description>Recent content in Downloads on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="https://project-hop.org/download/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://hop.apache.org/download/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Download</title>
-      <link>https://project-hop.org/download/download/</link>
+      <link>https://hop.apache.org/download/download/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://project-hop.org/download/download/</guid>
+      <guid>https://hop.apache.org/download/download/</guid>
       <description>There is no official release of project hop yet, but you can take a look at the latest build of our software.
  Preview release 0.30 here
  Latest Snapshots (0.40-SNAPSHOT) here
