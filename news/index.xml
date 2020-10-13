@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>News on Hop</title>
+    <link>https://project-hop.org/news/</link>
+    <description>Recent content in News on Hop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 08 Sep 2020 12:01:56 +0200</lastBuildDate>
+    
+	<atom:link href="https://project-hop.org/news/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>https://project-hop.org/news/apache-hop-incubation-proposal-accepted/</link>
+      <pubDate>Tue, 08 Sep 2020 12:01:56 +0200</pubDate>
+      
+      <guid>https://project-hop.org/news/apache-hop-incubation-proposal-accepted/</guid>
+      <description>Apache Hop - Incubation Proposal Submitted From the very start with Hop, we haven&amp;#8217;t exactly been secretive about our intention to join the Apache Software Foundation (ASF) and donate Project Hop to the ASF as Apache Hop.
+ After almost a year of work on Project Hop, we&amp;#8217;re very happy to announce we&amp;#8217;ve reached a first milestone: the Apache Hop proposal was submitted to the incubator mailing list on September, 9th and has been accepted!</description>
+    </item>
+    
+    <item>
+      <title>Roundup July, August 2020</title>
+      <link>https://project-hop.org/news/roundup-2020-08/</link>
+      <pubDate>Sat, 27 Jun 2020 12:01:56 +0200</pubDate>
+      
+      <guid>https://project-hop.org/news/roundup-2020-08/</guid>
+      <description>We released 0.30 in late July, followed by a couple of weeks of slower progress because of summer holidays, but here we are with a roundup for July and August.
+ After all the heavy lifting we did in the first half of the year, Project Hop now entered a feature-freeze phase. The focus now is on bug fixing, documentation and hardening the platform. Minor new features may continue to appear, just don&amp;#8217;t expect any spectacular new functionality for now.</description>
+    </item>
+    
+    <item>
+      <title>Roundup June 2020</title>
+      <link>https://project-hop.org/news/roundup-2020-06/</link>
+      <pubDate>Sat, 27 Jun 2020 12:01:56 +0200</pubDate>
+      
+      <guid>https://project-hop.org/news/roundup-2020-06/</guid>
+      <description>Another month has passed, so here we are with a new roundup!
+ A lot of work has been done in the last couple of weeks. A huge thanks to Matt, who implemented most of the functionality that was added this month.
+ Here&amp;#8217;s what happened in June!
+   Environments &amp;#8594; Projects, Environments and Purposes The environments system, introduced earlier this year, was significantly extended.
+   a project is a set of workflows and pipelines with their datasets, tests etc.</description>
+    </item>
+    
+    <item>
+      <title>Roundup May 2020</title>
+      <link>https://project-hop.org/news/roundup-2020-05/</link>
+      <pubDate>Tue, 02 Jun 2020 12:01:56 +0200</pubDate>
+      
+      <guid>https://project-hop.org/news/roundup-2020-05/</guid>
+      <description>Another month has passed, so here we are with a new roundup!
+ In early May, we released version 0.21. Check the release announcement here
+ We would like to thank everyone who tested 0.21 and created feature requests and bug tickets. Fixing the bugs and implementing the feature requests will keep us busy for another couple of weeks.
+ Apart from the topics discussed below, we have continued to walk the path of major code cleanup and refactoring.</description>
+    </item>
+    
+    <item>
+      <title>Preview Release 0.21</title>
+      <link>https://project-hop.org/news/release-preview-0-21/</link>
+      <pubDate>Thu, 07 May 2020 12:01:56 +0200</pubDate>
+      
+      <guid>https://project-hop.org/news/release-preview-0-21/</guid>
+      <description>In the month since we released 0.10, we&amp;#8217;ve added enough functionality to Project Hop for another preview release.
+ We&amp;#8217;re happy to announce to availability of our 0.21 preview release. Please take it for a spin. If you find a bug, please create a bug ticket, if there&amp;#8217;s functionality you&amp;#8217;d like to see, please create a feature request.
+ Direct download here
+ Getting Started Guide
+ Release Notes: 0.20, 0.</description>
+    </item>
+    
+    <item>
+      <title>Preview Release 0.30</title>
+      <link>https://project-hop.org/news/release-preview-0-30/</link>
+      <pubDate>Thu, 07 May 2020 12:01:56 +0200</pubDate>
+      
+      <guid>https://project-hop.org/news/release-preview-0-30/</guid>
+      <description>It has been about 2 months since our latest release, and a lot has happened!
+ We&amp;#8217;re happy to announce to availability of our 0.30 preview release. Please take it for a spin. If you find a bug, please create a bug ticket, if there&amp;#8217;s functionality you&amp;#8217;d like to see, please create a feature request.
+ Direct download here
+ Getting Started Guide
+ Release Notes: 0.30
+ Over 100 tickets have been closed in this release, here we will discuss the major changes.</description>
+    </item>
+    
+    <item>
+      <title>Roundup April 2020</title>
+      <link>https://project-hop.org/news/roundup-2020-04/</link>
+      <pubDate>Sun, 03 May 2020 12:01:56 +0200</pubDate>
+      
+      <guid>https://project-hop.org/news/roundup-2020-04/</guid>
+      <description>Another month has passed time for a new roundup! Previous month has been a hectic one, we had our first preview version (0.10) and are currently getting close to releasing 0.20!
+ We would like to thank everyone that tested 0.10 and created feature requests and issues, we have not yet been able to solve all of them but so many changes were made we feel like 0.20 is at its place.</description>
+    </item>
+    
+    <item>
+      <title>Preview Release 0.10</title>
+      <link>https://project-hop.org/news/release-preview-0-10/</link>
+      <pubDate>Thu, 09 Apr 2020 12:01:56 +0200</pubDate>
+      
+      <guid>https://project-hop.org/news/release-preview-0-10/</guid>
+      <description>After more than half a year of hard work, we felt the time was right to show the world what we have been working on.
+ We&amp;#8217;re happy to announce to availability of our 0.10 preview release. Please take it for a spin. If you find a bug, please create a bug ticket, if there&amp;#8217;s functionality you&amp;#8217;d like to see, please create a feature request.
+ Direct download here
+ Getting Started Guide</description>
+    </item>
+    
+    <item>
+      <title>Roundup March 2020</title>
+      <link>https://project-hop.org/news/roundup-2020-03/</link>
+      <pubDate>Tue, 31 Mar 2020 12:01:56 +0200</pubDate>
+      
+      <guid>https://project-hop.org/news/roundup-2020-03/</guid>
+      <description>A new month, a new roundup! We&amp;#8217;re getting very close to a first preview release, expect it to see the light of day in the coming week (don&amp;#8217;t haunt us if it&amp;#8217;s a week later). We have continued to walk the path of major code cleanup and refactoring. Because we don&amp;#8217;t want to bore you with the technical stuff (those interested in the technical stuff come and ask in our #dev channel ) here is an overview of what you can see.</description>
+    </item>
+    
+    <item>
+      <title>Roundup February 2020</title>
+      <link>https://project-hop.org/news/roundup-2020-02/</link>
+      <pubDate>Sun, 08 Mar 2020 12:38:42 +0100</pubDate>
+      
+      <guid>https://project-hop.org/news/roundup-2020-02/</guid>
+      <description>Currently we are working on creating a first public preview version of the Hop Orchestration Platform. Expect this version to give you a first overview of what the future of Hop will be offering, we are not following a specific roadmap and are working on all fronts. The main focus of the preview version is UI changes.
+ Following items contain the biggest changes but much more is happening.
+   UI We are completely rewriting the Hop UI, creating a new experience on how to create data pipelines.</description>
+    </item>
+    
+  </channel>
+</rss>
