@@ -8,5 +8,5 @@ Doing this, Hop aims to have a minimal installation footprint and wants to be st
 
 The way these goals are chased is by allowing orchestration workloads, defined in the broadest possible sense, to be defined as metadata. This metadata can then be expressed in various ways like an XML or JSON document, a database of any type or indeed a graphical user interface.  The user interfaces delivered by this project needs to cover 100% of all functionality, removing the need for external editors or tools.
 
-Project Hop decided to use a single metadata interface for all expressions of metadata.  This interface is called the MetaStore.
+Apache Hop decided to use a single metadata interface for all expressions of metadata.  This interface is called the MetaStore.
 Once orchestration metadata is defined we offer tools to execute locally, remotely, debug and so on.

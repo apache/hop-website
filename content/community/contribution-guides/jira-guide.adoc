@@ -2,7 +2,7 @@
 title: "Jira Guidelines"
 ---
 
-Jira is the issue tracker that is being used to track all changes and implementation of new code or documentation in Project Hop. This document serves to explain the workflow that is used and what can happen after a ticket has been created. The second purpose is to explain what you need to do to create an complete ticket, doing so helps the developers to understand the request and work on it.
+Jira is the issue tracker that is being used to track all changes and implementation of new code or documentation in Apache Hop. This document serves to explain the workflow that is used and what can happen after a ticket has been created. The second purpose is to explain what you need to do to create an complete ticket, doing so helps the developers to understand the request and work on it.
 
 [%hardbreaks]
 . <<create-ticket, Creating a Jira Ticket>>
@@ -52,7 +52,7 @@ If possible include a sample pipeline and sample data to reproduce the situation
 
 == anchor:workflow[]Hop Jira Workflow
 
-The Jira workflow that is using in the development process of Project Hop is the following.
+The Jira workflow that is using in the development process of Apache Hop is the following.
 
 image::/img/Jira-Workflow.png[Workflow]
 
@@ -64,7 +64,7 @@ image::/img/Jira-Workflow.png[Workflow]
 
 The committer will always add a comment to the ticket stating his reasoning, why the ticket will not be handled
 
-* When a release of Project Hop has finished the committers will go over the backlog and decide which tickets will be added to the following release. These tickets are then added to the ready for development list. Each ticket in this list is linked to a release version and the goal is to add them to the following release. When this list has been created it is not final, following exceptions can occur
+* When a release of Apache Hop has finished the committers will go over the backlog and decide which tickets will be added to the following release. These tickets are then added to the ready for development list. Each ticket in this list is linked to a release version and the goal is to add them to the following release. When this list has been created it is not final, following exceptions can occur
 ** A severe or critical bug has been created, these can get fast tracked and added to a current release
 ** The reporter wants to work on the issue, when the reporter wants to be contributor for the code the ticket can be added to the current release. A committer will add the contributor to the ticket, the contributor tries to create a pull request in the same time frame as the rest of the developers.
 
