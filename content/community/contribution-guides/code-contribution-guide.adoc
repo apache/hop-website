@@ -20,7 +20,7 @@ Apache Hop is maintained, improved, and extended by code contributions of volunt
 |====
 |[very big]*1 <<create-jira-ticket, Discuss>>*
 
-Create a https://jira.project-hop.org[Jira] ticket or mailing list discussion and reach consensus
+Create a https://issues.apache.org/jira/projects/HOP/issues[Jira] ticket or mailing list discussion and reach consensus
 
 Agree on importance, relevance, scope of the ticket, discuss the implementation approach and find a committer willing to review and merge the change.
 
@@ -54,7 +54,7 @@ anchor:code-contribution-process[Code Contribution Process]
 
 The first step for making a contribution to Apache Hop is to reach consensus with the Hop community. This means agreeing on the scope and implementation approach of a change.
 
-In most cases, the discussion should happen in Hop’s bug tracker: https://jira.project-hop.org[Jira].
+In most cases, the discussion should happen in Hop’s bug tracker: https://issues.apache.org/jira/projects/HOP/issues[Jira].
 
 The following types of changes require a discussion in the dev https://chat.project-hop.org[chat] channel:
 

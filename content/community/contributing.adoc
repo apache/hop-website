@@ -11,7 +11,7 @@ Contributing to Hop goes beyond writing code for the project. Below, we list dif
 [width="100%", ,cols="3,10", options="header,footer"]
 |============================
 |Area |Further Information
-|Report a Bug|To report a problem with Hop, open Hop’s https://jira.project-hop.org[Jira ,window=_blank], log in if necessary, and click on the "+" in the left side bar (Shortcut "c").
+|Report a Bug|To report a problem with Hop, open Hop’s https://issues.apache.org/jira/projects/HOP/issues[Jira ,window=_blank], log in if necessary, and click on the "+" in the left side bar (Shortcut "c").
 Please give detailed information about the problem you encountered and, if possible, add a description that helps to reproduce the problem. For more information go to our link:../contribution-guides/jira-guide/[info] page.
 |Contribute Code|Read the link:../contribution-guides/code-contribution-guide/[Code Contribution Guide] (Work in progress)
 |Help With Code Reviews|Read the link:../contribution-guides/code-review-guide/[Code Review Guide] (Work in progress)
@@ -33,7 +33,7 @@ A release candidate will be announced using our form/twitter and chat. We will t
 - Contribute to the Hop blog (comming soon)
 
 
-2+|Any other questions? Reach out to the Hop https://forums.project-hop.org[forums ,window=_blank] or https://chat.project-hop.org[chat ,window=_blank] to get help.
+2+|Any other questions? Reach out on the Hop https://chat.project-hop.org[chat ,window=_blank] to get help.
 |============================
 
 == Further Reading
