@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Downloads on Hop</title>
+    <link>https://hop.apache.org/download/</link>
+    <description>Recent content in Downloads on Hop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://hop.apache.org/download/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Download</title>
+      <link>https://hop.apache.org/download/download/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hop.apache.org/download/download/</guid>
+      <description>There is no official release of Apache Hop yet, but you can take a look at the latest build of our software.
+ Preview release 0.30 here
+ Latest Snapshots (0.40-SNAPSHOT) here
+ These are the latest builds available directly from the master branch.
+ If you find issues please file a ticket on our Jira please make sure to check if no ticket for your issue has been created yet, or join us on our chat and come discuss your ideas.</description>
+    </item>
+    
+  </channel>
+</rss>
