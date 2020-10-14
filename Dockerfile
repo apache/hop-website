@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:lts-stretch
 
 RUN set -ex \
   && apt-get update \
