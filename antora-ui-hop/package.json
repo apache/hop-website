@@ -73,5 +73,6 @@
   "installConfig": {
     "pnp": true
   },
-  "dependencies": {}
+  "dependencies": {},
+  "version": "1.0.0"
 }
