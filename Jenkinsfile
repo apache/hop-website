@@ -110,7 +110,7 @@ pipeline {
                 dir('deploy/staging') {
                     deleteDir()
                     sh 'git clone -b asf-site https://gitbox.apache.org/repos/asf/incubator-hop-website.git .'
-                    sh 'git rm -f "$(find . -not -path \'*/\\.*\' -type f  \\( ! -iname \".*\" \\))"'
+                    sh 'git rm -f --ignore-unmatch "$(find . -not -path \'*/\\.*\' -type f  \\( ! -iname \".*\" \\))"'
                     sh "cp -R $WORKSPACE/hop-website/public/. ."
                     sh 'git add .'
                     sh 'git commit -m "Website updated to $(git rev-parse --short HEAD)"'
