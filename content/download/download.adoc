@@ -2,7 +2,7 @@
 title: "Download"
 ---
 
-There is no official release of project hop yet, but you can take a look at the latest build of our software.
+There is no official release of Apache Hop yet, but you can take a look at the latest build of our software.
 
 **Preview release 0.30 https://artifactory.project-hop.org/artifactory/hop-releases-local/org/hop/hop-assemblies-client/0.30/hop-assemblies-client-0.30.zip[here]**
 

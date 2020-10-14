@@ -37,7 +37,7 @@ Artifactory is a storage location for artifacts that are created by maven. Each 
 Artifactyory can be found https://artifactory.project-hop.org[here]
 
 == anchor:sonarcloud[]Sonarcloud
-Sonarcloud is a platform that does code checks and validates the quality of your code. The goal of project hop is to create solid clean code, Sonarcloud helps us achieve this goal. Currently it does not look good yet but we are still in a stage where we are refactoring and cleaning up the Hop code base.
+Sonarcloud is a platform that does code checks and validates the quality of your code. The goal of Apache Hop is to create solid clean code, Sonarcloud helps us achieve this goal. Currently it does not look good yet but we are still in a stage where we are refactoring and cleaning up the Hop code base.
 
 You can take a look at the status of our project https://sonarcloud.io/dashboard?id=hop[here]
 

@@ -15,5 +15,5 @@ On a very high level here are the things we want to do:
 ** Make it easier to find Transforms or Tasks you need.
 ** Create a generic metastore browser for all objects in one location while at the same time making extensive use of editors of metastore elements in the locations where they’re needed.  This does away with the complete left hand side of the Spoon user interface giving more screen real-estate for the Pipelines and Workflows. (**done**)
 ** tbd
-* Create new documentation for every Transform and Task shipped with project Hop. This documentation needs to be stored in git along with the code and should allow us to generate HTML for offline inclusion or a PDF if needed. (**done**)
+* Create new documentation for every Transform and Task shipped with Apache Hop. This documentation needs to be stored in git along with the code and should allow us to generate HTML for offline inclusion or a PDF if needed. (**done**)
 * Create integration tests for every Transform or Task shipped so we can guard compatibility from release to release.

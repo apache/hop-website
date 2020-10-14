@@ -2,11 +2,11 @@
 title: "Code Contribution Guide"
 ---
 
-Project Hop is maintained, improved, and extended by code contributions of volunteers. We welcome contributions to Hop, but due to the size of the project and to preserve the high quality of the code base, we follow a contribution process that is explained in this document.
+Apache Hop is maintained, improved, and extended by code contributions of volunteers. We welcome contributions to Hop, but due to the size of the project and to preserve the high quality of the code base, we follow a contribution process that is explained in this document.
 
 *Please feel free to ask questions at any time*. Either send a message in the dev channel on our chatserver or comment on the Jira issue you are working on.
 
-*IMPORTANT*: Please read this document carefully before starting to work on a code contribution. Follow the process and guidelines explained below. Contributing to Project Hop does not start with opening a pull request. We expect contributors to reach out to us first to discuss the overall approach together. Without consensus with the Hop committers, contributions might require substantial rework or will not be reviewed.
+*IMPORTANT*: Please read this document carefully before starting to work on a code contribution. Follow the process and guidelines explained below. Contributing to Apache Hop does not start with opening a pull request. We expect contributors to reach out to us first to discuss the overall approach together. Without consensus with the Hop committers, contributions might require substantial rework or will not be reviewed.
 
 <<code-contribution-process>>
 [%hardbreaks]
@@ -52,7 +52,7 @@ anchor:code-contribution-process[Code Contribution Process]
 
 == anchor:create-jira-ticket[]Create JIRA Ticket and Reach Consensus
 
-The first step for making a contribution to Project Hop is to reach consensus with the Hop community. This means agreeing on the scope and implementation approach of a change.
+The first step for making a contribution to Apache Hop is to reach consensus with the Hop community. This means agreeing on the scope and implementation approach of a change.
 
 In most cases, the discussion should happen in Hop’s bug tracker: https://jira.project-hop.org[Jira].
 

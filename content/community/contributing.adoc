@@ -2,7 +2,7 @@
 title: "How To Contribute"
 ---
 
-Project Hop is developed by an open and friendly community. Everybody is cordially welcome to join the community and contribute to Project Hop. There are several ways to interact with the community and to contribute to Hop including asking questions, filing bug reports, proposing new features, joining discussions on the mailing lists, contributing code or documentation, improving the website, or testing release candidates.
+Apache Hop is developed by an open and friendly community. Everybody is cordially welcome to join the community and contribute to Apache Hop. There are several ways to interact with the community and to contribute to Hop including asking questions, filing bug reports, proposing new features, joining discussions on the mailing lists, contributing code or documentation, improving the website, or testing release candidates.
 
 == What do you want to do?
 Contributing to Hop goes beyond writing code for the project. Below, we list different opportunities to help the project:
@@ -38,7 +38,7 @@ A release candidate will be announced using our form/twitter and chat. We will t
 
 == Further Reading
 === Submit a Contributor License Agreement
-Please submit a contributor license agreement to the Project Hop if you are contributing a lot of code to Project Hop. The following quote from http://www.apache.org/licenses gives more information about the ICLA and CCLA and why they are necessary.
+Please submit a contributor license agreement to the Apache Hop if you are contributing a lot of code to Apache Hop. The following quote from http://www.apache.org/licenses gives more information about the ICLA and CCLA and why they are necessary.
 
 
 .Apache Licenses
@@ -58,7 +58,7 @@ There is no strict protocol for becoming a committer or PMC member. Candidates f
 
 Candidates for new committers are suggested by current committers or PMC members, and voted upon by the PMC.
 
-If you would like to become a committer, you should engage with the community and start contributing to Project Hop in any of the above ways. You might also want to talk to other committers and ask for their advice and guidance.
+If you would like to become a committer, you should engage with the community and start contributing to Apache Hop in any of the above ways. You might also want to talk to other committers and ask for their advice and guidance.
 
 === What are we looking for in Committers
 Being a committer means being recognized as a significant contributor to the project (community or technology), and having the tools to help with the development. Committer candidates are community members who have made good contributions over an extended period of time and want to continue their contributions.

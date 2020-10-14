@@ -49,7 +49,7 @@ We are planning on providing the website in multiple languages. We are looking f
 
 == anchor:submit-website[]Submit your contribution
 
-Project Hop accepts website contributions through the GitHub as Pull Requests. Pull requests are a simple way of offering a patch by providing a pointer to a code branch that contains the changes.
+Apache Hop accepts website contributions through the GitHub as Pull Requests. Pull requests are a simple way of offering a patch by providing a pointer to a code branch that contains the changes.
 
 To prepare and submit a pull request follow these steps.
 

@@ -2,7 +2,7 @@
 title: "Documentation Contribution Guide"
 ---
 
-Good documentation is crucial for any kind of software. This is especially true for sophisticated software systems such as distributed data processing engines like Project Hop. The Project Hop community aims to provide concise, precise, and complete documentation and welcomes any contribution to improve Project Hop’s documentation.
+Good documentation is crucial for any kind of software. This is especially true for sophisticated software systems such as distributed data processing engines like Apache Hop. The Apache Hop community aims to provide concise, precise, and complete documentation and welcomes any contribution to improve Apache Hop’s documentation.
 
 ====
 Our documentation is not yet fully implemented
@@ -20,7 +20,7 @@ ideas and contributions are very welcome, come discuss with us on our https://ch
 
 == anchor:doc-types[]Types of documentation
 
-Project Hop has multiple types of documentation, each type is directed to a different audience and covers other use cases. We are maintaining a user manual which contains basic and more advanced instructions on how to use and set up Hop. 
+Apache Hop has multiple types of documentation, each type is directed to a different audience and covers other use cases. We are maintaining a user manual which contains basic and more advanced instructions on how to use and set up Hop.
 
 === User manual
 The goal for the user manual is to give a general feeling to how the application works, which transforms and actions are available and a guide on how to use them. A default template is used to explain how transforms and actions work, an Archetype is included in the repository to use as a template.
@@ -34,7 +34,7 @@ This is code documentation and only needed when you want to explore the internal
 
 == anchor:obtain-docs[]Obtain the documentation sources
 
-Depending on the type of documentation the project Hop documentation is maintained in the separate git repository as the code base.
+Depending on the type of documentation the Apache Hop documentation is maintained in the separate git repository as the code base.
 
 === User manual and Technical documentation
 
@@ -97,7 +97,7 @@ We are planning on providing all documentation in multiple languages. We are loo
 
 == anchor:submit-doc[]Submit your contribution
 
-Project Hop accepts documentation contributions through the GitHub as Pull Requests. Pull requests are a simple way of offering a patch by providing a pointer to a code branch that contains the changes.
+Apache Hop accepts documentation contributions through the GitHub as Pull Requests. Pull requests are a simple way of offering a patch by providing a pointer to a code branch that contains the changes.
 
 To prepare and submit a pull request follow these steps.
 
