@@ -33,7 +33,7 @@ Make sure that you have Node.js (herein "`Node`") installed.
 
 If this command fails with an error, you do not have Node installed.
 
-This project requires the Node LTS version 10 (e.g., v10.15.3).
+This project requires the Node LTS version 12 (e.g., V12.19.0).
 
 Please make sure to have a suitable version of Node installed. You have several options to install
 Node on your machine.
@@ -42,12 +42,12 @@ Node on your machine.
 - Install using [Homebrew](https://brew.sh/) and [Node formulae](https://formulae.brew.sh/formula/node)
 - Install from official [Node packages](https://nodejs.org/en/download/)
 
-Note - If you have different Node version other than Node LTS version 10 you can use following command to make
-Node LTS version 10 as default Node version.
+Note - If you have different Node version other than Node LTS version 12 you can use following command to make
+Node LTS version 12 as default Node version.
 
-    $ nvm alias default 10
+    $ nvm alias default 12
 
-Now that you have Node 10 installed, you can proceed with checking the Yarn installation.
+Now that you have Node 12 installed, you can proceed with checking the Yarn installation.
 
 #### Yarn
 
