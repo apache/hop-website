@@ -1,3 +1,4 @@
+/*
 header.frontpage {
   font-size: 1.5rem;
   display: flex;
@@ -6,23 +7,75 @@ header.frontpage {
   margin: 0 auto;
   max-width: 60rem;
 }
+*/
+
+/* css for header section */
+
+header.frontpage {
+  display: flex;
+  flex-direction: row;
+  margin: 2rem 3rem 2.5rem;
+}
+
+header.frontpage img {
+  width: 45vw;
+  max-height: 50vh;
+}
+
+header.frontpage .main-heading {
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  margin-left: 2rem;
+}
 
 header.frontpage h1 {
-  font-size: 5rem;
+  font-size: 4rem;
+  /*
   font-weight: bolder;
+  */
   color: var(--heading-font-color);
   margin-top: 5rem;
-  text-align: center;
+  /* text-align: center; */
   text-transform: none;
   text-shadow: -1px -1px 1px #fff5, 1px -1px 1px #fff5, -1px 1px 1px #fff5, 1px 1px 1px #fff5;
 }
 
 header.frontpage p {
-  hyphens: none;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  line-height: 1.7rem;
+  /* hyphens: none;
   margin-top: 3rem;
   text-align: center;
   line-height: 1.5;
-  color: var(--body-font-color);
+  color: var(--body-font-color); */
+}
+
+.frontpage a.button-dark,
+.frontpage a.button-dark:hover {
+  white-space: nowrap;
+  padding: 0.7rem 1rem;
+  background-color: #8e8e8e;
+  background-image: none;
+  background-repeat: no-repeat;
+  background-position: 0;
+  color: white;
+  font-weight: bold;
+  margin-right: 0.5rem;
+  border-radius: 3rem;
+  outline: none;
+  display: inline-block;
+  box-shadow: 0 4px #8e480b;
+}
+
+.frontpage a.button-light {
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--color-gray-70);
+  color: var(--color-gray-70);
+  font-weight: bold;
+  border-radius: 3rem;
+  white-space: nowrap;
 }
 
 .frontpage a:hover {

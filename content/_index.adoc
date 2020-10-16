@@ -1,6 +1,6 @@
 ---
-title: Home
-description: The Hop Orchestration Platform aims to facilitate all aspects of data and metadata orchestration.
+title: Apache Hop (Incubating)
+description: Apache Hop - The Hop Orchestration Platform aims to facilitate all aspects of data and metadata orchestration.
 ---
 
 {{< section "frontpage columns" >}}
