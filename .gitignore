@@ -1,0 +1,16 @@
+node
+target
+node_modules
+public
+documentation
+resources
+
+.idea
+*.iml
+.project
+.classpath
+.metadata
+.pnp
+.pnp.js
+.settings
+antora-ui-hop/package-lock.json
