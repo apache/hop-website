@@ -169,11 +169,23 @@
   </url>
   
   <url>
+    <loc>https://hop.apache.org/community/mailing-list/</loc>
+  </url>
+  
+  <url>
     <loc>https://hop.apache.org/docs/qa/</loc>
   </url>
   
   <url>
     <loc>https://hop.apache.org/docs/roadmap/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/sources/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/support/</loc>
   </url>
   
   <url>

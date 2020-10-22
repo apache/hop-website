@@ -255,6 +255,15 @@ Licensee intends to use certain Lean products (each, a &#34;Product&#34;) and to
     </item>
     
     <item>
+      <title>Mailing Lists</title>
+      <link>https://hop.apache.org/community/mailing-list/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hop.apache.org/community/mailing-list/</guid>
+      <description>Use Hop User List You should post and subscriber to the Hop User List for all your questions on using Hop, or how to do X with Hop etc. If in doubt use this list. The other list, Hop Developer List, is for the Hop team to discus development of the actual Hop project; do not use this list for question on using Hop. Again to re-iterate, use the Hop User List, for you Hop questions.</description>
+    </item>
+    
+    <item>
       <title>Q&amp;A</title>
       <link>https://hop.apache.org/docs/qa/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -276,6 +285,29 @@ Licensee intends to use certain Lean products (each, a &#34;Product&#34;) and to
    Change all package names to org.apache.hop from org.pentaho.di (done)
   Remove all existing external dependencies to non-standard libraries so Hop can be compiled without referencing a proprietary Maven server. (done)
   Remove all references to the deprecated XUL libraries and build a new UI plugin system. Port existing GUI code over to it.</description>
+    </item>
+    
+    <item>
+      <title>Sources</title>
+      <link>https://hop.apache.org/community/sources/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hop.apache.org/community/sources/</guid>
+      <description>## Web Browsing of git
+ To browse via the web:
+ https://gitbox.apache.org/repos/asf/incubator-hop.git   ## Checking out from git
+ git clone https://gitbox.apache.org/repos/asf/incubator-hop.git   Only project developers can commit to the git via this method. SSH must be installed on your client machine. Enter your site password when prompted.
+ Using github The source code is mirrored to github, so you can also checkout the source code from github, if you are familiar with using github.</description>
+    </item>
+    
+    <item>
+      <title>Support</title>
+      <link>https://hop.apache.org/community/support/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hop.apache.org/community/support/</guid>
+      <description>Getting help If you are experiencing problems using Hop then please report your problem to our mailing list. This allows the entire community to help with your problem. If indeed a bug has been identified in the Hop software, then document the problem in our [Issue Tracker](https://issues.apache.org/jira/browse/HOP). Please refrain from immediately opening a ticket in the issue tracker unless you are certain it&amp;#8217;s a problem in the Hop software.
+ If you are in doubt, we appreciate asking the [mailing list](/community/mailing-list/) or [Mattermost](https://chat.</description>
     </item>
     
     <item>
