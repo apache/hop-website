@@ -1,4 +1,9 @@
-    <div class="edit"><a title="We would love your help &hearts;&hearts;&hearts;" href="https://github.com/apache/incubator-hop-website/edit/master/content/{{ .File.Path | replaceRE "^/" "" }}">Edit this Page</a></div>
+<div class="footer-tools">
+    {{ with .File }}
+    <a title="Improve this document, receive free virtual hugs &hearts;" href="https://github.com/apache/incubator-hop-website/edit/master/content/{{ .Path | replaceRE "^/" "" }}">Edit this Page</a>
+    {{ end }}
+    <a href="#top" title="Reach the top of the page">Back to top</a>
+</div>
     <footer>
         <div class="footer">
             <dl>

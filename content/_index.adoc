@@ -3,151 +3,127 @@ title: Apache Hop (Incubating)
 description: Apache Hop - The Hop Orchestration Platform aims to facilitate all aspects of data and metadata orchestration.
 ---
 
-{{< section "frontpage columns" >}}
 
-# News
-{{< div "box" >}}
-{{< div >}}
+{{< section "frontpage columns functionalities" >}}
 
-<a id="events" />
-## Events
+# Apache Hop
 
+{{< div "box right" >}}
 
-<img src="calendar/hangouts-meet-icon.png" style="width: 50px; height:50px; float: left;" alt="Hot Hop Hangout">
-<p>We'll have our third Hot Hop Hangout (3H3) on Thursday, July 23rd at 20:00 CET.
-<br />Some topics we'll discuss:
-    <ul>
-<li>What's new in Hop version 0.30</li>
-<li>Apache Hop incubation</li>
-<li>Hop Web update</li>
-<li>Hop Docker updates</li>
-<li>...</li>
-    </ul>
-    <table>
-    <tr>
-    <td>Google Calendar:</td>
-    <td>
-    <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Hot+Hop+Hangout+3+%283H3%29&details=-+What%E2%80%99s+new+in+Hop+version+0.30%0A-+Apache+Hop+incubation%0A-+Hop+Web+update%0A-+Hop+Docker+updates%0A%E2%80%A6&location=https%3A%2F%2Fmeet.google.com%2Fgfr-nrgk-shc&dates=20200723T180000Z%2F20200723T193000Z" target="_blank"><img src="img/calendar/gcal.png" style="width:25px; height:25px;" alt="Google Calendar"></a>
-    </td>
-    </tr>
-      <tr> <td>ICS (iCal, Outlook):</td> <td> <a href="calendar/hhh-2020723.ics"><img src="img/calendar/ical.png" style="height:25px; width: 25px;" alt="iCal"></a> </td> </tr>
-    </table>
-<br />
-</p>
-<img src="calendar/hangouts-meet-icon.png" style="width: 50px; height:50px; float: left;" alt="Hot Hop Hangout">
-<p>The first Hot Hop Hangout (3H1) on April 23rd was a great success with over 30 people joining.  Thank you all for participating!  We'll try to do a hangout every month to share our progress!<br>
+{{< div "content" >}}
 
+## Metadata Driven
 
+Hop is entirely metadata driven.
+
+<p><a class="button-dark" href="/components/latest/eips/enterprise-integration-patterns.html">Read more on Hop Metadata</a></p>
 
 {{< /div >}}
-{{< /div >}}
 
-{{< div "box" >}}
-{{< div >}}
+{{< div "icon" >}}
 
-## Releases
-
-Our Third preview release 0.30 is available!
-
-What to expect:
-
-* continued cleanup, refactoring
-* continued plugin ports
-* UI improvements (New File Browser)
-* Containers
-* Beam support
-
-
-**[0.30 Preview Release](/news/release-preview-0-30/)**
+<img src="./img/GenericTransform.svg" alt="Driven By Metadata"/>
 
 {{< /div >}}
-{{< /div >}}
 
-{{< div "box" >}}
-{{< div >}}
-
-## Monthly Roundup
-
-Hop fans! We'll be posting monthly roundups here to show you what we are working on, which new functionality is available and what you can expect in the near future.
-
-**[July, August 2020](/news/roundup-2020-08/)**
-
-[June 2020](/news/roundup-2020-06/)
-
-[May 2020](/news/roundup-2020-05/)
-
-[April 2020](/news/roundup-2020-04/)
-
-[March 2020](/news/roundup-2020-03/)
-
-[February 2020](/news/roundup-2020-02/)
-
-{{< /div >}}
-{{< /div >}}
-
-{{< div "box" >}}
-{{< div >}}
-
-## Sneak Peek
-
-You can find instructions to download and test the **nightly** version for the <mark>Hop Orchestration Platform</mark> [here](/download/download/).
-
-Please note that this is not a stable or usable production version.
-
-You can log all issues you find on our [JIRA](https://project-hop.atlassian.net). Feel free and join the discussion on the future plans of Hop on our [Mattermost Chat](https://chat.project-hop.org/).
-
-{{< /div >}}
 {{< /div >}}
 
 
-{{< div "box" >}}
-{{< div >}}
-## Quick Links
+{{< div "box left" >}}
 
-### [Source Code](https://github.com/project-hop/hop/) (Github)
-### [JIRA](https://project-hop.atlassian.net)
-### [Forums](https://forums.project-hop.org/)
-### [Mattermost Chat](https://chat.project-hop.org/)
-### [Contribution Guide](http://www.project-hop.org/community/contributing/)
+{{< div "icon" >}}
+
+<img src="./img/GenericTransform.svg" alt="Driven By Metadata"/>
 
 {{< /div >}}
+
+{{< div "content" >}}
+
+## Design Once, Run Anywhere
+
+Apache Beam
+
+<p><a class="button-dark" href="/components/latest/eips/enterprise-integration-patterns.html">Read more on runtimes</a></p>
+
 {{< /div >}}
 
-<div id="mc_embed_signup" class="box">
-  <div>
-    <form action="https://project-hop.us19.list-manage.com/subscribe/post?u=f85cf98c43d51747eaa845ff3&amp;id=914ae361b3" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-        <div id="mc_embed_signup_scroll">
-            <h1><span style="color:#0e3a5a">Become part of the Hop community!</span></h1>
-            <span>Want to stay in the loop of current progress on Hop development and events?</span>
-            <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
-            <div class="mc-field-group">
-                <label for="mce-EMAIL">Email Address <span class="asterisk">*</span>
-                </label>
-                <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
-            </div>
-            <div class="mc-field-group">
-                <label for="mce-FNAME">First Name </label>
-                <input type="text" value="" name="FNAME" class="" id="mce-FNAME">
-            </div>
-            <div class="mc-field-group">
-                <label for="mce-LNAME">Last Name </label>
-                <input type="text" value="" name="LNAME" class="" id="mce-LNAME">
-            </div>
-            <div id="mce-responses" class="clear">
-                <div class="response" id="mce-error-response" style="display:none"></div>
-                <div class="response" id="mce-success-response" style="display:none"></div>
-            </div>
-            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-            <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                <input type="text" name="b_f85cf98c43d51747eaa845ff3_914ae361b3" tabindex="-1" value="">
-            </div>
-            <div class="clear">
-                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button" style="background-color: #0e3a5a !important;">
-            </div>
-        </div>
-    </form>
-    </div>
-</div>
+{{< div "icon" >}}
+
+{{< /div >}}
+
+{{< /div >}}
+
+
+{{< div "box right" >}}
+
+{{< div "content" >}}
+
+## Visual Development
+
+Hop is entirely metadata driven.
+
+<p><a class="button-dark" href="/components/latest/eips/enterprise-integration-patterns.html">Read more on Hop Gui</a></p>
+
+{{< /div >}}
+
+{{< div "icon" >}}
+
+<img src="./img/GenericTransform.svg" alt="Driven By Metadata"/>
+
+{{< /div >}}
+
+{{< /div >}}
+
+
+{{< div "box left" >}}
+
+{{< div "icon" >}}
+
+<img src="./img/GenericTransform.svg" alt="Driven By Metadata"/>
+
+{{< /div >}}
+
+{{< div "content" >}}
+
+## Built-in Life Cycle Management
+
+Life Cycle Management
+
+<p><a class="button-dark" href="/components/latest/eips/enterprise-integration-patterns.html">Read more on LCM</a></p>
+
+{{< /div >}}
+
+{{< div "icon" >}}
+
+{{< /div >}}
+
+{{< /div >}}
 
 
 {{< /section >}}
+
+{{< section "frontpage columns apache" >}}
+
+# Apache &amp; OpenSource
+
+{{< div "split" >}}
+![20 years of Apache Software foundation](/img/apache-20.png)
+{{< /div >}}
+
+{{< div "split" >}}
+
+**Hop is your project!**
+
+Hop is an [Apache Software Foundation](https://www.apache.org) [Incubating](https://incubator.apache.org) project, available under the [Apache v2 license](https://apache.org/licenses/LICENSE-2.0). It's a complete open community, always listening to proposals and comments.
+
+[Sources](./community/sources/), [mailing lists](./community/mailing-list/), [issue tracker](./community/support/): it's fully open, you can access directly.
+
+We also love contributions: don't hesitate to [contribute](./community/contributing/). You can contribute by <a href="https://github.com/apache/incubator-hop-website/edit/master/content/_index.md">editing this page</a>!
+
+[Be Involved In The Community](./community/contributing/)
+
+{{< /div >}}
+
+{{< /section >}}
+
+

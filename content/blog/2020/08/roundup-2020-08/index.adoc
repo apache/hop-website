@@ -1,6 +1,9 @@
 ---
 title: "Roundup July, August 2020"
 date: 2020-06-27T12:01:56+02:00
+authors: ["bamaer"]
+categories: ["Roundup", "Project Hop"]
+preview: "Round July, August 2020"
 draft: false
 ---
 

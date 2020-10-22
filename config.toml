@@ -16,6 +16,12 @@ enableRobotsTXT = true
     name = "The Hop Team"
 
 [[menu.main]]
+    name = "Blog"
+    identifier = "blog"
+    weight = 1
+    url = "/blog/"
+
+[[menu.main]]
     name = "Documentation"
     identifier = "docs"
     weight = 1

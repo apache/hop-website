@@ -1,6 +1,5 @@
 .static {
   margin: var(--static-margin);
-  max-width: var(--static-max-width);
 }
 
 @media screen and (min-width: 1024px) {
