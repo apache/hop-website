@@ -2,41 +2,41 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Apache Hop (Incubating) on Hop</title>
-    <link>https://hop.apache.org/</link>
+    <link>https://hop.staged.apache.org/</link>
     <description>Recent content in Apache Hop (Incubating) on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 17 Oct 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://hop.apache.org/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://hop.staged.apache.org/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hop Joins the ASF</title>
-      <link>https://hop.apache.org/blog/2020/10/hop-joins-the-asf/</link>
+      <link>https://hop.staged.apache.org/blog/2020/10/hop-joins-the-asf/</link>
       <pubDate>Sat, 17 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/blog/2020/10/hop-joins-the-asf/</guid>
+      <guid>https://hop.staged.apache.org/blog/2020/10/hop-joins-the-asf/</guid>
       <description>Apache Hop - Incubation Proposal Submitted From the very start with Hop, we haven&amp;#8217;t exactly been secretive about our intention to join the Apache Software Foundation (ASF) and donate Project Hop to the ASF as Apache Hop.
  After almost a year of work on Project Hop, we&amp;#8217;re very happy to announce we&amp;#8217;ve reached a first milestone: the Apache Hop proposal was submitted to the incubator mailing list on September, 9th and has been accepted!</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://hop.apache.org/news/apache-hop-incubation-proposal-accepted/</link>
+      <link>https://hop.staged.apache.org/news/apache-hop-incubation-proposal-accepted/</link>
       <pubDate>Tue, 08 Sep 2020 12:01:56 +0200</pubDate>
       
-      <guid>https://hop.apache.org/news/apache-hop-incubation-proposal-accepted/</guid>
+      <guid>https://hop.staged.apache.org/news/apache-hop-incubation-proposal-accepted/</guid>
       <description>Apache Hop - Incubation Proposal Submitted From the very start with Hop, we haven&amp;#8217;t exactly been secretive about our intention to join the Apache Software Foundation (ASF) and donate Project Hop to the ASF as Apache Hop.
  After almost a year of work on Project Hop, we&amp;#8217;re very happy to announce we&amp;#8217;ve reached a first milestone: the Apache Hop proposal was submitted to the incubator mailing list on September, 9th and has been accepted!</description>
     </item>
     
     <item>
       <title>Preview Release 0.30</title>
-      <link>https://hop.apache.org/blog/2020/07/preview-release-0.30/</link>
+      <link>https://hop.staged.apache.org/blog/2020/07/preview-release-0.30/</link>
       <pubDate>Tue, 21 Jul 2020 12:01:56 +0200</pubDate>
       
-      <guid>https://hop.apache.org/blog/2020/07/preview-release-0.30/</guid>
+      <guid>https://hop.staged.apache.org/blog/2020/07/preview-release-0.30/</guid>
       <description>It has been about 2 months since our latest release, and a lot has happened!
  We&amp;#8217;re happy to announce to availability of our 0.30 preview release. Please take it for a spin. If you find a bug, please create a bug ticket, if there&amp;#8217;s functionality you&amp;#8217;d like to see, please create a feature request.
  Direct download here
@@ -47,20 +47,20 @@
     
     <item>
       <title>Roundup July, August 2020</title>
-      <link>https://hop.apache.org/blog/2020/08/roundup-2020-08/</link>
+      <link>https://hop.staged.apache.org/blog/2020/08/roundup-2020-08/</link>
       <pubDate>Sat, 27 Jun 2020 12:01:56 +0200</pubDate>
       
-      <guid>https://hop.apache.org/blog/2020/08/roundup-2020-08/</guid>
+      <guid>https://hop.staged.apache.org/blog/2020/08/roundup-2020-08/</guid>
       <description>We released 0.30 in late July, followed by a couple of weeks of slower progress because of summer holidays, but here we are with a roundup for July and August.
  After all the heavy lifting we did in the first half of the year, Project Hop now entered a feature-freeze phase. The focus now is on bug fixing, documentation and hardening the platform. Minor new features may continue to appear, just don&amp;#8217;t expect any spectacular new functionality for now.</description>
     </item>
     
     <item>
       <title>Roundup June 2020</title>
-      <link>https://hop.apache.org/blog/2020/06/roundup-2020-06/</link>
+      <link>https://hop.staged.apache.org/blog/2020/06/roundup-2020-06/</link>
       <pubDate>Sat, 27 Jun 2020 12:01:56 +0200</pubDate>
       
-      <guid>https://hop.apache.org/blog/2020/06/roundup-2020-06/</guid>
+      <guid>https://hop.staged.apache.org/blog/2020/06/roundup-2020-06/</guid>
       <description>Another month has passed, so here we are with a new roundup!
  A lot of work has been done in the last couple of weeks. A huge thanks to Matt, who implemented most of the functionality that was added this month.
  Here&amp;#8217;s what happened in June!
@@ -70,10 +70,10 @@
     
     <item>
       <title>Roundup May 2020</title>
-      <link>https://hop.apache.org/blog/2020/05/roundup-2020-05/</link>
+      <link>https://hop.staged.apache.org/blog/2020/05/roundup-2020-05/</link>
       <pubDate>Tue, 02 Jun 2020 12:01:56 +0200</pubDate>
       
-      <guid>https://hop.apache.org/blog/2020/05/roundup-2020-05/</guid>
+      <guid>https://hop.staged.apache.org/blog/2020/05/roundup-2020-05/</guid>
       <description>Another month has passed, so here we are with a new roundup!
  In early May, we released version 0.21. Check the release announcement here
  We would like to thank everyone who tested 0.21 and created feature requests and bug tickets. Fixing the bugs and implementing the feature requests will keep us busy for another couple of weeks.
@@ -82,10 +82,10 @@
     
     <item>
       <title>Preview Release 0.21</title>
-      <link>https://hop.apache.org/blog/2020/05/preview-release-0.21/</link>
+      <link>https://hop.staged.apache.org/blog/2020/05/preview-release-0.21/</link>
       <pubDate>Thu, 07 May 2020 12:01:56 +0200</pubDate>
       
-      <guid>https://hop.apache.org/blog/2020/05/preview-release-0.21/</guid>
+      <guid>https://hop.staged.apache.org/blog/2020/05/preview-release-0.21/</guid>
       <description>In the month since we released 0.10, we&amp;#8217;ve added enough functionality to Project Hop for another preview release.
  We&amp;#8217;re happy to announce to availability of our 0.21 preview release. Please take it for a spin. If you find a bug, please create a bug ticket, if there&amp;#8217;s functionality you&amp;#8217;d like to see, please create a feature request.
  Direct download here
@@ -95,20 +95,20 @@
     
     <item>
       <title>Roundup April 2020</title>
-      <link>https://hop.apache.org/blog/2020/04/roundup-2020-04/</link>
+      <link>https://hop.staged.apache.org/blog/2020/04/roundup-2020-04/</link>
       <pubDate>Sun, 03 May 2020 12:01:56 +0200</pubDate>
       
-      <guid>https://hop.apache.org/blog/2020/04/roundup-2020-04/</guid>
+      <guid>https://hop.staged.apache.org/blog/2020/04/roundup-2020-04/</guid>
       <description>Another month has passed time for a new roundup! Previous month has been a hectic one, we had our first preview version (0.10) and are currently getting close to releasing 0.20!
  We would like to thank everyone that tested 0.10 and created feature requests and issues, we have not yet been able to solve all of them but so many changes were made we feel like 0.20 is at its place.</description>
     </item>
     
     <item>
       <title>Preview Release 0.10</title>
-      <link>https://hop.apache.org/blog/2020/04/release-preview-0.1/</link>
+      <link>https://hop.staged.apache.org/blog/2020/04/release-preview-0.1/</link>
       <pubDate>Thu, 09 Apr 2020 12:01:56 +0200</pubDate>
       
-      <guid>https://hop.apache.org/blog/2020/04/release-preview-0.1/</guid>
+      <guid>https://hop.staged.apache.org/blog/2020/04/release-preview-0.1/</guid>
       <description>After more than half a year of hard work, we felt the time was right to show the world what we have been working on.
  We&amp;#8217;re happy to announce to availability of our 0.10 preview release. Please take it for a spin. If you find a bug, please create a bug ticket, if there&amp;#8217;s functionality you&amp;#8217;d like to see, please create a feature request.
  Direct download here
@@ -117,19 +117,19 @@
     
     <item>
       <title>Roundup March 2020</title>
-      <link>https://hop.apache.org/blog/2020/03/roundup-2020-03/</link>
+      <link>https://hop.staged.apache.org/blog/2020/03/roundup-2020-03/</link>
       <pubDate>Tue, 31 Mar 2020 12:01:56 +0200</pubDate>
       
-      <guid>https://hop.apache.org/blog/2020/03/roundup-2020-03/</guid>
+      <guid>https://hop.staged.apache.org/blog/2020/03/roundup-2020-03/</guid>
       <description>A new month, a new roundup! We&amp;#8217;re getting very close to a first preview release, expect it to see the light of day in the coming week (don&amp;#8217;t haunt us if it&amp;#8217;s a week later). We have continued to walk the path of major code cleanup and refactoring. Because we don&amp;#8217;t want to bore you with the technical stuff (those interested in the technical stuff come and ask in our #dev channel ) here is an overview of what you can see.</description>
     </item>
     
     <item>
       <title>Roundup February 2020</title>
-      <link>https://hop.apache.org/blog/2020/02/roundup-2020-02/</link>
+      <link>https://hop.staged.apache.org/blog/2020/02/roundup-2020-02/</link>
       <pubDate>Sun, 08 Mar 2020 12:38:42 +0100</pubDate>
       
-      <guid>https://hop.apache.org/blog/2020/02/roundup-2020-02/</guid>
+      <guid>https://hop.staged.apache.org/blog/2020/02/roundup-2020-02/</guid>
       <description>Currently we are working on creating a first public preview version of the Hop Orchestration Platform. Expect this version to give you a first overview of what the future of Hop will be offering, we are not following a specific roadmap and are working on all fronts. The main focus of the preview version is UI changes.
  Following items contain the biggest changes but much more is happening.
    UI We are completely rewriting the Hop UI, creating a new experience on how to create data pipelines.</description>
@@ -137,39 +137,39 @@
     
     <item>
       <title></title>
-      <link>https://hop.apache.org/manual/</link>
+      <link>https://hop.staged.apache.org/manual/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/manual/</guid>
+      <guid>https://hop.staged.apache.org/manual/</guid>
       <description>title   </description>
     </item>
     
     <item>
       <title>Architecture</title>
-      <link>https://hop.apache.org/docs/architecture/</link>
+      <link>https://hop.staged.apache.org/docs/architecture/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/docs/architecture/</guid>
+      <guid>https://hop.staged.apache.org/docs/architecture/</guid>
       <description>The architecture of Hop is very simple in essence: separate out any metadata from runtime code and tooling.
  Doing this, Hop aims to have a minimal installation footprint and wants to be stateless to facilitate execution on a variety of platforms like Spark and Flink, but also in a variety of scenarios like running in different life cycles such as development, test, acceptance, production, unit testing and continuous integration.</description>
     </item>
     
     <item>
       <title>Code Contribution Guide</title>
-      <link>https://hop.apache.org/community/contribution-guides/code-contribution-guide/</link>
+      <link>https://hop.staged.apache.org/community/contribution-guides/code-contribution-guide/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/community/contribution-guides/code-contribution-guide/</guid>
+      <guid>https://hop.staged.apache.org/community/contribution-guides/code-contribution-guide/</guid>
       <description>Apache Hop is maintained, improved, and extended by code contributions of volunteers. We welcome contributions to Hop, but due to the size of the project and to preserve the high quality of the code base, we follow a contribution process that is explained in this document.
  Please feel free to ask questions at any time. Either send a message in the dev channel on our chatserver or comment on the Jira issue you are working on.</description>
     </item>
     
     <item>
       <title>Code Review Guide</title>
-      <link>https://hop.apache.org/community/contribution-guides/code-review-guide/</link>
+      <link>https://hop.staged.apache.org/community/contribution-guides/code-review-guide/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/community/contribution-guides/code-review-guide/</guid>
+      <guid>https://hop.staged.apache.org/community/contribution-guides/code-review-guide/</guid>
       <description>This guide is for all committers and contributors that want to help with reviewing code contributions. Thank you for your effort - good reviews are one the most important and crucial parts of an open source project. This guide should help the community to make reviews such that:
    Contributors have a good contribution experience.
   Our reviews are structured and check all important aspects of a contribution.</description>
@@ -177,10 +177,10 @@
     
     <item>
       <title>Cookies used by this site</title>
-      <link>https://hop.apache.org/cookie-info/</link>
+      <link>https://hop.staged.apache.org/cookie-info/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/cookie-info/</guid>
+      <guid>https://hop.staged.apache.org/cookie-info/</guid>
       <description>First Party cookies We use cookies to store website settings they contain following items:
    acceptance of our cookie banner
     Third Party cookies When accepting the cookie banner this website uses cookies to monitor website performance, to do this Google Analytics is used. When your browser supports doNotTrack no cookies are placed on your computer and you will not see a cookie banner from this website.</description>
@@ -188,10 +188,10 @@
     
     <item>
       <title>Documentation Contribution Guide</title>
-      <link>https://hop.apache.org/community/contribution-guides/documentation-contribution-guide/</link>
+      <link>https://hop.staged.apache.org/community/contribution-guides/documentation-contribution-guide/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/community/contribution-guides/documentation-contribution-guide/</guid>
+      <guid>https://hop.staged.apache.org/community/contribution-guides/documentation-contribution-guide/</guid>
       <description>Good documentation is crucial for any kind of software. This is especially true for sophisticated software systems such as distributed data processing engines like Apache Hop. The Apache Hop community aims to provide concise, precise, and complete documentation and welcomes any contribution to improve Apache Hop’s documentation.
  Our documentation is not yet fully implemented
  ideas and contributions are very welcome, come discuss with us on our chat.
@@ -200,10 +200,10 @@
     
     <item>
       <title>Download</title>
-      <link>https://hop.apache.org/download/download/</link>
+      <link>https://hop.staged.apache.org/download/download/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/download/download/</guid>
+      <guid>https://hop.staged.apache.org/download/download/</guid>
       <description>There is no official release of Apache Hop yet, but you can take a look at the latest build of our software.
  Preview release 0.30 here
  Latest Snapshots (0.40-SNAPSHOT) here
@@ -213,10 +213,10 @@
     
     <item>
       <title>Hop&#39;s error handling caught a faulty request</title>
-      <link>https://hop.apache.org/404/</link>
+      <link>https://hop.staged.apache.org/404/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/404/</guid>
+      <guid>https://hop.staged.apache.org/404/</guid>
       <description>404 - Page not found   The page you requested has yet to be created.
  Return to homepage
    Hop Orchestration Platform Perhaps one of the following pages may be of interest:
@@ -227,48 +227,48 @@
     
     <item>
       <title>How To Contribute</title>
-      <link>https://hop.apache.org/community/contributing/</link>
+      <link>https://hop.staged.apache.org/community/contributing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/community/contributing/</guid>
+      <guid>https://hop.staged.apache.org/community/contributing/</guid>
       <description>Apache Hop is developed by an open and friendly community. Everybody is cordially welcome to join the community and contribute to Apache Hop. There are several ways to interact with the community and to contribute to Hop including asking questions, filing bug reports, proposing new features, joining discussions on the mailing lists, contributing code or documentation, improving the website, or testing release candidates.
  What do you want to do? Contributing to Hop goes beyond writing code for the project.</description>
     </item>
     
     <item>
       <title>Jira Guidelines</title>
-      <link>https://hop.apache.org/community/contribution-guides/jira-guide/</link>
+      <link>https://hop.staged.apache.org/community/contribution-guides/jira-guide/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/community/contribution-guides/jira-guide/</guid>
+      <guid>https://hop.staged.apache.org/community/contribution-guides/jira-guide/</guid>
       <description>Jira is the issue tracker that is being used to track all changes and implementation of new code or documentation in Apache Hop. This document serves to explain the workflow that is used and what can happen after a ticket has been created. The second purpose is to explain what you need to do to create an complete ticket, doing so helps the developers to understand the request and work on it.</description>
     </item>
     
     <item>
       <title>Lean End User License Agreement</title>
-      <link>https://hop.apache.org/about/eula/</link>
+      <link>https://hop.staged.apache.org/about/eula/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/about/eula/</guid>
+      <guid>https://hop.staged.apache.org/about/eula/</guid>
       <description>This End User License Agreement (this &#34;Agreement&#34;) is made between Lean Solution (&#34;Lean&#34;) and the end-user of Lean’s software (&#34;Licensee&#34;).
 Licensee intends to use certain Lean products (each, a &#34;Product&#34;) and to obtain a subscription license through one of Lean’s third party resellers or integrators (the &#34;Lean Partner&#34;). Licensee will enter a written agreement with the Lean Partner that covers fees, payment provisions and certain license and support terms (the &#34;</description>
     </item>
     
     <item>
       <title>Mailing Lists</title>
-      <link>https://hop.apache.org/community/mailing-list/</link>
+      <link>https://hop.staged.apache.org/community/mailing-list/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/community/mailing-list/</guid>
+      <guid>https://hop.staged.apache.org/community/mailing-list/</guid>
       <description>Use Hop User List You should post and subscriber to the Hop User List for all your questions on using Hop, or how to do X with Hop etc. If in doubt use this list. The other list, Hop Developer List, is for the Hop team to discus development of the actual Hop project; do not use this list for question on using Hop. Again to re-iterate, use the Hop User List, for you Hop questions.</description>
     </item>
     
     <item>
       <title>Q&amp;A</title>
-      <link>https://hop.apache.org/docs/qa/</link>
+      <link>https://hop.staged.apache.org/docs/qa/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/docs/qa/</guid>
+      <guid>https://hop.staged.apache.org/docs/qa/</guid>
       <description>Is this a fork?
   Yes this is a fork, in the sense that we used Kettle 8.2.0.7 as a starting point for Apache Hop. Apache Hop wants to used that as a starting point to explore the future of data integration. Check out the Roadmap and Architecture sections.
      Is this a hostile fork?
@@ -277,10 +277,10 @@ Licensee intends to use certain Lean products (each, a &#34;Product&#34;) and to
     
     <item>
       <title>Roadmap</title>
-      <link>https://hop.apache.org/docs/roadmap/</link>
+      <link>https://hop.staged.apache.org/docs/roadmap/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/docs/roadmap/</guid>
+      <guid>https://hop.staged.apache.org/docs/roadmap/</guid>
       <description>On a very high level here are the things we want to do:
    Change all package names to org.apache.hop from org.pentaho.di (done)
   Remove all existing external dependencies to non-standard libraries so Hop can be compiled without referencing a proprietary Maven server. (done)
@@ -289,10 +289,10 @@ Licensee intends to use certain Lean products (each, a &#34;Product&#34;) and to
     
     <item>
       <title>Sources</title>
-      <link>https://hop.apache.org/community/sources/</link>
+      <link>https://hop.staged.apache.org/community/sources/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/community/sources/</guid>
+      <guid>https://hop.staged.apache.org/community/sources/</guid>
       <description>## Web Browsing of git
  To browse via the web:
  https://gitbox.apache.org/repos/asf/incubator-hop.git   ## Checking out from git
@@ -302,20 +302,20 @@ Licensee intends to use certain Lean products (each, a &#34;Product&#34;) and to
     
     <item>
       <title>Support</title>
-      <link>https://hop.apache.org/community/support/</link>
+      <link>https://hop.staged.apache.org/community/support/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/community/support/</guid>
+      <guid>https://hop.staged.apache.org/community/support/</guid>
       <description>Getting help If you are experiencing problems using Hop then please report your problem to our mailing list. This allows the entire community to help with your problem. If indeed a bug has been identified in the Hop software, then document the problem in our [Issue Tracker](https://issues.apache.org/jira/browse/HOP). Please refrain from immediately opening a ticket in the issue tracker unless you are certain it&amp;#8217;s a problem in the Hop software.
  If you are in doubt, we appreciate asking the [mailing list](/community/mailing-list/) or [Mattermost](https://chat.</description>
     </item>
     
     <item>
       <title>Team</title>
-      <link>https://hop.apache.org/community/team/</link>
+      <link>https://hop.staged.apache.org/community/team/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/community/team/</guid>
+      <guid>https://hop.staged.apache.org/community/team/</guid>
       <description>This page lists who we are. By all means add yourself to the list - lets sort it in alphabetical order (based on last name)
  Committers     Name ID Organisation Social     Matt Casters
  mattcasters
@@ -332,10 +332,10 @@ Licensee intends to use certain Lean products (each, a &#34;Product&#34;) and to
     
     <item>
       <title>Tools</title>
-      <link>https://hop.apache.org/community/tools/</link>
+      <link>https://hop.staged.apache.org/community/tools/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/community/tools/</guid>
+      <guid>https://hop.staged.apache.org/community/tools/</guid>
       <description>The following tools are used within the Hop community.
    Github
   Jira
@@ -349,10 +349,10 @@ Licensee intends to use certain Lean products (each, a &#34;Product&#34;) and to
     
     <item>
       <title>Translation Contribution Guide</title>
-      <link>https://hop.apache.org/community/contribution-guides/translation-contribution-guide/</link>
+      <link>https://hop.staged.apache.org/community/contribution-guides/translation-contribution-guide/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/community/contribution-guides/translation-contribution-guide/</guid>
+      <guid>https://hop.staged.apache.org/community/contribution-guides/translation-contribution-guide/</guid>
       <description>Translating Hop to your language is an easy and code free contribution that adds a lot of value to our user community. The Hop Translator makes the process of translating Hop (or extending an existing translation) a breeze.
  Hop Translator The Hop Translator is a single dialog application.
    How to run You&amp;#8217;ll need the source code if you want to run the Hop Translator. Clone the repository from https://github.</description>
@@ -360,10 +360,10 @@ Licensee intends to use certain Lean products (each, a &#34;Product&#34;) and to
     
     <item>
       <title>Website Contribution Guide</title>
-      <link>https://hop.apache.org/community/contribution-guides/website-contribution-guide/</link>
+      <link>https://hop.staged.apache.org/community/contribution-guides/website-contribution-guide/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/community/contribution-guides/website-contribution-guide/</guid>
+      <guid>https://hop.staged.apache.org/community/contribution-guides/website-contribution-guide/</guid>
       <description>The website is the central place and first point of entry for any potentially new user. It needs to contain as much information as possible but not scare away new users with complex structures. This guide explains how to contribute to the website.
   Obtain the documentation sources
   Before you start start working on the documentation&amp;#8230;&amp;#8203;
