@@ -41,7 +41,7 @@ Joining the ASF Incubator will be mainly about learning to work the Apache way. 
 We'll be supported by a champion and a number of mentors to guide us through the entire incubation process.
 
 * **champion**: our champion is https://twitter.com/stadtlegende[Maximilian Michels], who has successfully guided Apache Flink and Apache Beam through the incubation process.
-* mentors: https://twitter.com/julianhyde[Julian Hyde], https://twitter.com/magicaltrout[Tom Barber] and https://github.com/djkevincr[Kevin Ratnasekera] (pending).
+* mentors: https://twitter.com/julianhyde[Julian Hyde], https://twitter.com/magicaltrout[Tom Barber], https://github.com/djkevincr[Kevin Ratnasekera] and https://twitter.com/fpapon2[François Papon].
 
 By joining the ASF, we'll need to move a couple of operational changes. Once we start migrating our infrastructure, we'll provide all the necessary information to update your bookmarks
 

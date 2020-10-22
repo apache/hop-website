@@ -14,9 +14,10 @@ description: Apache Hop - The Hop Orchestration Platform aims to facilitate all 
 
 ## Metadata Driven
 
-Hop is entirely metadata driven.
+Hop is entirely metadata driven. Every object type in Hop describes how data is read, manipulated or written, or how workflows and pipelines need to be orchestrated.</br>
+Metadata is wat drives Hop internally as well. Hop uses a kernel architecture with a robust engine. Plugins add functionality to the engine through their own metadata.
 
-<p><a class="button-dark" href="/components/latest/eips/enterprise-integration-patterns.html">Read more on Hop Metadata</a></p>
+<!--p><a class="button-dark" href="/link/to/doc/page/on/metadata">Read more on Hop Metadata</a></p-->
 
 {{< /div >}}
 
@@ -33,7 +34,7 @@ Hop is entirely metadata driven.
 
 {{< div "icon" >}}
 
-<img src="./img/GenericTransform.svg" alt="Driven By Metadata"/>
+<img src="./img/beam-logo.svg" alt="Driven By Metadata"/>
 
 {{< /div >}}
 
@@ -41,9 +42,10 @@ Hop is entirely metadata driven.
 
 ## Design Once, Run Anywhere
 
-Apache Beam
+Hop workflines and pipelines are definitions of how data needs to be processed. </br>Once designed, a pipeline can be executed on any supported runtime.
+Hop has built-in support to run pipelines locally and remotely in the native Hop runtime, or on <a href="https://spark.apache.org" target="blank">Apache Spark</a>, <a href="https://flink.apache.org" target="blank">Apache Flink</a> or <a href="https://cloud.google.com/dataflow" target="blank">Google Dataflow</a> through the <a href="https://beam.apache.org" target="blank">Apache Beam</a> runtimes.
 
-<p><a class="button-dark" href="/components/latest/eips/enterprise-integration-patterns.html">Read more on runtimes</a></p>
+<!--p><a class="button-dark" href="/components/latest/eips/enterprise-integration-patterns.html">Read more on runtimes</a></p-->
 
 {{< /div >}}
 
@@ -60,15 +62,16 @@ Apache Beam
 
 ## Visual Development
 
-Hop is entirely metadata driven.
+Hop workflows and pipelines are developed visually through an intuitive drag and drop interface. </br>
+Visual development allows data developers and data engineers to keep focus on the business logic that needs to be implemented, on <i>what</i> needs to be done instead of <i>how</i> it needs to be done.
 
-<p><a class="button-dark" href="/components/latest/eips/enterprise-integration-patterns.html">Read more on Hop Gui</a></p>
+<!--p><a class="button-dark" href="/components/latest/eips/enterprise-integration-patterns.html">Read more on Hop Gui</a></p-->
 
 {{< /div >}}
 
 {{< div "icon" >}}
 
-<img src="./img/GenericTransform.svg" alt="Driven By Metadata"/>
+<img src="./img/eyeglasses.svg" alt="Driven By Metadata"/>
 
 {{< /div >}}
 
@@ -79,7 +82,7 @@ Hop is entirely metadata driven.
 
 {{< div "icon" >}}
 
-<img src="./img/GenericTransform.svg" alt="Driven By Metadata"/>
+<img src="./img/cycle.svg" alt="Driven By Metadata"/>
 
 {{< /div >}}
 
@@ -87,7 +90,8 @@ Hop is entirely metadata driven.
 
 ## Built-in Life Cycle Management
 
-Life Cycle Management
+Managing, testing and deploying workflows and pipelines can be a daunting task.</br>
+Developers and engineers can manage the entire project life cycle from the Hop Gui: switch between projects, environments, runtime configurations, manage git versions etc.
 
 <p><a class="button-dark" href="/components/latest/eips/enterprise-integration-patterns.html">Read more on LCM</a></p>
 
