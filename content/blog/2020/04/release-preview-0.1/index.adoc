@@ -1,6 +1,9 @@
 ---
 title: "Preview Release 0.10"
 date: 2020-04-09T12:01:56+02:00
+authors: ["hansva"]
+categories: ["Pre-Release", "Project Hop"]
+preview: "Preview Release 0.10"
 draft: false
 ---
 

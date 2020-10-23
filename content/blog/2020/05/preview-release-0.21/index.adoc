@@ -1,6 +1,9 @@
 ---
 title: "Preview Release 0.21"
 date: 2020-05-07T12:01:56+02:00
+authors: ["bamaer", "hansva"]
+categories: ["Pre-Release", "Project Hop"]
+preview: "Preview Release 0.21"
 draft: false
 ---
 

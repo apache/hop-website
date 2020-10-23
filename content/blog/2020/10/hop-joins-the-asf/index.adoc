@@ -1,10 +1,10 @@
 ---
-title: ""
-date: 2020-09-08T12:01:56+02:00
-draft: false
-:imagesdir: /
+title: "Hop Joins the ASF"
+date: 2020-10-17
+authors: ["bamaer"]
+categories: ["Releases", "ASF", "Apache Hop (Incubating"]
+preview: "Project Hop joins the Apache Software Foundation and becomes Apache Hop (Incubating)."
 ---
-
 ## Apache Hop - Incubation Proposal Submitted
 
 From the very start with Hop, we haven't exactly been secretive about our intention to join the https://apache.org[Apache Software Foundation (ASF)] and donate Project Hop to the ASF as Apache Hop.
@@ -41,7 +41,7 @@ Joining the ASF Incubator will be mainly about learning to work the Apache way. 
 We'll be supported by a champion and a number of mentors to guide us through the entire incubation process.
 
 * **champion**: our champion is https://twitter.com/stadtlegende[Maximilian Michels], who has successfully guided Apache Flink and Apache Beam through the incubation process.
-* mentors: https://twitter.com/julianhyde[Julian Hyde], https://twitter.com/magicaltrout[Tom Barber] and https://github.com/djkevincr[Kevin Ratnasekera] (pending).
+* mentors: https://twitter.com/julianhyde[Julian Hyde], https://twitter.com/magicaltrout[Tom Barber], https://github.com/djkevincr[Kevin Ratnasekera] and https://twitter.com/fpapon2[François Papon].
 
 By joining the ASF, we'll need to move a couple of operational changes. Once we start migrating our infrastructure, we'll provide all the necessary information to update your bookmarks
 
@@ -63,4 +63,3 @@ Among the ASF's objectives are: to provide legal protection to volunteers workin
 
 The ASF also holds several ApacheCon conferences each year, highlighting Apache projects and related technology.
 ____
-

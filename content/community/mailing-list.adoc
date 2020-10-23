@@ -1,0 +1,22 @@
+---
+title: "Mailing Lists"
+---
+
+## Use Hop User List
+
+You should post and subscriber to the Hop User List for all your questions on using Hop, or how to do X with Hop etc. If in doubt use this list.
+The other list, Hop Developer List, is for the Hop team to discus development of the actual Hop project; do not use this list for question on using Hop.
+Again to re-iterate, use the Hop User List, for you Hop questions. This is the correct mailing list, and have the most people there ready for helping you.
+
+## Post plain text mails
+
+When posting to the mailing lists, use plain text mails. Do not use HTML mails. HTML mails is more likely to be targeted as spam mails and will be rejected; as well it's not easily readable by others.
+
+{{< table >}}
+| List Name  | Address | Subscribe | Unsubscribe | Archive | Comment |
+|------------|---------|-----------|-------------|---------|---------|
+| Hop User List  | users@hop.apache.org | [subscribe](mailto:users-subscribe@hop.apache.org) | [unsubscribe](mailto:users-unsubscribe@hop.apache.org) | [Archives](http://mail-archives.apache.org/mod_mbox/hop-users/) | Use this list for your Hop questions. |
+| Hop Developer List  | dev@hop.apache.org | [subscribe](mailto:dev-subscribe@hop.apache.org) | [unsubscribe](mailto:dev-unsubscribe@hop.apache.org) | [Archives](http://mail-archives.apache.org/mod_mbox/hop-dev/) | Used by Hop contributors to discuss development of Hop. |
+| Hop Commits List  | commits@hop.apache.org | [subscribe](mailto:commits-subscribe@hop.apache.org) | [unsubscribe](mailto:commits-unsubscribe@hop.apache.org) | [Archives](http://mail-archives.apache.org/mod_mbox/hop-commits/) | Notifications on changes to the Hop code |
+| Hop Issues List  | issues@hop.apache.org | [subscribe](mailto:issues-subscribe@hop.apache.org) | [unsubscribe](mailto:issues-unsubscribe@hop.apache.org) | [Archives](http://mail-archives.apache.org/mod_mbox/hop-issues/) | Notifications of JIRA issues |
+{{< /table >}}

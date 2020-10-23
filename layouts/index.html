@@ -1,12 +1,48 @@
 {{ partial "header.html" . }}
 
 <header class="frontpage">
-  <h1>Hop Orchestration Platform</h1>
-  <p>The Hop Orchestration Platform aims to facilitate all aspects of data and metadata orchestration.</p>
-  <tr><td><a class="significant" href="./manual/latest/getting-started.html">Get started</a></td></tr>
+  <div class="main-heading">
+    <h1>Apache Hop</h1>
+    <p>The <b>H</b>op <b>O</b>rchestration <b>P</b>latform, or Apache Hop (Incubating), aims to facilitate all aspects of data and metadata orchestration.</p>
+    <p>Hop is an entirely new open source data integration platform that is easy to use, fast and flexible</p>
+    <p>Hop aims to be the future of data integration. <b>Visual development</b> enables developers to be more productive than they can be through code.
+      Our <b>Design once, run anywhere</b> workflows and pipelines can be designed in te Hop Gui and run on the Hop native engine (local or remote), or on Spark, Flink, Google Dataflow or AWS EMR through Beam.
+      <b>Lifecycle Management</b> enables developers and administrators to switch between projects, environments and purposes without leaving your train of thought.
+    </p>
+    <p><a class="button-dark" href="./manual/latest/getting-started.html">Get started</a></p>
+  </div>
+  <img src="./img/hop-logo.svg" alt="Apache Hop (Incubating) - Hop Orchestration Platform">
 </header>
 
-{{ .Content }}
+<div class="frontpage news">
+  <h2>What's New?</h2>
+</div>
 
+<section class="frontpage columns blog-posts">
+  <ul>
+    {{with .Site.GetPage "section" "blog"}}
+    {{range .Pages | first 3}}
+
+    <li class="blog-post">
+      <time datetime="{{ dateFormat "2006-01-02" .PublishDate }}" class="date">
+      <data class="day">
+        {{ dateFormat "2" .PublishDate }}
+      </data>
+      <data class="month">
+        {{ dateFormat "Jan" .PublishDate }}
+        {{ dateFormat "2006" .PublishDate }}
+      </data>
+      </time>
+      <div class="content">
+        <h2>{{ .Title }}</h2>
+        <p>{{ .Params.preview }}... <a href="{{ .Permalink }}">Read More</a></p>
+      </div>
+    </li>
+    {{end}}
+    {{end}}
+  </ul>
+</section>
+
+{{ .Content }}
 
 {{ partial "footer.html" . }}

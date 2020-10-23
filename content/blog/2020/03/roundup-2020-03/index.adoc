@@ -1,6 +1,9 @@
 ---
 title: "Roundup March 2020"
 date: 2020-03-31T12:01:56+02:00
+authors: ["hansva"]
+categories: ["Roundup", "Project Hop"]
+preview: "Roundup March 2020"
 draft: false
 ---
 

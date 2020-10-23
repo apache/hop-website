@@ -1,5 +1,5 @@
 a.category:first-child::before {
-  content: "\2022\00A0\00A0";
+  content: '\2022\00A0\00A0';
 }
 
 a.category:first-child {
@@ -8,7 +8,6 @@ a.category:first-child {
 }
 
 a.category {
-  background-color: var(--color-gray-30);
   border-radius: 0.2rem;
   margin-left: 1px;
   color: var(--color-white);
@@ -16,6 +15,21 @@ a.category {
   font-weight: bold;
   font-size: 0.65rem;
   text-decoration: none;
+}
+
+li > a.category {
+  display: block;
+  margin: 0.2rem;
+  line-height: 2;
+}
+
+a.category,
+li > a.category {
+  background-color: var(--color-camel-hop);
+  background-image: none;
+  background-position: 0;
+  background-repeat: no-repeat;
+  background-size: 0;
 }
 
 a.category:hover {

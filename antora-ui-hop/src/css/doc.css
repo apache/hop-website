@@ -1,6 +1,7 @@
 .doc {
   color: var(--doc-font-color);
   font-size: var(--doc-font-size);
+  hyphens: auto;
   line-height: var(--doc-line-height);
   margin: var(--doc-margin);
   max-width: var(--doc-max-width);
@@ -12,6 +13,7 @@
     font-size: var(--doc-font-size--desktop);
     margin: var(--doc-margin--desktop);
     max-width: var(--doc-max-width--desktop);
+    min-width: 0;
   }
 }
 
@@ -23,6 +25,7 @@
 .doc h6 {
   color: var(--heading-font-color);
   font-weight: var(--heading-font-weight);
+  hyphens: none;
   line-height: 1.3;
   margin: 1rem 0 0;
   text-transform: uppercase;
@@ -34,26 +37,37 @@
   margin: 1.5rem 0;
 }
 
-@media screen and (min-width: 769px) {
-  .doc > h1.page:first-child {
-    margin-top: 2.5rem;
-  }
-}
-
 #preamble + .sect1,
 .doc .sect1 + .sect1 {
   margin-top: 2rem;
 }
 
+.doc h1.sect0 {
+  background: var(--abstract-background);
+  font-size: 1.8em;
+  margin: 1.5rem -1rem 0;
+  padding: 0.5rem 1rem;
+}
+
 .doc h2:not(.discrete) {
-  border-bottom: 1px solid var(--section-divider-color);
+  margin-top: 1rem;
   margin-left: -1rem;
   margin-right: -1rem;
   padding: 0.4rem 1rem 0.1rem;
+  overflow-wrap: break-word;
+}
+
+.doc h2:not(.discrete)::after {
+  content: "";
+  display: block;
+  position: relative;
+  height: 1px;
+  background-color: var(--section-divider-color);
 }
 
 .doc h3:not(.discrete) {
   font-weight: var(--alt-heading-font-weight);
+  overflow-wrap: break-word;
 }
 
 .doc h1 .anchor,
@@ -78,7 +92,7 @@
 .doc h4 .anchor::before,
 .doc h5 .anchor::before,
 .doc h6 .anchor::before {
-  content: "\00a7";
+  content: '\00a7';
 }
 
 .doc h1:hover .anchor,
@@ -98,6 +112,29 @@
   overflow-x: auto;
 }
 
+.doc .table-wrapper::-webkit-scrollbar {
+  height: var(--scrollbar-thickness);
+}
+
+.doc .table-wrapper::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-color);
+  border-radius: var(--scrollbar-radius);
+}
+
+.doc .table-wrapper::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-color);
+  border-radius: var(--scrollbar-radius);
+}
+
+.doc .table-wrapper::-webkit-scrollbar-thumb:hover,
+.doc .table-wrapper::-webkit-scrollbar-thumb:active {
+  background: var(--scrollbar-thumb-active-color);
+}
+
+.doc .table-wrapper table {
+  width: 100%;
+}
+
 .doc .tableblock p {
   font-size: inherit;
 }
@@ -111,10 +148,32 @@
 
 .doc a {
   color: var(--link-font-color);
+  word-break: break-word;
+  text-decoration: none;
+  background-image: linear-gradient(to right, #583ac2 50%, transparent 50%);
+  background-position: 0 1.1em;
+  background-repeat: repeat-x;
+  background-size: 7px 1px;
+}
+
+.doc li a,
+.doc table a,
+.doc .section .links a,
+.doc .camel-project .links a,
+.doc .sect2 h3 a {
+  background: none;
+}
+
+.doc table.tableblock td a {
+  word-break: normal;
 }
 
 .doc a:hover {
   color: var(--link_hover-font-color);
+}
+
+.doc a.unresolved {
+  color: var(--link_unresolved-font-color);
 }
 
 .doc i.fa {
@@ -126,12 +185,13 @@
   color: var(--code-font-color);
   background: var(--code-background);
   border-radius: 0.2rem;
-  font-size: calc(16 / var(--rem-base) * 1rem);
+  font-size: calc(14 / var(--rem-base) * 1rem);
   padding: 0.075rem 0.25rem 0.125rem;
+  overflow-wrap: break-word;
 }
 
 .doc pre {
-  font-size: calc(16 / var(--rem-base) * 1rem);
+  font-size: calc(14 / var(--rem-base) * 1rem);
   line-height: 1.5;
   margin: 0;
 }
@@ -152,6 +212,10 @@
   text-decoration: underline;
 }
 
+.doc .line-through {
+  text-decoration: line-through;
+}
+
 .doc .paragraph,
 .doc .dlist,
 .doc .olist,
@@ -162,8 +226,10 @@
 .doc .literalblock,
 .doc .sidebarblock,
 .doc .verseblock,
-.doc .quoteblock {
+.doc .quoteblock,
+.doc .partintro {
   margin: 1rem 0 0;
+  word-break: break-word;
 }
 
 .doc table.tableblock {
@@ -175,22 +241,20 @@
   /* table-layout: fixed; */
 }
 
-.doc table.spread {
+.doc table.stretch {
   width: 100%;
 }
 
-.doc table.tableblock th,
-.doc table.tableblock td {
+.doc table.tableblock thead th {
+  border-bottom: 2.5px solid var(--table-border-color);
   padding: 0.5rem;
 }
 
-.doc table.tableblock th {
-  border-bottom: 2.5px solid var(--table-border-color);
-}
-
-.doc table.tableblock td {
+.doc table.tableblock td,
+.doc table.tableblock > :not(thead) th {
   border-top: 1px solid var(--table-border-color);
   border-bottom: 1px solid var(--table-border-color);
+  padding: 0.5rem;
 }
 
 .doc .halign-left {
@@ -219,6 +283,7 @@
 
 .doc .admonitionblock {
   margin: 1.4rem 0 0;
+  box-shadow: inset 0 0 1.75px var(--abstract-border-color);
 }
 
 .doc .admonitionblock p,
@@ -248,7 +313,7 @@
 }
 
 .doc .admonitionblock .icon {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   font-size: calc(15 / var(--rem-base) * 1rem);
@@ -257,8 +322,6 @@
   line-height: 1;
   font-weight: var(--admonition-label-font-weight);
   text-transform: uppercase;
-  border-radius: 0.45rem;
-  transform: translate(-0.5rem, -50%);
 }
 
 .doc .admonitionblock.caution .icon {
@@ -295,6 +358,7 @@
 .doc .admonitionblock .icon i::after {
   content: attr(title);
   hyphens: none;
+  writing-mode: tb-rl;
 }
 
 .doc .imageblock {
@@ -311,6 +375,10 @@
 .doc .image > img {
   height: auto;
   max-width: 100%;
+}
+
+.doc table.tableblock td .imageblock img {
+  max-width: 50px;
 }
 
 #preamble .abstract blockquote {
@@ -404,11 +472,11 @@
 }
 
 .doc ul.checklist i.fa-check-square-o::before {
-  content: "\2713";
+  content: '\2713';
 }
 
 .doc ul.checklist i.fa-square-o::before {
-  content: "\274f";
+  content: '\274f';
 }
 
 .doc .dlist .dlist,
@@ -445,6 +513,7 @@
   font-size: calc(16 / var(--rem-base) * 1rem);
   font-weight: var(--caption-font-weight);
   font-style: italic;
+  hyphens: none;
   letter-spacing: 0.01em;
   padding-bottom: 0.075rem;
   text-align: left;
@@ -461,7 +530,8 @@
 
 .doc .exampleblock > .content {
   background: var(--example-background);
-  border: 0.1rem solid var(--example-border-color);
+  border: 0.25rem solid var(--example-border-color);
+  border-radius: 0.5rem;
   padding: 0.75rem;
 }
 
@@ -471,6 +541,7 @@
 
 .doc .sidebarblock {
   background: var(--sidebar-background);
+  border-radius: 0.75rem;
   padding: 0.75rem 1.5rem;
 }
 
@@ -499,6 +570,25 @@
   display: block;
   overflow-x: auto;
   padding: 0.75rem;
+}
+
+.doc pre.highlight code::-webkit-scrollbar {
+  height: var(--scrollbar-thickness);
+}
+
+.doc pre.highlight code::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-color);
+  border-radius: var(--scrollbar-radius);
+}
+
+.doc pre.highlight code::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-color);
+  border-radius: var(--scrollbar-radius);
+}
+
+.doc pre.highlight code::-webkit-scrollbar-thumb:hover,
+.doc pre.highlight code::-webkit-scrollbar-thumb:active {
+  background: var(--scrollbar-thumb-active-color);
 }
 
 /* NOTE assume pre.highlight contains code[data-lang] */
@@ -533,12 +623,18 @@
 
 .doc .colist {
   font-size: calc(16 / var(--rem-base) * 1rem);
-  margin-top: 0.5rem;
+  margin: 0.25rem 0 -0.25rem;
 }
 
-.doc .colist > table tr > td:first-of-type {
-  padding: 0 0.75em;
-  line-height: 1;
+.doc .colist > table > tr > :first-child,
+.doc .colist > table > tbody > tr > :first-child {
+  padding: 0.25em 0.5rem 0;
+  vertical-align: top;
+}
+
+.doc .colist > table > tr > :last-child,
+.doc .colist > table > tbody > tr > :last-child {
+  padding: 0.25rem 0;
 }
 
 .doc .conum[data-value] {
@@ -564,21 +660,21 @@
   display: none;
 }
 
-b.button {
+.doc b.button {
   white-space: nowrap;
 }
 
-b.button::before {
+.doc b.button::before {
   content: "[";
   padding-right: 0.25em;
 }
 
-b.button::after {
+.doc b.button::after {
   content: "]";
   padding-left: 0.25em;
 }
 
-kbd {
+.doc kbd {
   display: inline-block;
   font-size: calc(12 / var(--rem-base) * 1rem);
   background: var(--kbd-background);
@@ -590,34 +686,93 @@ kbd {
   white-space: nowrap;
 }
 
-kbd,
-.keyseq {
+.doc kbd,
+.doc .keyseq {
   line-height: 1;
 }
 
-.keyseq {
+.doc .keyseq {
   font-size: calc(16 / var(--rem-base) * 1rem);
 }
 
-.keyseq kbd {
+.doc .keyseq kbd {
   margin: 0 0.125em;
 }
 
-.keyseq kbd:first-child {
+.doc .keyseq kbd:first-child {
   margin-left: 0;
 }
 
-.keyseq kbd:last-child {
+.doc .keyseq kbd:last-child {
   margin-right: 0;
 }
 
-.menuseq i.caret::before {
+.doc .menuseq i.caret::before {
   content: "\203a";
   font-size: 1.1em;
   font-weight: var(--body-font-weight-bold);
   line-height: calc(1 / 1.1);
 }
 
-.stretch {
-  width: 100%;
+.doc a.bare,
+.doc b.button,
+.doc code,
+.doc .path,
+.doc kbd,
+.doc .menuseq,
+.doc .icon i::after {
+  hyphens: none;
+}
+
+/* for mobile screens */
+@media screen and (max-width: 626px) {
+  #preamble + .sect1,
+  .doc .sect1 + .sect1 {
+    overflow-wrap: break-word;
+  }
+}
+
+@media screen and (max-width: 1023px) and (min-width: 480px) {
+  .doc p code,
+  .doc thead code {
+    font-size: var(--body-font-size);
+  }
+}
+
+table.tableblock thead {
+  background: var(--color-smoke-90);
+  font-weight: var(--body-font-weight-bold);
+}
+
+/* Status badges used in Camel Quarkus extension pages */
+div.badges p {
+  text-align: left;
+}
+
+div.badges span {
+  color: var(--color-white);
+  padding: 0.15rem 0.3rem 0.15rem 0.3rem;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 0.8rem;
+}
+
+div.badges span.badge-key {
+  background-color: var(--color-gray-60);
+  border-radius: 0.2rem 0 0 0.2rem;
+}
+
+div.badges span.badge-version {
+  background-color: var(--note-color);
+  border-radius: 0 0.2rem 0.2rem 0;
+}
+
+div.badges span.badge-supported {
+  background-color: var(--tip-color);
+  border-radius: 0 0.2rem 0.2rem 0;
+}
+
+div.badges span.badge-unsupported {
+  background-color: var(--important-color);
+  border-radius: 0 0.2rem 0.2rem 0;
 }

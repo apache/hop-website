@@ -1,6 +1,9 @@
 ---
 title: "Preview Release 0.30"
-date: 2020-05-07T12:01:56+02:00
+date: 2020-07-21T12:01:56+02:00
+authors: ["bamaer"]
+categories: ["Pre-Releae", "Project Hop"]
+preview: "Preview Release 0.30"
 draft: false
 ---
 
