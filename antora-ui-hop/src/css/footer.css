@@ -83,10 +83,6 @@ footer .footer dl {
   margin: 3rem 0 0 1rem;
 }
 
-footer .footer dl:first-child {
-  margin-top: 0;
-}
-
 footer .footer dl dt {
   font-size: 1.25rem;
   font-weight: bold;

@@ -88,7 +88,7 @@ header.frontpage p {
   border-radius: 3rem;
   outline: none;
   display: inline-block;
-  box-shadow: 0 4px #8e480b;
+  box-shadow: 0 4px #b8b8b8;
 }
 
 .frontpage a.button-light {
