@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pre-Release on Hop</title>
-    <link>https://hop.staged.apache.org/categories/Pre-Release/</link>
+    <link>https://hop.apache.org/categories/Pre-Release/</link>
     <description>Recent content in Pre-Release on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 07 May 2020 12:01:56 +0200</lastBuildDate>
     
-	<atom:link href="https://hop.staged.apache.org/categories/Pre-Release/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://hop.apache.org/categories/Pre-Release/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Preview Release 0.21</title>
-      <link>https://hop.staged.apache.org/blog/2020/05/preview-release-0.21/</link>
+      <link>https://hop.apache.org/blog/2020/05/preview-release-0.21/</link>
       <pubDate>Thu, 07 May 2020 12:01:56 +0200</pubDate>
       
-      <guid>https://hop.staged.apache.org/blog/2020/05/preview-release-0.21/</guid>
+      <guid>https://hop.apache.org/blog/2020/05/preview-release-0.21/</guid>
       <description>In the month since we released 0.10, we&amp;#8217;ve added enough functionality to Project Hop for another preview release.
  We&amp;#8217;re happy to announce to availability of our 0.21 preview release. Please take it for a spin. If you find a bug, please create a bug ticket, if there&amp;#8217;s functionality you&amp;#8217;d like to see, please create a feature request.
  Direct download here
@@ -26,10 +26,10 @@
     
     <item>
       <title>Preview Release 0.10</title>
-      <link>https://hop.staged.apache.org/blog/2020/04/release-preview-0.1/</link>
+      <link>https://hop.apache.org/blog/2020/04/release-preview-0.1/</link>
       <pubDate>Thu, 09 Apr 2020 12:01:56 +0200</pubDate>
       
-      <guid>https://hop.staged.apache.org/blog/2020/04/release-preview-0.1/</guid>
+      <guid>https://hop.apache.org/blog/2020/04/release-preview-0.1/</guid>
       <description>After more than half a year of hard work, we felt the time was right to show the world what we have been working on.
  We&amp;#8217;re happy to announce to availability of our 0.10 preview release. Please take it for a spin. If you find a bug, please create a bug ticket, if there&amp;#8217;s functionality you&amp;#8217;d like to see, please create a feature request.
  Direct download here
