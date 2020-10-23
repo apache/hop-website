@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>https://hop.apache.org/dev-manual/latest/asciidoctor/index.html</loc>
-<lastmod>2020-10-14T13:47:27.310Z</lastmod>
-</url>
-<url>
 <loc>https://hop.apache.org/dev-manual/latest/getting-started.html</loc>
-<lastmod>2020-10-14T13:47:27.310Z</lastmod>
+<lastmod>2020-10-23T13:09:11.996Z</lastmod>
 </url>
 <url>
 <loc>https://hop.apache.org/dev-manual/latest/index.html</loc>
-<lastmod>2020-10-14T13:47:27.310Z</lastmod>
+<lastmod>2020-10-23T13:09:11.996Z</lastmod>
 </url>
 <url>
 <loc>https://hop.apache.org/dev-manual/latest/porting-kettle-plugins.html</loc>
-<lastmod>2020-10-14T13:47:27.310Z</lastmod>
+<lastmod>2020-10-23T13:09:11.996Z</lastmod>
 </url>
 </urlset>

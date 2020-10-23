@@ -3,62 +3,97 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://hop.apache.org/news/apache-hop-incubation-proposal-accepted/</loc>
-    <lastmod>2020-09-08T12:01:56+02:00</lastmod>
+    <loc>https://hop.apache.org/categories/Apache-Hop-Incubating/</loc>
+    <lastmod>2020-10-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://hop.apache.org/</loc>
-    <lastmod>2020-09-08T12:01:56+02:00</lastmod>
+    <lastmod>2020-10-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hop.apache.org/news/</loc>
-    <lastmod>2020-09-08T12:01:56+02:00</lastmod>
+    <loc>https://hop.apache.org/categories/ASF/</loc>
+    <lastmod>2020-10-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hop.apache.org/news/roundup-2020-08/</loc>
+    <loc>https://hop.apache.org/blog/</loc>
+    <lastmod>2020-10-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2020/10/hop-joins-the-asf/</loc>
+    <lastmod>2020-10-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/categories/Releases/</loc>
+    <lastmod>2020-10-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/categories/Pre-Releae/</loc>
+    <lastmod>2020-07-21T12:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2020/07/preview-release-0.30/</loc>
+    <lastmod>2020-07-21T12:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/categories/Project-Hop/</loc>
+    <lastmod>2020-07-21T12:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/categories/Roundup/</loc>
     <lastmod>2020-06-27T12:01:56+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hop.apache.org/news/roundup-2020-06/</loc>
+    <loc>https://hop.apache.org/blog/2020/08/roundup-2020-08/</loc>
     <lastmod>2020-06-27T12:01:56+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hop.apache.org/news/roundup-2020-05/</loc>
+    <loc>https://hop.apache.org/blog/2020/06/roundup-2020-06/</loc>
+    <lastmod>2020-06-27T12:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2020/05/roundup-2020-05/</loc>
     <lastmod>2020-06-02T12:01:56+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hop.apache.org/news/release-preview-0-21/</loc>
+    <loc>https://hop.apache.org/categories/Pre-Release/</loc>
     <lastmod>2020-05-07T12:01:56+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hop.apache.org/news/release-preview-0-30/</loc>
+    <loc>https://hop.apache.org/blog/2020/05/preview-release-0.21/</loc>
     <lastmod>2020-05-07T12:01:56+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hop.apache.org/news/roundup-2020-04/</loc>
+    <loc>https://hop.apache.org/blog/2020/04/roundup-2020-04/</loc>
     <lastmod>2020-05-03T12:01:56+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hop.apache.org/news/release-preview-0-10/</loc>
+    <loc>https://hop.apache.org/blog/2020/04/release-preview-0.1/</loc>
     <lastmod>2020-04-09T12:01:56+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hop.apache.org/news/roundup-2020-03/</loc>
+    <loc>https://hop.apache.org/blog/2020/03/roundup-2020-03/</loc>
     <lastmod>2020-03-31T12:01:56+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hop.apache.org/news/roundup-2020-02/</loc>
+    <loc>https://hop.apache.org/blog/2020/02/roundup-2020-02/</loc>
     <lastmod>2020-03-08T12:38:42+01:00</lastmod>
   </url>
   
@@ -124,11 +159,23 @@
   </url>
   
   <url>
+    <loc>https://hop.apache.org/community/mailing-list/</loc>
+  </url>
+  
+  <url>
     <loc>https://hop.apache.org/docs/qa/</loc>
   </url>
   
   <url>
     <loc>https://hop.apache.org/docs/roadmap/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/sources/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/support/</loc>
   </url>
   
   <url>
