@@ -110,7 +110,7 @@ pipeline {
                 dir('deploy/staging') {
                     deleteDir()
                     sh 'git clone -b asf-site https://gitbox.apache.org/repos/asf/incubator-hop-website.git .'
-                    sh 'git rm -f --ignore-unmatch .'
+                    sh 'git rm -rf --ignore-unmatch .'
                     sh "cp -R $WORKSPACE/hop-website/public/. ."
                     sh "cp $WORKSPACE/hop-website/.asf.yaml ."
                     sh 'git add .'
