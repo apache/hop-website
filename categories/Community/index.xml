@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Community on Hop</title>
+    <link>https://hop.apache.org/categories/Community/</link>
+    <description>Recent content in Community on Hop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 26 Oct 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://hop.apache.org/categories/Community/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>3Hx sessions</title>
+      <link>https://hop.apache.org/community/3hx/</link>
+      <pubDate>Mon, 26 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://hop.apache.org/community/3hx/</guid>
+      <description>Announcing the new Hot Hop Hangout (3Hx) sessions A lot has changed at Hop over the past year. We&amp;#8217;ve had the UI rewrite, support for different runtime engines, projects, environments, and finally, as the cherry on the 2020 cake, the ASF incubation.
+ As excited about these changes as we are, Hop is a community project above anything else! We&amp;#8217;re introducing this series of Hot Hop Hangouts as a way of knowledge sharing, but most importantly as a way of interacting with the community.</description>
+    </item>
+    
+  </channel>
+</rss>
