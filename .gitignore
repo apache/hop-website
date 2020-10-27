@@ -4,9 +4,11 @@ node_modules
 public
 documentation
 resources
+.DS_Store
 
 .idea
 *.iml
+*.tmp
 .project
 .classpath
 .metadata
