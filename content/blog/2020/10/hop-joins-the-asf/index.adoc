@@ -1,6 +1,6 @@
 ---
 title: "Hop Joins the ASF"
-date: 2020-10-17
+date: 2020-10-31
 authors: ["bamaer"]
 categories: ["Releases", "ASF", "Apache Hop (Incubating"]
 preview: "Project Hop joins the Apache Software Foundation and becomes Apache Hop (Incubating)."
