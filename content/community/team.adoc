@@ -6,18 +6,37 @@ This page lists who we are. By all means add yourself to the list - lets sort it
 
 == Committers
 
-
+[%header]
 |===
 | Name  | ID | Organisation | Social
 
+| Nicolas Adment | nadment | |
 | Matt Casters | mattcasters | Neo4j | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/mattcasters", window="_blank"]
+| Hiromu Hota | hiromu | | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/HiromuHota", window="_blank"]
+| Brandon Jackson | usbrandon || image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/usbrandon", window="_blank"]
 | Bart Maertens | bamaer | Know.bi | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/bartmaer", window="_blank"]
+| Mahendran Mookkiah | mookkiah || image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/mmookkiah", window="_blank"]
 | Hans Van Akelyen | hansva | Know.bi | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/hans_va", window="_blank"]
 |===
 
 == Contributors
 
+[%header]
 |===
 | Name  | ID | Organisation | Social
+|Lokke Bruyndonckx || know.bi |
+|Jason Chu ||Beijing Auphi Data Co|
+|Peter Fabricius |||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/pfabrici", window="_blank"]
+|Rodrigo Haces || Neo4j |image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/rhaces", window="_blank"]
+|Dave Henry||Schemetrica|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/ds_henry", window="_blank"]
+|Dan Keeley|||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/codek1", window="_blank"]
+|Yannick Mols || know.bi|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/yannickmols", window="_blank"]
+|Doug Moran|| eHealth Africa|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/doug_moran", window="_blank"]
+|Gretchen Moran||eHealth Africa|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/gretchiemoran", window="_blank"]
+|Sergio Ramazzina||Serasoft Italy|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/sramazzina", window="_blank"]
+|Maria Carina Roldan|||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/mariacroldan", window="_blank"]
+|David Rosenblum|| Neo4j |
+|Rafael Valenzuela |||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/sowe", window="_blank"]
 |===
+
 
