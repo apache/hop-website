@@ -11,7 +11,7 @@ This page lists who we are. By all means add yourself to the list - lets sort it
 | Name  | ID | Organisation | Social
 
 | Nicolas Adment | nadment | |
-| Matt Casters | mattcasters | Neo4j | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/mattcasters", window="_blank"]
+| Matt Casters | mcasters | Neo4j | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/mattcasters", window="_blank"]
 | Hiromu Hota | hiromu | | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/HiromuHota", window="_blank"]
 | Brandon Jackson | usbrandon || image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/usbrandon", window="_blank"]
 | Bart Maertens | bamaer | Know.bi | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/bartmaer", window="_blank"]
