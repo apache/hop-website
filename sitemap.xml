@@ -3,58 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://hop.apache.org/categories/3Hx/</loc>
-    <lastmod>2020-10-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hop.apache.org/community/3hx/</loc>
-    <lastmod>2020-10-26T00:00:00+00:00</lastmod>
+    <loc>https://hop.apache.org/categories/Apache-Hop-Incubating/</loc>
+    <lastmod>2020-10-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://hop.apache.org/</loc>
-    <lastmod>2020-10-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hop.apache.org/community/</loc>
-    <lastmod>2020-10-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hop.apache.org/categories/Community/</loc>
-    <lastmod>2020-10-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hop.apache.org/categories/Hot-Hop-Hangouts/</loc>
-    <lastmod>2020-10-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hop.apache.org/categories/Apache-Hop-Incubating/</loc>
-    <lastmod>2020-10-17T00:00:00+00:00</lastmod>
+    <lastmod>2020-10-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://hop.apache.org/categories/ASF/</loc>
-    <lastmod>2020-10-17T00:00:00+00:00</lastmod>
+    <lastmod>2020-10-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://hop.apache.org/blog/</loc>
-    <lastmod>2020-10-17T00:00:00+00:00</lastmod>
+    <lastmod>2020-10-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://hop.apache.org/blog/2020/10/hop-joins-the-asf/</loc>
-    <lastmod>2020-10-17T00:00:00+00:00</lastmod>
+    <lastmod>2020-10-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://hop.apache.org/categories/Releases/</loc>
-    <lastmod>2020-10-17T00:00:00+00:00</lastmod>
+    <lastmod>2020-10-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -141,6 +116,10 @@
   
   <url>
     <loc>https://hop.apache.org/community/contribution-guides/code-review-guide/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/</loc>
   </url>
   
   <url>

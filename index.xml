@@ -6,25 +6,15 @@
     <description>Recent content in Apache Hop (Incubating) on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 26 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://hop.apache.org/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>3Hx sessions</title>
-      <link>https://hop.apache.org/community/3hx/</link>
-      <pubDate>Mon, 26 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://hop.apache.org/community/3hx/</guid>
-      <description>Announcing the new Hot Hop Hangout (3Hx) sessions A lot has changed at Hop over the past year. We&amp;#8217;ve had the UI rewrite, support for different runtime engines, projects, environments, and finally, as the cherry on the 2020 cake, the ASF incubation.
- As excited about these changes as we are, Hop is a community project above anything else! We&amp;#8217;re introducing this series of Hot Hop Hangouts as a way of knowledge sharing, but most importantly as a way of interacting with the community.</description>
-    </item>
-    
-    <item>
       <title>Hop Joins the ASF</title>
       <link>https://hop.apache.org/blog/2020/10/hop-joins-the-asf/</link>
-      <pubDate>Sat, 17 Oct 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 31 Oct 2020 00:00:00 +0000</pubDate>
       
       <guid>https://hop.apache.org/blog/2020/10/hop-joins-the-asf/</guid>
       <description>Apache Hop - Incubation Proposal Submitted From the very start with Hop, we haven&amp;#8217;t exactly been secretive about our intention to join the Apache Software Foundation (ASF) and donate Project Hop to the ASF as Apache Hop.
@@ -317,17 +307,16 @@ Licensee intends to use certain Lean products (each, a &#34;Product&#34;) and to
       
       <guid>https://hop.apache.org/community/team/</guid>
       <description>This page lists who we are. By all means add yourself to the list - lets sort it in alphabetical order (based on last name)
- Committers     Name ID Organisation Social     Matt Casters
+ Committers     Name ID Organisation Social     Nicolas Adment
+ nadment
+     Matt Casters
  mattcasters
  Neo4j
  
-   Bart Maertens
- bamaer
- Know.bi
- 
-   Hans Van Akelyen
- hansva
- Know.bi</description>
+   Hiromu Hota
+ hiromu
+  
+   Brandon Jackson</description>
     </item>
     
     <item>
