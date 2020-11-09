@@ -15,8 +15,8 @@ When posting to the mailing lists, use plain text mails. Do not use HTML mails. 
 {{< table >}}
 | List Name  | Address | Subscribe | Unsubscribe | Archive | Comment |
 |------------|---------|-----------|-------------|---------|---------|
-| Hop User List  | users@hop.apache.org | [subscribe](mailto:users-subscribe@hop.apache.org) | [unsubscribe](mailto:users-unsubscribe@hop.apache.org) | [Archives](http://mail-archives.apache.org/mod_mbox/hop-users/) | Use this list for your Hop questions. |
-| Hop Developer List  | dev@hop.apache.org | [subscribe](mailto:dev-subscribe@hop.apache.org) | [unsubscribe](mailto:dev-unsubscribe@hop.apache.org) | [Archives](http://mail-archives.apache.org/mod_mbox/hop-dev/) | Used by Hop contributors to discuss development of Hop. |
-| Hop Commits List  | commits@hop.apache.org | [subscribe](mailto:commits-subscribe@hop.apache.org) | [unsubscribe](mailto:commits-unsubscribe@hop.apache.org) | [Archives](http://mail-archives.apache.org/mod_mbox/hop-commits/) | Notifications on changes to the Hop code |
-| Hop Issues List  | issues@hop.apache.org | [subscribe](mailto:issues-subscribe@hop.apache.org) | [unsubscribe](mailto:issues-unsubscribe@hop.apache.org) | [Archives](http://mail-archives.apache.org/mod_mbox/hop-issues/) | Notifications of JIRA issues |
+| Hop User List  | users@hop.apache.org | [subscribe](mailto:users-subscribe@hop.apache.org) | [unsubscribe](mailto:users-unsubscribe@hop.apache.org) | [archives](http://mail-archives.apache.org/mod_mbox/hop-users/) | Use this list for your Hop questions. |
+| Hop Developer List  | dev@hop.apache.org | [subscribe](mailto:dev-subscribe@hop.apache.org) | [unsubscribe](mailto:dev-unsubscribe@hop.apache.org) | [archives](http://mail-archives.apache.org/mod_mbox/hop-dev/) | Used by Hop contributors to discuss development of Hop. |
+| Hop Commits List  | commits@hop.apache.org | [subscribe](mailto:commits-subscribe@hop.apache.org) | [unsubscribe](mailto:commits-unsubscribe@hop.apache.org) | [archives](http://mail-archives.apache.org/mod_mbox/hop-commits/) | Notifications on changes to the Hop code |
+| Hop Issues List  | issues@hop.apache.org | [subscribe](mailto:issues-subscribe@hop.apache.org) | [unsubscribe](mailto:issues-unsubscribe@hop.apache.org) | [archives](http://mail-archives.apache.org/mod_mbox/hop-issues/) | Notifications of JIRA issues |
 {{< /table >}}

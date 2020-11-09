@@ -5,7 +5,7 @@ authors: ["bamaer"]
 categories: ["Releases", "ASF", "Apache Hop (Incubating"]
 preview: "Project Hop joins the Apache Software Foundation and becomes Apache Hop (Incubating)."
 ---
-## Apache Hop - Incubation Proposal Submitted
+## Apache Hop - Incubation Proposal Accepted
 
 From the very start with Hop, we haven't exactly been secretive about our intention to join the https://apache.org[Apache Software Foundation (ASF)] and donate Project Hop to the ASF as Apache Hop.
 
