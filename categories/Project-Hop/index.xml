@@ -6,10 +6,21 @@
     <description>Recent content in Project Hop on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 21 Jul 2020 12:01:56 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 09 Nov 2020 10:01:56 +0200</lastBuildDate>
     
 	<atom:link href="https://hop.apache.org/categories/Project-Hop/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Roundup September, October 2020</title>
+      <link>https://hop.apache.org/blog/2020/11/roundup-2020-11/</link>
+      <pubDate>Mon, 09 Nov 2020 10:01:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2020/11/roundup-2020-11/</guid>
+      <description>We&amp;#8217;ve had another couple of busy months at Apache Hop. A lot of these changes have been happening in the background, but are very exciting nevertheless. As we&amp;#8217;re getting close to finalizing the background work, we&amp;#8217;ll soon have more time to work on Hop platform features again.
+ Here&amp;#8217;s what happened over the last two months.
+   Hop joins the Apache Software Foundation, becomes Apache Hop (Incubating)</description>
+    </item>
     
     <item>
       <title>Preview Release 0.30</title>
