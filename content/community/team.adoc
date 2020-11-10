@@ -36,6 +36,7 @@ This page lists who we are. By all means add yourself to the list - lets sort it
 |Sergio Ramazzina||Serasoft Italy|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/sramazzina", window="_blank"]
 |Maria Carina Roldan|||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/mariacroldan", window="_blank"]
 |David Rosenblum|| Neo4j |
+|Diethard Steiner|||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/diethardsteiner", window="_blank"]
 |Rafael Valenzuela |||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/sowe", window="_blank"]
 |===
 
