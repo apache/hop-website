@@ -1,0 +1,97 @@
+---
+title: "Roundup September, October 2020"
+date: 2020-11-09T10:01:56+02:00
+authors: ["bamaer"]
+categories: ["Roundup", "Project Hop"]
+preview: "Round September, October 2020"
+draft: false
+---
+
+# Roundup September and October 2020
+
+We've had another couple of busy months at Apache Hop. A lot of these changes have been happening in the background, but are very exciting nevertheless.
+As we're getting close to finalizing the background work, we'll soon have more time to work on Hop platform features again.
+
+Here's what happened over the last two months.
+
+## Hop joins the Apache Software Foundation, becomes Apache Hop (Incubating)
+
+image:/img/asf_logo_wide.png[Apache Software Foundation, 85% , align="left" , link="/img/asf_logo_wide.png"]
+
+Our link:https://cwiki.apache.org/confluence/display/INCUBATOR/HopProposal[proposal] to join the Apache Software Foundation was link:https://lists.apache.org/thread.html/r63be0e08fe0408c1253c691888bc11d28813f419607a7696f8850023%40%3Cgeneral.incubator.apache.org%3E[accepted] on September, 24th.
+
+Migrating the code, documentation, website, JIRA and builds to Apache Infrastructure kept us busy for a while, but we're almost there.
+
+We already started working towards our first Apache Hop 0.50 release.
+
+With the start of the incubation process, the project will now be referred to as "Apache Hop (Incubating)". All references to "Project Hop" are obsolete.
+
+Below are a list of useful new project links for reference. Most existing links should forward to the new ones, but please update your bookmarks:
+
+* project url: link:https://hop.apache.org[hop.apache.org] or link:https://hop.incubator.apache.org[hop.incubator.apache.org]
+* link:https://chat.project-hop.org[chat]
+* link:https://issues.apache.org/jira/projects/HOP/issues[JIRA]
+* link:https://ci-builds.apache.org/job/Hop/[Jenkins]
+
+All formal communication will now happen through the ASF mailing lists:
+
+[%header, cols="2,1,1,3"]
+|===
+| List Name | Subscribe | Archive |Comment
+| Hop User List | mailto:users-subscribe@hop.apache.org[subscribe] | http://mail-archives.apache.org/mod_mbox/hop-users/[archives]| Use this list for your Hop questions.
+| Hop Developer List | mailto:dev-subscribe@hop.apache.org[subscribe] | http://mail-archives.apache.org/mod_mbox/hop-dev/[archives] | Used by Hop contributors to discuss development of Hop.
+| Hop Commits List | mailto:commits-subscribe@hop.apache.org[subscribe] | http://mail-archives.apache.org/mod_mbox/hop-commits/[archives] | Notifications on changes to the Hop code
+| Hop Issues List | mailto:issues-subscribe@hop.apache.org[subscribe] | http://mail-archives.apache.org/mod_mbox/hop-issues/[archives] | Notifications of JIRA issues
+|===
+
+Read more about why we're so excited to join the link:https://incubator.apache.org[ASF Incubation program] and what this means for Hop link:../../10/hop-joins-the-asf/[here].
+
+## UI Updates
+
+With the increasing amount of metadata items, plugins etc, we added category support to the various popup dialogs.
+At the top of the dialog, Hop users can expand or collapse all categories and can enable or disable the categorization of the available items.
+
+image:/img/Roundup-2020-11/hop-gui-categories.png[Hop Gui Categories, 65%, align="left", link="/img/hop-gui-categories.png"]
+
+Metadata editing for database connections, runtime configurations, the metadata dialog etc became more intuitive with a new UI tweak:
+
+image:/img/Roundup-2020-11/hop-gui-edit.png[Hop Gui Metadata Edit, 65%, align="left", link="/img/hop-gui-edit.png"]
+
+Many thanks to Nicolas Adment for this contribution!
+
+## Documentation
+
+Hop documentation is a work in progress. We've added or updated documentation for link:https://hop.incubator.apache.org/manual/latest/hop-gui/environments/environments.html[projects and environments], https://hop.incubator.apache.org/manual/latest/plugins/transforms/metainject.html[metadata injection], and lots of other small changes.
+
+As always, ping us on https://chat.project-hop.org[mattermost] to discuss documentation, and create link:https://issues.apache.org/jira/projects/HOP/issues[tickets] if you find any missing or incorrect information in the docs. Documentation is code, we take bugs in the documentation just as serious as bugs in the code.
+
+## Various
+
+Hop now works with Beam 2.24.
+
+Two new transforms have been added:
+
+* link:https://hop.incubator.apache.org/manual/latest/plugins/transforms/fake.html[Fake Data]
+* link:https://hop.incubator.apache.org/manual/latest/plugins/transforms/streamschemamerge.html[Stream Schema Merge]
+
+## Community
+
+The Hop community continues to grow:
+
+* chat: 104 registered members link:https://chat.project-hop.org[join]
+* LinkedIn: 263 followers link:https://www.linkedin.com/company/hop-project[follow]
+* Twitter: 219 followers link:https://twitter.com/ApacheHop[follow]
+* Facebook: 19 followers link:https://www.facebook.com/apachehop[like]
+
+The following people have been added as committers:
+
+* Nicolas Adment (various contributions)
+* Hiromu Hota (WebHop)
+* Brandon Jackson (various contributions)
+* Mahendran Mookkiah (various code fixes and cleanup)
+
+Check out the link:/community/team/[complete list] of committers and contributors.
+
+Without community contribution, Hop is just a coding club! Please feel free to join, participate in the discussion, test, file bug tickets on the software or documentation, ... Contributing is a lot more than writing code.
+
+Check out our link:/community/contributing/[contribution guides] to find out more.
