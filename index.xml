@@ -6,10 +6,21 @@
     <description>Recent content in Apache Hop (Incubating) on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 31 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 09 Nov 2020 10:01:56 +0200</lastBuildDate>
     
 	<atom:link href="https://hop.apache.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Roundup September, October 2020</title>
+      <link>https://hop.apache.org/blog/2020/11/roundup-2020-11/</link>
+      <pubDate>Mon, 09 Nov 2020 10:01:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2020/11/roundup-2020-11/</guid>
+      <description>We&amp;#8217;ve had another couple of busy months at Apache Hop. A lot of these changes have been happening in the background, but are very exciting nevertheless. As we&amp;#8217;re getting close to finalizing the background work, we&amp;#8217;ll soon have more time to work on Hop platform features again.
+ Here&amp;#8217;s what happened over the last two months.
+   Hop joins the Apache Software Foundation, becomes Apache Hop (Incubating)</description>
+    </item>
     
     <item>
       <title>Hop Joins the ASF</title>
@@ -17,7 +28,7 @@
       <pubDate>Sat, 31 Oct 2020 00:00:00 +0000</pubDate>
       
       <guid>https://hop.apache.org/blog/2020/10/hop-joins-the-asf/</guid>
-      <description>Apache Hop - Incubation Proposal Submitted From the very start with Hop, we haven&amp;#8217;t exactly been secretive about our intention to join the Apache Software Foundation (ASF) and donate Project Hop to the ASF as Apache Hop.
+      <description>Apache Hop - Incubation Proposal Accepted From the very start with Hop, we haven&amp;#8217;t exactly been secretive about our intention to join the Apache Software Foundation (ASF) and donate Project Hop to the ASF as Apache Hop.
  After almost a year of work on Project Hop, we&amp;#8217;re very happy to announce we&amp;#8217;ve reached a first milestone: the Apache Hop proposal was submitted to the incubator mailing list on September, 9th and has been accepted!</description>
     </item>
     

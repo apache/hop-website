@@ -3,22 +3,37 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://hop.apache.org/</loc>
+    <lastmod>2020-11-09T10:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/</loc>
+    <lastmod>2020-11-09T10:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/categories/Project-Hop/</loc>
+    <lastmod>2020-11-09T10:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/categories/Roundup/</loc>
+    <lastmod>2020-11-09T10:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2020/11/roundup-2020-11/</loc>
+    <lastmod>2020-11-09T10:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://hop.apache.org/categories/Apache-Hop-Incubating/</loc>
     <lastmod>2020-10-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hop.apache.org/</loc>
-    <lastmod>2020-10-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://hop.apache.org/categories/ASF/</loc>
-    <lastmod>2020-10-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hop.apache.org/blog/</loc>
     <lastmod>2020-10-31T00:00:00+00:00</lastmod>
   </url>
   
@@ -40,16 +55,6 @@
   <url>
     <loc>https://hop.apache.org/blog/2020/07/preview-release-0.30/</loc>
     <lastmod>2020-07-21T12:01:56+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hop.apache.org/categories/Project-Hop/</loc>
-    <lastmod>2020-07-21T12:01:56+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hop.apache.org/categories/Roundup/</loc>
-    <lastmod>2020-06-27T12:01:56+02:00</lastmod>
   </url>
   
   <url>
