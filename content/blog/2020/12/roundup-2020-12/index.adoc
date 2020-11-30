@@ -1,0 +1,268 @@
+---
+title: "Roundup November 2020"
+date: 2020-11-30T10:01:56+02:00
+authors: ["bamaer"]
+categories: ["Roundup", "Project Hop"]
+preview: "Round November 2020"
+draft: false
+---
+
+# Roundup November 2020
+
+With 2020 coming to a close, we've started preparing for 0.50, which will be our first Apache release. We'll have more news on that soon!
+
+At the start of the final month of 2020, let's have a closer look at what happened at Apache Hop in November.
+
+## Apache Hop Incubation - infrastructure
+
+Our migration to the Apache Software Foundation infrastructure is now done. All references to Project Hop have been changed to Apache Hop (Incubating).
+
+All software and documentation code have been moved to apache-hop-* repositories. All builds have been ported or recreated, some additional features have been added (e.g. PR builds over GitHub Actions). Thank you https://twitter.com/hans_va[Hans] to get all of this to work seamlessly!
+
+## New Plugins
+
+Quite a number of new plugins are now available in Hop:
+
+* Actions
+** https://hop.apache.org/manual/latest/plugins/actions/repeat.html[Repeat] and https://hop.apache.org/manual/latest/plugins/actions/repeat-end.html[End-Repeat]
+
+image:/img/Roundup-2020-12/actions.png[Repeat End-Repeat, width="15%" , align="left" , link="/img/Roundup-2020-12/actions.png"]
+
+
+* Transforms
+** MongoDB https://hop.apache.org/manual/latest/plugins/transforms/mongodbinput.html[Input] and https://hop.apache.org/manual/latest/plugins/transforms/mongodboutput.html[Output]
+** https://github.com/m-a-hall/hop-cpython[CPython]: Mark Hall ported the CPython plugin he wrote for Kettle/Pentaho to Hop.
+** Salesforce:
+*** Salesforce Delete
+*** Salesforce Input
+*** Salesforce Insert
+*** Salesforce Update
+*** Salesforce Upsert
+
+image:/img/Roundup-2020-12/transforms.png[Repeat End-Repeat, 45% , align="left" , link="/img/Roundup-2020-12/transforms.png"]
+
+## Documentation
+
+As mentioned a couple of times in previous updates, documentation will be work in progress for the foreseeable future. However, there is progress!
+
+We've received some additions and updates to the https://hop.apache.org/manual/latest/[user manual].
+
+The majority of the work was done on the developer documentation (thanks, https://twitter.com/hans_va[Hans], https://twitter.com/HiromuHota[Hiromu], https://twitter.com/mmookkiah[Mahendran], https://twitter.com/mattcasters[Matt]!):
+
+* Updated https://hop.apache.org/dev-manual/latest/getting-started.htmlp[Developer Getting Started]
+* Updated https://hop.apache.org/dev-manual/latest/porting-kettle-plugins.html[Porting Kettle Plugins]
+* New: https://hop.apache.org/dev-manual/latest/metadata-plugins.html[Metadata Plugins] guide
+* New: https://hop.apache.org/dev-manual/latest/setup-dev-environment.html[Setting Up Your Development Environment]
+* New: https://hop.apache.org/dev-manual/latest/plugin-development.html[Hop Plugin Development]
+* New: https://hop.apache.org/dev-manual/latest/webhop/developer-guide.html[WebHop Developer Guide]
+
+As always, ping us on https://chat.project-hop.org[mattermost] to discuss documentation, and create link:https://issues.apache.org/jira/projects/HOP/issues[tickets] if you find any missing or incorrect information in the docs. Documentation is code, we take bugs in the documentation just as serious as bugs in the code.
+
+## Community
+
+The Hop community continues to grow:
+
+* chat: 108 registered members (up from 104) link:https://chat.project-hop.org[join]
+* LinkedIn: 309 followers (up from 263) link:https://www.linkedin.com/company/hop-project[follow]
+* Twitter: 233 followers (up from 219) link:https://twitter.com/ApacheHop[follow]
+* YouTube: 40 subscribers (up from 38) link:https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA[subscribe]
+* Facebook: 20 followers (up from 19) link:https://www.facebook.com/apachehop[like]
+
+The following people have been added as committers:
+
+* Peter Fabricius
+* Sergio Ramazzina
+
+Check out the link:/community/team/[complete list] of committers and contributors.
+
+Without community contribution, Hop is just a coding club! Please feel free to join, participate in the discussion, test, file bug tickets on the software or documentation, ... Contributing is a lot more than writing code.
+
+Check out our link:/community/contributing/[contribution guides] to find out more.
+
+## Various
+
+The full list of issues that had activity over the last month is:
+
+
+### Resolved (76)
+
+//[%collapsible]
+//====
+[%header, width="90%"]
+|===
+|Issue|Summary|Components|Created|Updated
+|https://issues.apache.org/jira/browse/HOP-1733[HOP-1733]|Update MSSQLNative documentation with info on how to use integrated security|Database, Documentation|2020-10-04|2020-11-15
+|https://issues.apache.org/jira/browse/HOP-1757[HOP-1757]|Error thrown when hop.properties doesn't exist||2020-10-04|2020-11-23
+|https://issues.apache.org/jira/browse/HOP-1847[HOP-1847]|Editing Pipeline Run Configuration causes error||2020-10-04|2020-11-23
+|https://issues.apache.org/jira/browse/HOP-1896[HOP-1896]|Refactor UuidUtil||2020-10-04|2020-11-26
+|https://issues.apache.org/jira/browse/HOP-1905[HOP-1905]|MemoryGroupByMeta not working in Beam|Beam|2020-10-04|2020-11-23
+|https://issues.apache.org/jira/browse/HOP-1943[HOP-1943]|hop-conf.sh: Create config.json if missing||2020-10-04|2020-11-23
+|https://issues.apache.org/jira/browse/HOP-1997[HOP-1997]|Transform context option to specify row distribution doesn't work|Transforms|2020-10-04|2020-11-23
+|https://issues.apache.org/jira/browse/HOP-2013[HOP-2013]|Project not correctly created|GUI|2020-10-04|2020-11-23
+|https://issues.apache.org/jira/browse/HOP-2045[HOP-2045]|Update Generic Database connection Documentation|Database, Documentation|2020-10-04|2020-11-15
+|https://issues.apache.org/jira/browse/HOP-2057[HOP-2057]|update environments page|Documentation|2020-10-04|2020-11-15
+|https://issues.apache.org/jira/browse/HOP-2080[HOP-2080]|Remove or adapte file resources/org/apache/hop/ui/core/dialog/license/license.txt|GUI|2020-10-04|2020-11-25
+|https://issues.apache.org/jira/browse/HOP-2082[HOP-2082]|port Stream Schema Merge plugin to Hop transform|Transforms|2020-10-04|2020-11-18
+|https://issues.apache.org/jira/browse/HOP-2090[HOP-2090]|Stream Schema Merge - NPE|Transforms|2020-10-04|2020-11-18
+|https://issues.apache.org/jira/browse/HOP-2101[HOP-2101]|In a fresh copy of hop, a pipeline will fail to run without a project.||2020-10-04|2020-11-23
+|https://issues.apache.org/jira/browse/HOP-2102[HOP-2102]|If you close the Preview Rows dialog using the "X", the preview will keep running with no way to cancel (ever).||2020-10-04|2020-11-18
+|https://issues.apache.org/jira/browse/HOP-2103[HOP-2103]|Without a project; Text Input Step fails to record the whole file name for browsing and selecting files.||2020-10-04|2020-11-25
+|https://issues.apache.org/jira/browse/HOP-2121[HOP-2121]|Update base doc url to https://hop.apache.org/|Documentation, GUI|2020-10-18|2020-11-15
+|https://issues.apache.org/jira/browse/HOP-2123[HOP-2123]|Code cleanup: rename variables with bad style||2020-10-19|2020-11-09
+|https://issues.apache.org/jira/browse/HOP-2126[HOP-2126]|Parameter HOP_MAX_LOG_SIZE_IN_LINES is set too low||2020-10-22|2020-11-12
+|https://issues.apache.org/jira/browse/HOP-2127[HOP-2127]|Workflows do not correctly capture their log channel||2020-10-22|2020-11-09
+|https://issues.apache.org/jira/browse/HOP-2128[HOP-2128]|Context dialog for Notes is missing in workflows||2020-10-23|2020-11-25
+|https://issues.apache.org/jira/browse/HOP-2134[HOP-2134]|Add support for ordered categories for context actions, expose in context dialog|GUI|2020-10-27|2020-11-16
+|https://issues.apache.org/jira/browse/HOP-2135[HOP-2135]|Null pointer exception when running Shell action in a workflow|Actions|2020-10-27|2020-11-12
+|https://issues.apache.org/jira/browse/HOP-2136[HOP-2136]|Options: Font size changes are not honored|GUI|2020-10-30|2020-11-23
+|https://issues.apache.org/jira/browse/HOP-2137[HOP-2137]|Zoom factor is incorrectly calculated on Windows|GUI|2020-10-30|2020-11-12
+|https://issues.apache.org/jira/browse/HOP-2140[HOP-2140]|Exception raised when running Hop Translator||2020-11-03|2020-11-12
+|https://issues.apache.org/jira/browse/HOP-2146[HOP-2146]|AuditManagerTest fails||2020-11-06|2020-11-09
+|https://issues.apache.org/jira/browse/HOP-2152[HOP-2152]|Enum HopExtensionPoint use Job name||2020-11-10|2020-11-30
+|https://issues.apache.org/jira/browse/HOP-2156[HOP-2156]|AbstractMetaTest.testMultithreadHammeringOfListener causes OOM||2020-11-11|2020-11-12
+|https://issues.apache.org/jira/browse/HOP-2160[HOP-2160]|Wrong name of project and enviroment after update|GUI|2020-11-12|2020-11-25
+|https://issues.apache.org/jira/browse/HOP-2164[HOP-2164]|Add format selector in Data Set creation|GUI|2020-11-12|2020-11-12
+|https://issues.apache.org/jira/browse/HOP-2165[HOP-2165]|Add format selector in File Definition creation|GUI|2020-11-12|2020-11-12
+|https://issues.apache.org/jira/browse/HOP-2167[HOP-2167]|ContextDialog NPE|GUI|2020-11-12|2020-11-17
+|https://issues.apache.org/jira/browse/HOP-2168[HOP-2168]|Store run configuration names per file|GUI|2020-11-12|2020-11-17
+|https://issues.apache.org/jira/browse/HOP-2169[HOP-2169]|Random Value transform generates data of wrong class||2020-11-12|2020-11-16
+|https://issues.apache.org/jira/browse/HOP-2170[HOP-2170]|Evaluation Action: parent_workflow unavailable|Actions|2020-11-13|2020-11-23
+|https://issues.apache.org/jira/browse/HOP-2173[HOP-2173]|Make it easy for plugins to get lists of names from other plugins|GUI|2020-11-13|2020-11-17
+|https://issues.apache.org/jira/browse/HOP-2175[HOP-2175]|Translation issues|GUI|2020-11-16|2020-11-23
+|https://issues.apache.org/jira/browse/HOP-2180[HOP-2180]|Failed to show filename, file content & fields|GUI|2020-11-16|2020-11-23
+|https://issues.apache.org/jira/browse/HOP-2183[HOP-2183]|Error pasting from clipboard|GUI|2020-11-16|2020-11-24
+|https://issues.apache.org/jira/browse/HOP-2184[HOP-2184]|Canvas grid option doesn't update after saving|GUI|2020-11-16|2020-11-24
+|https://issues.apache.org/jira/browse/HOP-2185[HOP-2185]|Font and color options do not update after setting|GUI|2020-11-16|2020-11-24
+|https://issues.apache.org/jira/browse/HOP-2187[HOP-2187]|ContextDialog to create an item: set Workflow and pipeline in a Basic category||2020-11-16|2020-11-18
+|https://issues.apache.org/jira/browse/HOP-2188[HOP-2188]|Add RAT to PR Build and make it pass|Build|2020-11-17|2020-11-17
+|https://issues.apache.org/jira/browse/HOP-2189[HOP-2189]|Port the Salesforce transforms|Transforms|2020-11-17|2020-11-17
+|https://issues.apache.org/jira/browse/HOP-2192[HOP-2192]|Undoing delete of a note changes font color||2020-11-17|2020-11-17
+|https://issues.apache.org/jira/browse/HOP-2193[HOP-2193]|NPE in Copy Rows To Result|Transforms|2020-11-17|2020-11-18
+|https://issues.apache.org/jira/browse/HOP-2194[HOP-2194]|ITransform declaring meta or data causing NPEs|Transforms|2020-11-17|2020-11-18
+|https://issues.apache.org/jira/browse/HOP-2195[HOP-2195]|rename hop-assemblies-client to hop-client|Build|2020-11-17|2020-11-18
+|https://issues.apache.org/jira/browse/HOP-2196[HOP-2196]|Split the File/New actions into File and Metadata categories|GUI|2020-11-17|2020-11-18
+|https://issues.apache.org/jira/browse/HOP-2197[HOP-2197]|Changing variable in project dialog requires restart|GUI|2020-11-17|2020-11-19
+|https://issues.apache.org/jira/browse/HOP-2198[HOP-2198]|Workflow Transform not working||2020-11-17|2020-11-18
+|https://issues.apache.org/jira/browse/HOP-2200[HOP-2200]|Remove the Hop Lifecycle listener plugin type|API|2020-11-18|2020-11-26
+|https://issues.apache.org/jira/browse/HOP-2201[HOP-2201]|Workflow executer Transform does not show logging|Transforms|2020-11-18|2020-11-18
+|https://issues.apache.org/jira/browse/HOP-2202[HOP-2202]|Passing parameters using the "Copy results to parametrs" option does not work|Actions, Transforms|2020-11-18|2020-11-19
+|https://issues.apache.org/jira/browse/HOP-2208[HOP-2208]|Make ContextDialog more friendly for plugins|GUI|2020-11-19|2020-11-19
+|https://issues.apache.org/jira/browse/HOP-2209[HOP-2209]|ContextDialog: remove excess spacing and add "clear search" icon|GUI|2020-11-19|2020-11-19
+|https://issues.apache.org/jira/browse/HOP-2210[HOP-2210]|Add m2 caching to PR build|Build, Infrastructure|2020-11-19|2020-11-22
+|https://issues.apache.org/jira/browse/HOP-2211[HOP-2211]|Port the MongoDB plugins|Transforms|2020-11-19|2020-11-23
+|https://issues.apache.org/jira/browse/HOP-2214[HOP-2214]|Issue with variable resolution of empty values|Transforms|2020-11-20|2020-11-23
+|https://issues.apache.org/jira/browse/HOP-2215[HOP-2215]|Creating project with relative path in home folder creates NPE|CLI|2020-11-20|2020-11-24
+|https://issues.apache.org/jira/browse/HOP-2216[HOP-2216]|hop-run, return exit code 1 when a workflow aborts with error|CLI|2020-11-22|2020-11-28
+|https://issues.apache.org/jira/browse/HOP-2219[HOP-2219]|create mongoDB documentation|Documentation|2020-11-23|2020-11-24
+|https://issues.apache.org/jira/browse/HOP-2221[HOP-2221]|Clear custom options in the options dialog doesn't save to file|GUI|2020-11-24|2020-11-24
+|https://issues.apache.org/jira/browse/HOP-2222[HOP-2222]|Creating new project fails|GUI|2020-11-24|2020-11-24
+|https://issues.apache.org/jira/browse/HOP-2224[HOP-2224]|Renaming metadata entries creates a copy|Metadata|2020-11-24|2020-11-25
+|https://issues.apache.org/jira/browse/HOP-2227[HOP-2227]|The preview rows dialog should not pop up when dragging|GUI|2020-11-25|2020-11-27
+|https://issues.apache.org/jira/browse/HOP-2230[HOP-2230]|The Metadata Injection dialog references methods of specification|Transforms|2020-11-25|2020-11-27
+|https://issues.apache.org/jira/browse/HOP-2232[HOP-2232]|Port the repeat-until actions||2020-11-26|2020-11-27
+|https://issues.apache.org/jira/browse/HOP-2233[HOP-2233]|Project variables are not passed to a new workflow|Workflows|2020-11-26|2020-11-27
+|https://issues.apache.org/jira/browse/HOP-2234[HOP-2234]|Values are not passed to parameters in the Workflow Executor transform|Transforms, Workflows|2020-11-26|2020-11-27
+|https://issues.apache.org/jira/browse/HOP-2236[HOP-2236]|Action dialogs are not searched for in the plugin classpath|API|2020-11-27|2020-11-27
+|https://issues.apache.org/jira/browse/HOP-2237[HOP-2237]|Resizing the file dialog collapses columns|GUI|2020-11-27|2020-11-27
+|https://issues.apache.org/jira/browse/HOP-2238[HOP-2238]|Add search to metadata injection Transform|Transforms|2020-11-27|2020-11-27
+|https://issues.apache.org/jira/browse/HOP-2240[HOP-2240]|The JavaScript action still uses _entry_, doc says action|Actions|2020-11-27|2020-11-27
+|https://issues.apache.org/jira/browse/HOP-2241[HOP-2241]|A stopped workflow will think it's still running|Workflows|2020-11-27|2020-11-27
+|===
+//====
+
+### In Progress (9)
+
+//[%collapsible]
+//====
+[%header, width="90%"]
+|===
+|Issue|Summary|Components|Created|Updated
+|https://issues.apache.org/jira/browse/HOP-2132[HOP-2132]|Action with Connection line not correctly translated|Actions, Translations|2020-10-25|2020-11-30
+|https://issues.apache.org/jira/browse/HOP-2191[HOP-2191]|Check and update notice,license,disclaimer,...||2020-11-17|2020-11-24
+|https://issues.apache.org/jira/browse/HOP-2203[HOP-2203]|Create About page|GUI|2020-11-18|2020-11-18
+|https://issues.apache.org/jira/browse/HOP-2212[HOP-2212]|Create first version of Integration Testing|Build, Infrastructure, Integration Testing|2020-11-20|2020-11-20
+|https://issues.apache.org/jira/browse/HOP-2217[HOP-2217]|Port the Cassandra plugin|Transforms|2020-11-22|2020-11-29
+|https://issues.apache.org/jira/browse/HOP-2226[HOP-2226]|Document how to set up a developer environment|Documentation|2020-11-25|2020-11-25
+|https://issues.apache.org/jira/browse/HOP-2235[HOP-2235]|Create a perspective to manage metadata|GUI|2020-11-26|2020-11-29
+|https://issues.apache.org/jira/browse/HOP-2239[HOP-2239]|When executing a workflow manually set variables are not applied|GUI|2020-11-27|2020-11-27
+|https://issues.apache.org/jira/browse/HOP-2244[HOP-2244]|Reverse sort the projects drop-down list by use date|GUI|2020-11-30|2020-11-30
+|===
+//====
+
+### Open (42)
+
+//[%collapsible]
+//====
+[%header, width="90%"]
+|===
+|Issue|Summary|Components|Created|Updated
+|https://issues.apache.org/jira/browse/HOP-1593[HOP-1593]|Review/Refactor getValueFromSQLType|Database|2020-10-04|2020-11-09
+|https://issues.apache.org/jira/browse/HOP-1605[HOP-1605]|API should use boolean "isXXXX()" getter naming convention|Database|2020-10-04|2020-11-09
+|https://issues.apache.org/jira/browse/HOP-1835[HOP-1835]|Create Help- About menu entry|GUI|2020-10-04|2020-11-18
+|https://issues.apache.org/jira/browse/HOP-2054[HOP-2054]|Fix the beam-demo project|Beam|2020-10-04|2020-11-12
+|https://issues.apache.org/jira/browse/HOP-2071[HOP-2071]|Create Fake Data Transform Documentation|Documentation|2020-10-04|2020-11-03
+|https://issues.apache.org/jira/browse/HOP-2104[HOP-2104]|Hop needs a default "Project" and "Local Run Configuration"||2020-10-04|2020-11-12
+|https://issues.apache.org/jira/browse/HOP-2141[HOP-2141]|NullPointerException raised on hop-server workflow start|Hop Server|2020-11-05|2020-11-05
+|https://issues.apache.org/jira/browse/HOP-2142[HOP-2142]|Replace javax/mail/Address dependency|Transforms|2020-11-05|2020-11-23
+|https://issues.apache.org/jira/browse/HOP-2143[HOP-2143]|Not found from Search option|Documentation|2020-11-06|2020-11-23
+|https://issues.apache.org/jira/browse/HOP-2144[HOP-2144]|Git Repository option is missing|Documentation|2020-11-06|2020-11-06
+|https://issues.apache.org/jira/browse/HOP-2145[HOP-2145]|"Synchronise name with" option doesn't work (Workflow properties)|GUI|2020-11-06|2020-11-29
+|https://issues.apache.org/jira/browse/HOP-2147[HOP-2147]|hop-server.bat has wrong line ending char|Hop Server|2020-11-09|2020-11-09
+|https://issues.apache.org/jira/browse/HOP-2148[HOP-2148]|NullPointerException raised on stopping an inactive workflow|Hop Server|2020-11-10|2020-11-10
+|https://issues.apache.org/jira/browse/HOP-2149[HOP-2149]|Standardize option name "Synchronise name with filename"|GUI|2020-11-10|2020-11-17
+|https://issues.apache.org/jira/browse/HOP-2150[HOP-2150]|Issue editing pipelines and workflows|GUI|2020-11-10|2020-11-16
+|https://issues.apache.org/jira/browse/HOP-2151[HOP-2151]|Hop-server Object ID not returned in the result from /registerWorkflow request|Hop Server|2020-11-10|2020-11-10
+|https://issues.apache.org/jira/browse/HOP-2154[HOP-2154]|Error editing Data set with no file name|GUI|2020-11-11|2020-11-26
+|https://issues.apache.org/jira/browse/HOP-2155[HOP-2155]|Error selecting Edit Hop metadata object|GUI|2020-11-11|2020-11-26
+|https://issues.apache.org/jira/browse/HOP-2159[HOP-2159]|Flink pipeline engine documentation broken table|Website|2020-11-12|2020-11-12
+|https://issues.apache.org/jira/browse/HOP-2161[HOP-2161]|MetaStore created with no data|GUI|2020-11-12|2020-11-26
+|https://issues.apache.org/jira/browse/HOP-2162[HOP-2162]|Error in Ok, Edit and View options when the Data Set has no name|GUI|2020-11-12|2020-11-12
+|https://issues.apache.org/jira/browse/HOP-2163[HOP-2163]|Edit Repository instead of Git Repository|GUI|2020-11-12|2020-11-12
+|https://issues.apache.org/jira/browse/HOP-2166[HOP-2166]|Improve first-time usage experience|GUI|2020-11-12|2020-11-12
+|https://issues.apache.org/jira/browse/HOP-2171[HOP-2171]|Wrong file name|GUI|2020-11-13|2020-11-17
+|https://issues.apache.org/jira/browse/HOP-2172[HOP-2172]|Disable options as appropriate|GUI|2020-11-13|2020-11-17
+|https://issues.apache.org/jira/browse/HOP-2174[HOP-2174]|NullPointerException selecting or adding Project or Environment from Search view|GUI|2020-11-16|2020-11-23
+|https://issues.apache.org/jira/browse/HOP-2176[HOP-2176]|The system removes selection after canceling the creation of a new configuration|GUI|2020-11-16|2020-11-16
+|https://issues.apache.org/jira/browse/HOP-2178[HOP-2178]|Error selecting file (Text file input)|GUI|2020-11-16|2020-11-23
+|https://issues.apache.org/jira/browse/HOP-2179[HOP-2179]|Error creating new project|GUI|2020-11-16|2020-11-23
+|https://issues.apache.org/jira/browse/HOP-2181[HOP-2181]|Error opening file in CSV file input|GUI|2020-11-16|2020-11-23
+|https://issues.apache.org/jira/browse/HOP-2182[HOP-2182]|Remove dependencies on conflicting licenses|Build|2020-11-16|2020-11-17
+|https://issues.apache.org/jira/browse/HOP-2186[HOP-2186]|The system doesn't report existing file name|GUI|2020-11-16|2020-11-26
+|https://issues.apache.org/jira/browse/HOP-2190[HOP-2190]|IllegalArgumentException Open option (Serialize to file)|GUI|2020-11-17|2020-11-17
+|https://issues.apache.org/jira/browse/HOP-2204[HOP-2204]|create a menu option to export an entire project as a zip file|GUI|2020-11-18|2020-11-18
+|https://issues.apache.org/jira/browse/HOP-2207[HOP-2207]|Notify 'Stap Name' is mandatory|GUI|2020-11-19|2020-11-19
+|https://issues.apache.org/jira/browse/HOP-2213[HOP-2213]|import Kettle/PDI jobs and transformations into Hop|GUI|2020-11-20|2020-11-20
+|https://issues.apache.org/jira/browse/HOP-2218[HOP-2218]|Copy rows to result should be renamed|Transforms|2020-11-22|2020-11-22
+|https://issues.apache.org/jira/browse/HOP-2223[HOP-2223]|Doc Build: Images are not copied over from source code|Build, Documentation|2020-11-24|2020-11-24
+|https://issues.apache.org/jira/browse/HOP-2225[HOP-2225]|Show validation message in modal when no file is selected|GUI|2020-11-24|2020-11-24
+|https://issues.apache.org/jira/browse/HOP-2228[HOP-2228]|Support Hop on Java 11|API|2020-11-25|2020-11-25
+|https://issues.apache.org/jira/browse/HOP-2229[HOP-2229]|Configure Java 11 encapsulation|API|2020-11-25|2020-11-25
+|https://issues.apache.org/jira/browse/HOP-2231[HOP-2231]|Update powermock test libraries to 2.x|API|2020-11-25|2020-11-25
+|===
+//====
+
+
+### Closed (15)
+
+// [%collapsible]
+// ====
+[%header, width="100%"]
+|===
+|Issue|Summary|Components|Created|Updated
+|https://issues.apache.org/jira/browse/HOP-1740[HOP-1740]|Zoom dropdown looks missaligned|GUI|2020-10-04|2020-11-07
+|https://issues.apache.org/jira/browse/HOP-1897[HOP-1897]|All tickets related with Java 11 development||2020-10-04|2020-11-26
+|https://issues.apache.org/jira/browse/HOP-2033[HOP-2033]|Add latest tag to release docker builds for dockerhub|Containers|2020-10-04|2020-11-18
+|https://issues.apache.org/jira/browse/HOP-2114[HOP-2114]|Cannot delete selected note with menu Edit > Delete  in workflow or pipeline|GUI|2020-10-12|2020-11-17
+|https://issues.apache.org/jira/browse/HOP-2138[HOP-2138]|Fix sonar issues org.apache.hop.core.xml||2020-11-02|2020-11-07
+|https://issues.apache.org/jira/browse/HOP-2139[HOP-2139]|IPerspective should return Control not Composite|GUI|2020-11-03|2020-11-09
+|https://issues.apache.org/jira/browse/HOP-2153[HOP-2153]|Change case for keyboard shortcut on Windows|GUI|2020-11-10|2020-11-12
+|https://issues.apache.org/jira/browse/HOP-2157[HOP-2157]|MetadataPluginType doesn't extract image from annotation|GUI|2020-11-11|2020-11-12
+|https://issues.apache.org/jira/browse/HOP-2158[HOP-2158]|Fix Workflow Hop File Type ID and name||2020-11-11|2020-11-12
+|https://issues.apache.org/jira/browse/HOP-2177[HOP-2177]|Wrong icon|GUI|2020-11-16|2020-11-30
+|https://issues.apache.org/jira/browse/HOP-2199[HOP-2199]|Pipeline Executor action error when running for the first time|Actions|2020-11-17|2020-11-18
+|https://issues.apache.org/jira/browse/HOP-2205[HOP-2205]|TabFolderReorder lost font when TabItem is moved|GUI|2020-11-18|2020-11-19
+|https://issues.apache.org/jira/browse/HOP-2206[HOP-2206]|Add IHopFileType.CAPABILITY_SAVE_AS||2020-11-18|2020-11-19
+|https://issues.apache.org/jira/browse/HOP-2242[HOP-2242]|Extension point to detect the change of project|GUI|2020-11-27|2020-11-30
+|https://issues.apache.org/jira/browse/HOP-2243[HOP-2243]|GuiResource is buggy with same image in two different sizes|GUI|2020-11-29|2020-11-30
+|===
+//====
