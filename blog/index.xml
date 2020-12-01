@@ -6,10 +6,21 @@
     <description>Recent content in Blog on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 09 Nov 2020 10:01:56 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 30 Nov 2020 10:01:56 +0200</lastBuildDate>
     
 	<atom:link href="https://hop.apache.org/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Roundup November 2020</title>
+      <link>https://hop.apache.org/blog/2020/12/roundup-2020-12/</link>
+      <pubDate>Mon, 30 Nov 2020 10:01:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2020/12/roundup-2020-12/</guid>
+      <description>With 2020 coming to a close, we&amp;#8217;ve started preparing for 0.50, which will be our first Apache release. We&amp;#8217;ll have more news on that soon!
+ At the start of the final month of 2020, let&amp;#8217;s have a closer look at what happened at Apache Hop in November.
+   Apache Hop Incubation - infrastructure Our migration to the Apache Software Foundation infrastructure is now done. All references to Project Hop have been changed to Apache Hop (Incubating).</description>
+    </item>
     
     <item>
       <title>Roundup September, October 2020</title>
