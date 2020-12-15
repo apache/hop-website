@@ -212,10 +212,10 @@
     
     <item>
       <title>Download</title>
-      <link>https://hop.apache.org/download/download/</link>
+      <link>https://hop.apache.org/download/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/download/download/</guid>
+      <guid>https://hop.apache.org/download/</guid>
       <description>There is no official release of Apache Hop yet, but you can take a look at the latest build of our software.
  Pre-apache release Preview release 0.30 here
    Current Development Builds   Important  These are not official releases!     Latest Snapshots (0.50-SNAPSHOT) here
