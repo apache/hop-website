@@ -15,7 +15,7 @@ link:https://www.project-hop.org/[Return to homepage]
 ==  Hop Orchestration Platform
 **Perhaps one of the following pages may be of interest:**
 
-link:/manual/latest/getting-started.html[Manual] - link:/download/download/[Download] - link:/community/contributing/[Contributing]
+link:/manual/latest/getting-started.html[Manual] - link:/download/[Download] - link:/community/contributing/[Contributing]
 
 
 The Hop Orchestration Platform aims to facilitate all aspects of data and metadata orchestration.
