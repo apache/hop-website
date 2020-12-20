@@ -15,8 +15,7 @@ Contributing to Hop goes beyond writing code for the project. Below, we list dif
 Please give detailed information about the problem you encountered and, if possible, add a description that helps to reproduce the problem. For more information go to our link:../contribution-guides/jira-guide/[info] page.
 |Contribute Code|Read the link:../contribution-guides/code-contribution-guide/[Code Contribution Guide] (Work in progress)
 |Help With Code Reviews|Read the link:../contribution-guides/code-review-guide/[Code Review Guide] (Work in progress)
-|Help Prepare a Release|
-A release candidate will be announced using our form/twitter and chat. We will then ask as many people as possible to test this candidate and give feedback before proceeding to an actual release.
+|Help Prepare a Release|Read the link:../contribution-guides/release-contribution-guide/[Release Review Guide] (Work in progress)
 |Contribute Documentation|Read the link:../contribution-guides/documentation-contribution-guide/[Documentation Contribution Guide] (Work in progress)
 |Translate Hop|Read the link:../contribution-guides/translation-contribution-guide/[Translation Contribution Guide]
 |Support Hop Users|
