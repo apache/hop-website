@@ -2,14 +2,14 @@
 title: "Release Contribution Guide"
 ---
 
-Apache releases are created through a formal process. The entire process is https://www.apache.org/legal/release-policy.html[documented, window=\"_blank\"].
+Apache releases are created through a formal process. The entire process is https://www.apache.org/legal/release-policy.html[documented, window="_blank"].
 
 Other useful information:
 
-* https://incubator.apache.org/guides/releasemanagement.html[ASF Release Management, window=\"_blank\"]
-* https://incubator.apache.org/cookbook/[Apache Incubator Cookbook, window=\"_blank\"]
+* https://incubator.apache.org/guides/releasemanagement.html[ASF Release Management, window="_blank"]
+* https://incubator.apache.org/cookbook/[Apache Incubator Cookbook, window="_blank"]
 
-Check below for the TL;DR version. As always, we're eager to https://chat.project-hop.org[hear, window=\"_blank\"] your feedback!
+Check below for the TL;DR version. As always, we're eager to https://chat.project-hop.org[hear, window="_blank"] your feedback!
 
 == What is an Apache Release?
 
@@ -24,7 +24,7 @@ The steps to create an Apache release are:
 * the community decides to create a release
 * all code is verified to comply with the software licensing requirements. Checks are performed to make sure there are no license or copyright violations, no incompatible dependencies etc.
 * the release manager prepares and signs the proposed release materials
-* a https://hop.apache.org/community/team/[PPMC, window=\"_blank\"] member sends an email to the mailing list to announce the release candidate and requests the voting to start
+* a https://hop.apache.org/community/team/[PPMC, window="_blank"] member sends an email to the mailing list to announce the release candidate and requests the voting to start
 * if the vote passes, the release candidate is accepted and becomes are release
 
 == What is the release review process, how can I help?
@@ -36,8 +36,8 @@ A release, or any deliverables for a release should contain or comply to:
 * source package that can be built and tested to validate the release
 * release signing: packages must be cryptographically signed. The signature hash should be included in the [VOTE] mail
 * a LICENSE file, contains all (APL2.0 compatible licenses) used
-* a NOTICE file, contains at least all https://www.apache.org/legal/src-headers.html#header-existingcopyright[copyright notices, window=\"_blank\"], http://apache.org/legal/resolved.html#required-third-party-notices[required third-party notices, window=\"_blank\"], https://infra.apache.org/licensing-howto.html#mod-notice[MOD] (Modifications to NOTICE)
-* all source files submitted to the ASF need to contain the appropriate http://www.apache.org/legal/src-headers.html#headers[ASF Header, window=\"_blank\"].
+* a NOTICE file, contains at least all https://www.apache.org/legal/src-headers.html#header-existingcopyright[copyright notices, window="_blank"], http://apache.org/legal/resolved.html#required-third-party-notices[required third-party notices, window="_blank"], https://infra.apache.org/licensing-howto.html#mod-notice[MOD] (Modifications to NOTICE)
+* all source files submitted to the ASF need to contain the appropriate http://www.apache.org/legal/src-headers.html#headers[ASF Header, window="_blank"].
 
 === How can I help
 
@@ -47,7 +47,7 @@ What you can do to review a release:
 
 * verify the deliverables as listed above
 * follow the build instructions (e.g. in the README file) and double check all steps to (build and) run the release are accurate
-* if you contributed to Hop or any of the plugins for a release, double check the dependency licenses for compatibility, including dependencies of dependencies. We run automated checks through https://creadur.apache.org/rat/[Apache RAT, window=\"_blank\"] as part of the build, but that may not be infallible.
+* if you contributed to Hop or any of the plugins for a release, double check the dependency licenses for compatibility, including dependencies of dependencies. We run automated checks through https://creadur.apache.org/rat/[Apache RAT, window="_blank"] as part of the build, but that may not be infallible.
 
 Vote! After you've reviewed a release candidate, submit your vote to the mailing list. Specify the review tasks you performed and why you vote to accept or reject a release candidate.
 
@@ -80,4 +80,4 @@ In short: PMC member votes are binding, community members votes are non-binding.
 Community votes shouldn't be considered _only_ advisory, they are important and encouraged, as they can provide valuable input on the quality of a release.
 
 
-Check the detailed voting process https://www.apache.org/foundation/voting.html[here, window=\"_blank\"].
+Check the detailed voting process https://www.apache.org/foundation/voting.html[here, window="_blank"].
