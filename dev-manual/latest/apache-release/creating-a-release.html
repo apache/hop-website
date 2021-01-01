@@ -51,7 +51,68 @@ a majority of at least 3 +1 PMC votes are cast.
 [ ] -1 Do not release this package because ...
 
 Best Regards,
-&lt;YOUR NAME&gt;</pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_creating_a_key"><a class="anchor" href="#_creating_a_key"></a><a id="CreatingAKey"></a>Creating a key</h2> <div class="sectionbody"> <div class="paragraph"> <p>To generate and publish a key follow these steps, it is recommended to use your apache email as key alias.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gpg --gen-key
+&lt;YOUR NAME&gt;</pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_send_a_result_mail_to_the_dev_mailing_list"><a class="anchor" href="#_send_a_result_mail_to_the_dev_mailing_list"></a>Send a result mail to the dev mailing list</h2> <div class="sectionbody"> <div class="listingblock"> <div class="content"> <pre>Subject: [RESULT] [VOTE] Release Apache Hop (incubating) X.XX-rcX
+TO: dev@hop.apache.org
+
+Hello Team,
+
+The vote to release Apache Hop (incubating) X.XX - RCX has passed/failed.
+
++1 (binding):
+
++1 (non-binding)
+
++0
+
+-1 (binding)
+
+-1 (non-binding)
+
+Thank you for reviewing this release candidate.
+
+Cheers,
+&lt;YOUR NAME&gt;</pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_while_in_incubator"><a class="anchor" href="#_while_in_incubator"></a>While in Incubator</h2> <div class="sectionbody"> <div class="sect2"> <h3 id="_send_mail_to_general_incubator_list"><a class="anchor" href="#_send_mail_to_general_incubator_list"></a>Send mail to general incubator list</h3> <div class="paragraph"> <p>The mail to the IPMC is almost identical to our vote mail, a few extra details are added:</p> </div> <div class="ulist"> <ul> <li> <p>Vote and Result mail thread</p> </li> </ul> </div> <div class="listingblock"> <div class="content"> <pre>Subject: [VOTE] Release Apache Hop (incubating) X.XX-rcX
+TO: general@incubator.apache.org
+
+Hi All,
+
+&lt;INCLUDE SOME TEXT&gt;
+
+Build instructions can be found in the README included.
+
+Hop community vote and result threads:
+Vote:
+ &lt;URL TO VOTE FROM https://lists.apache.org/list.html?dev@hop.apache.org&gt;
+Result:
+ &lt;URL TO VOTE RESULT FROM https://lists.apache.org/list.html?dev@hop.apache.org&gt;
+
+The tag to be voted on is X.XX-rcX &lt;REPLACE TAG&gt; (commit &lt;COMMIT HASH&gt;):
+&lt;URL TO TAG COMMIT&gt;
+
+The release files, including signatures, digests, etc. can be found at:
+&lt;INCLUDE URL TO DIST RC FOLDER&gt;
+https://dist.apache.org/repos/dist/dev/incubator/hop/apache-hop-X.XX-incubating-rcX/
+
+The SHA512 Checksum for these artifacts is:
+&lt;INCLUDE CHECKSUM FROM SHA512 file&gt;
+
+Release artifacts are signed with the following key:
+&lt;ADD URL TO YOUR KEY ON A PUBLIC KEYSERVER&gt;
+
+For more information about the contents of this release, see:
+&lt;ADD URL TO RELEASE IN JIRA&gt;
+
+Please vote on releasing this package as Apache Hop 0.50!
+
+The vote is open for 72 hours and passes if
+a majority of at least 3 +1 PMC votes are cast.
+
+[ ] +1 Release this package as Apache Hop 0.50
+[ ] +0 No opinion
+[ ] -1 Do not release this package because ...
+
+Best Regards,
+&lt;YOUR NAME&gt;</pre> </div> </div> </div> </div> </div> <div class="sect1"> <h2 id="_creating_a_key"><a class="anchor" href="#_creating_a_key"></a><a id="CreatingAKey"></a>Creating a key</h2> <div class="sectionbody"> <div class="paragraph"> <p>To generate and publish a key follow these steps, it is recommended to use your apache email as key alias.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gpg --gen-key
 gpg -k &lt;username&gt;@apache.org
 # get the ID for your key
 gpg --send-keys --keyserver php.mit.edu &lt;KEY ID&gt;
@@ -59,7 +120,7 @@ gpg --send-keys --keyserver keyserver.ubuntu.com &lt;KEY ID&gt;</code></pre> </d
 cd hop_release
 gpg --list-sigs &lt;keyID&gt; &gt;&gt; KEYS
 gpg  --armor --export &lt;keyID&gt; &gt;&gt; KEYS
-svn commit -m "added new public key to KEYS file"</code></pre> </div> </div> </div> </div> </article> </main> </div> <footer> <div class="footer"> <dl> <dt>Overview</dt> <dd><a href="../../../download/">Download</a></dd> <dd><a href="../../../manual/latest/">Getting started</a></dd> </dl> <dl> <dt>Community</dt> <dd><a target="_blank" href="https://issues.apache.org/jira/projects/HOP/issues">Jira</a></dd> <dd><a target="_blank" href="https://chat.project-hop.org">Chat</a></dd> <dd><a target="_blank" href="../../../community/team/">Team</a></dd> </dl> <dl> <dt>About</dt> <dd><a target="_blank" href="https://www.apache.org/licenses/" title="License">License</a></dd> </dl> <p> &copy; 2019-2020 The Hop Team.<br> All marks mentioned may be trademarks or registered trademarks of their respective owners. </p> </div> </footer> <script src="../../../_/js/site-8ed57175ed.js"></script> <script async src="../../../_/js/vendor/highlight-41b831b4c4.js"></script> <script src="../../../_/js/vendor/cookies-eu-banner-d4a1518c50.js"></script> <script> new CookiesEuBanner(function () {
+svn commit -m "added new public key to KEYS file"</code></pre> </div> </div> </div> </div> </article> </main> </div> <footer> <div class="footer"> <dl> <dt>Overview</dt> <dd><a href="../../../download/">Download</a></dd> <dd><a href="../../../manual/latest/">Getting started</a></dd> </dl> <dl> <dt>Community</dt> <dd><a target="_blank" href="https://issues.apache.org/jira/projects/HOP/issues">Jira</a></dd> <dd><a target="_blank" href="https://chat.project-hop.org">Chat</a></dd> <dd><a target="_blank" href="../../../community/team/">Team</a></dd> </dl> <dl> <dt>About</dt> <dd><a target="_blank" href="https://www.apache.org/licenses/" title="License">License</a></dd> </dl> <p> &copy; 2019-2021 The Hop Team.<br> All marks mentioned may be trademarks or registered trademarks of their respective owners. </p> </div> </footer> <script src="../../../_/js/site-8ed57175ed.js"></script> <script async src="../../../_/js/vendor/highlight-41b831b4c4.js"></script> <script src="../../../_/js/vendor/cookies-eu-banner-d4a1518c50.js"></script> <script> new CookiesEuBanner(function () {
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
