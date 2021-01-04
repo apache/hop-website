@@ -6,10 +6,23 @@
     <description>Recent content in Apache Hop (Incubating) on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 Nov 2020 10:01:56 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 03 Jan 2021 10:01:56 +0200</lastBuildDate>
     
 	<atom:link href="https://hop.apache.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Roundup December 2020</title>
+      <link>https://hop.apache.org/blog/2021/01/roundup-2021-01/</link>
+      <pubDate>Sun, 03 Jan 2021 10:01:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2021/01/roundup-2021-01/</guid>
+      <description>Welcome in 2021, happy new year!
+ While the world has seen its share of problems in 2020, it&amp;#8217;s been a roller coaster for Hop!
+ Our community continued to work tirelessly in December, even through the holiday period.
+ Let&amp;#8217;s have a look at what happened in this last burst of productivity for 2020. With this pace of development, 2021 will be a great year for Hop!
+ A special shout out to Nicolas Adment, who was on an absolute roll in December!</description>
+    </item>
     
     <item>
       <title>Roundup November 2020</title>
@@ -212,13 +225,13 @@
     
     <item>
       <title>Download</title>
-      <link>https://hop.apache.org/download/download/</link>
+      <link>https://hop.apache.org/download/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hop.apache.org/download/download/</guid>
+      <guid>https://hop.apache.org/download/</guid>
       <description>There is no official release of Apache Hop yet, but you can take a look at the latest build of our software.
  Pre-apache release Preview release 0.30 here
-   Current Development Builds   Important  These are not official releases!     Latest Snapshots (0.50-SNAPSHOT) here
+   Current Development Builds   Important  These are not official releases!     Latest Snapshots (0.60-SNAPSHOT) here
  These are the latest builds available directly from the master branch.
  If you find issues please file a ticket on our Jira please make sure to check if no ticket for your issue has been created yet, or join us on our chat and come discuss your ideas.</description>
     </item>
@@ -285,6 +298,20 @@ Licensee intends to use certain Lean products (each, a &#34;Product&#34;) and to
   Yes this is a fork, in the sense that we used Kettle 8.2.0.7 as a starting point for Apache Hop. Apache Hop wants to used that as a starting point to explore the future of data integration. Check out the Roadmap and Architecture sections.
      Is this a hostile fork?
   By all means no! Kettle will remain a stable and trustworthy platform for data integration.</description>
+    </item>
+    
+    <item>
+      <title>Release Contribution Guide</title>
+      <link>https://hop.apache.org/community/contribution-guides/release-contribution-guide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hop.apache.org/community/contribution-guides/release-contribution-guide/</guid>
+      <description>Apache releases are created through a formal process. The entire process is documented.
+ Other useful information:
+   ASF Release Management
+  Apache Incubator Cookbook
+   Check below for the TL;DR version. As always, we&amp;#8217;re eager to hear your feedback!
+ What is an Apache Release? Apache Releases are a legal handover of a software project. With each release, a project hands over the ownership of all items in the release to the Apache Software Foundations.</description>
     </item>
     
     <item>
