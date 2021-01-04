@@ -1,0 +1,289 @@
+---
+title: "Roundup December 2020"
+date: 2021-01-03T10:01:56+02:00
+authors: ["bamaer"]
+categories: ["Roundup", "Project Hop"]
+preview: "Round December 2020"
+draft: false
+---
+
+# Roundup December 2020
+
+Welcome in 2021, happy new year!
+
+While the world has seen its share of problems in 2020, it's been a roller coaster for Hop!
+
+Our community continued to work tirelessly in December, even through the holiday period.
+
+Let's have a look at what happened in this last burst of productivity for 2020. With this pace of development, 2021 will be a great year for Hop!
+
+A special shout out to Nicolas Adment, who was on an absolute roll in December!
+
+## Apache Hop Incubation - 0.50 release preparation
+
+We had two voting rounds for 0.50 release candidates: 0.50-rc1 and 0.50-rc2. 
+
+We were told in advance that getting used to "the Apache Way" would take a while. Because of some lingering legacy problems (code, dependency licensing etc), we didn't reach the required total of 3 positive votes to release 0.50-rc2 as Apache Hop (Incubating) 0.50. 
+
+Some of the issues mentioned were already resolved in the code after the 0.50 release branch, and development moved on in preparation for the 0.60 release. We therefore won't be building a 0.50-rc3 and will move on to 0.60-rc1. 
+
+Check the https://lists.apache.org/thread.html/r2d5cb659da876bab24f7a04a936496fc88b3181874b261ff48b4db31%40%3Cdev.hop.apache.org%3E[mailing list archives] for more information:
+
+## UI Updates
+
+Hop Gui continues to evolve. A couple of the changes we made in December:
+
+### Single Click UI Actions
+
+Since eliminating right click and double actions improves developer productivity and helps us to move towards a unified user interface on all devices and platforms, we increased focus on single-click actions in the user interface.
+
+### New Icons
+
+Nicolas worked hard to update the icons in Hop Gui. A couple of areas where Hop Gui was given some icon love:
+
+* new workflow and pipeline icons
+* new toolbar and menu icons
+* new and/or updated icons for a number of actions and transforms
+
+The result is a Hop Gui that looks and feels lighter and cleaner:
+
+image:/img/Roundup-2021-01/icon-updates.png[Icon Updates, width="90%", align="left", link="/img/Roundup-2021-01/icon-updates.png"]
+
+### New Metadata Perspective
+
+A lot of metadata operations (relational, database connections, runtime configurations etc) had their own pop-up configuration dialogs.
+
+These various pop-ups were grouped in one central metadata configuration perpective.
+
+image:/img/Roundup-2021-01/hop-2235-metadata-perspective.png[Metadata Perspective, width="90%", align="left", link="/img/Roundup-2021-01/hop-2235-metadata-perspective.png"]
+
+## New Plugins
+
+Two new transform plugins are now available in Hop:
+
+* Transforms:
+** https://hop.apache.org/manual/latest/plugins/transforms/tokenreplacement.html[Token Replacement]
+** https://hop.apache.org/manual/latest/plugins/transforms/userdefinedjavaclass.html[User Defined Java Class]
+
+## Partitioned Stream Lookup
+
+The Stream Lookup now supports partitioning.
+
+image:/img/Roundup-2021-01/hop-2303-partitioned-stream-lu.png[Partitioned Stream Lookup, width="90%", align="left", link="/img/Roundup-2021-01/hop-2303-partitioned-stream-lu.png"]
+
+This significantly helps to improve lookups on _large_ volumes of data on _large_ machines.
+
+image:/img/Roundup-2021-01/hop-berserker.png[Hop Berserker, width=20%, scalewidth=20%, align="left", link="/img/Roundup-2021-01/hop-berserker.png"]
+
+## Docker, Kubernetes updates
+
+The separate Dockerfile and configuration were moved to the main Hop https://github.com/apache/incubator-hop/tree/master/docker[repository].
+
+A Hop Docker image is now one `docker pull` away through https://hub.docker.com/r/apache/incubator-hop/[Docker Hub].
+
+Work on Kubernetes continues in the separate https://github.com/project-hop/hop-docker[repository].
+
+## Jandex
+
+All plugins in Hop now use https://github.com/wildfly/jandex[Jandex].
+
+Jandex uses annotations to find and load all plugins at startup. This reduces the startup times for Hop Gui, Hop Run and Hop Server.
+
+
+## Community
+
+The Hop community continues to grow:
+
+* chat: 122 registered members (up from 108) link:https://chat.project-hop.org[join]
+* LinkedIn: 321 followers (up from 309) link:https://www.linkedin.com/company/hop-project[follow]
+* Twitter: 250 followers (up from 233) link:https://twitter.com/ApacheHop[follow]
+* YouTube: 50 subscribers (up from 40) link:https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA[subscribe]
+* Facebook: 20 followers (no change) link:https://www.facebook.com/apachehop[like]
+
+The following people have been added as committers:
+
+* Rodrigo Haces (late arrival, not included in November update)
+* Jason Chu  (late arrival, not included in November update)
+* Yannick Mols
+
+Check out the link:/community/team/[complete list] of committers and contributors.
+
+Without community contribution, Hop is just a coding club! Please feel free to join, participate in the discussion, test, file bug tickets on the software or documentation, ... Contributing is a lot more than writing code.
+
+Check out our link:/community/contributing/[contribution guides] to find out more.
+
+## Various
+
+### Hop Web
+
+Hop Web has seen some impressive activity from https://twitter.com/HiromuHota[Hiromu, target="blank"] over the last months.
+
+The code is in the final stages of being merged into Hop. Once that's done, you'll be able to choose to run Hop Gui from a fat (desktop) or web client. Both will be started from the same code base.
+
+Needless to say this will open an entire new world of possible use cases for Hop.
+
+image:/img/Roundup-2021-01/hop-web.png[Hop Web, width=90%, align="left", link="/img/Roundup-2021-01/hop-web.png"]
+
+
+## JIRA Tickets
+
+The full list of issues that had activity over the last month is:
+
+
+### Resolved (66)
+
+[%header, width="100%"]
+|===
+|Issue|Summary|Components|Created|Updated
+|https://issues.apache.org/jira/browse/HOP-2143[HOP-2143]|Not found from Search option|Documentation|2020-11-06|2020-12-16
+|https://issues.apache.org/jira/browse/HOP-2246[HOP-2246]|The HopGui metadata mangers are not refreshed|GUI|2020-12-02|2020-12-16
+|https://issues.apache.org/jira/browse/HOP-2248[HOP-2248]|The Pipeline action dialog doesn't remember its size|GUI|2020-12-03|2020-12-04
+|https://issues.apache.org/jira/browse/HOP-2249[HOP-2249]|Workflows: when not pasting XML see if other content can be recognized|GUI|2020-12-03|2020-12-04
+|https://issues.apache.org/jira/browse/HOP-2251[HOP-2251]|creating a new environment with a new name is not possible|GUI|2020-12-03|2020-12-04
+|https://issues.apache.org/jira/browse/HOP-2255[HOP-2255]|Trying to create a fat jar in a project home folder fails|Beam|2020-12-04|2020-12-04
+|https://issues.apache.org/jira/browse/HOP-2256[HOP-2256]|Create a GUI events handler|GUI|2020-12-04|2020-12-04
+|https://issues.apache.org/jira/browse/HOP-2258[HOP-2258]|Separate ActionSpecial into 2 actions START and DUMMY|Actions|2020-12-04|2020-12-13
+|https://issues.apache.org/jira/browse/HOP-2260[HOP-2260]|Metadata perspective: code cleanup|GUI|2020-12-04|2020-12-15
+|https://issues.apache.org/jira/browse/HOP-2261[HOP-2261]|Partition schema editor: doesn't pick up number of partitions|GUI|2020-12-04|2020-12-05
+|https://issues.apache.org/jira/browse/HOP-2266[HOP-2266]|Beam generating unbounded synthetic data too fast|Beam|2020-12-05|2020-12-05
+|https://issues.apache.org/jira/browse/HOP-2267[HOP-2267]|Beam complaining about slf4j|Beam|2020-12-05|2020-12-16
+|https://issues.apache.org/jira/browse/HOP-2268[HOP-2268]|Avoid state of metadata by not implementing IVariables|API|2020-12-06|2020-12-16
+|https://issues.apache.org/jira/browse/HOP-2270[HOP-2270]|Add Github README with badges||2020-12-06|2020-12-06
+|https://issues.apache.org/jira/browse/HOP-2273[HOP-2273]|Remove duplicate Hop jar files|Build|2020-12-06|2020-12-16
+|https://issues.apache.org/jira/browse/HOP-2274[HOP-2274]|Declare all plugins with only annotations without penalizing startup time||2020-12-06|2020-12-11
+|https://issues.apache.org/jira/browse/HOP-2275[HOP-2275]|Error opening files|GUI|2020-12-07|2020-12-15
+|https://issues.apache.org/jira/browse/HOP-2277[HOP-2277]|Options dialog has i18n issues|GUI|2020-12-07|2020-12-08
+|https://issues.apache.org/jira/browse/HOP-2279[HOP-2279]|Add log channel to the JavaScript action|Actions|2020-12-08|2020-12-11
+|https://issues.apache.org/jira/browse/HOP-2280[HOP-2280]|Pipeline and Workflow action dialog: change name after selecting file|Actions, GUI|2020-12-08|2020-12-11
+|https://issues.apache.org/jira/browse/HOP-2282[HOP-2282]|De-select objects on single canvas click|GUI|2020-12-09|2020-12-18
+|https://issues.apache.org/jira/browse/HOP-2283[HOP-2283]|The @HopMetadata annotation must be consistent with the other plugins|API|2020-12-09|2020-12-14
+|https://issues.apache.org/jira/browse/HOP-2285[HOP-2285]|Remove unused annotation EnginePlugin||2020-12-10|2020-12-11
+|https://issues.apache.org/jira/browse/HOP-2286[HOP-2286]|Images not found for Dummy and Start actions||2020-12-11|2020-12-11
+|https://issues.apache.org/jira/browse/HOP-2288[HOP-2288]|Define an order of perspective|GUI|2020-12-11|2020-12-12
+|https://issues.apache.org/jira/browse/HOP-2289[HOP-2289]|Output of Sort Rows is suspect|Transforms|2020-12-11|2020-12-11
+|https://issues.apache.org/jira/browse/HOP-2290[HOP-2290]|Set Variables transform throws an error when missing workflow|Transforms|2020-12-11|2020-12-11
+|https://issues.apache.org/jira/browse/HOP-2292[HOP-2292]|Internal Hop variables not set on pipelines and workflows|Pipelines, Workflows|2020-12-11|2020-12-16
+|https://issues.apache.org/jira/browse/HOP-2293[HOP-2293]|Various issues while executing Beam pipelines|Pipelines|2020-12-11|2020-12-12
+|https://issues.apache.org/jira/browse/HOP-2294[HOP-2294]|Move the plugin image to its folder||2020-12-12|2020-12-16
+|https://issues.apache.org/jira/browse/HOP-2295[HOP-2295]|Improve the sort order of the variables shown with CTRL-SPACE|GUI|2020-12-12|2020-12-12
+|https://issues.apache.org/jira/browse/HOP-2296[HOP-2296]|HopVfsFileDialog is unusable under windows||2020-12-12|2020-12-14
+|https://issues.apache.org/jira/browse/HOP-2298[HOP-2298]|Port Token Replacement Plugin from Chris Deptula|Transforms|2020-12-13|2020-12-22
+|https://issues.apache.org/jira/browse/HOP-2299[HOP-2299]|Search: when finding metadata objects you can't open them|GUI|2020-12-14|2020-12-16
+|https://issues.apache.org/jira/browse/HOP-2301[HOP-2301]|Add icon to each type of Hop file|GUI|2020-12-14|2020-12-14
+|https://issues.apache.org/jira/browse/HOP-2302[HOP-2302]|Stream Lookup: allow it to be run partitioned|Transforms|2020-12-14|2020-12-16
+|https://issues.apache.org/jira/browse/HOP-2303[HOP-2303]|remove duplicate 'download' from download link|Website|2020-12-15|2020-12-15
+|https://issues.apache.org/jira/browse/HOP-2304[HOP-2304]|Widget disposed in parameter tabs on Executor transforms|GUI|2020-12-15|2020-12-16
+|https://issues.apache.org/jira/browse/HOP-2306[HOP-2306]|Add support for TLS 1.2||2020-12-15|2020-12-15
+|https://issues.apache.org/jira/browse/HOP-2310[HOP-2310]|Exasol dependency error||2020-12-16|2020-12-19
+|https://issues.apache.org/jira/browse/HOP-2312[HOP-2312]|Add Sequence delivers duplicate ids when running in copies|Transforms|2020-12-16|2020-12-17
+|https://issues.apache.org/jira/browse/HOP-2313[HOP-2313]|Running integration tests locally is dangerous|Integration Testing|2020-12-17|2020-12-17
+|https://issues.apache.org/jira/browse/HOP-2316[HOP-2316]|Create an export to SVG menu options in Hop GUI|GUI|2020-12-18|2020-12-18
+|https://issues.apache.org/jira/browse/HOP-2317[HOP-2317]|Execute row SQL script broken||2020-12-18|2020-12-18
+|https://issues.apache.org/jira/browse/HOP-2318[HOP-2318]|Add database to test container|Integration Testing|2020-12-18|2020-12-27
+|https://issues.apache.org/jira/browse/HOP-2319[HOP-2319]|top bar menu disappears when using any item in documentation menu|Website|2020-12-18|2020-12-19
+|https://issues.apache.org/jira/browse/HOP-2322[HOP-2322]|With double-click support disabled, allow editing with a single click|GUI|2020-12-19|2020-12-21
+|https://issues.apache.org/jira/browse/HOP-2323[HOP-2323]|Options dialog: mangled option|GUI|2020-12-19|2020-12-21
+|https://issues.apache.org/jira/browse/HOP-2325[HOP-2325]|Add the Apache License header to all .properties files||2020-12-20|2020-12-21
+|https://issues.apache.org/jira/browse/HOP-2326[HOP-2326]|Add the Apache License header to all shell scripts|CLI|2020-12-20|2020-12-21
+|https://issues.apache.org/jira/browse/HOP-2327[HOP-2327]|Add the Apache License header to all XML files|Build|2020-12-20|2020-12-21
+|https://issues.apache.org/jira/browse/HOP-2331[HOP-2331]|Add right padding in Project dialog||2020-12-21|2020-12-23
+|https://issues.apache.org/jira/browse/HOP-2332[HOP-2332]|Add right padding in Environment dialog||2020-12-21|2020-12-23
+|https://issues.apache.org/jira/browse/HOP-2333[HOP-2333]|Environment variables not properly managed||2020-12-21|2020-12-22
+|https://issues.apache.org/jira/browse/HOP-2334[HOP-2334]|Review Token Replacemen plugin icon||2020-12-21|2020-12-29
+|https://issues.apache.org/jira/browse/HOP-2337[HOP-2337]|Selection mode entered inadvertently|GUI|2020-12-21|2020-12-21
+|https://issues.apache.org/jira/browse/HOP-2338[HOP-2338]|After selecting a transform in the action dialog with CTRL you get a NPE|GUI|2020-12-21|2020-12-21
+|https://issues.apache.org/jira/browse/HOP-2340[HOP-2340]|No longer able to create a hop in a workflow|GUI|2020-12-21|2020-12-23
+|https://issues.apache.org/jira/browse/HOP-2346[HOP-2346]|Remove mulesoft redshift jdbc dependency|Build|2020-12-23|2020-12-23
+|https://issues.apache.org/jira/browse/HOP-2347[HOP-2347]|Repair image for ValueMeta||2020-12-23|2020-12-25
+|https://issues.apache.org/jira/browse/HOP-2350[HOP-2350]|Rat should print filenames to console|Build|2020-12-26|2020-12-26
+|https://issues.apache.org/jira/browse/HOP-2353[HOP-2353]|Add a function to the GuiResource class to get image from IValueMeta|GUI|2020-12-26|2020-12-28
+|https://issues.apache.org/jira/browse/HOP-2356[HOP-2356]|Memory Group By - Count - outputs counts with padded zeros.||2020-12-27|2021-01-02
+|https://issues.apache.org/jira/browse/HOP-2360[HOP-2360]|Excel Input transform with XLSX Streaming don't work|Transforms|2020-12-28|2020-12-29
+|https://issues.apache.org/jira/browse/HOP-2361[HOP-2361]|Hop About Box opens too small.|GUI|2020-12-29|2020-12-30
+|https://issues.apache.org/jira/browse/HOP-2363[HOP-2363]|Ctrl-+ doesn't change the zoom level||2020-12-29|2021-01-02
+|===
+
+### In Progress (15)
+
+[%header, width="100%"]
+|===
+|Issue|Summary|Components|Created|Updated
+|https://issues.apache.org/jira/browse/HOP-2244[HOP-2244]|Reverse sort the projects drop-down list by use date|GUI|2020-11-30|2020-12-04
+|https://issues.apache.org/jira/browse/HOP-2281[HOP-2281]|Clean GuiResource images||2020-12-08|2020-12-29
+|https://issues.apache.org/jira/browse/HOP-2284[HOP-2284]|Update kettle to hop plugin porting documentation|API|2020-12-10|2020-12-15
+|https://issues.apache.org/jira/browse/HOP-2287[HOP-2287]|Move hop-docker into ASF HOP project and make docker image available in dockerhub via pipeline|Build, Containers, Infrastructure, Pipelines|2020-12-11|2020-12-29
+|https://issues.apache.org/jira/browse/HOP-2307[HOP-2307]|Add support to Clickhouse database|Database|2020-12-16|2021-01-03
+|https://issues.apache.org/jira/browse/HOP-2308[HOP-2308]|Enable pritty print on JSON output|Transforms|2020-12-16|2021-01-03
+|https://issues.apache.org/jira/browse/HOP-2309[HOP-2309]|Enable pritty print on XML output|Transforms|2020-12-16|2021-01-03
+|https://issues.apache.org/jira/browse/HOP-2320[HOP-2320]|NPE in User Defined Java Class code crashes Hop GUI|GUI|2020-12-18|2020-12-18
+|https://issues.apache.org/jira/browse/HOP-2324[HOP-2324]|add release process information to contribution page|Website|2020-12-20|2020-12-21
+|https://issues.apache.org/jira/browse/HOP-2330[HOP-2330]|Review of italian translation files|Translations|2020-12-21|2020-12-22
+|https://issues.apache.org/jira/browse/HOP-2341[HOP-2341]|Improve integration testing documentation|Documentation, Integration Testing|2020-12-21|2020-12-21
+|https://issues.apache.org/jira/browse/HOP-2342[HOP-2342]|Single click mode: moving a transform or action can cause edit|GUI|2020-12-21|2020-12-21
+|https://issues.apache.org/jira/browse/HOP-2355[HOP-2355]|cleanup integration tests|Integration Testing|2020-12-27|2020-12-27
+|https://issues.apache.org/jira/browse/HOP-2358[HOP-2358]|Remove jxl dependency from hop-transform-excelinput|Transforms|2020-12-28|2020-12-31
+|https://issues.apache.org/jira/browse/HOP-2359[HOP-2359]|Transform ExcelWriter upgrade POI 4.1.2 and remove unnecessary dependencies|Transforms|2020-12-28|2020-12-29
+|===
+
+### Open (40)
+
+[%header, width="100%"]
+|===
+|Issue|Summary|Components|Created|Updated
+|https://issues.apache.org/jira/browse/HOP-2118[HOP-2118]|macOS dark mode results in illegible UI text|GUI|2020-10-14|2020-12-15
+|https://issues.apache.org/jira/browse/HOP-2247[HOP-2247]|Need a way to clear a setting in Meta Data Injection Transform|Transforms|2020-12-02|2020-12-02
+|https://issues.apache.org/jira/browse/HOP-2250[HOP-2250]|Pipelines: when pasting allow other content then XML to be recognized|GUI|2020-12-03|2020-12-03
+|https://issues.apache.org/jira/browse/HOP-2252[HOP-2252]|Create page with branding/sample files|Documentation, Website|2020-12-03|2020-12-03
+|https://issues.apache.org/jira/browse/HOP-2253[HOP-2253]|Add a bit of left padding on the Action Dialog|GUI|2020-12-03|2020-12-03
+|https://issues.apache.org/jira/browse/HOP-2254[HOP-2254]|create usage documentation + examples for the various runtime configurations|Documentation, GUI|2020-12-04|2020-12-04
+|https://issues.apache.org/jira/browse/HOP-2257[HOP-2257]|Update Jetty Dependencies|API, Hop Server|2020-12-04|2020-12-04
+|https://issues.apache.org/jira/browse/HOP-2259[HOP-2259]|Add a warning to indicate the consequences of renaming metadata objects|GUI|2020-12-04|2020-12-16
+|https://issues.apache.org/jira/browse/HOP-2262[HOP-2262]|Native core plugins a registered twice||2020-12-04|2020-12-05
+|https://issues.apache.org/jira/browse/HOP-2263[HOP-2263]|Add support for a HOP_PLUGIN_FOLDERS variable|API|2020-12-04|2020-12-04
+|https://issues.apache.org/jira/browse/HOP-2264[HOP-2264]|Join rows (cartesian products) - Fields should be editable|GUI|2020-12-04|2020-12-04
+|https://issues.apache.org/jira/browse/HOP-2265[HOP-2265]|Allow results to be evaluated in an action|Actions|2020-12-05|2020-12-05
+|https://issues.apache.org/jira/browse/HOP-2269[HOP-2269]|Allow metadata to be read from other projects|Metadata|2020-12-06|2020-12-16
+|https://issues.apache.org/jira/browse/HOP-2271[HOP-2271]|Integration Tests: Add ability to pass parameters to hop-run.sh|Integration Testing|2020-12-06|2020-12-06
+|https://issues.apache.org/jira/browse/HOP-2276[HOP-2276]|Add option to stop pipeline or workflow after some time|Pipelines, Workflows|2020-12-07|2020-12-07
+|https://issues.apache.org/jira/browse/HOP-2278[HOP-2278]|NPE editing Workflow Executor transform|GUI|2020-12-08|2020-12-08
+|https://issues.apache.org/jira/browse/HOP-2291[HOP-2291]|Complete doc help for Start and Dummy actions|Documentation|2020-12-11|2020-12-12
+|https://issues.apache.org/jira/browse/HOP-2297[HOP-2297]|update incubator-hop-docs README, minor cleanups|Documentation|2020-12-12|2020-12-16
+|https://issues.apache.org/jira/browse/HOP-2300[HOP-2300]|GraphQL Input, Output, Update, Delete||2020-12-14|2020-12-14
+|https://issues.apache.org/jira/browse/HOP-2305[HOP-2305]|Allow unit tests to run on the Beam Direct pipeline execution engine|Pipelines|2020-12-15|2020-12-15
+|https://issues.apache.org/jira/browse/HOP-2311[HOP-2311]|Register project with Hop Server||2020-12-16|2020-12-16
+|https://issues.apache.org/jira/browse/HOP-2314[HOP-2314]|document Hop server rest api|Documentation, Hop Server|2020-12-17|2020-12-17
+|https://issues.apache.org/jira/browse/HOP-2321[HOP-2321]|Exporting to SVG causes errors|GUI|2020-12-19|2020-12-28
+|https://issues.apache.org/jira/browse/HOP-2328[HOP-2328]|Create documentation for Token Replacement plugin|Documentation|2020-12-20|2020-12-21
+|https://issues.apache.org/jira/browse/HOP-2329[HOP-2329]|Create unit tests for Token Replacement plugin|Integration Testing|2020-12-20|2020-12-21
+|https://issues.apache.org/jira/browse/HOP-2335[HOP-2335]|Remove the old samples in archive-samples|Build|2020-12-21|2020-12-21
+|https://issues.apache.org/jira/browse/HOP-2336[HOP-2336]|Remove the archive-pipeline-transforms folder|Build|2020-12-21|2020-12-21
+|https://issues.apache.org/jira/browse/HOP-2339[HOP-2339]|Use keyboard shortcuts to create transforms and actions in hop gui||2020-12-21|2020-12-21
+|https://issues.apache.org/jira/browse/HOP-2343[HOP-2343]|generic database connections require properties to be filled|Database, GUI|2020-12-22|2020-12-23
+|https://issues.apache.org/jira/browse/HOP-2344[HOP-2344]|MultiMarkdown support for Notes||2020-12-22|2020-12-22
+|https://issues.apache.org/jira/browse/HOP-2345[HOP-2345]|The active Hop password encoder plugin is not passed along to the metadata providers|API|2020-12-22|2020-12-22
+|https://issues.apache.org/jira/browse/HOP-2348[HOP-2348]|Dragging a hpl or hwf in the application should open it|GUI|2020-12-23|2020-12-23
+|https://issues.apache.org/jira/browse/HOP-2349[HOP-2349]|Replace the use of StyledText with Text|Web Hop|2020-12-26|2020-12-27
+|https://issues.apache.org/jira/browse/HOP-2351[HOP-2351]|add progress dialog while importing files|GUI, Import|2020-12-26|2020-12-26
+|https://issues.apache.org/jira/browse/HOP-2352[HOP-2352]|Export to SVG menu should de disabled when no file is active|Transforms|2020-12-26|2020-12-28
+|https://issues.apache.org/jira/browse/HOP-2357[HOP-2357]|Wrap Canvas in ScrolledComposite at ContextDialog|Web Hop|2020-12-28|2020-12-28
+|https://issues.apache.org/jira/browse/HOP-2362[HOP-2362]|Action selection dialog not properly positioned on screen||2020-12-29|2020-12-29
+|https://issues.apache.org/jira/browse/HOP-2364[HOP-2364]|Change variable name HOP_PIPELINE_PAN_JVM_EXIT_CODE||2020-12-29|2020-12-29
+|https://issues.apache.org/jira/browse/HOP-2365[HOP-2365]|Create a load-balancing row distribution plugin|Pipelines|2020-12-29|2020-12-29
+|https://issues.apache.org/jira/browse/HOP-2367[HOP-2367]|Use SWT's ToolTip instead of JFace's (Default)ToolTip|Web Hop|2020-12-30|2020-12-30
+|===
+
+
+### Closed (8)
+
+[%header, width="100%"]
+|===
+|Issue|Summary|Components|Created|Updated
+|https://issues.apache.org/jira/browse/HOP-1866[HOP-1866]|checkboxes don'twork||2020-10-04|2020-12-04
+|https://issues.apache.org/jira/browse/HOP-2144[HOP-2144]|Git Repository option is missing|Documentation|2020-11-06|2020-12-16
+|https://issues.apache.org/jira/browse/HOP-2272[HOP-2272]|Integration Tests: Add ability to have inverted (true negative) tests||2020-12-06|2020-12-10
+|https://issues.apache.org/jira/browse/HOP-2315[HOP-2315]|GetPipelineImageServlet and GetWorkflowImageServlet don't work|Hop Server|2020-12-17|2020-12-28
+|https://issues.apache.org/jira/browse/HOP-2354[HOP-2354]|GuiContextUtil shares session-unique instances among sessions|Web Hop|2020-12-27|2021-01-02
+|https://issues.apache.org/jira/browse/HOP-2366[HOP-2366]|Do no use CTabFolder.setSimple()|Web Hop|2020-12-30|2021-01-02
+|https://issues.apache.org/jira/browse/HOP-2368[HOP-2368]|RAP only allows painting on the Canvas widget|Web Hop|2020-12-31|2021-01-02
+|https://issues.apache.org/jira/browse/HOP-2369[HOP-2369]|Browser in RAP does not implement back() and forward()|Web Hop|2020-12-31|2021-01-02
+|===
