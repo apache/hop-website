@@ -6,10 +6,23 @@
     <description>Recent content in Project Hop on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 Nov 2020 10:01:56 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 03 Jan 2021 10:01:56 +0200</lastBuildDate>
     
 	<atom:link href="https://hop.apache.org/categories/Project-Hop/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Roundup December 2020</title>
+      <link>https://hop.apache.org/blog/2021/01/roundup-2021-01/</link>
+      <pubDate>Sun, 03 Jan 2021 10:01:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2021/01/roundup-2021-01/</guid>
+      <description>Welcome in 2021, happy new year!
+ While the world has seen its share of problems in 2020, it&amp;#8217;s been a roller coaster for Hop!
+ Our community continued to work tirelessly in December, even through the holiday period.
+ Let&amp;#8217;s have a look at what happened in this last burst of productivity for 2020. With this pace of development, 2021 will be a great year for Hop!
+ A special shout out to Nicolas Adment, who was on an absolute roll in December!</description>
+    </item>
     
     <item>
       <title>Roundup November 2020</title>
