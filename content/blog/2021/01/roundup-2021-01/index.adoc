@@ -57,6 +57,14 @@ These various pop-ups were grouped in one central metadata configuration perpect
 
 image:/img/Roundup-2021-01/hop-2235-metadata-perspective.png[Metadata Perspective, width="90%", align="left", link="/img/Roundup-2021-01/hop-2235-metadata-perspective.png"]
 
+## Export to SVG
+
+A neat little feature was introduced to Hop Gui: export to SVG.
+
+image:/img/Roundup-2021-01/hop-2316-export-to-svg.png[Export To SVG, align="left", link="/img/Roundup-2021-01/hop-2316-export-to-svg.png"]
+
+Although not spectacular in itself, this little menu item gives you a full svg (scalable) export of your workflow or pipeline graph. For Hop, this is a first step towards self documenting workflows and pipelines.
+
 ## New Plugins
 
 Two new transform plugins are now available in Hop:
@@ -65,15 +73,29 @@ Two new transform plugins are now available in Hop:
 ** https://hop.apache.org/manual/latest/plugins/transforms/tokenreplacement.html[Token Replacement]
 ** https://hop.apache.org/manual/latest/plugins/transforms/userdefinedjavaclass.html[User Defined Java Class]
 
+## Integration tests
+
+Since nothing works as well as eating your own dog food, Hop now has an integration testing framework that is included in our daily https://ci-builds.apache.org/job/Hop/job/Hop-integration-tests/[build].
+
+The purpose of the integration testing framework is as simple as useful: code tests can only test a number of cases. Hop was designed and built to be easy. Easy to use, easy to configure, and now easy to test.
+
+Tests are built as workflows and pipelines. The success or failure of a test workflow is determined through the abort or success action exit code.
+
+There is no doubt about the usefulness of this framework: since its introduction (mid-December), the Hop developers have found and fixed a number of bugs that may have been in the code for over a decade!
+
+image:https://hop.apache.org/dev-manual/latest/_images/integration-tests-002.png[Integration Testing, width="90%", align="left", link="https://hop.apache.org/dev-manual/latest/_images/integration-tests-002.png"]
+
+
 ## Partitioned Stream Lookup
 
-The Stream Lookup now supports partitioning.
+The Stream Lookup transform now supports partitioning.
 
 image:/img/Roundup-2021-01/hop-2303-partitioned-stream-lu.png[Partitioned Stream Lookup, width="90%", align="left", link="/img/Roundup-2021-01/hop-2303-partitioned-stream-lu.png"]
 
 This significantly helps to improve lookups on _large_ volumes of data on _large_ machines.
 
-image:/img/Roundup-2021-01/hop-berserker.png[Hop Berserker, width=20%, scalewidth=20%, align="left", link="/img/Roundup-2021-01/hop-berserker.png"]
+image:/img/Roundup-2021-01/hop-berserker.png[Hop Berserker, width=40%, scalewidth=20%, align="left", link="/img/Roundup-2021-01/hop-berserker.png"]
+
 
 ## Docker, Kubernetes updates
 
@@ -88,6 +110,17 @@ Work on Kubernetes continues in the separate https://github.com/project-hop/hop-
 All plugins in Hop now use https://github.com/wildfly/jandex[Jandex].
 
 Jandex uses annotations to find and load all plugins at startup. This reduces the startup times for Hop Gui, Hop Run and Hop Server.
+
+## Documentation
+
+Lots of existing pages have been extended and/or updated. A selection of the new documentation we have available:
+
+* https://hop.apache.org/dev-manual/latest/integration-testing.html[Integration Testing]
+* https://hop.apache.org/dev-manual/latest/start-your-own-plugin.html[Plugin Development]
+* https://hop.apache.org/dev-manual/latest/sdk/hop-sdk.html[Hop SDK]
+* https://hop.apache.org/dev-manual/latest/apache-release/index.html[Creating and checking a release]
+
+As always, ping us on https://chat.project-hop.org[mattermost] to discuss documentation, and create link:https://issues.apache.org/jira/projects/HOP/issues[tickets] if you find any missing or incorrect information in the docs. Documentation is code, we take bugs in the documentation just as serious as bugs in the code.
 
 
 ## Community
