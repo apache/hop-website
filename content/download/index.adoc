@@ -13,7 +13,7 @@ There is no official release of Apache Hop yet, but you can take a look at the l
 
 IMPORTANT: These are not official releases!
 
-Latest Snapshots (0.60-SNAPSHOT) https://repository.apache.org/content/repositories/snapshots/org/apache/hop/hop-client/0.60-SNAPSHOT/[here]
+Latest Snapshots (0.70-SNAPSHOT) https://repository.apache.org/content/repositories/snapshots/org/apache/hop/hop-client/0.70-SNAPSHOT/[here]
 
 These are the latest builds available directly from the master branch.
 
