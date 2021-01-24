@@ -231,7 +231,7 @@
       <guid>https://hop.apache.org/download/</guid>
       <description>There is no official release of Apache Hop yet, but you can take a look at the latest build of our software.
  Pre-apache release Preview release 0.30 here
-   Current Development Builds   Important  These are not official releases!     Latest Snapshots (0.60-SNAPSHOT) here
+   Current Development Builds   Important  These are not official releases!     Latest Snapshots (0.70-SNAPSHOT) here
  These are the latest builds available directly from the master branch.
  If you find issues please file a ticket on our Jira please make sure to check if no ticket for your issue has been created yet, or join us on our chat and come discuss your ideas.</description>
     </item>
