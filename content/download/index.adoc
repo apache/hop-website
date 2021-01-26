@@ -2,11 +2,14 @@
 title: "Download"
 ---
 
-There is no official release of Apache Hop yet, but you can take a look at the latest build of our software.
+## Apache Hop (incubating)
 
-## Pre-apache release
+|===
+| Version | Date | Description | Download Link | PGP Signature file of download | SHA512 Checksum file of download 
 
-**Preview release 0.30 https://artifactory.project-hop.org/artifactory/hop-releases-local/org/hop/hop-assemblies-client/0.30/hop-assemblies-client-0.30.zip[here]**
+| 0.60 | jan, 2021 | Sources | http://www.apache.org/dyn/closer.cgi?filename=incubator/hop/0.60/apache-hop-0.60-incubating.tar.gz&action=download[apache-hop-0.60-incubating.tar.gz] | https://dist.apache.org/repos/dist/release/incubator/hop/0.60/apache-hop-0.60-incubating.tar.gz.asc[apache-hop-0.60-incubating.tar.gz.asc] | https://dist.apache.org/repos/dist/release/incubator/hop/0.60/apache-hop-0.60-incubating.tar.gz.sha512[apache-hop-0.60-incubating.tar.gz.sha512]
+|===
+
 
 
 ## Current Development Builds
@@ -19,44 +22,7 @@ These are the latest builds available directly from the master branch.
 
 If you find issues please file a ticket on our https://jira.project-hop.org[Jira ,window=_blank] please make sure to check if no ticket for your issue has been created yet, or join us on our https://chat.project-hop.org[chat ,window=_blank] and come discuss your ideas.
 
+## Keys
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+You can verify your download by following these http://www.apache.org/info/verification.html[procedures] and using these https://downloads.apache.org/incubator/hop/KEYS[KEYS].
 
