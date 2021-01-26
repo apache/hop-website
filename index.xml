@@ -229,11 +229,14 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hop.apache.org/download/</guid>
-      <description>There is no official release of Apache Hop yet, but you can take a look at the latest build of our software.
- Pre-apache release Preview release 0.30 here
-   Current Development Builds   Important  These are not official releases!     Latest Snapshots (0.70-SNAPSHOT) here
- These are the latest builds available directly from the master branch.
- If you find issues please file a ticket on our Jira please make sure to check if no ticket for your issue has been created yet, or join us on our chat and come discuss your ideas.</description>
+      <description>Apache Hop (incubating)     Version Date Description Download Link PGP Signature file of download SHA512 Checksum file of download     0.60
+ jan, 2021
+ Sources
+ apache-hop-0.60-incubating.tar.gz
+ apache-hop-0.60-incubating.tar.gz.asc
+ apache-hop-0.60-incubating.tar.gz.sha512
+      Current Development Builds   Important  These are not official releases!     Latest Snapshots (0.70-SNAPSHOT) here
+ These are the latest builds available directly from the master branch.</description>
     </item>
     
     <item>
