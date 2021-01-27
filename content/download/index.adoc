@@ -7,7 +7,7 @@ title: "Download"
 |===
 | Version | Date | Description | Download Link | PGP Signature file of download | SHA512 Checksum file of download 
 
-| 0.60 | jan, 2021 | Sources | http://www.apache.org/dyn/closer.cgi?filename=incubator/hop/0.60/apache-hop-0.60-incubating.tar.gz&action=download[apache-hop-0.60-incubating.tar.gz] | https://dist.apache.org/repos/dist/release/incubator/hop/0.60/apache-hop-0.60-incubating.tar.gz.asc[apache-hop-0.60-incubating.tar.gz.asc] | https://dist.apache.org/repos/dist/release/incubator/hop/0.60/apache-hop-0.60-incubating.tar.gz.sha512[apache-hop-0.60-incubating.tar.gz.sha512]
+| link:/blog/2021/01/release-0.60/[0.60] | jan, 2021 | Sources | http://www.apache.org/dyn/closer.cgi?filename=incubator/hop/0.60/apache-hop-0.60-incubating.tar.gz&action=download[apache-hop-0.60-incubating.tar.gz] | https://dist.apache.org/repos/dist/release/incubator/hop/0.60/apache-hop-0.60-incubating.tar.gz.asc[apache-hop-0.60-incubating.tar.gz.asc] | https://dist.apache.org/repos/dist/release/incubator/hop/0.60/apache-hop-0.60-incubating.tar.gz.sha512[apache-hop-0.60-incubating.tar.gz.sha512]
 |===
 
 
