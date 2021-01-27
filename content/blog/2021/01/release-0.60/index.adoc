@@ -16,6 +16,8 @@ Less than three months since Project Hop joined the ASF Incubator (late October 
 As stated earlier, one of the main goal of the incubator program is to give projects the time to adopt "The Apache Way". As such, it took us a bit of time to get the entire process straightened out. We went through 2 0.50 release candidates (RC1 and RC2) before this 0.60 release got accepted.
 Since the main purpose of this release was to work through the legal formalities that come with an ASF release, 0.60 is a code only release. We already started working on 0.70, which will be a complete release, including binaries. Once 0.70 has been released, moving towards a 1.0 release should be smooth sailing.
 
+Check our https://hop.apache.org/download/[downloads page] for the 0.60 source code (https://github.com/apache/incubator-hop/blob/master/README.md[build instructions]) or a recent nightly build.
+
 ## Apache Hop (Incubating) - 0.60 Release Highlight
 
 Our last pre-ASF pre-release was 0.30, back in July 2020. It goes without saying that a lot has happened since then. Check our monthly roundups for https://hop.apache.org/blog/2020/08/roundup-2020-08/[August, target="_blank"], https://hop.apache.org/blog/2020/11/roundup-2020-11/[September and October], https://hop.apache.org/blog/2020/12/roundup-2020-12/[November] and https://hop.apache.org/blog/2021/01/roundup-2021-01/[December] to catch up on the details.
