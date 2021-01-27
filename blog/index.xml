@@ -6,10 +6,20 @@
     <description>Recent content in Blog on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 03 Jan 2021 10:01:56 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 26 Jan 2021 10:01:56 +0200</lastBuildDate>
     
 	<atom:link href="https://hop.apache.org/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Apache Hop (Incubating) 0.60 released</title>
+      <link>https://hop.apache.org/blog/2021/01/release-0.60/</link>
+      <pubDate>Tue, 26 Jan 2021 10:01:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2021/01/release-0.60/</guid>
+      <description>Less than three months since Project Hop joined the ASF Incubator (late October 2020), we&amp;#8217;re happy to announce Apache Hop 0.60, our first release as an incubating project at the Apache Software Foundation.
+   Apache Hop (Incubating) 0.60 - Source only As stated earlier, one of the main goal of the incubator program is to give projects the time to adopt &#34;The Apache Way&#34;. As such, it took us a bit of time to get the entire process straightened out.</description>
+    </item>
     
     <item>
       <title>Roundup December 2020</title>
