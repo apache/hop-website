@@ -2,8 +2,8 @@
 title: "Roundup December 2020"
 date: 2021-01-03T10:01:56+02:00
 authors: ["bamaer"]
-categories: ["Roundup", "Project Hop"]
-preview: "Round December 2020"
+categories: ["Roundup", "Apache Hop"]
+preview: "Roundup December 2020"
 draft: false
 ---
 

@@ -1,0 +1,137 @@
+---
+title: "Apache Hop (Incubating) 0.60 released"
+date: 2021-01-26T10:01:56+02:00
+authors: ["bamaer"]
+categories: ["Release", "Apache Hop"]
+preview: "Apache Hop (Incubating) - 0.60 Released"
+draft: false
+---
+
+# Apache Hop (Incubating) - 0.60 Release
+
+Less than three months since Project Hop joined the ASF Incubator (late October 2020), we're happy to announce Apache Hop 0.60, our first release as an incubating project at the Apache Software Foundation.
+
+## Apache Hop (Incubating) 0.60 - Source only
+
+As stated earlier, one of the main goal of the incubator program is to give projects the time to adopt "The Apache Way". As such, it took us a bit of time to get the entire process straightened out. We went through 2 0.50 release candidates (RC1 and RC2) before this 0.60 release got accepted.
+Since the main purpose of this release was to work through the legal formalities that come with an ASF release, 0.60 is a code only release. We already started working on 0.70, which will be a complete release, including binaries. Once 0.70 has been released, moving towards a 1.0 release should be smooth sailing.
+
+## Apache Hop (Incubating) - 0.60 Release Highlight
+
+Our last pre-ASF pre-release was 0.30, back in July 2020. It goes without saying that a lot has happened since then. Check our monthly roundups for https://hop.apache.org/blog/2020/08/roundup-2020-08/[August, target="_blank"], https://hop.apache.org/blog/2020/11/roundup-2020-11/[September and October], https://hop.apache.org/blog/2020/12/roundup-2020-12/[November] and https://hop.apache.org/blog/2021/01/roundup-2021-01/[December] to catch up on the details.
+
+The following sections cover the highlights of the 0.60 release:
+
+## UI changes
+
+A lot of effort was spent on Hop Gui. Here's a chronological overview of the most important changes:
+
+### Categories in pop-up dialogs
+
+With the increasing amount of metadata items, plugins etc, we added category support to the various popup dialogs. At the top of the dialog, Hop users can expand or collapse all categories and can enable or disable the categorization of the available items.
+
+image:/img/Roundup-2020-11/hop-gui-categories.png[Hop Gui Categories, width="90%", align="left", link="/img/Roundup-2020-11/hop-gui-categories.png"]
+
+### Hop Gui Look and Feel
+
+The Hop Gui look and feel received updates, with a variety of new icons, hop colors and more to significantly improve the user experience.
+
+image:/img/Release-0.60/hop-gui-look-and-feel.png[Hop Gui Look and Feel, width="90%", align="left", link="/img/Release-0.60/hop-gui-look-and-feel.png"]
+
+### Metadata Perspective
+
+A lot of metadata operations (relational, database connections, runtime configurations etc) had their own pop-up configuration dialogs. These various pop-ups were grouped in one central metadata configuration perpective.
+
+image:/img/Roundup-2021-01/hop-2235-metadata-perspective.png[Metadata Perspective, width="90%", align="left", link="/img/Roundup-2021-01/hop-2235-metadata-perspective.png"]
+
+### Export to SVG
+
+Although not spectacular in itself, this little menu item gives you a full svg (scalable) export of your workflow or pipeline graph. For Hop, this is a first step towards self documenting workflows and pipelines.
+
+image:/img/Roundup-2021-01/hop-2316-export-to-svg.png[Export To SVG, align="left", link="/img/Roundup-2021-01/hop-2316-export-to-svg.png"]
+
+
+## New plugins
+
+A number of new plugins were added to Hop or were ported from Kettle/PDI:
+
+* Actions:
+** http://hop.apache.org/manual/latest/plugins/actions/repeat.html[Repeat] and http://hop.apache.org/manual/latest/plugins/actions/repeat-end.html[End Repeat]
+* Transforms:
+** https://github.com/m-a-hall/hop-cpython[CPython] (external)
+** https://hop.incubator.apache.org/manual/latest/plugins/transforms/fake.html[Fake Data]
+** http://hop.apache.org/manual/latest/plugins/transforms/mongodbinput.html[MongoDB Input] and http://hop.apache.org/manual/latest/plugins/transforms/mongodboutput.html[Output]
+** https://hop.incubator.apache.org/manual/latest/plugins/transforms/streamschemamerge.html[Stream Schema Merge]
+** https://hop.apache.org/manual/latest/plugins/transforms/tokenreplacement.html[Token Replacement]
+** https://hop.apache.org/manual/latest/plugins/transforms/userdefinedjavaclass.html[User Defined Java Class]
+** Salesforce:
+*** Salesforce Delete
+*** Salesforce Input
+*** Salesforce Insert
+*** Salesforce Update
+*** Salesforce Upsert
+
+image:/img/Roundup-2020-12/transforms.png[Salesforce Transforms, align="left", width="70%", link="/img/Roundup-2020-12/transforms.png"]
+
+## Documentation
+
+With the agressive changes and new development that happened over the last year, documentation was not at the top of our priority list in the first half of 2020. We caught up, though. Although the Hop documentation is not complete yet, we've come a long way:
+
+### User Documentation
+
+* http://hop.apache.org/manual/latest/hop-gui/index.html[Hop Gui] is now pretty well documented. All plugins and almost all dialogs have documentation, we're still working on higher level documentation.
+* http://hop.apache.org/manual/latest/hop-vs-kettle/index.html[Hop vs Kettle/PDI] describes the similarities and core differences between Hop and its predecessor
+
+### Developer Documentation
+
+* https://hop.apache.org/dev-manual/latest/getting-started.htmlp[Developer Getting Started]
+* https://hop.apache.org/dev-manual/latest/setup-dev-environment.html[Development Environment Setup]
+* https://hop.apache.org/dev-manual/latest/porting-kettle-plugins.html[Porting Kettle Plugins]
+* https://hop.apache.org/dev-manual/latest/metadata-plugins.html[Metadata Plugins Development]
+* https://hop.apache.org/dev-manual/latest/plugin-development.html[Plugin Development]
+* https://hop.apache.org/dev-manual/latest/webhop/developer-guide.html[Hop Web Developer]
+* https://hop.apache.org/dev-manual/latest/integration-testing.html[Integration Tests]
+* https://hop.apache.org/dev-manual/latest/sdk/hop-sdk.html[Hop SDK]
+* https://hop.apache.org/dev-manual/latest/apache-release/index.html[Creating and Checking a Release]
+
+
+## Integration tests
+
+Hop now has an integration testing framework that is included in our daily https://ci-builds.apache.org/job/Hop/job/Hop-integration-tests/[build]. Since the introduction (mid-December) of this testing framework, the Hop developers have found and fixed a number of bugs that may have been in the code for over a decade!
+
+image:https://hop.apache.org/dev-manual/latest/_images/integration-tests-002.png[Integration Testing, width="90%", align="left", link="https://hop.apache.org/dev-manual/latest/_images/integration-tests-002.png"]
+
+
+## Metadata Injection
+
+Hop now supports metadata injection, which allows pipelines to run with metadata that is supplied at runtime.
+
+image:/img/Roundup-2020-08/metadata-injection.png[Metadata Injection, 65% , align="left" , link="/img/Roundup-2020-08/metadata-injection.png"]
+
+
+## Docker, Kubernetes
+
+The separate Dockerfile and configuration were moved to the main Hop https://github.com/apache/incubator-hop/tree/master/docker[repository].
+
+A Hop Docker image is now one `docker pull` away through https://hub.docker.com/r/apache/incubator-hop/[Docker Hub].
+
+Work on Kubernetes continues in the separate https://github.com/project-hop/hop-docker[repository].
+
+## Community
+
+Last but definitely not least: our community has grown significantly over the last months. As stated before, with community, Hop would be nothing but a coding club.
+We're happy to see the Hop community and number of committers and contributors grow steadily.
+
+The number of people actively involved in Apache Hop (Incubating) are:
+
+* 11 PPMC members (PPMC: Podling Project Management Committee)
+* 17 committers
+* 24 people on the dev mailing list mailto:dev-subscribe@hop.apache.org[subscribe]
+
+Following and interacting with Apache Hop (Incubating) on chat and social media:
+
+* chat: 131 registered members link:https://chat.project-hop.org[join]
+* LinkedIn: 347 followers link:https://www.linkedin.com/company/hop-project[follow]
+* Twitter: 275 followers link:https://twitter.com/ApacheHop[follow]
+* YouTube: 59 subscribers link:https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA[subscribe]
+
