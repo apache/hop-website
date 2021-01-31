@@ -15,7 +15,7 @@ description: Apache Hop - The Hop Orchestration Platform aims to facilitate all 
 ## Metadata Driven
 
 Hop is entirely metadata driven. Every object type in Hop describes how data is read, manipulated or written, or how workflows and pipelines need to be orchestrated.</br>
-Metadata is wat drives Hop internally as well. Hop uses a kernel architecture with a robust engine. Plugins add functionality to the engine through their own metadata.
+Metadata is what drives Hop internally as well. Hop uses a kernel architecture with a robust engine. Plugins add functionality to the engine through their own metadata.
 
 <!--p><a class="button-dark" href="/link/to/doc/page/on/metadata">Read more on Hop Metadata</a></p-->
 
@@ -42,7 +42,7 @@ Metadata is wat drives Hop internally as well. Hop uses a kernel architecture wi
 
 ## Design Once, Run Anywhere
 
-Hop workflines and pipelines are definitions of how data needs to be processed. </br>Once designed, a pipeline can be executed on any supported runtime.
+Hop workflows and pipelines are definitions of how data needs to be processed. </br>Once designed, a pipeline can be executed on any supported runtime.
 Hop has built-in support to run pipelines locally and remotely in the native Hop runtime, or on <a href="https://spark.apache.org" target="blank">Apache Spark</a>, <a href="https://flink.apache.org" target="blank">Apache Flink</a> or <a href="https://cloud.google.com/dataflow" target="blank">Google Dataflow</a> through the <a href="https://beam.apache.org" target="blank">Apache Beam</a> runtimes.
 
 <!--p><a class="button-dark" href="/components/latest/eips/enterprise-integration-patterns.html">Read more on runtimes</a></p-->
