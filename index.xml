@@ -6,10 +6,21 @@
     <description>Recent content in Apache Hop (Incubating) on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 Jan 2021 10:01:56 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 02 Feb 2021 10:01:56 +0200</lastBuildDate>
     
 	<atom:link href="https://hop.apache.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Roundup January 2021</title>
+      <link>https://hop.apache.org/blog/2021/02/roundup-2021-02/</link>
+      <pubDate>Tue, 02 Feb 2021 10:01:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2021/02/roundup-2021-02/</guid>
+      <description>As always at the start of another new month, let&amp;#8217;s have a look at what happened at Hop over the last month. Here&amp;#8217;s the recap for January 2021!
+   Apache Hop (Incubating) 0.60 Released Apache Hop (Incubating) 0.60 was released in late January.
+ With 0.60 being the first Hop release as an Incubating ASF project, we focused on adopting the &#34;Apache Way&#34;, and made this a source code only release.</description>
+    </item>
     
     <item>
       <title>Apache Hop (Incubating) 0.60 released</title>
