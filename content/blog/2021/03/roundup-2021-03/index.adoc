@@ -20,7 +20,7 @@ toc::[]
 [[metadata-injection]]
 ## Metadata Injection
 
-Metadata was added to Hop months ago. As with most of the functionality that was ported from PDI/Kettle, some work was required to lift the code to the new flexibility and quality standards we've set for Hop. After we've given it some love, Hop Metadata Injection now has:
+Metadata injection was added to Hop months ago. As with most of the functionality that was ported from PDI/Kettle, some work was required to lift the code to the new flexibility and quality standards we've set for Hop. After we've given it some love, Hop Metadata Injection now has:
 
 * UI improvements:
 ** Fixed filter button
@@ -45,7 +45,7 @@ image:/img/Roundup-2021-03/dark-mode.png[Dark Mode, width=90%, align="left", lin
 
 The ability to run Hop pipelines on Apache Spark over Apache Beam has been available since the very early Hop days.
 
-The steps required to run pipelines on Spark has now been made significantly easier.
+It is now a lot easier to run pipelines on Apache Spark and Apache Flink.
 
 image:/img/Roundup-2021-03/beam-spark.png[Beam Spark, width=90%, align="left", link="/img/Roundup-2021-03/beam-spark.png"]
 
@@ -56,9 +56,9 @@ Check out the updated http://hop.apache.org/manual/latest/hop-gui/pipelines/pipe
 
 A number of new metadata types were introduced. These are all brand new, with lots of potential use cases!
 
-* http://hop.apache.org/manual/latest/hop-server/web-service.html[webservice]: expose data from a pipeline as a webservice
-* pipeline and workflow log probe: send pipeline and workflow logging data to a probe to be picked up in a transform. The pipeline holding that transform can do whatever is possible in Hop: write to files, send to a (graph) database, Kafka producer, ...
-* pipeline probe: similar to the logging probe, but for actual data. The processing pipeline in this case can be used for data quality, lineage and any imaginable use case.
+* http://hop.apache.org/manual/latest/hop-server/web-service.html[Webservice]: expose data from a pipeline as a webservice
+* http://hop.apache.org/manual/latest/logging/logging-reflection.html[Pipeline Log and Workflow Log]: send pipeline and workflow logging data to a probe to be picked up in a transform. The pipeline holding that transform can do whatever is possible in Hop: write to files, send to a (graph) database, Kafka producer, ...
+* Pipeline Probe: similar to the logging probe, but for actual data. The processing pipeline in this case can be used for data quality, lineage and any imaginable use case.
 
 image:/img/Roundup-2021-03/probes.png[Probes, width=90%, align="left", link="/img/Roundup-2021-03/probes.png"]
 
@@ -67,7 +67,7 @@ image:/img/Roundup-2021-03/webservice.png[Web Service, width=90%, align="left", 
 [[plugins]]
 ## New Plugins
 
-The new plugins in Hop continues to grow:
+The list of new plugins in Hop continues to grow. Here are the new additions for February:
 
 * Transforms:
 ** http://hop.apache.org/manual/latest/plugins/transforms/coalesce.html[Coalesce]
@@ -85,7 +85,7 @@ A number of small issues have been fixed and improvements have been made. As the
 
 ### Export project to zip
 
-image:/img/Roundup-2021-03/export-project-to-zip.png[Export project to zip, width=90%, align="left", link="/img/Roundup-2021-03/export-project-to-zip.png"]
+image:/img/Roundup-2021-03/export-project-to-zip.png[Export project to zip, width=50%, align="left", link="/img/Roundup-2021-03/export-project-to-zip.png"]
 
 ### Hop Web
 
