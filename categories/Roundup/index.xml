@@ -6,10 +6,20 @@
     <description>Recent content in Roundup on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 02 Feb 2021 10:01:56 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 28 Feb 2021 10:01:56 +0200</lastBuildDate>
     
 	<atom:link href="https://hop.apache.org/categories/Roundup/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Roundup February 2021</title>
+      <link>https://hop.apache.org/blog/2021/03/roundup-2021-03/</link>
+      <pubDate>Sun, 28 Feb 2021 10:01:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2021/03/roundup-2021-03/</guid>
+      <description>As always at the start of another new month, let&amp;#8217;s have a look at what happened at Hop over the last month. Here&amp;#8217;s the recap for February 2021!
+ We have quite a lot of ground to cover. Here are some quick links for the restless souls among you: Metadata Injection Dark Mode Beam Spark runner improvements New Metadata Types New Plugins Various Community JIRA Tickets     Metadata Injection Metadata was added to Hop months ago.</description>
+    </item>
     
     <item>
       <title>Roundup January 2021</title>
