@@ -26,7 +26,7 @@ Metadata was added to Hop months ago. As with most of the functionality that was
 ** Fixed filter button
 ** Added source-to-target (input-to-template) mapping button
 ** Removed unneeded top level in the tree
-** Added a "None" button when user clicks on a target key (was missing
+** Added a "None" button when user clicks on a target key (was missing)
 * reimplemented support for additional transforms, among others CSV File Input, Group By.
 
 image:/img/Roundup-2021-03/metadata-injection.png[Metadata Injection, width=90%, align="left", link="/img/Roundup-2021-03/metadata-injection.png"]
@@ -72,7 +72,7 @@ The new plugins in Hop continues to grow:
 * Transforms:
 ** http://hop.apache.org/manual/latest/plugins/transforms/coalesce.html[Coalesce]
 ** http://hop.apache.org/manual/latest/plugins/transforms/monetdbbulkloader.html[MonetDB bulk loader]
-** [Pipeline probe]
+** http://hop.apache.org/manual/latest/logging/logging-reflection.html[Pipeline probe]
 ** http://hop.apache.org/manual/latest/plugins/transforms/sasinput.html[SAS Input]
 
 
