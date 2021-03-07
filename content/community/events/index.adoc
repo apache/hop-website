@@ -1,0 +1,41 @@
+---
+title: "Events"
+---
+
+## Community Events
+
+No (wo)man is an island. As an open source project and even more so a community, Apache Hop (Incubating) cares deeply about sharing knowledge and experiences.
+
+Events, in any shape of form, are a great way to meet and connect with fellow Hop users, developers and other community members.
+
+<<events-agenda, The agenda>> lists all planned and past events in the Hop community.
+
+## Planning and adding your own event
+
+We encourage everyone in the Apache Hop (Incubating) community to organize and host events. An "event" is a very broad term and can be local Hop user group meetings, local or online hackathons, brainstorm sessions or a variety of other event types,
+
+To add your event to the agenda, send a mailto:users@hop.apache.org[mail, Apache Hop event announcement, add your event description here] to the users mailing list (mailto:users-subscribe@hop.apache.org[subscribe] if you haven't already) with the name, a brief description, the date/time and registration link for your event.
+
+A recording of your event can be added to the https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA[Hop Youtube channel]. Once published, the link to your recording will be added to the <<events-agenda, agenda>>.
+
+
+## Recurring Events
+
+### Hot Hop Hangouts
+
+The Hot Hop Hangouts (3Hx) have been organized at irregular times since the start of the Apache Hop (Incubating) project.
+
+A new Hot Hop Hangout session is organized every other week. Topics will alternate between _technical_ and _user-oriented_, so there is one technical and one user oriented 3Hx each month.
+
+mailto:users@hop.apache.org[Send, 3Hx presentation submission, add your presentation topic and brief description here] your submissions for a 3Hx talk to to the users mailing list to get it added to the agenda.
+
+[[events-agenda]]
+## Agenda
+
+[%header,cols="2,4,1,1,1"]
+|===
+|Event name|Description|date|link (subscribe/attend)|recording
+|3H6|Hot Hop Hangout 6 (agenda TBD)|2021-04-29|-|-
+|3H5|Hot Hop Hangout 5 (agenda TBD)|2021-04-15|-|-
+|3H4|Hot Hop Hangout 4 (agenda TBD)|2021-04-01|-|-
+|===
