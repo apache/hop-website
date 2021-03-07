@@ -1,0 +1,18 @@
+---
+title: Commercial Support
+---
+
+## Commercial Support
+
+Apache Hop (Incubating) is gaining traction in data orchestration projects across a number of industries. As such, several companies have built products and services around Hop. This page is dedicated to providing descriptions of those offerings and links to more information. Companies are definitely encouraged to update this page directly or send a mail to the Hop PMC with a description of your offerings and we can update the page. The products and services listed on this page are provided for information use only to our users. The Hop PMC does not endorse or recommend any of the products or services on this page. See below for information about what is appropriate to add to the page.
+
+### Lean With Data
+
+https://www.leanwithdata.com[Lean With Data, window="blank"] helps organizations be successful with Apache Hop (Incubating). Started by a number of the core Hop committers and Hop project founders, Lean With Data has in-depth knowledge of the Hop platform and can support your organization to hit the ground running with Hop. The services provided by Lean With Data include migrations, certified installations, coaching, training and enterprise-level support.
+
+
+## Policies for admission to this page
+
+Companies are free to add information about their products and services to this page (please keep entries in alphabetical order). The information must be factual and informational in nature and not be a marketing statement. Statements that promote your products and services over other offerings on the page will not be tolerated and will be removed. Such marketing statements can be added to your own pages on your own site, but not here.
+
+When in doubt, email the Hop dev list (see https://hop.apache.org/community/mailing-list/[mailing lists, window="blank"]) and ask. We’d be happy to help.

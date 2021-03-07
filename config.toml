@@ -116,6 +116,13 @@ enableRobotsTXT = true
     url = "/community/team/"
 
 [[menu.main]]
+    name = "Support"
+    parent = "community"
+    weight = 6
+    identifier = "community-support"
+    url = "/community/support/"
+
+[[menu.main]]
     name = "Download"
     weight = 3
     identifier = "download"
