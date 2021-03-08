@@ -32,6 +32,15 @@
     </item>
     
     <item>
+      <title>Commercial Support</title>
+      <link>https://hop.apache.org/community/commercial/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hop.apache.org/community/commercial/</guid>
+      <description>Commercial Support Apache Hop (Incubating) is gaining traction in data orchestration projects across a number of industries. As such, several companies have built products and services around Hop. This page is dedicated to providing descriptions of those offerings and links to more information. Companies are definitely encouraged to update this page directly or send a mail to the Hop PMC with a description of your offerings and we can update the page.</description>
+    </item>
+    
+    <item>
       <title>Documentation Contribution Guide</title>
       <link>https://hop.apache.org/community/contribution-guides/documentation-contribution-guide/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -116,8 +125,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hop.apache.org/community/support/</guid>
-      <description>Getting help If you are experiencing problems using Hop then please report your problem to our mailing list. This allows the entire community to help with your problem. If indeed a bug has been identified in the Hop software, then document the problem in our [Issue Tracker](https://issues.apache.org/jira/browse/HOP). Please refrain from immediately opening a ticket in the issue tracker unless you are certain it&amp;#8217;s a problem in the Hop software.
- If you are in doubt, we appreciate asking the [mailing list](/community/mailing-list/) or [Mattermost](https://chat.</description>
+      <description>Getting Help If you are experiencing problems using Hop then please report your problem to our mailing lists. This allows the entire community to help with your problem.
+ If you found an issue or have a feature request, pleaae create a ticket in our JIRA Issue Tracker. Adding plenty of details (stack trace, logs, screenshots, &amp;#8230;&amp;#8203;) makes it easier for the Hop developers to know what you exactly mean, and will allow us to resolve your ticket faster.</description>
     </item>
     
     <item>
