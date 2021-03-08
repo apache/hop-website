@@ -1,66 +1,52 @@
 ---
-title: "Support"
+title: Support
 ---
 
-## Getting help
+## Getting Help
 
-If you are experiencing problems using Hop then please report your problem to our mailing list. This allows the entire community to help with your problem.
-If indeed a bug has been identified in the Hop software, then document the problem in our [Issue Tracker](https://issues.apache.org/jira/browse/HOP).
-Please refrain from immediately opening a ticket in the issue tracker unless you are certain it's a problem in the Hop software.
+If you are experiencing problems using Hop then please report your problem to our https://hop.apache.org/community/mailing-list/[mailing lists, window="blank"]. This allows the entire community to help with your problem.
 
-If you are in doubt, we appreciate asking the [mailing list](/community/mailing-list/) or [Mattermost](https://chat.project-hop.org) chat first.
+If you found an issue or have a feature request, pleaae create a ticket in our http://issues.apache.org/jira/browse/HOP[JIRA Issue Tracker, window="blank"]. Adding plenty of details (stack trace, logs, screenshots, ...) makes it easier for the Hop developers to know what you exactly mean, and will allow us to resolve your ticket faster.
 
-Please read the section below (How to get help), and follow the bullets advised there first:
+## Alternative discussion forums and information
 
-* [Issue tracker](https://issues.apache.org/jira/browse/HOP)
-* [Q&A](/docs/qa)
+There are a number of sites outside Apache that offer discussion forums or information on Hop. You may find helpful discussions on technical blogs, e,g, (https://medium.com/codex/build-data-pipeline-with-apache-hop-62417ecee303[1, window="blank"]), (http://diethardsteiner.github.io/[2, window="blank"]), on https://www.google.com/search?q=apache+hop[Google, window="blank"], or even on https://twitter.com/search?q=%23apachehop&src=typed_query[Twitter, window="blank"].
 
-### Reporting bugs - Please read this first
 
-We prefer people to get in touch first using the mailing list, or Zulip chat. Or take time to read FAQs, or search in the mailing list archives to find answers.
-Unfortunately some people create a JIRA ticket as first thing. Please don't do that! Only if you are sure it really is a bug etc. JIRA tickets create noise
-for the Hop team to react on issues that are not bugs. But already covered in FAQs, in the mailing lists etc. Or in the existing documentation.
-Also on the mailing lists there is more people active to help you better.
+## How to get help
 
-////
-### Alternative discussion forums
-
-There's a number of sites outside Apache that offer discussion forums on Hop. For example, [Stack Overflow](http://stackoverflow.com/) is a popular Q & A site with a dedicated [Apache Hop forum](http://stackoverflow.com/questions/tagged/apache-hop).
-You are also likely to find helpful discussions on technical blogs, on [Google](https://www.google.com/search?q=apache+hop), or even on [Twitter](https://twitter.com/#!/search/apache%hop).
-////
-
-### How to get help
-
-Before you report a problem, you may wish to read the [FAQ](/docs/qa/).
 When you report an issue, please be sure to include as much information as possible. The more we know, the easier it is to reach an effective solution quickly.
 
-*What version do you use*
+A couple of usefull things to check or to provide when you report an issue are:
 
-What version of Hop do you use! Remember to include this information.
+* what are the version numbers of involved software components? (this is very important to detail)
 
-*  what are the version numbers of involved software components? (this is very important to detail)
-//*  what platform and JDK?
-*  any particular container being used? and if so, what version?
-*  stack traces generally really help! (Remember to post which version of Hop you use, this is important to know when posting stacktraces) If in doubt, include the whole thing; often exceptions get wrapped in other exceptions and the exception right near the bottom explains the actual error, not the first few lines at the top. It's very easy for us to skim-read past unnecessary parts of a stack trace.
-*  log output can be useful too; sometimes enabling DEBUG logging can help
-*  your code & configuration files are often useful
-*  did it work before? what have you changed to break it?
-*  try upgrading to the latest release and see if it's fixed there
-*  try the latest SNAPSHOT to see if it's fixed in the pre-release
-*  search the user forum to see if has been discussed before
-*  see the "known issues" section in the release notes
-*  and check the issue tracker to see if the issue has already been reported
-*  do not send private emails to Hop Team members to ask them to help you faster, or in the private only. Help on Apache Hop is volunteer based and must happen in the open on the public Mailing Lists. If you want to get help faster or in private, then see further below.
+* what platform and JDK?
 
-### How to get help faster
+* any particular container being used? and if so, what version?
 
-We can help you much quicker if you try the following
+* stack traces generally really help! (Remember to post which version of Hop you use, this is important to know when posting stacktraces) If in doubt, include the whole thing; often exceptions get wrapped in other exceptions and the exception right near the bottom explains the actual error, not the first few lines at the top. It’s very easy for us to skim-read past unnecessary parts of a stack trace.
 
-*  provide us with a JUnit test case that demonstrates your issue. e.g. if you think you've found a bug, can you create a test case to demonstrate the bug?
-*  [submit a patch](/community/contributing/) fixing the bug! (We also buy you beer when we meet you if you submit bug fixes (smile) )
-//*  for memory leak or performance related issues, if you can run a profiler on your test case and attach the output as a file (or zipped file if it's huge) to the JIRA we can normally fix things much faster. e.g. you could run jmap/jhat, JProfiler or YourKit on your code and send us the output. To find memory leaks it's quicker to resolve if you can tell us what classes are taking up all of the RAM; we can normally figure out what's wrong from that.
+* log output can be useful too; sometimes enabling DEBUG logging can help
 
-## Commercial Support
+* your code & configuration files are often useful
 
-This is an open source project, so the amount of time we have available to help resolve your issue is often limited as all help is provided on a volunteer basis.
-//If you want to get priority help, need to get up to speed quickly, require some training or mentoring, or need full 24 x 7 production support you could contact one of the following companies with [Commercial Camel Offerings](/manual/latest/commercial-camel-offerings.html).
+* did it work before? where there any configuration or other changes in your setup before it broke?
+
+* try upgrading to the latest release or nighly build and see if it’s fixed there
+
+* and check the issue tracker to see if the issue has already been reported
+
+* please do not send private emails or chat pm messages to Hop Team members to ask them to help you faster. Help on Apache Hop is volunteer based and works best in the open (on the public Mailing Lists, chat etc), so others can learn and benefit from your problems and solutions. If you want to get help faster or in private, then see further below.
+
+## How to get help faster
+
+We can help you much quicker if you try the following:
+
+* provide us with a pipeline, workflow or JUnit test case that demonstrates your issue. e.g. if you think you’ve found a bug, can you create a test case to demonstrate the bug?
+
+* if you're a developer: create a pull request with a fix for your bug! (We also buy you beer when we meet you if you submit bug fixes ;-) )
+
+## Commercial support
+
+Apache Hop is an open source project, so the amount of time we have available to help resolve your issue is often limited as all help is provided on a volunteer basis. If you want to get priority help, need to get up to speed quickly, require some training or mentoring, or need full 24 x 7 production support you could contact one of the following companies with link:commercial/[Commercial Hop Offerings, window="blank"].
