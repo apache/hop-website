@@ -102,11 +102,25 @@ enableRobotsTXT = true
     url = "/community/mailing-list/"
 
 [[menu.main]]
-    name = "Team"
+    name = "Events"
     parent = "community"
     weight = 4
+    identifier = "community-events"
+    url = "/community/events"
+
+[[menu.main]]
+    name = "Team"
+    parent = "community"
+    weight = 5
     identifier = "community-team"
     url = "/community/team/"
+
+[[menu.main]]
+    name = "Support"
+    parent = "community"
+    weight = 6
+    identifier = "community-support"
+    url = "/community/support/"
 
 [[menu.main]]
     name = "Download"
