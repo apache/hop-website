@@ -186,13 +186,22 @@ body {
     height: 100%;
     box-shadow: 0 16px 16px 0 rgba(10, 10, 10, 0.1);
     overflow-y: auto;
-    top: 4rem;
+    top: 8rem;
     right: 0;
   }
 
   .navbar-menu a.navbar-item:hover,
   .navbar-menu .navbar-link:hover {
     background-color: var(--navbar-menu-hover-background);
+  }
+
+  .navbar-item {
+    width: 100%;
+  }
+
+  .mobile-heading {
+    color: var(--color-asf-dark-blue);
+    font-weight: bold;
   }
 }
 
