@@ -35,7 +35,7 @@
                         {{ range .Site.Menus.main }}
                         {{ if .HasChildren }}
                         <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link" href="#">{{ .Name }}</a>
+                            <a class="navbar-link mobile-heading" href="#">{{ .Name }}</a>
                             <div class="navbar-dropdown">
                                 {{ range .Children }}
                                 <a class="navbar-item" href="{{ .URL | relURL }}">{{ .Name }}</a>
@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         {{ else }}
-                        <a class="navbar-item" href="{{ .URL | relURL }}">{{ .Name }}</a>
+                        <a class="navbar-item mobile-heading" href="{{ .URL | relURL }}">{{ .Name }}</a>
                         {{ end }}
                         {{ end }}
                     </div>
