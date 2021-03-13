@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ path.Join "_" (index .Site.Data "rev-manifest" "css/site.css") | relURL }}">
 </head>
 
-<body class="article">
+<body class="{{ if .Page.IsHome }}homepage {{ end }}article">
     <div class="cookie-banner" id="cookies-eu-banner" style="display: none;">
         <div id="cookies-eu-content">        
             By continuing to visit this site, you accept the use of <a href ="{{ .Site.BaseURL}}cookie-info/">cookies.</a>
@@ -35,7 +35,7 @@
                         {{ range .Site.Menus.main }}
                         {{ if .HasChildren }}
                         <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link" href="#">{{ .Name }}</a>
+                            <a class="navbar-link mobile-heading" href="#">{{ .Name }}</a>
                             <div class="navbar-dropdown">
                                 {{ range .Children }}
                                 <a class="navbar-item" href="{{ .URL | relURL }}">{{ .Name }}</a>
@@ -43,12 +43,14 @@
                             </div>
                         </div>
                         {{ else }}
-                        <a class="navbar-item" href="{{ .URL | relURL }}">{{ .Name }}</a>
+                        <a class="navbar-item mobile-heading" href="{{ .URL | relURL }}">{{ .Name }}</a>
                         {{ end }}
                         {{ end }}
                     </div>
                 </div>
-                <div class="navbar-search">
+				<div class="navbar-fill"></div>
+				<div class="break-row"></div>
+                <div class="navbar-search results-hidden">
                     <input id="search-input" type="text" placeholder="Search docs" class="ds-input" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="algolia-autocomplete-listbox-0" dir="auto">
                 </div>
                 <div class="navbar-tools">
@@ -66,3 +68,4 @@
             </div>
         </nav>
     </header>
+	<a id="top"></a>

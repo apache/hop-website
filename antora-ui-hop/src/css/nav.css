@@ -291,10 +291,10 @@ html.is-clipped--nav {
 .nav-logo {
   background-image: url('../img/hop-logo.svg');
   background-repeat: no-repeat;
-  background-size: 73px;
-  background-position-x: center;
-  background-position-y: center;
-  width: 180px;
+  background-size: 4rem;
+  background-position-y: -16px;
+  width: 4rem;
+  order: 1;
 }
 
 .nav-logo span {
