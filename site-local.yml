@@ -1,0 +1,34 @@
+site:
+  title: Apache Hop (Incubating)
+  url: https://hop.apache.org
+  start_page: manual::index.adoc
+  keys:
+    google_analytics: 'UA-151580460-1'
+
+content:
+  sources:
+  - url: ../incubator-hop-docs/
+    branches: 
+      - asf-site
+    start_path: /hop-user-manual/
+  - url: ../incubator-hop-docs/
+    branches: asf-site
+    start_path: /hop-tech-manual/
+  - url: ../incubator-hop-docs/
+    branches: asf-site
+    start_path: /hop-dev-manual/
+    
+ui:
+  bundle:
+    url: ./antora-ui-hop/build/ui-bundle.zip
+
+urls:
+  redirect_facility: disabled
+
+output:
+  dir: ./documentation
+
+asciidoc:
+  extensions:
+    - ./extensions/table.js
+    - ./extensions/inline-styles.js
