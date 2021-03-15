@@ -96,6 +96,14 @@ Simply call
 
     $ yarn preview
 
+or     
+
+    $ yarn preview-local 
+
+`preview` will pull the latest docs version from [github](https://github.com/apache/incubator-hop-docs),  `preview-local` will use the (committed) documentation files from your local incubator-hop-docs clone. 
+
+NOTE: `preview-local` assumes your docs repository is cloned to a folder `incubator-hop-docs` next to `incubator-hop-webste` (both repositories in the same parent folder). 
+
 and you will be provided with a web server running the site on [http://localhost:1313/](http://localhost:1313/)
 
 Point your favorite browser to `http://localhost:1313/` and you will see the Hop website.
