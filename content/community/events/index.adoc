@@ -32,10 +32,11 @@ mailto:users@hop.apache.org[Send, 3Hx presentation submission, add your presenta
 [[events-agenda]]
 ## Agenda
 
-[%header,cols="2,4,1,1,1"]
+[%header,cols="5%,60%,10%,15%,10%"]
 |===
 |Event name|Description|date|link (subscribe/attend)|recording
 |3H6|Hot Hop Hangout 6 (agenda TBD)|2021-04-29|-|-
 |3H5|Hot Hop Hangout 5 (agenda TBD)|2021-04-15|-|-
-|3H4|Hot Hop Hangout 4 (agenda TBD)|2021-04-01|-|-
+|{set:cellbgcolor:#30328422}3H4| The Road to Hop 1.0|2021-04-01|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/277117234[meetup^]|-
+//{set:cellbgcolor}
 |===
