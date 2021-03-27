@@ -26,7 +26,11 @@ urls:
   redirect_facility: disabled
 
 output:
+  clean: true
   dir: ./documentation
+
+runtime: 
+  fetch: true  
 
 asciidoc:
   extensions:
