@@ -1,15 +1,26 @@
 {{ partial "header.html" . }}
 
 <div class="body">
-    <main role="main">
-        <article class="static doc">
-
-          <h1>{{ .Title }}</h1>
-
-{{ .Content }}
-
-        </article>
-    </main>
+	<main>
+		<div class="static toolbar"></div>
+		<div class="content">
+			<article class="static doc {{ .Page.Section }}">
+				{{ with .Title }}
+				<h1>{{ . }} </h1>
+				{{ end }}
+				<aside class="toc embedded">
+					<div class="toc-menu">
+						<h3>Contents</h3>
+						{{ .TableOfContents }}
+					</div>
+				</aside>
+				{{ .Content }}
+			</article>
+			<aside class="toc sidebar" data-title="Contents" data-levels="2">
+				<div class="toc-menu"></div>
+			</aside>
+		</div>
+	</main>
 </div>
 
 {{ partial "footer.html" . }}
