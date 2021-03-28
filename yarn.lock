@@ -148,7 +148,7 @@
 
 "@antora/xref-validator@gitlab:antora/xref-validator":
   version "1.0.0-alpha.13"
-  resolved "git+ssh://git@gitlab.com/antora/xref-validator.git#19bfaf88fc7dd39552cfd8b3ac41c55d6d8f9edd"
+  resolved "https://gitlab.com/antora/xref-validator.git#19bfaf88fc7dd39552cfd8b3ac41c55d6d8f9edd"
   dependencies:
     "@antora/expand-path-helper" "~1.0"
     cache-directory "~2.0"
