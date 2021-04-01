@@ -6,10 +6,20 @@
     <description>Recent content in Apache Hop on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 28 Feb 2021 10:01:56 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 31 Mar 2021 08:59:56 +0200</lastBuildDate>
     
 	<atom:link href="https://hop.apache.org/categories/Apache-Hop/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Roundup March 2021</title>
+      <link>https://hop.apache.org/blog/2021/04/roundup-2021-04/</link>
+      <pubDate>Wed, 31 Mar 2021 08:59:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2021/04/roundup-2021-04/</guid>
+      <description>As always at the start of another new month, let&amp;#8217;s have a look at what happened at Hop over the last month. Here&amp;#8217;s the recap for March 2021!
+ The list of items we need to cover in the monthly reports continues to grow. Here are some quick links for the restless souls among you: Neo4j integration New file explorer perspective New Metadata Types VFS Drivers New Plugins Various Community JIRA Activity     Neo4j integration We&amp;#8217;re really excited to welcome full Neo4j integration in Hop!</description>
+    </item>
     
     <item>
       <title>Roundup February 2021</title>
