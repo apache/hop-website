@@ -4,14 +4,16 @@
 {{> head defaultPageTitle='Untitled'}}
   </head>
   <body class="article">
-  <div id="cookies-eu-content">
-    <div>
-      <p><b>This website uses cookies</b></p>
-      We use cookies to anonymously analyze site traffic so we can offer you a better browsing experience. By continuing to visit this site, you accept the use of <a href ="{{siteRootPath}}/cookie-info/">cookies.</a>
-    </div>
-    <div id="cookies-buttons">
-      <button id="cookies-eu-accept">Accept</button>
-      <button id="cookies-eu-reject">Reject</button>
+  <div class="cookie-banner" id="cookies-eu-banner" style="display: none;">
+    <div id="cookies-eu-content">
+      <div>
+        <p><b>This website uses cookies</b></p>
+        We use cookies to anonymously analyze site traffic so we can offer you a better browsing experience. By continuing to visit this site, you accept the use of <a href ="{{siteRootPath}}/cookie-info/">cookies.</a>
+      </div>
+      <div id="cookies-buttons">
+        <button id="cookies-eu-accept">Accept</button>
+        <button id="cookies-eu-reject">Reject</button>
+      </div>
     </div>
   </div>
 {{> header}}
