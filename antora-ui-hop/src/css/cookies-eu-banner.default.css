@@ -2,7 +2,6 @@
   color: #222;
   padding: 6px;
   font-size: 1rem;
-  text-align: center;
   position: fixed;
   width: 100%;
   bottom: 0;
@@ -14,9 +13,11 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  font-size: 2rem;
-  padding-top: 10rem;
-  padding-bottom: 3rem;
+  font-size: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 25rem;
+  padding-right: 25rem;
 }
 
 #cookies-eu-content a {
@@ -33,7 +34,7 @@
   cursor: pointer;
   padding: 4px 7px;
   margin: 2px 0;
-  font-size: 2rem;
+  font-size: 1rem;
   font-weight: bold;
   transition: background 0.07s, color 0.07s, border-color 0.07s;
 }
@@ -48,12 +49,10 @@
   cursor: pointer;
   padding: 4px 7px;
   margin: 2px 0;
-  font-size: 0.7rem;
+  font-size: 1rem;
   font-weight: bold;
   transition: background 0.07s, color 0.07s, border-color 0.07s;
   position: absolute;
-  bottom: 0;
-  right: 0;
 }
 
 #cookies-eu-more:hover,
@@ -84,6 +83,10 @@
   border-color: #fff;
   background: rgba(201, 232, 251, 0.8);
   color: #222;
+}
+
+#cookies-buttons {
+  padding-top: 0.7rem;
 }
 
 @media screen and (max-width: 1023px) {
