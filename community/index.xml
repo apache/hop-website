@@ -47,9 +47,7 @@
       
       <guid>https://hop.apache.org/community/contribution-guides/documentation-contribution-guide/</guid>
       <description>Good documentation is crucial for any kind of software. This is especially true for sophisticated software systems such as distributed data processing engines like Apache Hop. The Apache Hop community aims to provide concise, precise, and complete documentation and welcomes any contribution to improve Apache Hop’s documentation.
- Our documentation is not yet fully implemented
- ideas and contributions are very welcome, come discuss with us on our chat.
-    Types of documentation</description>
+   Warning  Just like code, documentation is never done. We&amp;#8217;re eager to find out how you think our docs can be improved, come discuss with us on our documentation channel.</description>
     </item>
     
     <item>
