@@ -36,7 +36,7 @@ mailto:users@hop.apache.org[Send, 3Hx presentation submission, add your presenta
 |===
 |Event name|Description|date|link (subscribe/attend)|recording
 |3H6|Hot Hop Hangout 6 (agenda TBD)|2021-04-29|-|-
-|3H5|Hot Hop Hangout 5 (agenda TBD)|2021-04-15|-|-
-|{set:cellbgcolor:#30328422}3H4| The Road to Hop 1.0|2021-04-01|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/277117234[meetup^]|-
+|{set:cellbgcolor:#30328422}3H5|Get Started With Hop - Concepts and First Pipelines|2021-04-15|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/277439258/[meetup^]|-
+|{set:cellbgcolor}3H4| The Road to Hop 1.0|2021-04-01|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/277117234[meetup^]|https://www.youtube.com/watch?v=EhO_DYszu_Y&t=2s[youtube]
 //{set:cellbgcolor}
 |===
