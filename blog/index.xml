@@ -6,10 +6,20 @@
     <description>Recent content in Blog on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 31 Mar 2021 08:59:56 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 12 Apr 2021 07:59:56 +0200</lastBuildDate>
     
 	<atom:link href="https://hop.apache.org/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Apache Hop (Incubating) 0.70 Release Available!</title>
+      <link>https://hop.apache.org/blog/2021/04/release-0.70/</link>
+      <pubDate>Mon, 12 Apr 2021 07:59:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2021/04/release-0.70/</guid>
+      <description>The Hop community is pleased to announce the availability of the Apache Hop (Incubating) 0.70 release.
+ This release contains about 2.5 months of work. Since our 0.60 release in late January, we&amp;#8217;ve seen a lot of activity in a variety of areas. Hop contributors not only worked on code: we&amp;#8217;ve received contributions in artwork, translations, documentation etc. We have more than 45 new plugins, and a total of 223 jira tickets were implemented.</description>
+    </item>
     
     <item>
       <title>Roundup March 2021</title>

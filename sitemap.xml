@@ -3,18 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://hop.apache.org/categories/Announcement/</loc>
+    <lastmod>2021-04-12T07:59:56+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://hop.apache.org/categories/Apache-Hop/</loc>
-    <lastmod>2021-03-31T08:59:56+02:00</lastmod>
+    <lastmod>2021-04-12T07:59:56+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://hop.apache.org/</loc>
-    <lastmod>2021-03-31T08:59:56+02:00</lastmod>
+    <lastmod>2021-04-12T07:59:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2021/04/release-0.70/</loc>
+    <lastmod>2021-04-12T07:59:56+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://hop.apache.org/blog/</loc>
-    <lastmod>2021-03-31T08:59:56+02:00</lastmod>
+    <lastmod>2021-04-12T07:59:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/categories/Release/</loc>
+    <lastmod>2021-04-12T07:59:56+02:00</lastmod>
   </url>
   
   <url>
@@ -39,11 +54,6 @@
   
   <url>
     <loc>https://hop.apache.org/blog/2021/01/release-0.60/</loc>
-    <lastmod>2021-01-26T10:01:56+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hop.apache.org/categories/Release/</loc>
     <lastmod>2021-01-26T10:01:56+02:00</lastmod>
   </url>
   
