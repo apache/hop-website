@@ -159,7 +159,7 @@ article.blog p {
   }
 
   .blog .post aside {
-    width: 30rem;
+    width: 20rem;
     min-width: 16rem;
   }
 
@@ -177,7 +177,7 @@ article.blog p {
 
   .blog .post .post-content {
     margin-left: 2rem;
-    width: 60%;
+    width: 80rem;
   }
 
   .blog.list {
