@@ -123,6 +123,13 @@ enableRobotsTXT = true
     url = "/community/support/"
 
 [[menu.main]]
+    name = "Ethos"
+    parent = "community"
+    weight = 7
+    identifier = "community-ethos"
+    url = "/community/ethos/"
+
+[[menu.main]]
     name = "Download"
     weight = 3
     identifier = "download"
