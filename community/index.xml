@@ -51,6 +51,17 @@
     </item>
     
     <item>
+      <title>Ethos</title>
+      <link>https://hop.apache.org/community/ethos/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hop.apache.org/community/ethos/</guid>
+      <description>Community Ethos Great communities make great software!
+ Hop wants to be a positive and inclusive community. As an Apache project, we subscribe to the Apache Software Foundation&amp;#8217;s Code of Conduct, which is reprinted below.
+   Apache Software Foundation Code of Conduct INTRODUCTION This code of conduct applies to all spaces managed by the Apache Software Foundation, including IRC, all public and private mailing lists, issue trackers, wikis, blogs, Twitter, and any other communication channel used by our communities.</description>
+    </item>
+    
+    <item>
       <title>Events</title>
       <link>https://hop.apache.org/community/events/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
