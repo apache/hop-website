@@ -9,13 +9,13 @@ content:
   sources:
   - url: ../incubator-hop-docs/
     branches: 
-      - asf-site
+      - HEAD
     start_path: /hop-user-manual/
   - url: ../incubator-hop-docs/
-    branches: asf-site
+    branches: HEAD
     start_path: /hop-tech-manual/
   - url: ../incubator-hop-docs/
-    branches: asf-site
+    branches: HEAD
     start_path: /hop-dev-manual/
     
 ui:
