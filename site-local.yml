@@ -7,16 +7,16 @@ site:
 
 content:
   sources:
-  - url: ../incubator-hop-docs/
+  - url: ../incubator-hop/
     branches: 
       - HEAD
-    start_path: /hop-user-manual/
-  - url: ../incubator-hop-docs/
+    start_path: /docs/hop-user-manual/
+  - url: ../incubator-hop/
     branches: HEAD
-    start_path: /hop-tech-manual/
-  - url: ../incubator-hop-docs/
+    start_path: /docs/hop-tech-manual/
+  - url: ../incubator-hop/
     branches: HEAD
-    start_path: /hop-dev-manual/
+    start_path: /docs/hop-dev-manual/
     
 ui:
   bundle:
