@@ -39,7 +39,7 @@ This page lists who we are. By all means add yourself to the list - lets sort it
 |David Rosenblum|| Neo4j |
 |Diethard Steiner|||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/diethardsteiner", window="_blank"]
 |Rafael Valenzuela |||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/sowe", window="_blank"]
-|Saurabh Deshmukh |||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/OfficialSauru", window="_blank"]
+|Saurabh Deshmukh | sauru22 | TechM | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/OfficialSauru", window="_blank"]
 |===
 
 
