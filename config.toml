@@ -136,16 +136,37 @@ enableRobotsTXT = true
     url = "/download/"
 
 [[menu.main]]
-    name = "About"
-    identifier = "about"
+    name = "Apache"
+    identifier = "apache"
     weight = 4
 
 [[menu.main]]
     name = "License"
-    parent = "about"
+    parent = "apache"
     weight = 1
     identifier = "about-license"
-    url = "https://www.apache.org/licenses/LICENSE-2.0"
+    url = "https://www.apache.org/licenses"
+
+[[menu.main]]
+    name = "Thanks to our sponsors"
+    parent = "apache"
+    weight = 2
+    identifier = "about-thanks"
+    url = "https://www.apache.org/foundation/thanks.html"
+
+[[menu.main]]
+    name = "Apache Security"
+    parent = "apache"
+    weight = 3
+    identifier = "about-security"
+    url = "https://www.apache.org/security/"
+
+[[menu.main]]
+    name = "Become a sponsor"
+    parent = "apache"
+    weight = 4
+    identifier = "about-sponsor"
+    url = "https://www.apache.org/foundation/sponsorship.html"
 
 
 [module]

@@ -2,6 +2,15 @@
 title: "Events"
 ---
 
+## Apache Events
+++++
+<a  href="https://www.apache.org/events/current-event.html">
+  <img src="https://www.apache.org/events/current-event-234x60.png"/>
+</a>
+++++
+
+For more information about Apache organised events visit the https://www.apache.org/events/current-event.html[Apache events] page
+
 ## Community Events
 
 No (wo)man is an island. As an open source project and even more so a community, Apache Hop (Incubating) cares deeply about sharing knowledge and experiences.
