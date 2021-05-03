@@ -6,10 +6,20 @@
     <description>Recent content in Blog on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 12 Apr 2021 07:59:56 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 01 May 2021 08:59:56 +0200</lastBuildDate>
     
 	<atom:link href="https://hop.apache.org/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Roundup April 2021</title>
+      <link>https://hop.apache.org/blog/2021/05/roundup-2021-05/</link>
+      <pubDate>Sat, 01 May 2021 08:59:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2021/05/roundup-2021-05/</guid>
+      <description>As always at the start of another new month, let&amp;#8217;s have a look at what happened at Hop over the last month. Here&amp;#8217;s the recap for April 2021!
+ Here are some quick links for the restless souls among you: 0.70 release 3Hx (Hot Hop Hangout) Sessions Documentation, Samples, Integration tests Various Hop search Community JIRA Activity     0.70 release On April, 12th, the Hop community release Apache Hop (Incubating) 0.</description>
+    </item>
     
     <item>
       <title>Apache Hop (Incubating) 0.70 Release Available!</title>
