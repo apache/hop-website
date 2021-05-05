@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://hop.apache.org/categories/Apache-Hop/</loc>
+    <lastmod>2021-05-01T08:59:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/</loc>
+    <lastmod>2021-05-01T08:59:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/</loc>
+    <lastmod>2021-05-01T08:59:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/categories/Roundup/</loc>
+    <lastmod>2021-05-01T08:59:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2021/05/roundup-2021-05/</loc>
+    <lastmod>2021-05-01T08:59:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/categories/Announcement/</loc>
+    <lastmod>2021-04-12T07:59:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2021/04/release-0.70/</loc>
+    <lastmod>2021-04-12T07:59:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/categories/Release/</loc>
+    <lastmod>2021-04-12T07:59:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2021/04/roundup-2021-04/</loc>
+    <lastmod>2021-03-31T08:59:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2021/03/roundup-2021-03/</loc>
+    <lastmod>2021-02-28T10:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2021/02/roundup-2021-02/</loc>
+    <lastmod>2021-02-02T10:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2021/01/release-0.60/</loc>
+    <lastmod>2021-01-26T10:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2021/01/roundup-2021-01/</loc>
+    <lastmod>2021-01-03T10:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2020/12/roundup-2020-12/</loc>
+    <lastmod>2020-11-30T10:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/categories/Project-Hop/</loc>
+    <lastmod>2020-11-09T10:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2020/11/roundup-2020-11/</loc>
+    <lastmod>2020-11-09T10:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/categories/Apache-Hop-Incubating/</loc>
+    <lastmod>2020-10-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/categories/ASF/</loc>
+    <lastmod>2020-10-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2020/10/hop-joins-the-asf/</loc>
+    <lastmod>2020-10-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/categories/Releases/</loc>
+    <lastmod>2020-10-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/categories/Pre-Releae/</loc>
+    <lastmod>2020-07-21T12:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2020/07/preview-release-0.30/</loc>
+    <lastmod>2020-07-21T12:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2020/08/roundup-2020-08/</loc>
+    <lastmod>2020-06-27T12:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2020/06/roundup-2020-06/</loc>
+    <lastmod>2020-06-27T12:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2020/05/roundup-2020-05/</loc>
+    <lastmod>2020-06-02T12:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/categories/Pre-Release/</loc>
+    <lastmod>2020-05-07T12:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2020/05/preview-release-0.21/</loc>
+    <lastmod>2020-05-07T12:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2020/04/roundup-2020-04/</loc>
+    <lastmod>2020-05-03T12:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2020/04/release-preview-0.1/</loc>
+    <lastmod>2020-04-09T12:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2020/03/roundup-2020-03/</loc>
+    <lastmod>2020-03-31T12:01:56+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/blog/2020/02/roundup-2020-02/</loc>
+    <lastmod>2020-03-08T12:38:42+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/manual/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/about/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/docs/architecture/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/contribution-guides/code-contribution-guide/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/contribution-guides/code-review-guide/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/commercial/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/cookie-info/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/docs/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/contribution-guides/documentation-contribution-guide/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/download/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/ethos/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/events/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/404/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/contributing/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/contribution-guides/jira-guide/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/about/eula/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/mailing-list/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/docs/qa/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/contribution-guides/release-contribution-guide/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/docs/roadmap/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/sources/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/support/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/team/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/tools/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/contribution-guides/translation-contribution-guide/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hop.apache.org/community/contribution-guides/website-contribution-guide/</loc>
+  </url>
+  
+</urlset>

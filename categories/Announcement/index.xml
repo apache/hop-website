@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Announcement on Hop</title>
+    <link>https://hop.apache.org/categories/Announcement/</link>
+    <description>Recent content in Announcement on Hop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 12 Apr 2021 07:59:56 +0200</lastBuildDate>
+    
+	<atom:link href="https://hop.apache.org/categories/Announcement/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Apache Hop (Incubating) 0.70 Release Available!</title>
+      <link>https://hop.apache.org/blog/2021/04/release-0.70/</link>
+      <pubDate>Mon, 12 Apr 2021 07:59:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2021/04/release-0.70/</guid>
+      <description>The Hop community is pleased to announce the availability of the Apache Hop (Incubating) 0.70 release.
+ This release contains about 2.5 months of work. Since our 0.60 release in late January, we&amp;#8217;ve seen a lot of activity in a variety of areas. Hop contributors not only worked on code: we&amp;#8217;ve received contributions in artwork, translations, documentation etc. We have more than 45 new plugins, and a total of 223 jira tickets were implemented.</description>
+    </item>
+    
+  </channel>
+</rss>

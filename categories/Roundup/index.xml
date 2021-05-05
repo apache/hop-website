@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Roundup on Hop</title>
+    <link>https://hop.apache.org/categories/Roundup/</link>
+    <description>Recent content in Roundup on Hop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 01 May 2021 08:59:56 +0200</lastBuildDate>
+    
+	<atom:link href="https://hop.apache.org/categories/Roundup/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Roundup April 2021</title>
+      <link>https://hop.apache.org/blog/2021/05/roundup-2021-05/</link>
+      <pubDate>Sat, 01 May 2021 08:59:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2021/05/roundup-2021-05/</guid>
+      <description>As always at the start of another new month, let&amp;#8217;s have a look at what happened at Hop over the last month. Here&amp;#8217;s the recap for April 2021!
+ Here are some quick links for the restless souls among you: 0.70 release 3Hx (Hot Hop Hangout) Sessions Documentation, Samples, Integration tests Various Hop search Community JIRA Activity     0.70 release On April, 12th, the Hop community release Apache Hop (Incubating) 0.</description>
+    </item>
+    
+    <item>
+      <title>Roundup March 2021</title>
+      <link>https://hop.apache.org/blog/2021/04/roundup-2021-04/</link>
+      <pubDate>Wed, 31 Mar 2021 08:59:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2021/04/roundup-2021-04/</guid>
+      <description>As always at the start of another new month, let&amp;#8217;s have a look at what happened at Hop over the last month. Here&amp;#8217;s the recap for March 2021!
+ The list of items we need to cover in the monthly reports continues to grow. Here are some quick links for the restless souls among you: Neo4j integration New file explorer perspective New Metadata Types VFS Drivers New Plugins Various Community JIRA Activity     Neo4j integration We&amp;#8217;re really excited to welcome full Neo4j integration in Hop!</description>
+    </item>
+    
+    <item>
+      <title>Roundup February 2021</title>
+      <link>https://hop.apache.org/blog/2021/03/roundup-2021-03/</link>
+      <pubDate>Sun, 28 Feb 2021 10:01:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2021/03/roundup-2021-03/</guid>
+      <description>As always at the start of another new month, let&amp;#8217;s have a look at what happened at Hop over the last month. Here&amp;#8217;s the recap for February 2021!
+ We have quite a lot of ground to cover. Here are some quick links for the restless souls among you: Metadata Injection Dark Mode Beam Spark runner improvements New Metadata Types New Plugins Various Community JIRA Tickets     Metadata Injection Metadata injection was added to Hop months ago.</description>
+    </item>
+    
+    <item>
+      <title>Roundup January 2021</title>
+      <link>https://hop.apache.org/blog/2021/02/roundup-2021-02/</link>
+      <pubDate>Tue, 02 Feb 2021 10:01:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2021/02/roundup-2021-02/</guid>
+      <description>As always at the start of another new month, let&amp;#8217;s have a look at what happened at Hop over the last month. Here&amp;#8217;s the recap for January 2021!
+   Apache Hop (Incubating) 0.60 Released Apache Hop (Incubating) 0.60 was released in late January.
+ With 0.60 being the first Hop release as an Incubating ASF project, we focused on adopting the &#34;Apache Way&#34;, and made this a source code only release.</description>
+    </item>
+    
+    <item>
+      <title>Roundup December 2020</title>
+      <link>https://hop.apache.org/blog/2021/01/roundup-2021-01/</link>
+      <pubDate>Sun, 03 Jan 2021 10:01:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2021/01/roundup-2021-01/</guid>
+      <description>Welcome in 2021, happy new year!
+ While the world has seen its share of problems in 2020, it&amp;#8217;s been a roller coaster for Hop!
+ Our community continued to work tirelessly in December, even through the holiday period.
+ Let&amp;#8217;s have a look at what happened in this last burst of productivity for 2020. With this pace of development, 2021 will be a great year for Hop!
+ A special shout out to Nicolas Adment, who was on an absolute roll in December!</description>
+    </item>
+    
+    <item>
+      <title>Roundup November 2020</title>
+      <link>https://hop.apache.org/blog/2020/12/roundup-2020-12/</link>
+      <pubDate>Mon, 30 Nov 2020 10:01:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2020/12/roundup-2020-12/</guid>
+      <description>With 2020 coming to a close, we&amp;#8217;ve started preparing for 0.50, which will be our first Apache release. We&amp;#8217;ll have more news on that soon!
+ At the start of the final month of 2020, let&amp;#8217;s have a closer look at what happened at Apache Hop in November.
+   Apache Hop Incubation - infrastructure Our migration to the Apache Software Foundation infrastructure is now done. All references to Project Hop have been changed to Apache Hop (Incubating).</description>
+    </item>
+    
+    <item>
+      <title>Roundup September, October 2020</title>
+      <link>https://hop.apache.org/blog/2020/11/roundup-2020-11/</link>
+      <pubDate>Mon, 09 Nov 2020 10:01:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2020/11/roundup-2020-11/</guid>
+      <description>We&amp;#8217;ve had another couple of busy months at Apache Hop. A lot of these changes have been happening in the background, but are very exciting nevertheless. As we&amp;#8217;re getting close to finalizing the background work, we&amp;#8217;ll soon have more time to work on Hop platform features again.
+ Here&amp;#8217;s what happened over the last two months.
+   Hop joins the Apache Software Foundation, becomes Apache Hop (Incubating)</description>
+    </item>
+    
+    <item>
+      <title>Roundup July, August 2020</title>
+      <link>https://hop.apache.org/blog/2020/08/roundup-2020-08/</link>
+      <pubDate>Sat, 27 Jun 2020 12:01:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2020/08/roundup-2020-08/</guid>
+      <description>We released 0.30 in late July, followed by a couple of weeks of slower progress because of summer holidays, but here we are with a roundup for July and August.
+ After all the heavy lifting we did in the first half of the year, Project Hop now entered a feature-freeze phase. The focus now is on bug fixing, documentation and hardening the platform. Minor new features may continue to appear, just don&amp;#8217;t expect any spectacular new functionality for now.</description>
+    </item>
+    
+    <item>
+      <title>Roundup June 2020</title>
+      <link>https://hop.apache.org/blog/2020/06/roundup-2020-06/</link>
+      <pubDate>Sat, 27 Jun 2020 12:01:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2020/06/roundup-2020-06/</guid>
+      <description>Another month has passed, so here we are with a new roundup!
+ A lot of work has been done in the last couple of weeks. A huge thanks to Matt, who implemented most of the functionality that was added this month.
+ Here&amp;#8217;s what happened in June!
+   Environments &amp;#8594; Projects, Environments and Purposes The environments system, introduced earlier this year, was significantly extended.
+   a project is a set of workflows and pipelines with their datasets, tests etc.</description>
+    </item>
+    
+    <item>
+      <title>Roundup May 2020</title>
+      <link>https://hop.apache.org/blog/2020/05/roundup-2020-05/</link>
+      <pubDate>Tue, 02 Jun 2020 12:01:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2020/05/roundup-2020-05/</guid>
+      <description>Another month has passed, so here we are with a new roundup!
+ In early May, we released version 0.21. Check the release announcement here
+ We would like to thank everyone who tested 0.21 and created feature requests and bug tickets. Fixing the bugs and implementing the feature requests will keep us busy for another couple of weeks.
+ Apart from the topics discussed below, we have continued to walk the path of major code cleanup and refactoring.</description>
+    </item>
+    
+    <item>
+      <title>Roundup April 2020</title>
+      <link>https://hop.apache.org/blog/2020/04/roundup-2020-04/</link>
+      <pubDate>Sun, 03 May 2020 12:01:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2020/04/roundup-2020-04/</guid>
+      <description>Another month has passed time for a new roundup! Previous month has been a hectic one, we had our first preview version (0.10) and are currently getting close to releasing 0.20!
+ We would like to thank everyone that tested 0.10 and created feature requests and issues, we have not yet been able to solve all of them but so many changes were made we feel like 0.20 is at its place.</description>
+    </item>
+    
+    <item>
+      <title>Roundup March 2020</title>
+      <link>https://hop.apache.org/blog/2020/03/roundup-2020-03/</link>
+      <pubDate>Tue, 31 Mar 2020 12:01:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2020/03/roundup-2020-03/</guid>
+      <description>A new month, a new roundup! We&amp;#8217;re getting very close to a first preview release, expect it to see the light of day in the coming week (don&amp;#8217;t haunt us if it&amp;#8217;s a week later). We have continued to walk the path of major code cleanup and refactoring. Because we don&amp;#8217;t want to bore you with the technical stuff (those interested in the technical stuff come and ask in our #dev channel ) here is an overview of what you can see.</description>
+    </item>
+    
+    <item>
+      <title>Roundup February 2020</title>
+      <link>https://hop.apache.org/blog/2020/02/roundup-2020-02/</link>
+      <pubDate>Sun, 08 Mar 2020 12:38:42 +0100</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2020/02/roundup-2020-02/</guid>
+      <description>Currently we are working on creating a first public preview version of the Hop Orchestration Platform. Expect this version to give you a first overview of what the future of Hop will be offering, we are not following a specific roadmap and are working on all fronts. The main focus of the preview version is UI changes.
+ Following items contain the biggest changes but much more is happening.
+   UI We are completely rewriting the Hop UI, creating a new experience on how to create data pipelines.</description>
+    </item>
+    
+  </channel>
+</rss>

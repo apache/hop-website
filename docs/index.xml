@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docs on Hop</title>
+    <link>https://hop.apache.org/docs/</link>
+    <description>Recent content in Docs on Hop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://hop.apache.org/docs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Architecture</title>
+      <link>https://hop.apache.org/docs/architecture/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hop.apache.org/docs/architecture/</guid>
+      <description>The architecture of Hop is very simple in essence: separate out any metadata from runtime code and tooling.
+ Doing this, Hop aims to have a minimal installation footprint and wants to be stateless to facilitate execution on a variety of platforms like Spark and Flink, but also in a variety of scenarios like running in different life cycles such as development, test, acceptance, production, unit testing and continuous integration.</description>
+    </item>
+    
+    <item>
+      <title>Q&amp;A</title>
+      <link>https://hop.apache.org/docs/qa/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hop.apache.org/docs/qa/</guid>
+      <description>Is this a fork?
+  Yes this is a fork, in the sense that we used Kettle 8.2.0.7 as a starting point for Apache Hop. Apache Hop wants to used that as a starting point to explore the future of data integration. Check out the Roadmap and Architecture sections.
+     Is this a hostile fork?
+  By all means no! Kettle will remain a stable and trustworthy platform for data integration.</description>
+    </item>
+    
+    <item>
+      <title>Roadmap</title>
+      <link>https://hop.apache.org/docs/roadmap/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hop.apache.org/docs/roadmap/</guid>
+      <description>On a very high level here are the things we want to do:
+   Change all package names to org.apache.hop from org.pentaho.di (done)
+  Remove all existing external dependencies to non-standard libraries so Hop can be compiled without referencing a proprietary Maven server. (done)
+  Remove all references to the deprecated XUL libraries and build a new UI plugin system. Port existing GUI code over to it.</description>
+    </item>
+    
+  </channel>
+</rss>
