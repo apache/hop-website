@@ -2,13 +2,6 @@
 # yarn lockfile v1
 
 
-"@antora/asciidoc-loader@2.2.0", "@antora/asciidoc-loader@~2.2":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@antora/asciidoc-loader/-/asciidoc-loader-2.2.0.tgz#93b7825bfd7271415f188393a990671f4fadfe4a"
-  integrity sha512-dwKXao6eqbAh8O7OS1ZUgVHmbfl38z7RzBCM6DbTb1VODk1HGIgp6gxauGmy5rBvjrJTtz7M1Dxs+BzBApeyMw==
-  dependencies:
-    asciidoctor.js "1.5.9"
-
 "@antora/asciidoc-loader@2.3.4":
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/@antora/asciidoc-loader/-/asciidoc-loader-2.3.4.tgz#b5c4b6447981e191cea8438226a8e76904fc1e7d"
@@ -17,7 +10,7 @@
     asciidoctor.js "1.5.9"
     opal-runtime "1.0.11"
 
-"@antora/cli@~2.3":
+"@antora/cli@2.3":
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/@antora/cli/-/cli-2.3.4.tgz#1b2df06eb5bbbfcb5c6ae8618e18c79dc1f6758e"
   integrity sha512-KItaWFEf/X4LLY2XCidjD00oUp4Ay7y9Hu26+T8dPqV+qnMwOL+MGHhYXsJz+4JaeNJu1Ofwc4onmShpwHQruA==
@@ -45,24 +38,6 @@
     vinyl "~2.2"
     vinyl-fs "~3.0"
 
-"@antora/content-aggregator@~2.2":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@antora/content-aggregator/-/content-aggregator-2.2.0.tgz#7fb6db98102dc97793a7cf66a346a4ba070f7751"
-  integrity sha512-Dd3jvjIty75G5X04lf6XFK8wKwKo1bfJfafsvwwJuApILASt0Nrv+Z3O+rfc4MhaswgZNqVBrEcSJW9BJxXPtw==
-  dependencies:
-    "@antora/expand-path-helper" "~1.0"
-    cache-directory "~2.0"
-    fs-extra "~8.1"
-    isomorphic-git "0.70.4"
-    js-yaml "~3.13"
-    lodash "~4.17"
-    matcher "~2.0"
-    mime-types "~2.1"
-    multi-progress "~2.0"
-    through2 "~3.0"
-    vinyl "~2.2"
-    vinyl-fs "~3.0"
-
 "@antora/content-classifier@2.3.4":
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/@antora/content-classifier/-/content-classifier-2.3.4.tgz#a2c59d5e971ed3ed48860bee2fd4d93b02012f97"
@@ -71,27 +46,12 @@
     "@antora/asciidoc-loader" "2.3.4"
     vinyl "~2.2"
 
-"@antora/content-classifier@~2.2":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@antora/content-classifier/-/content-classifier-2.2.0.tgz#bc6206f575105a6c62a9d75e1fb0dd3c91503905"
-  integrity sha512-cVoL7aR619FNFN3bKiiFhLinaFktQ06OmMG+QMJW0tNRaeI1ATYtrpUvwG5KVuciwDZFKp+GboRUoud0OGLfJQ==
-  dependencies:
-    lodash "~4.17"
-    vinyl "~2.2"
-
 "@antora/document-converter@2.3.4":
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/@antora/document-converter/-/document-converter-2.3.4.tgz#c787ebe0f24a3bc613843b557a1b04488f48c0be"
   integrity sha512-Fo2SKdX3BlNrvfQEBOi2II+YmYzdEqKQ5+lO2pzxJuNBfqN0kJJYYk30jFPR27h6QuU43U/XZgufyDt+FjfdZg==
   dependencies:
     "@antora/asciidoc-loader" "2.3.4"
-
-"@antora/document-converter@~2.2":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@antora/document-converter/-/document-converter-2.2.0.tgz#8ca696c62be22555569bc25db5a3be4613ec3a00"
-  integrity sha512-Ka3moJL5HRoaHUz6U1s9M36WGJg8vUmlQziUpKsC96GbgWyiNXIvNwvQN9kdAW0AXR1CNpIcZ8sl7ygIaa7pLA==
-  dependencies:
-    "@antora/asciidoc-loader" "2.2.0"
 
 "@antora/expand-path-helper@~1.0":
   version "1.0.0"
@@ -122,18 +82,6 @@
     camelcase-keys "~6.2"
     convict "~6.0"
     js-yaml "~3.14"
-    json5 "~2.1"
-
-"@antora/playbook-builder@~2.2":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@antora/playbook-builder/-/playbook-builder-2.2.0.tgz#782275ffafdfb0b44ed8d5a941e495d8100789e2"
-  integrity sha512-GIbkyCnwdTJVHYwSEG4d6Px2Uh/zBiwLXK7zGsaMY4/DmbYBKzNK4xpt7fHXvIw2IyH9GA1XRQ7+vpBSg8VP8w==
-  dependencies:
-    "@iarna/toml" "~2.2"
-    camelcase-keys "~6.1"
-    convict "~5.2"
-    deep-freeze-node "~1.1"
-    js-yaml "~3.13"
     json5 "~2.1"
 
 "@antora/redirect-producer@2.3.4":
@@ -197,16 +145,6 @@
     through2 "~4.0"
     vinyl "~2.2"
     vinyl-fs "~3.0"
-
-"@antora/xref-validator@gitlab:antora/xref-validator":
-  version "1.0.0-alpha.5"
-  resolved "https://gitlab.com/antora/xref-validator/repository/archive.tar.gz?ref=04536c7589848a3c720773ee00b59044c9c1b4cc"
-  dependencies:
-    "@antora/asciidoc-loader" "~2.2"
-    "@antora/content-aggregator" "~2.2"
-    "@antora/content-classifier" "~2.2"
-    "@antora/document-converter" "~2.2"
-    "@antora/playbook-builder" "~2.2"
 
 "@asciidoctor/cli@2.0.1":
   version "2.0.1"
@@ -755,15 +693,6 @@ camel-case@3.0.x:
     no-case "^2.2.0"
     upper-case "^1.1.1"
 
-camelcase-keys@~6.1:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/camelcase-keys/-/camelcase-keys-6.1.1.tgz#0d24dde78cea4c7d2da7f4ea40b7995083328c8d"
-  integrity sha512-kEPCddRFChEzO0d6w61yh0WbBiSv9gBnfZWGfXRYPlGqIdIGef6HMR6pgqVSEWCYkrp8B0AtEpEXNY+Jx0xk1A==
-  dependencies:
-    camelcase "^5.3.1"
-    map-obj "^4.0.0"
-    quick-lru "^4.0.1"
-
 camelcase-keys@~6.2:
   version "6.2.2"
   resolved "https://registry.yarnpkg.com/camelcase-keys/-/camelcase-keys-6.2.2.tgz#5e755d6ba51aa223ec7d3d52f25778210f9dc3c0"
@@ -1043,17 +972,6 @@ convert-source-map@^1.5.0:
   dependencies:
     safe-buffer "~5.1.1"
 
-convict@~5.2:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/convict/-/convict-5.2.0.tgz#4c01fa06885b8c4a4ffc98b7de43222fe6c876dc"
-  integrity sha512-C3cdUwo47cCikZNzu5Vv8AL0MuXVVeg9t/Gyr9qyK5ZpCjOkMPmJ85KUF3CowNeSfj4UtztHxS+hoO9wGRh6kg==
-  dependencies:
-    json5 "2.1.0"
-    lodash.clonedeep "4.5.0"
-    moment "2.24.0"
-    validator "11.1.0"
-    yargs-parser "13.0.0"
-
 convict@~6.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/convict/-/convict-6.0.0.tgz#4be829f001a778d337d32ec79e9ae7f2e39df1a6"
@@ -1253,11 +1171,6 @@ deep-equal@^1.0.0:
     object-is "^1.0.1"
     object-keys "^1.1.1"
     regexp.prototype.flags "^1.2.0"
-
-deep-freeze-node@~1.1:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/deep-freeze-node/-/deep-freeze-node-1.1.3.tgz#ce9c14b3210e6f5607a578254f4b53fe01dd9467"
-  integrity sha512-CrA+1BVGfs9ZrGFMYtHfFHncWivh9XPb+6g8bLOzYPJmW8FmUs1dXLjALzU1SMqOMdoD5pQJARXtzxfeLqE9HQ==
 
 deep-is@~0.1.3:
   version "0.1.3"
@@ -2738,27 +2651,6 @@ isobject@^3.0.0, isobject@^3.0.1:
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
 
-isomorphic-git@0.70.4:
-  version "0.70.4"
-  resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-0.70.4.tgz#b1b10d0e76c608a623a7113fba4705d7ff9f1e36"
-  integrity sha512-Nk/iD4iEL35zY1B4l2PgPOJpVgTQzVH9W0oRkKc3vDbMjcfvs7nle4Y8NRghXIG27Z6KQVSTi/om6lTbzpfl+A==
-  dependencies:
-    async-lock "^1.1.0"
-    clean-git-ref "^2.0.1"
-    crc-32 "^1.2.0"
-    diff3 "0.0.3"
-    git-apply-delta "0.0.7"
-    globalyzer "^0.1.4"
-    globrex "^0.1.2"
-    ignore "^5.1.4"
-    marky "^1.2.1"
-    minimisted "^2.0.0"
-    pako "^1.0.10"
-    pify "^4.0.1"
-    readable-stream "^3.4.0"
-    sha.js "^2.4.9"
-    simple-get "^3.0.2"
-
 isomorphic-git@0.78.5:
   version "0.78.5"
   resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-0.78.5.tgz#013f8f8c280b8e0f8bb10ffa251eb87e9bb1190b"
@@ -2785,7 +2677,7 @@ js-tokens@^4.0.0:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
-js-yaml@^3.13.1, js-yaml@~3.13:
+js-yaml@^3.13.1:
   version "3.13.1"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
   integrity sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
@@ -2849,13 +2741,6 @@ json-to-ast@^2.0.3:
   dependencies:
     code-error-fragment "0.0.230"
     grapheme-splitter "^1.0.4"
-
-json5@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/json5/-/json5-2.1.0.tgz#e7a0c62c48285c628d20a10b85c89bb807c32850"
-  integrity sha512-8Mh9h6xViijj36g7Dxi+Y4S6hNGV96vcJZr/SrlHh1LR/pEn/8j/+qIBbs44YKl69Lrfctp4QD+AdWLTMqEZAQ==
-  dependencies:
-    minimist "^1.2.0"
 
 json5@~2.1:
   version "2.1.1"
@@ -3031,12 +2916,12 @@ locate-path@^3.0.0:
     p-locate "^3.0.0"
     path-exists "^3.0.0"
 
-lodash.clonedeep@4.5.0, lodash.clonedeep@^4.5.0:
+lodash.clonedeep@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
   integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
 
-lodash@^4.15.0, lodash@^4.17.14, lodash@^4.17.15, lodash@~4.17, lodash@~4.17.11:
+lodash@^4.15.0, lodash@^4.17.14, lodash@^4.17.15, lodash@~4.17.11:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
@@ -3108,13 +2993,6 @@ matchdep@^2.0.0:
     micromatch "^3.0.4"
     resolve "^1.4.0"
     stack-trace "0.0.10"
-
-matcher@~2.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/matcher/-/matcher-2.0.0.tgz#85fe38d97670dbd2a46590cf099401e2ffb4755c"
-  integrity sha512-nlmfSlgHBFx36j/Pl/KQPbIaqE8Zf0TqmSMjsuddHDg6PMSVgmyW9HpkLs0o0M1n2GIZ/S2BZBLIww/xjhiGng==
-  dependencies:
-    escape-string-regexp "^2.0.0"
 
 matcher@~2.1:
   version "2.1.0"
@@ -3248,11 +3126,6 @@ mixin-deep@^1.2.0:
   integrity sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=
   dependencies:
     minimist "0.0.8"
-
-moment@2.24.0:
-  version "2.24.0"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
-  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
 
 ms@2.0.0:
   version "2.0.0"
@@ -3905,15 +3778,6 @@ readable-stream@1.1:
     isarray "0.0.1"
     string_decoder "~0.10.x"
 
-"readable-stream@2 || 3", readable-stream@^3.1.1, readable-stream@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-3.4.0.tgz#a51c26754658e0a3c21dbf59163bd45ba6f447fc"
-  integrity sha512-jItXPLmrSR8jmTRmRWJXCnGJsfy85mB3Wd/uINMXA65yrnFo0cPClFIUWzo2najVNSl+mx7/4W8ttlLWJe99pQ==
-  dependencies:
-    inherits "^2.0.3"
-    string_decoder "^1.1.1"
-    util-deprecate "^1.0.1"
-
 readable-stream@3:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-3.6.0.tgz#337bbda3adc0706bd3e024426a286d4b4b2c9198"
@@ -3935,6 +3799,15 @@ readable-stream@^2.0.0, readable-stream@^2.0.1, readable-stream@^2.0.2, readable
     safe-buffer "~5.1.1"
     string_decoder "~1.1.1"
     util-deprecate "~1.0.1"
+
+readable-stream@^3.1.1, readable-stream@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-3.4.0.tgz#a51c26754658e0a3c21dbf59163bd45ba6f447fc"
+  integrity sha512-jItXPLmrSR8jmTRmRWJXCnGJsfy85mB3Wd/uINMXA65yrnFo0cPClFIUWzo2najVNSl+mx7/4W8ttlLWJe99pQ==
+  dependencies:
+    inherits "^2.0.3"
+    string_decoder "^1.1.1"
+    util-deprecate "^1.0.1"
 
 readdirp@^2.2.1:
   version "2.2.1"
@@ -4590,13 +4463,6 @@ through2@^2.0.0, through2@^2.0.3, through2@~2.0.0:
     readable-stream "~2.3.6"
     xtend "~4.0.1"
 
-through2@~3.0:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/through2/-/through2-3.0.1.tgz#39276e713c3302edf9e388dd9c812dd3b825bd5a"
-  integrity sha512-M96dvTalPT3YbYLaKaCuwu+j06D/8Jfib0o/PxbVt6Amhv3dUAtW6rTV1jPgJSBG83I/e04Y6xkVdVhSRhi0ww==
-  dependencies:
-    readable-stream "2 || 3"
-
 through2@~4.0:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/through2/-/through2-4.0.2.tgz#a7ce3ac2a7a8b0b966c80e7c49f0484c3b239764"
@@ -4892,11 +4758,6 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-validator@11.1.0:
-  version "11.1.0"
-  resolved "https://registry.yarnpkg.com/validator/-/validator-11.1.0.tgz#ac18cac42e0aa5902b603d7a5d9b7827e2346ac4"
-  integrity sha512-qiQ5ktdO7CD6C/5/mYV4jku/7qnqzjrxb3C/Q5wR3vGGinHTgJZN/TdFT3ZX4vXhX2R1PXx42fB1cn5W+uJ4lg==
-
 value-or-function@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/value-or-function/-/value-or-function-3.0.0.tgz#1c243a50b595c1be54a754bfece8563b9ff8d813"
@@ -5045,14 +4906,6 @@ yaml@~1.7:
   integrity sha512-qXROVp90sb83XtAoqE8bP9RwAkTTZbugRUTm5YeFCBfNRPEp2YzTeqWiz7m5OORHzEvrA/qcGS8hp/E+MMROYw==
   dependencies:
     "@babel/runtime" "^7.6.3"
-
-yargs-parser@13.0.0:
-  version "13.0.0"
-  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-13.0.0.tgz#3fc44f3e76a8bdb1cc3602e860108602e5ccde8b"
-  integrity sha512-w2LXjoL8oRdRQN+hOyppuXs+V/fVAYtpcrRxZuF7Kt/Oc+Jr2uAcVntaUTNT6w5ihoWfFDpNY8CPx1QskxZ/pw==
-  dependencies:
-    camelcase "^5.0.0"
-    decamelize "^1.2.0"
 
 yargs-parser@^13.0.0:
   version "13.1.1"
