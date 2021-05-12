@@ -45,9 +45,10 @@ mailto:users@hop.apache.org[Send, 3Hx presentation submission, add your presenta
 |===
 |Event name|Description|date|link (subscribe/attend)|recording
 |3H8|Hot Hop Hangout 8 (agenda TBD)|2021-05-27|-|-
-|3H7|Hot Hop Hangout 7 (agenda TBD)|2021-05-13|-|-
-|{set:cellbgcolor:#30328422}3H6|Big Data Orchestration on Spark, Flink and DataFlow using Apache Beam|2021-04-29|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/277681256/[meetup]|-
-|{set:cellbgcolor}3H5|Get Started With Hop - Concepts and First Pipelines|2021-04-15|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/277439258/[meetup^]|https://youtu.be/gKVb_r4v_Oc[youtube]
+|{set:cellbgcolor:#30328422}3H7|End-to-end pipelines with testing, logging, monitoring and best practices
+|2021-05-20|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/278103629/[meetup]|-
+|{set:cellbgcolor}3H6|Big Data Orchestration on Spark, Flink and DataFlow using Apache Beam|2021-04-29|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/277681256/[meetup]|https://www.youtube.com/watch?v=s_cstCPdnKI[youtube]
+|3H5|Get Started With Hop - Concepts and First Pipelines|2021-04-15|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/277439258/[meetup^]|https://youtu.be/gKVb_r4v_Oc[youtube]
 |3H4| The Road to Hop 1.0|2021-04-01|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/277117234[meetup^]|https://www.youtube.com/watch?v=EhO_DYszu_Y&t=2s[youtube]
 //{set:cellbgcolor}
 |===
