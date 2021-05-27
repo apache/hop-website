@@ -8,7 +8,7 @@ disableKinds = ["taxonomyTerm"]
 enableRobotsTXT = true
 
 [params]
-    socialProfiles = ["https://twitter.com/projhop"]
+    socialProfiles = ["https://twitter.com/ApacheHop"]
     organizationLogo = "/img/hop-logo.svg"
     organizationDescription = "Hop"
 
