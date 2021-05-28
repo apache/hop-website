@@ -43,7 +43,11 @@
                             <a class="navbar-link mobile-heading" href="#">{{ .Name }}</a>
                             <div class="navbar-dropdown">
                                 {{ range .Children }}
-                                <a class="navbar-item" href="{{ .URL | relURL }}">{{ .Name }}</a>
+                                {{ if .Pre }}
+                                    <a class="navbar-item" href="{{ .URL | relURL }}" target="{{ .Pre }}">{{ .Name }}</a>
+                                {{ else }}
+                                    <a class="navbar-item" href="{{ .URL | relURL }}">{{ .Name }}</a>
+                                {{ end }}
                                 {{ end }}
                             </div>
                         </div>

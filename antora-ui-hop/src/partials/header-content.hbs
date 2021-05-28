@@ -15,7 +15,11 @@
                 {{#if children}}
                 <div class="navbar-dropdown">
                 {{#each children}}
-                  <a class="navbar-item" href="{{url}}">{{name}}</a>
+                  {{#if target }}
+                    <a class="navbar-item" href="{{url}}" target="{{target}}">{{name}}</a>
+                  {{else}}
+                    <a class="navbar-item" href="{{url}}">{{name}}</a>
+                  {{/if}} 
                 {{/each}}
                 </div>
                 {{/if}}
