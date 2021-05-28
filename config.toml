@@ -146,6 +146,7 @@ enableRobotsTXT = true
     weight = 1
     identifier = "about-events"
     url = "https://www.apache.org/events/current-event"
+    pre = "_blank"
 
 [[menu.main]]
     name = "License"
@@ -153,6 +154,7 @@ enableRobotsTXT = true
     weight = 2
     identifier = "about-license"
     url = "https://www.apache.org/licenses/"
+    pre = "_blank"
 
 [[menu.main]]
     name = "Thanks to our sponsors"
@@ -160,6 +162,7 @@ enableRobotsTXT = true
     weight = 3
     identifier = "about-thanks"
     url = "https://www.apache.org/foundation/thanks.html"
+    pre = "_blank"
 
 [[menu.main]]
     name = "Apache Security"
@@ -167,6 +170,7 @@ enableRobotsTXT = true
     weight = 4
     identifier = "about-security"
     url = "https://www.apache.org/security/"
+    pre = "_blank"
 
 [[menu.main]]
     name = "Become a sponsor"
@@ -174,6 +178,7 @@ enableRobotsTXT = true
     weight = 5
     identifier = "about-sponsor"
     url = "https://www.apache.org/foundation/sponsorship.html"
+    pre = "_blank"
 
 
 [module]

@@ -11,6 +11,7 @@ const createMenu = item => {
   return {
     url: item.url || '#',
     name: item.name,
+    target: item.pre,
     children: mainMenu.filter(child => child.parent === item.identifier).map(createMenu)
   }
 };
