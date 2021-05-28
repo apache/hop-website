@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pre-Releae on Hop</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Pre-Releae on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 21 Jul 2020 12:01:56 +0200</lastBuildDate>
-    
-	<atom:link href="https://hop.apache.org/categories/Pre-Releae/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 21 Jul 2020 12:01:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/Pre-Releae/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Preview Release 0.30</title>
       <link>https://hop.apache.org/blog/2020/07/preview-release-0.30/</link>
@@ -18,7 +14,7 @@
       
       <guid>https://hop.apache.org/blog/2020/07/preview-release-0.30/</guid>
       <description>It has been about 2 months since our latest release, and a lot has happened!
- We&amp;#8217;re happy to announce to availability of our 0.30 preview release. Please take it for a spin. If you find a bug, please create a bug ticket, if there&amp;#8217;s functionality you&amp;#8217;d like to see, please create a feature request.
+ We’re happy to announce to availability of our 0.30 preview release. Please take it for a spin. If you find a bug, please create a bug ticket, if there’s functionality you’d like to see, please create a feature request.
  Direct download here
  Getting Started Guide
  Release Notes: 0.30

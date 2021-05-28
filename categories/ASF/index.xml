@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ASF on Hop</title>
@@ -6,19 +6,15 @@
     <description>Recent content in ASF on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 31 Oct 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://hop.apache.org/categories/ASF/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 31 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://hop.apache.org/categories/ASF/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hop Joins the ASF</title>
       <link>https://hop.apache.org/blog/2020/10/hop-joins-the-asf/</link>
       <pubDate>Sat, 31 Oct 2020 00:00:00 +0000</pubDate>
       
       <guid>https://hop.apache.org/blog/2020/10/hop-joins-the-asf/</guid>
-      <description>Apache Hop - Incubation Proposal Accepted From the very start with Hop, we haven&amp;#8217;t exactly been secretive about our intention to join the Apache Software Foundation (ASF) and donate Project Hop to the ASF as Apache Hop.
- After almost a year of work on Project Hop, we&amp;#8217;re very happy to announce we&amp;#8217;ve reached a first milestone: the Apache Hop proposal was submitted to the incubator mailing list on September, 9th and has been accepted!</description>
+      <description>Apache Hop - Incubation Proposal Accepted From the very start with Hop, we haven’t exactly been secretive about our intention to join the Apache Software Foundation (ASF) and donate Project Hop to the ASF as Apache Hop.
+ After almost a year of work on Project Hop, we’re very happy to announce we’ve reached a first milestone: the Apache Hop proposal was submitted to the incubator mailing list on September, 9th and has been accepted!</description>
     </item>
     
   </channel>

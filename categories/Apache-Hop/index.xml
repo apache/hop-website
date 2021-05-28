@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Apache Hop on Hop</title>
@@ -6,19 +6,16 @@
     <description>Recent content in Apache Hop on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 01 May 2021 08:59:56 +0200</lastBuildDate>
-    
-	<atom:link href="https://hop.apache.org/categories/Apache-Hop/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 01 May 2021 08:59:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/Apache-Hop/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Roundup April 2021</title>
       <link>https://hop.apache.org/blog/2021/05/roundup-2021-05/</link>
       <pubDate>Sat, 01 May 2021 08:59:56 +0200</pubDate>
       
       <guid>https://hop.apache.org/blog/2021/05/roundup-2021-05/</guid>
-      <description>As always at the start of another new month, let&amp;#8217;s have a look at what happened at Hop over the last month. Here&amp;#8217;s the recap for April 2021!
- Here are some quick links for the restless souls among you: 0.70 release 3Hx (Hot Hop Hangout) Sessions Documentation, Samples, Integration tests Various Hop search Community JIRA Activity     0.70 release On April, 12th, the Hop community release Apache Hop (Incubating) 0.</description>
+      <description>As always at the start of another new month, let’s have a look at what happened at Hop over the last month. Here’s the recap for April 2021!
+   0.70 release On April, 12th, the Hop community release Apache Hop (Incubating) 0.70. As our first release with downloadable binaries, 0.70 is another major step forward for Hop as a maturing Apache project.
+ In a nutshell, the 0.70 release brought:</description>
     </item>
     
     <item>
@@ -28,7 +25,7 @@
       
       <guid>https://hop.apache.org/blog/2021/04/release-0.70/</guid>
       <description>The Hop community is pleased to announce the availability of the Apache Hop (Incubating) 0.70 release.
- This release contains about 2.5 months of work. Since our 0.60 release in late January, we&amp;#8217;ve seen a lot of activity in a variety of areas. Hop contributors not only worked on code: we&amp;#8217;ve received contributions in artwork, translations, documentation etc. We have more than 45 new plugins, and a total of 223 jira tickets were implemented.</description>
+ This release contains about 2.5 months of work. Since our 0.60 release in late January, we’ve seen a lot of activity in a variety of areas. Hop contributors not only worked on code: we’ve received contributions in artwork, translations, documentation etc. We have more than 45 new plugins, and a total of 223 jira tickets were implemented.</description>
     </item>
     
     <item>
@@ -37,8 +34,9 @@
       <pubDate>Wed, 31 Mar 2021 08:59:56 +0200</pubDate>
       
       <guid>https://hop.apache.org/blog/2021/04/roundup-2021-04/</guid>
-      <description>As always at the start of another new month, let&amp;#8217;s have a look at what happened at Hop over the last month. Here&amp;#8217;s the recap for March 2021!
- The list of items we need to cover in the monthly reports continues to grow. Here are some quick links for the restless souls among you: Neo4j integration New file explorer perspective New Metadata Types VFS Drivers New Plugins Various Community JIRA Activity     Neo4j integration We&amp;#8217;re really excited to welcome full Neo4j integration in Hop!</description>
+      <description>As always at the start of another new month, let’s have a look at what happened at Hop over the last month. Here’s the recap for March 2021!
+   Neo4j integration We’re really excited to welcome full Neo4j integration in Hop!
+ The plugins that are now a part of Hop were already available from Matt’s personal github repository. Having all of this functionality available in the default Hop distribution is a major step forward.</description>
     </item>
     
     <item>
@@ -47,8 +45,8 @@
       <pubDate>Sun, 28 Feb 2021 10:01:56 +0200</pubDate>
       
       <guid>https://hop.apache.org/blog/2021/03/roundup-2021-03/</guid>
-      <description>As always at the start of another new month, let&amp;#8217;s have a look at what happened at Hop over the last month. Here&amp;#8217;s the recap for February 2021!
- We have quite a lot of ground to cover. Here are some quick links for the restless souls among you: Metadata Injection Dark Mode Beam Spark runner improvements New Metadata Types New Plugins Various Community JIRA Tickets     Metadata Injection Metadata injection was added to Hop months ago.</description>
+      <description>As always at the start of another new month, let’s have a look at what happened at Hop over the last month. Here’s the recap for February 2021!
+   Metadata Injection Metadata injection was added to Hop months ago. As with most of the functionality that was ported from PDI/Kettle, some work was required to lift the code to the new flexibility and quality standards we’ve set for Hop.</description>
     </item>
     
     <item>
@@ -57,9 +55,9 @@
       <pubDate>Tue, 02 Feb 2021 10:01:56 +0200</pubDate>
       
       <guid>https://hop.apache.org/blog/2021/02/roundup-2021-02/</guid>
-      <description>As always at the start of another new month, let&amp;#8217;s have a look at what happened at Hop over the last month. Here&amp;#8217;s the recap for January 2021!
+      <description>As always at the start of another new month, let’s have a look at what happened at Hop over the last month. Here’s the recap for January 2021!
    Apache Hop (Incubating) 0.60 Released Apache Hop (Incubating) 0.60 was released in late January.
- With 0.60 being the first Hop release as an Incubating ASF project, we focused on adopting the &#34;Apache Way&#34;, and made this a source code only release.</description>
+ With 0.60 being the first Hop release as an Incubating ASF project, we focused on adopting the &amp;#34;Apache Way&amp;#34;, and made this a source code only release.</description>
     </item>
     
     <item>
@@ -68,8 +66,8 @@
       <pubDate>Tue, 26 Jan 2021 10:01:56 +0200</pubDate>
       
       <guid>https://hop.apache.org/blog/2021/01/release-0.60/</guid>
-      <description>Less than three months since Project Hop joined the ASF Incubator (late October 2020), we&amp;#8217;re happy to announce Apache Hop 0.60, our first release as an incubating project at the Apache Software Foundation.
-   Apache Hop (Incubating) 0.60 - Source only As stated earlier, one of the main goal of the incubator program is to give projects the time to adopt &#34;The Apache Way&#34;. As such, it took us a bit of time to get the entire process straightened out.</description>
+      <description>Less than three months since Project Hop joined the ASF Incubator (late October 2020), we’re happy to announce Apache Hop 0.60, our first release as an incubating project at the Apache Software Foundation.
+   Apache Hop (Incubating) 0.60 - Source only As stated earlier, one of the main goal of the incubator program is to give projects the time to adopt &amp;#34;The Apache Way&amp;#34;. As such, it took us a bit of time to get the entire process straightened out.</description>
     </item>
     
     <item>
@@ -79,9 +77,9 @@
       
       <guid>https://hop.apache.org/blog/2021/01/roundup-2021-01/</guid>
       <description>Welcome in 2021, happy new year!
- While the world has seen its share of problems in 2020, it&amp;#8217;s been a roller coaster for Hop!
+ While the world has seen its share of problems in 2020, it’s been a roller coaster for Hop!
  Our community continued to work tirelessly in December, even through the holiday period.
- Let&amp;#8217;s have a look at what happened in this last burst of productivity for 2020. With this pace of development, 2021 will be a great year for Hop!
+ Let’s have a look at what happened in this last burst of productivity for 2020. With this pace of development, 2021 will be a great year for Hop!
  A special shout out to Nicolas Adment, who was on an absolute roll in December!</description>
     </item>
     
@@ -91,8 +89,8 @@
       <pubDate>Mon, 30 Nov 2020 10:01:56 +0200</pubDate>
       
       <guid>https://hop.apache.org/blog/2020/12/roundup-2020-12/</guid>
-      <description>With 2020 coming to a close, we&amp;#8217;ve started preparing for 0.50, which will be our first Apache release. We&amp;#8217;ll have more news on that soon!
- At the start of the final month of 2020, let&amp;#8217;s have a closer look at what happened at Apache Hop in November.
+      <description>With 2020 coming to a close, we’ve started preparing for 0.50, which will be our first Apache release. We’ll have more news on that soon!
+ At the start of the final month of 2020, let’s have a closer look at what happened at Apache Hop in November.
    Apache Hop Incubation - infrastructure Our migration to the Apache Software Foundation infrastructure is now done. All references to Project Hop have been changed to Apache Hop (Incubating).</description>
     </item>
     

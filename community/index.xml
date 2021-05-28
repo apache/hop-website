@@ -1,15 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Communities on Hop</title>
     <link>https://hop.apache.org/community/</link>
     <description>Recent content in Communities on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="https://hop.apache.org/community/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language><atom:link href="https://hop.apache.org/community/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Code Contribution Guide</title>
       <link>https://hop.apache.org/community/contribution-guides/code-contribution-guide/</link>
@@ -47,7 +43,7 @@
       
       <guid>https://hop.apache.org/community/contribution-guides/documentation-contribution-guide/</guid>
       <description>Good documentation is crucial for any kind of software. This is especially true for sophisticated software systems such as distributed data processing engines like Apache Hop. The Apache Hop community aims to provide concise, precise, and complete documentation and welcomes any contribution to improve Apache Hop’s documentation.
-   Warning  Just like code, documentation is never done. We&amp;#8217;re eager to find out how you think our docs can be improved, come discuss with us on our documentation channel.</description>
+   Warning  Just like code, documentation is never done. We’re eager to find out how you think our docs can be improved, come discuss with us on our documentation channel.</description>
     </item>
     
     <item>
@@ -57,7 +53,7 @@
       
       <guid>https://hop.apache.org/community/ethos/</guid>
       <description>Community Ethos Great communities make great software!
- Hop wants to be a positive and inclusive community. As an Apache project, we subscribe to the Apache Software Foundation&amp;#8217;s Code of Conduct, which is reprinted below.
+ Hop wants to be a positive and inclusive community. As an Apache project, we subscribe to the Apache Software Foundation’s Code of Conduct, which is reprinted below.
    Apache Software Foundation Code of Conduct INTRODUCTION This code of conduct applies to all spaces managed by the Apache Software Foundation, including IRC, all public and private mailing lists, issue trackers, wikis, blogs, Twitter, and any other communication channel used by our communities.</description>
     </item>
     
@@ -110,7 +106,7 @@
  Other useful information:
    ASF Release Management
   Apache Incubator Cookbook
-   Check below for the TL;DR version. As always, we&amp;#8217;re eager to hear your feedback!
+   Check below for the TL;DR version. As always, we’re eager to hear your feedback!
  What is an Apache Release? Apache Releases are a legal handover of a software project. With each release, a project hands over the ownership of all items in the release to the Apache Software Foundations.</description>
     </item>
     
@@ -134,7 +130,7 @@
       
       <guid>https://hop.apache.org/community/support/</guid>
       <description>Getting Help If you are experiencing problems using Hop then please report your problem to our mailing lists. This allows the entire community to help with your problem.
- If you found an issue or have a feature request, pleaae create a ticket in our JIRA Issue Tracker. Adding plenty of details (stack trace, logs, screenshots, &amp;#8230;&amp;#8203;) makes it easier for the Hop developers to know what you exactly mean, and will allow us to resolve your ticket faster.</description>
+ If you found an issue or have a feature request, pleaae create a ticket in our JIRA Issue Tracker. Adding plenty of details (stack trace, logs, screenshots, …​) makes it easier for the Hop developers to know what you exactly mean, and will allow us to resolve your ticket faster.</description>
     </item>
     
     <item>
@@ -181,7 +177,7 @@
       <guid>https://hop.apache.org/community/contribution-guides/translation-contribution-guide/</guid>
       <description>Translating Hop to your language is an easy and code free contribution that adds a lot of value to our user community. The Hop Translator makes the process of translating Hop (or extending an existing translation) a breeze.
  Hop Translator The Hop Translator is a single dialog application.
-   How to run You&amp;#8217;ll need the source code if you want to run the Hop Translator. Clone the repository from https://github.</description>
+   How to run You’ll need the source code if you want to run the Hop Translator. Clone the repository from https://github.</description>
     </item>
     
     <item>
@@ -192,7 +188,7 @@
       <guid>https://hop.apache.org/community/contribution-guides/website-contribution-guide/</guid>
       <description>The website is the central place and first point of entry for any potentially new user. It needs to contain as much information as possible but not scare away new users with complex structures. This guide explains how to contribute to the website.
   Obtain the documentation sources
-  Before you start start working on the documentation&amp;#8230;&amp;#8203;
+  Before you start start working on the documentation…​
   Update or extend the documentation
   Documentation translations</description>
     </item>
