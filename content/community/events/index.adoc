@@ -1,8 +1,16 @@
 ---
-title: "Events"
+title: "Events and User Groups"
 ---
 
-## Apache Events
+== User Groups
+
+* https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/[3Hx - Apache Hop (Incubating) Hot Hop Hangouts ^]
+* https://t.me/apachehop[Grupo de usuarios de Apache Hop Incubating en Español ^]
+* https://t.me/apachehop[Apache Hop Brasil ^]
+
+== Events
+
+=== Apache Events
 ++++
 <a  href="https://www.apache.org/events/current-event.html">
   <img src="https://www.apache.org/events/current-event-234x60.png"/>
@@ -11,7 +19,7 @@ title: "Events"
 
 For more information about Apache organised events visit the https://www.apache.org/events/current-event.html[Apache events] page
 
-## Community Events
+=== Community Events
 
 No (wo)man is an island. As an open source project and even more so a community, Apache Hop (Incubating) cares deeply about sharing knowledge and experiences.
 
@@ -19,7 +27,7 @@ Events, in any shape of form, are a great way to meet and connect with fellow Ho
 
 <<events-agenda, The agenda>> lists all planned and past events in the Hop community.
 
-## Planning and adding your own event
+=== Planning and adding your own event
 
 We encourage everyone in the Apache Hop (Incubating) community to organize and host events. An "event" is a very broad term and can be local Hop user group meetings, local or online hackathons, brainstorm sessions or a variety of other event types,
 
@@ -28,9 +36,9 @@ To add your event to the agenda, send a mailto:users@hop.apache.org[mail, Apache
 A recording of your event can be added to the https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA[Hop Youtube channel]. Once published, the link to your recording will be added to the <<events-agenda, agenda>>.
 
 
-## Recurring Events
+=== Recurring Events
 
-### Hot Hop Hangouts
+==== Hot Hop Hangouts
 
 The Hot Hop Hangouts (3Hx) have been organized at irregular times since the start of the Apache Hop (Incubating) project.
 
@@ -38,14 +46,17 @@ A new Hot Hop Hangout session is organized every other week. Topics will alterna
 
 mailto:users@hop.apache.org[Send, 3Hx presentation submission, add your presentation topic and brief description here] your submissions for a 3Hx talk to to the users mailing list to get it added to the agenda.
 
-[[events-agenda]]
-## Agenda
+=== Agenda
+
+All known Hop events are listed below. Add your event to the list below or announce it on the xref:../mailing-list.adoc[user mailing list] to have it added for you.
 
 [%header,cols="5%,60%,10%,15%,10%"]
 |===
 |Event name|Description|date|link (subscribe/attend)|recording
-|{set:cellbgcolor:#30328422}3H9|End-to-end workflows|2021-06-17|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/278470431/[meetup]|
-|{set:cellbgcolor}3H8|Apache Hop in Docker|2021-06-03|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/278469535/[meetup]|https://www.youtube.com/watch?v=ayMD6RST4Do[youtube]
+|{set:cellbgcolor:#30328422}3H10|Apache Hop and Neo4j|2021-07-01|-|-
+|{set:cellbgcolor}3H9|End-to-end workflows|2021-06-17|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/278470431/[meetup]|
+|-|First Spanish Hop User Group Meetup|2021-6-16|https://www.meetup.com/es-ES/grupo-de-usuarios-de-hop-en-espanol/events/278568366/[meetup]|
+|3H8|Apache Hop in Docker|2021-06-03|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/278469535/[meetup]|https://www.youtube.com/watch?v=ayMD6RST4Do[youtube]
 |3H7|End-to-end pipelines with testing, logging, monitoring and best practices
 |2021-05-20|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/278103629/[meetup]|https://www.youtube.com/watch?v=CkbOThb2HPo[youtube]
 |3H6|Big Data Orchestration on Spark, Flink and DataFlow using Apache Beam|2021-04-29|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/277681256/[meetup]|https://www.youtube.com/watch?v=s_cstCPdnKI[youtube]

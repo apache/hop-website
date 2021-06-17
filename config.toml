@@ -102,7 +102,7 @@ enableRobotsTXT = true
     url = "/community/mailing-list/"
 
 [[menu.main]]
-    name = "Events"
+    name = "Events and User Groups"
     parent = "community"
     weight = 4
     identifier = "community-events"
