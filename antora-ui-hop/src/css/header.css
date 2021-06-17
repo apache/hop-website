@@ -502,7 +502,7 @@ div.footer-search h4 {
 }
 
 /* Styling for mobile use */
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .navbar {
     height: var(--navbar-mobile-height);
   }
