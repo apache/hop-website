@@ -43,7 +43,7 @@ diff -qr source_version apache-hop-X.XX-incubating
 # the folder containing the source code can now be removed
 
 rm -rf source_version</code></pre> </div> </div> <div class="paragraph"> <p>Check if the unpacked archive contains following files and if they are correct</p> </div> <div class="ulist"> <ul> <li> <p>DISCLAIMER</p> </li> <li> <p>LICENSE</p> <div class="ulist"> <ul> <li> <p>check if mentioned licenses are available in the licenses folder</p> </li> </ul> </div> </li> <li> <p>NOTICE</p> </li> <li> <p>README</p> <div class="ulist"> <ul> <li> <p>check for build instructions</p> </li> </ul> </div> </li> </ul> </div> <div class="paragraph"> <p>Validate if all files contain the correct headers</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd apache-hop-X.XX-incubating
-mvn apache-rat:rat -debug</code></pre> </div> </div> <div class="paragraph"> <p>Now build and test the released code</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># run maven clean install (you can add -T 4 to build multi threaded)
+mvn apache-rat:check -debug</code></pre> </div> </div> <div class="paragraph"> <p>Now build and test the released code</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># run maven clean install (you can add -T 4 to build multi threaded)
 
 mvn clean install
 
