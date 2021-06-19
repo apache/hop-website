@@ -53,6 +53,8 @@ Vote! After you've reviewed a release candidate, submit your vote to the mailing
 
 Reviewing and voting for releases (or release candidates) is an important and valuable contribution, every vote matters!
 
+Check the detailed https://hop.apache.org/dev-manual/latest/apache-release/checking-a-release.html[checking a release] guide.
+
 == What is the voting process?
 
 === Procedure
