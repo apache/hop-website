@@ -5,8 +5,9 @@ title: "Events and User Groups"
 == User Groups
 
 * https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/[3Hx - Apache Hop (Incubating) Hot Hop Hangouts ^]
-* https://t.me/apachehop[Grupo de usuarios de Apache Hop Incubating en Español ^]
-* https://t.me/apachehop[Apache Hop Brasil ^]
+* https://www.meetup.com/grupo-de-usuarios-de-hop-en-espanol/[Grupo de usuarios de Apache Hop Incubating en Español ^]
+* https://www.meetup.com/apache-hop-user-group-brasil/[Apache Hop User Group Brasil ^]
+* https://t.me/apachehop[Apache Hop Brasil no Telegram ^]
 
 == Events
 
@@ -53,6 +54,7 @@ All known Hop events are listed below. Add your event to the list below or annou
 [%header,cols="5%,60%,10%,15%,10%"]
 |===
 |Event name|Description|date|link (subscribe/attend)|recording
+|-|First Brazilian Hop User Group Meetup|2021-7-15|https://www.meetup.com/pt-BR/apache-hop-user-group-brasil/events/279133079/[meetup]|
 |{set:cellbgcolor:#30328422}3H10|Apache Hop and Neo4j|2021-07-01|-|-
 |{set:cellbgcolor}3H9|End-to-end workflows|2021-06-17|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/278470431/[meetup]|
 |-|First Spanish Hop User Group Meetup|2021-6-16|https://www.meetup.com/es-ES/grupo-de-usuarios-de-hop-en-espanol/events/278568366/[meetup]|
