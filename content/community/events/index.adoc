@@ -6,8 +6,8 @@ title: "Events and User Groups"
 
 * https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/[3Hx - Apache Hop (Incubating) Hot Hop Hangouts ^]
 * https://www.meetup.com/grupo-de-usuarios-de-hop-en-espanol/[Grupo de usuarios de Apache Hop Incubating en Español ^]
-* https://www.meetup.com/apache-hop-user-group-brasil/[Apache Hop User Group Brasil ^]
-* https://t.me/apachehop[Apache Hop Brasil no Telegram ^]
+* https://www.meetup.com/apache-hop-user-group-brasil/[Grupo de usuários do Apache Hop Incubating em Português ^]
+* https://t.me/apachehop[Apache Hop Incubating em Português no Telegram ^]
 * https://www.meetup.com/apache-hop-user-group-japan/[Apache Hop User Group Japan ^]
 
 == Events
