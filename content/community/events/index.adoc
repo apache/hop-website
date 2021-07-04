@@ -8,6 +8,7 @@ title: "Events and User Groups"
 * https://www.meetup.com/grupo-de-usuarios-de-hop-en-espanol/[Grupo de usuarios de Apache Hop Incubating en Español ^]
 * https://www.meetup.com/apache-hop-user-group-brasil/[Apache Hop User Group Brasil ^]
 * https://t.me/apachehop[Apache Hop Brasil no Telegram ^]
+* https://www.meetup.com/apache-hop-user-group-japan/[Apache Hop User Group Japan ^]
 
 == Events
 
