@@ -57,7 +57,7 @@ All known Hop events are listed below. Add your event to the list below or annou
 |Event name|Description|date|link (subscribe/attend)|recording
 |-|First Brazilian Hop User Group Meetup|2021-7-15|https://www.meetup.com/pt-BR/apache-hop-user-group-brasil/events/279133079/[meetup]|
 |{set:cellbgcolor:#30328422}3H10|Apache Hop and Neo4j|2021-07-01|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/279027295/[meetup]|-
-|{set:cellbgcolor}3H9|End-to-end workflows|2021-06-17|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/278470431/[meetup]|
+|{set:cellbgcolor}3H9|End-to-end workflows|2021-06-17|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/278470431/[meetup]|https://youtu.be/63LxM3gU1sQ[youtube]
 |-|First Spanish Hop User Group Meetup|2021-6-16|https://www.meetup.com/es-ES/grupo-de-usuarios-de-hop-en-espanol/events/278568366/[meetup]|
 |3H8|Apache Hop in Docker|2021-06-03|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/278469535/[meetup]|https://www.youtube.com/watch?v=ayMD6RST4Do[youtube]
 |3H7|End-to-end pipelines with testing, logging, monitoring and best practices
