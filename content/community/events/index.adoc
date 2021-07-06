@@ -8,7 +8,7 @@ title: "Events and User Groups"
 * https://www.meetup.com/grupo-de-usuarios-de-hop-en-espanol/[Grupo de usuarios de Apache Hop Incubating en Español ^]
 * https://www.meetup.com/apache-hop-user-group-brasil/[Grupo de usuários do Apache Hop Incubating em Português ^]
 * https://t.me/apachehop[Apache Hop Incubating em Português no Telegram ^]
-* https://www.meetup.com/apache-hop-user-group-japan/[Apache Hop User Group Japan ^]
+* https://www.meetup.com/apache-hop-user-group-japan/[日本Apache Hop Incubatingユーザーグループ (Apache Hop Incubating User Group Japan) ^]
 
 == Events
 
@@ -52,18 +52,28 @@ mailto:users@hop.apache.org[Send, 3Hx presentation submission, add your presenta
 
 All known Hop events are listed below. Add your event to the list below or announce it on the xref:../mailing-list.adoc[user mailing list] to have it added for you.
 
-[%header,cols="5%,60%,10%,15%,10%"]
+=== Upcoming
+
+[%header,cols="5%,60%,10%,10%,15%"]
 |===
-|Event name|Description|date|link (subscribe/attend)|recording
-|-|First Brazilian Hop User Group Meetup|2021-7-15|https://www.meetup.com/pt-BR/apache-hop-user-group-brasil/events/279133079/[meetup]|
-|{set:cellbgcolor:#30328422}3H10|Apache Hop and Neo4j|2021-07-01|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/279027295/[meetup]|-
-|{set:cellbgcolor}3H9|End-to-end workflows|2021-06-17|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/278470431/[meetup]|https://youtu.be/63LxM3gU1sQ[youtube]
-|-|First Spanish Hop User Group Meetup|2021-6-16|https://www.meetup.com/es-ES/grupo-de-usuarios-de-hop-en-espanol/events/278568366/[meetup]|
-|3H8|Apache Hop in Docker|2021-06-03|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/278469535/[meetup]|https://www.youtube.com/watch?v=ayMD6RST4Do[youtube]
+|Event name|Description|Date|Language|Link (subscribe/attend)
+|-|First Brazilian Hop User Group Meetup|2021-7-15|PT|https://www.meetup.com/pt-BR/apache-hop-user-group-brasil/events/279133079/[meetup]|
+//{set:cellbgcolor}
+|===
+
+=== Past events
+
+[%header,cols="5%,60%,10%,10%,15%"]
+|===
+|Event name|Description|Date|Language|Recording
+|{set:cellbgcolor:#30328422}3H10|Apache Hop and Neo4j|2021-07-01|EN|-
+|{set:cellbgcolor}3H9|End-to-end workflows|2021-06-17|EN|https://youtu.be/63LxM3gU1sQ[youtube]
+|-|First Spanish Hop User Group Meetup|2021-6-16|ES|
+|3H8|Apache Hop in Docker|2021-06-03|EN|https://www.youtube.com/watch?v=ayMD6RST4Do[youtube]
 |3H7|End-to-end pipelines with testing, logging, monitoring and best practices
-|2021-05-20|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/278103629/[meetup]|https://www.youtube.com/watch?v=CkbOThb2HPo[youtube]
-|3H6|Big Data Orchestration on Spark, Flink and DataFlow using Apache Beam|2021-04-29|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/277681256/[meetup]|https://www.youtube.com/watch?v=s_cstCPdnKI[youtube]
-|3H5|Get Started With Hop - Concepts and First Pipelines|2021-04-15|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/277439258/[meetup^]|https://youtu.be/gKVb_r4v_Oc[youtube]
-|3H4| The Road to Hop 1.0|2021-04-01|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/277117234[meetup^]|https://www.youtube.com/watch?v=EhO_DYszu_Y&t=2s[youtube]
+|2021-05-20|EN|https://www.youtube.com/watch?v=CkbOThb2HPo[youtube]
+|3H6|Big Data Orchestration on Spark, Flink and DataFlow using Apache Beam|2021-04-29|EN|https://www.youtube.com/watch?v=s_cstCPdnKI[youtube]
+|3H5|Get Started With Hop - Concepts and First Pipelines|2021-04-15|EN|https://youtu.be/gKVb_r4v_Oc[youtube]
+|3H4| The Road to Hop 1.0|2021-04-01|EN|https://www.youtube.com/watch?v=EhO_DYszu_Y&t=2s[youtube]
 //{set:cellbgcolor}
 |===
