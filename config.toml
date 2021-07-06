@@ -7,6 +7,9 @@ staticDir = ["static", "documentation"]
 disableKinds = ["taxonomyTerm"]
 enableRobotsTXT = true
 
+[markup.goldmark.renderer]
+unsafe= true
+
 [params]
     socialProfiles = ["https://twitter.com/ApacheHop"]
     organizationLogo = "/img/hop-logo.svg"
