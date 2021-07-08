@@ -13,11 +13,11 @@ As always at the start of another new month, let's have a look at what happened 
 
 ## Apache Hop (Incubating) 0.60 Released
 
-Apache Hop (Incubating) 0.60 was link:../../01/release-0.60/index.adoc[released] in late January.
+Apache Hop (Incubating) 0.60 was link:/blog/2021/01/release-0.60/index.html[released] in late January.
 
 With 0.60 being the first Hop release as an Incubating ASF project, we focused on adopting the "Apache Way", and made this a source code only release.
 
-Check all details in the link:../../01/release-0.60/index.adoc[release announcement].
+Check all details in the link:/blog/2021/01/release-0.60/index.html[release announcement].
 
 Since the release of 0.60, the last license incompatibilities have been resolved: all non-compliant source code has been cleanup up or removed, Hop is now 100% ASF compliant.
 

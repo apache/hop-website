@@ -16,7 +16,7 @@ Please take it for a spin. If you find a bug, please create a https://jira.proje
 
 **Direct download https://artifactory.project-hop.org/artifactory/hop-releases-local/org/hop/hop-assemblies-client/0.21/hop-assemblies-client-0.21.zip[here]**
 
-**link:../../manual/latest/getting-started.html[Getting Started Guide]**
+**link:/manual/latest/getting-started/[Getting Started Guide]**
 
 Release Notes: **https://project-hop.atlassian.net/secure/ReleaseNote.jspa?projectId=10002&version=10001[0.20]**, **https://project-hop.atlassian.net/secure/ReleaseNote.jspa?projectId=10002&version=10004[0.21]** (one last-minute fix)
 
@@ -41,7 +41,7 @@ After 0.10, these have been evolutions rather than revolutions, and we consider 
 
 ## Hop Concepts
 
-Hop's tools reflect its Architecture, check out the link:../../manual/latest/concepts.html[Concepts] page.
+Hop's tools reflect its Architecture, check out the link:/manual/latest/concepts.html[Concepts] page.
 
 Our main concepts are:
 
@@ -105,7 +105,7 @@ video::rH5eLMB06xM[youtube, width=50%, height=400px]
 The last couple of weeks we have been hearing the same question multiple times. And we feel the same!
 Currently our Documentation is, how should we put it... A bit lacking... We have been focusing mainly on code to get you this 0.10 and now 0.21 release.
 
-We do have a great link:../../manual/latest/getting-started.html[getting started] but our link:../../manual/latest/[user manual] is currently falling a bit short.
+We do have a great link:/manual/latest/getting-started/[getting started] but our link:/manual/latest/[user manual] is currently falling a bit short.
 After the 0.21 release we will focus on catching up on documentation.
 
 The documentation now has a search option to quickly find the information you need.
@@ -131,7 +131,7 @@ Contributing is much more than writing code. A couple of ways you can help out a
 * write documentation
 * spreading the word
 
-Check out the link:../../community/contributing/[Contribution Guide] to find out how you can contribute.
+Check out the link:/community/contributing/[Contribution Guide] to find out how you can contribute.
 
 Contributions in any shape or form are greatly appreciated!
 

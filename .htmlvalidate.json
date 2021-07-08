@@ -12,7 +12,15 @@
     "element-required-attributes": "off",
     "prefer-tbody": "off",
     "long-title": "off",
-    "hop/title": "error"
-  }
+    "hop/title": "warn",
+    "no-deprecated-attr": "warn",
+    "doctype-style": "off",
+    "text-content": "off",
+    "prefer-native-element" : "off",
+    "no-redundant-role" : "off",
+    "prefer-button" : "off",
+    "no-multiple-main": "warn"
+  },
+  "root": true
 }
 

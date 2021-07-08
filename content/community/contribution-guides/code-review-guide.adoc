@@ -22,7 +22,7 @@ This guide is for all committers and contributors that want to help with reviewi
 //<<bot-review, Review with the @hopbot>>
 
 :sectnums!:
-== anchor:review-checklist:[]Review Checklist
+== anchor:review-checklist[]Review Checklist
 Every review needs to check the following six aspects. *We encourage to check these aspects in order, to avoid spending time on detailed code quality reviews when formal requirements are not met or there is no consensus in the community to accept the change.*
 
 
@@ -34,7 +34,7 @@ Any pull request that changes functionality or behavior needs to describe the bi
 
 *A contribution is well-described if the following questions 2, 3, and 4 can be answered without looking at the code.*
 
-== anchor:consensur[]Is There Consensus that the Change or Feature Should Go into Hop?
+== anchor:consensus[]Is There Consensus that the Change or Feature Should Go into Hop?
 
 This question can be directly answered from the linked Jira issue. For pull requests that are created without prior consensus, a discussion in Jira to seek consensus will be needed.
 

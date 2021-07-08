@@ -47,7 +47,7 @@ image:/img/Roundup-2020-05/beam-runconfigurations.png[Beam Run Configurations , 
 
 ## Hop Config
 
-We mentioned the addition of Hop Environments in the link:../roundup-2020-04/[April roundup] and the link:../release-preview-0-21/[0.21 release announcement].
+We mentioned the addition of Hop Environments in the link:/blog/2020/04/roundup-2020-04/[April roundup] and the link:/blog/2020/05/preview-release-0.21/[0.21 release announcement].
 
 A new addition to the Hop Platform is Hop Config; a plugin driven tool to configure various aspects of your Hop environments and overall installation.
 
@@ -100,7 +100,7 @@ Check this project out:
 
 https://twitter.com/uweeegeee[Uwe Geercken] picked up the task to build a migration tool to import Kettle/PDI jobs and transformations to Hop workflows and pipelines.
 
-Uwe wrote a https://datamelt.weebly.com/blog/hop-uit-hop-ultimate-import-tool-part-1[blog post] about hop-uit and contributed link:../../tech-manual/latest/hop-uit.html[documentation].
+Uwe wrote a https://datamelt.weebly.com/blog/hop-uit-hop-ultimate-import-tool-part-1[blog post] about hop-uit.
 
 We'll work with Uwe to make hop-uit fully functional so you can start migrating your Kettle/PDI projects to Hop soon. In the meantime, don't hesitate to give hop-uit a try and file and bugs you find or feature requests that you have in https://jira.project-hop.org[JIRA]
 

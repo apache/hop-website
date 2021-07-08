@@ -16,7 +16,7 @@ Please take it for a spin. If you find a bug, please create a https://jira.proje
 
 **Direct download https://artifactory.project-hop.org/artifactory/hop-releases-local/org/hop/hop-assemblies-client/0.30/hop-assemblies-client-0.30.zip[here]**
 
-**link:../../manual/latest/getting-started.html[Getting Started Guide]**
+**link:/manual/latest/getting-started/[Getting Started Guide]**
 
 Release Notes: **https://project-hop.atlassian.net/secure/ReleaseNote.jspa?projectId=10002&version=10003[0.30]**
 
@@ -137,7 +137,7 @@ Exit Metastore, enter Hop Metadata, a much more lightweight and flexible seriali
 
 ## Documentation
 
-As stated with the previous release, our documentation is a work in progress... Now all Transforms and Actions have documentation available in the link:../../manual/latest/[user manual]. We would like to thank the community members that took the effort to check the documentation and create tickets when noticing errors or missing documentation.
+As stated with the previous release, our documentation is a work in progress... Now all Transforms and Actions have documentation available in the link:/manual/latest/[user manual]. We would like to thank the community members that took the effort to check the documentation and create tickets when noticing errors or missing documentation.
 
 Now that the bulk of the API work is finished and we are comfortable with the concepts we have introduced in the past months, we can start documenting and explaining all buttons and features in Hop.
 
@@ -156,7 +156,7 @@ Contributing is much more than writing code. A couple of ways you can help out a
 * write documentation
 * spreading the word
 
-Check out the link:../../community/contributing/[Contribution Guide] to find out how you can contribute.
+Check out the link:/community/contributing/[Contribution Guide] to find out how you can contribute.
 
 Contributions in any shape or form are greatly appreciated!
 

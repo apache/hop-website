@@ -56,7 +56,7 @@ In the hop folder you will find a hop-translator.sh script.
 
 image:/img/Roundup-2020-03/roundup-2020-03-0004.png[Translator , 50% , align="left" , link="/img/Roundup-2020-03/roundup-2020-03-0004.png"]
 
-This program requires a local clone of the hop project, and will show you what has been translated and what is on the to-do list. Instructions on how to use the translator can be found in the link:../../community/contribution-guides/translation-contribution-guide/[Translation Contribution Guide]
+This program requires a local clone of the hop project, and will show you what has been translated and what is on the to-do list. Instructions on how to use the translator can be found in the link:/community/contribution-guides/translation-contribution-guide/[Translation Contribution Guide]
 
 ## Exit Transformations, Enter Pipelines
 
