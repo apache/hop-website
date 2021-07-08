@@ -80,8 +80,6 @@ pipeline {
                 sh "cd $WORKSPACE/hop-website && yarn --non-interactive --frozen-lockfile build"
             }
         }
-        /* disable checks for now */
-        /*
         stage('Checks') {
             agent {
                 dockerfile {
@@ -100,7 +98,6 @@ pipeline {
                 sh "cd $WORKSPACE/hop-website && yarn --non-interactive --frozen-lockfile checks"
             }
         }
-        */
         stage('Deploy') {
             when {
                 branch 'master'

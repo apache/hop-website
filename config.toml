@@ -76,7 +76,7 @@ unsafe= true
     parent = "docs"
     weight = 7
     identifier = "docs-qa"
-    url = "/docs/qa"
+    url = "/docs/qa/"
 
 [[menu.main]]
     name = "Community"
@@ -109,7 +109,7 @@ unsafe= true
     parent = "community"
     weight = 4
     identifier = "community-events"
-    url = "/community/events"
+    url = "/community/events/"
 
 [[menu.main]]
     name = "Team"

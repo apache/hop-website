@@ -16,7 +16,7 @@ Here's what happened over the last two months.
 
 ## Hop joins the Apache Software Foundation, becomes Apache Hop (Incubating)
 
-image:/img/asf_logo_wide.png[Apache Software Foundation, 85% , align="left" , link="/img/asf_logo_wide.png"]
+image:/img/asf_logo_wide.png[Apache Software Foundation, 85% , align="left"]
 
 Our link:https://cwiki.apache.org/confluence/display/INCUBATOR/HopProposal[proposal] to join the Apache Software Foundation was link:https://lists.apache.org/thread.html/r63be0e08fe0408c1253c691888bc11d28813f419607a7696f8850023%40%3Cgeneral.incubator.apache.org%3E[accepted] on September, 24th.
 
@@ -51,11 +51,11 @@ Read more about why we're so excited to join the link:https://incubator.apache.o
 With the increasing amount of metadata items, plugins etc, we added category support to the various popup dialogs.
 At the top of the dialog, Hop users can expand or collapse all categories and can enable or disable the categorization of the available items.
 
-image:/img/Roundup-2020-11/hop-gui-categories.png[Hop Gui Categories, 65%, align="left", link="/img/hop-gui-categories.png"]
+image:/img/Roundup-2020-11/hop-gui-categories.png[Hop Gui Categories, 65%, align="left"]
 
 Metadata editing for database connections, runtime configurations, the metadata dialog etc became more intuitive with a new UI tweak:
 
-image:/img/Roundup-2020-11/hop-gui-edit.png[Hop Gui Metadata Edit, 65%, align="left", link="/img/hop-gui-edit.png"]
+image:/img/Roundup-2020-11/hop-gui-edit.png[Hop Gui Metadata Edit, 65%, align="left"]
 
 Many thanks to Nicolas Adment for this contribution!
 

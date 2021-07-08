@@ -15,7 +15,7 @@ title: "Events and User Groups"
 === Apache Events
 ++++
 <a  href="https://www.apache.org/events/current-event.html">
-  <img src="https://www.apache.org/events/current-event-234x60.png"/>
+  <img src="https://www.apache.org/events/current-event-234x60.png" alt="Current Events by Apache Foundation"/>
 </a>
 ++++
 
@@ -48,9 +48,9 @@ A new Hot Hop Hangout session is organized every other week. Topics will alterna
 
 mailto:users@hop.apache.org[Send, 3Hx presentation submission, add your presentation topic and brief description here] your submissions for a 3Hx talk to to the users mailing list to get it added to the agenda.
 
-=== Agenda
+=== anchor:events-agenda[]Agenda
 
-All known Hop events are listed below. Add your event to the list below or announce it on the xref:../mailing-list.adoc[user mailing list] to have it added for you.
+All known Hop events are listed below. Add your event to the list below or announce it on the link:/community/mailing-list/[user mailing list] to have it added for you.
 
 === Upcoming
 

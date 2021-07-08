@@ -68,7 +68,7 @@ video::rH5eLMB06xM[youtube, width=50%, height=400px]
 The last couple of weeks we have been hearing the same question multiple times. And we feel the same! 
 Currently our Documentation is, how should we put it... A bit lacking... We have been focussing mainly on code to get you this 0.10 and now 0.20 release.
 
-We do have a great link:../../manual/latest/getting-started.html[getting started] but our link:../../manual/latest/[user manual] is currently falling a bit short.
+We do have a great link:/manual/latest/getting-started/index.html[getting started] but our link:/manual/latest/index.html[user manual] is currently falling a bit short.
 After the 0.20 release we will focus on catching up on documentation, a search engine will also be integrated in the docs.
 
 If there is anyone willing to help write documentation contact us and we will be happy to get you started.
