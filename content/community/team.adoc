@@ -41,6 +41,7 @@ This page lists who we are. By all means add yourself to the list - lets sort it
 |Rafael Valenzuela |||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/sowe", window="_blank"]
 |Saurabh Deshmukh | sauru22 | TechM | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/OfficialSauru", window="_blank"]
 |Marcio Junior Vieira | marciojv | Ambiente Livre | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/ambientelivre", window="_blank"]
+|Ricardo Gouvêa | rgouvea | Openin Big Data | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/openinbigdata", window="_blank"]
 |===
 
 
