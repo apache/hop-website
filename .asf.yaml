@@ -17,9 +17,12 @@
 
 notifications:
   pullrequests: commits@hop.apache.org
+  commits: commits@hop.apache.org
   jira_options: link label comment
+
 publish:
   whoami: asf-site
+
 github:
   description: "Apache Hop Website"
   labels:
