@@ -2,18 +2,18 @@
 title: "Roadmap"
 ---
 
-On a very high level here are the things we want to do:
+The Apache Hop team just released version 0.99.  It offers our users the chance to test critical functionality before version 1.0 is released.
 
-* Change all package names to org.apache.hop from org.pentaho.di (**done**)
-* Remove all existing external dependencies to non-standard libraries so Hop can be compiled without referencing a proprietary Maven server. (**done**)
-* Remove all references to the deprecated XUL libraries and build a new UI plugin system.  Port existing GUI code over to it. (**done**)
-* Create a plugin type for transformations.  Port over the existing multi-threaded and single threaded engines as well as import the code from the Kettle Beam project.  Do the same for jobs so we can create different workflow engines. (**done**)
-* Rename the top class objects to be more in line with Apache Beam and Airflow terminology, e.g. Pipelines and Transforms, Workflows and Tasks.  Rename the tools to be self evident:  hop-ui, hop-run, hop-server and so on. (**done**)
-* Create a new user interface for designing pipelines and workflows.  Make the experience more in line with the needs of a developer: (**done**)
-** Allow for more context options to be available in every situation (on a task, at the start of a new pipeline, …)
-** Make smarter suggestions
-** Make it easier to find Transforms or Tasks you need.
-** Create a generic metastore browser for all objects in one location while at the same time making extensive use of editors of metastore elements in the locations where they’re needed.  This does away with the complete left hand side of the Spoon user interface giving more screen real-estate for the Pipelines and Workflows. (**done**)
-** tbd
-* Create new documentation for every Transform and Task shipped with Apache Hop. This documentation needs to be stored in git along with the code and should allow us to generate HTML for offline inclusion or a PDF if needed. (**done**)
-* Create integration tests for every Transform or Task shipped so we can guard compatibility from release to release.
+After that our community wants to graduate as a top level project.
+
+Here are a few directions that we want to explore for the future of our software:
+* Set up a software marketplace where 3rd party plugins can be found
+* Pluggable field expressions in transforms and actions
+* Integration with Apache Airflow both in Airflow and as a new Workflow engine plugin
+* Modularisation of the Apache Beam plugins
+* Further unification of Beam plugins, for example make the `Beam BigQuery Input` plugin work in non-Beam engines as well
+* Finish conversion of all plugins to generic XML serialization to allow for JSON/YAML/... metadata serialization of pipelines and workflows
+* Create a new GUI for executing, previewing and debugging pipelines and workflows with care for long-running and streaming workloads
+* Create a monitoring and logging network service capable of accepting operational metadata from local and remote Hop executions, even on clusters (Beam)
+* Convert the Neo4j logging perspective to a generic logging perspective with room for plugins exposing the underlying strength of the logging sink.
+
