@@ -144,7 +144,7 @@ Check out the complete list of committers and contributors.
 
 === New Contributors
 
-In addition to the many contributions we received from all over the Hop community, Hop has 2 new committers since the 0.70 releaae:
+In addition to the many contributions we received from all over the Hop community, Hop has 2 new committers since the 0.70 release:
 
 * https://twitter.com/bfasilva[Bruno Silva]
 * David Campen
