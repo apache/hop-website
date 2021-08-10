@@ -7,6 +7,7 @@ The Apache Hop team just released version 0.99.  It offers our users the chance 
 After that our community wants to graduate as a top level project.
 
 Here are a few directions that we want to explore for the future of our software:
+
 * Set up a software marketplace where 3rd party plugins can be found
 * Pluggable field expressions in transforms and actions
 * Integration with Apache Airflow both in Airflow and as a new Workflow engine plugin
