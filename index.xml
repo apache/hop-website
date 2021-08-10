@@ -459,10 +459,9 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hop.apache.org/docs/roadmap/</guid>
-      <description>On a very high level here are the things we want to do:
-   Change all package names to org.apache.hop from org.pentaho.di (done)
-  Remove all existing external dependencies to non-standard libraries so Hop can be compiled without referencing a proprietary Maven server. (done)
-  Remove all references to the deprecated XUL libraries and build a new UI plugin system. Port existing GUI code over to it.</description>
+      <description>The Apache Hop team just released version 0.99. It offers our users the chance to test critical functionality before version 1.0 is released.
+ After that our community wants to graduate as a top level project.
+ Here are a few directions that we want to explore for the future of our software: * Set up a software marketplace where 3rd party plugins can be found * Pluggable field expressions in transforms and actions * Integration with Apache Airflow both in Airflow and as a new Workflow engine plugin * Modularisation of the Apache Beam plugins * Further unification of Beam plugins, for example make the Beam BigQuery Input plugin work in non-Beam engines as well * Finish conversion of all plugins to generic XML serialization to allow for JSON/YAML/…​ metadata serialization of pipelines and workflows * Create a new GUI for executing, previewing and debugging pipelines and workflows with care for long-running and streaming workloads * Create a monitoring and logging network service capable of accepting operational metadata from local and remote Hop executions, even on clusters (Beam) * Convert the Neo4j logging perspective to a generic logging perspective with room for plugins exposing the underlying strength of the logging sink.</description>
     </item>
     
     <item>
