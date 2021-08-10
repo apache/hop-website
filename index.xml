@@ -6,7 +6,17 @@
     <description>Recent content in Apache Hop (Incubating) on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 02 Jul 2021 07:59:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 Aug 2021 07:59:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Hop (Incubating) 0.99 Release Available!</title>
+      <link>https://hop.apache.org/blog/2021/08/hop-0.99/</link>
+      <pubDate>Sat, 07 Aug 2021 07:59:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2021/08/hop-0.99/</guid>
+      <description>The Hop community is pleased to announce the availability of the Apache Hop (Incubating) 0.99 release, our last stop before Hop 1.0.
+ This release contains over 3 months of work. Since our 0.70 release in late April, we’ve seen a lot of activity in a variety of areas. The focus for this release was on hardening Hop to deliver our users the most scalable, robust, documented and tested Hop experience possible.</description>
+    </item>
+    
     <item>
       <title>Roundup June 2021</title>
       <link>https://hop.apache.org/blog/2021/07/roundup-2021-07/</link>
@@ -316,23 +326,29 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hop.apache.org/download/</guid>
-      <description>Apache Hop (incubating)     Version Date Description Download Link PGP Signature file of download SHA512 Checksum file of download     0.70
+      <description>Apache Hop (incubating)     Version
+ Date
+ Description
+ Download Link
+ PGP Signature file of download
+ SHA512 Checksum file of download
+   0.99
+ August, 5th, 2021
+ Binaries
+ apache-hop-client-0.99-incubating.zip
+ asc
+ sha512
+   Sources
+ apache-hop-0.99-incubating-src.tar.gz
+ asc
+ sha512
+   0.70
  April, 12th, 2021
  Binaries
  apache-hop-client-0.70-incubating.zip
  asc
  sha512
-   Sources
- apache-hop-0.70-incubating.tar.gz
- asc
- sha512
-   0.60
- jan, 2021
- Sources
- apache-hop-0.60-incubating.tar.gz
- asc
- sha512
-      Docker Apache Hop is available as a Docker image on Dockerhub:</description>
+   Sources</description>
     </item>
     
     <item>

@@ -6,7 +6,17 @@
     <description>Recent content in Announcement on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 12 Apr 2021 07:59:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/Announcement/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 Aug 2021 07:59:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/Announcement/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Hop (Incubating) 0.99 Release Available!</title>
+      <link>https://hop.apache.org/blog/2021/08/hop-0.99/</link>
+      <pubDate>Sat, 07 Aug 2021 07:59:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2021/08/hop-0.99/</guid>
+      <description>The Hop community is pleased to announce the availability of the Apache Hop (Incubating) 0.99 release, our last stop before Hop 1.0.
+ This release contains over 3 months of work. Since our 0.70 release in late April, we’ve seen a lot of activity in a variety of areas. The focus for this release was on hardening Hop to deliver our users the most scalable, robust, documented and tested Hop experience possible.</description>
+    </item>
+    
     <item>
       <title>Apache Hop (Incubating) 0.70 Release Available!</title>
       <link>https://hop.apache.org/blog/2021/04/release-0.70/</link>

@@ -2,14 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://hop.apache.org/categories/Announcement/</loc>
+    <lastmod>2021-08-07T07:59:56+02:00</lastmod>
+  </url><url>
     <loc>https://hop.apache.org/categories/Apache-Hop/</loc>
-    <lastmod>2021-07-02T07:59:56+02:00</lastmod>
+    <lastmod>2021-08-07T07:59:56+02:00</lastmod>
   </url><url>
     <loc>https://hop.apache.org/</loc>
-    <lastmod>2021-07-02T07:59:56+02:00</lastmod>
+    <lastmod>2021-08-07T07:59:56+02:00</lastmod>
+  </url><url>
+    <loc>https://hop.apache.org/blog/2021/08/hop-0.99/</loc>
+    <lastmod>2021-08-07T07:59:56+02:00</lastmod>
   </url><url>
     <loc>https://hop.apache.org/blog/</loc>
-    <lastmod>2021-07-02T07:59:56+02:00</lastmod>
+    <lastmod>2021-08-07T07:59:56+02:00</lastmod>
+  </url><url>
+    <loc>https://hop.apache.org/categories/Release/</loc>
+    <lastmod>2021-08-07T07:59:56+02:00</lastmod>
   </url><url>
     <loc>https://hop.apache.org/categories/Roundup/</loc>
     <lastmod>2021-07-02T07:59:56+02:00</lastmod>
@@ -23,13 +32,7 @@
     <loc>https://hop.apache.org/blog/2021/05/roundup-2021-05/</loc>
     <lastmod>2021-05-01T08:59:56+02:00</lastmod>
   </url><url>
-    <loc>https://hop.apache.org/categories/Announcement/</loc>
-    <lastmod>2021-04-12T07:59:56+02:00</lastmod>
-  </url><url>
     <loc>https://hop.apache.org/blog/2021/04/release-0.70/</loc>
-    <lastmod>2021-04-12T07:59:56+02:00</lastmod>
-  </url><url>
-    <loc>https://hop.apache.org/categories/Release/</loc>
     <lastmod>2021-04-12T07:59:56+02:00</lastmod>
   </url><url>
     <loc>https://hop.apache.org/blog/2021/04/roundup-2021-04/</loc>
