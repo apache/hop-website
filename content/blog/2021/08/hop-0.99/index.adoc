@@ -1,0 +1,161 @@
+---
+title: "Apache Hop (Incubating) 0.99 Release Available!"
+date: 2021-08-07T07:59:56+02:00
+authors: ["bamaer"]
+categories: ["Release", "Announcement", "Apache Hop"]
+preview: "Apache Hop releases 0.99, our last stop before Hop 1.0"
+draft: false
+---
+
+# Apache Hop (Incubating) 0.99 Released
+:toc: macro
+:toc-title: Highlights (in alphabetical order):
+:toc-class: none
+:toclevels: 1
+
+The Hop community is pleased to announce the availability of the Apache Hop
+(Incubating) 0.99 release, our last stop before Hop 1.0.
+
+This release contains over 3 months of work. Since our 0.70 release in late April,
+we’ve seen a lot of activity in a variety of areas. The focus for this release was on
+hardening Hop to deliver our users the most scalable, robust, documented and
+tested Hop experience possible. Hop contributors not only worked on code:
+we’ve received contributions in artwork, translations, documentation, samples etc.
+
+Great communities build great software, and we’re delighted to see the Hop
+community grow: since our 0.70 release, we have not only seen growth in the existing channels, new initiatives like local user groups started popping up in Brazil (over 130 members!), Spain, Italy and Japan. A huge thank you to the entire Apache Hop community and everyone involved. A growing and thriving community is what Hop is all about.
+
+Hop 0.99 is our second release with downloadable binaries. Head over to the
+xref:../../../../download/index.adoc[downloads page] and give Hop 0.99 a try on your local desktop or take https://hop.apache.org/manual/latest/hop-gui/hop-web.html#top[Hop Web] for a spin with the Hop Web Docker image.
+
+As Hop 0.99 is a release candidate for Hop 1.0, we encourage the Hop community to not just try, but to test this release as much and as hard as possible. The more bugs we can find and fix in Hop 0.99, the better Hop 1.0 will be!
+
+Let’s take a closer look at what’s new in Hop 0.99
+
+== Lots and lots of bug fixes, cleanup and overall improvements
+
+We’ve been cleaning up the code base and api for almost 2 years now. A lot of
+work has been done in this area, making Hop as robust, stable en performant as
+possible. A full Hop weighs in at just over 500MB, starts in a couple of seconds
+and contains over 400 plugins.
+
+The Hop community worked on more than 300 JIRA tickets since the 0.70 release.
+Tons of bugs were found and fixed. Our growing library of more than 260 integration tests continuously checks and validates Hop’s functionality.
+
+The Hop documentation and library of available samples has grown significantly,
+making it as easy as possible to find the information you’re looking for. Documentation and samples are never done, so please create JIRA tickets if you don’t
+find the information you’re looking or if you find bugs in the docs.
+
+As we’ve now ironed out the last licensing, dependency and ASF procedural wrinkles, Hop is not only getting ready for 1.0, we’re also maturing as an Apache project. After Hop
+1.0 is released, we will start working towards our graduation as an Apache Top
+Level Project (TLP).
+
+== Hop Web
+
+Hop Web is now on par with the desktop Hop Gui. Hop Web has been fully integrated with the Hop code base for quite a while now, we’ve been hunting bugs for months, and Hop Web is becoming a mature alternative to the desktop app (and even has its own dark mode)..
+
+image:/img/Release-0.99/hop-web.png[Hop Web, width=90%, align="left", link="/img/Release-0.99/hop-web.png"]
+
+
+== Avro and Parquet Support
+
+Hop development deliberately focused on hardening the existing functionality
+over implementing new features since the 0.70 release.
+Notable exceptions are the Avro and Parquet transforms:
+
+* Avro Decode
+* Avro File Input
+* Parquet File Input
+* Parquet File Output
+
+image:/img/Release-0.99/avro-parquet.png[Avro and Parquet support, width=90%, align="left", link="/img/Release-0.99/avro-parquet.png"]
+
+== Various
+
+=== Extended VFS Support
+
+Apache VFS support for AWS S3, Azure Blob Storage, Google Drive and Google Cloud Storage was added to Hop a long time ago.
+
+This has now been extended with VFS support for project folders and many other locations. This combination of Hop Web and a first stab at Kubernetes Helm charts brings Hop cloud deployments a major step closer.
+
+=== Kettle/PDI Importer Improvements
+
+A number of improvements have been made to the PDI/Kettle importer. It is now possible to skip existing files, skip folders, import directly into a VFS folder. Variables are now imported to an environment file by default.
+
+Additionally, the importer is now available from the command line with the `hop-import` script.
+
+=== Metadata Injection improvements
+
+The old code base we inherited from PDI/Kettle used two different APIs for metadata injection. By removing the old and deprecated api from the code base, a number of transforms lost their metadata injection functionality.
+
+Replacing the metadata injection with new and updated code took a while and is still work in progress, but we're aiming higher for Hop: the goal is to have native metadata injection support for all transforms. The status of metadata injection support is available in the https://hop.apache.org/manual/latest/pipeline/metadata-injection.html[Hop docs]. .
+
+Additionally, the metadata injection transform dialog received some love. Among many other minor tweaks this dialog now shows the icon for all injectable transforms.
+
+image:/img/Release-0.99/mdi.png[Metadata Injection improvements, width=90%, align="left", link="/img/Release-0.99/mdi.png"]
+
+
+=== Translations
+
+Hop is now fully translated into Italian, with more translations being worked on.
+
+The list of languages (locales) that are at least partially supported in Hop is now:
+
+* de_DE: German
+* en_US: English (United States)
+* es_AR: Spanish (Argentina)
+* es_ES: Spanish (Spain)
+* fr_FR: French
+* it_IT: Italian
+* ja_JP: Japanese
+* ko_KR: Korean
+* nl_NL: Dutch
+* zh_CN: Chinese
+
+Some of these translations still are incomplete and lacking. Check the https://hop.apache.org/community/contribution-guides/translation-contribution-guide/[Translator Contribution Guide] if you'd like to help us translate Hop in your native language. Translations are an easy way to contribute with a huge impact, and just like any contribution, would be greatly appreciated by the Hop community.
+
+
+== Documentation, Samples and Integration Tests
+
+A lot of effort was spent on making Hop as user friendly as possible.
+
+Even though documentation, just like software, is never finished, the Hop docs are now close to feature complete. We'll obviously continue to work on extending and improving our docs.
+
+In addition to documentation, Hop now has more than 80 sample workflows and pipelines. This number is expected to grow rapidly as we continue to prepare for 1.0.
+
+Integration tests are an important part of improving the stability of the Hop platform. Although not intended as documentation, feel free to explore our library of 300 integration testing workflows and pipelines as examples on how a certain action, transform or design pattern works.
+
+== Community
+
+=== In numbers
+
+The Hop community has grown significantly since the 0.70 release:
+
+* chat: 210 registered members (up from 161) link:https://chat.project-hop.org[join]
+* LinkedIn: 545 followers (up from 435) link:https://www.linkedin.com/company/hop-project[follow]
+* Twitter: 476 followers (up from 368) link:https://twitter.com/ApacheHop[follow]
+* YouTube: 232 subscribers (up from 104) link:https://www.youtube.com/ApacheHop[subscribe]
+* 3Hx Meetup: 167 members link:https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/[join]
+
+=== User Groups
+Hop now has user groups in Brasil, Spain, Italy and Japan. Check the community page for more details). Let us know if you'd like to start your local user group. The Hop community will be happy to support you in starting, announcing etc.
+
+Check out the complete list of committers and contributors.
+
+=== New Contributors
+
+In addition to the many contributions we received from all over the Hop community, Hop has 2 new committers since the 0.70 releaae:
+
+* https://twitter.com/bfasilva[Bruno Silva]
+* David Campen
+
+=== Mailing lists
+
+The dev and user lists currently only have 32 and 27 subscribers respectively. The
+major discussions and decisions are made on the mailing lists, link:https://hop.apache.org/community/mailing-list/[subscribe] to stay
+up to date about the latest Hop news.
+
+Without community contribution, Hop is just a coding club! Please feel free to
+join, participate in the discussion, test, file bug tickets on the software or documentation, ...Contributing is a lot more than writing code.
+
+Check out our contribution guides to find out more.
