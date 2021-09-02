@@ -6,7 +6,18 @@
     <description>Recent content in Roundup on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 02 Jul 2021 07:59:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/Roundup/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 02 Sep 2021 07:59:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/Roundup/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Roundup July, August 2021</title>
+      <link>https://hop.apache.org/blog/2021/09/roundup-2021-08/</link>
+      <pubDate>Thu, 02 Sep 2021 07:59:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2021/09/roundup-2021-08/</guid>
+      <description>As always at the start of another new month, let’s have a look at what happened at Hop over the last month. Here’s the recap for July and August 2021!
+ Hop 0.99 Release On August 7th, the Hop community released Apache Hop (Incubating) 0.99. As discussed at length in the release announcement, 0.99 is our last stop before Hop 1.0.
+ Since we want 1.0 to be as robust as possible, the focus has been on hardening Hop, so we worked hard on finding and fixing as many bugs as possible.</description>
+    </item>
+    
     <item>
       <title>Roundup June 2021</title>
       <link>https://hop.apache.org/blog/2021/07/roundup-2021-07/</link>
