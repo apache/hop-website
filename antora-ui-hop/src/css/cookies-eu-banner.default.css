@@ -91,6 +91,7 @@
 
 @media screen and (max-width: 1023px) {
   #cookies-eu-content {
-    font-size: 6vw;
+    font-size: 2vw;
+    padding: 1rem 2rem;
   }
 }
