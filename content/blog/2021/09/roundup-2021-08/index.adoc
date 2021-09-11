@@ -4,6 +4,8 @@ date: 2021-09-02T07:59:56+02:00
 authors: ["bamaer"]
 categories: ["Roundup", "Apache Hop"]
 preview: "Roundup July, August 2021"
+description: "The Apache Hop (Incubating) recap for July and August 2020: 0.99 released, Dropbox VFS support, ongoing bug hunt and community growth"
+image: 	"http://knowbi:1313/_/img/hop-logo.svg"
 draft: false
 ---
 

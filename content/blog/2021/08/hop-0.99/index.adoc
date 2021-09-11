@@ -4,6 +4,7 @@ date: 2021-08-07T07:59:56+02:00
 authors: ["bamaer"]
 categories: ["Release", "Announcement", "Apache Hop"]
 preview: "Apache Hop releases 0.99, our last stop before Hop 1.0"
+description: "Apache Hop releases 0.99, our last stop before Hop 1.0"
 draft: false
 ---
 
