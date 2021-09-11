@@ -11,9 +11,12 @@ enableRobotsTXT = true
 unsafe= true
 
 [params]
+    openGraph = true
+    images = ['https://hop.apache.org/img/hop-logo.png']
     socialProfiles = ["https://twitter.com/ApacheHop"]
     organizationLogo = "/img/hop-logo.svg"
-    organizationDescription = "Hop"
+    organizationDescription = "Apache Hop (Incubating) - Hop Orchestration Platform"
+    Description = "Apache Hop (Incubating) - Hop Orchestration Platform"
 
 [Author]
     name = "The Hop Team"
