@@ -10,7 +10,6 @@
     <link rel="manifest" href="{{ "site.webmanifest" | relURL }}">
     <title>{{ block "title" . }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
     <link rel="canonical" href="{{ .RelPermalink }}">
-    {{ template "_internal/opengraph.html". }}
     {{ if .Description}}
     <meta name="description" content="{{ .Description }}">
     {{ end }}
