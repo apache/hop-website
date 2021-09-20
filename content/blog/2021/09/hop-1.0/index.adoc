@@ -1,0 +1,99 @@
+---
+title: "Apache Hop 1.0 Released"
+date: 2021-09-17T07:59:56+02:00
+authors: ["bamaer"]
+categories: ["1.0", "Release", "Apache Hop"]
+preview: "Apache Hop 1.0 Released"
+description: "After more than 2 years of work, Apache Hop (Incubating) releases 1.0. This releaae is a milestone in the project's continued effort to become the world's leading open source data integration and data orchestration platform."
+draft: false
+---
+
+## Apache Hop (Incubating) 1.0 is available!
+:toc: macro
+:toc-title: The list of items we need to cover in the monthly reports continues to grow. Here are some quick links for the restless souls among you:
+:toc-class: none
+:toclevels: 1
+
+toc::[]
+
+After more than 2 years of work, the Apache Hop community is pleased to announce the general availability of Hop 1.0.
+
+This release marks the end of a period of major refactoring and cleanup of what once was the Kettle code base Apache Hop started from. In addition to this cleanup, tons of new functionality was added: a new GUI was written from scratch, unit testing, Apache Beam integration was added and projects and environments are now an integral part of the platform. Together with git integration, Hop now is a platform that gives data developers unparallelled power to develop robust, scalable and blazing fast data pipelines and workflows.
+
+image::/img/Release-1.0/hop-10.svg[ width="45%"]
+
+
+## Metadata, metadata, metadata!
+
+The single most important concept in Apache Hop. Literally everything, from workflows and pipelines over projects and environments to runtime configurations and everything else, it's all metadata driven.
+Building an abstraction layer over not only your data, but also the environments it runs in an every single piece of technology it touches in an entire data architecture allows Hop to be incredibly flexible. Hop integrates with hundreds of data platforms, runs on over half a dozen different runtimes (with more to come) and can seamlessly be deployed in multiple environments, processing data from IoT edge devices up to petabytes, all through metadata.
+
+## Major refactoring and code cleanup
+
+Apache Hop started as a fork of the Pentaho Data Integration (aka Kettle) data integration platform in the summer of 2019. From day one, the Hop project team made it clear that Hop was an independent platform with its own goals and roadmap. One of the core tasks in the early stages was to do a massive refactoring and code cleanup. Thousands of person hours were spent updating apis and removing and rewriting old or license incompatible code.
+
+Apache Hop is now over half a million lines of (clean) code, with a full installation size of just over half a gigabyte and a startup time of only a couple of seconds.
+
+## Kernel architecture and plugins
+
+In parallel with the code refactoring and cleanup, Apache Hop was re-architected from the ground up. The Hop architecture is extremely simple: a small and lean engine contains the core functionality to run workflows and pipelines, with all the additional features implemented as plugins.
+
+Plugins can be added or removed from the default Hop installation by simply removing or adding plugin folders.
+
+This not only makes life a lot easier for plugin developers, it most importantly helps to keep the Hop engine separate from implementation specific details.
+
+While the Hop core developers work on building a robust, flexible and scalable engine, a thriving and growing community of plugin developers is building an impressive number of external plugins. With the addition of a Hop marketplace post 1.0, the Hop ecosystem is expected to continue to grow and expand into even more areas of data technology.
+
+## Portable runtimes and Apache Beam integration
+
+One of the many plugins types supported in the Hop platform are runtime engines. With 1.0, Hop supports its own native engine for workflows and pipelines, both locally and remotely. Through Apache Beam, additional runtimes for pipelines are available on Apache Spark, Apache Flink and Google Dataflow.
+
+The ability to design a pipeline once and run it on any of the close to ten runtime configurations supported in 1.0 makes Hop the most flexible data integration and data orchestration platform on the planet, bar to none.
+
+Pluggable runtimes allow data developers to design, run and test their pipelines and workflows on their own laptop, with limited data volumes for quick and easy development. Once a workflow or pipeline matures, it can be deployed to the environment where it best fits, whether that is a powerful bare metal server, a virtual machine in the cloud, a Spark, Flink or Google dataflow cluster, it doesn't really matter. Hop just takes care of running it smoothly and transparently.
+
+## Projects and Environments
+
+Data developers almost always work on multiple projects simultaneously and run these projects in multiple environments. The Hop project team recognizes this and wants to make a data developer's life as easy as possible by facilitating working with projects and environments.
+
+Whether you're working locally in a desktop environment or on a headless server, Hop supports creating, managing and switching environments through a variety of GUI and command line tools.
+
+Your managed projects and environments can be used throughout the entire development life cycle, deploying exactly the environment you want to deploy, whether that is through a manual or automated (CI/CD) deployment process.
+
+Additionally, Hop's projects and environments allow you to keep a tight separation of code and configuration, both managed in version control.
+
+## Hop GUI
+
+Hop Gui is the visual development environment where data developers create workflows and pipelines. Hop Gui was written from scratch. It supports user interface plugins to allow developers to quickly and easily change and extend existing functionality, and is available on all major desktop platforms (Windows, Mac OS, Linuz) and the browser (Hop Web).
+
+With a single-click focus, Hop Gui enables data developers to work at unparallelled levels of speed and productivity. A lot of the functionality in Hop Gui can be accessed even faster through keyboard shortcuts and mouse gestures.
+
+As a development environment, Hop Gui allows data developers to design, run, preview and test their data pipelines and workflows, almost at the speed of thought.
+
+Visually developed workflows and pipelines are quick to build and easy to maintain. Hop Gui's visual design editor makes the workflow and pipeline code as good as self-documenting.
+
+## Unit Testing
+
+No self-respecting software development project would ever bypass testing. However, in the data world, testing often is a cumbersome and therefore ignored task.
+
+In Hop, data developers can work with Hop Gui to not only build workflows and pipelines, but also add unit tests that check if the workflow or pipeline didn't run without errors, but also check if the data was processed as expected.
+
+Building a library of unit tests, regression and integration tests will take your data projects to the next level. You'll not only know if your workflows and pipelines were executed without failures, you'll also be able to check if pipelines produced the results you expected by comparing the generated data to a set of "golden data".
+
+The Hop project team eats its own dog food. Through a growing library of integration tests, the Hop developers have been able to identify and fix a number of issues that must have been in the code base for over a decade.
+
+## Life cycle management
+
+The combination of workflows and pipelines, project and environment, the various runtime configurations and all the metadata types Hop supports take quite a bit of configuration and management.
+
+With all of these in version control, Hop supports your implementation in every step of its life cycle. With project and environment support, a Docker image and Helm charts, GUI and command line tools, nothing stops you from building top-notch data solutions with Hops. Building a decent DataOps has never been easier.
+
+## Community
+
+One of the most important pillars of becoming an Apache Software Foundation project is community building.
+
+While the Hop team has been working tirelessly on building the absolute best data orchestration and data integration platform out there, community building has been equally important. Building the best platform in the world is useless without people using it and being excited about the things they can do with it.
+
+Hop has seen a tremendous growth in community adoption since we joined the Apache Software Foundation's incubator in September 2020. The project now has hundreds of followers on our various social media accounts, well over 200 people are registered on the Hop chat, there are user groups in Brazil, Japan, Spain, Italy and more.
+
+Even more important than the software, community is what Hop is all about. If you're reading this, you're at least interested in Apache Hop, and we're very happy to have you on board!
