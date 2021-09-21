@@ -10,6 +10,7 @@ content:
   - url: git@github.com:apache/incubator-hop.git
     branches: 
       - master
+      - release1.0.0
     start_path: /docs/hop-user-manual/
   - url: git@github.com:apache/incubator-hop.git
     branches: master
