@@ -110,8 +110,6 @@
     <loc>https://hop.apache.org/manual/</loc>
     <priority>0</priority>
   </url><url>
-    <loc>https://hop.apache.org/about/</loc>
-  </url><url>
     <loc>https://hop.apache.org/docs/architecture/</loc>
   </url><url>
     <loc>https://hop.apache.org/community/contribution-guides/code-contribution-guide/</loc>
@@ -139,8 +137,6 @@
     <loc>https://hop.apache.org/community/contributing/</loc>
   </url><url>
     <loc>https://hop.apache.org/community/contribution-guides/jira-guide/</loc>
-  </url><url>
-    <loc>https://hop.apache.org/about/eula/</loc>
   </url><url>
     <loc>https://hop.apache.org/community/mailing-list/</loc>
   </url><url>
