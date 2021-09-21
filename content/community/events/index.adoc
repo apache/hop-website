@@ -1,5 +1,6 @@
 ---
 title: "Events and User Groups"
+description: "Apache Hop (Incubating) deeply cares about its community and encourages community members to organize local user groups and events. Find out what is happening in your area or native language."
 ---
 
 == User Groups
