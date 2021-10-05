@@ -30,6 +30,7 @@
     <script src="{{ path.Join "_" (index .Site.Data "rev-manifest" "js/site.js") | relURL }}"></script>
     <script src="{{ path.Join "_" (index .Site.Data "rev-manifest" "js/vendor/highlight.js") | relURL }}"></script>
     <script src="{{ path.Join "_" (index .Site.Data "rev-manifest" "js/vendor/cookies-eu-banner.js") | relURL }}"></script>
+    {{ if not .Site.BuildDrafts }}
     <script>
         new CookiesEuBanner(function () {
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -40,7 +41,8 @@
             ga('create', 'UA-151580460-1', 'auto' ,{'anonymize_ip':true});
             ga('send', 'pageview');
         }, true, false);
-    </script> 
+    </script>
+    {{ end }}
     <script src="{{ path.Join "_" (index .Site.Data "rev-manifest" "js/vendor/docsearch.min.js") | relURL }}"></script>
     <script>
     var search = docsearch({

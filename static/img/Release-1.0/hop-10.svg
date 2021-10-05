@@ -9,26 +9,26 @@
    id="svg1530">
   <style>
 .logoholder {
+/*   border: 1px solid black;  */
 }
 #hoplogo {
   visibility: hidden; 
   transform: translate(100px) scale(0.6); 
   animation: fadein 4s forwards;  
-  animation-delay: 5s;
+  animation-delay: 2s; 
 }
 
 #one {
-    animation-delay: 3s;
 }
 #dot {
-  animation-delay: 3.5s;
+  animation-delay: 0.5s;
 }
 #zero {
-  animation-delay: 4s;
+  animation-delay: 1s; 
 }
 
 .hoptext { 
-	stroke-width: 2;
+  font-family: 'Ostrich Sans Black';
 	fill: #0e3a5a;
 	font-size: 12em;
 	animation: strokeone 6s forwards;
@@ -50,7 +50,7 @@
   70% {
     transform: translateY(550px) scale(1.1);     
     transform-origin: center; 
-    filter: drop-shadow(16px 16px 20px #0e3a5a);
+    filter: drop-shadow(16px 16px 20px #0e3a5a);  
   }
   100% {
     transform: translateY(550px) scale(1);     
@@ -66,13 +66,7 @@
   90% { 
     opacity: 1; 
     visibility: visible; 
-    transform: translate(100px) scale(0.7);
-    }
-  95% {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(100px) scale(0.7);
-    filter: drop-shadow(16px 16px 20px #0e3a5a);
+    transform: translate(100px) scale(0.7); 
   }
   100% { 
     opacity: 1; 

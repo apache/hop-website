@@ -10,6 +10,10 @@ enableRobotsTXT = true
 [markup.goldmark.renderer]
 unsafe= true
 
+[markup]
+    [markup.asciidocExt]
+        preserveTOC = true
+
 [params]
     openGraph = true
     images = ['https://hop.apache.org/img/hop-logo.png']
