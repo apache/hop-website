@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>1.0 on Hop</title>
+    <link>https://hop.apache.org/categories/1.0/</link>
+    <description>Recent content in 1.0 on Hop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 05 Oct 2021 07:59:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/1.0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Hop (Incubating) 1.0 is available!!</title>
+      <link>https://hop.apache.org/blog/2021/10/hop-1.0.0/</link>
+      <pubDate>Tue, 05 Oct 2021 07:59:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2021/10/hop-1.0.0/</guid>
+      <description>After more than two years of work, the Apache Hop community is pleased to announce the general availability of Apache Hop (Incubating) 1.0.
+    
+ This 1.0 release is the result of a massive amount of work by the Apache Hop community.
+ Let&amp;#39;s take a closer look at what Hop 1.0 brings: Code Architecture, cleanup, refactoring Hop GUI and a uniform set of tools Projects and Environments Portable runtimes: design once, run anywhere Unit, Integration and Regression Testing Life cycle management Community   Code Architecture, cleanup, refactoring Since Apache Hop started from the Kettle (Pentaho Data Integration) code base in late 2019, no stone has been left unturned.</description>
+    </item>
+    
+  </channel>
+</rss>

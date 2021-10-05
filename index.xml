@@ -6,7 +6,19 @@
     <description>Recent content in Apache Hop (Incubating) on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 02 Sep 2021 07:59:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 05 Oct 2021 07:59:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Hop (Incubating) 1.0 is available!!</title>
+      <link>https://hop.apache.org/blog/2021/10/hop-1.0.0/</link>
+      <pubDate>Tue, 05 Oct 2021 07:59:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2021/10/hop-1.0.0/</guid>
+      <description>After more than two years of work, the Apache Hop community is pleased to announce the general availability of Apache Hop (Incubating) 1.0.
+    
+ This 1.0 release is the result of a massive amount of work by the Apache Hop community.
+ Let&amp;#39;s take a closer look at what Hop 1.0 brings: Code Architecture, cleanup, refactoring Hop GUI and a uniform set of tools Projects and Environments Portable runtimes: design once, run anywhere Unit, Integration and Regression Testing Life cycle management Community   Code Architecture, cleanup, refactoring Since Apache Hop started from the Kettle (Pentaho Data Integration) code base in late 2019, no stone has been left unturned.</description>
+    </item>
+    
     <item>
       <title>Roundup July, August 2021</title>
       <link>https://hop.apache.org/blog/2021/09/roundup-2021-08/</link>
@@ -35,7 +47,7 @@
       
       <guid>https://hop.apache.org/blog/2021/07/roundup-2021-07/</guid>
       <description>As always at the start of another new month, let’s have a look at what happened at Hop over the last month. Here’s the recap for June 2021!
-   Hop 0.99 Release process We’ve created a couple of release candidate for Apache Hop (Incubating) 0.99. Since the Hop code base no longer contains a WIP (Work In Progress) disclaimer, the review process has become a little more strict. We’ve encountered a problem with a limited number of files in the Hop code base.</description>
+ Here are some quick links for the restless souls among you: Hop 0.99 Release process VFS Improvements Importer Improvements Hop Web Various 3Hx (Hot Hop Hangout) Sessions Community JIRA Activity     Hop 0.99 Release process We’ve created a couple of release candidate for Apache Hop (Incubating) 0.</description>
     </item>
     
     <item>
@@ -45,8 +57,7 @@
       
       <guid>https://hop.apache.org/blog/2021/06/roundup-2021-06/</guid>
       <description>As always at the start of another new month, let’s have a look at what happened at Hop over the last month. Here’s the recap for May 2021!
-   Hop 0.99 Release process started At the very end of the month (on May, 27th), the release process for Hop 0.99 was started, with a code cutoff point in early June.
- Hop 0.99 will be a release candidate for Hop 1.</description>
+ Here are some quick links for the restless souls among you: Hop 0.99 Release process started Avro Support Various 3Hx (Hot Hop Hangout) Sessions Community JIRA Activity     Hop 0.99 Release process started At the very end of the month (on May, 27th), the release process for Hop 0.</description>
     </item>
     
     <item>
@@ -56,8 +67,7 @@
       
       <guid>https://hop.apache.org/blog/2021/05/roundup-2021-05/</guid>
       <description>As always at the start of another new month, let’s have a look at what happened at Hop over the last month. Here’s the recap for April 2021!
-   0.70 release On April, 12th, the Hop community release Apache Hop (Incubating) 0.70. As our first release with downloadable binaries, 0.70 is another major step forward for Hop as a maturing Apache project.
- In a nutshell, the 0.70 release brought:</description>
+ Here are some quick links for the restless souls among you: 0.70 release 3Hx (Hot Hop Hangout) Sessions Documentation, Samples, Integration tests Various Hop search Community JIRA Activity     0.70 release On April, 12th, the Hop community release Apache Hop (Incubating) 0.</description>
     </item>
     
     <item>
@@ -77,8 +87,7 @@
       
       <guid>https://hop.apache.org/blog/2021/04/roundup-2021-04/</guid>
       <description>As always at the start of another new month, let’s have a look at what happened at Hop over the last month. Here’s the recap for March 2021!
-   Neo4j integration We’re really excited to welcome full Neo4j integration in Hop!
- The plugins that are now a part of Hop were already available from Matt’s personal github repository. Having all of this functionality available in the default Hop distribution is a major step forward.</description>
+ The list of items we need to cover in the monthly reports continues to grow. Here are some quick links for the restless souls among you: Neo4j integration New file explorer perspective New Metadata Types VFS Drivers New Plugins Various Community JIRA Activity     Neo4j integration We’re really excited to welcome full Neo4j integration in Hop!</description>
     </item>
     
     <item>
@@ -88,7 +97,7 @@
       
       <guid>https://hop.apache.org/blog/2021/03/roundup-2021-03/</guid>
       <description>As always at the start of another new month, let’s have a look at what happened at Hop over the last month. Here’s the recap for February 2021!
-   Metadata Injection Metadata injection was added to Hop months ago. As with most of the functionality that was ported from PDI/Kettle, some work was required to lift the code to the new flexibility and quality standards we’ve set for Hop.</description>
+ We have quite a lot of ground to cover. Here are some quick links for the restless souls among you: Metadata Injection Dark Mode Beam Spark runner improvements New Metadata Types New Plugins Various Community JIRA Tickets     Metadata Injection Metadata injection was added to Hop months ago.</description>
     </item>
     
     <item>
@@ -343,20 +352,20 @@
  Download Link
  PGP Signature file of download
  SHA512 Checksum file of download
+   1.0.0
+ October, 5th, 2021
+ Binaries
+ apache-hop-client-1.0.0-incubating.zip
+ asc
+ sha512
+   Sources
+ apache-hop-1.0.0-incubating-src.tar.gz
+ asc
+ sha512
    0.99
  August, 5th, 2021
  Binaries
  apache-hop-client-0.99-incubating.zip
- asc
- sha512
-   Sources
- apache-hop-0.99-incubating-src.tar.gz
- asc
- sha512
-   0.70
- April, 12th, 2021
- Binaries
- apache-hop-client-0.70-incubating.zip
  asc
  sha512
    Sources</description>
