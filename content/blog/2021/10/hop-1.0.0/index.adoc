@@ -79,9 +79,9 @@ Unit tests can be combined with higher-level integration and regression tests to
 
 A library of tests significantly improves the quality of a project. As a matter of fact, the Hop project team eats its own dog food: through a growing library of unit, regression and integration tests, the Hop developers have been able to identify and fix a number of issues that have been in the code base for over a decade.
 
-image:/img/Release-1.0/unit-tests.png[Hop unit tests, align="left", width="90%", link="image:/img/Release-1.0/unit-tests.png"]
+image:/img/Release-1.0/unit-tests.png[Hop unit tests, align="left", width="90%", link="/img/Release-1.0/unit-tests.png"]
 
-image:/img/Release-1.0/unit-tests-logging.png[Hop unit tests logging output, align="left", width="90%", link="image:/img/Release-1.0/unit-tests-logging.png"]
+image:/img/Release-1.0/unit-tests-logging.png[Hop unit tests logging output, align="left", width="90%", link="/img/Release-1.0/unit-tests-logging.png"]
 
 == Life cycle management
 
