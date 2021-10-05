@@ -4,7 +4,7 @@ date: 2021-10-05T07:59:56+02:00
 authors: ["bamaer"]
 categories: ["1.0", "Release", "Apache Hop"]
 preview: "Apache Hop 1.0 Released"
-description: "After more than 2 years of work, Apache Hop (Incubating) releases 1.0. This releaae is a milestone in the project's continued effort to become the world's leading open source data integration and data orchestration platform."
+description: "After more than 2 years of work, Apache Hop (Incubating) releases 1.0. This release is a milestone in the project's continued effort to become the world's leading open source data integration and data orchestration platform."
 draft: false
 ---
 
