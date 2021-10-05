@@ -1,6 +1,6 @@
 ---
 title: "Apache Hop (Incubating) 1.0 is available!!"
-date: 2021-09-17T07:59:56+02:00
+date: 2021-10-05T07:59:56+02:00
 authors: ["bamaer"]
 categories: ["1.0", "Release", "Apache Hop"]
 preview: "Apache Hop 1.0 Released"

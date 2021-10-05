@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="http://fonts.cdnfonts.com/css/ostrich-sans-2" type="text/css"?>
 <svg
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
@@ -8,9 +10,7 @@
    viewBox="0 0 440.00003 506.47376"
    id="svg1530">
   <style>
-.logoholder {
-/*   border: 1px solid black;  */
-}
+
 #hoplogo {
   visibility: hidden; 
   transform: translate(100px) scale(0.6); 
@@ -27,11 +27,11 @@
   animation-delay: 1s; 
 }
 
-.hoptext { 
+.hoptext {
   font-family: 'Ostrich Sans Black';
-	fill: #0e3a5a;
-	font-size: 12em;
-	animation: strokeone 6s forwards;
+  fill: #0e3a5a;
+  font-size: 12em;
+  animation: strokeone 6s forwards;
 }
 
 
