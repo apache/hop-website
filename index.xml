@@ -362,13 +362,7 @@
  apache-hop-1.0.0-incubating-src.tar.gz
  asc
  sha512
-   0.99
- August, 5th, 2021
- Binaries
- apache-hop-client-0.99-incubating.zip
- asc
- sha512
-   Sources</description>
+      Docker Apache Hop is available as a Docker image on Dockerhub:</description>
     </item>
     
     <item>
