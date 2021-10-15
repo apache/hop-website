@@ -10,12 +10,6 @@ description: "Download Apache Hop (Incubating) source and binary releases or Doc
 | Version | Date | Description | Download Link | PGP Signature file of download | SHA512 Checksum file of download
 .2+| link:/blog/2021/10/hop-1.0.0/[1.0.0] .2+| October, 5th, 2021 | **Binaries** | https://www.apache.org/dyn/closer.cgi?filename=incubator/hop/1.0.0/apache-hop-client-1.0.0-incubating.zip&action=download[**apache-hop-client-1.0.0-incubating.zip**] | https://downloads.apache.org/incubator/hop/1.0.0/apache-hop-client-1.0.0-incubating.zip.asc[asc] | https://downloads.apache.org/incubator/hop/1.0.0/apache-hop-client-1.0.0-incubating.zip.sha512[sha512]
 | Sources | https://www.apache.org/dyn/closer.cgi?filename=incubator/hop/1.0.0/apache-hop-1.0.0-incubating-src.tar.gz&action=download[apache-hop-1.0.0-incubating-src.tar.gz] | https://downloads.apache.org/incubator/hop/1.0.0/apache-hop-1.0.0-incubating-src.tar.gz.asc[asc] | https://downloads.apache.org/incubator/hop/1.0.0/apache-hop-1.0.0-incubating-src.tar.gz.sha512[sha512]
-.2+| link:/blog/2021/08/hop-0.99/[0.99] .2+| August, 5th, 2021 | **Binaries** | https://www.apache.org/dyn/closer.cgi?filename=incubator/hop/0.99/apache-hop-client-0.99-incubating.zip&action=download[**apache-hop-client-0.99-incubating.zip**] | https://downloads.apache.org/incubator/hop/0.99/apache-hop-client-0.99-incubating.zip.asc[asc] | https://downloads.apache.org/incubator/hop/0.99/apache-hop-client-0.99-incubating.zip.sha512[sha512]
- | Sources | https://www.apache.org/dyn/closer.cgi?filename=incubator/hop/0.99/apache-hop-0.99-incubating-src.tar.gz&action=download[apache-hop-0.99-incubating-src.tar.gz] | https://downloads.apache.org/incubator/hop/0.99/apache-hop-0.99-incubating-src.tar.gz.asc[asc] | https://downloads.apache.org/incubator/hop/0.99/apache-hop-0.99-incubating-src.tar.gz.sha512[sha512]
-
-.2+| link:/blog/2021/04/release-0.70/[0.70] .2+| April, 12th, 2021 | **Binaries** | https://www.apache.org/dyn/closer.cgi?filename=incubator/hop/0.70/apache-hop-client-0.70-incubating.zip&action=download[**apache-hop-client-0.70-incubating.zip**] | https://downloads.apache.org/incubator/hop/0.70/apache-hop-client-0.70-incubating.zip.asc[asc] | https://downloads.apache.org/incubator/hop/0.70/apache-hop-client-0.70-incubating.zip.sha512[sha512]
- | Sources | https://www.apache.org/dyn/closer.cgi?filename=incubator/hop/0.70/apache-hop-0.70-incubating.tar.gz&action=download[apache-hop-0.70-incubating.tar.gz] | https://downloads.apache.org/incubator/hop/0.70/apache-hop-0.70-incubating.tar.gz.asc[asc] | https://downloads.apache.org/incubator/hop/0.70/apache-hop-0.70-incubating.tar.gz.sha512[sha512]
-| link:/blog/2021/01/release-0.60/[0.60] | jan, 2021 | Sources | https://www.apache.org/dyn/closer.cgi?filename=incubator/hop/0.60/apache-hop-0.60-incubating.tar.gz&action=download[apache-hop-0.60-incubating.tar.gz] | https://downloads.apache.org/incubator/hop/0.60/apache-hop-0.60-incubating.tar.gz.asc[asc] | https://downloads.apache.org/incubator/hop/0.60/apache-hop-0.60-incubating.tar.gz.sha512[sha512]
 |===
 
 ## Docker
@@ -24,17 +18,6 @@ Apache Hop is available as a Docker image on Dockerhub:
 
 * https://hub.docker.com/r/apache/incubator-hop[Hop], Docker pull command:  `docker pull apache/incubator-hop`
 * https://hub.docker.com/r/apache/incubator-hop-web[Hop Web], Docker pull command `docker pull apache/incubator-hop-web`
-
-
-//## Current Development (Nightly) Builds
-//
-//IMPORTANT: These are not official releases!
-//
-//https://repository.apache.org/content/repositories/snapshots/org/apache/hop/hop-client/0.99-SNAPSHOT/[Download] latest Snapshots (0.99-SNAPSHOT)
-//
-//These are the latest builds available directly from the master branch.
-//
-//If you find issues please file a ticket on our https://jira.project-hop.org[Jira ,window=_blank] please make sure to check if no ticket for your issue has been created yet, or join us on our https://chat.project-hop.org[chat ,window=_blank] and come discuss your ideas.
 
 
 ## Keys
