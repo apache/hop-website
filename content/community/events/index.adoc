@@ -57,22 +57,25 @@ All known Hop events are listed below. Add your event to the list below or annou
 [%header,cols="5%,60%,10%,10%,15%"]
 |===
 |Event name|Description|Date|Language|Link (subscribe/attend)
-|{set:cellbgcolor:#30328422}-|First Brazilian Hop User Group Meetup|2021-7-15|PT|https://www.meetup.com/pt-BR/apache-hop-user-group-brasil/events/279133079/[meetup]
+|-|First Brazilian Hop User Group Meetup|2021-7-15|PT|https://youtu.be/NGD6PGr8Id4[youtube^]
 |===
-{set:cellbgcolor}
+
 
 === Past events
 
 [%header,cols="5%,60%,10%,10%,15%"]
 |===
 |Event name|Description|Date|Language|Recording
-|3H10|Apache Hop and Neo4j|2021-07-01|EN|-
-|3H9|End-to-end workflows|2021-06-17|EN|https://youtu.be/63LxM3gU1sQ[youtube]
-|-|First Spanish Hop User Group Meetup|2021-6-16|ES|
-|3H8|Apache Hop in Docker|2021-06-03|EN|https://www.youtube.com/watch?v=ayMD6RST4Do[youtube]
+|3H12|3H12 - a well-designed Hop project walkthrough https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/281418940/[register^]|2021-10-28|EN|-
+|{set:cellbgcolor:#30328422}-|5-fach Speed für Ihr Datenprojekt mit Hop (IT-Novum) https://t.co/l5AHSSYzhr?amp=1[register]|2021-10-26|DE|-
+|{set:cellbgcolor}3H11|Apache Hop 1.0, TLP graduation and beyond|2021-10-07|EN|https://youtu.be/eaHuga0IReg[youtube^]
+|3H10|Apache Hop and Neo4j|2021-07-01|EN|https://youtu.be/i30SWDiiZqw[youtube^]
+|3H9|End-to-end workflows|2021-06-17|EN|https://youtu.be/63LxM3gU1sQ[youtube^]
+|-|First Spanish Hop User Group Meetup|2021-6-16|ES|https://youtu.be/rosC4KvBivM[youtube^]
+|3H8|Apache Hop in Docker|2021-06-03|EN|https://www.youtube.com/watch?v=ayMD6RST4Do[youtube^]
 |3H7|End-to-end pipelines with testing, logging, monitoring and best practices
-|2021-05-20|EN|https://www.youtube.com/watch?v=CkbOThb2HPo[youtube]
-|3H6|Big Data Orchestration on Spark, Flink and DataFlow using Apache Beam|2021-04-29|EN|https://www.youtube.com/watch?v=s_cstCPdnKI[youtube]
-|3H5|Get Started With Hop - Concepts and First Pipelines|2021-04-15|EN|https://youtu.be/gKVb_r4v_Oc[youtube]
-|3H4| The Road to Hop 1.0|2021-04-01|EN|https://www.youtube.com/watch?v=EhO_DYszu_Y&t=2s[youtube]
+|2021-05-20|EN|https://www.youtube.com/watch?v=CkbOThb2HPo[youtube^]
+|3H6|Big Data Orchestration on Spark, Flink and DataFlow using Apache Beam|2021-04-29|EN|https://www.youtube.com/watch?v=s_cstCPdnKI[youtube^]
+|3H5|Get Started With Hop - Concepts and First Pipelines|2021-04-15|EN|https://youtu.be/gKVb_r4v_Oc[youtube^]
+|3H4| The Road to Hop 1.0|2021-04-01|EN|https://www.youtube.com/watch?v=EhO_DYszu_Y&t=2s[youtube^]
 |===
