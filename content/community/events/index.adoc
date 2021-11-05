@@ -55,21 +55,22 @@ All known Hop events are listed below. Add your event to the list below or annou
 
 === Upcoming
 
-[%header,cols="5%,60%,10%,10%,15%"]
+[%header,cols="5%,55%,15%,10%,15%"]
 |===
 |Event name|Description|Date|Language|Link (subscribe/attend)
-|-|First Brazilian Hop User Group Meetup|2021-7-15|PT|https://youtu.be/NGD6PGr8Id4[youtube^]
+|{set:cellbgcolor:#30328422}-|Apache Hop (Incubating) - User Group Japan #1|2021-11-16|JP-EN|https://www.meetup.com/en-AU/apache-hop-user-group-japan/events/281837833/[register^]
 |===
-
+{set:cellbgcolor}
 
 === Past events
 
-[%header,cols="5%,60%,10%,10%,15%"]
+[%header,cols="5%,55%,15%,10%,15%"]
 |===
 |Event name|Description|Date|Language|Recording
-|3H12|3H12 - a well-designed Hop project walkthrough https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/281418940/[register^]|2021-10-28|EN|-
-|{set:cellbgcolor:#30328422}-|5-fach Speed für Ihr Datenprojekt mit Hop (IT-Novum) https://t.co/l5AHSSYzhr?amp=1[register]|2021-10-26|DE|-
-|{set:cellbgcolor}3H11|Apache Hop 1.0, TLP graduation and beyond|2021-10-07|EN|https://youtu.be/eaHuga0IReg[youtube^]
+|3H12|A well-designed Hop project walkthrough|2021-10-28|EN|https://youtu.be/a1jg1A2vmtA[youtube^]
+|-|5-fach Speed für Ihr Datenprojekt mit Hop (IT-Novum)|2021-10-26|DE|-
+|3H11|Apache Hop 1.0, TLP graduation and beyond|2021-10-07|EN|https://youtu.be/eaHuga0IReg[youtube^]
+|-|First Brazilian Hop User Group Meetup|2021-7-15|PT|https://youtu.be/NGD6PGr8Id4[youtube^]
 |3H10|Apache Hop and Neo4j|2021-07-01|EN|https://youtu.be/i30SWDiiZqw[youtube^]
 |3H9|End-to-end workflows|2021-06-17|EN|https://youtu.be/63LxM3gU1sQ[youtube^]
 |-|First Spanish Hop User Group Meetup|2021-6-16|ES|https://youtu.be/rosC4KvBivM[youtube^]
