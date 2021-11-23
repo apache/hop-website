@@ -55,7 +55,7 @@ Mentors and community members are encouraged to contribute to this page and comm
 |===
 |ID|Description|Status
 |QU10|The project is open and honest about the quality of its code. Various levels of quality and maturity for various modules are natural and acceptable as long as they are clearly communicated.|Open issues are listed in the public Jira and discussed in JIRA, on chat and the mailing list.
-|QU20|The project puts a very high priority on producing secure software.|Security issues are treated with the highest priority. We use Apaches default way to submit security related information, which is described on the link:/website[website].
+|QU20|The project puts a very high priority on producing secure software.|Security issues are treated with the highest priority. We use Apaches default way to submit security related information, which is described on the https://issues.apache.org/security/[website].
 |QU30|The project provides a well-documented, secure and private channel to report security issues, along with a documented way of responding to them.|
 |QU40|The project puts a high priority on backwards compatibility and aims to document any incompatible changes and provide tools and documentation to help users transition to new features.|Hop tries to be as backward compatible as possible. Incompatibilities have been prevented so far, but will be documented if/when they occur.
 |QU50|The project strives to respond to documented bug reports in a timely manner.|The community is very active in responding to bug reports and usually fixes them within a short time period.
