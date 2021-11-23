@@ -1,0 +1,14 @@
+---
+title: "Apache Hop (Incubating) Security Vulnerabilities"
+description:
+---
+
+== Security Vulnerabilities
+
+Please note that binary patches are not produced for individual vulnerabilities. To obtain the binary fix for a particular vulnerability you should upgrade to an Apache Hop (Incubating) version where that vulnerability has been fixed.
+
+For more information about reporting vulnerabilities, see the https://www.apache.org/security/[Apache Security Team] page.
+
+== Known Vulnerabilities
+
+No vulnerabilities have been reported.
