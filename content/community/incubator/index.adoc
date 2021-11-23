@@ -1,0 +1,100 @@
+---
+title: "Apache Hop (Incubating) Maturity Self-Assessment"
+description: Self-assessment of Apache Hop's maturity in preparation for the graduation as a Top Level Project
+---
+
+== Overview
+
+This document is an assessment of the maturity of Apache Hop (Incubating) as an Apache project.
+
+This document is intended to inform the decision of mentors, community, incubator PMC and ASF Board of Directors) to graduate Hop as a top-level Apache project.
+
+== Maturity model assessment
+
+Mentors and community members are encouraged to contribute to this page and comment on it, the following table summarizes project’s self-assessment against the http://community.apache.org/apache-way/apache-project-maturity-model.html[Apache Maturity Model].
+
+=== Code
+
+[options="header", width="90%", cols="1,3,5"]
+|===
+|ID|Description|Status
+|CD10|The project produces Open Source software for distribution to the public, at no charge.|The project source code is licensed under the Apache License, version 2.0.
+|CD20|Anyone can easily discover and access the project's code.|The Apache Hop (Incubating) source code is available on https://gitbox.apache.org/repos/asf?p=incubator-hop.git[GitBot] and http://github.com/apache/incubator-hop[github]
+|CD30|Anyone using standard, widely-available tools, can build the code in a reproducible way.|The Apache Hop (Incubating) is built after each commit and integration tests are run on a daily basis on the https://ci-builds.apache.org/job/Hop/[ASF Jenkins server]. + Development environment setup and build instructions are http://hop.apache.org/dev-manual/latest/setup-dev-environment.html[documented] on the Hop website.
+|CD40|The full history of the project's code is available via a source code control system, in a way that allows anyone to recreate any released version.| The entire commit history is available from the https://github.com/apache/incubator-hop/commit/e24b53ea7dfe6bcad9e03011d1ce88eeb1bb7edc[beginning].
+|CD50|The source code control system establishes the provenance of each line of code in a reliable way, based on strong authentication of the committer. When third parties contribute code, commit messages provide reliable information about the code provenance.|The project uses the git repository, managed by Apache Infra, ensuring provenance of each line of code to a committer. All code is checked in after review and approval of a pull-request. For 3rd party contribution, the commit message and logs will include all the details of author and committer.
+|===
+
+=== Licenses and Copyright
+
+[options="header", width="90%", cols="1,3,5"]
+|===
+|ID|Description|Status
+|LC10|The Apache License, version 2.0, covers the released code.|Source distributions clearly state license. Convenience binaries clearly state license.
+|LC20|Libraries that are mandatory dependencies of the project's code do not create more restrictions than the Apache License does.|The list of mandatory dependencies have been reviewed to contain approved licenses only.
+|LC30|The libraries mentioned in LC20 are available as Open Source software|All mandatory dependencies are available as open source software.
+|LC40|Committers are bound by an Individual Contributor Agreement (the "Apache iCLA") that defines which code they may commit and how they need to identify code that is not their own.|The project uses a repository managed by Apache Gitbox, write access requires an Apache account, which requires an ICLA on file.
+|LC50|The project clearly defines and documents the copyright ownership of everything that the project produces.|All files in the source repository have appropriate headers. An automated process is in place to ensure every file has expected headers.
+|===
+
+=== Releases
+
+[options="header", width="90%", cols="1,3,5"]
+|===
+|ID|Description|Status
+|RE10|Releases consist of source code, distributed using standard and open archive formats that are expected to stay readable in the long term.|Releases are available via https://dlcdn.apache.org/incubator/hop/. Source code and convenience binaries are linked to from the http://hop.apache.org/download/[website].
+|RE20|The project's PMC (Project Management Committee, see CS10) approves each software release in order to make the release an act of the Foundation.|All incubating releases have been approved by the Hop community and the Incubator, all with at least 3 (P)PMC votes and more +1 than -1.
+|RE30|Releases are signed and/or distributed along with digests that anyone can reliably use to validate the downloaded archives.|Releases are signed, the keys are available from the http://hop.apache.org/download/[Hop download page].
+|RE40|The project can distribute convenience binaries alongside source code, but they are not Apache Releases, they are provided with no guarantee.|Convenience binaries are available from the download page, a Docker image is available from https://hub.docker.com/r/apache/incubator-hop[Dockerbub]
+|RE50|The project documents a repeatable release process so that someone new to the project can independently generate the complete set of artifacts required for a release.|The processes to https://hop.apache.org/dev-manual/latest/apache-release/creating-a-release.html[create], https://hop.apache.org/dev-manual/latest/apache-release/promoting-a-release.html[promote] and https://hop.apache.org/dev-manual/latest/apache-release/checking-a-release.html[check] a release are documented.
+|===
+
+=== Quality
+
+[options="header", width="90%", cols="1,3,5"]
+|===
+|ID|Description|Status
+|QU10|The project is open and honest about the quality of its code. Various levels of quality and maturity for various modules are natural and acceptable as long as they are clearly communicated.|Open issues are listed in the public Jira and discussed in JIRA, on chat and the mailing list.
+|QU20|The project puts a very high priority on producing secure software.|Security issues are treated with the highest priority. We use Apaches default way to submit security related information, which is described on the link:/website[website].
+|QU30|The project provides a well-documented, secure and private channel to report security issues, along with a documented way of responding to them.|
+|QU40|The project puts a high priority on backwards compatibility and aims to document any incompatible changes and provide tools and documentation to help users transition to new features.|Hop tries to be as backward compatible as possible. Incompatibilities have been prevented so far, but will be documented if/when they occur.
+|QU50|The project strives to respond to documented bug reports in a timely manner.|The community is very active in responding to bug reports and usually fixes them within a short time period.
+|===
+
+=== Community
+
+[options="header", width="90%", cols="1,3,5"]
+|===
+|ID|Description|Status
+|CO10|The project has a well-known homepage that points to all the information required to operate according to this maturity model.|The website describes the project and contains links to all relevant systems (e.g., issue tracker, confluence, source repos, mailing lists).
+|CO20|The community welcomes contributions from anyone who acts in good faith and in a respectful manner, and who adds value to the project.|Committers are really welcome contributions and the commuity is actively seeking for new committers.
+|CO30|Contributions include source code, documentation, constructive bug reports, constructive discussions, marketing and generally anything that adds value to the project.|The community welcomes all contributions, e.g., also blog posts or other marketing material, and is very clear about contributions being more than code.
+|CO40|The community strives to be meritocratic and gives more rights and responsibilities to contributors who, over time, add value to the project.|Several committers and PPMC members have been elected during the incubation phase so far.
+|CO50|The project documents how contributors can earn more rights such as commit access or decision power, and applies these principles consistently.|The process to become a committer or (P)PMC member is documented on the https://hop.apache.org/community/contributing/[website].
+|CO60|The community operates based on consensus of its members (see CS10) who have decision power. Dictators, benevolent or not, are not welcome in Apache projects.|The project works to build consensus. All PPMC votes have been unanimous so far.
+|CO70|The project strives to answer user questions in a timely manner.|Responses to reported issues or asked questions typically are handled by the community withing a matter of a few hours
+|===
+
+=== Consensus Building
+
+[options="header", width="90%", cols="1,3,5"]
+|===
+|ID|Description|Status
+|CS10|The project maintains a public list of its contributors who have decision power. The project's PMC (Project Management Committee) consists of those contributors.|Committers and contributors are listed on the website's https://hop.apache.org/community/team/[team page].
+|CS20|Decisions require a consensus among PMC members and are documented on the project's main communications channel. The PMC takes community opinions into account, but the PMC has the final word.|All important decisions were made by consensus on the mailing list.
+|CS30|The project uses documented voting rules to build consensus when discussion is not sufficient.|The project uses the standard ASF voting rules.
+|CS40|In Apache projects, vetoes are only valid for code commits. The person exercising the veto must justify it with a technical explanation, as per the Apache voting rules defined in CS30.|The project has not used a veto at any point during incubation.
+|CS50|All "important" discussions happen asynchronously in written form on the project's main communications channel. Offline, face-to-face or private discussions 11 that affect the project are also documented on that channel.|The main communication channel is the mailing list. There are other channels, such as the chat channel, which are not used for important project discussions.
+|===
+
+=== Independence
+
+[options="header", width="90%", cols="1,3,5"]
+|===
+|ID|Description|Status
+|IN10|The project is independent from any corporate or organizational influence.|The PPMC (excluding mentors) consists of members from at least 4 different organisations. Committers also come from various other organizations which are not represented in the PPMC.
+|IN20|Contributors act as themselves, not as representatives of a corporation or organization.|The contributors act on their own initiative without representing a corporation or organization.
+|===
+
+
+
