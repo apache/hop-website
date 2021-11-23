@@ -280,6 +280,29 @@
     </item>
     
     <item>
+      <title>Apache Hop (Incubating) Maturity Self-Assessment</title>
+      <link>https://hop.apache.org/community/incubator/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hop.apache.org/community/incubator/</guid>
+      <description>Overview This document is an assessment of the maturity of Apache Hop (Incubating) as an Apache project.
+ This document is intended to inform the decision of mentors, community, incubator PMC and ASF Board of Directors) to graduate Hop as a top-level Apache project.
+   Maturity model assessment Mentors and community members are encouraged to contribute to this page and comment on it, the following table summarizes project’s self-assessment against the Apache Maturity Model.</description>
+    </item>
+    
+    <item>
+      <title>Apache Hop (Incubating) Security Vulnerabilities</title>
+      <link>https://hop.apache.org/security/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hop.apache.org/security/</guid>
+      <description>Security Vulnerabilities Please note that binary patches are not produced for individual vulnerabilities. To obtain the binary fix for a particular vulnerability you should upgrade to an Apache Hop (Incubating) version where that vulnerability has been fixed.
+ For more information about reporting vulnerabilities, see the Apache Security Team page.
+   Known Vulnerabilities No vulnerabilities have been reported.
+   </description>
+    </item>
+    
+    <item>
       <title>Architecture</title>
       <link>https://hop.apache.org/docs/architecture/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

@@ -116,6 +116,10 @@
     <loc>https://hop.apache.org/manual/</loc>
     <priority>0</priority>
   </url><url>
+    <loc>https://hop.apache.org/community/incubator/</loc>
+  </url><url>
+    <loc>https://hop.apache.org/security/</loc>
+  </url><url>
     <loc>https://hop.apache.org/docs/architecture/</loc>
   </url><url>
     <loc>https://hop.apache.org/community/contribution-guides/code-contribution-guide/</loc>
