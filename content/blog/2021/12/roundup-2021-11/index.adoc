@@ -1,0 +1,140 @@
+---
+title: "Roundup November 2021"
+date: 2021-12-02T07:59:56+02:00
+authors: ["bamaer"]
+categories: ["Roundup", "Apache Hop"]
+preview: "Roundup November 2021"
+description: "The Apache Hop (Incubating) recap for November 2021: "
+draft: false
+---
+
+:toc: macro
+:toclevels: 2
+:toc-title: As always at the start of another new month, let's have a look at what happened at Hop over the last month. Here's the recap for November 2021!
+:toc-class: none
+
+toc::[]
+
+== Graduation preparation
+
+After the release of Hop 1.0 in early October, the Hop team started working towards the second major milestone: graduate Hop as an Apache Top Level project.
+
+The graduation process is not complex but requires a number of steps and quite a bit of preparation and time. A lot of these steps require mailing lists discussions and voting rounds.
+
+Even though Hop is not a top level project yet, we're making good progress. Except some exciting news really soon!
+
+== Hop 1.1.0 preparation
+
+[[hop-server]]
+=== Hop Server
+
+A lot of work was done on Hop Server:
+
+* Hop Server now allow asynchronous execution of long-running workflows
+* the **Get Server Status transform** retrieves a lot of server and operating system metrics from one of your Hop Servers.
+* Hop Server now supports defining a project or environment on startup
+* Hop Server status can now be queried from the command line
+
+image:/img/Roundup-2021-12/hop-transform-server-status.png[Hop Server Status Transform, width="40%"]
+
+[[neo4j]]
+== Neo4j Graph Output
+
+The Neo4j Graph Output saw a lot of work. Mostly of the improvements are under the cover improvements, but are offer a lot of new options to work with Hop in your Neo4j projects.
+
+The Neo4j Graph Output transform now supports:
+
+* self-relationships: relationship from a Node type to itself
+* multiple relationships between 2 nodes
+* models with multiple node labels
+
+image:/img/Roundup-2021-12/hop-transforms-neo4j-graph-output.png[Hop - Neo4j Graph Output, width="90%"]
+
+[[fixes-improvements]]
+=== Lots and lots of bug fixes and improvements
+
+There always are bugs to fix and things to improve. The Hop team worked on more than 160 tickets for the upcoming 1.1.0 release.
+
+Some of the most important fixes and smaller improvements are:
+
+* Hop Gui had some issues when working with large pipelines and workflows. These issues are fixed, and it now is a lot easier to navigate the gui in a large workflow or pipeline by simple mouse-wheel-dragging through the UI.
+* the context dialog now uses keywords to search for transforms, actions and other metadata items.
+* relational database transforms (e.g. table input, table output) now support variables for the connection name.
+* Kafka consumer transform now shows sub-pipeline logs in main pipeline log
+* CockroachDB as a new database type
+* lots of small improvements on projects and environments
+* lots of small improvements and support for additional transforms in metadata injection
+* lots of documentation updates
+* additional samples
+* additional integration tests: Hop now runs close to 400 integration test workflows and pipelines. This growing test library helps us to build and maintain the best Hop releases possible.
+
+[[plugins]]
+== New plugins
+
+Transforms:
+
+* Get Server Status: get Hop Server metrics (see Hop Server earlier)
+* Standardize Phone Numbers: standardize phone numbers in your data. No more regex parsing required!
+
+[[hop-2.0]]
+== Apache Hop 2.0 preparation.
+
+The Hop team is already looking past Hop 1.1.0 and towards Hop 2.0.
+
+We created a separate branch with its own https://ci-builds.apache.org/job/Hop/job/Hop/job/2.0.0/[daily build] to start working towards Hop 2.0 on Java 11.
+
+It's not a lot of fun to watch yet, the build still breaks, but there's progress. We're fixing issues with every build, and will eventually get there.
+
+[[community]]
+== Community
+
+=== Hop Mailing lists
+
+Don't forget to subscribe to our mailto:dev-subscribe@hop.apache.org[dev] and mailto:users-subscribe@hop.apache.org[users] mailing lists!
+These mailing lists allow us to discuss and make decisions in a process that is as transparent and inclusive as possible, and as such are an important tool in our communication as an Apache project.
+
+The dev and user lists currently _only_ have 33 and 38 subscribers respectively. We can do better, Hop Community!
+
+Subscribing is as easy as sending an empty email by clicking the links below:
+
+* mailto:users-subscribe@hop.apache.org[users]: general how-to and functionality questions. Ask us anything!
+* mailto:dev-subscribe@hop.apache.org[dev]: developer discussions. There's a lot of informal discussion going on in our https://chat.project-hop.org[chat channels], but decisions that matter are taken on the dev list!
+
+=== 3Hx - Hot Hop Hangouts
+
+We had one hangout in November, and one in late October that wasn't included in previous updates.
+
+* 3H12 - a well-designed Hop project walkthrough (2021-10-28, https://www.youtube.com/watch?v=a1jg1A2vmtA[recording])
+* 3H13 - Apache Hop sucks! Let's un-suck it (2021-11-18, https://www.youtube.com/watch?v=qW5Jwe5OipU[recording])
+
+Check the xref:../../../../community/events/index.adoc[events] page for the full 3Hx schedule.
+
+=== Hop Community
+
+The Hop community continues to grow:
+
+* chat: 243 registered members (up from 217) link:https://chat.project-hop.org[join]
+* LinkedIn: 690 followers (up from 603) link:https://www.linkedin.com/company/hop-project[follow]
+* Twitter: 545 followers (up from 488) link:https://twitter.com/ApacheHop[follow]
+* YouTube: 325 subscribers (up from 247) link:https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA[subscribe]
+* Meetup: 211 members (up from 168) link: https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts[join]
+
+Check out the link:/community/team/[complete list] of committers and contributors.
+
+Without community contribution, Hop is just a coding club! Please feel free to join, participate in the discussion, test, file bug tickets on the software or documentation, ... Contributing is a lot more than writing code.
+
+Check out our link:/community/contributing/[contribution guides] and http://hop.apache.org/community/ethos/[Code of Conduct] to find out more.
+
+[[tickets]]
+## JIRA Activity
+
+Here's a quick overview of the 79 tickets the Hop community worked on in November
+
+* Resolved: 40
+* In Progress: 2
+* Open: 35
+* Closed: 2
+
+The full list of issues that had activity over the last month is available https://issues.apache.org/jira/issues/?jql=project%20%3D%20HOP%20AND%20status%20in%20(Resolved%2C%20Closed)%20AND%20resolved%20%3E%3D%202021-11-01%20AND%20resolved%20%3C%3D%202021-11-30%20ORDER%20BY%20updated%20ASC&startIndex=50[here^]
+
+
