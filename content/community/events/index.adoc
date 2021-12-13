@@ -58,7 +58,7 @@ All known Hop events are listed below. Add your event to the list below or annou
 [%header,cols="5%,55%,15%,10%,15%"]
 |===
 |Event name|Description|Date|Language|Link (subscribe/attend)
-|{set:cellbgcolor:#30328422}-|Apache Hop (Incubating) - User Group Japan #1|2021-11-16|JP-EN|https://www.meetup.com/en-AU/apache-hop-user-group-japan/events/281837833/[register^]
+|{set:cellbgcolor:#30328422}3H14|Apache Hop in Docker|2021-12-16|EN|https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/events/282654541/[register^]
 |===
 {set:cellbgcolor}
 
@@ -67,6 +67,8 @@ All known Hop events are listed below. Add your event to the list below or annou
 [%header,cols="5%,55%,15%,10%,15%"]
 |===
 |Event name|Description|Date|Language|Recording
+|3H13|Apache Hop Sucks. Let's un-suck it!|2021-11-18|EN|https://youtu.be/qW5Jwe5OipU[youtube^]
+|-|Apache Hop (Incubating) - User Group Japan #1|2021-11-16|JP-EN|-
 |3H12|A well-designed Hop project walkthrough|2021-10-28|EN|https://youtu.be/a1jg1A2vmtA[youtube^]
 |-|5-fach Speed für Ihr Datenprojekt mit Hop (IT-Novum)|2021-10-26|DE|-
 |3H11|Apache Hop 1.0, TLP graduation and beyond|2021-10-07|EN|https://youtu.be/eaHuga0IReg[youtube^]
