@@ -34,8 +34,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hop.apache.org/docs/roadmap/</guid>
-      <description>The Apache Hop team just released version 0.99. It offers our users the chance to test critical functionality before version 1.0 is released.
- After that our community wants to graduate as a top level project.
+      <description>The Apache Hop team just released version 1.0.0 and became a top level project at the Apache Software Foundation. The immediate next goal for us is to release version 1.1.0 with almost 200 fixes and improvements.
  Here are a few directions that we want to explore for the future of our software:
    Set up a software marketplace where 3rd party plugins can be found
   Pluggable field expressions in transforms and actions</description>
