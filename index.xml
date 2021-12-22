@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Apache Hop (Incubating) on Hop</title>
+    <title>Apache Hop on Hop</title>
     <link>https://hop.apache.org/</link>
-    <description>Recent content in Apache Hop (Incubating) on Hop</description>
+    <description>Recent content in Apache Hop on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 02 Dec 2021 07:59:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/index.xml" rel="self" type="application/rss+xml" />
@@ -300,12 +300,12 @@
     </item>
     
     <item>
-      <title>Apache Hop (Incubating) Security Vulnerabilities</title>
+      <title>Apache Hop Security Vulnerabilities</title>
       <link>https://hop.apache.org/security/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hop.apache.org/security/</guid>
-      <description>Security Vulnerabilities Please note that binary patches are not produced for individual vulnerabilities. To obtain the binary fix for a particular vulnerability you should upgrade to an Apache Hop (Incubating) version where that vulnerability has been fixed.
+      <description>Security Vulnerabilities Please note that binary patches are not produced for individual vulnerabilities. To obtain the binary fix for a particular vulnerability you should upgrade to an Apache Hop version where that vulnerability has been fixed.
  For more information about reporting vulnerabilities, see the Apache Security Team page.
    Known Vulnerabilities No vulnerabilities have been reported.
    </description>
@@ -348,7 +348,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hop.apache.org/community/commercial/</guid>
-      <description>Commercial Support Apache Hop (Incubating) is gaining traction in data orchestration projects across a number of industries. As such, several companies have built products and services around Hop. This page is dedicated to providing descriptions of those offerings and links to more information. Companies are definitely encouraged to update this page directly or send a mail to the Hop PMC with a description of your offerings and we can update the page.</description>
+      <description>Commercial Support Apache Hop is gaining traction in data orchestration projects across a number of industries. As such, several companies have built products and services around Hop. This page is dedicated to providing descriptions of those offerings and links to more information. Companies are definitely encouraged to update this page directly or send a mail to the Hop PMC with a description of your offerings and we can update the page.</description>
     </item>
     
     <item>
@@ -378,7 +378,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hop.apache.org/download/</guid>
-      <description>Apache Hop (incubating)     Version
+      <description>Apache Hop     Version
  Date
  Description
  Download Link
@@ -394,7 +394,8 @@
  apache-hop-1.0.0-incubating-src.tar.gz
  asc
  sha512
-      Docker Apache Hop is available as a Docker image on Dockerhub:</description>
+      Docker Apache Hop is available as a Docker image on Dockerhub:
+   Hop, Docker pull command: docker pull apache/incubator-hop</description>
     </item>
     
     <item>
@@ -414,11 +415,11 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hop.apache.org/community/events/</guid>
-      <description>User Groups   3Hx - Apache Hop (Incubating) Hot Hop Hangouts 
-  Grupo de usuarios de Apache Hop Incubating en Español 
-  Grupo de usuários do Apache Hop Incubating em Português 
-  Apache Hop Incubating em Português no Telegram 
-  日本Apache Hop Incubatingユーザーグループ (Apache Hop Incubating User Group Japan) 
+      <description>User Groups   3Hx - Apache Hop Hot Hop Hangouts 
+  Grupo de usuarios de Apache Hop en Español 
+  Grupo de usuários do Apache Hop em Português 
+  Apache Hop em Português no Telegram 
+  日本Apache Hop ユーザーグループ (Apache Hop User Group Japan) 
      Events Apache Events  For more information about Apache organised events visit the Apache events page</description>
     </item>
     
