@@ -1,5 +1,5 @@
 ---
-title: Apache Hop (Incubating)
+title: Apache Hop
 description: Apache Hop - The Hop Orchestration Platform aims to facilitate all aspects of data and metadata orchestration.
 ---
 
@@ -109,7 +109,7 @@ Developers and engineers can manage the entire project life cycle from the Hop G
 
 **Hop is your project!**
 
-Hop is an [Apache Software Foundation](https://www.apache.org) [Incubating](https://incubator.apache.org) project, available under the [Apache v2 license](https://apache.org/licenses/LICENSE-2.0). It's a complete open community, always listening to proposals and comments.
+Hop is an [Apache Software Foundation](https://www.apache.org) project, available under the [Apache v2 license](https://apache.org/licenses/LICENSE-2.0). It's a complete open community, always listening to proposals and comments.
 
 [Sources](./community/sources/), [mailing lists](./community/mailing-list/), [issue tracker](./community/support/): it's fully open, you can access directly.
 

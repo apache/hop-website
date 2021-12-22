@@ -1,15 +1,15 @@
 ---
 title: "Events and User Groups"
-description: "Apache Hop (Incubating) deeply cares about its community and encourages community members to organize local user groups and events. Find out what is happening in your area or native language."
+description: "Apache Hop deeply cares about its community and encourages community members to organize local user groups and events. Find out what is happening in your area or native language."
 ---
 
 == User Groups
 
-* https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/[3Hx - Apache Hop (Incubating) Hot Hop Hangouts ^]
-* https://www.meetup.com/grupo-de-usuarios-de-hop-en-espanol/[Grupo de usuarios de Apache Hop Incubating en Español ^]
-* https://www.meetup.com/apache-hop-user-group-brasil/[Grupo de usuários do Apache Hop Incubating em Português ^]
-* https://t.me/apachehop[Apache Hop Incubating em Português no Telegram ^]
-* https://www.meetup.com/apache-hop-user-group-japan/[日本Apache Hop Incubatingユーザーグループ (Apache Hop Incubating User Group Japan) ^]
+* https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/[3Hx - Apache Hop Hot Hop Hangouts ^]
+* https://www.meetup.com/grupo-de-usuarios-de-hop-en-espanol/[Grupo de usuarios de Apache Hop en Español ^]
+* https://www.meetup.com/apache-hop-user-group-brasil/[Grupo de usuários do Apache Hop em Português ^]
+* https://t.me/apachehop[Apache Hop em Português no Telegram ^]
+* https://www.meetup.com/apache-hop-user-group-japan/[日本Apache Hop ユーザーグループ (Apache Hop User Group Japan) ^]
 
 == Events
 
@@ -24,7 +24,7 @@ For more information about Apache organised events visit the https://www.apache.
 
 === Community Events
 
-No (wo)man is an island. As an open source project and even more so a community, Apache Hop (Incubating) cares deeply about sharing knowledge and experiences.
+No (wo)man is an island. As an open source project and even more so a community, Apache Hop cares deeply about sharing knowledge and experiences.
 
 Events, in any shape of form, are a great way to meet and connect with fellow Hop users, developers and other community members.
 
@@ -32,7 +32,7 @@ Events, in any shape of form, are a great way to meet and connect with fellow Ho
 
 === Planning and adding your own event
 
-We encourage everyone in the Apache Hop (Incubating) community to organize and host events. An "event" is a very broad term and can be local Hop user group meetings, local or online hackathons, brainstorm sessions or a variety of other event types,
+We encourage everyone in the Apache Hop community to organize and host events. An "event" is a very broad term and can be local Hop user group meetings, local or online hackathons, brainstorm sessions or a variety of other event types,
 
 To add your event to the agenda, send a mailto:users@hop.apache.org[mail, Apache Hop event announcement, add your event description here] to the users mailing list (mailto:users-subscribe@hop.apache.org[subscribe] if you haven't already) with the name, a brief description, the date/time and registration link for your event.
 
@@ -43,7 +43,7 @@ A recording of your event can be added to the https://www.youtube.com/channel/UC
 
 ==== Hot Hop Hangouts
 
-The Hot Hop Hangouts (3Hx) have been organized at irregular times since the start of the Apache Hop (Incubating) project.
+The Hot Hop Hangouts (3Hx) have been organized at irregular times since the start of the Apache Hop project.
 
 A new Hot Hop Hangout session is organized every other week. Topics will alternate between _technical_ and _user-oriented_, so there is one technical and one user oriented 3Hx each month.
 
@@ -68,7 +68,7 @@ All known Hop events are listed below. Add your event to the list below or annou
 |===
 |Event name|Description|Date|Language|Recording
 |3H13|Apache Hop Sucks. Let's un-suck it!|2021-11-18|EN|https://youtu.be/qW5Jwe5OipU[youtube^]
-|-|Apache Hop (Incubating) - User Group Japan #1|2021-11-16|JP-EN|-
+|-|Apache Hop - User Group Japan #1|2021-11-16|JP-EN|-
 |3H12|A well-designed Hop project walkthrough|2021-10-28|EN|https://youtu.be/a1jg1A2vmtA[youtube^]
 |-|5-fach Speed für Ihr Datenprojekt mit Hop (IT-Novum)|2021-10-26|DE|-
 |3H11|Apache Hop 1.0, TLP graduation and beyond|2021-10-07|EN|https://youtu.be/eaHuga0IReg[youtube^]
