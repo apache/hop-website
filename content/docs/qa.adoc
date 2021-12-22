@@ -7,7 +7,7 @@ title: "Q&A"
 * Is this a hostile fork?
 ** By all means no! Kettle will remain a stable and trustworthy platform for data integration. Apache Hop is a way to decouple the risk of experimentation and refactoring from the stability needs of Pentaho Data Integration.  As such we’ve invited Hitachi Vantara to contribute to Apache Hop, just like we invite every individual in the entire Kettle and data engineering community to contribute.  We sincerely hope that cool innovations from this project will find its way into other code bases if they pan out.
 * Will Apache Hop remain open source?
-** As an incubating Apache project, Apache Hop is and will always be open source. Hop is getting ready to graduate as an Apache Top Level project. At that point, all ownership of all the code and artifacts in Apache Hop will be transferred to the Apache Software Foundation.
+** As an Apache project, Apache Hop is and will always be open source. Hop is getting ready to graduate as an Apache Top Level project. At that point, all ownership of all the code and artifacts in Apache Hop will be transferred to the Apache Software Foundation.
 * Can I contribute to Apache Hop?
 ** We warmly welcome contributions in all shapes and forms. Check the link:../../community/contributing/[contributing guides] for more information.
 * What are the plans for Apache Hop

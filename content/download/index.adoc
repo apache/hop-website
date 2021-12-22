@@ -1,9 +1,9 @@
 ---
 title: "Download"
-description: "Download Apache Hop (Incubating) source and binary releases or Docker images for Hop and Hop Web."
+description: "Download Apache Hop source and binary releases or Docker images for Hop and Hop Web."
 ---
 
-## Apache Hop (incubating)
+## Apache Hop
 
 [cols="<.^1,<.^1,1,2,1,1"]
 |===
