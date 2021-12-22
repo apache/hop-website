@@ -37,7 +37,7 @@ apache-hop-client-X.XX-incubating.zip.sha512
 apache-hop-client-X.XX-incubating.zip.asc
 apache-hop-client-X.XX-incubating.zip</code></pre> </div> </div> <div class="paragraph"> <p>Add and commit the files to svn</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">svn add *
 svn status
-svn commit -m 'Add release files for Apache hop X.XX-rcX'</code></pre> </div> </div> <div class="paragraph"> <p>Check if the files are uploaded <a href="https://dist.apache.org/repos/dist/dev/incubator/hop/">here</a></p> </div> </div> </div> <div class="sect1"> <h2 id="_send_mail_to_dev_list_to_announce_new_release_candidate"><a class="anchor" href="#_send_mail_to_dev_list_to_announce_new_release_candidate"></a>Send mail to dev list to announce new release candidate</h2> <div class="sectionbody"> <div class="paragraph"> <p>Mail Template</p> </div> <div class="listingblock"> <div class="content"> <pre>Subject: [VOTE] Release Apache Hop (incubating) X.XX-rcX
+svn commit -m 'Add release files for Apache hop X.XX-rcX'</code></pre> </div> </div> <div class="paragraph"> <p>Check if the files are uploaded <a href="https://dist.apache.org/repos/dist/dev/incubator/hop/">here</a></p> </div> </div> </div> <div class="sect1"> <h2 id="_send_mail_to_dev_list_to_announce_new_release_candidate"><a class="anchor" href="#_send_mail_to_dev_list_to_announce_new_release_candidate"></a>Send mail to dev list to announce new release candidate</h2> <div class="sectionbody"> <div class="paragraph"> <p>Mail Template</p> </div> <div class="listingblock"> <div class="content"> <pre>Subject: [VOTE] Release Apache Hop X.XX-rcX
 TO: dev@hop.apache.org
 
 Hi All,
@@ -62,22 +62,22 @@ Release artifacts are signed with the following key:
 For more information about the contents of this release, see:
 &lt;ADD URL TO RELEASE IN JIRA&gt;
 
-Please vote on releasing this package as Apache Hop (incubating) X.XX!
+Please vote on releasing this package as Apache Hop X.XX!
 
 The vote is open for 72 hours and passes if
 a majority of at least 3 +1 PMC votes are cast.
 
-[ ] +1 Release this package as Apache Hop (incubating) X.XX
+[ ] +1 Release this package as Apache Hop X.XX
 [ ] +0 No opinion
 [ ] -1 Do not release this package because ...
 
 Best Regards,
-&lt;YOUR NAME&gt;</pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_send_a_result_mail_to_the_dev_mailing_list"><a class="anchor" href="#_send_a_result_mail_to_the_dev_mailing_list"></a>Send a result mail to the dev mailing list</h2> <div class="sectionbody"> <div class="listingblock"> <div class="content"> <pre>Subject: [RESULT] [VOTE] Release Apache Hop (incubating) X.XX-rcX
+&lt;YOUR NAME&gt;</pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_send_a_result_mail_to_the_dev_mailing_list"><a class="anchor" href="#_send_a_result_mail_to_the_dev_mailing_list"></a>Send a result mail to the dev mailing list</h2> <div class="sectionbody"> <div class="listingblock"> <div class="content"> <pre>Subject: [RESULT] [VOTE] Release Apache Hop X.XX-rcX
 TO: dev@hop.apache.org
 
 Hello Team,
 
-The vote to release Apache Hop (incubating) X.XX - RCX has passed/failed.
+The vote to release Apache Hop X.XX - RCX has passed/failed.
 
 +1 (binding):
 
@@ -92,48 +92,7 @@ The vote to release Apache Hop (incubating) X.XX - RCX has passed/failed.
 Thank you for reviewing this release candidate.
 
 Cheers,
-&lt;YOUR NAME&gt;</pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_while_in_incubator"><a class="anchor" href="#_while_in_incubator"></a>While in Incubator</h2> <div class="sectionbody"> <div class="sect2"> <h3 id="_send_mail_to_general_incubator_list"><a class="anchor" href="#_send_mail_to_general_incubator_list"></a>Send mail to general incubator list</h3> <div class="paragraph"> <p>The mail to the IPMC is almost identical to our vote mail, a few extra details are added:</p> </div> <div class="ulist"> <ul> <li> <p>Vote and Result mail thread</p> </li> </ul> </div> <div class="listingblock"> <div class="content"> <pre>Subject: [VOTE] Release Apache Hop (incubating) X.XX-rcX
-TO: general@incubator.apache.org
-
-Hi All,
-
-&lt;INCLUDE SOME TEXT&gt;
-
-Build instructions can be found in the README included.
-
-Hop community vote and result threads:
-Vote:
- &lt;URL TO VOTE FROM https://lists.apache.org/list.html?dev@hop.apache.org&gt;
-Result:
- &lt;URL TO VOTE RESULT FROM https://lists.apache.org/list.html?dev@hop.apache.org&gt;
-
-The tag to be voted on is X.XX-rcX &lt;REPLACE TAG&gt; (commit &lt;COMMIT HASH&gt;):
-&lt;URL TO TAG COMMIT&gt;
-
-The release files, including signatures, digests, etc. can be found at:
-&lt;INCLUDE URL TO DIST RC FOLDER&gt;
-https://dist.apache.org/repos/dist/dev/incubator/hop/apache-hop-X.XX-incubating-rcX/
-
-The SHA512 Checksum for these artifacts is:
-&lt;INCLUDE CHECKSUM FROM SHA512 file&gt;
-
-Release artifacts are signed with the following key:
-&lt;ADD URL TO YOUR KEY ON A PUBLIC KEYSERVER&gt;
-
-For more information about the contents of this release, see:
-&lt;ADD URL TO RELEASE IN JIRA&gt;
-
-Please vote on releasing this package as Apache Hop (incubating) X.XX!
-
-The vote is open for 72 hours and passes if
-a majority of at least 3 +1 PMC votes are cast.
-
-[ ] +1 Release this package as Apache Hop (incubating) X.XX
-[ ] +0 No opinion
-[ ] -1 Do not release this package because ...
-
-Best Regards,
-&lt;YOUR NAME&gt;</pre> </div> </div> </div> </div> </div> <div class="sect1"> <h2 id="_creating_a_key"><a class="anchor" href="#_creating_a_key"></a><a id="CreatingAKey"></a>Creating a key</h2> <div class="sectionbody"> <div class="paragraph"> <p>To generate and publish a key follow these steps, it is recommended to use your apache email as key alias.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gpg --gen-key
+&lt;YOUR NAME&gt;</pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_creating_a_key"><a class="anchor" href="#_creating_a_key"></a><a id="CreatingAKey"></a>Creating a key</h2> <div class="sectionbody"> <div class="paragraph"> <p>To generate and publish a key follow these steps, it is recommended to use your apache email as key alias.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gpg --gen-key
 gpg -k &lt;username&gt;@apache.org
 # get the ID for your key
 gpg --send-keys --keyserver php.mit.edu &lt;KEY ID&gt;
