@@ -11,7 +11,7 @@ The Hop Translator is a single dialog application.
 
 == anchor:hop-translator-how-to-run[]How to run
 You'll need the source code if you want to run the Hop Translator.
-Clone the repository from https://github.com/apache/incubator-hop
+Clone the repository from https://github.com/apache/hop
 
 Build Hop:
 [source,bash]

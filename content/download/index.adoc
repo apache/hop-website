@@ -16,8 +16,8 @@ description: "Download Apache Hop source and binary releases or Docker images fo
 
 Apache Hop is available as a Docker image on Dockerhub:
 
-* https://hub.docker.com/r/apache/incubator-hop[Hop], Docker pull command:  `docker pull apache/incubator-hop`
-* https://hub.docker.com/r/apache/incubator-hop-web[Hop Web], Docker pull command `docker pull apache/incubator-hop-web`
+* https://hub.docker.com/r/apache/hop[Hop], Docker pull command:  `docker pull apache/hop`
+* https://hub.docker.com/r/apache/hop-web[Hop Web], Docker pull command `docker pull apache/hop-web`
 
 
 ## Keys

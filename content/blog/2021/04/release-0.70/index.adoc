@@ -213,14 +213,14 @@ Check out the updated http://hop.apache.org/manual/latest/hop-gui/pipelines/pipe
 
 A number of small issues have been fixed and improvements have been made. As the number of Docker use cases continues to grow, Hop in Docker has become stable and mature.
 
-The https://hub.docker.com/r/apache/incubator-hop[Hop image] is continuously pushed to , check it out with the pull command:  `docker pull apache/incubator-hop`
+The https://hub.docker.com/r/apache/hop[Hop image] is continuously pushed to , check it out with the pull command:  `docker pull apache/hop`
 
 
 ### Hop Web
 
 Hop Web is now fully integrated and is included in the default Hop build. It is still a little rough around the edges, but it is starting to look very good.
 
-Just like the default Docker image, the https://hub.docker.com/r/apache/incubator-hop-web[Hop Web Image] is pushed to Docker Hub continuously, check it out with the pull command `docker pull apache/incubator-hop-web`.
+Just like the default Docker image, the https://hub.docker.com/r/apache/hop-web[Hop Web Image] is pushed to Docker Hub continuously, check it out with the pull command `docker pull apache/hop-web`.
 
 
 ### Ordered List

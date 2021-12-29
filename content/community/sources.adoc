@@ -7,13 +7,13 @@ title: "Sources"
 To browse via the web:
 
 ```
-https://gitbox.apache.org/repos/asf/incubator-hop.git
+https://gitbox.apache.org/repos/asf/hop.git
 ```
 
 ## Checking out from git
 
 ```
-git clone https://gitbox.apache.org/repos/asf/incubator-hop.git
+git clone https://gitbox.apache.org/repos/asf/hop.git
 ```
 
 Only project developers can commit to the git via this method. SSH must be installed on your client machine. Enter your site password when prompted.
@@ -23,5 +23,5 @@ Only project developers can commit to the git via this method. SSH must be insta
 The source code is mirrored to github, so you can also checkout the source code from github, if you are familiar with using github. By using github you can submit pull requests to the project using the standard github way.
 
 ```
-https://github.com/apache/incubator-hop/
+https://github.com/apache/hop/
 ```

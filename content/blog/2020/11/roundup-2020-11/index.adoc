@@ -28,7 +28,7 @@ With the start of the incubation process, the project will now be referred to as
 
 Below are a list of useful new project links for reference. Most existing links should forward to the new ones, but please update your bookmarks:
 
-* project url: link:https://hop.apache.org[hop.apache.org] or link:https://hop.incubator.apache.org[hop.incubator.apache.org]
+* project url: link:https://hop.apache.org[hop.apache.org]
 * link:https://chat.project-hop.org[chat]
 * link:https://issues.apache.org/jira/projects/HOP/issues[JIRA]
 * link:https://ci-builds.apache.org/job/Hop/[Jenkins]
@@ -61,7 +61,7 @@ Many thanks to Nicolas Adment for this contribution!
 
 ## Documentation
 
-Hop documentation is a work in progress. We've added or updated documentation for link:https://hop.incubator.apache.org/manual/latest/hop-gui/environments/environments.html[projects and environments], https://hop.incubator.apache.org/manual/latest/plugins/transforms/metainject.html[metadata injection], and lots of other small changes.
+Hop documentation is a work in progress. We've added or updated documentation for link:https://hop.apache.org/manual/latest/hop-gui/environments/environments.html[projects and environments], https://hop.apache.org/manual/latest/plugins/transforms/metainject.html[metadata injection], and lots of other small changes.
 
 As always, ping us on https://chat.project-hop.org[mattermost] to discuss documentation, and create link:https://issues.apache.org/jira/projects/HOP/issues[tickets] if you find any missing or incorrect information in the docs. Documentation is code, we take bugs in the documentation just as serious as bugs in the code.
 
@@ -71,8 +71,8 @@ Hop now works with Beam 2.24.
 
 Two new transforms have been added:
 
-* link:https://hop.incubator.apache.org/manual/latest/plugins/transforms/fake.html[Fake Data]
-* link:https://hop.incubator.apache.org/manual/latest/plugins/transforms/streamschemamerge.html[Stream Schema Merge]
+* link:https://hop.apache.org/manual/latest/plugins/transforms/fake.html[Fake Data]
+* link:https://hop.apache.org/manual/latest/plugins/transforms/streamschemamerge.html[Stream Schema Merge]
 
 ## Community
 

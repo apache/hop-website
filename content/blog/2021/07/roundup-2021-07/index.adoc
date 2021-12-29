@@ -52,7 +52,7 @@ Hop Gui was designed from the start to provide one single, fully integrated user
 
 Hop Web now even has its own dark mode. Trying Hop Web on your local machine has never been easier:
 
-`docker pull apache/incubator-hop-web:1.0-SNAPSHOT docker run -p 8080:8080 -e HOP_WEB_THEME=dark apache/incubator-hop-web:1.0-SNAPSHOT`
+`docker pull apache/hop-web:1.0-SNAPSHOT docker run -p 8080:8080 -e HOP_WEB_THEME=dark apache/hop-web:1.0-SNAPSHOT`
 
 image:/img/Roundup-2021-07/hop-web-dark.jpeg[Hop Web Dark Mode, width="65%", align="left", link="/img/Roundup-2021-07/hop-web-dark.jpeg"]
 

@@ -99,9 +99,9 @@ image:/img/Roundup-2021-01/hop-berserker.png[Hop Berserker, width=40%, scalewidt
 
 ## Docker, Kubernetes updates
 
-The separate Dockerfile and configuration were moved to the main Hop https://github.com/apache/incubator-hop/tree/master/docker[repository].
+The separate Dockerfile and configuration were moved to the main Hop https://github.com/apache/hop/tree/master/docker[repository].
 
-A Hop Docker image is now one `docker pull` away through https://hub.docker.com/r/apache/incubator-hop/[Docker Hub].
+A Hop Docker image is now one `docker pull` away through https://hub.docker.com/r/apache/hop/[Docker Hub].
 
 Work on Kubernetes continues in the separate https://github.com/project-hop/hop-docker[repository].
 

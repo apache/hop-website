@@ -37,7 +37,7 @@ In addition to cloud storage for AWS, Azure and GCP, Hop VFS now also https://ho
 
 A number of (minor) bugs have been identified and fixed since the 0.99 release.
 
-In preparation for 1.0, the Hop team continues to clean up old and deprecated code. Automated code formatting has been added, we continue to fix https://sonarcloud.io/dashboard?id=apache_incubator-hop[SonarCloud] and other issues to get the Hop source code in the best shape possible for the Hop 1.0 release.
+In preparation for 1.0, the Hop team continues to clean up old and deprecated code. Automated code formatting has been added, we continue to fix https://sonarcloud.io/dashboard?id=apache_hop[SonarCloud] and other issues to get the Hop source code in the best shape possible for the Hop 1.0 release.
 
 
 [[community]]
