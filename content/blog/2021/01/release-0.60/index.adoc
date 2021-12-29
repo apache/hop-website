@@ -16,7 +16,7 @@ Less than three months since Project Hop joined the ASF Incubator (late October 
 As stated earlier, one of the main goal of the incubator program is to give projects the time to adopt "The Apache Way". As such, it took us a bit of time to get the entire process straightened out. We went through 2 0.50 release candidates (RC1 and RC2) before this 0.60 release got accepted.
 Since the main purpose of this release was to work through the legal formalities that come with an ASF release, 0.60 is a code only release. We already started working on 0.70, which will be a complete release, including binaries. Once 0.70 has been released, moving towards a 1.0 release should be smooth sailing.
 
-Check our https://hop.apache.org/download/[downloads page] for the 0.60 source code (https://github.com/apache/incubator-hop/blob/master/README.md[build instructions]) or a recent nightly build.
+Check our https://hop.apache.org/download/[downloads page] for the 0.60 source code (https://github.com/apache/hop/blob/master/README.md[build instructions]) or a recent nightly build.
 
 ## Apache Hop (Incubating) - 0.60 Release Highlight
 
@@ -61,9 +61,9 @@ A number of new plugins were added to Hop or were ported from Kettle/PDI:
 ** http://hop.apache.org/manual/latest/plugins/actions/repeat.html[Repeat] and http://hop.apache.org/manual/latest/plugins/actions/repeat-end.html[End Repeat]
 * Transforms:
 ** https://github.com/m-a-hall/hop-cpython[CPython] (external)
-** https://hop.incubator.apache.org/manual/latest/plugins/transforms/fake.html[Fake Data]
+** https://hop.apache.org/manual/latest/plugins/transforms/fake.html[Fake Data]
 ** http://hop.apache.org/manual/latest/plugins/transforms/mongodbinput.html[MongoDB Input] and http://hop.apache.org/manual/latest/plugins/transforms/mongodboutput.html[Output]
-** https://hop.incubator.apache.org/manual/latest/plugins/transforms/streamschemamerge.html[Stream Schema Merge]
+** https://hop.apache.org/manual/latest/plugins/transforms/streamschemamerge.html[Stream Schema Merge]
 ** https://hop.apache.org/manual/latest/plugins/transforms/tokenreplacement.html[Token Replacement]
 ** https://hop.apache.org/manual/latest/plugins/transforms/userdefinedjavaclass.html[User Defined Java Class]
 ** Salesforce:
@@ -113,9 +113,9 @@ image:/img/Roundup-2020-08/metadata-injection.png[Metadata Injection, 65% , alig
 
 ## Docker, Kubernetes
 
-The separate Dockerfile and configuration were moved to the main Hop https://github.com/apache/incubator-hop/tree/master/docker[repository].
+The separate Dockerfile and configuration were moved to the main Hop https://github.com/apache/hop/tree/master/docker[repository].
 
-A Hop Docker image is now one `docker pull` away through https://hub.docker.com/r/apache/incubator-hop/[Docker Hub].
+A Hop Docker image is now one `docker pull` away through https://hub.docker.com/r/apache/hop/[Docker Hub].
 
 Work on Kubernetes continues in the separate https://github.com/project-hop/hop-docker[repository].
 

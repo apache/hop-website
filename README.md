@@ -57,7 +57,7 @@ Follow [the documentation on installing](https://yarnpkg.com/en/docs/install) Ya
 
 Clone the hop-webiste git repository:
 
-    $ git clone https://github.com/apache/hincubator-op-website.git
+    $ git clone https://github.com/apache/hop-website.git
 
 
 ## Build the Antora Hop UI theme
@@ -100,9 +100,9 @@ or
 
     $ yarn preview-local 
 
-`preview` will pull the latest docs version from [github](https://github.com/apache/incubator-hop-docs),  `preview-local` will use the (committed) documentation files from your local incubator-hop-docs clone. 
+`preview` will pull the latest docs version from [github](https://github.com/apache/hop),  `preview-local` will use the (committed) documentation files from your local hop clone. 
 
-NOTE: `preview-local` assumes your docs repository is cloned to a folder `incubator-hop-docs` next to `incubator-hop-webste` (both repositories in the same parent folder). 
+NOTE: `preview-local` assumes your docs repository is cloned to a folder `hop` next to `hop-webste` (both repositories in the same parent folder). 
 
 and you will be provided with a web server running the site on [http://localhost:1313/](http://localhost:1313/)
 

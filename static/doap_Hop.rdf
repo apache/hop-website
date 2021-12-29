@@ -49,8 +49,8 @@ Hop aims to be the future of data integration. Visual development enables develo
     </release>
     <repository>
       <GitRepository>
-        <location rdf:resource="https://github.com/apache/incubator-hop.git"/>
-        <browse rdf:resource="https://github.com/apache/incubator-hop"/>
+        <location rdf:resource="https://github.com/apache/hop.git"/>
+        <browse rdf:resource="https://github.com/apache/hop"/>
       </GitRepository>
     </repository>
     <maintainer>

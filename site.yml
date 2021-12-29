@@ -7,15 +7,15 @@ site:
 
 content:
   sources:
-  - url: git@github.com:apache/incubator-hop.git
+  - url: git@github.com:apache/hop.git
     branches: 
       - master
       - release1.0.0
     start_path: /docs/hop-user-manual/
-  - url: git@github.com:apache/incubator-hop.git
+  - url: git@github.com:apache/hop.git
     branches: master
     start_path: /docs/hop-tech-manual/
-  - url: git@github.com:apache/incubator-hop.git
+  - url: git@github.com:apache/hop.git
     branches: master
     start_path: /docs/hop-dev-manual/
     
