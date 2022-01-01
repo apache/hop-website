@@ -6,7 +6,7 @@ Tools used to generate the website:
 
  - [Git](https://git-scm.com/) a source code management tool used to fetch document sources from different
    github repositories.
- - [Node.js](https://nodejs.org/) a JavaScript runtime used to build the website. You will need to use Node.js version 10.
+ - [Node.js](https://nodejs.org/) a JavaScript runtime used to build the website. You will need to use Node.js version 12.
  - [yarn](https://yarnpkg.com/) a blazing fast dependency and package manager tool used to download
    and manage required libraries.
  - (installed via yarn) [Gulp](http://gulpjs.com/) a task automation tool. Used to build the Hop
@@ -42,8 +42,8 @@ Node.js on your machine:
 - Install using [Homebrew](https://brew.sh/) and [Node formulae](https://formulae.brew.sh/formula/node)
 - Install from official [Node packages](https://nodejs.org/en/download/)
 
-Note - If you have different Node version other than Node LTS version 12 you can use following command to make
-Node LTS version 12 as default Node version.
+Note - If you have different Node version other than Node.js Maintenance LTS version 12 you can use following command to make
+Node.js Maintenance LTS version 12 as your default Node.js version.
 
     $ nvm alias default 12
 
