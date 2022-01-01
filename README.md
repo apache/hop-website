@@ -6,7 +6,7 @@ Tools used to generate the website:
 
  - [Git](https://git-scm.com/) a source code management tool used to fetch document sources from different
    github repositories.
- - [Node.js](https://nodejs.org/) a JavaScript runtime used to build the website. You will need to use Node.js version 10.
+ - [Node.js](https://nodejs.org/) a JavaScript runtime used to build the website. You will need to use Node.js version 12.
  - [yarn](https://yarnpkg.com/) a blazing fast dependency and package manager tool used to download
    and manage required libraries.
  - (installed via yarn) [Gulp](http://gulpjs.com/) a task automation tool. Used to build the Hop
@@ -25,25 +25,25 @@ You can build the website locally using the tools `Node.js` and `yarn`.
 
 ### Preparing the tools
 
-#### Node
+#### Node.js
 
 Make sure that you have Node.js (herein "`Node`") installed.
 
     $ node --version
 
-If this command fails with an error, you do not have Node installed.
+If this command fails with an error, you do not have Node.js installed.
 
-This project requires the Node LTS version 12 (e.g., V12.19.0).
+This project requires the Node Maintenance LTS version 12 (e.g., V12.19.0).
 
-Please make sure to have a suitable version of Node installed. You have several options to install
-Node on your machine.
+Please make sure to have a suitable version of Node.js installed. You have several options to install
+Node.js on your machine:
 
-- Install using the Node version manager [nvm](https://github.com/creationix/nvm)
+- Install using the Node Version Manager [nvm](https://github.com/creationix/nvm)
 - Install using [Homebrew](https://brew.sh/) and [Node formulae](https://formulae.brew.sh/formula/node)
 - Install from official [Node packages](https://nodejs.org/en/download/)
 
-Note - If you have different Node version other than Node LTS version 12 you can use following command to make
-Node LTS version 12 as default Node version.
+Note - If you have different Node version other than Node.js Maintenance LTS version 12 you can use following command to make
+Node.js Maintenance LTS version 12 as your default Node.js version.
 
     $ nvm alias default 12
 
@@ -51,19 +51,19 @@ Now that you have Node 12 installed, you can proceed with checking the Yarn inst
 
 #### Yarn
 
-Follow [the documentation on installing](https://yarnpkg.com/en/docs/install) Yarn for your Operating system.
+Follow [the documentation on installing](https://yarnpkg.com/en/docs/install) Yarn for your operating system.
 
 #### Clone and Initialize the project
 
-Clone the hop-webiste git repository:
+Clone the hop-webiste Git repository:
 
     $ git clone https://github.com/apache/hop-website.git
 
 
 ## Build the Antora Hop UI theme
 
-First step is to build the Antora ui theme used for the Hop website. The theme sources are located
-inside [Project root directory/antora-ui-hop](antora-ui-hop). So first switch to that directory:
+The first step is to build the Antora UI theme used for the Hop website. The theme sources are located
+inside [Project root directory/antora-ui-hop](antora-ui-hop). Start by switching to that directory:
 
     $ cd antora-ui-hop
 
@@ -76,7 +76,7 @@ You should see the Antora theme bundle generated in [antora-ui-hop/build/ui-bund
 
 ## Build the website content
 
-Before you are able to build the website content the ui bundle must be present.
+Before you are able to build the website content the UI bundle must be present.
 
 To build the website go to the project root directory and run:
 
@@ -100,17 +100,17 @@ or
 
     $ yarn preview-local 
 
-`preview` will pull the latest docs version from [github](https://github.com/apache/hop),  `preview-local` will use the (committed) documentation files from your local hop clone. 
+`preview` will pull the latest docs version from [GitHub](https://github.com/apache/hop),  `preview-local` will use the (committed) documentation files from your local Hop clone. 
 
-NOTE: `preview-local` assumes your docs repository is cloned to a folder `hop` next to `hop-webste` (both repositories in the same parent folder). 
+NOTE: `preview-local` assumes your docs repository is cloned to a folder `hop` next to `hop-website` (both repositories in the same parent folder). 
 
-and you will be provided with a web server running the site on [http://localhost:1313/](http://localhost:1313/)
+You will be provided with a web server running the site on [http://localhost:1313/](http://localhost:1313/)
 
 Point your favorite browser to `http://localhost:1313/` and you will see the Hop website.
 
 ## Contributing
 
-The website content is added under the `content` directory, logical groups have been created to group website content. This repository will only be used for the more "static" types of information (blog/news/announcements). Software documentation will reside in a seperate repository or in the same repository as the code.
+The website content is added under the `content` directory, logical groups have been created to group website content. This repository will only be used for the more "static" types of information (blog/news/announcements). Software documentation will reside in a separate repository or in the same repository as the code.
 
 Asciidoc is used to write content for the website, more information about asciidoc syntax can be found [here](https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/)
 
