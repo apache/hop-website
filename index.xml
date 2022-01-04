@@ -531,17 +531,20 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hop.apache.org/community/team/</guid>
-      <description>This page lists who we are. By all means add yourself to the list - lets sort it in alphabetical order (based on last name)
- Committers     Name ID Organisation Social     Nicolas Adment
- nadment
-     Matt Casters
- mcasters
- Neo4j
+      <description>The Apache Hop developer community is growing rapidly and currently includes contributors employed by many organizations.
+ PMC     Name Apache ID Organisation Twitter     Bart Maertens
+ bamaer
+ know.bi
  
-   Hiromu Hota
- hiromu
+   Brandon Jackson
+ usbrandon
   
-   Brandon Jackson</description>
+   Dave Campen
+ dcampen
+     François Papon
+ fpapon
+  
+   Hans Van Akelyen</description>
     </item>
     
     <item>
