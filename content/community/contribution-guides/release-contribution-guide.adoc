@@ -7,7 +7,6 @@ Apache releases are created through a formal process. The entire process is http
 Other useful information:
 
 * https://incubator.apache.org/guides/releasemanagement.html[ASF Release Management, window="_blank"]
-* https://incubator.apache.org/cookbook/[Apache Incubator Cookbook, window="_blank"]
 
 Check below for the TL;DR version. As always, we're eager to https://chat.project-hop.org[hear, window="_blank"] your feedback!
 

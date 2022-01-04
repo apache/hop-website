@@ -26,9 +26,9 @@
     <license rdf:resource="https://spdx.org/licenses/Apache-2.0" />
     <name>Apache Hop</name>
     <homepage rdf:resource="https://hop.apache.org" />
-    <asfext:pmc rdf:resource="https://incubator.apache.org" />
-    <shortdesc>The Hop Orchestration Platform, or Apache Hop (Incubating), aims to facilitate all aspects of data and metadata orchestration.</shortdesc>
-    <description>The Hop Orchestration Platform, or Apache Hop (Incubating), aims to facilitate all aspects of data and metadata orchestration.
+    <asfext:pmc rdf:resource="https://hop.apache.org" />
+    <shortdesc>The Hop Orchestration Platform, or Apache Hop, aims to facilitate all aspects of data and metadata orchestration.</shortdesc>
+    <description>The Hop Orchestration Platform, or Apache Hop, aims to facilitate all aspects of data and metadata orchestration.
 
 Hop is an entirely new open source data integration platform that is easy to use, fast and flexible
 
