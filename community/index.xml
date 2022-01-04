@@ -12,7 +12,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hop.apache.org/community/incubator/</guid>
-      <description>Overview This document is an assessment of the maturity of Apache Hop (Incubating) as an Apache project.
+      <description>Overview   Tip  Apache Hop graduated in December 2021.     This document is an assessment of the maturity of Apache Hop (Incubating) as an Apache project.
  This document is intended to inform the decision of mentors, community, incubator PMC and ASF Board of Directors) to graduate Hop as a top-level Apache project.
    Maturity model assessment Mentors and community members are encouraged to contribute to this page and comment on it, the following table summarizes project’s self-assessment against the Apache Maturity Model.</description>
     </item>
@@ -119,7 +119,6 @@
       <description>Apache releases are created through a formal process. The entire process is documented.
  Other useful information:
    ASF Release Management
-  Apache Incubator Cookbook
    Check below for the TL;DR version. As always, we’re eager to hear your feedback!
  What is an Apache Release? Apache Releases are a legal handover of a software project. With each release, a project hands over the ownership of all items in the release to the Apache Software Foundations.</description>
     </item>
