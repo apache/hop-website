@@ -5,9 +5,12 @@ description: Self-assessment of Apache Hop's maturity in preparation for the gra
 
 == Overview
 
+TIP: Apache Hop graduated in December 2021.
+
 This document is an assessment of the maturity of Apache Hop (Incubating) as an Apache project.
 
 This document is intended to inform the decision of mentors, community, incubator PMC and ASF Board of Directors) to graduate Hop as a top-level Apache project.
+
 
 == Maturity model assessment
 

@@ -19,8 +19,8 @@ unsafe= true
     images = ['https://hop.apache.org/img/hop-logo.png']
     socialProfiles = ["https://twitter.com/ApacheHop"]
     organizationLogo = "/img/hop-logo.svg"
-    organizationDescription = "Apache Hop (Incubating) - Hop Orchestration Platform"
-    Description = "Apache Hop (Incubating) - Hop Orchestration Platform"
+    organizationDescription = "Apache Hop - Hop Orchestration Platform"
+    Description = "Apache Hop - Hop Orchestration Platform"
 
 [Author]
     name = "The Hop Team"
