@@ -2,46 +2,40 @@
 title: "Team"
 ---
 
-This page lists who we are. By all means add yourself to the list - lets sort it in alphabetical order (based on last name)
+The Apache Hop developer community is growing rapidly and currently includes contributors employed by many organizations.
+
+== PMC
+
+[%header]
+|===
+|Name|Apache ID|Organisation|Twitter
+
+|Bart Maertens|bamaer|know.bi|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/bartmaer", window="_blank"]
+|Brandon Jackson|usbrandon||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/usbrandon", window="_blank"]
+|Dave Campen|dcampen||
+|François Papon|fpapon||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/fpapon2", window="_blank"]
+|Hans Van Akelyen|hansva|know.bi|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/hans_va", window="_blank"]
+|Julian Hyde|jhyde|Looker/Google|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/julianhyde", window="_blank"]
+|Kevin Ratnasekera|djkevincr||
+|Matt Casters|mcasters|Neo4j|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/mattcasters", window="_blank"]
+|Nicolas Adment|nadment||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/nadment", window="_blank"]
+|Sergio Ramazzina|sramazzina|Serasoft Italy|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/sramazzina", window="_blank"]
+|===
 
 == Committers
 
 [%header]
 |===
-| Name  | ID | Organisation | Social
-
-| Nicolas Adment | nadment | |
-| Matt Casters | mcasters | Neo4j | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/mattcasters", window="_blank"]
-| Hiromu Hota | hiromu | | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/HiromuHota", window="_blank"]
-| Brandon Jackson | usbrandon || image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/usbrandon", window="_blank"]
-| Bart Maertens | bamaer | Know.bi | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/bartmaer", window="_blank"]
-| Mahendran Mookkiah | mookkiah || image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/mmookkiah", window="_blank"]
-| Hans Van Akelyen | hansva | Know.bi | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/hans_va", window="_blank"]
-| Sergio Ramazzina | sramazzina | Serasoft Italy | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/sramazzina", window="_blank"]
-| Yannick Mols || know.bi |image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/yannickmols", window="_blank"]
-| Jason Chu ||Beijing Auphi Data Co|
-| Peter Fabricius |||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/pfabrici", window="_blank"]
-| Rodrigo Haces || Neo4j |image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/rhaces", window="_blank"]
-|===
-
-== Contributors
-
-[%header]
-|===
-| Name  | ID | Organisation | Social
-|Lokke Bruyndonckx || know.bi |
-|Dave Henry||Schemetrica|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/ds_henry", window="_blank"]
-|Dan Keeley|||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/codek1", window="_blank"]
-|Yannick Mols || know.bi|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/yannickmols", window="_blank"]
-|Doug Moran|| eHealth Africa|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/doug_moran", window="_blank"]
-|Gretchen Moran||eHealth Africa|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/gretchiemoran", window="_blank"]
-|Maria Carina Roldan|||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/mariacroldan", window="_blank"]
-|David Rosenblum|| Neo4j |
-|Diethard Steiner|||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/diethardsteiner", window="_blank"]
-|Rafael Valenzuela |||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/sowe", window="_blank"]
-|Saurabh Deshmukh | sauru22 | TechM | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/OfficialSauru", window="_blank"]
-|Marcio Junior Vieira | marciojv | Ambiente Livre | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/ambientelivre", window="_blank"]
-|Ricardo Gouvêa | rgouvea | Openin Big Data | image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/openinbigdata", window="_blank"]
+|Name|Apache ID|Organisation|Twitter
+|Bruno Silva|bsilva||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/bfasilva", window="_blank"]
+|Hiromu Hota|hiromu||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/HiromuHota", window="_blank"]
+|Jason Chu|jianjunchu|Beijing Auphi Data Co|
+|Mahendran Mookkiah|mookkiah||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/mmookkiah", window="_blank"]
+|Maximilian Michels|mxm||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/stadtlegende", window="_blank"]
+|Peter Fabricius|pfabrici||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/pfabrici", window="_blank"]
+|Rodrigo Haces|rhaces|Neo4j|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/rhaces", window="_blank"]
+|Tom Barber|magicaltrout||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/magicaltrout", window="_blank"]
+|Yannick Mols|yannickmols||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/yannickmols", window="_blank"]
 |===
 
 
