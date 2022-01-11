@@ -6,7 +6,16 @@
     <description>Recent content in Apache Hop on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 02 Dec 2021 07:59:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/Apache-Hop/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 10 Jan 2022 07:59:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/Apache-Hop/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Roundup December 2021</title>
+      <link>https://hop.apache.org/blog/2022/01/roundup-2021-12/</link>
+      <pubDate>Mon, 10 Jan 2022 07:59:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2022/01/roundup-2021-12/</guid>
+      <description>As always at the start of another new month, let&amp;#39;s have a look at what happened at Hop over the last month. Here&amp;#39;s the recap for December 2021! Graduation Hop is now a Top Level Project Hop 1.1.0 preparation Hop 2.0 preparation - Java 11 build is taking shape Lots and lots of improvements and bug fixes New Transform Plugins Hop Server Log4j removed Various   Community JIRA Activity   Graduation Hop is now a Top Level Project As an early Christmas present, Apache Hop’s graduation was confirmed by that ASF Board on December, 16th.</description>
+    </item>
+    
     <item>
       <title>Roundup November 2021</title>
       <link>https://hop.apache.org/blog/2021/12/roundup-2021-11/</link>
