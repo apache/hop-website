@@ -16,7 +16,7 @@ draft: false
 toc::[]
 
 
-== Graduation Hop is now a Top Level Project
+== Graduation - Hop is now a Top Level Project
 
 As an early Christmas present, Apache Hop's graduation was confirmed by that ASF Board on December, 16th.
 
