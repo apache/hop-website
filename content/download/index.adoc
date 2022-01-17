@@ -8,8 +8,8 @@ description: "Download Apache Hop source and binary releases or Docker images fo
 [cols="<.^1,<.^1,1,2,1,1"]
 |===
 | Version | Date | Description | Download Link | PGP Signature file of download | SHA512 Checksum file of download
-.2+| link:/blog/2021/10/hop-1.0.0/[1.0.0] .2+| October, 5th, 2021 | **Binaries** | https://www.apache.org/dyn/closer.cgi?filename=incubator/hop/1.0.0/apache-hop-client-1.0.0-incubating.zip&action=download[**apache-hop-client-1.0.0-incubating.zip**] | https://downloads.apache.org/incubator/hop/1.0.0/apache-hop-client-1.0.0-incubating.zip.asc[asc] | https://downloads.apache.org/incubator/hop/1.0.0/apache-hop-client-1.0.0-incubating.zip.sha512[sha512]
-| Sources | https://www.apache.org/dyn/closer.cgi?filename=incubator/hop/1.0.0/apache-hop-1.0.0-incubating-src.tar.gz&action=download[apache-hop-1.0.0-incubating-src.tar.gz] | https://downloads.apache.org/incubator/hop/1.0.0/apache-hop-1.0.0-incubating-src.tar.gz.asc[asc] | https://downloads.apache.org/incubator/hop/1.0.0/apache-hop-1.0.0-incubating-src.tar.gz.sha512[sha512]
+.2+| link:/blog/2021/10/hop-1.0.0/[1.0.0] .2+| October, 5th, 2021 | **Binaries** | https://www.apache.org/dyn/closer.cgi?filename=hop/1.0.0/apache-hop-client-1.0.0-incubating.zip&action=download[**apache-hop-client-1.0.0-incubating.zip**] | https://downloads.apache.org/hop/1.0.0/apache-hop-client-1.0.0-incubating.zip.asc[asc] | https://downloads.apache.org/hop/1.0.0/apache-hop-client-1.0.0-incubating.zip.sha512[sha512]
+| Sources | https://www.apache.org/dyn/closer.cgi?filename=hop/1.0.0/apache-hop-1.0.0-incubating-src.tar.gz&action=download[apache-hop-1.0.0-incubating-src.tar.gz] | https://downloads.apache.org/hop/1.0.0/apache-hop-1.0.0-incubating-src.tar.gz.asc[asc] | https://downloads.apache.org/hop/1.0.0/apache-hop-1.0.0-incubating-src.tar.gz.sha512[sha512]
 |===
 
 ## Docker
@@ -22,5 +22,5 @@ Apache Hop is available as a Docker image on Dockerhub:
 
 ## Keys
 
-You can verify your download by following these https://www.apache.org/info/verification.html[procedures] and using these https://downloads.apache.org/incubator/hop/KEYS[KEYS].
+You can verify your download by following these https://www.apache.org/info/verification.html[procedures] and using these https://downloads.apache.org/hop/KEYS[KEYS].
 
