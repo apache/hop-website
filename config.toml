@@ -79,13 +79,6 @@ unsafe= true
     url = "/docs/roadmap/"
 
 [[menu.main]]
-    name = "Q&A"
-    parent = "docs"
-    weight = 7
-    identifier = "docs-qa"
-    url = "/docs/qa/"
-
-[[menu.main]]
     name = "Community"
     identifier = "community"
     weight = 2
