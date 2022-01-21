@@ -475,18 +475,6 @@
     </item>
     
     <item>
-      <title>Q&amp;A</title>
-      <link>https://hop.apache.org/docs/qa/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://hop.apache.org/docs/qa/</guid>
-      <description>Is this a fork?
-  Yes this is a fork, in the sense that we used Kettle 8.2.0.7 as a starting point for Apache Hop. Apache Hop wants to used that as a starting point to explore the future of data integration. Check out the Roadmap and Architecture sections.
-     Is this a hostile fork?
-  By all means no! Kettle will remain a stable and trustworthy platform for data integration.</description>
-    </item>
-    
-    <item>
       <title>Release Contribution Guide</title>
       <link>https://hop.apache.org/community/contribution-guides/release-contribution-guide/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
