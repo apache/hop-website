@@ -6,7 +6,17 @@
     <description>Recent content in Blog on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Jan 2022 07:59:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 Jan 2022 07:59:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Hop Graduates as a Top-Level Project</title>
+      <link>https://hop.apache.org/blog/2022/01/hop-graduation/</link>
+      <pubDate>Thu, 20 Jan 2022 07:59:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2022/01/hop-graduation/</guid>
+      <description>Apache Hop Graduates as a Top-Level Project DISCLAIMER: this is a reprint of the official Apache Software Foundation press release about Hop’s graduation.
+   The Apache Software Foundation Announces Open Source data orchestration platform Apache® Hop™ as a Top-Level Project Wilmington, DE, Jan. 18, 2022 (GLOBE NEWSWIRE) — The Apache Software Foundation (ASF), the all-volunteer developers, stewards, and incubators of more than 350 Open Source projects and initiatives, announced today Apache® Hop™ as a Top-Level Project (TLP).</description>
+    </item>
+    
     <item>
       <title>Roundup December 2021</title>
       <link>https://hop.apache.org/blog/2022/01/roundup-2021-12/</link>

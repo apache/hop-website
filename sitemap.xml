@@ -3,13 +3,19 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://hop.apache.org/categories/Apache-Hop/</loc>
-    <lastmod>2022-01-10T07:59:56+02:00</lastmod>
+    <lastmod>2022-01-20T07:59:56+02:00</lastmod>
   </url><url>
     <loc>https://hop.apache.org/</loc>
-    <lastmod>2022-01-10T07:59:56+02:00</lastmod>
+    <lastmod>2022-01-20T07:59:56+02:00</lastmod>
+  </url><url>
+    <loc>https://hop.apache.org/blog/2022/01/hop-graduation/</loc>
+    <lastmod>2022-01-20T07:59:56+02:00</lastmod>
   </url><url>
     <loc>https://hop.apache.org/blog/</loc>
-    <lastmod>2022-01-10T07:59:56+02:00</lastmod>
+    <lastmod>2022-01-20T07:59:56+02:00</lastmod>
+  </url><url>
+    <loc>https://hop.apache.org/categories/Graduation/</loc>
+    <lastmod>2022-01-20T07:59:56+02:00</lastmod>
   </url><url>
     <loc>https://hop.apache.org/categories/Roundup/</loc>
     <lastmod>2022-01-10T07:59:56+02:00</lastmod>
