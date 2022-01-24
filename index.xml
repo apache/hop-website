@@ -403,18 +403,23 @@
  Download Link
  PGP Signature file of download
  SHA512 Checksum file of download
+   1.1.0
+ Januari, 24th, 2022
+ Binaries
+ apache-hop-client-1.1.0.zip
+ asc
+ sha512
+   Sources
+ apache-hop-1.1.0-src.tar.gz
+ asc
+ sha512
    1.0.0
  October, 5th, 2021
  Binaries
  apache-hop-client-1.0.0-incubating.zip
  asc
  sha512
-   Sources
- apache-hop-1.0.0-incubating-src.tar.gz
- asc
- sha512
-      Docker Apache Hop is available as a Docker image on Dockerhub:
-   Hop, Docker pull command: docker pull apache/hop</description>
+   Sources</description>
     </item>
     
     <item>
