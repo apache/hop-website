@@ -1,0 +1,55 @@
+---
+title: "Apache Hop Graduates as a Top-Level Project"
+date: 2022-01-20T07:59:56+02:00
+authors: ["bamaer"]
+categories: ["Graduation", "Apache Hop"]
+preview: "Apache Hop graduates as a Top-Level Project at the Apache Software Foundation"
+description: "Apache Hop graduates as a Top-Level Project at the Apache Software Foundation"
+draft: false
+---
+
+== Apache Hop Graduates as a Top-Level Project
+
+**DISCLAIMER**: this is a reprint of the official Apache Software Foundation https://www.globenewswire.com/en/news-release/2022/01/18/2368576/17401/en/The-Apache-Software-Foundation-Announces-Open-Source-data-orchestration-platform-Apache-Hop-as-a-Top-Level-Project.html[press release] about Hop's graduation.
+
+== The Apache Software Foundation Announces Open Source data orchestration platform Apache® Hop™ as a Top-Level Project
+
+Wilmington, DE, Jan. 18, 2022 (GLOBE NEWSWIRE) -- The Apache Software Foundation (ASF), the all-volunteer developers, stewards, and incubators of more than 350 Open Source projects and initiatives, announced today Apache® Hop™ as a Top-Level Project (TLP).
+
+Apache Hop —the Hop Orchestration Platform— is a flexible, metadata-infused data orchestration, engineering, and integration platform. The project originated more than two decades ago as the Extract-Transform-Load (ETL) platform Kettle (Pentaho Data Integration), was refactored over several years, and entered the Apache Incubator in September 2020.
+
+"We are pleased to successfully adopt 'the Apache Way' and graduate from the Apache Incubator," said Bart Maertens, Vice President of Apache Hop. "Apache Hop enables people of all skill levels to build powerful and scalable data solutions without the need to write code. As an Apache Top-Level Project, Hop is developed and used by people across the globe. Hop's full project life cycle support helps these data teams to successfully build, test and run their projects in ways that would otherwise be hard or impossible to do."
+
+Using Apache Hop, data professionals can rapidly and affordably facilitate all aspects of data and metadata orchestration whilst supporting DevOps best practices, such as testing. Apache Hop’s Java-based visual designer, server, and configuration tools are easy to set up, deploy, and maintain across numerous platforms. Features include:
+
+* Lightweight “design once, run anywhere” architecture —workflows and pipelines can be designed in the Hop GUI and executed locally or remotely on the Hop native engine, on Apache Flink, Apache Kafka, Apache Spark, Google Dataflow, or AWS EMR through Apache Beam runtimes;
+* Metadata-driven —every object type in Hop describes how data is read, manipulated or written, or how workflows and pipelines need to be orchestrated. In addition, Hop itself is internally metadata-driven, using a kernel architecture with a robust engine;
+* Visual development environment —intuitive drag-and-drop graphical user interface (GUI) enables developers to enjoy the ease and productivity of visual development rather than code. Using Hop, data engineers can focus on business logic and requirements rather than how it needs to be done;
+* Plug-in integration —more than 250 plugins make it easy to manage ecosystem complexity, and add new functionality; and
+* Built-in lifecycle management —enables developers, engineers, and administrators to manage, test, deploy, and switch between projects, workflows, pipelines, environments, purposes, Git versions and more —all from the Hop GUI.
+
+Apache Hop has been designed to work in any scenario: on-premises, on a cloud, on a bare OS, in containers, IoT environments, large datasets, and more, on Windows, Linux, and OSX.
+
+Many of the thousands of organizations in finance, retail, supply chain, and other sectors that use Kettle (Pentaho Data Integration; the precursor to Apache Hop) have started to look into Hop or already are in the process of upgrading to Hop.
+
+"I'm very happy that we can now safely collaborate with any company or person across the global community under the umbrella of the Apache Software Foundation on something as cool as Apache Hop," said Matt Casters, Chief Solution Architect at Neo4j and member of the Apache Hop Project Management Committee.
+
+"We started adopting Apache Hop in our data integration projects in early 2021 because of its flexibility, scalability and ease of use, in various scenarios ranging from classical DWH ETL processes to highly critical, real time processes," said Sergio Ramazzina, CEO and Chief Architect at Serasoft S.r.l., and member of the Apache Hop Project Management Committee. "We are impressed by how responsive the community is in solving issues and helping users approaching the platform --an important point to increase users adoption and trust. We welcome everyone joining our Hop community and contributing to the project."
+
+"This graduation is just the beginning for Hop, and is proof that great communities build great software. The entire Hop community would like to thank the Apache Software Foundation for making this possible, especially our mentors who guided us through the Incubator," added Maertens. "We invite everyone to download and try Hop, join our chat and become part of the Hop community."
+
+Catch Apache Hop in action at a future Hop community event. For more information and to register, visit https://hop.apache.org/community/events/
+
+=== Availability and Oversight
+
+Apache Hop software is released under the Apache License v2.0 and is overseen by a self-selected team of active contributors to the project. A Project Management Committee (PMC) guides the Project's day-to-day operations, including community development and product releases. For downloads, documentation, and ways to become involved with Apache Hop, visit https://hop.apache.org/ and https://twitter.com/ApacheHop
+
+=== About the Apache Incubator
+
+The Apache Incubator is the primary entry path for projects and codebases wishing to become part of the efforts at The Apache Software Foundation. All code donations from external organizations and existing external projects enter the ASF through the Incubator to: 1) ensure all donations are in accordance with the ASF legal standards; and 2) develop new communities that adhere to our guiding principles. Incubation is required of all newly accepted projects until a further review indicates that the infrastructure, communications, and decision making process have stabilized in a manner consistent with other successful ASF projects. While incubation status is not necessarily a reflection of the completeness or stability of the code, it does indicate that the project has yet to be fully endorsed by the ASF. For more information, visit http://incubator.apache.org/
+
+=== About The Apache Software Foundation (ASF)
+
+Established in 1999, The Apache Software Foundation is the world’s largest Open Source foundation, stewarding 227M+ lines of code and providing more than $22B+ worth of software to the public at 100% no cost. The ASF’s all-volunteer community grew from 21 original founders overseeing the Apache HTTP Server to 820+ individual Members and 200 Project Management Committees who successfully lead 350+ Apache projects and initiatives in collaboration with 8,400+ Committers through the ASF’s meritocratic process known as "The Apache Way". Apache software is integral to nearly every end user computing device, from laptops to tablets to mobile devices across enterprises and mission-critical applications. Apache projects power most of the Internet, manage exabytes of data, execute teraflops of operations, and store billions of objects in virtually every industry. The commercially-friendly and permissive Apache License v2 is an Open Source industry standard, helping launch billion dollar corporations and benefiting countless users worldwide. The ASF is a US 501(c)(3) not-for-profit charitable organization funded by individual donations and corporate sponsors that include Aetna, Alibaba Cloud Computing, Amazon Web Services, Anonymous, Baidu, Bloomberg, Capital One, Cloudera, Comcast, Confluent, Didi Chuxing, Facebook, Google, Huawei, IBM, Indeed, Microsoft, Namebase, Pineapple Fund, Red Hat, Replicated, Talend, Target, Tencent, Union Investment, Workday, and Yahoo!. For more information, visit http://apache.org/ and https://twitter.com/TheASF
+
+© The Apache Software Foundation. "Apache", "Hop", "Apache Hop", and "ApacheCon" are registered trademarks or trademarks of the Apache Software Foundation in the United States and/or other countries. All other brands and trademarks are the property of their respective owners.
