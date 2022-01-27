@@ -4,7 +4,7 @@ date: 2022-01-24T07:59:56+02:00
 authors: ["bamaer"]
 categories: ["1.1", "Release", "Apache Hop"]
 preview: "Apache Hop 1.1 Released"
-description: "Hop 1.1.0 is the Hop first release as a Top-Level Project. This release contains four months of work and contains tons improvements and bugfixes."
+description: "Hop 1.1.0 is the Hop first release as a Top-Level Project. This release contains four months of work and contains tons of improvements and bugfixes."
 draft: false
 ---
 
