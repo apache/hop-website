@@ -1,0 +1,115 @@
+---
+title: "Apache Hop 1.1 is available!!"
+date: 2022-01-24T07:59:56+02:00
+authors: ["bamaer"]
+categories: ["1.1", "Release", "Apache Hop"]
+preview: "Apache Hop 1.1 Released"
+description: "Hop 1.1.0 is the Hop first release as a Top-Level Project. This release contains four months of work and contains tons improvements and bugfixes."
+draft: false
+---
+
+:imagesdir: ../../../../../static
+
+:toc: macro
+:toclevels: 3
+:toc-title: Let's take a closer look at what Hop 1.1 brings:
+:toc-class: none
+
+After four months of work, the Apache Hop community is pleased to announce the general availability of Apache Hop 1.1.0. +
+A huge thank you to everyone who made this possible.
+
+image::/img/Release-1.1/hop-11.svg[ width="45%"]
+
+&nbsp; +
+
+toc::[]
+
+or https://hop.apache.org/download/[**download Hop 1.1.0 **] right away.
+
+== Known Issue
+
+There is a known issue where text is displayed as white on a white background in Windows. Enable the 'Use look of OS' option in `Options -> Look & Feel` to avoid this.
+
+image:/img/Release-1.1/use-look-of-os.png[Use Look of OS, width="40%"]
+
+== Hop Server
+
+* Hop Server can now be started with https://hop.apache.org/manual/latest/hop-server/index.html#_ssl_configuration[SSL (https) enabled].
+* https://hop.apache.org/manual/latest/hop-server/async-web-service.html[Asynchronous web services] can be used to execute long-running workflows. Instead of results, this webservice returns a unique ID that can be used to query the server for that workflow or pipeline's status.
+* Hop Server can now be started with projects and environments as parameters.
+
+== Docker
+
+* the project and environment name are now optional
+* project and environment are now supported in long-lived container
+* logging options can now be set in the long-lived container (max_log_lines, max_log_timeout_minutes, object_timeout_minutes).
+* the short-lived container now returns the correct exit code for the executed hop-run command.
+
+== Apache Beam updates and improvements
+
+Hop 1.1.0 comes with new and updated Apache Beam libraries.
+
+* upgraded versions: Apache Beam in Hop was upgraded to 2.35.0, with support for Apache Spark 3.1.2 and Flink 1.13.5.
+* Beam on Google Cloud Dataflow now supports service accounts.
+* Beam on Google Cloud Dataflow now support DataflowServiceOptions which pass various options through if they're not available in the GUI
+
+== New and updated plugins
+
+* the https://hop.apache.org/manual/latest/pipeline/transforms/serverstatus.html[**Hop Server Status**] transform retrieves a lot of server and operating system metrics from one of your Hop Servers.
+* the https://hop.apache.org/manual/latest/pipeline/transforms/apache-tika.html[**Apache Tika**] transform parses files in all sorts of formats and extracts the text content as well as available metadata it can extract.
+* the https://hop.apache.org/manual/latest/pipeline/transforms/metadata-input.html[**Metadata Input**] gives you access to the Hop Metadata items in the current project. It outputs all the metadata objects of all types unless one or more types are filtered.
+* the https://hop.apache.org/manual/latest/pipeline/transforms/neo4j-graphoutput.html[**Neo4j Graph Output**] transform now supports
+** models with multiple relationships between two nodes
+** models with multiple node labels
+** models with self-relationships
+
+image:/img/Roundup-2022-01/apache-tika-transform.png[Apache Tika transform, width="90%"]
+
+image:/img/Roundup-2021-12/hop-transforms-neo4j-graph-output.png[Hop - Neo4j Graph Output, width="90%"]
+
+
+== Hop Gui improvements
+
+Hop GUI continues to evolve. Hop 1.1.0 contains a lot of minor improvements that together significantly improve the Hop user experience.
+
+* large pipelines and workflows: sometimes there is no way around building or working with large workflows and pipelines (even though that is against https://hop.apache.org/manual/latest/best-practices/index.html#_size_matters[best practices]). Hop Gui now lets you scroll through large workflows and pipelines correctly. The additional **SCROLL-drag** gesture makes navigating large workflows and pipelines in Hop GUI even easier.
+* File Explorer Perspective:
+** files and folders are now loaded lazily, reducing the need to wait for refreshes or a "hanging" Hop Gui.
+** any text file type can now be edited in the File Explorer perspective (this was only possible for CSV and JSON in Hop 1.0).
+** users now get a warning when trying to open large files
+
+== Various
+
+* Log4j removal: Hop never actively used Log4j but included Log4j libraries for developer convenience. These libraries have been removed in 1.1.0.
+* Kafka consumer transform improvements: improved error handling, logging from sub-pipelines is now passed to parent pipeline.
+* search in the context (popup) dialog is now keyword-aware. This works with internationalization, so searching for keywords in your own language (if available in Hop) also works.
+* CockroachDB is now a supported database type
+* documentation continues to grow in depth and in breadth. Hop 1.1.0 contains almost 500 individual documentation pages.
+* English, French and Italian have complete translations. The other supported languages have been moved to beta. Check the https://hop.apache.org/community/contribution-guides/translation-contribution-guide/[translation contribution guide] if you want to help to translate Hop to your own language.
+
+== Community
+
+The Hop community continued to grow significantly since the 1.0 release:
+
+* chat: 264 registered members (Hop 1.0: 210) link:https://chat.project-hop.org[join]
+* LinkedIn: 758 followers (Hop 1.0: 545) link:https://www.linkedin.com/company/hop-project[follow]
+* Twitter: 606 followers (Hop 1.0: 476) link:https://twitter.com/ApacheHop[follow]
+* YouTube: 399 subscribers (Hop 1.0: 232) link:https://www.youtube.com/ApacheHop[subscribe]
+* 3Hx Meetup: 216 members (Hop 1.0: 167)  link:https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/[join]
+
+Without community contribution, Hop is just a coding club! Please feel free to join, participate in the discussion, test, file bug tickets on the software or documentation, ... Contributing is a lot more than writing code.
+
+Check out our link:/community/contributing/[contribution guides] and http://hop.apache.org/community/ethos/[Code of Conduct] to find out more.
+
+== JIRA
+
+Hop 1.1.0 contains work on 235 tickets:
+
+* Resolved: 219
+* Closed: 16
+
+Check the https://issues.apache.org/jira/browse/?jql=project%20%3D%20%22Apache%20Hop%22%20AND%20fixVersion%20~%201.1.0%20and%20status%20%3D%20Resolved%20order%20by%20updated%20desc[Hop JIRA] for a full overview of all tickets.
+
+== Download Hop 1.1.0
+
+https://hop.apache.org/download/[**Download Hop 1.1.0**].
