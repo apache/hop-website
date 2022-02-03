@@ -6,7 +6,7 @@ Tools used to generate the website:
 
  - [Git](https://git-scm.com/) a source code management tool used to fetch document sources from different
    github repositories.
- - [Node.js](https://nodejs.org/) a JavaScript runtime used to build the website. You will need to use Node.js version 16.
+ - [Node.js](https://nodejs.org/) a JavaScript runtime used to build the website. You will need to use Node.js version 12.
  - [yarn](https://yarnpkg.com/) a blazing fast dependency and package manager tool used to download
    and manage required libraries.
  - (installed via yarn) [Gulp](http://gulpjs.com/) a task automation tool. Used to build the Hop
@@ -33,7 +33,7 @@ Make sure that you have Node.js (herein "`Node`") installed.
 
 If this command fails with an error, you do not have Node.js installed.
 
-This project requires the Node LTS version 16 (e.g., V16.13.2).
+This project requires the Node Maintenance LTS version 12 (e.g., V12.19.0).
 
 Please make sure to have a suitable version of Node.js installed. You have several options to install
 Node.js on your machine:
@@ -42,12 +42,12 @@ Node.js on your machine:
 - Install using [Homebrew](https://brew.sh/) and [Node formulae](https://formulae.brew.sh/formula/node)
 - Install from official [Node packages](https://nodejs.org/en/download/)
 
-Note - If you have different Node version other than Node.js LTS version 16 you can use following command to make
-Node.js LTS version 16 as your default Node.js version.
+Note - If you have different Node version other than Node.js Maintenance LTS version 12 you can use following command to make
+Node.js Maintenance LTS version 12 as your default Node.js version.
 
-    $ nvm alias default 16
+    $ nvm alias default 12
 
-Now that you have Node 16 installed, you can proceed with checking the Yarn installation.
+Now that you have Node 12 installed, you can proceed with checking the Yarn installation.
 
 #### Yarn
 
