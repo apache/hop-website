@@ -18,9 +18,8 @@
     "checks": "run-s check:*"
   },
   "devDependencies": {
-    "@antora/cli": "3.0.1",
-    "@antora/site-generator-default": "~3.0.1",
-    "@antora/site-generator": "~3.0.1",
+    "@antora/cli": "2.3",
+    "@antora/site-generator-default": "~2.3",
     "gulp": "^4.0.2",
     "gulp-htmlmin": "~5.0",
     "html-validate": "~5.0.2",
@@ -33,9 +32,9 @@
     "pnp": true
   },
   "dependencies": {
-    "asciidoctor": "^2.2.6",
+    "asciidoctor": "^2.0.15",
     "cookies-eu-banner": "^2.0.1",
-    "handlebars": "~4.7.7",
+    "handlebars": "~4.4",
     "toml": "~3.0",
     "unzipper": "~0.10",
     "yaml": "~1.7"
