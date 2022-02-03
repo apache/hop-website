@@ -25,7 +25,7 @@ ui:
     url: ./antora-ui-hop/build/ui-bundle.zip
 
 urls:
-  redirect_facility: disabled
+  latest_version_segment: stable
 
 output:
   clean: true

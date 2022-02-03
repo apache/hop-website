@@ -1,4 +1,4 @@
-FROM node:lts-stretch
+FROM node:lts-bullseye
 
 RUN set -ex \
   && apt-get update \
