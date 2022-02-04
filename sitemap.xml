@@ -2,19 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://hop.apache.org/categories/Apache-Hop/</loc>
+    <lastmod>2022-02-03T07:59:56+02:00</lastmod>
+  </url><url>
+    <loc>https://hop.apache.org/</loc>
+    <lastmod>2022-02-03T07:59:56+02:00</lastmod>
+  </url><url>
+    <loc>https://hop.apache.org/blog/</loc>
+    <lastmod>2022-02-03T07:59:56+02:00</lastmod>
+  </url><url>
+    <loc>https://hop.apache.org/categories/Roundup/</loc>
+    <lastmod>2022-02-03T07:59:56+02:00</lastmod>
+  </url><url>
+    <loc>https://hop.apache.org/blog/2022/02/roundup-2022-02/</loc>
+    <lastmod>2022-02-03T07:59:56+02:00</lastmod>
+  </url><url>
     <loc>https://hop.apache.org/categories/1.1/</loc>
     <lastmod>2022-01-24T07:59:56+02:00</lastmod>
   </url><url>
-    <loc>https://hop.apache.org/categories/Apache-Hop/</loc>
-    <lastmod>2022-01-24T07:59:56+02:00</lastmod>
-  </url><url>
-    <loc>https://hop.apache.org/</loc>
-    <lastmod>2022-01-24T07:59:56+02:00</lastmod>
-  </url><url>
     <loc>https://hop.apache.org/blog/2022/01/hop-1.1.0/</loc>
-    <lastmod>2022-01-24T07:59:56+02:00</lastmod>
-  </url><url>
-    <loc>https://hop.apache.org/blog/</loc>
     <lastmod>2022-01-24T07:59:56+02:00</lastmod>
   </url><url>
     <loc>https://hop.apache.org/categories/Release/</loc>
@@ -25,9 +31,6 @@
   </url><url>
     <loc>https://hop.apache.org/categories/Graduation/</loc>
     <lastmod>2022-01-20T07:59:56+02:00</lastmod>
-  </url><url>
-    <loc>https://hop.apache.org/categories/Roundup/</loc>
-    <lastmod>2022-01-10T07:59:56+02:00</lastmod>
   </url><url>
     <loc>https://hop.apache.org/blog/2022/01/roundup-2021-12/</loc>
     <lastmod>2022-01-10T07:59:56+02:00</lastmod>
