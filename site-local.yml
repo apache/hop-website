@@ -24,6 +24,7 @@ ui:
 
 urls:
   redirect_facility: disabled
+  latest_version_segment: latest
 
 output:
   dir: ./documentation
