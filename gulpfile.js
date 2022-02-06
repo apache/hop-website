@@ -8,7 +8,8 @@ gulp.task('minify', () => {
       collapseWhitespace: true,
       collapseInlineTagWhitespace: true,
       conservativeCollapse: true,
-      useShortDoctype: true
+      useShortDoctype: true,
+      processScripts: ['application/ld+json']
     }))
     .pipe(gulp.dest('public'));
 });
