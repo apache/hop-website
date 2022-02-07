@@ -1,4 +1,4 @@
-# Redirect security advisories to new location
+# Redirect rules for Hop
 RewriteEngine on
 RewriteBase "/"
 
