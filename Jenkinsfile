@@ -110,6 +110,7 @@ pipeline {
                     sh 'git rm -rf --ignore-unmatch .'
                     sh "cp -R $WORKSPACE/hop-website/public/. ."
                     sh "cp $WORKSPACE/hop-website/.asf.yaml ."
+                    sh "cp $WORKSPACE/hop-website/.htaccess ."
                     sh 'git add .'
                     sh 'git commit -m "Website updated to $(git rev-parse --short HEAD)"'
                     sh 'git push origin asf-site'
