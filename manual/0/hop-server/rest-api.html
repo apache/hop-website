@@ -3,7 +3,7 @@
     &lt;result&gt;OK&lt;/result&gt;
     &lt;message&gt;file:///tmp/export_70eb8ef1-9721-4cf5-afa3-940cd0f771d9.zip&lt;/message&gt;
     &lt;id/&gt;
-&lt;/webresult&gt;</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_addpipeline"><a class="anchor" href="#_addpipeline"></a>addPipeline</h2> <div class="sectionbody"> <div class="dlist"> <dl> <dt class="hdlist1">name</dt> <dd> <p>addPipeline</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Add a pipeline for execution</p> </dd> <dt class="hdlist1">endPoint</dt> <dd> <p>GET <code>hop/addPipeline</code></p> </dd> <dt class="hdlist1">parameters</dt> <dd> <div class="ulist"> <ul> <li> <p>xml Request body should contain xml containing pipeline_configuration (pipeline and pipeline_execution_configuration wrapped in pipeline_configuration tag).</p> </li> </ul> </div> </dd> <dt class="hdlist1">example request</dt> <dd> <p><code>http://localhost:8081/hop/addPipeline/xml=Y</code> with XML payload</p> </dd> <dt class="hdlist1">result</dt> <dd> <p>== addWorkflow</p> </dd> <dt class="hdlist1">name</dt> <dd> <p>addWorkflow</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Add a workflow for execution</p> </dd> <dt class="hdlist1">endPoint</dt> <dd> <p>GET <code>hop/addWorkflow</code></p> </dd> <dt class="hdlist1">parameters</dt> <dd> <div class="ulist"> <ul> <li> <p>xml Request body should contain xml containing workflow_configuration (pipeline and workflow_execution_configuration wrapped in pipeline_configuration tag).</p> </li> </ul> </div> </dd> <dt class="hdlist1">example request</dt> <dd> <p><code>http://localhost:8081/hop/addWorkflow/xml=Y</code> with XML payload</p> </dd> <dt class="hdlist1">result</dt> <dd> <p>== getPipelineImage</p> </dd> <dt class="hdlist1">name</dt> <dd> <p>getPipelineImage</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Generate a SVG image of a pipeline</p> </dd> <dt class="hdlist1">endPoint</dt> <dd> <p>GET <code>hop/pipelineImage</code></p> </dd> <dt class="hdlist1">parameters</dt> <dd> <div class="ulist"> <ul> <li> <p>name: name of the pipeline to generate the image for</p> </li> <li> <p>id: id of the pipeline to generate the image for</p> </li> </ul> </div> </dd> <dt class="hdlist1">example request</dt> <dd> <p>GET <code>http://localhost:8081/hop/pipelineImage/?name=remote-pipeline&amp;id=c1451bfb-b867-4c76-b123-c29d2b05da17</code></p> </dd> <dt class="hdlist1">result</dt> <dd> <p>an SVG image of the pipeline graph</p> </dd> </dl> </div> </div> </div> <div class="sect1"> <h2 id="_getpipelinestatus"><a class="anchor" href="#_getpipelinestatus"></a>getPipelineStatus</h2> <div class="sectionbody"> <div class="dlist"> <dl> <dt class="hdlist1">name</dt> <dd> <p>getPipelineStatus</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Get the status of a pipeline</p> </dd> <dt class="hdlist1">endPoint</dt> <dd> <p>GET <code>hop/pipelineStatus</code></p> </dd> <dt class="hdlist1">parameters</dt> <dd> <div class="ulist"> <ul> <li> <p>name: name of the pipeline to get the status for</p> </li> <li> <p>id: id of the pipeline to get the status for</p> </li> </ul> </div> </dd> <dt class="hdlist1">example request</dt> <dd> <p>GET <code>http://localhost:8081/hop/pipelineStatus/?name=&lt;NAME&gt;&gt;&amp;id=&lt;ID&gt;</code></p> </dd> <dt class="hdlist1">result</dt> <dd> <p>an HTML response with the execution status, transform details and canvas preview for this pipeline</p> </dd> </dl> </div> </div> </div> <div class="sect1"> <h2 id="_status"><a class="anchor" href="#_status"></a>Status</h2> <div class="sectionbody"> <div class="dlist"> <dl> <dt class="hdlist1">name</dt> <dd> <p>status</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Get the status of the server</p> </dd> <dt class="hdlist1">parameters</dt> <dd> <p>none</p> </dd> <dt class="hdlist1">example request</dt> <dd> <p>GET <code>http://localhost:8081/hop/status</code></p> </dd> <dt class="hdlist1">result</dt> <dd> <p>an HTML page with an overview of the pipelines and workflows on the server, their execution details and the server&#8217;s configuration details.</p> </dd> </dl> </div> </div> </div> <div class="sect1"> <h2 id="_getworkflowimage"><a class="anchor" href="#_getworkflowimage"></a>getWorkflowImage</h2> <div class="sectionbody"> <div class="dlist"> <dl> <dt class="hdlist1">name</dt> <dd> <p>getWorkflowImage</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Generate an SVG image of a workflow</p> </dd> <dt class="hdlist1">endPoint</dt> <dd> <p>GET <code>hop/workflowImage</code></p> </dd> <dt class="hdlist1">parameters</dt> <dd> <div class="ulist"> <ul> <li> <p>name: name of the workflow to generate the image for</p> </li> <li> <p>id: id of the workflow to generate the image for</p> </li> </ul> </div> </dd> <dt class="hdlist1">example request</dt> <dd> <p>GET <code>http://localhost:8081/hop/workflowImage/?name=&lt;NAME&gt;&gt;&amp;id=&lt;ID&gt;</code></p> </dd> <dt class="hdlist1">result</dt> <dd> <p>an SVG image of the workflow graph</p> </dd> </dl> </div> </div> </div> <div class="sect1"> <h2 id="_getworkflowstatus"><a class="anchor" href="#_getworkflowstatus"></a>getWorkflowStatus</h2> <div class="sectionbody"> <div class="dlist"> <dl> <dt class="hdlist1">name</dt> <dd> <p>getWorkflowStatus</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Get the status of a workflow</p> </dd> <dt class="hdlist1">endPoint</dt> <dd> <p>GET <code>hop/workflowStatus</code></p> </dd> <dt class="hdlist1">parameters</dt> <dd> <div class="ulist"> <ul> <li> <p>name: name of the workflow to get the status for</p> </li> <li> <p>id: id of the workflow to get the status for</p> </li> </ul> </div> </dd> <dt class="hdlist1">example request</dt> <dd> <p>GET <code>http://localhost:8081/hop/workflowStatus/?name=&lt;NAME&gt;&amp;id=&lt;ID&gt;</code></p> </dd> <dt class="hdlist1">result</dt> <dd> <p>an HTML response with the execution status, action details and canvas preview for this workflow</p> </dd> </dl> </div> </div> </div> <div class="sect1"> <h2 id="_pausepipeline"><a class="anchor" href="#_pausepipeline"></a>pausePipeline</h2> <div class="sectionbody"> <div class="dlist"> <dl> <dt class="hdlist1">name</dt> <dd> <p>pausePipeline</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Pause or continue a pipeline</p> </dd> <dt class="hdlist1">endPoint</dt> <dd> <p>GET <code>/hop/pausePipeline</code></p> </dd> <dt class="hdlist1">parameters</dt> <dd> <div class="ulist"> <ul> <li> <p>name: name of the pipeline to pause or restart</p> </li> <li> <p>id: id of the pipeline to pause or restart</p> </li> </ul> </div> </dd> <dt class="hdlist1">example request</dt> <dd> <p>GET <code>http://localhost:8081/hop/pausePipeline/?name=&lt;NAME&gt;&amp;id=&lt;ID&gt;</code></p> </dd> <dt class="hdlist1">result</dt> <dd> <p>HTML page with the request status, e.g.</p> </dd> </dl> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;HTML&gt;
+&lt;/webresult&gt;</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_addpipeline"><a class="anchor" href="#_addpipeline"></a>addPipeline</h2> <div class="sectionbody"> <div class="dlist"> <dl> <dt class="hdlist1">name</dt> <dd> <p>addPipeline</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Add a pipeline for execution</p> </dd> <dt class="hdlist1">endPoint</dt> <dd> <p>GET <code>hop/addPipeline</code></p> </dd> <dt class="hdlist1">parameters</dt> <dd> <div class="ulist"> <ul> <li> <p>xml Request body should contain xml containing pipeline_configuration (pipeline and pipeline_execution_configuration wrapped in pipeline_configuration tag).</p> </li> </ul> </div> </dd> <dt class="hdlist1">example request</dt> <dd> <p><code>http://localhost:8081/hop/addPipeline/xml=Y</code> with XML payload</p> </dd> <dt class="hdlist1">result</dt> <dd> <p>== addWorkflow</p> </dd> <dt class="hdlist1">name</dt> <dd> <p>addWorkflow</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Add a workflow for execution</p> </dd> <dt class="hdlist1">endPoint</dt> <dd> <p>GET <code>hop/addWorkflow</code></p> </dd> <dt class="hdlist1">parameters</dt> <dd> <div class="ulist"> <ul> <li> <p>xml Request body should contain xml containing workflow_configuration (pipeline and workflow_execution_configuration wrapped in pipeline_configuration tag).</p> </li> </ul> </div> </dd> <dt class="hdlist1">example request</dt> <dd> <p><code>http://localhost:8081/hop/addWorkflow/xml=Y</code> with XML payload</p> </dd> <dt class="hdlist1">result</dt> <dd> <p>-</p> </dd> </dl> </div> </div> </div> <div class="sect1"> <h2 id="_getpipelineimage"><a class="anchor" href="#_getpipelineimage"></a>getPipelineImage</h2> <div class="sectionbody"> <div class="dlist"> <dl> <dt class="hdlist1">name</dt> <dd> <p>getPipelineImage</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Generate a SVG image of a pipeline</p> </dd> <dt class="hdlist1">endPoint</dt> <dd> <p>GET <code>hop/pipelineImage</code></p> </dd> <dt class="hdlist1">parameters</dt> <dd> <div class="ulist"> <ul> <li> <p>name: name of the pipeline to generate the image for</p> </li> <li> <p>id: id of the pipeline to generate the image for</p> </li> </ul> </div> </dd> <dt class="hdlist1">example request</dt> <dd> <p>GET <code>http://localhost:8081/hop/pipelineImage/?name=remote-pipeline&amp;id=c1451bfb-b867-4c76-b123-c29d2b05da17</code></p> </dd> <dt class="hdlist1">result</dt> <dd> <p>an SVG image of the pipeline graph</p> </dd> </dl> </div> </div> </div> <div class="sect1"> <h2 id="_getpipelinestatus"><a class="anchor" href="#_getpipelinestatus"></a>getPipelineStatus</h2> <div class="sectionbody"> <div class="dlist"> <dl> <dt class="hdlist1">name</dt> <dd> <p>getPipelineStatus</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Get the status of a pipeline</p> </dd> <dt class="hdlist1">endPoint</dt> <dd> <p>GET <code>hop/pipelineStatus</code></p> </dd> <dt class="hdlist1">parameters</dt> <dd> <div class="ulist"> <ul> <li> <p>name: name of the pipeline to get the status for</p> </li> <li> <p>id: id of the pipeline to get the status for</p> </li> </ul> </div> </dd> <dt class="hdlist1">example request</dt> <dd> <p>GET <code>http://localhost:8081/hop/pipelineStatus/?name=&lt;NAME&gt;&gt;&amp;id=&lt;ID&gt;</code></p> </dd> <dt class="hdlist1">result</dt> <dd> <p>an HTML response with the execution status, transform details and canvas preview for this pipeline</p> </dd> </dl> </div> </div> </div> <div class="sect1"> <h2 id="_status"><a class="anchor" href="#_status"></a>Status</h2> <div class="sectionbody"> <div class="dlist"> <dl> <dt class="hdlist1">name</dt> <dd> <p>status</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Get the status of the server</p> </dd> <dt class="hdlist1">parameters</dt> <dd> <p>none</p> </dd> <dt class="hdlist1">example request</dt> <dd> <p>GET <code>http://localhost:8081/hop/status</code></p> </dd> <dt class="hdlist1">result</dt> <dd> <p>an HTML page with an overview of the pipelines and workflows on the server, their execution details and the server&#8217;s configuration details.</p> </dd> </dl> </div> </div> </div> <div class="sect1"> <h2 id="_getworkflowimage"><a class="anchor" href="#_getworkflowimage"></a>getWorkflowImage</h2> <div class="sectionbody"> <div class="dlist"> <dl> <dt class="hdlist1">name</dt> <dd> <p>getWorkflowImage</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Generate an SVG image of a workflow</p> </dd> <dt class="hdlist1">endPoint</dt> <dd> <p>GET <code>hop/workflowImage</code></p> </dd> <dt class="hdlist1">parameters</dt> <dd> <div class="ulist"> <ul> <li> <p>name: name of the workflow to generate the image for</p> </li> <li> <p>id: id of the workflow to generate the image for</p> </li> </ul> </div> </dd> <dt class="hdlist1">example request</dt> <dd> <p>GET <code>http://localhost:8081/hop/workflowImage/?name=&lt;NAME&gt;&gt;&amp;id=&lt;ID&gt;</code></p> </dd> <dt class="hdlist1">result</dt> <dd> <p>an SVG image of the workflow graph</p> </dd> </dl> </div> </div> </div> <div class="sect1"> <h2 id="_getworkflowstatus"><a class="anchor" href="#_getworkflowstatus"></a>getWorkflowStatus</h2> <div class="sectionbody"> <div class="dlist"> <dl> <dt class="hdlist1">name</dt> <dd> <p>getWorkflowStatus</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Get the status of a workflow</p> </dd> <dt class="hdlist1">endPoint</dt> <dd> <p>GET <code>hop/workflowStatus</code></p> </dd> <dt class="hdlist1">parameters</dt> <dd> <div class="ulist"> <ul> <li> <p>name: name of the workflow to get the status for</p> </li> <li> <p>id: id of the workflow to get the status for</p> </li> </ul> </div> </dd> <dt class="hdlist1">example request</dt> <dd> <p>GET <code>http://localhost:8081/hop/workflowStatus/?name=&lt;NAME&gt;&amp;id=&lt;ID&gt;</code></p> </dd> <dt class="hdlist1">result</dt> <dd> <p>an HTML response with the execution status, action details and canvas preview for this workflow</p> </dd> </dl> </div> </div> </div> <div class="sect1"> <h2 id="_pausepipeline"><a class="anchor" href="#_pausepipeline"></a>pausePipeline</h2> <div class="sectionbody"> <div class="dlist"> <dl> <dt class="hdlist1">name</dt> <dd> <p>pausePipeline</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Pause or continue a pipeline</p> </dd> <dt class="hdlist1">endPoint</dt> <dd> <p>GET <code>/hop/pausePipeline</code></p> </dd> <dt class="hdlist1">parameters</dt> <dd> <div class="ulist"> <ul> <li> <p>name: name of the pipeline to pause or restart</p> </li> <li> <p>id: id of the pipeline to pause or restart</p> </li> </ul> </div> </dd> <dt class="hdlist1">example request</dt> <dd> <p>GET <code>http://localhost:8081/hop/pausePipeline/?name=&lt;NAME&gt;&amp;id=&lt;ID&gt;</code></p> </dd> <dt class="hdlist1">result</dt> <dd> <p>HTML page with the request status, e.g.</p> </dd> </dl> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;HTML&gt;
 
 &lt;HEAD&gt;
 	&lt;TITLE&gt;Pause pipeline&lt;/TITLE&gt;
@@ -23,7 +23,176 @@
     &lt;result&gt;OK&lt;/result&gt;
     &lt;message/&gt;
     &lt;id/&gt;
-&lt;/webresult&gt;</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_register_pipeline"><a class="anchor" href="#_register_pipeline"></a>Register Pipeline</h2> <div class="sectionbody"> <div class="dlist"> <dl> <dt class="hdlist1">name</dt> <dd> <p>registerPipeline</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Register a pipeline for execution</p> </dd> <dt class="hdlist1">endPoint</dt> <dd> <p>GET <code>hop/registerPipeline</code></p> </dd> <dt class="hdlist1">parameters</dt> <dd> <div class="ulist"> <ul> <li> <p>xml Request body should contain xml containing pipeline_configuration (pipeline and pipeline_execution_configuration wrapped in pipeline_configuration tag).</p> </li> </ul> </div> </dd> <dt class="hdlist1">example request</dt> <dd> <p><code>http://localhost:8081/hop/registerPipeline/xml=Y</code> with XML payload</p> </dd> <dt class="hdlist1">result</dt> <dd> <p>== Register Workflow</p> </dd> <dt class="hdlist1">name</dt> <dd> <p>registerWorkflow</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Register a workflow on the server</p> </dd> <dt class="hdlist1">endPoint</dt> <dd> <p>GET <code>/hop/registerWorkflow</code></p> </dd> <dt class="hdlist1">parameters</dt> <dd> <div class="ulist"> <ul> <li> <p>xml:</p> </li> </ul> </div> </dd> <dt class="hdlist1">example request</dt> <dd> <p>-</p> </dd> <dt class="hdlist1">result</dt> <dd> <p>-</p> </dd> </dl> </div> </div> </div> <div class="sect1"> <h2 id="_remove_pipeline"><a class="anchor" href="#_remove_pipeline"></a>Remove Pipeline</h2> <div class="sectionbody"> <div class="dlist"> <dl> <dt class="hdlist1">name</dt> <dd> <p>removePipeline</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Remove a pipeline from the server</p> </dd> <dt class="hdlist1">endPoint</dt> <dd> <p>GET <code>/hop/removePipeline</code></p> </dd> <dt class="hdlist1">parameters</dt> <dd> <div class="ulist"> <ul> <li> <p>name: the name of the pipeline to remove</p> </li> <li> <p>id: the id of the pipeline to remove</p> </li> </ul> </div> </dd> <dt class="hdlist1">example request</dt> <dd> <p>GET <code>http://localhost:8081/hop/removePipeline/?name=&lt;NAME&gt;&amp;id=&lt;ID&gt;</code></p> </dd> <dt class="hdlist1">result</dt> <dd> <p>Example result:</p> </dd> </dl> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;HTML&gt;
+&lt;/webresult&gt;</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_register_pipeline"><a class="anchor" href="#_register_pipeline"></a>Register Pipeline</h2> <div class="sectionbody"> <div class="dlist"> <dl> <dt class="hdlist1">name</dt> <dd> <p>registerPipeline</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Register a pipeline for execution</p> </dd> <dt class="hdlist1">endPoint</dt> <dd> <p>GET <code>hop/registerPipeline</code></p> </dd> <dt class="hdlist1">parameters</dt> <dd> <div class="ulist"> <ul> <li> <p>xml Request body should contain xml containing pipeline_configuration (pipeline and pipeline_execution_configuration wrapped in pipeline_configuration tag).</p> </li> </ul> </div> </dd> <dt class="hdlist1">example request</dt> <dd> <p><code>http://localhost:8081/hop/registerPipeline/xml=Y</code></p> </dd> </dl> </div> <div class="paragraph"> <p>with XML payload (example):</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;pipeline_configuration&gt;
+&lt;pipeline&gt;
+  &lt;info&gt;
+    &lt;name&gt;generate_rows&lt;/name&gt;
+    &lt;name_sync_with_filename&gt;Y&lt;/name_sync_with_filename&gt;
+    &lt;description/&gt;
+    &lt;extended_description/&gt;
+    &lt;pipeline_version/&gt;
+    &lt;pipeline_type&gt;Normal&lt;/pipeline_type&gt;
+    &lt;parameters&gt;
+    &lt;/parameters&gt;
+    &lt;capture_transform_performance&gt;N&lt;/capture_transform_performance&gt;
+    &lt;transform_performance_capturing_delay&gt;1000&lt;/transform_performance_capturing_delay&gt;
+    &lt;transform_performance_capturing_size_limit&gt;100&lt;/transform_performance_capturing_size_limit&gt;
+    &lt;created_user&gt;-&lt;/created_user&gt;
+    &lt;created_date&gt;2022/02/03 13:47:49.645&lt;/created_date&gt;
+    &lt;modified_user&gt;-&lt;/modified_user&gt;
+    &lt;modified_date&gt;2022/02/03 13:47:49.645&lt;/modified_date&gt;
+    &lt;key_for_session_key&gt;H4sIAAAAAAAA/wMAAAAAAAAAAAA=&lt;/key_for_session_key&gt;
+    &lt;is_key_private&gt;N&lt;/is_key_private&gt;
+  &lt;/info&gt;
+  &lt;notepads&gt;
+  &lt;/notepads&gt;
+  &lt;order&gt;
+    &lt;hop&gt;
+      &lt;from&gt;Generate rows&lt;/from&gt;
+      &lt;to&gt;Delay row&lt;/to&gt;
+      &lt;enabled&gt;Y&lt;/enabled&gt;
+    &lt;/hop&gt;
+    &lt;hop&gt;
+      &lt;from&gt;Delay row&lt;/from&gt;
+      &lt;to&gt;result&lt;/to&gt;
+      &lt;enabled&gt;Y&lt;/enabled&gt;
+    &lt;/hop&gt;
+  &lt;/order&gt;
+  &lt;transform&gt;
+    &lt;name&gt;Delay row&lt;/name&gt;
+    &lt;type&gt;Delay&lt;/type&gt;
+    &lt;description/&gt;
+    &lt;distribute&gt;Y&lt;/distribute&gt;
+    &lt;custom_distribution/&gt;
+    &lt;copies&gt;1&lt;/copies&gt;
+    &lt;partitioning&gt;
+      &lt;method&gt;none&lt;/method&gt;
+      &lt;schema_name/&gt;
+    &lt;/partitioning&gt;
+    &lt;scaletime&gt;seconds&lt;/scaletime&gt;
+    &lt;timeout&gt;1&lt;/timeout&gt;
+    &lt;attributes/&gt;
+    &lt;GUI&gt;
+      &lt;xloc&gt;416&lt;/xloc&gt;
+      &lt;yloc&gt;96&lt;/yloc&gt;
+    &lt;/GUI&gt;
+  &lt;/transform&gt;
+  &lt;transform&gt;
+    &lt;name&gt;Generate rows&lt;/name&gt;
+    &lt;type&gt;RowGenerator&lt;/type&gt;
+    &lt;description/&gt;
+    &lt;distribute&gt;Y&lt;/distribute&gt;
+    &lt;custom_distribution/&gt;
+    &lt;copies&gt;1&lt;/copies&gt;
+    &lt;partitioning&gt;
+      &lt;method&gt;none&lt;/method&gt;
+      &lt;schema_name/&gt;
+    &lt;/partitioning&gt;
+    &lt;fields&gt;
+      &lt;field&gt;
+        &lt;length&gt;-1&lt;/length&gt;
+        &lt;name&gt;value&lt;/name&gt;
+        &lt;precision&gt;-1&lt;/precision&gt;
+        &lt;set_empty_string&gt;N&lt;/set_empty_string&gt;
+        &lt;type&gt;String&lt;/type&gt;
+        &lt;nullif&gt;test&lt;/nullif&gt;
+      &lt;/field&gt;
+    &lt;/fields&gt;
+    &lt;interval_in_ms&gt;5000&lt;/interval_in_ms&gt;
+    &lt;last_time_field&gt;FiveSecondsAgo&lt;/last_time_field&gt;
+    &lt;never_ending&gt;N&lt;/never_ending&gt;
+    &lt;limit&gt;10000&lt;/limit&gt;
+    &lt;row_time_field&gt;now&lt;/row_time_field&gt;
+    &lt;attributes/&gt;
+    &lt;GUI&gt;
+      &lt;xloc&gt;160&lt;/xloc&gt;
+      &lt;yloc&gt;96&lt;/yloc&gt;
+    &lt;/GUI&gt;
+  &lt;/transform&gt;
+  &lt;transform&gt;
+    &lt;name&gt;result&lt;/name&gt;
+    &lt;type&gt;Dummy&lt;/type&gt;
+    &lt;description/&gt;
+    &lt;distribute&gt;Y&lt;/distribute&gt;
+    &lt;custom_distribution/&gt;
+    &lt;copies&gt;1&lt;/copies&gt;
+    &lt;partitioning&gt;
+      &lt;method&gt;none&lt;/method&gt;
+      &lt;schema_name/&gt;
+    &lt;/partitioning&gt;
+    &lt;attributes/&gt;
+    &lt;GUI&gt;
+      &lt;xloc&gt;720&lt;/xloc&gt;
+      &lt;yloc&gt;96&lt;/yloc&gt;
+    &lt;/GUI&gt;
+  &lt;/transform&gt;
+  &lt;transform_error_handling&gt;
+  &lt;/transform_error_handling&gt;
+  &lt;attributes/&gt;
+&lt;/pipeline&gt;
+  &lt;pipeline_execution_configuration&gt;
+    &lt;pass_export&gt;N&lt;/pass_export&gt;
+    &lt;parameters&gt;
+    &lt;/parameters&gt;
+    &lt;variables&gt;
+    &lt;variable&gt;&lt;name&gt;HOP_AUDIT_FOLDER&lt;/name&gt;&lt;value&gt;/Users/hans/config/audit&lt;/value&gt;&lt;/variable&gt;
+    &lt;variable&gt;&lt;name&gt;HOP_AUTO_CREATE_CONFIG&lt;/name&gt;&lt;value&gt;Y&lt;/value&gt;&lt;/variable&gt;
+    &lt;variable&gt;&lt;name&gt;HOP_CONFIG_FOLDER&lt;/name&gt;&lt;value&gt;/Users/hans/config&lt;/value&gt;&lt;/variable&gt;
+    &lt;variable&gt;&lt;name&gt;HOP_DATASETS_FOLDER&lt;/name&gt;&lt;value&gt;/Users/hans/test/datasets&lt;/value&gt;&lt;/variable&gt;
+    &lt;variable&gt;&lt;name&gt;HOP_ENVIRONMENT_NAME&lt;/name&gt;&lt;value&gt;test1&lt;/value&gt;&lt;/variable&gt;
+    &lt;variable&gt;&lt;name&gt;HOP_METADATA_FOLDER&lt;/name&gt;&lt;value&gt;/Users/hans/test/metadata&lt;/value&gt;&lt;/variable&gt;
+    &lt;variable&gt;&lt;name&gt;HOP_PIPELINE_PAN_JVM_EXIT_CODE&lt;/name&gt;&lt;value/&gt;&lt;/variable&gt;
+    &lt;variable&gt;&lt;name&gt;HOP_PROJECTS&lt;/name&gt;&lt;value&gt;/Users/hans/tmp/&lt;/value&gt;&lt;/variable&gt;
+    &lt;variable&gt;&lt;name&gt;HOP_PROJECT_NAME&lt;/name&gt;&lt;value&gt;test&lt;/value&gt;&lt;/variable&gt;
+    &lt;variable&gt;&lt;name&gt;HOP_UNIT_TESTS_FOLDER&lt;/name&gt;&lt;value&gt;/Users/hans/test&lt;/value&gt;&lt;/variable&gt;
+    &lt;variable&gt;&lt;name&gt;NEO4J_CONNECTION&lt;/name&gt;&lt;value&gt;neo4j&lt;/value&gt;&lt;/variable&gt;
+    &lt;variable&gt;&lt;name&gt;PROJECT_HOME&lt;/name&gt;&lt;value&gt;/Users/hans/test&lt;/value&gt;&lt;/variable&gt;
+    &lt;variable&gt;&lt;name&gt;TEST&lt;/name&gt;&lt;value&gt;TEST&lt;/value&gt;&lt;/variable&gt;
+    &lt;variable&gt;&lt;name&gt;ftp.nonProxyHosts&lt;/name&gt;&lt;value&gt;local|*.local|169.254/16|*.169.254/16&lt;/value&gt;&lt;/variable&gt;
+    &lt;variable&gt;&lt;name&gt;http.nonProxyHosts&lt;/name&gt;&lt;value&gt;local|*.local|169.254/16|*.169.254/16&lt;/value&gt;&lt;/variable&gt;
+    &lt;variable&gt;&lt;name&gt;jdk.debug&lt;/name&gt;&lt;value&gt;release&lt;/value&gt;&lt;/variable&gt;
+    &lt;variable&gt;&lt;name&gt;native.encoding&lt;/name&gt;&lt;value&gt;UTF-8&lt;/value&gt;&lt;/variable&gt;
+    &lt;variable&gt;&lt;name&gt;p1&lt;/name&gt;&lt;value&gt;a&lt;/value&gt;&lt;/variable&gt;
+    &lt;variable&gt;&lt;name&gt;socksNonProxyHosts&lt;/name&gt;&lt;value&gt;local|*.local|169.254/16|*.169.254/16&lt;/value&gt;&lt;/variable&gt;
+    &lt;/variables&gt;
+    &lt;log_level&gt;Basic&lt;/log_level&gt;
+    &lt;log_file&gt;N&lt;/log_file&gt;
+    &lt;log_filename/&gt;
+    &lt;log_file_append&gt;N&lt;/log_file_append&gt;
+    &lt;create_parent_folder&gt;N&lt;/create_parent_folder&gt;
+    &lt;clear_log&gt;Y&lt;/clear_log&gt;
+    &lt;show_subcomponents&gt;Y&lt;/show_subcomponents&gt;
+    &lt;run_configuration&gt;local&lt;/run_configuration&gt;
+&lt;/pipeline_execution_configuration&gt;
+&lt;metastore_json&gt;H4sIAAAAAAAA/+1XbVPbOBD+Kxl/upshzQsUAt/SxBzchSRNTDudpuNRZNlRkSVXkgk5hv9+K0t+
+CSl3cDP37coH8Gq1evTs7rPqo6eIvCfSu/j66G3JephlU5QS78Lzjjyl2EjwmCbeBc8ZKww3IoLV
+GDFFjrxMiofdXEht/TdCaW539/pn77rw0wNzhpTaChmB2edY7jJNolZ/Tc4HKMaDU4TO4j45wese
+Qv3T9zgyJjyAjVzwuTnhCuIqe4QArJJGxH+gSlOewHpGpKZENUE50w1Smkh7H3uBzGId9AYGmMPK
+ydZzd7mqbwCmHLhxX5jlJpb39A08aUYY5aQNW9aw+BVsOae6rYnS9lNG61QVnLq/Hr3ldPb5cjL8
+wzcfEdJojRSpuc5YnlB+bUiqPY88yiPyEKA1IypDuLrHFkmyEYDPbjbhDp0QxkSpYJeBpbuXnZeS
+4lUMVYgcwiUX25ihO2LKoqgY3qAVaS3pOtfE3vR2Pp8tgmUYXN/4y2B4Mw/Hw2AYBl/mcHnvC4T4
+eDsL/HA4mYSX1/5kvATzFMzVzg+z2cQfTg/2Xc4WIz+8HvvT4Bp2LuCMWTiZffYXo+HSd1HmC3/p
+Lz75ofs9Dj/PFuPQeZgwy4+TcDSbTv1RYO/607gA5nncS3+xgHjL0ZV/Mwynwxuz5j0deSniOWK3
+kh1Ujvf0VFVaQjiRFPdhR6My5rNl8Btg/Tj5SWlkkLVEArF7JdLY8mKNvLUomMCIme83tOzZOSa9
+bnR6fox6+Lwun/cnx/3nJTS3N7GY/6+ht9TQBnHVrKMsKYQIMnQXM7FtM5FY3cGQN8QjidpYcE6w
+poLbFU7Eyfd2IlG2aaeg4cyaQfLbJhfUVAjIlZZwVCxk6pI2ztN01/olEi0u9AYE91dAFlNGHJJV
+5xa2q1XHQFx1jAKuOqbyljbou03Gih2ERS7kPWK5kRFmFXypkc5r9XZxFUozRkKAV6KDywmuCde2
+dj2UZYxiZG646nxXcM8jD1BBvUPVapmTPamWOTeUwCzLJXKsPII/lCdZ5Hy0v/TofSAoHVMJDM5d
+CL/wNWuapNlEYOdbsHGx6pifeyRXnViwqKDkvgu0fE9P77Ik6nbPTjmO7rJ4IJPjaNuFfwkAD1Yd
+0w1awnlAxpXIgjID6kMex0Qu6Z9OsnmerokMRRyaxMMR1hwj/TuSdc0MQWVMD0KsF0NfwjjbXAOd
+ErJht1aZnxdNO2JQSkQ1R4EKBCQrcWgesgNHU6F7JH9CkhYK5GrQ5rYYk6BPRGFJM8diIYkv52NB
+UqEL9smD0ZgQJFHkEpvQJtkwcktDqJFMiA5tHizYetH+3lu0WhRmgrGQ7nECVRNi9wKy+li8crKw
+fDS5t0MzArQW2v0jG49VK/cOqThyPQJFXvS5c5WWgzcyNylgwx8xIdEa4btQ2Yp6b2rQgLet5qy9
+pk1DqwElYZJTWJqgIm9SbBXQW/u7HTEJ0+bjUG3ENiwPraxaZAKSYKaEsyRIb4C8lID+41oIinpE
+hYIZ/IX1lQVWZmqfJyBHtXaQ/lapCqpVeLJda0v1pgUwWkqDfCIZ2ZUWNE3l3bIc24wUarqnsY/V
+S3pvkq4LuqR7JJ+dnJ2491pjxhfRvMYAcNdBuRYp3BOX1yxnZa6god1gLk53nEmRG0mtn8KvHuPr
+qH8cRYNujAupfXZAfb5XwHwI6uQsIG+7gJbvypqTCb2H545Sow3Bd8YBwD33ecE8xD9yquiBB3S6
+0kPGRuZ9Hxv1J+oA26iBICa6QubI2fevKH7O4VzAdNlZp7Vgukzg6eDsBSBVBCgCBaeflMrEn2e5
+AXEuBKsVvjHyS+8yWBO2qcBU8ERE64M5nyFAVH8iteO4vT/lm3OxejlUb4m3TspKXw4V4KUWbrZp
+/2/6tMT0uj4tvas+fZ0s/jvY/x3qb/Z91Y5ITDltJAAzoXJZvgWa/3U9GB/Fc2tcBXByoggUB9JC
+ljWkYK7zO7toJAlk3Xw8/QVlC+SCFRAAAA==
+&lt;/metastore_json&gt;
+&lt;/pipeline_configuration&gt;</code></pre> </div> </div> <div class="paragraph"> <p>The metastore_json is base64 encoded GZip content</p> </div> <div class="dlist"> <dl> <dt class="hdlist1">result</dt> <dd> <p>-</p> </dd> </dl> </div> </div> </div> <div class="sect1"> <h2 id="_register_workflow"><a class="anchor" href="#_register_workflow"></a>Register Workflow</h2> <div class="sectionbody"> <div class="dlist"> <dl> <dt class="hdlist1">name</dt> <dd> <p>registerWorkflow</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Register a workflow on the server</p> </dd> <dt class="hdlist1">endPoint</dt> <dd> <p>GET <code>/hop/registerWorkflow</code></p> </dd> <dt class="hdlist1">parameters</dt> <dd> <div class="ulist"> <ul> <li> <p>xml:</p> </li> </ul> </div> </dd> <dt class="hdlist1">example request</dt> <dd> <p>-</p> </dd> <dt class="hdlist1">result</dt> <dd> <p>-</p> </dd> </dl> </div> </div> </div> <div class="sect1"> <h2 id="_remove_pipeline"><a class="anchor" href="#_remove_pipeline"></a>Remove Pipeline</h2> <div class="sectionbody"> <div class="dlist"> <dl> <dt class="hdlist1">name</dt> <dd> <p>removePipeline</p> </dd> <dt class="hdlist1">description</dt> <dd> <p>Remove a pipeline from the server</p> </dd> <dt class="hdlist1">endPoint</dt> <dd> <p>GET <code>/hop/removePipeline</code></p> </dd> <dt class="hdlist1">parameters</dt> <dd> <div class="ulist"> <ul> <li> <p>name: the name of the pipeline to remove</p> </li> <li> <p>id: the id of the pipeline to remove</p> </li> </ul> </div> </dd> <dt class="hdlist1">example request</dt> <dd> <p>GET <code>http://localhost:8081/hop/removePipeline/?name=&lt;NAME&gt;&amp;id=&lt;ID&gt;</code></p> </dd> <dt class="hdlist1">result</dt> <dd> <p>Example result:</p> </dd> </dl> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;HTML&gt;
 
 &lt;HEAD&gt;
 	&lt;TITLE&gt;The pipeline was removed&lt;/TITLE&gt;
