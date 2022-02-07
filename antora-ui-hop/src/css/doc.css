@@ -724,6 +724,96 @@
   hyphens: none;
 }
 
+.doc .source-toolbox {
+  display: flex;
+  visibility: hidden;
+  position: absolute;
+  top: 0.25rem;
+  right: 0.5rem;
+  color: var(--pre-annotation-font-color);
+  font-family: var(--body-font-family);
+  font-size: calc(13.5 / var(--rem-base) * 1rem);
+  line-height: 1;
+}
+
+.doc .listingblock:hover .source-toolbox {
+  visibility: visible;
+}
+
+.doc .source-toolbox .source-lang {
+  text-transform: uppercase;
+  letter-spacing: 0.075em;
+  font-size: 0.96em;
+  line-height: 1.0425;
+}
+
+.doc .source-toolbox > :not(:last-child)::after {
+  content: "|";
+  letter-spacing: 0;
+  padding: 0 1ch;
+}
+
+.doc .source-toolbox .copy-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: inherit;
+  outline: none;
+  padding: 0;
+  font-size: inherit;
+  line-height: inherit;
+  width: 1em;
+  height: 1em;
+}
+
+.doc .source-toolbox .copy-icon {
+  flex: none;
+  width: inherit;
+  height: inherit;
+}
+
+.doc .source-toolbox img.copy-icon {
+  filter: invert(50.2%);
+}
+
+.doc .source-toolbox svg.copy-icon {
+  fill: currentColor;
+}
+
+.doc .source-toolbox .copy-toast {
+  flex: none;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  margin-top: 1em;
+  background-color: var(--doc-font-color);
+  border-radius: 0.25em;
+  padding: 0.5em;
+  color: var(--color-white);
+  cursor: auto;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.75s;
+}
+
+.doc .source-toolbox .copy-toast::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 1em;
+  height: 1em;
+  border: 0.55em solid transparent;
+  border-left-color: var(--doc-font-color);
+  transform: rotate(-90deg) translateX(50%) translateY(50%);
+  transform-origin: left;
+}
+
+.doc .source-toolbox .copy-button.clicked .copy-toast {
+  opacity: 1;
+  transition: none;
+}
+
 /* for mobile screens */
 @media screen and (max-width: 626px) {
   #preamble + .sect1,
