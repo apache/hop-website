@@ -69,7 +69,7 @@ A couple of items worth highlighting:
 
 With the increased Apache Hop visibility after the graduation and the 1.1.0 release, we've seen a significant uptick in the number of forks of the Hop github code repository and contributions. We'll work on updates statistics on community interaction and contributions soon.
 
-A couple of notable new contributions are SonarCube code cleanup and fixes, Brazilian Portuguese translations and a new link:/manual/0/how-to-guides/apache-hop-web-services-docker.html[Hop web services in Docker tutorial]. A huge thank you to everyone who contributed!
+A couple of notable new contributions are SonarCube code cleanup and fixes, Brazilian Portuguese translations and a new link:/manual/next/how-to-guides/apache-hop-web-services-docker.html[Hop web services in Docker tutorial]. A huge thank you to everyone who contributed!
 
 === New Committers
 

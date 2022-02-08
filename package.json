@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "build:antora": "antora --require ./menu.js --clean --fetch site.yml",
-    "build:hugo": "hugo",
+    "build:hugo": "hugo --cleanDestinationDir",
     "build:minify": "gulp minify",
     "build": "run-s build:*",
     "preview": "run-s preview:*",
