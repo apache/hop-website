@@ -27,6 +27,7 @@ ui:
 urls:
   redirect_facility: disabled
   latest_version_segment: latest
+  latest_prerelease_version_segment: next
 
 output:
   clean: true
