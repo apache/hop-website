@@ -32,6 +32,12 @@
     <loc>https://hop.apache.org/categories/Graduation/</loc>
     <lastmod>2022-01-20T07:59:56+02:00</lastmod>
   </url><url>
+    <loc>https://hop.apache.org/docs/architecture/</loc>
+    <lastmod>2022-01-10T07:59:56+02:00</lastmod>
+  </url><url>
+    <loc>https://hop.apache.org/docs/</loc>
+    <lastmod>2022-01-10T07:59:56+02:00</lastmod>
+  </url><url>
     <loc>https://hop.apache.org/blog/2022/01/roundup-2021-12/</loc>
     <lastmod>2022-01-10T07:59:56+02:00</lastmod>
   </url><url>
@@ -141,8 +147,6 @@
   </url><url>
     <loc>https://hop.apache.org/security/</loc>
   </url><url>
-    <loc>https://hop.apache.org/docs/architecture/</loc>
-  </url><url>
     <loc>https://hop.apache.org/community/contribution-guides/code-contribution-guide/</loc>
   </url><url>
     <loc>https://hop.apache.org/community/contribution-guides/code-review-guide/</loc>
@@ -152,8 +156,6 @@
     <loc>https://hop.apache.org/community/</loc>
   </url><url>
     <loc>https://hop.apache.org/cookie-info/</loc>
-  </url><url>
-    <loc>https://hop.apache.org/docs/</loc>
   </url><url>
     <loc>https://hop.apache.org/community/contribution-guides/documentation-contribution-guide/</loc>
   </url><url>

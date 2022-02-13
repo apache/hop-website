@@ -38,6 +38,17 @@
     </item>
     
     <item>
+      <title>Apache Hop Architecture</title>
+      <link>https://hop.apache.org/docs/architecture/</link>
+      <pubDate>Mon, 10 Jan 2022 07:59:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/docs/architecture/</guid>
+      <description>The Hop architecture is very simple in essence: separate out any metadata from runtime code and tooling.
+ Doing this, Hop aims to have a minimal installation footprint and wants to be stateless to facilitate execution on a variety of platforms like Spark and Flink, but also in a variety of scenarios like running in different life cycles such as development, test, acceptance, production, unit testing and continuous integration.
+ The way these goals are achieved is by allowing orchestration workloads, defined in the broadest possible sense, to be defined as metadata.</description>
+    </item>
+    
+    <item>
       <title>Roundup December 2021</title>
       <link>https://hop.apache.org/blog/2022/01/roundup-2021-12/</link>
       <pubDate>Mon, 10 Jan 2022 07:59:56 +0200</pubDate>
@@ -348,16 +359,6 @@
  For more information about reporting vulnerabilities, see the Apache Security Team page.
    Known Vulnerabilities No vulnerabilities have been reported.
    </description>
-    </item>
-    
-    <item>
-      <title>Architecture</title>
-      <link>https://hop.apache.org/docs/architecture/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://hop.apache.org/docs/architecture/</guid>
-      <description>The architecture of Hop is very simple in essence: separate out any metadata from runtime code and tooling.
- Doing this, Hop aims to have a minimal installation footprint and wants to be stateless to facilitate execution on a variety of platforms like Spark and Flink, but also in a variety of scenarios like running in different life cycles such as development, test, acceptance, production, unit testing and continuous integration.</description>
     </item>
     
     <item>
