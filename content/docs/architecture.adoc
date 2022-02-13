@@ -17,13 +17,13 @@ image:/img/apache-hop-architecture.png[Apache Hop Architecture, width="75%"]
 
 The core concepts and main file types in Hop are pipelines and workflows.
 
-link:/manual/latest/pipeline/pipelines.html[**Pipelines**] perform the heavy data lifting: in a pipeline, you read data from one or more sources, perform a number of operations (joins, lookups, filters and lots more) and finally write the processed data to one or more target platforms.
+https://hop.apache.org/manual/latest/pipeline/pipelines.html[**Pipelines**] perform the heavy data lifting: in a pipeline, you read data from one or more sources, perform a number of operations (joins, lookups, filters and lots more) and finally write the processed data to one or more target platforms.
 
-Pipelines are networks of link:/manual/latest/pipeline/transforms.html[transforms]. Each transform reads from a data source, writes to a target platform or performs an operations on the data in the pipeline. The transforms in a pipeline all run in parallel and are connected through hops that pass data between connected transforms.
+Pipelines are networks of https://hop.apache.org/manual/latest/pipeline/transforms.html[transforms]. Each transform reads from a data source, writes to a target platform or performs an operations on the data in the pipeline. The transforms in a pipeline all run in parallel and are connected through hops that pass data between connected transforms.
 
-link:/manual/latest/workflow/workflows.html[**Workflows**] take care of the orchestration work: prepare the environment, fetch remote files, perform error handling and executing child workflows and pipelines.
+https://hop.apache.org/manual/latest/workflow/workflows.html[**Workflows**] take care of the orchestration work: prepare the environment, fetch remote files, perform error handling and executing child workflows and pipelines.
 
-Workflows consist of a series of link:/manual/latest/workflow/actions.html[actions] that are executed sequentially by default. The actions in a workflow do not operate on the data directly but return an exit code that can be used to determine the sequence of actions (through succes, failure or unconditional hops) to be followed in a workflow.
+Workflows consist of a series of https://hop.apache.org/manual/latest/workflow/actions.html[actions] that are executed sequentially by default. The actions in a workflow do not operate on the data directly but return an exit code that can be used to determine the sequence of actions (through succes, failure or unconditional hops) to be followed in a workflow.
 
 == Apache Hop Engine
 
