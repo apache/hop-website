@@ -28,11 +28,14 @@ The Apache Hop developer community is growing rapidly and currently includes con
 |===
 |Name|Apache ID|Organisation|Twitter
 |Bruno Silva|bsilva||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/bfasilva", window="_blank"]
+|Gabriel Dutra|gvdutra||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/gvdutra", window="_blank"]
 |Hiromu Hota|hiromu||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/HiromuHota", window="_blank"]
 |Jason Chu|jianjunchu|Beijing Auphi Data Co|
 |Mahendran Mookkiah|mookkiah||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/mmookkiah", window="_blank"]
 |Maximilian Michels|mxm||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/stadtlegende", window="_blank"]
 |Peter Fabricius|pfabrici||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/pfabrici", window="_blank"]
+|Ray Chang|uraychang||
+|Ricardo Gouvea|rgouvea||
 |Rodrigo Haces|rhaces|Neo4j|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/rhaces", window="_blank"]
 |Tom Barber|magicaltrout||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/magicaltrout", window="_blank"]
 |Yannick Mols|yannickmols||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/yannickmols", window="_blank"]
