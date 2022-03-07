@@ -2,6 +2,6 @@
 RewriteEngine on
 RewriteBase "/"
 
-# Redirect /manual/1.1.0 to latest
+# Redirect /manual/1.2.0 to latest
 
-RewriteRule "^manual/1.1.0(/.*)$" "/manual/latest$1" [R=permanent,L]
+RewriteRule "^manual/1.2.0(/.*)$" "/manual/latest$1" [R=permanent,L]
