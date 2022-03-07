@@ -424,20 +424,20 @@
  Download Link
  PGP Signature file of download
  SHA512 Checksum file of download
+   1.2.0
+ March, 7th, 2022
+ Binaries
+ apache-hop-client-1.2.0.zip
+ asc
+ sha512
+   Sources
+ apache-hop-1.2.0-src.tar.gz
+ asc
+ sha512
    1.1.0
  January, 24th, 2022
  Binaries
  apache-hop-client-1.1.0.zip
- asc
- sha512
-   Sources
- apache-hop-1.1.0-src.tar.gz
- asc
- sha512
-   1.0.0
- October, 5th, 2021
- Binaries
- apache-hop-client-1.0.0-incubating.zip
  asc
  sha512
    Sources</description>
