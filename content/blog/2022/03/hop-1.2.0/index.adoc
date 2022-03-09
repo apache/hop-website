@@ -1,0 +1,78 @@
+---
+title: "Apache Hop 1.2 is available!!"
+date: 2022-03-08T07:59:56+02:00
+authors: ["bamaer"]
+categories: ["1.2", "Release", "Apache Hop"]
+preview: "Apache Hop 1.2 Released"
+description: "Hop 1.2.0 bring lots of bug fixes and minor changes on almost 90 tickets and almost two months of work."
+draft: false
+---
+
+:imagesdir: ../../../../../static
+
+:toc: macro
+:toclevels: 3
+:toc-title: Let's take a closer look at what Hop 1.2 brings:
+:toc-class: none
+
+The Apache Hop community is pleased to announce the general availability of Apache Hop 1.2.0. +
+A huge thank you to everyone involved to made this possible.
+
+== Hop Gui
+
+Hop Gui continues to evolve. The following list of improvements will make you even more productive in Hop.
+
+* https://issues.apache.org/jira/browse/HOP-3298[HOP-3298^]: Hop Gui now remembers the last environment you used when you switch to a project.
+* https://issues.apache.org/jira/browse/HOP-3736[HOP-3736^]: Hop Gui now remembers the logging level of the last run (used to default back to "Basic")
+* https://issues.apache.org/jira/browse/HOP-3762[HOP-3762^]: dark mode is improved on Windows. Other operating systems now default to the look of the OS (https://issues.apache.org/jira/browse/HOP-3761[HOP-3761^])
+* https://issues.apache.org/jira/browse/HOP-3775[HOP-3775^]: the Hop icon (hop.ico) is now included for your Hop Gui and other desktop launchers
+
+image::/img/Release-1.2/hop-shortcut.png[the Hop icon is now included for your Hop Gui and other desktop launchers]
+
+== Docker
+
+* https://issues.apache.org/jira/browse/HOP-3169[HOP-3169^] and https://issues.apache.org/jira/browse/HOP-3708[HOP-3708^]: the Hop and Hop Web Docker images on Dockerhub are now available for ARM
+* https://issues.apache.org/jira/browse/HOP-3767[HOP-3767^]: the long-lived Docker container now detects if a project already exists.
+
+== Neo4j
+
+* https://issues.apache.org/jira/browse/HOP-2859[HOP-2859^]: a number of internationalization issues were fixed in the https://hop.apache.org/manual/latest/pipeline/transforms/neo4j-import.html[Neo4j Import^] transform.
+* https://issues.apache.org/jira/browse/HOP-3073[HOP-3073^]: Metadata injection support was added to the https://hop.apache.org/manual/latest/pipeline/transforms/neo4j-import.html[Neo4j Import^] transform.
+
+
+== Kafka and Avro
+
+* https://issues.apache.org/jira/browse/HOP-2788[HOP-2788^]:The https://hop.apache.org/manual/latest/pipeline/transforms/kafkaproducer.html[Kafka producer^] transform now has additional options to produce to security-enabled clusters (e.g. Confluence Cloud).
+* https://issues.apache.org/jira/browse/HOP-3739[HOP-3739^]: the Kafka Producer and Consumer transforms now support Avro, including the ability to communicate the Avro Schema with a Schema Registry service.
+* https://issues.apache.org/jira/browse/HOP-3686[HOP-3686^]: the brand new https://hop.apache.org/manual/latest/pipeline/transforms/avro-encode.html[Avro Encode^] transform allows encoding multiple fields into a single Avro field.
+
+image::/img/Release-1.2/avro-encode.png[Avro Encode transform, width="60%"]
+
+== Translations and Hop Translator
+
+Hop is now fully available in Chinese, with work on the Brazilian Portuguese in progress.
+
+Hop Translator is a Hop tool that provides a user interface to make translating Hop into your own native language easier. Translator received a couple of bug fixes and improvements to make translating Hop even easier. Thanks, https://github.com/shlxue[Shl Xue^]! https://issues.apache.org/jira/browse/HOP-3715[HOP-3715^], https://issues.apache.org/jira/browse/HOP-3801[HOP-3801^], https://issues.apache.org/jira/browse/HOP-3776[HOP-3776^], https://issues.apache.org/jira/browse/HOP-3807[HOP-3807^], https://issues.apache.org/jira/browse/HOP-3788[HOP-3788^]
+
+== Community
+
+The Hop community continues to grow:
+
+* chat: 300 registered members (up from 282) link:https://chat.project-hop.org[join]
+* LinkedIn: 840 followers (up from 786) link:https://www.linkedin.com/company/hop-project[follow]
+* Twitter: 670 followers (up from 634) link:https://twitter.com/ApacheHop[follow]
+* YouTube: 452 subscribers (up from 415) link:https://www.youtube.com/ApacheHop[subscribe]
+* 3Hx Meetup: 219 members (up from 217)  link:https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/[join]
+
+Without community interaction and contribution, Hop is just a coding club! Please feel free to join, participate in the discussion, test, file bug tickets on the software or documentation, ... Contributing is a lot more than writing code.
+
+Check out our link:/community/contributing/[contribution guides^] and http://hop.apache.org/community/ethos/[Code of Conduct^] to find out more.
+
+== JIRA
+
+Hop 1.2.0 contains work on 86 tickets:
+
+* Resolved: 83
+* Closed: 3
+
+Check the https://issues.apache.org/jira/browse/HOP-3807?jql=project%20%3D%20%22Apache%20Hop%22%20and%20fixVersion%20%3D%201.2.0[Hop Jira^] for a full overview of all tickets.
