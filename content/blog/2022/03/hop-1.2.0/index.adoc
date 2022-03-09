@@ -8,7 +8,7 @@ description: "Hop 1.2.0 bring lots of bug fixes and minor changes on almost 90 t
 draft: false
 ---
 
-:imagesdir: ../../../../../static
+:imagesdir: ../../../../../static/
 
 :toc: macro
 :toclevels: 3
@@ -27,7 +27,7 @@ Hop Gui continues to evolve. The following list of improvements will make you ev
 * https://issues.apache.org/jira/browse/HOP-3762[HOP-3762^]: dark mode is improved on Windows. Other operating systems now default to the look of the OS (https://issues.apache.org/jira/browse/HOP-3761[HOP-3761^])
 * https://issues.apache.org/jira/browse/HOP-3775[HOP-3775^]: the Hop icon (hop.ico) is now included for your Hop Gui and other desktop launchers
 
-image::/img/Release-1.2/hop-shortcut.png[the Hop icon is now included for your Hop Gui and other desktop launchers]
+image:/img/Release-1.2/hop-shortcut.png[the Hop icon is now included for your Hop Gui and other desktop launchers]
 
 == Docker
 
@@ -37,8 +37,10 @@ image::/img/Release-1.2/hop-shortcut.png[the Hop icon is now included for your H
 == Neo4j
 
 * https://issues.apache.org/jira/browse/HOP-2859[HOP-2859^]: a number of internationalization issues were fixed in the https://hop.apache.org/manual/latest/pipeline/transforms/neo4j-import.html[Neo4j Import^] transform.
+* https://issues.apache.org/jira/browse/HOP-3684[HOP-3684^]: the Neo4j connection dialog was cleaned up. Recent Neo4j Java driver versions are capable of automatically figuring out the encryption, routing, trust all certificates options. All of these were enabled with an "Automatic" option.
 * https://issues.apache.org/jira/browse/HOP-3073[HOP-3073^]: Metadata injection support was added to the https://hop.apache.org/manual/latest/pipeline/transforms/neo4j-import.html[Neo4j Import^] transform.
 
+image:/img/Release-1.2/neo4j-automatic.png[Neo4j automatic connection option]
 
 == Kafka and Avro
 
@@ -46,7 +48,7 @@ image::/img/Release-1.2/hop-shortcut.png[the Hop icon is now included for your H
 * https://issues.apache.org/jira/browse/HOP-3739[HOP-3739^]: the Kafka Producer and Consumer transforms now support Avro, including the ability to communicate the Avro Schema with a Schema Registry service.
 * https://issues.apache.org/jira/browse/HOP-3686[HOP-3686^]: the brand new https://hop.apache.org/manual/latest/pipeline/transforms/avro-encode.html[Avro Encode^] transform allows encoding multiple fields into a single Avro field.
 
-image::/img/Release-1.2/avro-encode.png[Avro Encode transform, width="60%"]
+image:/img/Release-1.2/avro-encode.png[Avro Encode transform, width="60%"]
 
 == Translations and Hop Translator
 
