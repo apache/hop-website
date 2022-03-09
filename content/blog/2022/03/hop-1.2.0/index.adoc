@@ -39,6 +39,7 @@ image:/img/Release-1.2/hop-shortcut.png[the Hop icon is now included for your Ho
 * https://issues.apache.org/jira/browse/HOP-2859[HOP-2859^]: a number of internationalization issues were fixed in the https://hop.apache.org/manual/latest/pipeline/transforms/neo4j-import.html[Neo4j Import^] transform.
 * https://issues.apache.org/jira/browse/HOP-3684[HOP-3684^]: the Neo4j connection dialog was cleaned up. Recent Neo4j Java driver versions are capable of automatically figuring out the encryption, routing, trust all certificates options. All of these were enabled with an "Automatic" option.
 * https://issues.apache.org/jira/browse/HOP-3073[HOP-3073^]: Metadata injection support was added to the https://hop.apache.org/manual/latest/pipeline/transforms/neo4j-import.html[Neo4j Import^] transform.
+* https://issues.apache.org/jira/browse/HOP-3783[HOP-3783^]: Add label to nodes based on key/value of previous hop in Neo4j Graph Output
 
 image:/img/Release-1.2/neo4j-automatic.png[Neo4j automatic connection option]
 
@@ -72,9 +73,9 @@ Check out our link:/community/contributing/[contribution guides^] and http://hop
 
 == JIRA
 
-Hop 1.2.0 contains work on 86 tickets:
+Hop 1.2.0 contains work on 87 tickets:
 
-* Resolved: 83
+* Resolved: 84
 * Closed: 3
 
 Check the https://issues.apache.org/jira/browse/HOP-3807?jql=project%20%3D%20%22Apache%20Hop%22%20and%20fixVersion%20%3D%201.2.0[Hop Jira^] for a full overview of all tickets.
