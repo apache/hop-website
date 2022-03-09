@@ -18,6 +18,8 @@ draft: false
 The Apache Hop community is pleased to announce the general availability of Apache Hop 1.2.0. +
 A huge thank you to everyone involved to made this possible.
 
+Read on for an overview of what has changed in this release or https://hop.apache.org/download/downloads[download Hop 1.2.0^] right away.
+
 == Hop Gui
 
 Hop Gui continues to evolve. The following list of improvements will make you even more productive in Hop.
