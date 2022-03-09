@@ -6,7 +6,19 @@
     <description>Recent content in Apache Hop on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 03 Feb 2022 07:59:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 08 Mar 2022 07:59:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Hop 1.2 is available!!</title>
+      <link>https://hop.apache.org/blog/2022/03/hop-1.2.0/</link>
+      <pubDate>Tue, 08 Mar 2022 07:59:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2022/03/hop-1.2.0/</guid>
+      <description>The Apache Hop community is pleased to announce the general availability of Apache Hop 1.2.0. A huge thank you to everyone involved to made this possible.
+ Hop Gui Hop Gui continues to evolve. The following list of improvements will make you even more productive in Hop.
+   HOP-3298: Hop Gui now remembers the last environment you used when you switch to a project.
+  HOP-3736: Hop Gui now remembers the logging level of the last run (used to default back to &amp;#34;Basic&amp;#34;)</description>
+    </item>
+    
     <item>
       <title>Roundup January 2022</title>
       <link>https://hop.apache.org/blog/2022/02/roundup-2022-02/</link>
