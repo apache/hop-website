@@ -5,6 +5,13 @@ description: "Download Apache Hop source and binary releases or Docker images fo
 
 ## Apache Hop
 
+For each release you can find a download of the source code which can be used to build your own version.
+We recommend using the pre-build binary release, this includes all dependencies required to run and use the software.
+
+Apache Hop requires Java 8 or 11 to be installed on the system 
+
+More information can be found in the readme files included in the download archives.
+
 [cols="<.^1,<.^1,1,2,1,1"]
 |===
 | Version | Date | Description | Download Link | PGP Signature file of download | SHA512 Checksum file of download
