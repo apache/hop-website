@@ -430,29 +430,9 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hop.apache.org/download/</guid>
-      <description>Apache Hop     Version
- Date
- Description
- Download Link
- PGP Signature file of download
- SHA512 Checksum file of download
-   1.2.0
- March, 7th, 2022
- Binaries
- apache-hop-client-1.2.0.zip
- asc
- sha512
-   Sources
- apache-hop-1.2.0-src.tar.gz
- asc
- sha512
-   1.1.0
- January, 24th, 2022
- Binaries
- apache-hop-client-1.1.0.zip
- asc
- sha512
-   Sources</description>
+      <description>Apache Hop For each release you can find a download of the source code which can be used to build your own version. We recommend using the pre-build binary release, this includes all dependencies required to run and use the software.
+ Apache Hop requires Java 8 or 11 to be installed on the system.
+ More information can be found in the readme files included in the download archives.</description>
     </item>
     
     <item>
