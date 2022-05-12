@@ -6,6 +6,7 @@ description: "Apache Hop deeply cares about its community and encourages communi
 == User Groups
 
 * https://www.meetup.com/3hx-apache-hop-hot-hop-hangouts/[3Hx - Apache Hop Hot Hop Hangouts ^]
+* https://www.meetup.com/Hop-Italia-Users-Group/[Hop User Group Italia^]
 * https://www.meetup.com/grupo-de-usuarios-de-hop-en-espanol/[Grupo de usuarios de Apache Hop en Español ^]
 * https://www.meetup.com/apache-hop-user-group-brasil/[Grupo de usuários do Apache Hop em Português ^]
 * https://t.me/apachehop[Apache Hop em Português no Telegram ^]
@@ -58,8 +59,9 @@ All known Hop events are listed below. Add your event to the list below or annou
 [%header,cols="5%,55%,15%,10%,15%"]
 |===
 |Event name|Description|Date|Language|Link (subscribe/attend)
-|
+|{set:cellbgcolor:#30328422}3H15|Apache Hop updates and use case: Apache Hop and Debezium|2022-06-09|EN|https://www.meetup.com/3hx-apache-hop-hot-hop-hangouts/events/285817683/[register^]
 |===
+{set:cellbgcolor}
 
 
 === Past events
@@ -67,8 +69,8 @@ All known Hop events are listed below. Add your event to the list below or annou
 [%header,cols="5%,55%,15%,10%,15%"]
 |===
 |Event name|Description|Date|Language|Recording
-|{set:cellbgcolor:#30328422}3H14|Apache Hop in Docker|2021-12-16|EN|https://youtu.be/v2rNxAQEhu0[youtube^]
-|{set:cellbgcolor}3H13|Apache Hop Sucks. Let's un-suck it!|2021-11-18|EN|https://youtu.be/qW5Jwe5OipU[youtube^]
+|3H14|Apache Hop in Docker|2021-12-16|EN|https://youtu.be/v2rNxAQEhu0[youtube^]
+|3H13|Apache Hop Sucks. Let's un-suck it!|2021-11-18|EN|https://youtu.be/qW5Jwe5OipU[youtube^]
 |-|Apache Hop - User Group Japan #1|2021-11-16|JP-EN|-
 |3H12|A well-designed Hop project walkthrough|2021-10-28|EN|https://youtu.be/a1jg1A2vmtA[youtube^]
 |-|5-fach Speed für Ihr Datenprojekt mit Hop (IT-Novum)|2021-10-26|DE|-
