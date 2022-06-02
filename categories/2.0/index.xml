@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2.0 on Hop</title>
+    <link>https://hop.apache.org/categories/2.0/</link>
+    <description>Recent content in 2.0 on Hop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 02 Jun 2022 07:49:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/2.0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Hop 2.0 is available!!</title>
+      <link>https://hop.apache.org/blog/2022/06/hop-2.0.0/</link>
+      <pubDate>Thu, 02 Jun 2022 07:49:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2022/06/hop-2.0.0/</guid>
+      <description>After three months of work, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.0.0. A huge thank you to everyone who made this possible.
+    
+ Let&amp;#39;s take a closer look at what Hop 2.0 brings: Upgrade to Java 11 Chinese translations New transform plugins Apache Avro File Output Apache Doris Bulk Loader Drools Rules Accumulator Drools Rules Executor Formula   Apache Beam upgrade Various Variable Annotations Dimension Lookup/Update new dialog Integration tests   Community JIRA   or download Hop 2.</description>
+    </item>
+    
+  </channel>
+</rss>
