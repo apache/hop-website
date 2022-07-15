@@ -98,3 +98,28 @@ mark {
 .text-center {
   text-align: center;
 }
+
+.image-bottom-align img {
+  vertical-align: bottom;
+}
+
+table.table-no-borders > tbody > tr > td {
+  border-top: none !important;
+  border-bottom: none !important;
+  padding-left: 0 !important;
+  padding-top: 0 !important;
+}
+
+table.table-no-borders {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+table.table-supported-engines > tbody > tr:first-child > td {
+  border-top: none !important;
+}
+
+table.table-supported-engines {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}

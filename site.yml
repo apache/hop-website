@@ -38,7 +38,3 @@ output:
 runtime: 
   fetch: true  
 
-asciidoc:
-  extensions:
-    - ./extensions/table.js
-    - ./extensions/inline-styles.js
