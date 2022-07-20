@@ -99,8 +99,9 @@ mark {
   text-align: center;
 }
 
-.image-bottom-align img {
-  vertical-align: bottom;
+.image-doc-icon img {
+  vertical-align: middle;
+  width: 45pt;
 }
 
 table.table-no-borders > tbody > tr > td {
