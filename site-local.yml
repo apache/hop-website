@@ -2,8 +2,6 @@ site:
   title: Apache Hop
   url: https://hop.apache.org
   start_page: manual::index.adoc
-  keys:
-    google_analytics: 'UA-151580460-1'
 
 content:
   sources:

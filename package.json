@@ -33,7 +33,6 @@
   },
   "dependencies": {
     "asciidoctor": "~2.2",
-    "cookies-eu-banner": "^2.0.1",
     "handlebars": "~4.4",
     "toml": "~3.0",
     "unzipper": "~0.10",
