@@ -7,6 +7,10 @@
     "build:hugo": "hugo --cleanDestinationDir",
     "build:minify": "gulp minify",
     "build": "run-s build:*",
+    "build-local:antora": "antora --require ./menu.js --clean --fetch site-local.yml",
+    "build-local:hugo": "hugo --cleanDestinationDir",
+    "build-local:minify": "gulp minify",
+    "build-local": "run-s build-local:*",
     "preview": "run-s preview:*",
     "preview:antora": "antora --require ./menu.js site.yml",
     "preview:hugo": "hugo server -D",
@@ -15,7 +19,10 @@
     "preview-local:hugo": "hugo server -D",
     "check:links": "link-checker --disable-external --mkdocs --allow-hash-href public",
     "check:html": "html-validate 'public/**/*.html'",
-    "checks": "run-s check:*"
+    "checks": "run-s check:*",
+    "check-local:links": "link-checker --disable-external --url-ignore 'file:///' --mkdocs --allow-hash-href public",
+    "check-local:html": "html-validate 'public/**/*.html'",
+    "checks-local": "run-s check-local:*"
   },
   "devDependencies": {
     "@antora/cli": "^3.0.0",
