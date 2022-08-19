@@ -309,7 +309,7 @@
 .doc .admonitionblock td.content {
   padding: 1rem 1rem 0.75rem;
   background: var(--admonition-background);
-  width: 100%;
+  width: 95%;
 }
 
 .doc .admonitionblock .icon {
