@@ -20,7 +20,7 @@ mvn clean install
 After a successful build:
 [source,bash]
 cd assemblies/client/target
-unzip hop-assemblies-client-0.1.0-SNAPSHOT.zip
+unzip hop-client-2.1.0-SNAPSHOT.zip
 cd hop
 
 From your new Hop build:
