@@ -28,7 +28,23 @@ sha512sum apache-hop-client-X.XX.zip &gt; apache-hop-client-X.XX.zip.sha512
 
 # Validate
 gpg --verify apache-hop-client-X.XX.zip.asc
-sha512sum -c apache-hop-client-X.XX.zip.sha512</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_staging_the_files"><a class="anchor" href="#_staging_the_files"></a>Staging the files</h2> <div class="sectionbody"> <div class="paragraph"> <p>First step is to check out the SVN directory, and create a new directory</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">svn co https://dist.apache.org/repos/dist/dev/hop hop_release
+sha512sum -c apache-hop-client-X.XX.zip.sha512</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_creating_the_helm_chart_if_needed"><a class="anchor" href="#_creating_the_helm_chart_if_needed"></a>Creating the Helm chart (if needed)</h2> <div class="sectionbody"> <div class="paragraph"> <p>When changes have been made to the helm chart a new release of this artifact is also needed. This assumes helm has been installed.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Copy source to temp build location
+cd apache-hop-X.XX/helm
+
+# Run helm package
+helm package hop
+
+# Copy client back (and rename)
+cp hop-X.XX.tgz ../../hop-X.XX.tgz
+
+# Go back to root of your working dir
+cd ../..</code></pre> </div> </div> <div class="paragraph"> <p>As we now added a new binary file we also need to sign and create a sha512 for it.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Create keyfile and sha512
+gpg --armor --default-key username@apache.org --output hop-X.XX.tgz.asc --detach-sig hop-X.XX.tgz
+sha512sum hop-X.XX.tgz &gt; hop-X.XX.tgz.sha512
+
+# Validate
+gpg --verify hop-X.XX.tgz.asc
+sha512sum -c hop-X.XX.tgz.sha512</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_staging_the_files"><a class="anchor" href="#_staging_the_files"></a>Staging the files</h2> <div class="sectionbody"> <div class="paragraph"> <p>First step is to check out the SVN directory, and create a new directory</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">svn co https://dist.apache.org/repos/dist/dev/hop hop_release
 cd hop_release
 svn mkdir apache-hop-x.xx-rcx</code></pre> </div> </div> <div class="paragraph"> <p>Now copy over the following files in this new directory</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">apache-hop-X.XX-src.tar.gz.sha512
 apache-hop-X.XX-src.tar.gz.asc
