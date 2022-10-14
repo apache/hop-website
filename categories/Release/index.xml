@@ -6,7 +6,19 @@
     <description>Recent content in Release on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 02 Jun 2022 07:49:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/Release/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 14 Oct 2022 07:49:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/Release/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Hop 2.1 is available!!</title>
+      <link>https://hop.apache.org/blog/2022/10/hop-2.1.0/</link>
+      <pubDate>Fri, 14 Oct 2022 07:49:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2022/10/hop-2.1.0/</guid>
+      <description>After four and a half months of work, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.1.0.
+ A huge thank you to everyone who made this possible.
+    
+ Let&amp;#39;s take a closer look at what Hop 2.1 brings: MongoDB Apache Beam Execution Information Framework and Data Profiling Kubernetes Documentation New plugins Community JIRA   or download Hop 2.</description>
+    </item>
+    
     <item>
       <title>Apache Hop 2.0 is available!!</title>
       <link>https://hop.apache.org/blog/2022/06/hop-2.0.0/</link>

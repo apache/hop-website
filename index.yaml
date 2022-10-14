@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  hop:
+  - apiVersion: v2
+    appVersion: 1.2.0
+    created: "2022-10-14T09:43:06.888598+02:00"
+    description: A Helm chart for hop services
+    digest: 28cef35b9af9e5b4dfaefd16aa352794cf589c9393990ea49101f9bc6aee41c7
+    name: hop
+    type: application
+    urls:
+    - https://downloads.apache.org/hop/2.1.0/hop-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-10-14T09:43:06.887741+02:00"
