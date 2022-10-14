@@ -1,0 +1,143 @@
+---
+title: "Apache Hop 2.1 is available!!"
+date: 2022-10-14T07:49:56+02:00
+authors: ["bamaer"]
+categories: ["2.1", "Release", "Apache Hop"]
+preview: "Apache Hop 2.1 Released"
+description: "The latest Apache Hop release 2.1.0  is now available. Let's walk through the most important new features in this release."
+draft: false
+---
+
+:imagesdir: ../../../../../static
+
+:toc: macro
+:toclevels: 3
+:toc-title: Let's take a closer look at what Hop 2.1 brings:
+:toc-class: none
+
+After four and a half months of work, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.1.0. +
+
+A huge thank you to everyone who made this possible.
+
+image::/img/Release-2.1/hop-21.svg[ width="45%"]
+
+&nbsp; +
+
+toc::[]
+
+or https://hop.apache.org/download/[**download Hop 2.1.0 **] right away.
+
+== MongoDB
+
+image:/img/Release-2.1/mongodb-logo.svg[MongDB, width="20%"] Apache Hop has had support for MongoDB since the very first releases, with a https://hop.apache.org/manual/latest/metadata-types/mongodb-connection.html[MongoDB connection^] metadata type and https://hop.apache.org/manual/latest/pipeline/transforms/mongodbinput.html[MongoDB input^] and https://hop.apache.org/manual/latest/pipeline/transforms/mongodbinput.html[MongoDB Output^] transforms. Hop 2.1.0 now adds a new https://hop.apache.org/manual/next/pipeline/transforms/mongodbdelete.html[MongoDB Delete^] transform to the mix.
+
+In addition to this new MongoDB delete transform, the MongoDB drivers and documentation have been updated.
+
+* https://issues.apache.org/jira/browse/HOP-3925[HOP-3925^] MongoDB Delete transform
+
+
+== Apache Beam
+
+image:/img/Release-2.1/apache-beam-logo.svg[Apache Beam, width="20%"] https://beam.apache.org[Apache Beam^] has been updated to 2.41.0, with https://spark.apache.org[Apache Spark^] 3.3.0 and https://flink.apache.org[Apache Flink^] 1.15.2.
+
+The https://hop.apache.org/manual/latest/pipeline/pipeline-run-configurations/beam-spark-pipeline-engine.html[Apache Spark run configuration] now supports local execution again, making it easier to test your Apache Hop pipelines on Apache Spark.
+
+Your Apache Hop pipelines on any of the supported Apache Beam run configurations should see major performance improvements. We've optimized the Beam rows serialization, especially for locking, serialization and removal of redundant checks.
+
+AWS Kinesis is now supported in the Beam run configurations with two new transforms: https://hop.apache.org/manual/next/pipeline/transforms/beamkinesisconsume.html[Beam Kinesis Consume^] and https://hop.apache.org/manual/next/pipeline/transforms/beamkinesisconsume.html[Beam Kinesis Produce^].
+
+* https://issues.apache.org/jira/browse/HOP-3985[HOP-3985^]: Support AWS Kinesis over Beam
+* https://issues.apache.org/jira/browse/HOP-4170[HOP-4170^]: Upgrade Apache Beam to 2.41
+* https://issues.apache.org/jira/browse/HOP-4226[HOP-4226^]: Beam rows serialize too much data
+
+
+== Execution Information Framework and Data Profiling
+
+A lot of the work in the 2.1.0 release was spent on a new Execution Information and Data Profiling framework.
+
+Apache Hop users already had the flexibility to run workflows and pipelines from Hop Gui, hop-run or hop-server. What was missing was a unified, transparent and centralized way of keeping track of current and previous executions. That has now been resolved with the new execution information framework.
+
+You can now configure your workflow and pipeline run configuration to use an https://hop.apache.org/manual/next/metadata-types/execution-information-location.html[execution information location^]. These locations can be a local file system, a remote Hop Server or a Neo4j graph database.
+Execution information includes the run information (parameters, variables, start and time, status and so on), the complete workflow or pipeline log, metrics and (for pipelines) optional https://hop.apache.org/manual/next/metadata-types/execution-data-profile.html[execution data profiles^].
+
+Execution data profiles are another addition in 2.1.0 that allow pipelines to log a number of data profiles for the transforms in your pipeline. Data profiles include the minimum and maximum values, number of (non) null values and so on. Additionally, you can sample the first, last or a random set of rows.
+
+The execution and data profiling information can be consulted in the new Execution Information perspective. This perspective not only lets you consult your execution information, but also lets you drill up to or down from the parent or child workflow or pipeline. Additionally, the embedded workflow and pipeline viewer in the perspective also lets you jump straight to the workflow or pipeline editor.
+
+Check the https://hop.apache.org/manual/next/hop-gui/perspective-execution-information.html[Execution Information Perspective^], https://hop.apache.org/manual/next/metadata-types/execution-information-location.html[Execution Information Location^] and https://hop.apache.org/manual/next/metadata-types/execution-data-profile.html[Execution Data Profile^] docs for more information.
+
+image:/img/Release-2.1/execution-information-perspective.png[Execution Information Perspective, width="80%"]
+
+* https://issues.apache.org/jira/browse/HOP-4024[HOP-4024^]: Create a new execution information platform
+* https://issues.apache.org/jira/browse/HOP-4229[HOP-4229^]: document new execution platform
+
+== Kubernetes
+
+
+image:/img/Release-2.1/kubernetes-logo.svg[Kubernetes, width="20%"] Apache Hop already contained a basic Kubernetes Helm chart. With Apache Hop 2.1.0, we're also releasing new Helm charts for Hop Server and Hop Web. These do not necessarily have to follow the same release cycle as the official Apache Hop releases, hence the 0.1 version number...
+
+In addition to the Helm charts, the Hop docs now contain a how-to guide on https://hop.apache.org/manual/next/pipeline/beam/flink-k8s-operator-running-hop-pipeline.html[running a Hop pipeline using the Flink Kubernetes operator].
+
+* https://issues.apache.org/jira/browse/HOP-3979[HOP-3979^]: Enhance Helm Chart
+* https://issues.apache.org/jira/browse/HOP-4162[HOP-4162^]: Add hop-web to Helm Charts
+
+== Documentation
+
+Documentation is never-ending ongoing effort. As with every release, the Apache Hop team worked hard to improve and extend the available documentation to support the Apache Hop community as good as possible.
+
+The transform documentation pages have been updated to contain an indication of the supported engines. A lot of these are placeholders for now, but will be updated continuously.
+
+New how-to guides were added on how to work with https://hop.apache.org/manual/next/how-to-guides/joins-lookups.html[Joins and Lookups^] and on how to https://hop.apache.org/manual/next/how-to-guides/run-hop-in-apache-airflow.html[run workflows and pipelines from Apache Airflow^] with the docker operator.
+
+The installation and configuration instructions have been extended with an upgrade section. Installing and configuring Apache Hop already always was a breeze, but this section explains a couple of tweaks.
+
+
+== New plugins
+
+As with every release, a number of new plugins make their first appearance in Apache Hop:
+
+* **transforms**
+** the https://hop.apache.org/manual/next/pipeline/transforms/accessoutput.html[**Microsoft Access Output**^] transform lets you write data to Microsoft Access databases. Even though MS Access is not the most advanced data platform, it's still an indispensable data format in a lot of organizations. +
+image:/img/Release-2.1/microsoft-access-logo.svg[Microsoft Access, width="5%", align="center"]
+** the https://hop.apache.org/manual/next/pipeline/transforms/snowflakebulkloader.html[**Snowflake Bulk Loader**^] transform lets you bulk upload data to your Snowflake analytical cloud databases. +
+image:/img/Release-2.1/snowflake-logo.svg[Snowflake, width="20%", align="center"]
+* **databases**: https://hop.apache.org/manual/next/database/databases/apache-hive.html[**Apache Hive**^] is now a fully supported database type. Support for Apache Hive was lacking in previous Apache Hop releases. That functionality gap has now been closed. +
+image:/img/Release-2.1/apache-hive-logo.svg[Apache Hive, width="15%", align="center"]
+
+
+* https://issues.apache.org/jira/browse/HOP-4003[HOP-4003^]: add Snowflake Bulk Loader
+* https://issues.apache.org/jira/browse/HOP-4109[HOP-4109^]: Microsoft Access connector
+* https://issues.apache.org/jira/browse/HOP-4262[HOP-4262^]: Add support for Apache Hive databases
+
+
+== Community
+
+The Hop community continues to grow!
+
+The Apache Hop PMC and community welcomed one new committer since the 2.0.0 release.
+https://github.com/shlxue[Shl Xue^] made various contributions to Apache Hop internationalization, the Chinese translation and many other areas. Thank you very much and a warm welcome, Shl Xue!
+
+We'd also like to give a shoutout to Iranian community member @morti, who helped to identify, troubleshoot and test the Apache Beam performance improvements. Thank you, Nouri!
+
+The overview below shows the community growth compared to the 2.0.0 release in June:
+
+* chat: 440 registered members (up from 355) link:https://chat.project-hop.org[join]
+* LinkedIn: 1026 followers (up from 911) link:https://www.linkedin.com/company/hop-project[follow]
+* Twitter: 780 followers (up from 714) link:https://twitter.com/ApacheHop[follow]
+* YouTube: 644 subscribers (up from 519) link:https://www.youtube.com/ApacheHop[subscribe]
+* 3Hx Meetup: 259 members (up from 236)  link:https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/[join]
+
+image:/img/Release-2.1/hop-community-growth.png[Apache Hop Community Growth, width="60%"]
+
+Without community interaction and contribution, Hop is just a coding club! Please feel free to join, participate in the discussion, test, file bug tickets on the software or documentation, ... Contributing is a lot more than writing code.
+
+Check out our link:/community/contributing/[contribution guides^] and http://hop.apache.org/community/ethos/[Code of Conduct^] to find out more.
+
+== JIRA
+
+Hop 2.1.0 contains work on 213 tickets:
+
+* Resolved: 204
+* Closed: 9
+
+Check the https://issues.apache.org/jira/browse/HOP-3962?jql=project%20%3D%20%22Apache%20Hop%22%20and%20fixVersion%20%3D%202.1.0[Hop Jira^] for a full overview of all tickets.
