@@ -12,6 +12,7 @@ content:
       - release1.1.0
       - release1.2.0
       - release2.0.0
+      - release2.1.0
     start_path: /docs/hop-user-manual/
   - url: git@github.com:apache/hop.git
     branches: master
