@@ -15,8 +15,18 @@ More information can be found in the readme files included in the download archi
 [cols="<.^1,<.^1,1,2,1,1"]
 |===
 | Version | Date | Description | Download Link | PGP Signature file of download | SHA512 Checksum file of download
+.2+| link:/blog/2022/10/hop-2.1.0/[2.1.0] 
+.2+| October, 14th, 2022 
+| **Binaries** 
+| https://www.apache.org/dyn/closer.cgi?filename=hop/2.1.0/apache-hop-client-2.1.0.zip&action=download[**apache-hop-client-2.1.0.zip**] 
+| https://downloads.apache.org/hop/2.1.0/apache-hop-client-2.1.0.zip.asc[asc] 
+| https://downloads.apache.org/hop/2.1.0/apache-hop-client-2.1.0.zip.sha512[sha512]
+| Sources 
+| https://www.apache.org/dyn/closer.cgi?filename=hop/2.1.0/apache-hop-2.1.0-src.tar.gz&action=download[apache-hop-2.1.0-src.tar.gz] 
+| https://downloads.apache.org/hop/2.1.0/apache-hop-2.1.0-src.tar.gz.asc[asc] 
+| https://downloads.apache.org/hop/2.1.0/apache-hop-2.1.0-src.tar.gz.sha512[sha512]
 .2+| link:/blog/2022/06/hop-2.0.0/[2.0.0] 
-.2+| June, 2th, 2022 
+.2+| June, 2nd, 2022 
 | **Binaries** 
 | https://www.apache.org/dyn/closer.cgi?filename=hop/2.0.0/apache-hop-client-2.0.0.zip&action=download[**apache-hop-client-2.0.0.zip**] 
 | https://downloads.apache.org/hop/2.0.0/apache-hop-client-2.0.0.zip.asc[asc] 
@@ -25,27 +35,8 @@ More information can be found in the readme files included in the download archi
 | https://www.apache.org/dyn/closer.cgi?filename=hop/2.0.0/apache-hop-2.0.0-src.tar.gz&action=download[apache-hop-2.0.0-src.tar.gz] 
 | https://downloads.apache.org/hop/2.0.0/apache-hop-2.0.0-src.tar.gz.asc[asc] 
 | https://downloads.apache.org/hop/2.0.0/apache-hop-2.0.0-src.tar.gz.sha512[sha512]
-.2+| link:/blog/2022/03/hop-1.2.0/[1.2.0] 
-.2+| March, 7th, 2022 
-| **Binaries** 
-| https://www.apache.org/dyn/closer.cgi?filename=hop/1.2.0/apache-hop-client-1.2.0.zip&action=download[**apache-hop-client-1.2.0.zip**] 
-| https://downloads.apache.org/hop/1.2.0/apache-hop-client-1.2.0.zip.asc[asc] 
-| https://downloads.apache.org/hop/1.2.0/apache-hop-client-1.2.0.zip.sha512[sha512]
-| Sources 
-| https://www.apache.org/dyn/closer.cgi?filename=hop/1.2.0/apache-hop-1.2.0-src.tar.gz&action=download[apache-hop-1.2.0-src.tar.gz] 
-| https://downloads.apache.org/hop/1.2.0/apache-hop-1.2.0-src.tar.gz.asc[asc] 
-| https://downloads.apache.org/hop/1.2.0/apache-hop-1.2.0-src.tar.gz.sha512[sha512]
-.2+| link:/blog/2022/01/hop-1.1.0/[1.1.0] 
-.2+| January, 24th, 2022 
-| **Binaries** 
-| https://www.apache.org/dyn/closer.cgi?filename=hop/1.1.0/apache-hop-client-1.1.0.zip&action=download[**apache-hop-client-1.1.0.zip**] 
-| https://downloads.apache.org/hop/1.1.0/apache-hop-client-1.1.0.zip.asc[asc] 
-| https://downloads.apache.org/hop/1.1.0/apache-hop-client-1.1.0.zip.sha512[sha512]
-| Sources 
-| https://www.apache.org/dyn/closer.cgi?filename=hop/1.1.0/apache-hop-1.1.0-src.tar.gz&action=download[apache-hop-1.1.0-src.tar.gz] 
-| https://downloads.apache.org/hop/1.1.0/apache-hop-1.1.0-src.tar.gz.asc[asc] 
-| https://downloads.apache.org/hop/1.1.0/apache-hop-1.1.0-src.tar.gz.sha512[sha512]
 |===
+Older releases can be found in the https://archive.apache.org/dist/hop/[archives]
 
 ## Docker
 
@@ -53,6 +44,16 @@ Apache Hop is available as a Docker image on Dockerhub:
 
 * https://hub.docker.com/r/apache/hop[Hop], Docker pull command:  `docker pull apache/hop`
 * https://hub.docker.com/r/apache/hop-web[Hop Web], Docker pull command `docker pull apache/hop-web`
+
+## Helm Chart (Work in progress)
+
+Apache Hop is available as a Helm Chart:
+
+You can add the repository with following command
+
+```
+helm repo add apache-hop https://hop.apache.org
+```
 
 
 ## Keys
