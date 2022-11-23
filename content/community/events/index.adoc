@@ -59,7 +59,7 @@ All known Hop events are listed below. Add your event to the list below or annou
 [%header,cols="5%,55%,15%,10%,15%"]
 |===
 |Event name|Description|Date|Language|Link (subscribe/attend)
-|{set:cellbgcolor:#30328422}3H16|3H16 - Packaging Hop as a Windows Application and Parsing Stripe API Data|2022-06-23|EN|https://www.meetup.com/3hx-apache-hop-hot-hop-hangouts/events/286605354/[register^]
+|{set:cellbgcolor:#30328422}||||
 |===
 {set:cellbgcolor}
 
@@ -69,6 +69,8 @@ All known Hop events are listed below. Add your event to the list below or annou
 [%header,cols="5%,55%,15%,10%,15%"]
 |===
 |Event name|Description|Date|Language|Recording
+|3H17|Introducing the new Execution Information framework in Apache Hop 2.1.0|2022-11-10|EN|https://www.youtube.com/watch?v=HCbW2TB3pEo[youtube^]
+|3H16|Packaging Hop as a Windows Application and Parsing Stripe API Data|2022-06-23|EN|https://www.youtube.com/watch?v=nxgZOJx-FKc[youtube^]
 |3H15|Apache Hop updates and use case: Apache Hop and Debezium|2022-06-09|EN|https://youtu.be/_sTSGwmV-3w[youtube^]
 |-|Zweites Apache Hop Meetup (IT-Novum)|2022-06-09|DE|https://data.it-novum.com/termine/zweites-apache-hop-meetup/[video links on page^]
 |3H14|Apache Hop in Docker|2021-12-16|EN|https://youtu.be/v2rNxAQEhu0[youtube^]
