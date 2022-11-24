@@ -24,10 +24,11 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hop.apache.org/docs/roadmap/</guid>
-      <description>The Apache Hop team just released version 1.0.0 and became a top level project at the Apache Software Foundation. The immediate next goal for us is to release version 1.1.0 with almost 200 fixes and improvements.
+      <description>The Apache Hop team just released version 2.1.0. The immediate next goal for us is to release version 2.2.0 with over 100 fixes and improvements.
  Here are a few directions that we want to explore for the future of our software:
-   Set up a software marketplace where 3rd party plugins can be found
-  Pluggable field expressions in transforms and actions</description>
+   Authentication plugins for various security providers (3.x)
+  Integration with authentication for the VFS plugins (3.x)
+  S3 compatible object store support through updated AWS libs (3.</description>
     </item>
     
   </channel>
