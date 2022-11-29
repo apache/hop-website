@@ -1,0 +1,58 @@
+---
+title: "Issue Priorities"
+---
+
+== Issue Priorities
+
+=== Priority 0: Outage
+
+This is reserved only for the most critical of bugs halting all development on the project.
+
+*Example Priority 0 issues*:
+
+ - the build is broken, halting all development
+ - the website is down
+ - a vulnerability requires a point release ASAP
+
+=== Priority 1: Critical
+
+This is considered a high priority. Most P1 bugs should block a release.
+P1 bugs should not be unassigned and require frequent status updates.
+
+*Example Priority 1 issues*:
+
+ - regression in integration tests
+ - important component is nonfunctional
+ - performance regression
+
+=== Priority 2: Default
+
+Most tickets fall into this priority. These can be planned and
+executed by anyone who is interested. No special urgency is associated, but if
+no action is taken on a P2 ticket for a long time, it indicates it is actually
+just P3/nice-to-have.
+
+*Example Priority 2 issues*
+
+ - typical feature request
+ - bug that affects some use cases but don't make a component nonfunctional
+
+=== Priority 3: Nice-to-have
+
+Nice-to-have improvements.
+
+*Example Priority 3 issues*
+
+ - feature request that is nice-to-have
+ - ticket filed as P2 that no one finds time to work on
+
+=== Priority 4
+
+Nice-to-have improvements that are also very small and easy.
+Usually it is quicker to just fix them than to file a bug, but the issue
+can be referenced by a pull request and shows up in release notes.
+
+*Example Priority 4 issues*
+
+ - spelling errors in comments or code
+ - sonar code smells
