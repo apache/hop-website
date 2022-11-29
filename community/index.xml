@@ -94,6 +94,20 @@
     </item>
     
     <item>
+      <title>Issue Priorities</title>
+      <link>https://hop.apache.org/community/contribution-guides/priority-guide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hop.apache.org/community/contribution-guides/priority-guide/</guid>
+      <description>Issue Priorities Priority 0: Outage This is reserved only for the most critical of bugs halting all development on the project.
+ Example Priority 0 issues:
+   the build is broken, halting all development
+  the website is down
+  a vulnerability requires a point release ASAP
+    Priority 1: Critical This is considered a high priority. Most P1 bugs should block a release.</description>
+    </item>
+    
+    <item>
       <title>Jira Guidelines</title>
       <link>https://hop.apache.org/community/contribution-guides/jira-guide/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
