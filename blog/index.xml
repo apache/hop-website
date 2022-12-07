@@ -9,10 +9,10 @@
     <lastBuildDate>Tue, 06 Dec 2022 07:49:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Apache Hop 2.2 is available!!</title>
-      <link>https://hop.apache.org/blog/2022/12/</link>
+      <link>https://hop.apache.org/blog/2022/12/hop-2.2.0/</link>
       <pubDate>Tue, 06 Dec 2022 07:49:56 +0200</pubDate>
       
-      <guid>https://hop.apache.org/blog/2022/12/</guid>
+      <guid>https://hop.apache.org/blog/2022/12/hop-2.2.0/</guid>
       <description>After almost two months of work on over 160 tickets, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.2.0.
  A huge thank you to everyone who made this possible.
     
