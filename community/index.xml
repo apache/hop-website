@@ -24,7 +24,7 @@
       
       <guid>https://hop.apache.org/community/contribution-guides/code-contribution-guide/</guid>
       <description>Apache Hop is maintained, improved, and extended by code contributions of volunteers. We welcome contributions to Hop, but due to the size of the project and to preserve the high quality of the code base, we follow a contribution process that is explained in this document.
- Please feel free to ask questions at any time. Either send a message in the dev channel on our chatserver or comment on the Jira issue you are working on.</description>
+ Please feel free to ask questions at any time. Either send a message in the dev channel on our chatserver or comment on the GitHub issue you are working on.</description>
     </item>
     
     <item>
@@ -84,6 +84,15 @@
     </item>
     
     <item>
+      <title>GitHub Issues Guidelines</title>
+      <link>https://hop.apache.org/community/contribution-guides/github-guide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hop.apache.org/community/contribution-guides/github-guide/</guid>
+      <description>GitHub Issues is the issue tracker that is being used to track all changes and implementation of new code or documentation in Apache Hop. This document serves to explain the workflow that is used and what can happen after a ticket has been created. The second purpose is to explain what you need to do to create an complete ticket, doing so helps the developers to understand the request and work on it.</description>
+    </item>
+    
+    <item>
       <title>How To Contribute</title>
       <link>https://hop.apache.org/community/contributing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -105,15 +114,6 @@
   the website is down
   a vulnerability requires a point release ASAP
     Priority 1: Critical This is considered a high priority. Most P1 bugs should block a release.</description>
-    </item>
-    
-    <item>
-      <title>Jira Guidelines</title>
-      <link>https://hop.apache.org/community/contribution-guides/jira-guide/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://hop.apache.org/community/contribution-guides/jira-guide/</guid>
-      <description>Jira is the issue tracker that is being used to track all changes and implementation of new code or documentation in Apache Hop. This document serves to explain the workflow that is used and what can happen after a ticket has been created. The second purpose is to explain what you need to do to create an complete ticket, doing so helps the developers to understand the request and work on it.</description>
     </item>
     
     <item>
@@ -158,7 +158,7 @@
       
       <guid>https://hop.apache.org/community/support/</guid>
       <description>Getting Help If you are experiencing problems using Hop then please report your problem to our mailing lists. This allows the entire community to help with your problem.
- If you found an issue or have a feature request, pleaae create a ticket in our JIRA Issue Tracker. Adding plenty of details (stack trace, logs, screenshots, …​) makes it easier for the Hop developers to know what you exactly mean, and will allow us to resolve your ticket faster.</description>
+ If you found an issue or have a feature request, pleaae create a ticket in our GitHub Issue Tracker. Adding plenty of details (stack trace, logs, screenshots, …​) makes it easier for the Hop developers to know what you exactly mean, and will allow us to resolve your ticket faster.</description>
     </item>
     
     <item>
@@ -191,9 +191,8 @@
       <guid>https://hop.apache.org/community/tools/</guid>
       <description>The following tools are used within the Hop community.
    Github
-  Jira
+  GitHub Issues
   Jenkins
-  Artifactory
   Sonarcloud
   Wiki
   Mattermost Chat
