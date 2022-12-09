@@ -1,19 +1,17 @@
 ---
-title: "Jira Guidelines"
+title: "GitHub Issues Guidelines"
 ---
 
-Jira is the issue tracker that is being used to track all changes and implementation of new code or documentation in Apache Hop. This document serves to explain the workflow that is used and what can happen after a ticket has been created. The second purpose is to explain what you need to do to create an complete ticket, doing so helps the developers to understand the request and work on it.
+GitHub Issues is the issue tracker that is being used to track all changes and implementation of new code or documentation in Apache Hop. This document serves to explain the workflow that is used and what can happen after a ticket has been created. The second purpose is to explain what you need to do to create an complete ticket, doing so helps the developers to understand the request and work on it.
 
 [%hardbreaks]
-. <<create-ticket, Creating a Jira Ticket>>
-. <<workflow, Hop Jira Workflow>>
-. <<voting, Voting on a ticket>>
+. <<create-ticket, Creating a GitHub Issue>>
+. <<workflow, Hop GitHub Issues Workflow>>
 
 
+== anchor:create-ticket[]Creating a GitHub Issue
 
-== anchor:create-ticket[]Creating a Jira Ticket
-
-Writing a good Jira ticket can be a difficult task, these guidelines should help you with writing a useful ticket that is easy to comprehend by the developer that will handle the task.
+Writing a good ticket can be a difficult task, these guidelines should help you with writing a useful ticket that is easy to comprehend by the developer that will handle the task.
 
 These criteria are only applicable when we are talking about bugs or small changes to the code. When you have a great new idea or major change for the product please start a discussion on our dev chat channel first, for more info on this please take a look at our link:../code-contribution-guide/[Code Contribution Guide].
 
@@ -50,16 +48,14 @@ If possible include a sample pipeline and sample data to reproduce the situation
 
 
 
-== anchor:workflow[]Hop Jira Workflow
+== anchor:workflow[]Hop GitHub Issues Workflow
 
-The Jira workflow that is using in the development process of Apache Hop is the following.
-
-image::/img/Jira-Workflow.png[Workflow]
+The workflow that is used in the development process of Apache Hop is the following.
 
 * All new issues will first get the triage status, there one of the committers will check if all needed information is included in the ticket or if a duplicate ticket already exists. This process can have multiple outcomes
 ** The ticket is complete and added to the backlog
 ** Additional information is requested
-** The ticket is out of scope or reporter fails to reply to questions then it will be labeled as "won't fix"
+** The ticket is out of scope or reporter fails to reply to questions then it will be closed with a comment
 
 
 The committer will always add a comment to the ticket stating his reasoning, why the ticket will not be handled
@@ -73,9 +69,3 @@ The committer will always add a comment to the ticket stating his reasoning, why
 * After the development is finished and you created a pull request the ticket will be placed In Review, one of the committers will look at the code and merge it with master if it is conforming our guidelines.
 
 * When a ticket is done it is ready for release
-
-== anchor:voting[]Voting on a Jira Ticket
-
-====
-until following issue has been resolved voting is not possible on our jira tickets https://jira.atlassian.com/browse/JRACLOUD-71251[JRACLOUD-71251]
-====

@@ -90,7 +90,7 @@ The API documentation is located in the docs/hop-dev-manual subdirectory
 
 == anchor:before-start[]Before you start start working on the documentation...
 
-Please make sure you have a Jira issue that corresponds to your contribution. We require all documentation changes to refer to a Jira issue, except for trivial fixes such as typos.
+Please make sure you have a GitHub issue that corresponds to your contribution. We require all documentation changes to refer to a GitHub issue, except for trivial fixes such as typos.
 
 
 == anchor:multi-lang-doc[] Documentation translations
@@ -105,7 +105,7 @@ Apache Hop accepts documentation contributions through the GitHub as Pull Reques
 
 To prepare and submit a pull request follow these steps.
 
-Commit your changes to your local git repository. The commit message should point to the corresponding Jira issue by starting with [HOP-XXXX].
+Commit your changes to your local git repository. The commit message should point to the corresponding GitHub issue by starting with [Fix #XXXX].
 
 Push your committed contribution to your fork of the Hop repository at GitHub.
 
@@ -114,4 +114,4 @@ git push origin myBranch
 
 Go to the website of your repository fork (`https://github.com/<your-user-name>/hop`) and use the “Create Pull Request” button to start creating a pull request. Make sure that the base fork is hop master and the head fork selects the branch with your changes. Give the pull request a meaningful description and submit it.
 
-It is also possible to attach a patch to a Jira issue.
+It is also possible to attach a patch to a GitHub issue.
