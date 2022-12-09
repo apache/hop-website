@@ -4,13 +4,13 @@ title: "Code Contribution Guide"
 
 Apache Hop is maintained, improved, and extended by code contributions of volunteers. We welcome contributions to Hop, but due to the size of the project and to preserve the high quality of the code base, we follow a contribution process that is explained in this document.
 
-*Please feel free to ask questions at any time*. Either send a message in the dev channel on our chatserver or comment on the Jira issue you are working on.
+*Please feel free to ask questions at any time*. Either send a message in the dev channel on our chatserver or comment on the GitHub issue you are working on.
 
 *IMPORTANT*: Please read this document carefully before starting to work on a code contribution. Follow the process and guidelines explained below. Contributing to Apache Hop does not start with opening a pull request. We expect contributors to reach out to us first to discuss the overall approach together. Without consensus with the Hop committers, contributions might require substantial rework or will not be reviewed.
 
 <<code-contribution-process>>
 [%hardbreaks]
-. <<create-jira-ticket, Create JIRA Ticked and Reach Consensus>>
+. <<create-github-issue, Create GitHub Issue and Reach Consensus>>
 . <<implement-change, Implement Your Change>>
 . <<open-pull-request, Open a Pull Request>>
 . <<merge-change, Merge Change>>
@@ -18,16 +18,16 @@ Apache Hop is maintained, improved, and extended by code contributions of volunt
 .Contribution Process Table
 [width="100%", cols="4"]
 |====
-|[very big]*1 <<create-jira-ticket, Discuss>>*
+|[very big]*1 <<create-github-issue, Discuss>>*
 
-Create a https://issues.apache.org/jira/projects/HOP/issues[Jira] ticket or mailing list discussion and reach consensus
+Create a https://github.com/apache/hop/issues[GitHub Issue] or mailing list discussion and reach consensus
 
 Agree on importance, relevance, scope of the ticket, discuss the implementation approach and find a committer willing to review and merge the change.
 
-*Only committers can assign a Jira ticket.*
+*Only committers can assign a GitHub Issues.*
 |[very big]*2 <<implement-change, Implement>>*
 
-Implement the change according to the Code Style and Quality Guide and the approach agreed upon in the Jira ticket.
+Implement the change according to the Code Style and Quality Guide and the approach agreed upon in the ticket.
 
 *Only start working on the implementation if there is consensus on the approach (e.g. you are assigned to the ticket)*
 
@@ -35,7 +35,7 @@ Implement the change according to the Code Style and Quality Guide and the appro
 
 Open a pull request and work with the reviewer.
 
-*Pull requests belonging to unassigned Jira tickets or not authored by assignee will not be reviewed or merged by the community.*
+*Pull requests belonging to unassigned GitHub Issues or not authored by assignee will not be reviewed or merged by the community.*
 
 |[very big]*4 <<merge-change, Merge>>*
 
@@ -45,16 +45,16 @@ A committer of Hop checks if the contribution fulfills the requirements and merg
 
 [frame=topbot]
 |===
-|Note: trivial hot fixes such as typos or syntax errors can be opened as a [hotfix] pull request, without a Jira ticket.
+|Note: trivial hot fixes such as typos or syntax errors can be opened as a [hotfix] pull request, without a ticket.
 |===
 
 anchor:code-contribution-process[Code Contribution Process]
 
-== anchor:create-jira-ticket[]Create JIRA Ticket and Reach Consensus
+== anchor:create-github-issue[]Create GitHub Issue and Reach Consensus
 
 The first step for making a contribution to Apache Hop is to reach consensus with the Hop community. This means agreeing on the scope and implementation approach of a change.
 
-In most cases, the discussion should happen in Hop’s bug tracker: https://issues.apache.org/jira/projects/HOP/issues[Jira].
+In most cases, the discussion should happen in Hop’s bug tracker: https://github.com/apache/hop/issues[GitHub].
 
 The following types of changes require a discussion in the dev https://chat.project-hop.org[chat] channel:
 
@@ -62,9 +62,9 @@ The following types of changes require a discussion in the dev https://chat.proj
 - potentially controversial changes or issues
 - changes with very unclear approaches or multiple equal approaches
 
-Do not open a Jira ticket for these types of changes before the discussion has come to a conclusion. Jira tickets based on a dev@ discussion should summarize the outcome of that discussion.
+Do not open a GitHub Issues for these types of changes before the discussion has come to a conclusion. GitHub Issues based on a dev@ discussion should summarize the outcome of that discussion.
 
-*Requirements for a Jira ticket to get consensus:*
+*Requirements for a ticket to get consensus:*
 
 - Formal requirements
 * The _Title_ describes the problem concisely.
@@ -85,23 +85,23 @@ Do not open a Jira ticket for these types of changes before the discussion has c
 * Impact on Hop’s build time
 * Dependencies and their licenses
 
-If a change is identified as a large or controversial change in the discussion on Jira, it might require a Hop Improvement Proposal (HIP) or a discussion in the dev channel to reach agreement and consensus.
+If a change is identified as a large or controversial change in the discussion on GitHub, it might require a Hop Improvement Proposal (HIP) or a discussion in the dev channel to reach agreement and consensus.
 
 Contributors can expect to get a first reaction from a committer within a few days after opening the ticket. If a ticket doesn’t get any attention, we recommend reaching out to the developer chat. Note that the Hop community sometimes does not have the capacity to accept all incoming contributions.
 
 Once all requirements for the ticket are met, a committer will assign somebody to the Assignee field of the ticket to work on it. Only committers have the permission to assign somebody.
 
-*Pull requests belonging to unassigned Jira tickets will not be reviewed or merged by the community.*
+*Pull requests belonging to unassigned tickets will not be reviewed or merged by the community.*
 
 == anchor:implement-change[]Implement Your Change
 
-Once you’ve been assigned to a Jira issue, you may start to implement the required changes.
+Once you’ve been assigned to an issue, you may start to implement the required changes.
 
 Here are some further points to keep in mind while implementing:
 
 - Set up a Hop development environment
 - Follow the Code Style and Quality Guide of Hop
-- Take any discussions and requirements from the Jira issue or design document into account.
+- Take any discussions and requirements from the issue or design document into account.
 - Do not mix unrelated issues into one contribution.
 
 == anchor:open-pull-request[]Open a Pull Request
@@ -113,7 +113,7 @@ Considerations before opening a pull request:
 - Make sure no unrelated or unnecessary reformatting changes are included.
 - Make sure your commit history adheres to the requirements.
 - Make sure your change has been rebased to the latest commits in your base branch.
-- Make sure the pull request refers to the respective Jira, and that each Jira issue is assigned to exactly one pull request (in case of multiple pull requests for one Jira; resolve that situation first)
+- Make sure the pull request refers to the respective GitHub Issue, and that each ticket is assigned to exactly one pull request (in case of multiple pull requests for one ticket; resolve that situation first)
 
 Considerations before or right after opening a pull request:
 - Make sure that the branch is building successfully on Travis.
@@ -124,4 +124,4 @@ There is a separate guide on how to review a pull request, including our pull re
 
 == anchor:merge-change[merge-change]Merge Changes
 
-The code will be merged by a committer of Hop once the review is finished. The Jira ticket will be closed afterwards.
+The code will be merged by a committer of Hop once the review is finished. The ticket will be closed afterwards.

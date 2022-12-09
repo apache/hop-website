@@ -11,8 +11,8 @@ Contributing to Hop goes beyond writing code for the project. Below, we list dif
 [width="100%", ,cols="3,10", options="header,footer"]
 |============================
 |Area |Further Information
-|Report a Bug|To report a problem with Hop, open Hop’s https://issues.apache.org/jira/projects/HOP/issues[Jira ,window=_blank], log in if necessary, and click on the "+" in the left side bar (Shortcut "c").
-Please give detailed information about the problem you encountered and, if possible, add a description that helps to reproduce the problem. For more information go to our link:../contribution-guides/jira-guide/[info] page.
+|Report a Bug|To report a problem with Hop, open Hop’s https://github.com/apache/hop/issues[GitHub Issues ,window=_blank], log in if necessary, and click on the "+" in the left side bar (Shortcut "c").
+Please give detailed information about the problem you encountered and, if possible, add a description that helps to reproduce the problem. For more information go to our link:../contribution-guides/github-guide/[info] page.
 |Contribute Code|Read the link:../contribution-guides/code-contribution-guide/[Code Contribution Guide]
 |Help With Code Reviews|Read the link:../contribution-guides/code-review-guide/[Code Review Guide]
 |Help Prepare a Release|Read the link:../contribution-guides/release-contribution-guide/[Release Review Guide]
@@ -23,7 +23,7 @@ Please give detailed information about the problem you encountered and, if possi
 
 - Reply to Hop related questions on Stack Overflow with the hop tag or the Hop forums
 
-- Check the latest issues in Jira for tickets which are actually user questions
+- Check the latest issues in GitHub for tickets which are actually user questions
 
 |Improve the Website|Read the link:../contribution-guides/website-contribution-guide/[Website Contribution Guide]
 |Spread the Word about Hop|

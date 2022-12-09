@@ -6,7 +6,7 @@ title: Support
 
 If you are experiencing problems using Hop then please report your problem to our https://hop.apache.org/community/mailing-list/[mailing lists, window="blank"]. This allows the entire community to help with your problem.
 
-If you found an issue or have a feature request, pleaae create a ticket in our http://issues.apache.org/jira/browse/HOP[JIRA Issue Tracker, window="blank"]. Adding plenty of details (stack trace, logs, screenshots, ...) makes it easier for the Hop developers to know what you exactly mean, and will allow us to resolve your ticket faster.
+If you found an issue or have a feature request, pleaae create a ticket in our https://github.com/apache/hop/issues[GitHub Issue Tracker, window="blank"]. Adding plenty of details (stack trace, logs, screenshots, ...) makes it easier for the Hop developers to know what you exactly mean, and will allow us to resolve your ticket faster.
 
 ## Alternative discussion forums and information
 

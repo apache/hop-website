@@ -35,16 +35,16 @@ Hop is an entirely new open source data integration platform that is easy to use
 Hop aims to be the future of data integration. Visual development enables developers to be more productive than they can be through code. Our Design once, run anywhere workflows and pipelines can be designed in the Hop Gui and run on the Hop native engine (local or remote), or on Spark, Flink, Google Dataflow or AWS EMR through Beam. Lifecycle Management enables developers and administrators to switch between projects, environments and purposes without leaving your train of thought.
 
 </description>
-    <bug-database rdf:resource="https://issues.apache.org/jira/projects/HOP/" />
+    <bug-database rdf:resource="https://github.com/apache/hop/issues" />
     <mailing-list rdf:resource="http://hop.apache.org/community/mailing-list/" />
     <download-page rdf:resource="http://hop.apache.org/download/" />
     <programming-language>Java</programming-language>
     <category rdf:resource="https://projects.apache.org/category/big-data" />
     <release>
       <Version>
-        <name>Apache Hop 0.70</name>
-        <created>2021-04-08</created>
-        <revision>0.70</revision>
+        <name>Apache Hop 2.2.0</name>
+        <created>2022-12-08</created>
+        <revision>2.2.0</revision>
       </Version>
     </release>
     <repository>
