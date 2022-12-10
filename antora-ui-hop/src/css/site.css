@@ -9,13 +9,12 @@
 @import 'toolbar.css';
 @import 'breadcrumbs.css';
 @import 'page-versions.css';
-@import "toc.css";
+@import 'toc.css';
 @import 'doc.css';
 @import 'static.css';
 @import 'header.css';
 @import 'footer.css';
 @import 'highlight.css';
-@import 'frontpage.css';
 @import 'print.css';
 @import 'pagination.css';
 @import 'blog.css';
@@ -25,5 +24,5 @@
 @import 'community.css';
 @import 'docs.css';
 @import 'sitemap.css';
-@import "docsearch.css";
-@import "mailchimp.css";
+@import 'docsearch.css';
+@import 'frontpage.css';

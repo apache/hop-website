@@ -347,6 +347,10 @@ section.frontpage.projects .project img {
     text-transform: uppercase;
     border-radius: 0;
   }
+
+  .split .demo {
+    display: none;
+  }
 }
 
 /* css for mobile view */
@@ -408,5 +412,9 @@ section.frontpage.projects .project img {
 
   header.frontpage h1 {
     font-size: 2.5rem;
+  }
+
+  .split.demo {
+    display: none;
   }
 }
