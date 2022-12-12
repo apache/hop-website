@@ -25,15 +25,16 @@
   --color-glow: #fff7a3;
   --color-wheat: #f5deb3;
   /* fonts */
-  --rem-base: 18; /* used to compute rem value from desired pixel value (e.g., calc(18 / var(--rem-base) * 1rem) = 18px) */
+  --rem-base: 18; /* used to compute rem value from desired pixel value
+                    (e.g., calc(18 / var(--rem-base) * 1rem) = 18px) */
   --body-font-size: 1.0625em; /* 17px */
   --body-font-size--desktop: 1.125em; /* 18px */
   --body-font-size--print: 0.9375em; /* 15px */
   --body-line-height: 1.15;
   --body-font-color: var(--color-jet-50);
-  --body-font-family: 'Open Sans', sans-serif;
+  --body-font-family: "Open Sans", sans-serif;
   --body-font-weight-bold: bold;
-  --monospace-font-family: 'Droid Sans Mono', 'DejaVu Sans Mono', monospace;
+  --monospace-font-family: "Droid Sans Mono", "DejaVu Sans Mono", monospace;
   --monospace-font-weight-bold: 500;
   /* base */
   --body-background: var(--color-white);

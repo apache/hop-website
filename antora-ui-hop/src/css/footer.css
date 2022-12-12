@@ -24,7 +24,7 @@ footer .footer p {
 }
 
 footer .footer p.remark::after {
-  content: '';
+  content: "";
   display: block;
   position: relative;
   height: 1px;
@@ -48,7 +48,7 @@ footer .footer .context a {
 }
 
 footer .footer .context a::after {
-  content: ' ';
+  content: " ";
   display: inline-block;
   border-radius: 50%;
   width: 8px;
@@ -90,7 +90,7 @@ footer .footer dl dt {
 }
 
 footer .footer dl dt label:first-of-type::after {
-  content: '';
+  content: "";
   display: block;
   position: relative;
   bottom: 0;

@@ -1,4 +1,5 @@
-/* For perf reasons, we emulate only those few parts of Font Awesome css that we use without actually pulling the FA font */
+/* For perf reasons, we emulate only those few parts of Font Awesome css
+   that we use without actually pulling the FA font */
 
 .fa {
   display: inline-block;
