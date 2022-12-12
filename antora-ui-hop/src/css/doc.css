@@ -92,7 +92,7 @@
 .doc h4 .anchor::before,
 .doc h5 .anchor::before,
 .doc h6 .anchor::before {
-  content: '\00a7';
+  content: "\00a7";
 }
 
 .doc h1:hover .anchor,
@@ -472,11 +472,11 @@
 }
 
 .doc ul.checklist i.fa-check-square-o::before {
-  content: '\2713';
+  content: "\2713";
 }
 
 .doc ul.checklist i.fa-square-o::before {
-  content: '\274f';
+  content: "\274f";
 }
 
 .doc .dlist .dlist,

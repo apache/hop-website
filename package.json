@@ -27,6 +27,7 @@
   "devDependencies": {
     "@antora/cli": "^3.0.0",
     "@antora/site-generator": "^3.0.0",
+    "@asciidoctor/tabs": "^1.0.0-alpha.11",
     "gulp": "~4.0",
     "gulp-htmlmin": "~5.0",
     "html-validate": "~5.0.2",

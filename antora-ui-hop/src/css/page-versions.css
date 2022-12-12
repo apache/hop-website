@@ -13,7 +13,7 @@
 
 .page-versions .version-menu-toggle {
   color: inherit;
-  background: url(../img/chevron.svg) no-repeat;
+  background: url("../img/chevron.svg") no-repeat;
   background-position: right 0.5rem top 50%;
   background-size: auto 0.75em;
   border: none;

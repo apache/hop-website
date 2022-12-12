@@ -184,7 +184,7 @@ body {
     display: block;
     position: fixed;
     height: 100%;
-    box-shadow: 0 16px 16px 0 rgba(10, 10, 10, 0.1);
+    box-shadow: 0 16px 16px 0 rgba(10, 10, 10, 10%);
     overflow-y: auto;
     top: 8rem;
     right: 0;
@@ -358,10 +358,10 @@ body {
   width: 14rem;
   margin-top: 0.5rem;
   padding: 0.4rem 1.5rem 0.4rem 1.9rem;
-  font-family: Open Sans, sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 1rem;
   caret-color: #ed8225;
-  background: no-repeat 0.4rem/1rem url(../img/search.svg);
+  background: no-repeat 0.4rem/1rem url("../img/search.svg");
   background-color: var(--color-smoke-50);
   outline: 0;
 }
@@ -390,7 +390,7 @@ body {
   top: 3.38rem;
   background: var(--navbar-background);
   text-align: left;
-  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 5%);
   position: absolute;
   margin-right: 10px;
   overflow-y: auto;
