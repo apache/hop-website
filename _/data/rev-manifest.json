@@ -1,5 +1,5 @@
 {
-  "css/site.css": "css/site-56f1bb9f84.css",
+  "css/site.css": "css/site-59053c9ed8.css",
   "img/back.svg": "img/back-0b77317ba4.svg",
   "img/caret.svg": "img/caret-fe375177d0.svg",
   "img/chevron.svg": "img/chevron-0d3baf009c.svg",
@@ -13,5 +13,6 @@
   "img/search.svg": "img/search-46756b38c9.svg",
   "js/site.js": "js/site-8bbb7a5250.js",
   "js/vendor/docsearch.min.js": "js/vendor/docsearch-4983f0f1ec.min.js",
-  "js/vendor/highlight.js": "js/vendor/highlight-a243a7d07e.js"
+  "js/vendor/highlight.js": "js/vendor/highlight-a243a7d07e.js",
+  "js/vendor/tabs.js": "js/vendor/tabs-523d9bca0f.js"
 }
