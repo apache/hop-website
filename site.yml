@@ -3,9 +3,9 @@ site:
   url: https://hop.apache.org
   start_page: manual::index.adoc
 
-# asciidoc:
-#   extensions:
-#   - '@asciidoctor/tabs'
+asciidoc:
+  extensions:
+  - '@asciidoctor/tabs'
 
 content:
   sources:
