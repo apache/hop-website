@@ -6,7 +6,9 @@ GitHub Issues is the issue tracker that is being used to track all changes and i
 
 [%hardbreaks]
 . <<create-ticket, Creating a GitHub Issue>>
+. <<ticket-priority, Ticket priorities>>
 . <<workflow, Hop GitHub Issues Workflow>>
+. <<github-actions, Hop GitHub Actions>>
 
 
 == anchor:create-ticket[]Creating a GitHub Issue
@@ -46,6 +48,60 @@ ____
 If possible include a sample pipeline and sample data to reproduce the situation, this will greatly improve our efficiency. If you would like to include error logs, attach them using a file or pastebin and do not paste them in the description of the issue.
 
 
+== anchor:ticket-priority[]Priorities used within the project
+
+=== Priority 0: Outage
+
+This is reserved only for the most critical of bugs halting all development on the project.
+
+*Example Priority 0 issues*:
+
+ - the build is broken, halting all development
+ - the website is down
+ - a vulnerability requires a point release ASAP
+
+=== Priority 1: Critical
+
+This is considered a high priority. Most P1 bugs should block a release.
+P1 bugs should not be unassigned and require frequent status updates.
+
+*Example Priority 1 issues*:
+
+ - regression in integration tests
+ - important component is nonfunctional
+ - performance regression
+
+=== Priority 2: Default
+
+Most tickets fall into this priority. These can be planned and
+executed by anyone who is interested. No special urgency is associated, but if
+no action is taken on a P2 ticket for a long time, it indicates it is actually
+just P3/nice-to-have.
+
+*Example Priority 2 issues*
+
+ - typical feature request
+ - bug that affects some use cases but don't make a component nonfunctional
+
+=== Priority 3: Nice-to-have
+
+Nice-to-have improvements.
+
+*Example Priority 3 issues*
+
+ - feature request that is nice-to-have
+ - ticket filed as P2 that no one finds time to work on
+
+=== Priority 4
+
+Nice-to-have improvements that are also very small and easy.
+Usually it is quicker to just fix them than to file a bug, but the issue
+can be referenced by a pull request and shows up in release notes.
+
+*Example Priority 4 issues*
+
+ - spelling errors in comments or code
+ - sonar code smells
 
 
 == anchor:workflow[]Hop GitHub Issues Workflow
@@ -53,7 +109,6 @@ If possible include a sample pipeline and sample data to reproduce the situation
 The workflow that is used in the development process of Apache Hop is the following.
 
 * All new issues will first get the triage status, there one of the committers will check if all needed information is included in the ticket or if a duplicate ticket already exists. This process can have multiple outcomes
-** The ticket is complete and added to the backlog
 ** Additional information is requested
 ** The ticket is out of scope or reporter fails to reply to questions then it will be closed with a comment
 
@@ -64,8 +119,22 @@ The committer will always add a comment to the ticket stating his reasoning, why
 ** A severe or critical bug has been created, these can get fast tracked and added to a current release
 ** The reporter wants to work on the issue, when the reporter wants to be contributor for the code the ticket can be added to the current release. A committer will add the contributor to the ticket, the contributor tries to create a pull request in the same time frame as the rest of the developers.
 
-* When a committer or contributor is working on a ticket it will be placed in the In progress state, only committers can move tickets so if you are contributing you have to ask a committer to move your ticket.
+* When a committer or contributor is working on a ticket it will be assigned to that person
 
 * After the development is finished and you created a pull request the ticket will be placed In Review, one of the committers will look at the code and merge it with master if it is conforming our guidelines.
 
 * When a ticket is done it is ready for release
+
+
+== anchor:github-actions[]Github Actions
+
+As a project we have added some helpers to help us manage our tickets in GitHub, When using the templates to create a GitHub Issue a bot will automatically add tags to help us filter on domains and priority. You can also use the bot to self-assign or change labels on your own issues.
+
+Following commands are available to you on Issues you have created:
+
+`.take-issue` self-assign the issue to you +
+`.close-issue` Close this issue +
+`.reopen-issue` Reopen a closed issue +
+`.add-labels` label1,label2,'label 3 with spaces' +
+`.remove-labels` label1,label2,'label 3 with spaces' +
+`.set-labels` label1,label2,'label 3 with spaces' (which removes any labels not in that set)
