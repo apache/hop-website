@@ -6,7 +6,7 @@
                         The target config file to write variable to
   -e, --skip-existing   Skip existing files in the target folders
   -f, --skip-folders    Skip import of sub-folders
-  -h, --help            Displays this help message and quits.
+  -h, --help            Displays this help message and quits
   -i, --input=&lt;inputFolderName&gt;
                         The input folder to read from
   -j, --jdbc-properties=&lt;jdbcPropertiesFilename&gt;
@@ -19,7 +19,8 @@
   -p, --skip-hidden     Skip import of hidden files and folders
   -s, --shared-xml=&lt;sharedXmlFilename&gt;
                         The shared.xml file to read from
-  -t, --type=&lt;type&gt;     The type of import plugin to use (e.g. kettle)</code></pre> </div> </div> </div> </details> <div class="paragraph"> <p>&nbsp;<br></p> </div> </div> </div> <div class="sect1"> <h2 id="_examples"><a class="anchor" href="#_examples"></a>Examples</h2> <div class="sectionbody"> <div class="paragraph"> <p>Import a set of Kettle files and folders into a project stored on Amazon AWS S3:</p> </div> <div class="paragraph"> <p>&nbsp;<br></p> </div> <div id="_tabs_1" class="openblock tabs is-loading"> <div class="content"> <div class="ulist tablist"> <ul> <li id="_tabs_1_windows" class="tab"> <p>Windows</p> </li> <li id="_tabs_1_linux_macos" class="tab"> <p>Linux, macOS</p> </li> </ul> </div> <div id="_tabs_1_windows--panel" class="tabpanel" aria-labelledby="_tabs_1_windows"> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">hop-import.bat \
+  -t, --type=&lt;type&gt;     The type of import plugin to use (e.g. kettle)
+  -v, --version         Print version information and exit</code></pre> </div> </div> </div> </details> <div class="paragraph"> <p>&nbsp;<br></p> </div> </div> </div> <div class="sect1"> <h2 id="_examples"><a class="anchor" href="#_examples"></a>Examples</h2> <div class="sectionbody"> <div class="paragraph"> <p>Import a set of Kettle files and folders into a project stored on Amazon AWS S3:</p> </div> <div class="paragraph"> <p>&nbsp;<br></p> </div> <div id="_tabs_1" class="openblock tabs is-loading"> <div class="content"> <div class="ulist tablist"> <ul> <li id="_tabs_1_windows" class="tab"> <p>Windows</p> </li> <li id="_tabs_1_linux_macos" class="tab"> <p>Linux, macOS</p> </li> </ul> </div> <div id="_tabs_1_windows--panel" class="tabpanel" aria-labelledby="_tabs_1_windows"> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">hop-import.bat \
   --type kettle \
   --input /projects/kettle/inventory \
   --output s3:///apache-hop/s3project \
