@@ -11,7 +11,113 @@
   -p 8080:8080 \
   -v &lt;PATH_TO_YOUR_PROJECT&gt;:/project \
   -v &lt;PATH_TO_YOUR_ENVIRONMENT&gt;:/config \
-  hop-web</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_using_the_hop_cli_tools_in_hop_web"><a class="anchor" href="#_using_the_hop_cli_tools_in_hop_web"></a>Using the Hop CLI tools in Hop Web.</h2> <div class="sectionbody"> <div class="paragraph"> <p>Hop Web contains the default <a href="../hop-tools/index.html" class="xref page">Hop tools</a> like <a href="../hop-tools/hop-conf/hop-conf.html" class="xref page">hop-conf</a>, <a href="../hop-run/index.html" class="xref page">hop-run</a> etc.</p> </div> <div class="paragraph"> <p>The tools are available in <code>/usr/local/tomcat/webapps/ROOT</code> in a running Hop Web container.</p> </div> </div> </div> </article> </div> </main> </div> <footer> <div class="footer"> <dl> <dt>Overview</dt> <dd><a href="../../../download/">Download</a></dd> <dd><a href="../../../manual/latest/">Getting started</a></dd> </dl> <dl> <dt>Community</dt> <dd><a target="_blank" href="https://github.com/apache/hop/issues">Github Issues</a></dd> <dd><a target="_blank" href="https://chat.project-hop.org">Chat</a></dd> <dd><a target="_blank" href="../../../community/team/">Team</a></dd> </dl> <dl> <dt>About</dt> <dd><a target="_blank" href="https://www.apache.org/licenses/" title="License">License</a></dd> </dl> <p> &copy; 2019-2023 The Hop Team.<br> All marks mentioned may be trademarks or registered trademarks of their respective owners. </p> </div> </footer> <script src="../../../_/js/site-8bbb7a5250.js"></script> <script async src="../../../_/js/vendor/highlight-a243a7d07e.js"></script> <script src="../../../_/js/vendor/docsearch-4983f0f1ec.min.js"></script> <script async src="../../../_/js/vendor/tabs-523d9bca0f.js"></script> <!-- fetched from https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js --> <script> var search = docsearch({
+  hop-web</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_using_the_hop_cli_tools_in_hop_web"><a class="anchor" href="#_using_the_hop_cli_tools_in_hop_web"></a>Using the Hop CLI tools in Hop Web.</h2> <div class="sectionbody"> <div class="paragraph"> <p>Hop Web contains the default <a href="../hop-tools/index.html" class="xref page">Hop tools</a> like <a href="../hop-tools/hop-conf/hop-conf.html" class="xref page">hop-conf</a>, <a href="../hop-run/index.html" class="xref page">hop-run</a> etc.</p> </div> <div class="paragraph"> <p>The tools are available in <code>/usr/local/tomcat/webapps/ROOT</code> in a running Hop Web container.</p> </div> </div> </div> <div class="sect1"> <h2 id="_authentication"><a class="anchor" href="#_authentication"></a>Authentication</h2> <div class="sectionbody"> <div class="paragraph"> <p>Hop Web runs on a Tomcat server by default. You can extend Hop Web&#8217;s tomcat configuration to add authentication.</p> </div> <div class="paragraph"> <p>The default Hop Web docker image picks up <code>tomcat-users.xml</code> and <code>web.xml</code> files and moves them to the correct location before Hop Web starts.</p> </div> <div class="paragraph"> <p>A minimal sample <code>tomcat-users.xml</code> file:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version='1.0' encoding='utf-8'?&gt;
+&lt;!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one or more
+  ~ contributor license agreements.  See the NOTICE file distributed with
+  ~ this work for additional information regarding copyright ownership.
+  ~ The ASF licenses this file to You under the Apache License, Version 2.0
+  ~ (the "License"); you may not use this file except in compliance with
+  ~ the License.  You may obtain a copy of the License at
+  ~
+  ~       http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  --&gt;
+&lt;tomcat-users&gt;
+  &lt;role rolename="apachehop"/&gt;
+  &lt;user username="apachehop" password="password" roles="apachehop" /&gt;
+&lt;/tomcat-users&gt;</code></pre> </div> </div> <div class="paragraph"> <p>The following sample <code>web.xml</code> extends Hop Web&#8217;s default <code>web.xml</code> with the <code>&lt;security-constraint /&gt;</code> and <code>&lt;login-config /&gt;</code> elements required for basic authentication.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one or more
+  ~ contributor license agreements.  See the NOTICE file distributed with
+  ~ this work for additional information regarding copyright ownership.
+  ~ The ASF licenses this file to You under the Apache License, Version 2.0
+  ~ (the "License"); you may not use this file except in compliance with
+  ~ the License.  You may obtain a copy of the License at
+  ~
+  ~       http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  --&gt;
+
+&lt;web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4"&gt;
+
+    &lt;context-param&gt;
+        &lt;param-name&gt;org.eclipse.rap.applicationConfiguration&lt;/param-name&gt;
+        &lt;param-value&gt;org.apache.hop.ui.hopgui.HopWeb&lt;/param-value&gt;
+    &lt;/context-param&gt;
+
+    &lt;listener&gt;
+        &lt;listener-class&gt;org.apache.hop.ui.hopgui.HopWebServletContextListener&lt;/listener-class&gt;
+    &lt;/listener&gt;
+
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;HopGui&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.eclipse.rap.rwt.engine.RWTServlet&lt;/servlet-class&gt;
+    &lt;/servlet&gt;
+
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;HopGui&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/ui&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;welcome&lt;/servlet-name&gt;
+        &lt;jsp-file&gt;/docs/English/welcome/index.html&lt;/jsp-file&gt;
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;welcome&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/docs/English/welcome/index.html&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;Server&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.apache.hop.www.HopServerServlet&lt;/servlet-class&gt;
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;Server&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/hop/*&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+
+    &lt;security-constraint&gt;
+      &lt;web-resource-collection&gt;
+        &lt;web-resource-name&gt;Wildcard means whole app requires authentication&lt;/web-resource-name&gt;
+          &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+          &lt;http-method&gt;GET&lt;/http-method&gt;
+          &lt;http-method&gt;POST&lt;/http-method&gt;
+        &lt;/web-resource-collection&gt;
+      &lt;auth-constraint&gt;
+        &lt;role-name&gt;apachehop&lt;/role-name&gt;
+      &lt;/auth-constraint&gt;
+
+      &lt;user-data-constraint&gt;
+        &lt;!-- transport-guarantee can be CONFIDENTIAL, INTEGRAL, or NONE --&gt;
+        &lt;transport-guarantee&gt;NONE&lt;/transport-guarantee&gt;
+      &lt;/user-data-constraint&gt;
+    &lt;/security-constraint&gt;
+
+    &lt;login-config&gt;
+      &lt;auth-method&gt;BASIC&lt;/auth-method&gt;
+    &lt;/login-config&gt;
+
+&lt;/web-app&gt;</code></pre> </div> </div> <div class="paragraph"> <p>Check the <a href="https://tomcat.apache.org/tomcat-9.0-doc/realm-howto.html" target="_blank" rel="noopener">Apache Tomcat documentation</a> on REALM configuration for more advanced configurations.</p> </div> <div class="paragraph"> <p>Mount your local configuration folder with these two files to a <code>/config</code> folder in the Apache Hop Web container to do so:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -it --rm \
+    -p 8080:8080 \
+    -v &lt;PATH_TO_YOUR_LOCAL_CONFIG_DIRECTORY&gt;:/config/ \
+    apache/hop-web`</code></pre> </div> </div> <div class="paragraph"> <p>Hop Web will now ask for your username and password:</p> </div> <div class="paragraph"> <p><span class="image"><img src="../_images/hop-gui/hop-web-basic-authentication.png" alt="Hop Web with basic authentication" width="90%"></span></p> </div> </div> </div> </article> </div> </main> </div> <footer> <div class="footer"> <dl> <dt>Overview</dt> <dd><a href="../../../download/">Download</a></dd> <dd><a href="../../../manual/latest/">Getting started</a></dd> </dl> <dl> <dt>Community</dt> <dd><a target="_blank" href="https://github.com/apache/hop/issues">Github Issues</a></dd> <dd><a target="_blank" href="https://chat.project-hop.org">Chat</a></dd> <dd><a target="_blank" href="../../../community/team/">Team</a></dd> </dl> <dl> <dt>About</dt> <dd><a target="_blank" href="https://www.apache.org/licenses/" title="License">License</a></dd> </dl> <p> &copy; 2019-2023 The Hop Team.<br> All marks mentioned may be trademarks or registered trademarks of their respective owners. </p> </div> </footer> <script src="../../../_/js/site-8bbb7a5250.js"></script> <script async src="../../../_/js/vendor/highlight-a243a7d07e.js"></script> <script src="../../../_/js/vendor/docsearch-4983f0f1ec.min.js"></script> <script async src="../../../_/js/vendor/tabs-523d9bca0f.js"></script> <!-- fetched from https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js --> <script> var search = docsearch({
   appId: 'IEDZCR8JT4',
   apiKey: '587e7bafb978fa5e4640ab18bfbd9b99',
   indexName: 'hop-doc',
