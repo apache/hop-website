@@ -1,21 +1,9 @@
 <script src="{{uiRootPath}}/js/site.js"></script>
 <script async src="{{uiRootPath}}/js/vendor/highlight.js"></script>
-<script src="{{uiRootPath}}/js/vendor/docsearch.min.js"></script>
 <script async src="{{{uiRootPath}}}/js/vendor/tabs.js"></script>
-<!-- fetched from https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js -->
-<script>
-var search = docsearch({
-  appId: 'IEDZCR8JT4',
-  apiKey: '587e7bafb978fa5e4640ab18bfbd9b99',
-  indexName: 'hop-doc',
-  inputSelector: '#search-input',
-  autocompleteOptions: { hint: false, keyboardShortcuts: ['s'] },
-  algoliaOptions: { hitsPerPage: 10 }
-}).autocomplete
-search.on('autocomplete:closed', function () { search.autocomplete.setVal() })
-function focusSearchInput () { document.querySelector('#search-input').focus() }
-if (document.querySelector('.home-link.is-current')) window.addEventListener('load', focusSearchInput)
-</script>
+{{#if env.SITE_SEARCH_PROVIDER}}
+{{> search-scripts}}
+{{/if}}
 <!-- Matomo -->
 <script>
   var _paq = window._paq = window._paq || [];

@@ -24,6 +24,6 @@
 @import url("community.css");
 @import url("docs.css");
 @import url("sitemap.css");
-@import url("docsearch.css");
 @import url("frontpage.css");
 @import url("@asciidoctor/tabs");
+@import url("search.css");

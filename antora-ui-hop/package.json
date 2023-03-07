@@ -18,6 +18,7 @@
     "preview": "gulp preview"
   },
   "devDependencies": {
+    "@antora/lunr-extension": "^1.0.0-alpha.8",
     "@asciidoctor/core": "~2.2",
     "@asciidoctor/tabs": "^1.0.0-alpha.11",
     "@openfonts/open-sans_latin-ext": "^1.44.0",
