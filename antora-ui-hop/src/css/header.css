@@ -306,6 +306,10 @@ body {
   white-space: nowrap;
 }
 
+.navbar .search {
+  order: 4;
+}
+
 .navbar-tools {
   display: flex;
   align-items: flex-end;
@@ -483,22 +487,6 @@ body {
 div.footer-search h4 {
   color: var(--color-asf-dark-blue);
   width: 5rem;
-}
-
-.no_search_results {
-  padding: 1rem;
-  font-weight: bold;
-  color: var(--color-asf-dark-blue);
-  border-bottom: 2px solid var(--color-smoke-50);
-}
-
-.algolia-docsearch-suggestion--highlight {
-  font-weight: bold;
-  color: var(--color-jet-50);
-}
-
-.results-hidden #search_results {
-  display: none;
 }
 
 /* Styling for mobile use */

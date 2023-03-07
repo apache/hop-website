@@ -28,23 +28,11 @@
     </footer>
     <script src="{{ path.Join "_" (index .Site.Data "rev-manifest" "js/site.js") | relURL }}"></script>
     <script src="{{ path.Join "_" (index .Site.Data "rev-manifest" "js/vendor/highlight.js") | relURL }}"></script>
-    <script src="{{ path.Join "_" (index .Site.Data "rev-manifest" "js/vendor/cookies-eu-banner.js") | relURL }}"></script>
-    <script src="{{ path.Join "_" (index .Site.Data "rev-manifest" "js/vendor/docsearch.min.js") | relURL }}"></script>
-    <script>
-    var search = docsearch({
-      appId: 'IEDZCR8JT4',
-      apiKey: '587e7bafb978fa5e4640ab18bfbd9b99',
-      indexName: 'hop-doc',
-      inputSelector: '#search-input',
-      autocompleteOptions: { hint: false, keyboardShortcuts: ['s'] },
-      algoliaOptions: { hitsPerPage: 10 }
-    }).autocomplete
-    search.on('autocomplete:closed', function () { search.autocomplete.setVal() })
-    function focusSearchInput () { document.querySelector('#search-input').focus() }
-    if (document.querySelector('.home-link.is-current')) window.addEventListener('load', focusSearchInput)
-    </script>
+    <script src="./_/js/vendor/lunr.js"></script>
+    <script src="./_/js/search-ui.js" id="search-ui-script" data-site-root-path="./" data-snippet-length="100" data-stylesheet="./_/css/search.css"></script>
+    <script async="" src="./search-index.js"></script>
     <!-- Matomo -->
-<script>
+    <script>
     var _paq = window._paq = window._paq || [];
     /* We explicitly disable cookie tracking to avoid privacy issues */
     _paq.push(['disableCookies']);  

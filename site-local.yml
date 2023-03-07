@@ -7,6 +7,10 @@ asciidoc:
   extensions:
   - '@asciidoctor/tabs'
 
+antora:
+  extensions:
+  - '@antora/lunr-extension'
+
 content:
   sources:
   - url: ../hop/

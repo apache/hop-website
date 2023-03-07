@@ -25,6 +25,7 @@
     "checks-local": "run-s check-local:*"
   },
   "devDependencies": {
+    "@antora/lunr-extension": "^1.0.0-alpha.8",
     "@antora/cli": "^3.0.0",
     "@antora/site-generator": "^3.0.0",
     "@asciidoctor/tabs": "^1.0.0-alpha.11",
