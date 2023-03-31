@@ -6,7 +6,20 @@
     <description>Recent content in Apache Hop on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 Jan 2023 07:49:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/Apache-Hop/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 31 Mar 2023 06:49:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/Apache-Hop/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Hop 2.4 is available!!</title>
+      <link>https://hop.apache.org/blog/2023/03/hop-2.4.0/</link>
+      <pubDate>Fri, 31 Mar 2023 06:49:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2023/03/hop-2.4.0/</guid>
+      <description>After another two months of work on 98 tickets, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.4.0.
+ A huge thank you to everyone who made this possible.
+    
+ Let&amp;#39;s take a closer look at what Hop 2.4 brings: New Features Improvements Container image Community GitHub Issues   or download Hop 2.4.0  right away.
+ Apache Hop 2.</description>
+    </item>
+    
     <item>
       <title>Apache Hop 2.3 is available!!</title>
       <link>https://hop.apache.org/blog/2023/01/hop-2.3.0/</link>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2.4 on Hop</title>
+    <link>https://hop.apache.org/categories/2.4/</link>
+    <description>Recent content in 2.4 on Hop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 31 Mar 2023 06:49:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/2.4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Hop 2.4 is available!!</title>
+      <link>https://hop.apache.org/blog/2023/03/hop-2.4.0/</link>
+      <pubDate>Fri, 31 Mar 2023 06:49:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2023/03/hop-2.4.0/</guid>
+      <description>After another two months of work on 98 tickets, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.4.0.
+ A huge thank you to everyone who made this possible.
+    
+ Let&amp;#39;s take a closer look at what Hop 2.4 brings: New Features Improvements Container image Community GitHub Issues   or download Hop 2.4.0  right away.
+ Apache Hop 2.</description>
+    </item>
+    
+  </channel>
+</rss>
