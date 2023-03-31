@@ -1,0 +1,95 @@
+---
+title: "Apache Hop 2.4 is available!!"
+date: 2023-03-31T06:49:56+02:00
+authors: ["bamaer"]
+categories: ["2.4", "Release", "Apache Hop"]
+preview: "Apache Hop 2.4 Released"
+description: "The latest Apache Hop release 2.4.0 is now available. Let's walk through the most important new features in this release."
+draft: false
+---
+
+:imagesdir: ../../../../../static
+
+:toc: macro
+:toclevels: 3
+:toc-title: Let's take a closer look at what Hop 2.4 brings:
+:toc-class: none
+
+After another two months of work on 98 tickets, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.4.0. +
+
+A huge thank you to everyone who made this possible.
+
+image::/img/Release-2.4/hop-24.svg[ width="45%"]
+
+&nbsp; +
+
+toc::[]
+
+or https://hop.apache.org/download/[**download Hop 2.4.0 **] right away.
+
+Apache Hop 2.4.0 is another mostly bug fixing release with a number of new features.
+
+== New Features 
+
+https://hop.apache.org/manual/next/database/databases/duckdb.html[DuckDB^] is now a supported database type. DuckDB is an in-process SQL OLAP and column-oriented database management system. Check the https://duckdb.org/[DuckDB^] website for more information.
+
+image:https://duckdb.org/images/DuckDB_Logo_dl.png[DuckDB, width="25%"]
+
+The Relational Database Connection metadata type in Hop Gui now shows which database driver (if any) and version is available. 
+
+image:/img/Release-2.4/rdbms-driver-info.png[Relational Database Connection driver info, width="55%"]
+
+When selecting multiple transforms, you can now enable or disable all hops in this selection from the context dialog. 
+
+image:/img/Release-2.4/enable-disable-hops-between-selection.png[Enable of disable hops between selected transforms, width="55%"]
+
+A new JSR-223 https://hop.apache.org/manual/next/pipeline/transforms/script.html[Script transform^] supports scripts in ECMAScript (JavaScript as part of the JVM), Groovy and Python (through the Jython library).
+* a new Data Validator transform 
+
+image:/img/Release-2.4/script-transform.png[Script transform, width="65%"]
+
+You can now change the default behavior of the environment dropdown box (show all environments) to only show the environments for the selected project. (Configuration perspective -> Plugins -> Projects -> check "Restrict environment list to active project")
+
+image:/img/Release-2.4/restrict-environment-list-to-current-project.png[Restrict environment list to current project, width="55%"]
+
+== Improvements 
+
+A Lot of bugs have been fixed in among others the https://hop.apache.org//manual/latest/pipeline/transforms/filterrows.html[Filter rows^], https://hop.apache.org//manual/latest/pipeline/transforms/formula.html[Formula^] and https://hop.apache.org//manual/latest/pipeline/transforms/excelinput.html[Microsoft Excel input^] (large file handling) transforms. 
+
+Apache Hop comes with lots of new and improved documentation pages, translation updates and a batch of new samples in the samples project. 
+
+Translations for German, Italian and French have been updated.
+
+== Container image 
+
+The default path for the hop installation inside the container image has been updated from `/opt/hop/hop`
+to `/opt/hop`.
+Make sure to update your paths if you extended or modified the base image.
+
+== Community 
+
+The Hop community continues to grow!
+
+No new committers have been added since the 2.3.0 release.
+
+The overview below shows the community growth compared to the 2.3.0 release in January:
+
+* chat: 548 registered members (up from 516) link:https://chat.project-hop.org[join]
+* LinkedIn: 1245 followers (up from 1180) link:https://www.linkedin.com/company/hop-project[follow]
+* Twitter: 857 followers (up from 844) link:https://twitter.com/ApacheHop[follow]
+* YouTube: 799 subscribers (up from 739) link:https://www.youtube.com/ApacheHop[subscribe]
+* 3Hx Meetup: 278 members (up from 276)  link:https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/[join]
+
+image:/img/Release-2.4/hop-community-growth.png[Apache Hop Community Growth, width="60%"]
+
+Without community interaction and contribution, Hop is just a coding club! Please feel free to join, participate in the discussion, test, file bug tickets on the software or documentation, ... Contributing is a lot more than writing code.
+
+Check out our link:/community/contributing/[contribution guides^] and http://hop.apache.org/community/ethos/[Code of Conduct^] to find out more.
+
+
+== GitHub Issues 
+
+This release contains work on 98 tickets:
+
+Check out the full list of issues in Apache Hop 2.4.0 in our https://github.com/apache/hop/issues[Github Issues^] 
+and the https://github.com/apache/hop/releases/tag/2.4.0-rc1[Release notes^].
