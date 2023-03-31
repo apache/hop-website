@@ -44,9 +44,12 @@ When selecting multiple transforms, you can now enable or disable all hops in th
 image:/img/Release-2.4/enable-disable-hops-between-selection.png[Enable of disable hops between selected transforms, width="55%"]
 
 A new JSR-223 https://hop.apache.org/manual/next/pipeline/transforms/script.html[Script transform^] supports scripts in ECMAScript (JavaScript as part of the JVM), Groovy and Python (through the Jython library).
-* a new Data Validator transform 
 
 image:/img/Release-2.4/script-transform.png[Script transform, width="65%"]
+
+A new https://hop.apache.org//manual/latest/pipeline/transforms/validator.html[Data Validator^] transform. This transform allows you to add data validations which can each validate the input data for the various fields in the input rows.
+
+image:/img/Release-2.4/data-validator-transform.png[Data Validator transform, width="65%"]
 
 You can now change the default behavior of the environment dropdown box (show all environments) to only show the environments for the selected project. (Configuration perspective -> Plugins -> Projects -> check "Restrict environment list to active project")
 
