@@ -51,12 +51,12 @@ A new https://hop.apache.org//manual/next/how-to-guides/loops-in-apache-hop.html
 
 The viewport in Hop Gui is now optional. If you prefer scroll bars to horizontally and vertically navigate in Hop Gui, you can now disable the viewport from the "Look and Feel" tab in the configuration perspective. 
 
-image:/img/Release-2.5/viewport-option.png[Viewport option, width="45%]
+image:/img/Release-2.5/viewport-option.png[Viewport option, width="45%"]
 
 Fields in your stream can now be sorted by name or by the order the fields were added to the stream. 
 Change the option from the "General" tab in the configuration perspective.
 
-image:/img/Release-2.5/sort-field-by-name.png[Sort field by name, width="45%]
+image:/img/Release-2.5/sort-field-by-name.png[Sort field by name, width="45%"]
 
 == Various changes and improvements
 
