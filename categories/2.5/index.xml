@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2.5 on Hop</title>
+    <link>https://hop.apache.org/categories/2.5/</link>
+    <description>Recent content in 2.5 on Hop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 12 Jun 2023 06:49:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/2.5/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Hop 2.5 is available!!</title>
+      <link>https://hop.apache.org/blog/2023/06/hop-2.5.0/</link>
+      <pubDate>Mon, 12 Jun 2023 06:49:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2023/06/hop-2.5.0/</guid>
+      <description>After another two months of work on exactly 100 tickets, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.5.0.
+ A huge thank you to everyone who made this possible.
+    
+ Let&amp;#39;s take a closer look at what Hop 2.5 brings: Apache Beam Upgrade Documentation Beam and Google Dataflow how-to guide Extended Apache Airflow how-to guide Looping how-to guide   Hop Gui Improvements Various changes and improvements Community GitHub Issues   or download Hop 2.</description>
+    </item>
+    
+  </channel>
+</rss>
