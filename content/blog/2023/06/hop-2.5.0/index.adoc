@@ -1,0 +1,95 @@
+---
+title: "Apache Hop 2.5 is available!!"
+date: 2023-06-12T06:49:56+02:00
+authors: ["bamaer"]
+categories: ["2.5", "Release", "Apache Hop"]
+preview: "Apache Hop 2.5 Released"
+description: "The latest Apache Hop release 2.5.0 is now available. Let's walk through the most important new features in this release."
+draft: false
+---
+
+:imagesdir: ../../../../../static
+
+:toc: macro
+:toclevels: 3
+:toc-title: Let's take a closer look at what Hop 2.5 brings:
+:toc-class: none
+
+After another two months of work on exactly 100 tickets, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.5.0. +
+
+A huge thank you to everyone who made this possible.
+
+image::/img/Release-2.5/hop-25.svg[ width="45%"]
+
+&nbsp; +
+
+toc::[]
+
+or https://hop.apache.org/download/[**download Hop 2.5.0 **] right away.
+
+Apache Hop 2.5.0 is another mostly bug fixing release with a number of new features.
+
+== Apache Beam Upgrade
+
+Apache Beam has been upgraded to 2.48.0, with support for Apache Spark 3.4, Apache Flink 1.16 and Google Cloud Dataflow.
+
+== Documentation 
+
+=== Beam and Google Dataflow how-to guide
+
+The Apache Hop docs now contain a new https://hop.apache.org//manual/next/pipeline/beam/beam-samples-dataflow.html[how-to guide^] to run the Beam pipelines in the samples project on Google Dataflow. 
+
+=== Extended Apache Airflow how-to guide
+
+The https://hop.apache.org//manual/next/how-to-guides/run-hop-in-apache-airflow.html[Apache Airflow how-to guide^] has been extended, and now covers all the basics you need to run Apache Hop workflows and pipelines in Apache Airflow. 
+
+=== Looping how-to guide
+
+A new https://hop.apache.org//manual/next/how-to-guides/loops-in-apache-hop.html[Looping how-to guide^] explains how to work with the various ways to build loops in workflows and pipelines, and provides guidance on which of these different types to use in different scenarios. 
+
+== Hop Gui Improvements 
+
+The viewport in Hop Gui is now optional. If you prefer scroll bars to horizontally and vertically navigate in Hop Gui, you can now disable the viewport from the "Look and Feel" tab in the configuration perspective. 
+
+image:/img/Release-2.5/viewport-option.png[Viewport option, width="45%]
+
+Fields in your stream can now be sorted by name or by the order the fields were added to the stream. 
+Change the option from the "General" tab in the configuration perspective.
+
+image:/img/Release-2.5/sort-field-by-name.png[Sort field by name, width="45%]
+
+== Various changes and improvements
+
+* a new https://hop.apache.org//manual/next/database/databases/iris.html[Intersystems IRIS^] database type 
+* improvements, bug fixes in JSON input and (enhanced) output
+* improvements, bug fixes in Salesforce input 
+* duckdb upgraded to 0.8 (with lots of performance updates and new functionality)
+* lots of translation updates, new Polish language added
+
+== Community 
+
+The Hop community continues to grow!
+
+No new committers have been added since the 2.4.0 release.
+
+The overview below shows the community growth compared to the 2.4.0 release in March:
+
+* chat: 587 registered members (up from 548) link:https://chat.project-hop.org[join]
+* LinkedIn: 1358 followers (up from 1245) link:https://www.linkedin.com/company/hop-project[follow]
+* Twitter: 894 followers (up from 857) link:https://twitter.com/ApacheHop[follow]
+* YouTube: 838 subscribers (up from 799) link:https://www.youtube.com/ApacheHop[subscribe]
+* 3Hx Meetup: 279 members (up from 278)  link:https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/[join]
+
+image:/img/Release-2.5/hop-community-growth.png[Apache Hop Community Growth, width="60%"]
+
+Without community interaction and contribution, Hop is just a coding club! Please feel free to join, participate in the discussion, test, file bug tickets on the software or documentation, ... Contributing is a lot more than writing code.
+
+Check out our link:/community/contributing/[contribution guides^] and http://hop.apache.org/community/ethos/[Code of Conduct^] to find out more.
+
+
+== GitHub Issues 
+
+This release contains work on 100 tickets:
+
+Check out the full list of issues in Apache Hop 2.5.0 in our https://github.com/apache/hop/issues[Github Issues^] 
+and the https://github.com/apache/hop/releases/tag/2.5.0-rc1[Release notes^].
