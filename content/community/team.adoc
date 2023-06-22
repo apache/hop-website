@@ -17,7 +17,7 @@ The Apache Hop developer community is growing rapidly and currently includes con
 |Hans Van Akelyen|hansva|know.bi|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/hans_va", window="_blank"]
 |Julian Hyde|jhyde|Looker/Google|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/julianhyde", window="_blank"]
 |Kevin Ratnasekera|djkevincr||
-|Matt Casters|mcasters|Neo4j|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/mattcasters", window="_blank"]
+|Matt Casters|mcasters||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/mattcasters", window="_blank"]
 |Nicolas Adment|nadment||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/nadment", window="_blank"]
 |Sergio Ramazzina|sramazzina|Serasoft Italy|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/sramazzina", window="_blank"]
 |===
