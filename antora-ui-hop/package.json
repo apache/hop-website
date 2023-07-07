@@ -61,7 +61,7 @@
     "prettier-eslint": "~9.0",
     "require-directory": "~2.1",
     "require-from-string": "~2.0",
-    "stylelint": "~14.16.0",
+    "stylelint": "~15.10.1",
     "stylelint-config-standard": "~29.0.0",
     "svg4everybody": "^2.1.9",
     "through2": "~3.0",
