@@ -26,6 +26,7 @@ content:
       - release/2.3.0
       - release/2.4.0
       - release/2.5.0
+      - release/2.6.0
     start_path: /docs/hop-user-manual/
   - url: git@github.com:apache/hop.git
     branches: master
