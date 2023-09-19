@@ -1,8 +1,8 @@
 ---
 title: "Apache Hop 2.6 is available!!"
-date: 2023-06-12T06:49:56+02:00
+date: 2023-09-18T06:49:56+02:00
 authors: ["bamaer"]
-categories: ["2.5", "Release", "Apache Hop"]
+categories: ["2.6", "Release", "Apache Hop"]
 preview: "Apache Hop 2.6 Released"
 description: "The latest Apache Hop release 2.6.0 is now available. Let's walk through the most important new features in this release."
 draft: false
@@ -15,5 +15,71 @@ draft: false
 :toc-title: Let's take a closer look at what Hop 2.6 brings:
 :toc-class: none
 
-After a summer of hard work, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.6.0. +
+After a summer of hard work on 65 tickets, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.6.0. +
 
+A huge thank you to everyone who made this possible.
+
+image::/img/Release-2.6/hop-26.svg[ width="45%"]
+
+&nbsp; +
+
+toc::[]
+
+or https://hop.apache.org/download/[**download Hop 2.6.0 **] right away.
+
+After a number of mostly bug fixing releases, Apache Hop 2.6.0 comes with a couple of new features.
+
+== Apache Beam Upgrade and doc updates
+
+The https://beam.apache.org[Apache Beam] dependency in Apache Hop 2.6.0 has been upgraded to 2.50.0, with support for Apache Spark 3.4, Apache Flink 1.16 and Google Cloud Dataflow.
+
+The https://hop.apache.org//manual/latest/pipeline/beam/running-the-beam-samples.html[Running the Beam samples] docs section now also contains a https://hop.apache.org//manual/latest/pipeline/beam/beam-samples-dataflow.html[guide^] to run the Apache Hop samples on Google Cloud Dataflow. 
+
+== New Google Transforms 
+
+=== Google Analytics 4 
+
+Since Google switched to Google Universal Analytics off on July 1st, all Google Analytics traffic now flows through GA4 properties. 
+
+This new https://hop.apache.org//manual/latest/pipeline/transforms/google-analytics.html[Google Analytics 4^] Input transform collects data from a Google Analytics dimensions and metrics into your pipelines. 
+
+image:/img/Release-2.6/google-analytics-4-transform.png[Google Analtytics 4 transform, width="65%"]
+
+=== Google Sheets Input and Output 
+
+The https://hop.apache.org//manual/latest/pipeline/transforms/google-sheets-input.html[Google Sheets Input^] and https://hop.apache.org//manual/latest/pipeline/transforms/google-sheets-output.html[Google Sheets Output^] transforms have been available in the https://github.com/project-hop/hop-plugins[external plugins repository] for a couple of years.
+
+Originally contributed by https://github.com/jfmonteil/[
+Jeff Monteil], these plugins have now been integrated in the main Apache Hop code base, and have been updated to work with the latest Apache Hop api and the latest Google Sheets and Google Drive apis.
+
+image:/img/Release-2.6/google-sheets-input-transform.png[Google Sheets Input transform, width="65%"]
+
+image:/img/Release-2.6/google-sheets-output-transform.png[Google Sheets Output transform, width="65%"]
+
+== Community 
+
+The Hop community continues to grow!
+
+No new committers have been added since the 2.5.0 release.
+
+The overview below shows the community growth compared to the 2.5.0 release in June:
+
+* chat: 641 registered members (up from 587) link:https://chat.project-hop.org[join]
+* LinkedIn: 1.445 followers (up from 1358) link:https://www.linkedin.com/company/hop-project[follow]
+* Twitter: 906 followers (up from 894) link:https://twitter.com/ApacheHop[follow]
+* YouTube: 892 subscribers (up from 838) link:https://www.youtube.com/ApacheHop[subscribe]
+* 3Hx Meetup: 279 members (stable)  link:https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts/[join]
+
+image:/img/Release-2.6/hop-community-growth.png[Apache Hop Community Growth, width="60%"]
+
+Without community interaction and contribution, Hop is just a coding club! Please feel free to join, participate in the discussion, test, file bug tickets on the software or documentation, ... Contributing is a lot more than writing code.
+
+Check out our link:/community/contributing/[contribution guides^] and http://hop.apache.org/community/ethos/[Code of Conduct^] to find out more.
+
+
+== GitHub Issues 
+
+This release contains work on 65 tickets:
+
+Check out the full list of issues in Apache Hop 2.6.0 in our https://github.com/apache/hop/issues[Github Issues^] 
+and the https://github.com/apache/hop/releases/tag/2.6.0-rc1[Release notes^].
