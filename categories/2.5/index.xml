@@ -19,15 +19,5 @@
  Let&amp;#39;s take a closer look at what Hop 2.5 brings: Apache Beam Upgrade Documentation Beam and Google Dataflow how-to guide Extended Apache Airflow how-to guide Looping how-to guide   Hop Gui Improvements Various changes and improvements Community GitHub Issues   or download Hop 2.</description>
     </item>
     
-    <item>
-      <title>Apache Hop 2.6 is available!!</title>
-      <link>https://hop.apache.org/blog/2023/09/hop-2.6.0/</link>
-      <pubDate>Mon, 12 Jun 2023 06:49:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2023/09/hop-2.6.0/</guid>
-      <description>After a summer of hard work, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.6.0.
- </description>
-    </item>
-    
   </channel>
 </rss>
