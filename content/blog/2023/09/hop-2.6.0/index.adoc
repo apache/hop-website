@@ -39,9 +39,9 @@ The https://hop.apache.org//manual/latest/pipeline/beam/running-the-beam-samples
 
 === Google Analytics 4 
 
-Since Google switched to Google Universal Analytics off on July 1st, all Google Analytics traffic now flows through GA4 properties. 
+Since Google switched Google Universal Analytics off on July 1st, all Google Analytics traffic now flows through GA4 properties. 
 
-This new https://hop.apache.org//manual/latest/pipeline/transforms/google-analytics.html[Google Analytics 4^] Input transform collects data from a Google Analytics dimensions and metrics into your pipelines. 
+This new https://hop.apache.org//manual/latest/pipeline/transforms/google-analytics.html[Google Analytics 4^] Input transform collects data from Google Analytics dimensions and metrics into your pipelines. 
 
 image:/img/Release-2.6/google-analytics-4-transform.png[Google Analtytics 4 transform, width="65%"]
 
