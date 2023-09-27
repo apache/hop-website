@@ -14,12 +14,12 @@ export HOP_PASSWORD_ENCODER_PLUGIN="Hop"
 # point Hop to the plugins folder
 export HOP_PLUGIN_BASE_FOLDERS="${CATALINA_HOME}/plugins"
 # path to jdbc drivers
-export HOP_SHARED_JDBC_FOLDER=
+export HOP_SHARED_JDBC_FOLDERS=
 # the theme to use (dark or light)
 export HOP_WEB_THEME="light"
 
 # Set TOMCAT start variables
-export CATALINA_OPTS='${HOP_OPTIONS} -DHOP_AES_ENCODER_KEY="${HOP_AES_ENCODER_KEY}" -DHOP_AUDIT_FOLDER="${HOP_AUDIT_FOLDER}" -DHOP_CONFIG_FOLDER="${HOP_CONFIG_FOLDER}" -DHOP_LOG_LEVEL="${HOP_LOG_LEVEL}" -DHOP_PASSWORD_ENCODER_PLUGIN="${HOP_PASSWORD_ENCODER_PLUGIN}" -DHOP_PLUGIN_BASE_FOLDERS="${HOP_PLUGIN_BASE_FOLDERS}" -DHOP_SHARED_JDBC_FOLDER="${HOP_SHARED_JDBC_FOLDER}" -DHOP_WEB_THEME="${HOP_WEB_THEME}"'</code></pre> </div> </div> <div class="paragraph"> <p>If you want to run Hop Web with the <code>default</code> and <code>samples</code> projects, make sure the project root path in <code>hop-config.json</code> is set to `${HOP_CONFIG_FOLDER}.</p> </div> <div class="paragraph"> <p>On Linux or Mac, use the following sed command to fix this in one line:</p> </div> <div class="paragraph"> <p><code>sed -i 's/config\/projects/${HOP_CONFIG_FOLDER}\/projects/g' webapps/hop/config/hop-config.json</code></p> </div> <div class="paragraph"> <p>On Windows, modify <code>hop-config.json</code> to make sure <code>projectsConf</code> looks like the one below:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">  "projectsConfig" : {
+export CATALINA_OPTS='${HOP_OPTIONS} -DHOP_AES_ENCODER_KEY="${HOP_AES_ENCODER_KEY}" -DHOP_AUDIT_FOLDER="${HOP_AUDIT_FOLDER}" -DHOP_CONFIG_FOLDER="${HOP_CONFIG_FOLDER}" -DHOP_LOG_LEVEL="${HOP_LOG_LEVEL}" -DHOP_PASSWORD_ENCODER_PLUGIN="${HOP_PASSWORD_ENCODER_PLUGIN}" -DHOP_PLUGIN_BASE_FOLDERS="${HOP_PLUGIN_BASE_FOLDERS}" -DHOP_SHARED_JDBC_FOLDERS="${HOP_SHARED_JDBC_FOLDERS}" -DHOP_WEB_THEME="${HOP_WEB_THEME}"'</code></pre> </div> </div> <div class="paragraph"> <p>If you want to run Hop Web with the <code>default</code> and <code>samples</code> projects, make sure the project root path in <code>hop-config.json</code> is set to `${HOP_CONFIG_FOLDER}.</p> </div> <div class="paragraph"> <p>On Linux or Mac, use the following sed command to fix this in one line:</p> </div> <div class="paragraph"> <p><code>sed -i 's/config\/projects/${HOP_CONFIG_FOLDER}\/projects/g' webapps/hop/config/hop-config.json</code></p> </div> <div class="paragraph"> <p>On Windows, modify <code>hop-config.json</code> to make sure <code>projectsConf</code> looks like the one below:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">  "projectsConfig" : {
     "enabled" : true,
     "projectMandatory" : true,
     "defaultProject" : "default",
