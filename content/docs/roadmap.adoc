@@ -2,20 +2,22 @@
 title: "Roadmap"
 ---
 
-The Apache Hop team just released version 2.1.0.  The immediate next goal for us is to release version 2.2.0 with over 100 fixes and improvements.
+The Apache Hop team aims to create a new release every 2 to 3 months. 
 
 Here are a few directions that we want to explore for the future of our software:
 
-* Authentication plugins for various security providers (3.x)
-* Integration with authentication for the VFS plugins (3.x)
-* S3 compatible object store support through updated AWS libs (3.x)
-* Creation of a 'hop' command with sub-commands (3.x)
-* Set up a software marketplace where 3rd party plugins can be found (3.x)
-* Finish conversion of all plugins to generic XML serialization to allow for JSON/YAML/... metadata serialization of pipelines and workflows (3.0)
-* Pluggable field expressions in transforms and actions (4.x)
+* Authentication and authorization plugins for various security providers
+* VFS: 
+** Integration with authentication for the VFS plugins, allow VFS configurations per project (instead of the current global Apache Hop configurations)
+** S3 compatible object store support through updated AWS libs
+* Integrate with graph databases as a plugin type similar to the existing database plugins
+* Creation of a 'hop' command with sub-commands
+* Set up a software marketplace where 3rd party plugins can be found
+* Finish conversion of all plugins to generic XML serialization to allow for JSON/YAML/... metadata serialization of pipelines and workflows
+* Pluggable field expressions in transforms and actions
 * Integration with Apache Airflow both in Airflow and as a new Workflow engine plugin
-* Environment level plugin support for hardware and software setup validation
+* Infrastructure and project environment validation
 * MongoDB: API update to support Atlas
+* Improved monitoring and logging, integrations with the leading logging and monitoring platforms
 * A new docker/k8s pipeline/workflow engine
-* Render pipelines/workflows as SVG in Hop Web
 * ...
