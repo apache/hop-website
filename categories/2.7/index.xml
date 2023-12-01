@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2.7 on Hop</title>
+    <link>https://hop.apache.org/categories/2.7/</link>
+    <description>Recent content in 2.7 on Hop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 01 Dec 2023 09:49:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/2.7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Hop 2.7 is available!!</title>
+      <link>https://hop.apache.org/blog/2023/12/hop-2.7.0/</link>
+      <pubDate>Fri, 01 Dec 2023 09:49:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2023/12/hop-2.7.0/</guid>
+      <description>The Apache Hop PMC is proud to announce the release of version 2.7.0, this release contains 51 tickets and some work that has not been covered by tickets.
+ A huge thank you to everyone who made this possible.
+    
+ Let&amp;#39;s take a closer look at what Hop 2.7 brings: Redshift Bulk loader JDBC Driver refactoring Improvements Enhanced JSON Ouput Formula Transform Underline transform names Improved Brazilian   Community GitHub Issues   or download Hop 2.</description>
+    </item>
+    
+  </channel>
+</rss>

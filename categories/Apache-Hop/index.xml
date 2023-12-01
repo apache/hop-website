@@ -6,7 +6,19 @@
     <description>Recent content in Apache Hop on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 18 Sep 2023 06:49:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/Apache-Hop/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Dec 2023 09:49:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/Apache-Hop/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Hop 2.7 is available!!</title>
+      <link>https://hop.apache.org/blog/2023/12/hop-2.7.0/</link>
+      <pubDate>Fri, 01 Dec 2023 09:49:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2023/12/hop-2.7.0/</guid>
+      <description>The Apache Hop PMC is proud to announce the release of version 2.7.0, this release contains 51 tickets and some work that has not been covered by tickets.
+ A huge thank you to everyone who made this possible.
+    
+ Let&amp;#39;s take a closer look at what Hop 2.7 brings: Redshift Bulk loader JDBC Driver refactoring Improvements Enhanced JSON Ouput Formula Transform Underline transform names Improved Brazilian   Community GitHub Issues   or download Hop 2.</description>
+    </item>
+    
     <item>
       <title>Apache Hop 2.6 is available!!</title>
       <link>https://hop.apache.org/blog/2023/09/hop-2.6.0/</link>
