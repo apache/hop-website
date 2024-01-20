@@ -5,6 +5,7 @@ public
 documentation
 resources
 .DS_Store
+.vscode/settings.json
 
 .idea
 *.iml

@@ -1,3 +1,4 @@
 {
-    "ansible.python.interpreterPath": "/Users/hans/.pyenv/versions/3.9.13/bin/python"
+    "ansible.python.interpreterPath": "/Users/hans/.pyenv/versions/3.9.13/bin/python",
+    "asciidoc.antora.enableAntoraSupport": true
 }
