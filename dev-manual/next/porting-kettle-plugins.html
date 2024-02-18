@@ -12,7 +12,7 @@
     &lt;/repository&gt;
   &lt;/repositories&gt;</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_jandex"><a class="anchor" href="#_jandex"></a>Jandex</h2> <div class="sectionbody"> <div class="paragraph"> <p>To speed up searching for plugin annotations Apache Hop uses a Java Annotations Index: Jandex. Unless you have such an index in your plugin JAR file Hop will not pick it up. To add the index you simply need to add the plugin to your maven pom.xml:</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">...
 &lt;properties&gt;
-  &lt;jandex.version&gt;3.0.5&lt;/jandex.version&gt;
+  &lt;jandex.version&gt;3.1.6&lt;/jandex.version&gt;
 &lt;/properties&gt;
 ...
 &lt;build&gt;
