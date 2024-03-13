@@ -16,7 +16,7 @@ More information can be found in the readme files included in the download archi
 |===
 | Version | Date | Description | Download Link | PGP Signature file of download | SHA512 Checksum file of download
 
-.2+| link:/blog/2023/12/hop-2.8.0/[2.8.0] 
+.2+| link:/blog/2024/03/hop-2.8.0/[2.8.0] 
 .2+| March, 13th, 2024
 | **Binaries** 
 | https://www.apache.org/dyn/closer.cgi?filename=hop/2.8.0/apache-hop-client-2.8.0.zip&action=download[**apache-hop-client-2.8.0.zip**] 
