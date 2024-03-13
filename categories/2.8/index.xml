@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2.8 on Hop</title>
+    <link>https://hop.apache.org/categories/2.8/</link>
+    <description>Recent content in 2.8 on Hop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 13 Mar 2024 08:44:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/2.8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Hop 2.8 is available!!</title>
+      <link>https://hop.apache.org/blog/2024/03/hop-2.8.0/</link>
+      <pubDate>Wed, 13 Mar 2024 08:44:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2024/03/hop-2.8.0/</guid>
+      <description>After more than three months of work on 79 tickets, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.8.0.
+ A huge thank you to everyone who made this possible.
+    
+ Let&amp;#39;s take a closer look at what Hop 2.8 brings: Two new AWS transforms AWS SNS Notify AWS SQS Reader   Various Community GitHub Issues   or download Hop 2.</description>
+    </item>
+    
+  </channel>
+</rss>
