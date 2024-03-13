@@ -1,6 +1,6 @@
 ---
 title: "Apache Hop 2.8 is available!!"
-date: 2024-03-13T09:49:56+02:00
+date: 2024-03-13T08:44:56+02:00
 authors: ["bamaer"]
 categories: ["2.8", "Release", "Apache Hop"]
 preview: "Apache Hop 2.8 Released"
@@ -8,9 +8,77 @@ description: "The latest Apache Hop release 2.8.0 is now available. Let's walk t
 draft: false
 ---
 
-:imagesdir: ../../../../../static/
+:imagesdir: ../../../../../static
 
 :toc: macro
 :toclevels: 3
 :toc-title: Let's take a closer look at what Hop 2.8 brings:
 :toc-class: none
+
+After more than three months of work on 79 tickets, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.8.0. +
+
+A huge thank you to everyone who made this possible.
+
+image::/img/Release-2.8/hop-28.svg[ width="45%"]
+
+&nbsp; +
+
+toc::[]
+
+or https://hop.apache.org/download/[**download Hop 2.8.0 **] right away.
+
+Apache Hop 2.8.0 comes with a lot of bug fixes, code hardening and a couple of new features. 
+
+== Two new AWS transforms 
+
+=== AWS SNS Notify
+
+The https://hop.apache.org/manual/next/pipeline/transforms/aws-sns-notify.html[AWS SNS Notify^] transform enables you to send notifications from an Apache Hop pipeline via https://aws.amazon.com/sns/[Amazon Web Services Simple Notification Service^] to subscribed users.
+
+image:/img/Release-2.8/aws-sns-notify-transform.png[AWS SNS Notify transform, width="65%"]
+
+=== AWS SQS Reader 
+
+The https://hop.apache.org/manual/next/pipeline/transforms/aws-sqs-reader.html[AWS SQS Reader^] transform enables you to receive messages from https://aws.amazon.com/sns/[Amazon Web Services Simple Queue Service^] within an Apache Hop pipeline.
+
+image:/img/Release-2.8/aws-sqs-reader-transform.png[AWS SQS Reader transform, width="65%"]
+
+== Various 
+
+* a nasty bug (https://github.com/apache/hop/issues/3056[#3056]) throwing a NullPointerException in (very exceptional) edge cases when a transform receives more than one input flow was resolved. 
+
+* action duration is now recorded correctly in workflow log (https://github.com/apache/hop/issues/3606[#3606])
+
+* the Execution Information perspective now loads significantly faster for locations with a large number of executions (https://github.com/apache/hop/issues/2845[#2845])
+
+* lots of new and updated translations
+
+* lots of new and updated documentation
+
+== Community 
+
+The Hop community continues to grow!
+
+https://github.com/Mattang-Dan[Dan Vandermolen^] was added as a new committer to the Apache Hop project. A warm welcome and thanks for all the new and update documentation, Dan! 
+
+The overview below shows the community growth compared to the 2.7.0 release in December:
+
+* chat: 729 registered members (up from 670) link:https://chat.project-hop.org[join]
+* LinkedIn: 1.682 followers (up from 1.509) link:https://www.linkedin.com/company/hop-project[follow]
+* Twitter/X: 915 followers (down from 904) link:https://twitter.com/ApacheHop[follow]
+* YouTube: 1.020 subscribers (up from 939) link:https://www.youtube.com/ApacheHop[subscribe]
+[join]
+
+image:/img/Release-2.8/hop-community-growth.png[Apache Hop Community Growth, width="60%"]
+
+Without community interaction and contribution, Hop is just a coding club! Please feel free to join, participate in the discussion, test, file bug tickets on the software or documentation, ... Contributing is a lot more than writing code.
+
+Check out our link:/community/contributing/[contribution guides^] and http://hop.apache.org/community/ethos/[Code of Conduct^] to find out more.
+
+
+== GitHub Issues 
+
+This release contains work on 79 tickets:
+
+Check out the full list of issues in Apache Hop 2.8.0 in our https://github.com/apache/hop/issues[Github Issues^] 
+and the https://github.com/apache/hop/releases/tag/2.8.0-rc1[Release notes^].
