@@ -65,7 +65,7 @@ The overview below shows the community growth compared to the 2.7.0 release in D
 
 * chat: 729 registered members (up from 670) link:https://chat.project-hop.org[join]
 * LinkedIn: 1.682 followers (up from 1.509) link:https://www.linkedin.com/company/hop-project[follow]
-* Twitter/X: 915 followers (down from 904) link:https://twitter.com/ApacheHop[follow]
+* Twitter/X: 915 followers (up from 904) link:https://twitter.com/ApacheHop[follow]
 * YouTube: 1.020 subscribers (up from 939) link:https://www.youtube.com/ApacheHop[subscribe]
 [join]
 
