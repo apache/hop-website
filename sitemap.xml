@@ -2,22 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://hop.apache.org/categories/2.9/</loc>
+    <lastmod>2024-05-28T06:44:56+02:00</lastmod>
+  </url><url>
+    <loc>https://hop.apache.org/categories/Apache-Hop/</loc>
+    <lastmod>2024-05-28T06:44:56+02:00</lastmod>
+  </url><url>
+    <loc>https://hop.apache.org/</loc>
+    <lastmod>2024-05-28T06:44:56+02:00</lastmod>
+  </url><url>
+    <loc>https://hop.apache.org/blog/2024/05/hop-2.9.0/</loc>
+    <lastmod>2024-05-28T06:44:56+02:00</lastmod>
+  </url><url>
+    <loc>https://hop.apache.org/blog/</loc>
+    <lastmod>2024-05-28T06:44:56+02:00</lastmod>
+  </url><url>
+    <loc>https://hop.apache.org/categories/Release/</loc>
+    <lastmod>2024-05-28T06:44:56+02:00</lastmod>
+  </url><url>
     <loc>https://hop.apache.org/categories/2.8/</loc>
     <lastmod>2024-03-13T08:44:56+02:00</lastmod>
   </url><url>
-    <loc>https://hop.apache.org/categories/Apache-Hop/</loc>
-    <lastmod>2024-03-13T08:44:56+02:00</lastmod>
-  </url><url>
-    <loc>https://hop.apache.org/</loc>
-    <lastmod>2024-03-13T08:44:56+02:00</lastmod>
-  </url><url>
     <loc>https://hop.apache.org/blog/2024/03/hop-2.8.0/</loc>
-    <lastmod>2024-03-13T08:44:56+02:00</lastmod>
-  </url><url>
-    <loc>https://hop.apache.org/blog/</loc>
-    <lastmod>2024-03-13T08:44:56+02:00</lastmod>
-  </url><url>
-    <loc>https://hop.apache.org/categories/Release/</loc>
     <lastmod>2024-03-13T08:44:56+02:00</lastmod>
   </url><url>
     <loc>https://hop.apache.org/categories/2.7/</loc>
