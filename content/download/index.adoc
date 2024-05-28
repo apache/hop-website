@@ -16,6 +16,17 @@ More information can be found in the readme files included in the download archi
 |===
 | Version | Date | Description | Download Link | PGP Signature file of download | SHA512 Checksum file of download
 
+.2+| link:/blog/2024/05/hop-2.9.0/[2.9.0] 
+.2+| May, 28th, 2024
+| **Binaries** 
+| https://www.apache.org/dyn/closer.cgi?filename=hop/2.9.0/apache-hop-client-2.9.0.zip&action=download[**apache-hop-client-2.9.0.zip**] 
+| https://downloads.apache.org/hop/2.9.0/apache-hop-client-2.9.0.zip.asc[asc] 
+| https://downloads.apache.org/hop/2.9.0/apache-hop-client-2.9.0.zip.sha512[sha512]
+| Sources 
+| https://www.apache.org/dyn/closer.cgi?filename=hop/2.9.0/apache-hop-2.9.0-src.tar.gz&action=download[apache-hop-2.9.0-src.tar.gz] 
+| https://downloads.apache.org/hop/2.9.0/apache-hop-2.9.0-src.tar.gz.asc[asc] 
+| https://downloads.apache.org/hop/2.9.0/apache-hop-2.9.0-src.tar.gz.sha512[sha512]
+
 .2+| link:/blog/2024/03/hop-2.8.0/[2.8.0] 
 .2+| March, 13th, 2024
 | **Binaries** 
@@ -38,18 +49,6 @@ More information can be found in the readme files included in the download archi
 | https://www.apache.org/dyn/closer.cgi?filename=hop/2.7.0/apache-hop-2.7.0-src.tar.gz&action=download[apache-hop-2.7.0-src.tar.gz] 
 | https://downloads.apache.org/hop/2.7.0/apache-hop-2.7.0-src.tar.gz.asc[asc] 
 | https://downloads.apache.org/hop/2.7.0/apache-hop-2.7.0-src.tar.gz.sha512[sha512]
-
-.2+| link:/blog/2023/09/hop-2.6.0/[2.6.0] 
-.2+| September, 17th, 2023 
-| **Binaries** 
-| https://www.apache.org/dyn/closer.cgi?filename=hop/2.6.0/apache-hop-client-2.6.0.zip&action=download[**apache-hop-client-2.6.0.zip**] 
-| https://downloads.apache.org/hop/2.6.0/apache-hop-client-2.6.0.zip.asc[asc] 
-| https://downloads.apache.org/hop/2.6.0/apache-hop-client-2.6.0.zip.sha512[sha512]
-| Sources 
-| https://www.apache.org/dyn/closer.cgi?filename=hop/2.6.0/apache-hop-2.6.0-src.tar.gz&action=download[apache-hop-2.6.0-src.tar.gz] 
-| https://downloads.apache.org/hop/2.6.0/apache-hop-2.6.0-src.tar.gz.asc[asc] 
-| https://downloads.apache.org/hop/2.6.0/apache-hop-2.6.0-src.tar.gz.sha512[sha512]
-
 
 
 |===
