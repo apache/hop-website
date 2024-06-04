@@ -9,6 +9,7 @@ svn mv ~/svn/hop_release/apache-hop-X.XX-rcX/* .
 svn commit -m 'Move release files for Apache hop 1.2.0-rc1'</code></pre> </div> </div> </div> </div> <div class="sect1"> <h2 id="_creating_dockerhub_artifacts"><a class="anchor" href="#_creating_dockerhub_artifacts"></a>Creating Dockerhub Artifacts</h2> <div class="sectionbody"> <div class="paragraph"> <p>To create the docker images you can use the build used to create the client, go to the folder with the code and do following steps</p> </div> <div class="paragraph"> <p>first take a copy of the source code release and build the software (could be that you still have the build from the creating a release steps)</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">unzip ./assemblies/client/target/hop-client-*.zip -d ./assemblies/client/target/
 unzip ./assemblies/web/target/hop.war -d ./assemblies/web/target/webapp
 unzip ./assemblies/plugins/dist/target/hop-assemblies-*.zip -d ./assemblies/plugins/dist/target/
+unzip -j ./assemblies/lib-jdbc/target/hop-assemblies-*.zip -d ./assemblies/lib-jdbc/target/jdbc-drivers
 
 # Create image (make sure to add correct version)
 docker buildx build --platform linux/amd64,linux/arm64 . -f docker/Dockerfile -t docker.io/apache/hop:X.XX -t docker.io/apache/hop:latest --push
