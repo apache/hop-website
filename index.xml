@@ -732,9 +732,10 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hop.apache.org/community/contribution-guides/translation-contribution-guide/</guid>
-      <description>Translating Hop to your language is an easy and code free contribution that adds a lot of value to our user community. The Hop Translator makes the process of translating Hop (or extending an existing translation) a breeze.
- Hop Translator The Hop Translator is a single dialog application.
-   How to run You’ll need the source code if you want to run the Hop Translator. Clone the repository from https://github.</description>
+      <description>Translating Apache Hop to your language is an easy and code free contribution that adds a lot of value to our user community. We use an online application called Weblate to help us in translating Hop.
+ Hop Translation Website To help translate Hop you can visit https://translate.project-hop.org/
+ For more information on how to use Weblate you can read the guides provided on their site.
+   Supported languages The current list of languages that can be translated is:</description>
     </item>
     
     <item>
