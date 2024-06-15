@@ -37,6 +37,7 @@ The Apache Hop developer community is growing rapidly and currently includes con
 |Ray Chang|uraychang||
 |Ricardo Gouvea|rgouvea|Openin Big Data|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/rdegouvea", window="_blank"]
 |Rodrigo Haces|rhaces|Neo4j|image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/rhaces", window="_blank"]
+|Sergio De Lorenzis|xdelox|Serasoft Italy|
 |Tom Barber|magicaltrout||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/magicaltrout", window="_blank"]
 |Yannick Mols|yannickmols||image:/img/twitter.svg[Twitter, 35px, link="https://twitter.com/yannickmols", window="_blank"]
 |===
