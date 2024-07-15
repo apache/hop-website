@@ -12,3 +12,11 @@ For more information about reporting vulnerabilities, see the https://www.apache
 == Known Vulnerabilities
 
 No vulnerabilities have been reported.
+
+== With great power comes great responsibility 
+
+The Apache Hop platform allows data engineers and data developers to perform some very powerful operations. 
+
+With great power comes great responsibility: the various transforms and actions allow you to perform potentially destructive operations on your databases, file systems and other areas of your data architecture. Make sure you have the proper permissions and restrictions in place to avoid unwanted operations. 
+
+In addition to these permissions and restrictions, unwanted plugins can be removed from Apache Hop by removing the corresponding folder from the `<HOP>/plugins` folder. For example, to remove the https://hop.apache.org/manual/latest/workflow/actions/deletefiles.html[`Delete files`] action, delete the `<HOP>/plugins/actions/deletefiles/` folder from your Hop installation.  
