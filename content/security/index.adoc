@@ -11,7 +11,9 @@ For more information about reporting vulnerabilities, see the https://www.apache
 
 == Known Vulnerabilities
 
-No vulnerabilities have been reported.
+https://www.cve.org/CVERecord?id=CVE-2024-24683[CVE-2024-24683]: fixed in Apache Hop 2.8.0. 
+
+Check the https://security.apache.org/projects/hop/[Apache Hop security advisories] page for more details. 
 
 == With great power comes great responsibility 
 
