@@ -26,6 +26,8 @@ Check the video below for more information on the concepts and a quick introduct
 
 video::BAJ8F7yQz64[youtube]
 
+TIP: if you can't watch the video from the Apache Hop website, try watching it https://www.youtube.com/watch?v=BAJ8F7yQz64[directly on YouTube]. 
+
 
 == anchor:doc-types[]Types of documentation
 
@@ -45,13 +47,19 @@ This is code documentation and only needed when you want to explore the internal
 
 Every documentation page on the Hop website has a 'Edit this page' button like the one below.
 
+To make sure your doc change goes to the latest version of the Apache Hop documentation, select the pre-release version of the docs from the dropdown in the upper right-hand corner of the documentation. 
+
+image:/img/doc-contrib-select-pre-release.png[Select pre-release, width="50%"]
+
+Then, select the "Edit this page button": 
+
 image:/img/doc-contrib-edit-this-page.png[Edit this page, width="35%"]
 
 If you click on this page, you'll be taken directly to the github editor for that page.
 
 After you've made the changes you want to make, add a description for your changes and click 'Proposed changes'.
 
-image:/img/doc-contrib-propose-changes.png[Propose Changes, width="55%"]
+image:/img/doc-contrib-propose-changes.png[Propose Changes, width="35%"]
 
 Review the entries in the pull request template and click 'Create pull request'.
 
@@ -112,6 +120,6 @@ Push your committed contribution to your fork of the Hop repository at GitHub.
 [source,shell]
 git push origin myBranch
 
-Go to the website of your repository fork (`https://github.com/<your-user-name>/hop`) and use the “Create Pull Request” button to start creating a pull request. Make sure that the base fork is hop master and the head fork selects the branch with your changes. Give the pull request a meaningful description and submit it.
+Go to the website of your repository fork (`https://github.com/<your-user-name>/hop`) and use the “Create Pull Request” button to start creating a pull request. Make sure that the base fork is hop `main` and the head fork selects the branch with your changes. Give the pull request a meaningful description and submit it.
 
 It is also possible to attach a patch to a GitHub issue.
