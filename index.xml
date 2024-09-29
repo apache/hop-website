@@ -489,8 +489,8 @@
       <guid>https://hop.apache.org/security/</guid>
       <description>Security Vulnerabilities Please note that binary patches are not produced for individual vulnerabilities. To obtain the binary fix for a particular vulnerability you should upgrade to an Apache Hop version where that vulnerability has been fixed.
  For more information about reporting vulnerabilities, see the Apache Security Team page.
-   Known Vulnerabilities No vulnerabilities have been reported.
-   </description>
+   Known Vulnerabilities CVE-2024-24683: fixed in Apache Hop 2.8.0.
+ Check the Apache Hop security advisories page for more details.</description>
     </item>
     
     <item>
