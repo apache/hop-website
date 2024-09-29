@@ -59,7 +59,7 @@ Older releases can be found in the https://archive.apache.org/dist/hop/[archives
 Apache Hop is available as a Docker image on Dockerhub:
 
 * https://hub.docker.com/r/apache/hop[Hop], Docker pull command:  `docker pull apache/hop`
-* https://hub.docker.com/r/apache/hop-web[Hop Web], Docker pull command `docker pull apache/hop-web`
+* https://hub.docker.com/r/apache/hop-web[Hop Web] (work in progress, provided as-is), Docker pull command `docker pull apache/hop-web`
 
 ## Helm Chart (Work in progress)
 
