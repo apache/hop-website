@@ -63,7 +63,7 @@ The File Explorer perspective has been enhanced to
 * new file types are recognized and shown with the corresponding icon 
 * files in `.gitignore` are now shown in light grey 
 
-image:/img/Release-2.10/file-explorer.png[File Explore Perspective, width="70%]
+image:/img/Release-2.10/file-explorer.png[File Explore Perspective, width="70%"]
 
 == Community 
 
