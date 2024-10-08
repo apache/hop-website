@@ -8,13 +8,25 @@ description: "Download Apache Hop source and binary releases or Docker images fo
 For each release you can find a download of the source code which can be used to build your own version.
 We recommend using the pre-build binary release, this includes all dependencies required to run and use the software.
 
-Apache Hop requires Java 11 to be installed on the system.
+Apache Hop requires Java 17 to be installed on the system. Check [the docs] for more information about the supported JVMs. 
 
 More information can be found in the readme files included in the download archives.
 
 [cols="<.^1,<.^1,1,2,1,1"]
 |===
 | Version | Date | Description | Download Link | PGP Signature file of download | SHA512 Checksum file of download
+
+.2+| link:/blog/2024/10/hop-2.10.0/[2.10.0] 
+.2+| Oct, 7th, 2024
+| **Binaries** 
+| https://www.apache.org/dyn/closer.cgi?filename=hop/2.10.0/apache-hop-client-2.10.0.zip&action=download[**apache-hop-client-2.10.0.zip**] 
+| https://downloads.apache.org/hop/2.10.0/apache-hop-client-2.10.0.zip.asc[asc] 
+| https://downloads.apache.org/hop/2.10.0/apache-hop-client-2.10.0.zip.sha512[sha512]
+| Sources 
+| https://www.apache.org/dyn/closer.cgi?filename=hop/2.10.0/apache-hop-2.10.0-src.tar.gz&action=download[apache-hop-2.10.0-src.tar.gz] 
+| https://downloads.apache.org/hop/2.10.0/apache-hop-2.10.0-src.tar.gz.asc[asc] 
+| https://downloads.apache.org/hop/2.10.0/apache-hop-2.10.0-src.tar.gz.sha512[sha512]
+
 
 .2+| link:/blog/2024/05/hop-2.9.0/[2.9.0] 
 .2+| May, 28th, 2024
@@ -37,18 +49,6 @@ More information can be found in the readme files included in the download archi
 | https://www.apache.org/dyn/closer.cgi?filename=hop/2.8.0/apache-hop-2.8.0-src.tar.gz&action=download[apache-hop-2.8.0-src.tar.gz] 
 | https://downloads.apache.org/hop/2.8.0/apache-hop-2.8.0-src.tar.gz.asc[asc] 
 | https://downloads.apache.org/hop/2.8.0/apache-hop-2.8.0-src.tar.gz.sha512[sha512]
-
-
-.2+| link:/blog/2023/12/hop-2.7.0/[2.7.0] 
-.2+| December, 1th, 2023 
-| **Binaries** 
-| https://www.apache.org/dyn/closer.cgi?filename=hop/2.7.0/apache-hop-client-2.7.0.zip&action=download[**apache-hop-client-2.7.0.zip**] 
-| https://downloads.apache.org/hop/2.7.0/apache-hop-client-2.7.0.zip.asc[asc] 
-| https://downloads.apache.org/hop/2.7.0/apache-hop-client-2.7.0.zip.sha512[sha512]
-| Sources 
-| https://www.apache.org/dyn/closer.cgi?filename=hop/2.7.0/apache-hop-2.7.0-src.tar.gz&action=download[apache-hop-2.7.0-src.tar.gz] 
-| https://downloads.apache.org/hop/2.7.0/apache-hop-2.7.0-src.tar.gz.asc[asc] 
-| https://downloads.apache.org/hop/2.7.0/apache-hop-2.7.0-src.tar.gz.sha512[sha512]
 
 
 |===
