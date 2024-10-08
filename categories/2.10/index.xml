@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2.10 on Hop</title>
+    <link>https://hop.apache.org/categories/2.10/</link>
+    <description>Recent content in 2.10 on Hop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 07 Oct 2024 06:44:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/2.10/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Hop 2.10 is available!!</title>
+      <link>https://hop.apache.org/blog/2024/10/hop-2.10.0/</link>
+      <pubDate>Mon, 07 Oct 2024 06:44:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2024/10/hop-2.10.0/</guid>
+      <description>After about four months of work on 139 tickets, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.10.0.
+ A huge thank you to everyone who made this possible.
+    
+ Let&amp;#39;s take a closer look at what Hop 2.10 brings: Notable bug fixes New Features Block code execution in UDJC and UDJE Ability to configure multiple Azure accounts File Explorer perspective improvements   Community GitHub Issues   or download Hop 2.</description>
+    </item>
+    
+  </channel>
+</rss>
