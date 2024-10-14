@@ -6,7 +6,19 @@
     <description>Recent content in Apache Hop on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 07 Oct 2024 06:44:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/Apache-Hop/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 14 Oct 2024 06:44:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/Apache-Hop/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Moving away from Mattermost</title>
+      <link>https://hop.apache.org/blog/2024/10/moving-away-from-mattermost/</link>
+      <pubDate>Mon, 14 Oct 2024 06:44:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2024/10/moving-away-from-mattermost/</guid>
+      <description>Hi Everyone,
+ As discussed on the mailing lists recently, the Apache Hop community will move away from the Mattermost chat and switch to GitHub Discussions and the ASF Slack workspace for more informal community discussions.
+ As discussed in the mailing list thread, there are a couple of reasons to do this:
+   The current Mattermost chat isn’t hosted on an offical Apache Hop (sub)domain, which is something we can’t change.</description>
+    </item>
+    
     <item>
       <title>Apache Hop 2.10 is available!!</title>
       <link>https://hop.apache.org/blog/2024/10/hop-2.10.0/</link>
