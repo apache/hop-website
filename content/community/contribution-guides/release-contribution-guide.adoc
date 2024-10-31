@@ -8,7 +8,7 @@ Other useful information:
 
 * https://incubator.apache.org/guides/releasemanagement.html[ASF Release Management, window="_blank"]
 
-Check below for the TL;DR version. As always, we're eager to https://chat.project-hop.org[hear, window="_blank"] your feedback!
+Check below for the TL;DR version. As always, we're eager to https://github.com/apache/hop/discussions[hear, window="_blank"] your feedback!
 
 == What is an Apache Release?
 

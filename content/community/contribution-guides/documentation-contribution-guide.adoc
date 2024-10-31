@@ -4,7 +4,7 @@ title: "Documentation Contribution Guide"
 
 Good documentation is crucial for any kind of software. This is especially true for sophisticated software systems such as distributed data processing engines like Apache Hop. The Apache Hop community aims to provide concise, precise, and complete documentation and welcomes any contribution to improve Apache Hop’s documentation.
 
-WARNING: Just like code, documentation is never done. We're eager to find out how you think our docs can be improved, come discuss with us on our https://chat.project-hop.org/hop/channels/documentation[documentation channel].
+WARNING: Just like code, documentation is never done. We're eager to find out how you think our docs can be improved, come discuss with us on our https://github.com/apache/hop/discussions[GitHub Discussions].
 
 . <<doc-types, Types of documentation>>
 . <<get-docs, Get the documentation sources>>
@@ -103,7 +103,7 @@ Please make sure you have a GitHub issue that corresponds to your contribution. 
 
 == anchor:multi-lang-doc[] Documentation translations
 
-We are planning on providing all documentation in multiple languages. We are looking for contributors that want to work with us and make this possible! If you are interested to maintain a translation language feel free to contact us on our https://chat.project-hop.org[chat].
+We are planning on providing all documentation in multiple languages. We are looking for contributors that want to work with us and make this possible! If you are interested to maintain a translation language feel free to contact us on our link:../../mailing-list/[Mailing lists ,window=_blank].
 
 
 

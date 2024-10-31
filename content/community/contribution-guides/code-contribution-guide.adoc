@@ -56,7 +56,7 @@ The first step for making a contribution to Apache Hop is to reach consensus wit
 
 In most cases, the discussion should happen in Hop’s bug tracker: https://github.com/apache/hop/issues[GitHub].
 
-The following types of changes require a discussion in the dev https://chat.project-hop.org[chat] channel:
+The following types of changes require a discussion in the dev mailing list or GitHub Discussions:
 
 - big changes (major new feature; big refactorings, involving multiple components)
 - potentially controversial changes or issues

@@ -11,7 +11,8 @@ Contributing to Hop goes beyond writing code for the project. Below, we list dif
 [width="100%", ,cols="3,10", options="header,footer"]
 |============================
 |Area |Further Information
-|Report a Bug|To report a problem with Hop, open Hop’s https://github.com/apache/hop/issues[GitHub Issues ,window=_blank], log in if necessary, and click on the "+" in the left side bar (Shortcut "c").
+|Report a Bug|To report a problem with Hop, open Hop’s https://github.com/apache/hop/issues[GitHub Issues ,window=_blank], log in if necessary, and click on the "New issue" button.
+
 Please give detailed information about the problem you encountered and, if possible, add a description that helps to reproduce the problem. For more information go to our link:../contribution-guides/github-guide/[info] page.
 |Contribute Code|Read the link:../contribution-guides/code-contribution-guide/[Code Contribution Guide]
 |Help With Code Reviews|Read the link:../contribution-guides/code-review-guide/[Code Review Guide]
@@ -19,7 +20,9 @@ Please give detailed information about the problem you encountered and, if possi
 |Contribute Documentation|Read the link:../contribution-guides/documentation-contribution-guide/[Documentation Contribution Guide]
 |Translate Hop|Read the link:../contribution-guides/translation-contribution-guide/[Translation Contribution Guide]
 |Support Hop Users|
-- Join us on our https://chat.project-hop.org[Mattermost ,window=_blank] server and answer questions
+- Join us on our Slack, more information on how to join link:../tools/[here]
+
+- Check out our https://github.com/apache/hop/discussions[GitHub Discussions] and help someone out
 
 - Reply to Hop related questions on Stack Overflow with the hop tag or the Hop forums
 
@@ -32,7 +35,7 @@ Please give detailed information about the problem you encountered and, if possi
 - Contribute to the Hop blog (coming soon)
 
 
-2+|Any other questions? Reach out on the Hop https://chat.project-hop.org[chat ,window=_blank] to get help.
+2+|Any other questions? Reach out on the Hop link:../mailing-list/[Mailing lists ,window=_blank] to get help.
 |============================
 
 == Further Reading
