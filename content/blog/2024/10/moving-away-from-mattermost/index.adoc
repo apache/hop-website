@@ -24,7 +24,7 @@ As discussed in the mailing list thread, there are a couple of reasons to do thi
 We believe we can work more efficiently as a community by moving away from the Mattermost chat in two different ways: 
 
 * We'll enable https://github.com/features/discussions[GitHub Discussions^] on the Apache Hop GitHub repository. GitHub Discussions sits as close as possible to the project's source code, documentation and issues, and is publicly accessible, and can by indexed by search engines. In addition to being close to the rest of the project, GitHub discussions are organized in threads that can be marked as `Answered`, `Closed`, which will make it easy to find the status of a discussion. 
-* We'll open a `#hop` channel on the https://the-asf.slack.comp[ASF Slack workspace] for more informal discussions, similar to a lot of the conversations we currently have on the Mattermost chat. 
+* We'll open a `#hop` channel on the https://the-asf.slack.comp[ASF Slack workspace] for more informal discussions, similar to a lot of the conversations we currently have on the Mattermost chat. To receive an invite to the `#hop` channel reach out to us on the users mailing list or ask on the Mattermost server. More information on our link:../../../../community/tools/[Tools page].
 
 Just for the record, we want to state that this move away from Mattermost is in no way driven by the Mattermost platform. +
 Just like Apache Hop, Mattermost is free and open source, and has been a great platform for the Apache Hop community for the last 5 years. Big shoutout to the folks at https://www.mattermost.com[Mattermost.com]. 

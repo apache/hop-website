@@ -6,10 +6,11 @@ The following tools are used within the Hop community.
 
 * <<github, Github>>
 * <<Github-Issues, GitHub Issues>>
+* <<Github-Discussions, GitHub Discussions>>
 * <<jenkins, Jenkins>>
 * <<sonarcloud, Sonarcloud>>
 * <<wiki, Wiki>>
-* <<chat, Mattermost Chat>>
+* <<chat, Slack>>
 
 == anchor:github[]GitHub
 All our source code is publicly available on GitHub, GitHub is a Git repository hosting service, but it adds many of its own features. While Git is a command line tool, GitHub provides a Web-based graphical interface. It also provides access control and several collaboration features.
@@ -23,6 +24,12 @@ While GitHub provides solutions to do issue tracking we use a separate platform 
 All new features and issues found in Hop can be reported in our bug tracker. If you find an issue or want to request new features first read our link:/community/contribution-guides/github-guide/[github-guide] this document contains the basic steps needed to create a ticket that we can work on.
 
 To see what we are currently working on visit our https://github.com/apache/hop/issues[GitHub Issues page , window="_blank"]
+
+== anchor:Github-Discussions[]GitHub Discussions
+
+If you have questions or want to discuss new potential features but you don't like to use one of our mailing lists then you can also reach out to us using GitHub Discussions. 
+
+To see what is currently being discussed visit our https://github.com/apache/hop/discussions[GitHub Discussions page , window="_blank"]
 
 == anchor:jenkins[]Jenkins
 Jenkins is a Continuous Integration/Deployment platform, when a commit has been made and source code is changed Jenkins will automatically trigger and test and build the code. It will also check pull requests. Our current Jenkins setup is a fairly basic workflow which will be extended in the future to include more checks and steps.
@@ -38,6 +45,6 @@ You can take a look at the status of our project https://sonarcloud.io/dashboard
 
 All documentation is written in Wiki style documents and resides in it's own repository or close to the code, this means all our documentation is version controlled and we have an easy and fast system to accept contributions from the community. More information on documentation contribution and guidelines can be found link:/community/contribution-guides/documentation-contribution-guide/[here].
 
-== anchor:chat[]Mattermost Chat
+== anchor:chat[]Slack
 
-Mattermost is a chat client that is comparable to Slack it is an opensource alternative that allows us to invite everyone to come join us and chat with the developers or ask question, feel free to join and start https://chat.project-hop.org[chatting , window="_blank"].
+The Apache Hop team has a channel on the http://the-asf.slack.com/[ASF Slack server]. If you already have a multi-channel account you can join the conversations in the #hop channel. If you have an @apache.org email address you can join using that address. If you don't you can request an invite by sending a mail to our link:/community/mailing-list/[users mailing list].

@@ -43,7 +43,7 @@ Please feel free to ask any questions you have on the developer chat channel.
 
 == anchor:multi-lang-website[] Documentation translations
 
-We are planning on providing the website in multiple languages. We are looking for contributors that want to work with us and make this possible! If you are interested to maintain a translation language feel free to contact us on our https://chat.project-hop.org[chat].
+We are planning on providing the website in multiple languages. We are looking for contributors that want to work with us and make this possible! If you are interested to maintain a translation language feel free to contact us on our link:../../mailing-list/[Mailing lists ,window=_blank].
 
 
 
