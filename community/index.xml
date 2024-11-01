@@ -54,7 +54,7 @@
       
       <guid>https://hop.apache.org/community/contribution-guides/documentation-contribution-guide/</guid>
       <description>Good documentation is crucial for any kind of software. This is especially true for sophisticated software systems such as distributed data processing engines like Apache Hop. The Apache Hop community aims to provide concise, precise, and complete documentation and welcomes any contribution to improve Apache Hop’s documentation.
-   Warning  Just like code, documentation is never done. We’re eager to find out how you think our docs can be improved, come discuss with us on our documentation channel.</description>
+   Warning  Just like code, documentation is never done. We’re eager to find out how you think our docs can be improved, come discuss with us on our GitHub Discussions.</description>
     </item>
     
     <item>
@@ -192,10 +192,11 @@
       <description>The following tools are used within the Hop community.
    Github
   GitHub Issues
+  GitHub Discussions
   Jenkins
   Sonarcloud
   Wiki
-  Mattermost Chat
+  Slack
    GitHub All our source code is publicly available on GitHub, GitHub is a Git repository hosting service, but it adds many of its own features. While Git is a command line tool, GitHub provides a Web-based graphical interface.</description>
     </item>
     
