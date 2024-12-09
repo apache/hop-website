@@ -52,7 +52,7 @@ image:/img/Release-2.11/file-explorer.png[File Explorer, width="70%"]
 
 Syntax highlighting for SQL and scripts was removed in the very early Apache Hop days. 
 
-A new and improved version of this syntax highlighting is now reintroduced in Apache Hop 2.11.0. 
+A new and improved version of this syntax highlighting is now reintroduced in Apache Hop 2.11.0 (As was the case with the original implementation, this isn't available in Hop Web).
 
 image:/img/Release-2.11/syntax-highlighting.png[Syntax Highlighting, width="70%"]
 
