@@ -48,6 +48,15 @@ Authentication and authorization have been improved, and additional branch opera
 
 image:/img/Release-2.11/file-explorer.png[File Explorer, width="70%"]
 
+== Syntax highlighting 
+
+Syntax highlighting for SQL and scripts was removed in the very early Apache Hop days. 
+
+A new and improved version of this syntax highlighting is now reintroduced in Apache Hop 2.11.0. 
+
+image:/img/Release-2.11/syntax-highlighting.png[Syntax Highlighting, width="70%"]
+
+
 == UI improvements 
 
 * Some fixes in data grids when adding/removing lines using the toolbar
