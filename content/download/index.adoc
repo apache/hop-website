@@ -16,6 +16,18 @@ More information can be found in the readme files included in the download archi
 |===
 | Version | Date | Description | Download Link | PGP Signature file of download | SHA512 Checksum file of download
 
+.2+| link:/blog/2025/02/hop-2.12.0/[2.12.0] 
+.2+| Feb, 19th, 2025
+| **Binaries** 
+| https://www.apache.org/dyn/closer.cgi?filename=hop/2.12.0/apache-hop-client-2.12.0.zip&action=download[**apache-hop-client-2.12.0.zip**] 
+| https://downloads.apache.org/hop/2.12.0/apache-hop-client-2.12.0.zip.asc[asc] 
+| https://downloads.apache.org/hop/2.12.0/apache-hop-client-2.12.0.zip.sha512[sha512]
+| Sources 
+| https://www.apache.org/dyn/closer.cgi?filename=hop/2.12.0/apache-hop-2.12.0-src.tar.gz&action=download[apache-hop-2.12.0-src.tar.gz] 
+| https://downloads.apache.org/hop/2.12.0/apache-hop-2.12.0-src.tar.gz.asc[asc] 
+| https://downloads.apache.org/hop/2.12.0/apache-hop-2.12.0-src.tar.gz.sha512[sha512]
+
+
 .2+| link:/blog/2024/12/hop-2.11.0/[2.11.0] 
 .2+| Dec, 10th, 2024
 | **Binaries** 
@@ -39,17 +51,6 @@ More information can be found in the readme files included in the download archi
 | https://downloads.apache.org/hop/2.10.0/apache-hop-2.10.0-src.tar.gz.asc[asc] 
 | https://downloads.apache.org/hop/2.10.0/apache-hop-2.10.0-src.tar.gz.sha512[sha512]
 
-
-.2+| link:/blog/2024/05/hop-2.9.0/[2.9.0] 
-.2+| May, 28th, 2024
-| **Binaries** 
-| https://www.apache.org/dyn/closer.cgi?filename=hop/2.9.0/apache-hop-client-2.9.0.zip&action=download[**apache-hop-client-2.9.0.zip**] 
-| https://downloads.apache.org/hop/2.9.0/apache-hop-client-2.9.0.zip.asc[asc] 
-| https://downloads.apache.org/hop/2.9.0/apache-hop-client-2.9.0.zip.sha512[sha512]
-| Sources 
-| https://www.apache.org/dyn/closer.cgi?filename=hop/2.9.0/apache-hop-2.9.0-src.tar.gz&action=download[apache-hop-2.9.0-src.tar.gz] 
-| https://downloads.apache.org/hop/2.9.0/apache-hop-2.9.0-src.tar.gz.asc[asc] 
-| https://downloads.apache.org/hop/2.9.0/apache-hop-2.9.0-src.tar.gz.sha512[sha512]
 
 
 |===
