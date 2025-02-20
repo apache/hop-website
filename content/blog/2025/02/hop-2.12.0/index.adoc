@@ -54,14 +54,11 @@ image:https://hop.apache.org//manual/latest/_images/variables/resolving-variable
 
 The Hop community continues to grow!
 
-The overview below shows the community growth compared to the 2.11.0 release in October:
+The overview below shows the community growth compared to the 2.11.0 release in December:
 
 * LinkedIn: 2.847 followers (up from 2.545) link:https://www.linkedin.com/company/hop-project[follow]
 * Twitter/X: 956 followers (up from 949) link:https://twitter.com/ApacheHop[follow]
 * YouTube: 1.320 subscribers (up from 1.280) link:https://www.youtube.com/ApacheHop[subscribe]
-[join]
-
-image:/img/Release-2.12/hop-community-growth.png[Apache Hop Community Growth, width="70%"]
 
 Without community interaction and contribution, Hop is just a coding club! Please feel free to join, participate in the discussion, test, file bug tickets on the software or documentation, ... Contributing is a lot more than writing code.
 
@@ -70,7 +67,7 @@ Check out our link:/community/contributing/[contribution guides^] and http://hop
 
 == GitHub Issues 
 
-This release contains work on 58 tickets by 11 contributors, including 4 new contributors: 
+This release contains work on 58 tickets by 11 contributors, including 1 new contributor: 
 
 * https://github.com/@Pask42[Pascal Gattino]
 
