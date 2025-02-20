@@ -1,0 +1,78 @@
+---
+title: "Apache Hop 2.12 is available!!"
+date: 2025-02-19T06:44:56+02:00
+authors: ["bamaer"]
+categories: ["2.12", "Release", "Apache Hop"]
+preview: "Apache Hop 2.12 Released"
+description: "The latest Apache Hop release 2.12.0 is now available. Let's walk through the most important new features in this release."
+draft: false
+---
+
+:imagesdir: ../../../../../static
+
+:toc: macro
+:toclevels: 3
+:toc-title: Let's take a closer look at what Hop 2.12 brings:
+:toc-class: none
+
+After about two months of work on 58 tickets by 11 contributors, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.12.0. +
+
+A huge thank you to everyone who made this possible.
+
+image::/img/Release-2.12/hop-212.svg[ width="45%"]
+
+&nbsp; +
+
+toc::[]
+
+or https://hop.apache.org/download/[**download Hop 2.12.0 **] right away.
+
+Apache Hop 2.12.0 is mostly a bug fixing release, with a couple of new features. 
+
+
+== Variable resolvers 
+
+https://hop.apache.org//manual/latest/variables.html#_variable_resolvers[Variable resolvers] are a new concept in Apache Hop. They allow you to resolve variable values in a consistent way across all metadata objects.
+
+Apache Hop includes three variable resolver types:
+
+* Pipeline variable resolver
+* Hashicorp Vault variable resolver
+* Google Secret Manager variable resolver
+
+image:https://hop.apache.org//manual/latest/_images/variables/resolving-variables.png[Variable resolvers, width="55%"]
+
+== Various improvements 
+
+* REST connection metadata type improvements
+* a new Impala database type and dialect 
+* the Text File Output transform now supports a rounding type for numbers
+* improved syntax highlighting for SQL and scripting transforms
+
+== Community 
+
+
+The Hop community continues to grow!
+
+The overview below shows the community growth compared to the 2.11.0 release in October:
+
+* LinkedIn: 2.847 followers (up from 2.545) link:https://www.linkedin.com/company/hop-project[follow]
+* Twitter/X: 956 followers (up from 949) link:https://twitter.com/ApacheHop[follow]
+* YouTube: 1.320 subscribers (up from 1.280) link:https://www.youtube.com/ApacheHop[subscribe]
+[join]
+
+image:/img/Release-2.12/hop-community-growth.png[Apache Hop Community Growth, width="70%"]
+
+Without community interaction and contribution, Hop is just a coding club! Please feel free to join, participate in the discussion, test, file bug tickets on the software or documentation, ... Contributing is a lot more than writing code.
+
+Check out our link:/community/contributing/[contribution guides^] and http://hop.apache.org/community/ethos/[Code of Conduct^] to find out more.
+
+
+== GitHub Issues 
+
+This release contains work on 58 tickets by 11 contributors, including 4 new contributors: 
+
+* https://github.com/@Pask42[Pascal Gattino]
+
+Check out the full list of issues in Apache Hop 2.12.0 in our https://github.com/apache/hop/issues[Github Issues^] 
+and the https://github.com/apache/hop/releases/tag/2.12.0-rc1[Release notes^].
