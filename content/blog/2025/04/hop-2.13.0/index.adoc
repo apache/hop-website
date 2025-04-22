@@ -1,0 +1,16 @@
+---
+title: "Apache Hop 2.13 is available!!"
+date: 2025-02-19T06:44:56+02:00
+authors: ["bamaer"]
+categories: ["2.13", "Release", "Apache Hop"]
+preview: "Apache Hop 2.13 Released"
+description: "The latest Apache Hop release 2.13.0 is now available. Let's walk through the most important new features in this release."
+draft: false
+---
+
+:imagesdir: ../../../../../static
+
+:toc: macro
+:toclevels: 3
+:toc-title: Let's take a closer look at what Hop 2.13 brings:
+:toc-class: none
