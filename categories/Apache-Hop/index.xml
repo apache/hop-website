@@ -6,7 +6,19 @@
     <description>Recent content in Apache Hop on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Feb 2025 06:44:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/Apache-Hop/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 22 Apr 2025 06:44:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/Apache-Hop/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Hop 2.13 is available!!</title>
+      <link>https://hop.apache.org/blog/2025/04/hop-2.13.0/</link>
+      <pubDate>Tue, 22 Apr 2025 06:44:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2025/04/hop-2.13.0/</guid>
+      <description>After about two months of work on 84 tickets by 8 contributors, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.13.0.
+ A huge thank you to everyone who made this possible.
+    
+ Let&amp;#39;s take a closer look at what Hop 2.13 brings: Multiple GCP Storage locations MySQL Bulk Loader Transform Various improvements Community GitHub Issues   or download Hop 2.</description>
+    </item>
+    
     <item>
       <title>Apache Hop 2.12 is available!!</title>
       <link>https://hop.apache.org/blog/2025/02/hop-2.12.0/</link>
