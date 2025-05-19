@@ -1,0 +1,29 @@
+---
+title: "Apache Hop 2.14 is available!!"
+date: 2025-05-19T06:44:56+02:00
+authors: ["bamaer"]
+categories: ["2.14", "Release", "Apache Hop"]
+preview: "Apache Hop 2.14 Released"
+description: "The latest Apache Hop release 2.14.0 is now available. Let's walk through the most important new features in this release."
+draft: false
+---
+
+:imagesdir: ../../../../../static
+
+:toc: macro
+:toclevels: 3
+:toc-title: Let's take a closer look at what Hop 2.14 brings:
+:toc-class: none
+
+After about two months of work on 84 tickets by 8 contributors, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.14.0. +
+
+A huge thank you to everyone who made this possible.
+
+image::/img/Release-2.13/hop-213.svg[ width="45%"]
+
+&nbsp; +
+
+toc::[]
+
+or https://hop.apache.org/download/[**download Hop 2.13.0 **] right away.
+
