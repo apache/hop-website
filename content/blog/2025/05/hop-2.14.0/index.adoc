@@ -84,5 +84,5 @@ Check out our link:/community/contributing/[contribution guides^] and http://hop
 
 This release contains work on 35 tickets by 7 contributors.
 
-Check out the full list of issues in Apache Hop 2.13.0 in our https://github.com/apache/hop/issues[Github Issues^] 
+Check out the full list of issues in Apache Hop 2.14.0 in our https://github.com/apache/hop/issues[Github Issues^] 
 and the https://github.com/apache/hop/releases/tag/2.14.0-rc1[Release notes^].
