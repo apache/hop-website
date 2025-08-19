@@ -17,7 +17,7 @@ More information can be found in the readme files included in the download archi
 | Version | Date | Description | Download Link | PGP Signature file of download | SHA512 Checksum file of download
 
 .2+| link:/blog/2025/08/hop-2.15.0/[2.15.0] 
-.2+| May, 19nd, 2025
+.2+| August, 19nd, 2025
 | **Binaries** 
 | https://www.apache.org/dyn/closer.cgi?filename=hop/2.15.0/apache-hop-client-2.15.0.zip&action=download[**apache-hop-client-2.15.0.zip**] 
 | https://downloads.apache.org/hop/2.15.0/apache-hop-client-2.15.0.zip.asc[asc] 
