@@ -24,7 +24,6 @@ We want to extend a heartfelt thank you to every contributor, tester, and user w
 
 Your feedback, patches, and enthusiasm fuel the project and help make Apache Hop the versatile, reliable platform it is today.
 
-// Let's take a closer look at what Hop 2.15 brings
 
 image::/img/Release-2.15/hop-215.svg[ width="45%"]
 
@@ -35,16 +34,6 @@ toc::[]
 or https://hop.apache.org/download/[**download Hop 2.15.0 **] right away.
 
 
-// * <<google-sheets-output,Google Sheets Output: Option to re-create sheets and proxy support>>
-// * <<duckdb-upgrade,DuckDB gets an upgrade>>
-// * <<databricks-dialect,Databricks dialect support>>
-// * <<sql-editor-highlighting,SQL Editor gets syntax highlighting>>
-// * <<workflow-status-remote,Workflow execution status feedback for remote engines>>
-// * <<janino-upgrade,Janino Expression Engine upgrade>>
-// * <<bug-fixes,Bug fixes & quality-of-life improvements>>
-// * <<community-growth,The Apache Hop Community is growing stronger>>
-
-// Get started today, https://hop.apache.org/download/[download Hop 2.15.0] right away.
 
 [[google-sheets-output]]
 == Google Sheets Output: Option to re-create sheets and proxy support
@@ -67,7 +56,7 @@ One of our favorite in-process analytics databases just leveled up from version 
 Working in Databricks? Now Apache Hop speaks your language.  
 The new Databricks database dialect provides connectivity and proper SQL generation for Databricks environments, with primary support for **Databricks Unity Catalog**.
 
-image::/img/Release-2.15/databricks-dialect.png[Databricks Dialect, width="65%"]    
+image::/img/Release-2.15/databricks-dialect.png[Databricks Dialect]    
 
 [[sql-editor-highlighting]]
 == SQL Editor gets syntax highlighting
