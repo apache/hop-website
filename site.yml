@@ -17,11 +17,6 @@ content:
   - url: git@github.com:apache/hop.git
     branches: 
       - main
-      - release2.0.0
-      - release2.1.0
-      - release/2.2.0
-      - release/2.3.0
-      - release/2.4.0
       - release/2.5.0
       - release/2.6.0
       - release/2.7.0
