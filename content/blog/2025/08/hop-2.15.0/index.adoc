@@ -1,0 +1,184 @@
+---
+title: "Apache Hop 2.15 is available!!"
+date: 2025-08-20T06:44:56+02:00
+authors: ["bamaer"]
+categories: ["2.15", "Release", "Apache Hop"]
+preview: "Apache Hop 2.15 Released"
+description: "The latest Apache Hop release 2.15.0 is now available. Let's walk through the most important new features in this release."
+draft: false
+---
+
+:imagesdir: ../../../../../static
+
+:toc: macro
+:toclevels: 3
+:toc-title: Let's take a closer look at what Hop 2.15 brings:
+:toc-class: none
+
+
+The Apache Hop community is proud to announce the release of Apache Hop 2.15!  
+
+After three months of hard work, collaboration, and relentless testing, this release closes **95 tickets** by **17 contributors**, including important bug fixes, usability improvements, and new features designed to make your data orchestration simpler and more powerful.
+
+We want to extend a heartfelt thank you to every contributor, tester, and user who helped shape this release.  
+
+Your feedback, patches, and enthusiasm fuel the project and help make Apache Hop the versatile, reliable platform it is today.
+
+// Let's take a closer look at what Hop 2.15 brings
+
+image::/img/Release-2.15/hop-215.svg[ width="45%"]
+
+&nbsp; +
+
+toc::[]
+
+or https://hop.apache.org/download/[**download Hop 2.15.0 **] right away.
+
+
+// * <<google-sheets-output,Google Sheets Output: Option to re-create sheets and proxy support>>
+// * <<duckdb-upgrade,DuckDB gets an upgrade>>
+// * <<databricks-dialect,Databricks dialect support>>
+// * <<sql-editor-highlighting,SQL Editor gets syntax highlighting>>
+// * <<workflow-status-remote,Workflow execution status feedback for remote engines>>
+// * <<janino-upgrade,Janino Expression Engine upgrade>>
+// * <<bug-fixes,Bug fixes & quality-of-life improvements>>
+// * <<community-growth,The Apache Hop Community is growing stronger>>
+
+// Get started today, https://hop.apache.org/download/[download Hop 2.15.0] right away.
+
+[[google-sheets-output]]
+== Google Sheets Output: Option to re-create sheets and proxy support
+
+When exporting data to Google Sheets, you can now choose to re-create sheets as needed.
+
+image::/img/Release-2.15/google-sheets-output-recreate-sheet.png[Google Sheets Output Re-create Sheet Option]
+
+By default, the Google Sheets Output transform empties the sheet before writing (or appends if you enable the “Append” option).  
+This new option goes further: it removes the sheet entirely and re-creates it. This can help avoid versioning issues that can arise when writing to the same sheet repeatedly over long periods, such as hourly updates running for months or years.
+
+[[duckdb-upgrade]]
+== DuckDB gets an upgrade
+
+One of our favorite in-process analytics databases just leveled up from version **1.2.0** to **1.3.0.0**, meaning faster queries, better compatibility, and more features right out of the box.
+
+[[databricks-dialect]]
+== Databricks dialect support
+
+Working in Databricks? Now Apache Hop speaks your language.  
+The new Databricks database dialect provides connectivity and proper SQL generation for Databricks environments, with primary support for **Databricks Unity Catalog**.
+
+image::/img/Release-2.15/databricks-dialect.png[Databricks Dialect, width="65%"]    
+
+[[sql-editor-highlighting]]
+== SQL Editor gets syntax highlighting
+
+The SQL Editor in Apache Hop now supports syntax highlighting, making it easier to read, write, and debug SQL queries directly within the Hop GUI.
+
+[[workflow-status-remote]]
+== Workflow execution status feedback for remote engines
+
+When executing a workflow on a remote engine from the GUI, you now receive **real-time status updates**.  
+This makes it easier to track progress, spot issues, and confirm that your pipeline or workflow is running as expected.
+
+[[janino-upgrade]]
+== Janino Expression Engine upgrade
+
+The Janino library, used internally to evaluate expressions within scripting transforms like **JavaScript**, **User Defined Java Class**, and **User Defined Java Expression**, has been upgraded from version **3.1.11** to **3.1.12**.  
+This upgrade brings enhanced performance and stability, so your transforms run faster and more reliably.
+
+[[bug-fixes]]
+== Bug fixes & quality-of-life improvements
+
+Apache Hop 2.15 also focuses heavily on smoothing out rough edges. This release fixes numerous bugs reported by users and contributors alike, ensuring a more predictable and enjoyable experience.
+
+=== Real-Time Pipeline Metrics & Logging Fixes
+Fixed a critical bug that prevented pipeline metrics and logs from updating live during execution after the first run. Now you get continuous, accurate feedback on your pipeline’s progress and performance in real-time.
+
+=== JSON Input Fixes
+JSON Input transforms now handle keys with dots (`.`) properly during scanning, fixing issues with nested or complex JSON structures.
+
+=== YAML Input Cloning
+YAML Input transforms now correctly clone output rows to avoid data corruption or unexpected results when processing multiple outputs.
+
+=== GUI Enhancements
+* You can now use `CTRL+V` to paste in the Search perspective.
+* Editing datasets no longer causes focus loss.
+* The “OK” button in transform dialogs now reliably applies all changes.
+
+=== Azure Storage Metadata Accuracy
+Fixed incorrect last modified times reported by the Azure Storage plugin — essential for time-sensitive workflows.
+
+=== File Metadata Transform Behavior
+The File Metadata transform now only executes when it has input rows, preventing unnecessary runs.
+
+=== NullPointerExceptions & Stability Fixes
+Various NullPointerExceptions across transforms and actions have been addressed.
+
+=== OracleBulkLoader Manual URL Fix
+OracleBulkLoader now correctly supports manual connection URLs.
+
+=== Concat Fields Enclosure Handling
+The Concat Fields transform now respects field enclosures during concatenation.
+
+=== Updated Documentation on Parallel Execution with JOIN Action
+Documentation now includes clearer explanations, practical examples, and best practices for parallel workflows with the JOIN action.
+
+…and many other minor fixes and improvements. See the https://github.com/apache/hop/milestone/16?closed=1[full changelog].
+
+[[community-growth]]
+== The Apache Hop Community is growing stronger
+
+Our community continues to grow steadily:
+
+* LinkedIn: 3,409 followers (up from 3,130) https://www.linkedin.com/company/apache-hop/[follow]
+* Twitter/X: 981 followers (up from 976) https://twitter.com/ApacheHop[follow]
+* YouTube: 1,460 subscribers (up from 1,400) https://www.youtube.com/c/ApacheHop[subscribe]
+
+We're grateful for every user, contributor, and advocate who helps push Apache Hop forward.
+
+If you haven't yet joined the conversation, here are some great ways to get involved:
+
+* Join our https://hop.apache.org/community/mailing-list/[mailing lists]
+* Connect with us on https://hop.apache.org/community/slack/[Slack]
+* Explore https://github.com/apache/hop[GitHub] to contribute code, report bugs, or suggest features
+
+Your participation helps make Apache Hop better for everyone!
+
+== Get Apache Hop 2.15 today!
+
+Don’t wait to try the latest and greatest version of Apache Hop.  
+https://hop.apache.org/download/[Download 2.15 now] and experience the improved stability, usability, and new features firsthand.
+
+Want to see every single fix and enhancement?  
+Explore the https://github.com/apache/hop/milestone/35?closed=1[Apache Hop 2.15 Milestone] on GitHub.
+
+== Looking forward
+
+The Apache Hop team is already working hard on version 2.16, packed with new features and improvements you won’t want to miss.
+
+Thank you for being part of the Apache Hop journey.
+
+
+
+== Community 
+
+
+The Hop community continues to grow!
+
+The overview below shows the community growth compared to the 2.14.0 release in May:
+
+* LinkedIn: 3.130 followers (up from 3.050) link:https://www.linkedin.com/company/hop-project[follow]
+* Twitter/X: 976 followers (up from 973) link:https://twitter.com/ApacheHop[follow]
+* YouTube: 1.400 subscribers (up from 1.390) link:https://www.youtube.com/ApacheHop[subscribe]
+
+Without community interaction and contribution, Hop is just a coding club! Please feel free to join, participate in the discussion, test, file bug tickets on the software or documentation, ... Contributing is a lot more than writing code.
+
+Check out our link:/community/contributing/[contribution guides^] and http://hop.apache.org/community/ethos/[Code of Conduct^] to find out more.
+
+
+== GitHub Issues 
+
+This release contains work on 95 tickets by 17 contributors.
+
+Check out the full list of issues in Apache Hop 2.15.0 in our https://github.com/apache/hop/issues[Github Issues^] 
+and the https://github.com/apache/hop/releases/tag/2.15.0-rc2[Release notes^].
