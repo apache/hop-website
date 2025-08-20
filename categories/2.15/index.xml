@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2.15 on Hop</title>
+    <link>https://hop.apache.org/categories/2.15/</link>
+    <description>Recent content in 2.15 on Hop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 20 Aug 2025 06:44:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/2.15/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Hop 2.15 is available!!</title>
+      <link>https://hop.apache.org/blog/2025/08/hop-2.15.0/</link>
+      <pubDate>Wed, 20 Aug 2025 06:44:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2025/08/hop-2.15.0/</guid>
+      <description>The Apache Hop community is proud to announce the release of Apache Hop 2.15!
+ After three months of hard work, collaboration, and relentless testing, this release closes 95 tickets by 17 contributors, including important bug fixes, usability improvements, and new features designed to make your data orchestration simpler and more powerful.
+ We want to extend a heartfelt thank you to every contributor, tester, and user who helped shape this release.</description>
+    </item>
+    
+  </channel>
+</rss>
