@@ -69,6 +69,9 @@ All known Hop events are listed below. Add your event to the list below or annou
 [%header,cols="5%,55%,15%,10%,15%"]
 |===
 |Event name|Description|Date|Language|Recording
+|https://www.giswiki.ch/KI-gest%C3%BCtzte_Enterprise-_und_Geo-Datenintegration_und_Apache_Hop_2025-08[KI-gestützte Enterprise- und Geo-Datenintegration und Apache Hop 2025-08]|Webinar "KI-gestützte Enterprise- und Geo-Datenintegration und Apache Hop 2025-08"
+
+Ein kompakter Überblick zur Datenintegration vom Vibe- bis zum No-Coding mit dem Open-Source-Tool Apache Hop.|2025-08-26|DE|-
 |3H17|Introducing the new Execution Information framework in Apache Hop 2.1.0|2022-11-10|EN|https://www.youtube.com/watch?v=HCbW2TB3pEo[youtube^]
 |3H16|Packaging Hop as a Windows Application and Parsing Stripe API Data|2022-06-23|EN|https://www.youtube.com/watch?v=nxgZOJx-FKc[youtube^]
 |3H15|Apache Hop updates and use case: Apache Hop and Debezium|2022-06-09|EN|https://youtu.be/_sTSGwmV-3w[youtube^]
