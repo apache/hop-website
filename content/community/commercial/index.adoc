@@ -10,6 +10,10 @@ Apache Hop is gaining traction in data orchestration projects across a number of
 
 https://www.know-bi.be/contact[know.bi, window="blank"] helps organizations be successful with Apache Hop. Started by a number of the core Hop committers and Hop project founders, know.bi has in-depth knowledge of the Hop platform and can support your organization to hit the ground running with Hop. The services provided by know.bi include migrations, certified installations, coaching, training and enterprise-level support.
 
+### yupiik
+
+Based in France, https://www.yupiik.com[Yupiik, window="blank"] has years of experience in data integration and Java performance optimization, and we know how to get the best out of Hop. We actively contribute to other Apache Software Foundation projects, giving us a deep understanding of the open-source ecosystem.
+Our services include performance tuning, best practice guidance, and ongoing commercial support to help your organization get up and running with Hop quickly and efficiently.
 
 ## Policies for admission to this page
 
