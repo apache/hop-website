@@ -56,17 +56,18 @@ All known Hop events are listed below. Add your event to the list below or annou
 
 === Upcoming
 
-[%header,cols="5%,55%,15%,10%,15%"]
+[%header,cols="15%,50%,10%,10%,15%"]
 |===
 |Event name|Description|Date|Language|Link (subscribe/attend)
-|{set:cellbgcolor:#30328422}||||
+|{set:cellbgcolor:#30328422}Apache Hop User Meeting Vol. 5|Das fünfte Apache Hop User Meetup zeigt, wie lebendig die Community ist. Es erwarten dich frische Features, echte Use Cases und viel Austausch mit anderen. Egal, ob du Apache Hop schon nutzt oder erst kennenlernen willst: als Fan von Datenintegrationstools bist du hier richtig!|2025-11-18|DE|https://data.it-novum.com/termine/apache-hop-user-meetup/?utm_source=linkedin&utm_medium=social[Register^]
 |===
 {set:cellbgcolor}
 
 
+
 === Past events
 
-[%header,cols="5%,55%,15%,10%,15%"]
+[%header,cols="15%,50%,10%,10%,15%"]
 |===
 |Event name|Description|Date|Language|Recording
 |https://www.giswiki.ch/KI-gest%C3%BCtzte_Enterprise-_und_Geo-Datenintegration_und_Apache_Hop_2025-08[KI-gestützte Enterprise- und Geo-Datenintegration und Apache Hop 2025-08]|Webinar "KI-gestützte Enterprise- und Geo-Datenintegration und Apache Hop 2025-08"
