@@ -1,0 +1,34 @@
+---
+title: "Apache Hop 2.16 is available!!"
+date: 2025-11-14T06:44:56+02:00
+authors: ["bamaer"]
+categories: ["2.16", "Release", "Apache Hop"]
+preview: "Apache Hop 2.16 Released"
+description: "The latest Apache Hop release 2.16.0 is now available. Let's walk through the most important new features in this release."
+draft: false
+---
+
+:imagesdir: ../../../../../static
+
+:toc: macro
+:toclevels: 3
+:toc-title: Let's take a closer look at what Hop 2.16 brings:
+:toc-class: none
+
+
+The Apache Hop community is proud to announce the release of Apache Hop 2.16!  
+
+After three months of hard work, collaboration, and relentless testing, this release closes **11 tickets** by **17 contributors**, including important bug fixes, usability improvements, and new features designed to make your data orchestration simpler and more powerful.
+
+We want to extend a heartfelt thank you to every contributor, tester, and user who helped shape this release.  
+
+Your feedback, patches, and enthusiasm fuel the project and help make Apache Hop the versatile, reliable platform it is today.
+
+
+image::/img/Release-2.15/hop-215.svg[ width="45%"]
+
+&nbsp; +
+
+toc::[]
+
+or https://hop.apache.org/download/[**download Hop 2.16.0 **] right away.
