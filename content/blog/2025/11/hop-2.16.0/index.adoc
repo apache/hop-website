@@ -1,6 +1,6 @@
 ---
 title: "Apache Hop 2.16 is available!!"
-date: 2025-11-14T06:44:56+02:00
+date: 2025-11-17T06:44:56+02:00
 authors: ["bamaer"]
 categories: ["2.16", "Release", "Apache Hop"]
 preview: "Apache Hop 2.16 Released"
@@ -18,17 +18,124 @@ draft: false
 
 The Apache Hop community is proud to announce the release of Apache Hop 2.16!  
 
-After three months of hard work, collaboration, and relentless testing, this release closes **11 tickets** by **17 contributors**, including important bug fixes, usability improvements, and new features designed to make your data orchestration simpler and more powerful.
-
+After another three months of hard work, collaboration, and testing, this release closes **111 tickets** by **22 contributors**, delivers powerful new capabilities, important integrations, and a series of quality-of-life improvements to make data orchestration even more flexible, robust, and enterprise-ready.
 We want to extend a heartfelt thank you to every contributor, tester, and user who helped shape this release.  
 
 Your feedback, patches, and enthusiasm fuel the project and help make Apache Hop the versatile, reliable platform it is today.
 
 
-image::/img/Release-2.15/hop-215.svg[ width="45%"]
+image::/img/Release-2.16/hop-216.svg[ width="45%"]
 
 &nbsp; +
 
 toc::[]
 
 or https://hop.apache.org/download/[**download Hop 2.16.0 **] right away.
+
+== Table Output Can Update Tables
+
+The Table Output transform can now update existing tables.  
+This improvement makes it easier to build and maintain staging areas and incremental data pipelines without separate update logic - a major step forward for data warehouse and ETL workflows.
+
+[[salesforce-oauth]]
+== OAuth Support for Salesforce Transforms
+
+Salesforce transforms now support **OAuth authentication**.  
+This update enhances security, simplifies configuration, and improves compatibility with enterprise Salesforce environments. Users no longer need to depend on basic username and password connections.
+
+A new **Salesforce connection metadata type** has also been introduced, making it easier to manage and reuse Salesforce connection settings across projects.
+
+In addition, the **Salesforce Input transform** can now use Salesforce *keys* instead of *labels*, providing greater flexibility and accuracy when working with Salesforce data structures.
+
+image::/img/Release-2.16/salesforce-oauth.png[Salesforce OAuth, width="90%"]
+
+
+[[merge-diff]]
+== Merge Diff: See What Changed
+
+The Merge Diff action now shows which fields have changed values between data sets.  
+This improvement increases visibility for audit and comparison workflows, making it easier to identify changes and ensure data integrity.
+
+[[uuid-support]]
+== UUID Column Type Support
+
+Apache Hop 2.16 introduces native **UUID column type** support for both PostgreSQL and MongoDB.  
+This addition enables more consistent schema management and smoother integration between relational and document databases.
+
+[[json-field]]
+== Improved JSON Field Type Handling
+
+JSON field type support has been improved across multiple transforms, resulting in:
+
+* More consistent parsing and serialization  
+* Better compatibility with nested structures  
+* Fewer edge case issues  
+
+These updates make working with JSON data in Hop more reliable and predictable, especially in pipelines that process complex or semi-structured data.
+
+[[parquet-input]]
+== Parquet Input Enhancements
+
+Reading Parquet files is now faster and more reliable.  
+The enhanced Parquet Input transform improves schema inference, supports more data types, and provides smoother interoperability with data lake and Spark environments.
+
+image::/img/Release-2.16/parquet-input.png[Parquet Input, width="70%"]
+
+
+[[azure-key-vault]]
+== Azure Key Vault Variable Resolver
+
+Hop now includes an **Azure Key Vault variable resolver**, allowing you to reference secrets and credentials directly from Azure Key Vault.  
+This feature helps organizations manage credentials securely and eliminate hardcoded secrets in workflows.
+
+image::/img/Release-2.16/azure-key-vault-variable-resolver.png[Azure Key Vault Variable Resolver, width="90%"]
+
+[[other-fixes]]
+== Other Fixes and Improvements
+
+In addition to the major new features, Apache Hop 2.16 includes a wide range of fixes, optimizations, and refinements contributed by our community members.  
+Several long-standing issues were resolved, and many transforms and actions received targeted updates. Highlights include:
+
+* Improved variable handling across workflows and pipelines for more consistent value resolution  
+* Enhanced logging and error messages to make debugging and troubleshooting easier  
+* User interface updates that improve layout consistency and dialog responsiveness  
+* Performance improvements in file-based transforms and metadata loading  
+* Updated plugin behavior and dependency alignment for smoother compatibility across environments
+
+For the complete list of fixes, enhancements, and merged pull requests, visit the https://github.com/apache/hop/milestone/17?closed=1[Apache Hop 2.16 milestone on GitHub].
+
+
+[[community-growth]]
+== The Apache Hop Community Keeps Growing
+
+Our community continues to grow steadily, with more developers, data engineers, and contributors joining the project every month.
+
+* LinkedIn: 3,591 followers (up from 3,409) https://www.linkedin.com/company/apache-hop/[follow]  
+* Twitter/X: 984 followers (up from 981) https://twitter.com/ApacheHop[follow]  
+* YouTube: 1,540 subscribers (up from 1,460) https://www.youtube.com/c/ApacheHop[subscribe]  
+
+From building pipelines to testing new features or enhancing documentation, every contribution helps strengthen Apache Hop.
+If you haven’t yet joined the conversation, here are some great ways to get involved:
+
+* Join our https://hop.apache.org/community/mailing-list/[mailing lists]  
+* Connect with us on https://hop.apache.org/community/slack/[Slack]  
+* Explore https://github.com/apache/hop[GitHub] to contribute code, report bugs, or suggest features  
+
+Your participation helps make Apache Hop better for everyone!
+
+== Get Apache Hop 2.16 today!
+
+Don’t wait to try the latest and greatest version of Apache Hop.  
+https://hop.apache.org/download/[Download 2.16 now] and experience the improved stability, integrations, and new features firsthand.
+
+== GitHub Issues 
+
+This release contains work on 111 tickets by 22 contributors.
+
+Want to see every fix and enhancement?  
+Explore the https://github.com/apache/hop/milestone/17?closed=1[Apache Hop 2.16 Milestone] and the https://github.com/apache/hop/releases/tag/2.16.0-rc1[Release notes^] on GitHub.
+
+== Looking forward
+
+The Apache Hop community is already working hard on the next version, packed with even more features and improvements you won't want to miss.
+Thank you for being part of the Apache Hop journey.
