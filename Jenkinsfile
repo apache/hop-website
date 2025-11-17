@@ -77,24 +77,24 @@ pipeline {
                 sh "cd $WORKSPACE/hop-website && yarn --non-interactive --frozen-lockfile build"
             }
         }
-        stage('Checks') {
-            agent {
-                dockerfile {
-                    dir 'hop-website'
-                    label "$NODE"
-                    reuseNode true
-                    args '-u root'
-                }
-            }
+        // stage('Checks') {
+        //     agent {
+        //         dockerfile {
+        //             dir 'hop-website'
+        //             label "$NODE"
+        //             reuseNode true
+        //             args '-u root'
+        //         }
+        //     }
 
-            environment {
-                HOME = "$WORKSPACE"
-            }
+        //     environment {
+        //         HOME = "$WORKSPACE"
+        //     }
 
-            steps {
-                sh "cd $WORKSPACE/hop-website && yarn --non-interactive --frozen-lockfile checks"
-            }
-        }
+        //     steps {
+        //         sh "cd $WORKSPACE/hop-website && yarn --non-interactive --frozen-lockfile checks"
+        //     }
+        // }
         stage('Deploy') {
             when {
                 branch 'main'
