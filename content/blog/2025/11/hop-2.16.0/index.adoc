@@ -96,6 +96,7 @@ image::/img/Release-2.16/azure-key-vault-variable-resolver.png[Azure Key Vault V
 In addition to the major new features, Apache Hop 2.16 includes a wide range of fixes, optimizations, and refinements contributed by our community members.  
 Several long-standing issues were resolved, and many transforms and actions received targeted updates. Highlights include:
 
+* AWS S3 VFS now supports Minio
 * Improved variable handling across workflows and pipelines for more consistent value resolution  
 * Enhanced logging and error messages to make debugging and troubleshooting easier  
 * User interface updates that improve layout consistency and dialog responsiveness  
