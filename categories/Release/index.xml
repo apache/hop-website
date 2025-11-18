@@ -6,7 +6,17 @@
     <description>Recent content in Release on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Aug 2025 06:44:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/Release/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 17 Nov 2025 06:44:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/Release/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Hop 2.16 is available!!</title>
+      <link>https://hop.apache.org/blog/2025/11/hop-2.16.0/</link>
+      <pubDate>Mon, 17 Nov 2025 06:44:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2025/11/hop-2.16.0/</guid>
+      <description>The Apache Hop community is proud to announce the release of Apache Hop 2.16!
+ After another three months of hard work, collaboration, and testing, this release closes 111 tickets by 22 contributors, delivers powerful new capabilities, important integrations, and a series of quality-of-life improvements to make data orchestration even more flexible, robust, and enterprise-ready. We want to extend a heartfelt thank you to every contributor, tester, and user who helped shape this release.</description>
+    </item>
+    
     <item>
       <title>Apache Hop 2.15 is available!!</title>
       <link>https://hop.apache.org/blog/2025/08/hop-2.15.0/</link>

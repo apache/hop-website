@@ -2,22 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://hop.apache.org/categories/2.16/</loc>
+    <lastmod>2025-11-17T06:44:56+02:00</lastmod>
+  </url><url>
+    <loc>https://hop.apache.org/categories/Apache-Hop/</loc>
+    <lastmod>2025-11-17T06:44:56+02:00</lastmod>
+  </url><url>
+    <loc>https://hop.apache.org/</loc>
+    <lastmod>2025-11-17T06:44:56+02:00</lastmod>
+  </url><url>
+    <loc>https://hop.apache.org/blog/2025/11/hop-2.16.0/</loc>
+    <lastmod>2025-11-17T06:44:56+02:00</lastmod>
+  </url><url>
+    <loc>https://hop.apache.org/blog/</loc>
+    <lastmod>2025-11-17T06:44:56+02:00</lastmod>
+  </url><url>
+    <loc>https://hop.apache.org/categories/Release/</loc>
+    <lastmod>2025-11-17T06:44:56+02:00</lastmod>
+  </url><url>
     <loc>https://hop.apache.org/categories/2.15/</loc>
     <lastmod>2025-08-20T06:44:56+02:00</lastmod>
   </url><url>
-    <loc>https://hop.apache.org/categories/Apache-Hop/</loc>
-    <lastmod>2025-08-20T06:44:56+02:00</lastmod>
-  </url><url>
-    <loc>https://hop.apache.org/</loc>
-    <lastmod>2025-08-20T06:44:56+02:00</lastmod>
-  </url><url>
     <loc>https://hop.apache.org/blog/2025/08/hop-2.15.0/</loc>
-    <lastmod>2025-08-20T06:44:56+02:00</lastmod>
-  </url><url>
-    <loc>https://hop.apache.org/blog/</loc>
-    <lastmod>2025-08-20T06:44:56+02:00</lastmod>
-  </url><url>
-    <loc>https://hop.apache.org/categories/Release/</loc>
     <lastmod>2025-08-20T06:44:56+02:00</lastmod>
   </url><url>
     <loc>https://hop.apache.org/categories/2.14/</loc>
