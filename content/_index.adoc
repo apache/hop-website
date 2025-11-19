@@ -107,7 +107,7 @@ Developers and engineers can manage the entire project life cycle from the Hop G
 # Apache &amp; Open Source
 
 {{< div "split" >}}
-![20 years of Apache Software foundation](/img/apache-20.png)
+![The Apache Software foundation](/img/asf_logo_wide.svg)
 {{< /div >}}
 
 {{< div "split" >}}
@@ -125,7 +125,3 @@ We also love contributions: don't hesitate to [contribute](./community/contribut
 {{< /div >}}
 
 {{< /section >}}
-
-
-
-
