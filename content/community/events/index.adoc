@@ -7,8 +7,6 @@ description: "Apache Hop deeply cares about its community and encourages communi
 
 * https://www.meetup.com/3hx-apache-hop-hot-hop-hangouts/[3Hx - Apache Hop Hot Hop Hangouts ^]
 * https://www.meetup.com/Hop-Italia-Users-Group/[Hop User Group Italia^]
-* https://www.meetup.com/grupo-de-usuarios-de-hop-en-espanol/[Grupo de usuarios de Apache Hop en Español ^]
-* https://www.meetup.com/apache-hop-user-group-brasil/[Grupo de usuários do Apache Hop em Português ^]
 * https://t.me/apachehop[Apache Hop em Português no Telegram ^]
 * https://www.meetup.com/apache-hop-user-group-japan/[日本Apache Hop ユーザーグループ (Apache Hop User Group Japan) ^]
 
@@ -59,7 +57,13 @@ All known Hop events are listed below. Add your event to the list below or annou
 [%header,cols="15%,50%,10%,10%,15%"]
 |===
 |Event name|Description|Date|Language|Link (subscribe/attend)
-|{set:cellbgcolor:#30328422}Apache Hop User Meeting Vol. 5|Das fünfte Apache Hop User Meetup zeigt, wie lebendig die Community ist. Es erwarten dich frische Features, echte Use Cases und viel Austausch mit anderen. Egal, ob du Apache Hop schon nutzt oder erst kennenlernen willst: als Fan von Datenintegrationstools bist du hier richtig!|2025-11-18|DE|https://data.it-novum.com/termine/apache-hop-user-meetup/?utm_source=linkedin&utm_medium=social[Register^]
+|{set:cellbgcolor:#30328422}Webinar Möglichkeiten der Enterprise- und Geo-Datenintegration
+mit Apache Hop|Description: Eine Einführung (online, kostenlos) in Apache Hop mit
+Fokus auf Geodaten. Dabei steht die Weiterentwicklung der GIS-Plug-ins
+von AtolCD im Vordergrund. Zudem werden Lösungen zur Einbindung
+externer Werkzeuge - für Formate wie 3D, INTERLIS oder IFC/BIM - in
+Pipelines und Workflows präsentiert.|2026-02-10|DE|https://www.giswiki.ch/Webinar_Apache_Hop_GIS_2026[Register^]
+
 |===
 {set:cellbgcolor}
 
@@ -70,6 +74,7 @@ All known Hop events are listed below. Add your event to the list below or annou
 [%header,cols="15%,50%,10%,10%,15%"]
 |===
 |Event name|Description|Date|Language|Recording
+|{set:cellbgcolor:#30328422}Apache Hop User Meeting Vol. 5|Das fünfte Apache Hop User Meetup zeigt, wie lebendig die Community ist. Es erwarten dich frische Features, echte Use Cases und viel Austausch mit anderen. Egal, ob du Apache Hop schon nutzt oder erst kennenlernen willst: als Fan von Datenintegrationstools bist du hier richtig!|2025-11-18|DE|https://data.it-novum.com/termine/apache-hop-user-meetup/?utm_source=linkedin&utm_medium=social[Video links on page^]
 |https://www.giswiki.ch/KI-gest%C3%BCtzte_Enterprise-_und_Geo-Datenintegration_und_Apache_Hop_2025-08[KI-gestützte Enterprise- und Geo-Datenintegration und Apache Hop 2025-08]|Webinar "KI-gestützte Enterprise- und Geo-Datenintegration und Apache Hop 2025-08"
 
 Ein kompakter Überblick zur Datenintegration vom Vibe- bis zum No-Coding mit dem Open-Source-Tool Apache Hop.|2025-08-26|DE|-
