@@ -1,11 +1,10 @@
 ---
 title: "Apache Hop 2.17 is available!!"
-date: 2026-02-01T06:44:56+02:00
-authors: ["bamaer","hansva"]
+date: 2026-02-06T06:44:56+02:00
+authors: ["hansva"]
 categories: ["2.17", "Release", "Apache Hop"]
 preview: "Apache Hop 2.17 Released"
 description: "The latest Apache Hop release 2.17.0 is now available. Let's walk through the most important new features in this release."
-draft: true
 ---
 
 :imagesdir: ../../../../../static
@@ -18,7 +17,7 @@ draft: true
 
 The Apache Hop community is proud to announce the release of Apache Hop 2.17!  
 
-After another three months of hard work, collaboration, and testing, this release closes **111 tickets** by **22 contributors**, delivers powerful new capabilities, important integrations, and a series of quality-of-life improvements to make data orchestration even more flexible, robust, and enterprise-ready.
+After another three months of hard work, collaboration, and testing, this release closes **194 tickets** by **18 contributors**, delivers powerful new capabilities, important integrations, and a series of quality-of-life improvements to make data orchestration even more flexible, robust, and enterprise-ready.
 We want to extend a heartfelt thank you to every contributor, tester, and user who helped shape this release.  
 
 Your feedback, patches, and enthusiasm fuel the project and help make Apache Hop the versatile, reliable platform it is today.
@@ -42,6 +41,7 @@ We have reached around 70% translated, this brings Portuguese (Brazil) support o
 I would like to thank everyone that has worked on these translations.
 
 Current languages without Beta label:
+
 * Chinese
 * English
 * French
@@ -168,9 +168,9 @@ For the complete list of fixes, enhancements, and merged pull requests, visit th
 
 Our community continues to grow steadily, with more developers, data engineers, and contributors joining the project every month.
 
-* LinkedIn: 3,591 followers (up from 3,409) https://www.linkedin.com/company/apache-hop/[follow]  
-* Twitter/X: 984 followers (up from 981) https://twitter.com/ApacheHop[follow]  
-* YouTube: 1,540 subscribers (up from 1,460) https://www.youtube.com/c/ApacheHop[subscribe]  
+* LinkedIn: 3,812 followers (up from 3,591) https://www.linkedin.com/company/apachehop/[follow]  
+* Twitter/X: 990 followers (up from 984) https://twitter.com/ApacheHop[follow]  
+* YouTube: 1,590 subscribers (up from 1,540) https://www.youtube.com/c/ApacheHop[subscribe]  
 
 From building pipelines to testing new features or enhancing documentation, every contribution helps strengthen Apache Hop.
 If you haven’t yet joined the conversation, here are some great ways to get involved:
@@ -188,10 +188,10 @@ https://hop.apache.org/download/[Download 2.17 now] and experience the improved 
 
 == GitHub Issues 
 
-This release contains work on 111 tickets by 22 contributors.
+This release contains work on 194 tickets by 18 contributors.
 
 Want to see every fix and enhancement?  
-Explore the https://github.com/apache/hop/milestone/18?closed=1[Apache Hop 2.17 Milestone] and the https://github.com/apache/hop/releases/tag/2.16.0-rc1[Release notes^] on GitHub.
+Explore the https://github.com/apache/hop/milestone/18?closed=1[Apache Hop 2.17 Milestone] and the https://github.com/apache/hop/releases/tag/2.17.0-rc1[Release notes^] on GitHub.
 
 == Looking forward
 
