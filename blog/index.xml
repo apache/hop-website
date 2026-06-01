@@ -6,7 +6,17 @@
     <description>Recent content in Blog on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Feb 2026 06:44:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Jun 2026 06:44:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Hop 2.18 is available!!</title>
+      <link>https://hop.apache.org/blog/2026/06/hop-2.18.0/</link>
+      <pubDate>Mon, 01 Jun 2026 06:44:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2026/06/hop-2.18.0/</guid>
+      <description>The Apache Hop community is excited to announce the release of Apache Hop 2.18!
+ This release is the result of three months of focused development, collaboration, and rigorous testing. With 280 closed tickets by 21 contributors, including 10 first-time contributors, 2.18 brings significant new capabilities, deeper integrations, and a range of improvements that make Apache Hop more powerful and enjoyable to work with every day. A sincere thank you to every contributor, tester, and user who invested their time and expertise into making this release possible.</description>
+    </item>
+    
     <item>
       <title>Apache Hop 2.17 is available!!</title>
       <link>https://hop.apache.org/blog/2026/02/hop-2.17.0/</link>
