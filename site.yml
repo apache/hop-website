@@ -17,7 +17,6 @@ content:
   - url: git@github.com:apache/hop.git
     branches: 
       - main
-      - release/2.8.0
       - release/2.9.0
       - release/2.10.0
       - release/2.11.0
@@ -27,11 +26,11 @@ content:
       - release/2.15.0
       - release/2.16.0
       - release/2.17.0
+      - release/2.18.0
     start_path: /docs/hop-user-manual/
   - url: git@github.com:apache/hop.git
     branches: 
       - main
-      - release/2.8.0
       - release/2.9.0
       - release/2.10.0
       - release/2.11.0
@@ -41,11 +40,11 @@ content:
       - release/2.15.0
       - release/2.16.0
       - release/2.17.0
+      - release/2.18.0
     start_path: /docs/hop-tech-manual/
   - url: git@github.com:apache/hop.git
     branches: 
       - main
-      - release/2.8.0
       - release/2.9.0
       - release/2.10.0
       - release/2.11.0
@@ -55,6 +54,7 @@ content:
       - release/2.15.0
       - release/2.16.0
       - release/2.17.0
+      - release/2.18.0
     start_path: /docs/hop-dev-manual/
     
 ui:
