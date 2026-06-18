@@ -16,6 +16,17 @@ More information can be found in the readme files included in the download archi
 |===
 | Version | Date | Description | Download Link | PGP Signature file of download | SHA512 Checksum file of download
 
+.2+| link:/blog/2026/06/hop-2.18.1/[2.18.1] 
+.2+| June, 18th, 2026
+| **Binaries** 
+| https://www.apache.org/dyn/closer.cgi?filename=hop/2.18.1/apache-hop-client-2.18.1.zip&action=download[**apache-hop-client-2.18.1.zip**] 
+| https://downloads.apache.org/hop/2.18.1/apache-hop-client-2.18.1.zip.asc[asc] 
+| https://downloads.apache.org/hop/2.18.1/apache-hop-client-2.18.1.zip.sha512[sha512]
+| Sources 
+| https://www.apache.org/dyn/closer.cgi?filename=hop/2.18.1/apache-hop-2.18.1-src.tar.gz&action=download[apache-hop-2.18.1-src.tar.gz] 
+| https://downloads.apache.org/hop/2.18.1/apache-hop-2.18.1-src.tar.gz.asc[asc] 
+| https://downloads.apache.org/hop/2.18.1/apache-hop-2.18.1-src.tar.gz.sha512[sha512]
+
 .2+| link:/blog/2026/06/hop-2.18.0/[2.18.0] 
 .2+| June, 1st, 2026
 | **Binaries** 
