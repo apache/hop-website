@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2.18.1 on Hop</title>
+    <link>https://hop.apache.org/categories/2.18.1/</link>
+    <description>Recent content in 2.18.1 on Hop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 18 Jun 2026 06:44:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/categories/2.18.1/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Hop 2.18.1 is available!!</title>
+      <link>https://hop.apache.org/blog/2026/06/hop-2.18.1/</link>
+      <pubDate>Thu, 18 Jun 2026 06:44:56 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2026/06/hop-2.18.1/</guid>
+      <description>The Apache Hop community is excited to announce the release of Apache Hop 2.18.1!
+ This is a patch release to address some regressions that have happened between 2.17.0 and 2.18.0. The following issues have been solved:
+   Text file input no longer returned row numbers if configured to return those
+  Merge Rows (diff) regression with row lay-out
+  Get file names filter on type (files/Folders) did not work anymore</description>
+    </item>
+    
+  </channel>
+</rss>
