@@ -6,7 +6,19 @@
     <description>Recent content in Blog on Hop</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 18 Jun 2026 06:44:56 +0200</lastBuildDate><atom:link href="https://hop.apache.org/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 16 Aug 2026 00:00:00 +0200</lastBuildDate><atom:link href="https://hop.apache.org/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Hop 2.19 is available!</title>
+      <link>https://hop.apache.org/blog/2026/08/hop-2.19.0/</link>
+      <pubDate>Sun, 16 Aug 2026 00:00:00 +0200</pubDate>
+      
+      <guid>https://hop.apache.org/blog/2026/08/hop-2.19.0/</guid>
+      <description>The Apache Hop community is happy to announce the release of Apache Hop 2.19!
+ This release brings the largest set of changes we’ve delivered so far: 22 contributors, including 6 first-time contributors, worked on new features, improvements, and fixes over the past three months, closing 337 issues.
+    
+ Let&amp;#39;s take a closer look at what Hop 2.19 brings: The Marketplace Native Spark engine Databricks file system support Append support for Cloud File systems SFTP metadata type Open and edit more file types Split view in the UI Redis vCard support Notable Bug Fixes New contributors Get Apache Hop 2.</description>
+    </item>
+    
     <item>
       <title>Apache Hop 2.18.1 is available!!</title>
       <link>https://hop.apache.org/blog/2026/06/hop-2.18.1/</link>
