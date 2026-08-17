@@ -1,6 +1,6 @@
 ---
 title: "Apache Hop 2.19 is available!"
-date: 2026-09-01T00:00:00+02:00
+date: 2026-08-16T00:00:00+02:00
 authors: ["Adalennis"]
 categories: ["2.19", "Release", "Apache Hop"]
 preview: "Apache Hop 2.19 Released"
