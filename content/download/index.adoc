@@ -12,8 +12,6 @@ Apache Hop requires Java 17 to be installed on the system. Check [the docs] for 
 
 More information can be found in the readme files included in the download archives.
 
-**If the 2.19.0 download links are not working yet you can fetch the files https://dist.apache.org/repos/dist/release/hop/2.19.0/[here]**
-
 
 [cols="<.^1,<.^1,1,2,1,1"]
 |===
