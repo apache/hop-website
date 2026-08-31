@@ -74,7 +74,7 @@ TIP: The pull request review and merge is a manual process. Even though it usual
 
 All Apache Hop documentation is maintained in the same git repository as the code base.
 
-=== User manual and Technical documentation
+=== User manual
 
 The easiest way to contribute documentation is to fork https://github.com/apache/hop[Hop’s repository] on GitHub into your own GitHub account by clicking on the fork button at the top right. If you have no GitHub account, you can create one for free.
 
@@ -84,7 +84,6 @@ Next, clone your fork to your local machine.
 git clone https://github.com/<your-user-name>/hop.git
 
 The user manual documentation is located in the docs/hop-user-manual/ subdirectory.
-The technical documentation is located in the docs/hop-tech-manual/ subdirectory.
 
 
 === API documentation

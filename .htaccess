@@ -5,3 +5,16 @@ RewriteBase "/"
 # Redirect /manual/2.19.0 to latest
 
 RewriteRule "^manual/2.19.0(/.*)$" "/manual/latest$1" [R=permanent,L]
+
+# The technical documentation was folded into the user and developer manuals.
+# Redirect its pages, in any published version, to their new homes.
+
+RewriteRule "^tech-manual/[^/]+/hop-vs-kettle/hop-import\.html$" "/manual/latest/hop-tools/hop-import.html" [R=permanent,L]
+RewriteRule "^tech-manual/[^/]+/hop-vs-kettle/(.*)$" "/manual/latest/hop-vs-kettle/$1" [R=permanent,L]
+RewriteRule "^tech-manual/[^/]+/docker-container\.html$" "/manual/latest/docker-container.html" [R=permanent,L]
+RewriteRule "^tech-manual/[^/]+/hop-web-docker\.html$" "/manual/latest/hop-web-docker.html" [R=permanent,L]
+RewriteRule "^tech-manual/[^/]+/disable-ui-elements\.html$" "/manual/latest/hop-gui/disable-ui-elements.html" [R=permanent,L]
+RewriteRule "^tech-manual/[^/]+/logging/.*$" "/dev-manual/latest/architecture/logging-and-debugging.html" [R=permanent,L]
+RewriteRule "^tech-manual/[^/]+/hop-logo-and-icons\.html$" "/community/branding/" [R=permanent,L]
+RewriteRule "^tech-manual/[^/]+/_attachments/BrandGuideline_Hop\.pdf$" "/graphical_resources/brand_guideline_hop.pdf" [R=permanent,L]
+RewriteRule "^tech-manual/(.*)$" "/manual/latest/" [R=permanent,L]
