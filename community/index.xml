@@ -116,6 +116,19 @@
     </item>
     
     <item>
+      <title>Logo and Icons</title>
+      <link>https://hop.apache.org/community/branding/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hop.apache.org/community/branding/</guid>
+      <description>The Apache Hop logo should be used as the main reference to the Apache Hop project.
+ The Apache Hop icon should be used in graphical user interfaces like Apache Hop’s Hop Gui. The icon should not be used as a replacement for the Apache Hop logo.
+ Vector sources are available as CMYK PDF and RGB PDF.
+ Style guide BrandGuideline_Hop.pdf
+   CMYK for printing Logo</description>
+    </item>
+    
+    <item>
       <title>Mailing Lists</title>
       <link>https://hop.apache.org/community/mailing-list/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
