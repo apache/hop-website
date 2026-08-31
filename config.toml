@@ -51,30 +51,23 @@ unsafe= true
     url = "/manual/latest/"
 
 [[menu.main]]
-    name = "Technical Documentation"
-    parent = "docs"
-    weight = 3
-    identifier = "docs-tech-manual"
-    url = "/tech-manual/latest/"
-
-[[menu.main]]
     name = "Developer Documentation"
     parent = "docs"
-    weight = 4
+    weight = 3
     identifier = "docs-dev-manual"
     url = "/dev-manual/latest/"
 
 [[menu.main]]
     name = "Architecture"
     parent = "docs"
-    weight = 5
+    weight = 4
     identifier = "docs-architecture"
     url = "/docs/architecture/"
 
 [[menu.main]]
     name = "Roadmap"
     parent = "docs"
-    weight = 6
+    weight = 5
     identifier = "docs-roadmap"
     url = "/docs/roadmap/"
 
@@ -131,6 +124,13 @@ unsafe= true
     weight = 7
     identifier = "community-ethos"
     url = "/community/ethos/"
+
+[[menu.main]]
+    name = "Logo and Icons"
+    parent = "community"
+    weight = 8
+    identifier = "community-branding"
+    url = "/community/branding/"
 
 [[menu.main]]
     name = "Download"

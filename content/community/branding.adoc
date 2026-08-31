@@ -1,0 +1,71 @@
+---
+title: "Logo and Icons"
+---
+
+The Apache Hop logo should be used as the main reference to the Apache Hop project.
+
+The Apache Hop icon should be used in graphical user interfaces like Apache Hop's Hop Gui. The icon should not be used as a replacement for the Apache Hop logo.
+
+Vector sources are available as link:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/cmyk_print/hop_logo_cmyk.pdf[CMYK PDF] and link:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/rgb_web/hop_logo_rgb.pdf[RGB PDF].
+
+== Style guide
+
+link:/graphical_resources/brand_guideline_hop.pdf[BrandGuideline_Hop.pdf]
+
+== CMYK for printing
+
+=== Logo
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/cmyk_print/jpg/hop_logo_cmyk-4.jpg[Hop logo CMYK, width="50%"]
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/cmyk_print/jpg/hop_logo_cmyk-2.jpg[Hop logo CMYK, width="50%"]
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/cmyk_print/jpg/hop_logo_cmyk-1.jpg[Hop logo CMYK, width="50%"]
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/cmyk_print/jpg/hop_logo_cmyk-3.jpg[Hop logo CMYK, width="50%"]
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/cmyk_print/jpg/hop_logo_cmyk-5.jpg[Hop logo CMYK, width="50%"]
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/cmyk_print/jpg/hop_logo_cmyk-6.jpg[Hop logo CMYK, width="50%"]
+
+=== Icon
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/cmyk_print/jpg/hop_logo_cmyk-10.jpg[Hop icon CMYK, width="50%"]
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/cmyk_print/jpg/hop_logo_cmyk-7.jpg[Hop icon CMYK, width="50%"]
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/cmyk_print/jpg/hop_logo_cmyk-8.jpg[Hop icon CMYK, width="50%"]
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/cmyk_print/jpg/hop_logo_cmyk-9.jpg[Hop icon CMYK, width="50%"]
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/cmyk_print/jpg/hop_logo_cmyk-12.jpg[Hop icon CMYK, width="50%"]
+
+== RGB for web usage
+
+=== Logo
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/rgb_web/jpg/hop_logo_rgb-4.jpg[Hop logo RGB, width="50%"]
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/rgb_web/jpg/hop_logo_rgb-1.jpg[Hop logo RGB, width="50%"]
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/rgb_web/jpg/hop_logo_rgb-2.jpg[Hop logo RGB, width="50%"]
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/rgb_web/jpg/hop_logo_rgb-3.jpg[Hop logo RGB, width="50%"]
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/rgb_web/jpg/hop_logo_rgb-5.jpg[Hop logo RGB, width="50%"]
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/rgb_web/jpg/hop_logo_rgb-6.jpg[Hop logo RGB, width="50%"]
+
+=== Icon
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/rgb_web/jpg/hop_logo_rgb-10.jpg[Hop icon RGB, width="50%"]
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/rgb_web/jpg/hop_logo_rgb-7.jpg[Hop icon RGB, width="50%"]
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/rgb_web/jpg/hop_logo_rgb-8.jpg[Hop icon RGB, width="50%"]
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/rgb_web/jpg/hop_logo_rgb-9.jpg[Hop icon RGB, width="50%"]
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/rgb_web/jpg/hop_logo_rgb-11.jpg[Hop icon RGB, width="50%"]
+
+image:/graphical_resources/hop_logo_and_icon/hop_logo_and_icon/rgb_web/jpg/hop_logo_rgb-12.jpg[Hop icon RGB, width="50%"]

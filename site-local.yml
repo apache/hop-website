@@ -21,9 +21,6 @@ content:
     start_path: /docs/hop-user-manual/
   - url: ../hop/
     branches: HEAD
-    start_path: /docs/hop-tech-manual/
-  - url: ../hop/
-    branches: HEAD
     start_path: /docs/hop-dev-manual/
     
 ui:
