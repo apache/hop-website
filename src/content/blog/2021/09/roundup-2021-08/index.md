@@ -1,0 +1,80 @@
+---
+title: "Roundup July, August 2021"
+description: "The Apache Hop (Incubating) recap for July and August 2020: 0.99 released, Dropbox VFS support, ongoing bug hunt and community growth"
+publishDate: "2021-09-02T07:59:56+02:00"
+authors: bamaer
+categories: "Roundup, Apache Hop"
+preview: "Roundup July, August 2021"
+---
+As always at the start of another new month, let’s have a look at what happened at Hop over the last month. Here’s the recap for July and August 2021!
+
+## Hop 0.99 Release
+
+On August 7th, the Hop community released Apache Hop (Incubating) 0.99. As discussed at length in the [release announcement](https://hop.apache.org/blog/2021/08/hop-0.99/), 0.99 is our last stop before Hop 1.0.
+
+Since we want 1.0 to be as robust as possible, the focus has been on hardening Hop, so we worked hard on finding and fixing as many bugs as possible. Nevertheless, there’s quite a bit of new functionality in 0.99 as well:
+
+* Hop Web is now a mature alternative to Hop Gui on your Windows, Mac OS or Linux desktop.
+* Avro and Parquet have new transforms for input and output, Avro support comes with its own `Avro Record` data type
+* VFS support has been extended to projects etc, so your Apache Hop projects can now live in a cloud storage folder on AWS, GCP or Azure.
+* the PDI/Kettle importer has been improved. It now supports reading variables directly to an environment file, VFS support was added here as well, existing files and folders can now be skipped, and Pentaho Data Integration or Kettle projects can now be imported from the command line with the new `hop-import` tool.
+* Metadata Injection received some major work. A lot of additional transforms now support metadata injection, the Metadata Injection transform dialog now shows the icons for the transforms in your template pipeline along with lots of smaller improvements
+* the Hop documentation is now feature complete, while we continue to add additional docs, improve existing pages and add more samples to the samples project.
+* Hop is now fully translated in Italian. We fixed some translation and internationalization issues in the process.
+
+## Various
+
+In the three weeks since the Hop 0.99 release, the Hop team continued to work on a variety of items:
+
+### Dropbox VFS support
+
+In addition to cloud storage for AWS, Azure and GCP, Hop VFS now also [supports Dropbox](https://hop.apache.org/manual/latest/vfs/dropbox-vfs.html).
+
+### Bug Fixing Continued code cleanup
+
+A number of (minor) bugs have been identified and fixed since the 0.99 release.
+
+In preparation for 1.0, the Hop team continues to clean up old and deprecated code. Automated code formatting has been added, we continue to fix [SonarCloud](https://sonarcloud.io/dashboard?id=apache_hop) and other issues to get the Hop source code in the best shape possible for the Hop 1.0 release.
+
+## Community
+
+### Hop Mailing lists
+
+Don’t forget to subscribe to our [dev](mailto:dev-subscribe@hop.apache.org) and [users](mailto:users-subscribe@hop.apache.org) mailing lists!
+These mailing lists allow us to discuss and make decisions in a process that is as transparent and inclusive as possible, and as such are an important tool in our communication as an Apache project.
+
+The dev and user lists currently _only_ have 31 and 29 subscribers respectively. We can do better, Hop Community!
+
+Subscribing is as easy as sending an empty email by clicking the links below:
+
+* [users](mailto:users-subscribe@hop.apache.org): general how-to and functionality questions. Ask us anything!
+* [dev](mailto:dev-subscribe@hop.apache.org): developer discussions. There’s a lot of informal discussion going on in our [chat channels](https://chat.project-hop.org), but decisions that matter are taken on the dev list!
+
+### Hop Community
+
+The Hop community continues to grow:
+
+* chat: 217 registered members (up from 210) [join](https://chat.project-hop.org)
+* LinkedIn: 603 followers (up from 545) [follow](https://www.linkedin.com/company/hop-project)
+* Twitter: 488 followers (up from 476) [follow](https://twitter.com/ApacheHop)
+* YouTube: 247 subscribers (up from 232) [subscribe](https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA)
+* Meetup: 168 members (up from 167) link: [join](https://www.meetup.com/3hx-apache-hop-incubating-hot-hop-hangouts)
+
+Check out the [complete list](/community/team/) of committers and contributors.
+
+Without community contribution, Hop is just a coding club! Please feel free to join, participate in the discussion, test, file bug tickets on the software or documentation, ... Contributing is a lot more than writing code.
+
+Check out our [contribution guides](/community/contributing/) and [Code of Conduct](http://hop.apache.org/community/ethos/) to find out more.
+
+<a id="tickets"></a>
+
+## JIRA Activity
+
+Here’s a quick overview of what the Hop community worked on since the 0.99 Release.
+
+* Resolved: 29
+* In Progress: 9
+* Open: 32
+* Closed: 5
+
+The full list of issues that had activity over the last month is available [here](https://issues.apache.org/jira/issues/?jql=project%20%3D%20HOP%20AND%20status%20in%20(Resolved%2C%20Closed)%20AND%20resolved%20%3E%3D%202021-08-07%20AND%20resolved%20%3C%3D%202021-09-01%20ORDER%20BY%20updated%20ASC&startIndex=50)

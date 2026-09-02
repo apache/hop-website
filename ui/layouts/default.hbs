@@ -1,0 +1,51 @@
+{{!
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+    
+         http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+{{! Only the latest version of each manual is indexed: without this the same
+    page is a hit once per published version, twelve times over. Pagefind
+    indexes only pages carrying data-pagefind-body once any page has it. }}
+<body class="doc-page"{{#if (eq page.componentVersion page.component.latest)}} data-pagefind-body{{/if}}>
+{{> header}}
+<div class="doc-shell">
+{{> nav}}
+  <main class="doc-main" id="main">
+    {{! Below 1000px the sidebar is off-canvas, so it needs a way in. Only
+        rendered when there is a sidebar to open. }}
+    {{#if page.navigation.[0]}}
+    <button type="button" class="doc-nav__open" aria-expanded="false" aria-controls="doc-nav" data-pagefind-ignore>
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      Documentation menu
+    </button>
+    {{/if}}
+{{> breadcrumbs}}
+{{> marketplace}}
+{{> engines}}
+    <article class="doc">
+      {{#with page.title}}<h1>{{{this}}}</h1>{{/with}}
+      {{{page.contents}}}
+    </article>
+{{> pagination}}
+  </main>
+{{> toc}}
+</div>
+{{> footer}}
+</body>
+</html>

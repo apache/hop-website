@@ -1,0 +1,42 @@
+---
+/* Trail derived from the URL. The old site had none, so a visitor three levels
+   into /community/contribution-guides/ had no way back up but the browser. */
+const { path = '/', title, known } = Astro.props
+const LABELS = {
+  community: 'Community',
+  'contribution-guides': 'Contribution guides',
+  docs: 'Docs',
+  security: 'Security',
+  blog: 'Blog',
+}
+const parts = path.split('/').filter(Boolean)
+// Not every segment is a page: there is no /community/ or /docs/ landing
+// page, so those render as plain text rather than as links to a 404.
+const crumbs = parts.slice(0, -1).map((part, i) => {
+  const href = '/' + parts.slice(0, i + 1).join('/') + '/'
+  return {
+    label: LABELS[part] ?? part.replace(/-/g, ' ').replace(/^\w/, (c) => c.toUpperCase()),
+    href: !known || known.has(href) ? href : null,
+  }
+})
+---
+{crumbs.length > 0 && (
+  <nav class="crumbs" aria-label="Breadcrumb" data-pagefind-ignore>
+    <ol>
+      <li><a href="/">Home</a></li>
+      {crumbs.map((c) => <li>{c.href ? <a href={c.href}>{c.label}</a> : <span>{c.label}</span>}</li>)}
+      {title && <li><span aria-current="page">{title}</span></li>}
+    </ol>
+  </nav>
+)}
+
+<style>
+  .crumbs ol {
+    list-style: none; display: flex; flex-wrap: wrap; gap: 6px;
+    margin: 0 0 20px; padding: 0; font-size: 13.5px; color: var(--ink-3);
+  }
+  .crumbs li + li::before { content: "/"; margin-right: 6px; color: var(--rule-2); }
+  .crumbs a { color: var(--ink-3); text-decoration: none; }
+  .crumbs a:hover { color: var(--accent); }
+  .crumbs span { color: var(--ink-2); }
+</style>

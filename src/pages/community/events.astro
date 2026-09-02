@@ -1,0 +1,96 @@
+---
+import Base from '../../layouts/Base.astro'
+import Breadcrumbs from '../../components/Breadcrumbs.astro'
+import Section from '../../components/Section.astro'
+import EventList from '../../components/EventList.astro'
+import { events, userGroups } from '../../data/events.mjs'
+import { getCollection } from 'astro:content'
+
+const known = new Set((await getCollection('pages')).map((p) => `/${p.id}/`))
+
+/* Upcoming and past are derived, not hand-maintained. The previous page kept
+   them as two separate tables and its single "upcoming" entry had been in the
+   past for five months. */
+const today = new Date().toISOString().slice(0, 10)
+const upcoming = events.filter((e) => e.date >= today).sort((a, b) => a.date.localeCompare(b.date))
+const past = events.filter((e) => e.date < today).sort((a, b) => b.date.localeCompare(a.date))
+
+const announce = 'mailto:users@hop.apache.org?subject=' +
+  encodeURIComponent('Apache Hop event announcement') + '&body=' +
+  encodeURIComponent('Name:\nDescription:\nDate and time:\nLanguage:\nRegistration link:')
+---
+<Base
+  title="Events and user groups"
+  description="Apache Hop user groups and community events, worldwide and in several languages. Find one near you, or add your own.">
+  <main id="main">
+    <div class="intro">
+      <Breadcrumbs path="/community/events/" title="Events and user groups" known={known} />
+      <h1>Events and user groups</h1>
+      <p class="intro__lede">
+        Apache Hop cares deeply about its community. Local user groups and events &mdash; meetups,
+        hackathons, webinars, brainstorms &mdash; are how people meet each other and share what
+        they have built. Find one near you, or start your own.
+      </p>
+    </div>
+
+    <Section title="User groups" lede="Ongoing groups, each in its own language and time zone." divider={false}>
+      <ul class="groups">
+        {userGroups.map((g) => (
+          <li><a href={g.href}>{g.name}</a></li>
+        ))}
+      </ul>
+    </Section>
+
+    <Section title="Upcoming">
+      <EventList events={upcoming} empty="Nothing scheduled at the moment. If you are planning something, announce it on the users mailing list and it will appear here." />
+    </Section>
+
+    <Section title="Add your own event">
+      <div class="add">
+        <p>
+          An event can be almost anything: a local user group meeting, an online hackathon, a
+          brainstorm, a talk at a conference. To get yours listed, send the name, a short
+          description, the date and time, the language and a registration link to the users
+          mailing list.
+        </p>
+        <p class="add__cta">
+          <a class="btn btn--primary" href={announce}>Announce an event</a>
+          <a class="btn" href="/community/mailing-list/">Subscribe to users@</a>
+        </p>
+        <p class="add__note">
+          Recordings are welcome on the{' '}
+          <a href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA">Hop YouTube channel</a>,
+          and get linked from the list below once published.
+        </p>
+      </div>
+    </Section>
+
+    <Section title="Apache events">
+      <p class="asf">
+        The foundation runs its own conferences and community events across the year.
+      </p>
+      <p><a class="btn" href="https://www.apache.org/events/current-event.html">Apache events &rarr;</a></p>
+    </Section>
+
+    <Section title={`Past events (${past.length})`}>
+      <EventList events={past} />
+    </Section>
+  </main>
+</Base>
+
+<style>
+  .intro { max-width: 1180px; margin: 0 auto; padding: 36px 24px 0; }
+  .intro h1 { font-size: clamp(30px, 4vw, 42px); letter-spacing: -.028em; margin: 0 0 14px; }
+  .intro__lede { font-size: 18px; line-height: 1.6; color: var(--ink-2); max-width: 62ch; margin: 0; }
+
+  .groups { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+  .groups li { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; transition: border-color .15s; }
+  .groups li:hover { border-color: var(--accent); }
+  .groups a { display: block; padding: 16px 18px; text-decoration: none; font-weight: 600; font-size: 15.5px; }
+
+  .add { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 28px; }
+  .add p { color: var(--ink-2); max-width: 66ch; margin: 0 0 18px; }
+  .add__cta { display: flex; flex-wrap: wrap; gap: 12px; }
+  .add__note { font-size: 14.5px; margin: 18px 0 0 !important; }
+  .asf { color: var(--ink-2); max-width: 62ch; }
+</style>

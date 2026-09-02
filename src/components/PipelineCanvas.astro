@@ -1,0 +1,60 @@
+---
+// The hero visual: a Hop pipeline drawn in the product's own vocabulary
+// rather than a screenshot, so it never goes stale and works in both themes.
+---
+<div class="hero__canvas">
+        <svg viewBox="0 0 530 232" role="img" aria-labelledby="canvas-title canvas-desc">
+          <title id="canvas-title">A Hop pipeline on the design canvas</title>
+          <desc id="canvas-desc">Four transforms joined by hops: a CSV file input feeds a filter, which routes matching rows to an enrichment lookup and a table output, and rejected rows to an error log.</desc>
+          <defs>
+            <marker id="hop-arrow" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0 0 L8 4 L0 8 z" fill="var(--canvas-hop)"/>
+            </marker>
+            <marker id="hop-arrow-err" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0 0 L8 4 L0 8 z" fill="var(--canvas-err)"/>
+            </marker>
+          </defs>
+
+          <g class="canvas-grid" aria-hidden="true">
+            <path d="M0 .5 H530 M0 40.5 H530 M0 80.5 H530 M0 120.5 H530 M0 160.5 H530 M0 200.5 H530
+                     M.5 0 V232 M40.5 0 V232 M80.5 0 V232 M120.5 0 V232 M160.5 0 V232 M200.5 0 V232
+                     M240.5 0 V232 M280.5 0 V232 M320.5 0 V232 M360.5 0 V232 M400.5 0 V232 M440.5 0 V232
+                     M480.5 0 V232 M520.5 0 V232"/>
+          </g>
+
+          <g class="hops">
+            <path d="M148 74 H192" marker-end="url(#hop-arrow)"/>
+            <path d="M330 74 C352 74 356 32 374 32" marker-end="url(#hop-arrow)"/>
+            <path d="M330 74 C352 74 356 122 374 122" marker-end="url(#hop-arrow)"/>
+            <path class="hop--error" d="M261 96 V172" marker-end="url(#hop-arrow-err)"/>
+          </g>
+
+          <g class="nodes">
+            <g class="node" transform="translate(18,52)">
+              <rect width="130" height="44" rx="8"/>
+              <rect class="node__chip" x="10" y="13" width="18" height="18" rx="4"/>
+              <text x="38" y="27">CSV Input</text>
+            </g>
+            <g class="node node--active" transform="translate(192,52)">
+              <rect width="138" height="44" rx="8"/>
+              <rect class="node__chip node__chip--accent" x="10" y="13" width="18" height="18" rx="4"/>
+              <text x="38" y="27">Filter Rows</text>
+            </g>
+            <g class="node" transform="translate(374,10)">
+              <rect width="138" height="44" rx="8"/>
+              <rect class="node__chip" x="10" y="13" width="18" height="18" rx="4"/>
+              <text x="38" y="27">Stream Lookup</text>
+            </g>
+            <g class="node" transform="translate(374,100)">
+              <rect width="138" height="44" rx="8"/>
+              <rect class="node__chip" x="10" y="13" width="18" height="18" rx="4"/>
+              <text x="38" y="27">Table Output</text>
+            </g>
+            <g class="node node--error" transform="translate(192,172)">
+              <rect width="138" height="44" rx="8"/>
+              <rect class="node__chip node__chip--error" x="10" y="13" width="18" height="18" rx="4"/>
+              <text x="38" y="27">Error Log</text>
+            </g>
+          </g>
+        </svg>
+      </div>

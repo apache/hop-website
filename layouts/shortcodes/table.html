@@ -1,3 +1,0 @@
-{{ $htmlTable := .Inner | markdownify }}
-{{ $htmlTable := replace $htmlTable "<table>" "<table class=\"tableblock frame-all grid-all stretch\">" }}
-{{ $htmlTable | safeHTML }}

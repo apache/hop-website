@@ -1,0 +1,259 @@
+---
+import Base from '../layouts/Base.astro'
+import Section from '../components/Section.astro'
+import GuiShot from '../components/GuiShot.astro'
+import { site } from '../site.config.mjs'
+import { current } from '../data/releases.mjs'
+import { getCollection } from 'astro:content'
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => (b.data.publishDate?.getTime() ?? 0) - (a.data.publishDate?.getTime() ?? 0))
+  .slice(0, 3)
+
+const pillars = [
+  {
+    step: 'Design',
+    title: 'On a canvas, not in a config file',
+    body: 'Drag transforms onto a pipeline and join them with hops. Preview rows at any step, sniff live data while it runs, and see metrics on the canvas itself. Nothing is generated and nothing is compiled.',
+  },
+  {
+    step: 'Run',
+    title: 'Anywhere, without a rewrite',
+    body: 'The same pipeline runs on the native engine locally, on a remote Hop Server, or on Spark, Flink and Dataflow through Apache Beam. The runtime is a run configuration, not a different codebase.',
+  },
+  {
+    step: 'Manage',
+    title: 'Projects and environments, not copies',
+    body: 'Configuration lives beside the work rather than inside it. Move a project from development to production by switching environment, and keep credentials out of the pipelines entirely.',
+  },
+]
+
+/* The documented pipeline run configurations. Spark appears twice on purpose:
+   there is a native Spark engine that runs on Spark 4.1 without Beam, as well
+   as the Beam Spark runner. AWS EMR is deliberately absent - the old site
+   claimed it, but there is no run configuration or documentation page for it. */
+const engines = [
+  { name: 'Local', how: 'native' },
+  { name: 'Hop Server', how: 'native' },
+  { name: 'Apache Spark', how: 'native' },
+  { name: 'Databricks', how: 'native' },
+  { name: 'Apache Spark', how: 'Beam' },
+  { name: 'Apache Flink', how: 'Beam' },
+  { name: 'Google Dataflow', how: 'Beam' },
+]
+
+// Deliberately rounded. The exact counts at the time of writing were 253, 82
+// and 45, but plugins get added and nobody will remember to update a precise
+// figure on the home page - a stale exact number is worse than a round one.
+const stats = [
+  { n: '250+', label: 'pipeline transforms' },
+  { n: '80+', label: 'workflow actions' },
+  { n: '40+', label: 'database dialects' },
+]
+const connectors = [
+  'PostgreSQL', 'MySQL', 'Oracle', 'SQL Server', 'Snowflake', 'BigQuery', 'Redshift',
+  'Databricks', 'MongoDB', 'Neo4j', 'Kafka', 'Cassandra', 'Salesforce', 'SAP',
+  'Parquet', 'Avro', 'S3', 'Azure Blob', 'Google Cloud Storage', 'REST', 'SFTP',
+]
+
+const fmtDate = (d) =>
+  d ? d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }) : ''
+---
+<Base
+  bodyClass="home-page"
+  description="Apache Hop is an open source data integration and orchestration platform. Design pipelines and workflows visually, then run them locally, remotely, or on Spark, Flink and Dataflow.">
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="hero__inner">
+        <div>
+          <h1>Build data pipelines you can <em>see</em>.</h1>
+          <p class="hero__lede">
+            An open source platform for data integration and orchestration. Design pipelines
+            and workflows on a canvas, then run them where they belong &mdash; locally, on a
+            remote Hop&nbsp;Server, natively on Apache&nbsp;Spark, or on Flink and Dataflow
+            through Apache&nbsp;Beam.
+          </p>
+          <div class="hero__cta">
+            <a class="btn btn--primary btn--lg" href="/download/">Download {current.version}</a>
+            <a class="btn btn--lg btn--ghost" href="/manual/latest/getting-started/">Get started &rarr;</a>
+          </div>
+          <div class="hero__snippet">
+            <code>{site.dockerCommand}</code>
+            <button type="button" class="snippet-copy" data-copy={site.dockerCommand} aria-label="Copy command to clipboard">Copy</button>
+          </div>
+          <p class="hero__meta">Requires Java&nbsp;{site.javaVersion} &middot; released {site.releaseDate}</p>
+        </div>
+        <GuiShot />
+      </div>
+    </section>
+
+    <Section
+      title="Design, run, manage"
+      lede="Three things Hop does that a scheduler plus a pile of scripts does not.">
+      <ol class="pillars">
+        {pillars.map((p) => (
+          <li class="pillar">
+            <p class="pillar__step">{p.step}</p>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </li>
+        ))}
+      </ol>
+    </Section>
+
+    <Section
+      title="Run it where your data already is"
+      lede="The engine is a run configuration, not a rewrite. Point the same pipeline at a different runtime and the pipeline itself does not change.">
+      <ul class="engines">
+        {engines.map((e) => (
+          <li class="engine-chip">{e.name}<span class="engine-chip__how">{e.how}</span></li>
+        ))}
+      </ul>
+    </Section>
+
+    <Section
+      title="What's in the box"
+      lede="Transforms, workflow actions and database dialects ship with the platform. The marketplace adds the rest.">
+      <ul class="stats">
+        {stats.map((s) => (
+          <li class="stat"><strong>{s.n}</strong><span>{s.label}</span></li>
+        ))}
+      </ul>
+      <p class="connectors__intro">Including, out of the box:</p>
+      <ul class="connectors">
+        {connectors.map((c) => <li>{c}</li>)}
+      </ul>
+    </Section>
+
+    {posts.length > 0 && (
+      <Section title="Latest from the blog">
+        <ul class="posts">
+          {posts.map((p) => (
+            <li>
+              <a href={`/blog/${p.id}/`}>
+                <time datetime={p.data.publishDate?.toISOString().slice(0, 10)}>{fmtDate(p.data.publishDate)}</time>
+                <h3>{p.data.title}</h3>
+                {p.data.preview && <p>{p.data.preview}</p>}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="posts__more"><a href="/blog/">All posts &rarr;</a></p>
+      </Section>
+    )}
+
+    <section class="closing">
+      <div class="closing__inner">
+        <h2>Built by a community, at the Apache Software Foundation</h2>
+        <p>
+          Hop is developed in the open under the Apache&nbsp;License&nbsp;2.0. Everything happens on
+          the mailing lists and in the issue tracker, and new contributors are genuinely welcome.
+        </p>
+        <p class="closing__cta">
+          <a class="btn btn--primary btn--lg" href="/download/">Download {current.version}</a>
+          <a class="btn btn--lg btn--ghost" href="/community/contributing/">Contribute</a>
+          <a class="btn btn--lg btn--ghost" href="/community/mailing-list/">Mailing lists</a>
+        </p>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style>
+  /* ---- hero ---- */
+  .hero { position: relative; overflow: hidden; padding: 76px 0 68px; border-bottom: 1px solid var(--rule); }
+  .hero__glow {
+    position: absolute; inset: -40% -10% auto -10%; height: 130%; pointer-events: none;
+    background:
+      radial-gradient(46% 52% at 74% 32%, var(--glow-a) 0%, transparent 68%),
+      radial-gradient(40% 46% at 18% 8%, var(--glow-b) 0%, transparent 70%);
+  }
+  .hero__inner {
+    position: relative; max-width: 1180px; margin: 0 auto; padding: 0 24px;
+    display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.02fr);
+    gap: 60px; align-items: center;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 5vw, 58px); line-height: 1.03;
+    letter-spacing: -.032em; margin: 0 0 20px; max-width: 14ch;
+  }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero__lede { font-size: clamp(16.5px, 1.4vw, 19px); line-height: 1.58; color: var(--ink-2); max-width: 52ch; margin: 0 0 28px; }
+  .hero__cta { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 24px; }
+  .hero__snippet {
+    display: flex; align-items: center; gap: 10px; max-width: 420px;
+    background: var(--surface); border: 1px solid var(--rule);
+    border-radius: var(--radius); padding: 9px 9px 9px 14px; box-shadow: var(--shadow-sm);
+  }
+  .hero__snippet code { flex: 1; background: none; border: 0; padding: 0; font-size: 13.5px; overflow-x: auto; white-space: nowrap; }
+  .hero__snippet code::before { content: "$ "; color: var(--ink-3); }
+  .snippet-copy {
+    flex: none; font: inherit; font-size: 12px; font-weight: 600; padding: 5px 11px;
+    border-radius: 4px; cursor: pointer; background: var(--surface-2);
+    color: var(--ink-2); border: 1px solid var(--rule);
+  }
+  .snippet-copy:hover { color: var(--accent); border-color: var(--accent); }
+  .hero__meta { font-size: 13.5px; color: var(--ink-3); margin: 16px 0 0; }
+  @media (max-width: 940px) {
+    .hero { padding: 52px 0 48px; }
+    .hero__inner { grid-template-columns: 1fr; gap: 36px; }
+    .hero h1 { max-width: 18ch; }
+  }
+
+  /* ---- pillars ---- */
+  .pillars { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(268px,1fr)); gap: 28px; }
+  .pillar { border-top: 2px solid var(--accent); padding-top: 18px; }
+  .pillar__step {
+    font-family: var(--mono); font-size: 11.5px; font-weight: 600; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 10px;
+  }
+  .pillar h3 { margin: 0 0 8px; font-size: 18px; line-height: 1.3; }
+  .pillar p { margin: 0; color: var(--ink-2); font-size: 15px; line-height: 1.6; }
+
+  /* ---- engines ---- */
+  .engines { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .engine-chip {
+    display: inline-flex; align-items: baseline; gap: 8px;
+    padding: 9px 16px; border-radius: 999px; border: 1px solid var(--rule);
+    background: var(--surface); font-size: 14.5px; font-weight: 600; color: var(--ink-2);
+  }
+  .engine-chip__how {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    letter-spacing: .04em; color: var(--ink-3);
+  }
+
+  /* ---- stats + connectors ---- */
+  .stats { list-style: none; margin: 0 0 40px; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 18px; }
+  .stat { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 22px 20px; }
+  .stat strong { display: block; font-size: 34px; font-weight: 700; letter-spacing: -.02em; color: var(--accent); font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .stat span { display: block; font-size: 14.5px; color: var(--ink-2); margin-top: 6px; }
+  .connectors__intro { font-size: 14.5px; color: var(--ink-3); margin: 0 0 12px; }
+  .connectors { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .connectors li {
+    font-size: 13.5px; color: var(--ink-2); background: var(--surface-2);
+    border: 1px solid var(--rule); border-radius: 5px; padding: 5px 11px;
+  }
+
+  /* ---- posts ---- */
+  .posts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(258px,1fr)); gap: 18px; }
+  .posts a {
+    display: block; text-decoration: none; color: inherit; height: 100%;
+    background: var(--surface); border: 1px solid var(--rule);
+    border-radius: 10px; padding: 22px;
+    transition: border-color .15s, transform .15s;
+  }
+  .posts a:hover { border-color: var(--rule-2); transform: translateY(-2px); }
+  .posts time { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+  .posts h3 { margin: 8px 0 6px; font-size: 16.5px; line-height: 1.32; }
+  .posts p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+  .posts__more { margin: 22px 0 0; font-size: 15px; }
+
+  /* ---- closing ---- */
+  .closing { border-top: 1px solid var(--rule); background: var(--surface); }
+  .closing__inner { max-width: 1180px; margin: 0 auto; padding: 68px 24px; text-align: center; }
+  .closing h2 { font-size: clamp(24px, 3vw, 32px); margin: 0 0 12px; }
+  .closing p { color: var(--ink-2); max-width: 58ch; margin: 0 auto 24px; }
+  .closing__cta { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+</style>

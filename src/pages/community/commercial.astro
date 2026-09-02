@@ -1,0 +1,110 @@
+---
+import Base from '../../layouts/Base.astro'
+import Breadcrumbs from '../../components/Breadcrumbs.astro'
+import Section from '../../components/Section.astro'
+import { vendors } from '../../data/commercial.mjs'
+import { getCollection } from 'astro:content'
+
+const known = new Set((await getCollection('pages')).map((p) => `/${p.id}/`))
+const listing = 'mailto:dev@hop.apache.org?subject=' +
+  encodeURIComponent('Commercial offerings page: listing request') + '&body=' +
+  encodeURIComponent('Company:\nCountry:\nLink:\nFactual description of your Hop services:')
+---
+<Base
+  title="Commercial support"
+  description="Companies offering commercial services around Apache Hop. An informational listing maintained by the Hop PMC, not an endorsement.">
+  <main id="main">
+    <div class="intro">
+      <Breadcrumbs path="/community/commercial/" title="Commercial support" known={known} />
+      <h1>Commercial support</h1>
+      <p class="intro__lede">
+        Hop is free software and the community answers questions for free. Some organisations
+        also want an SLA, training, a migration done for them, or someone to call. The companies
+        below offer that.
+      </p>
+      <p class="disclaimer">
+        <strong>This is a listing, not a recommendation.</strong> The Apache Software Foundation
+        and the Hop PMC do not endorse, rank or vet these companies. Entries are written by the
+        companies themselves and are shown in alphabetical order.
+      </p>
+    </div>
+
+    <Section divider={false}>
+      <ul class="vendors">
+        {vendors.map((v) => (
+          <li class="vendor">
+            <div class="vendor__head">
+              <h2 class="vendor__name"><a href={v.href}>{v.name}</a></h2>
+              {v.market && <span class="vendor__market">{v.market}</span>}
+            </div>
+            <p class="vendor__body">{v.body}</p>
+            {v.services && (
+              <ul class="vendor__services">{v.services.map((x) => <li>{x}</li>)}</ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    </Section>
+
+    <Section title="Before you look here">
+      <p class="first">
+        Most questions get answered on the <a href="/community/mailing-list/">users mailing
+        list</a> within a day or two, and it costs nothing. If you have not asked there yet,
+        start with <a href="/community/support/">the support page</a> &mdash; commercial help is
+        for when you need a guarantee, not for when you need an answer.
+      </p>
+    </Section>
+
+    <Section title="Adding your company">
+      <div class="policy">
+        <p>
+          Companies offering Hop services are welcome to be listed. Send the details to the
+          dev mailing list, or open a pull request against this site.
+        </p>
+        <p class="policy__cta"><a class="btn" href={listing}>Request a listing</a></p>
+        <h3>What is acceptable</h3>
+        <p>
+          Entries must be factual and informational. Marketing language, and any claim that
+          positions your offering above another on this page, will be removed &mdash; that
+          material belongs on your own site. The list is kept in alphabetical order so that its
+          ordering carries no meaning.
+        </p>
+      </div>
+    </Section>
+  </main>
+</Base>
+
+<style>
+  .intro { max-width: 1180px; margin: 0 auto; padding: 36px 24px 0; }
+  .intro h1 { font-size: clamp(30px, 4vw, 42px); letter-spacing: -.028em; margin: 0 0 14px; }
+  .intro__lede { font-size: 18px; line-height: 1.6; color: var(--ink-2); max-width: 62ch; margin: 0 0 20px; }
+  .disclaimer {
+    border-left: 3px solid var(--rule-2); padding: 12px 0 12px 16px;
+    font-size: 15px; line-height: 1.6; color: var(--ink-2); max-width: 66ch; margin: 0;
+  }
+  .disclaimer strong { color: var(--ink); }
+
+  .vendors { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 18px; }
+  .vendor { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 26px; }
+  .vendor__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; margin-bottom: 10px; }
+  .vendor__name { margin: 0; font-size: 20px; }
+  .vendor__market {
+    font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--accent); background: var(--surface-2);
+    border: 1px solid var(--rule); border-radius: 999px; padding: 3px 10px;
+  }
+  .vendor__name a { text-decoration: none; }
+  .vendor__name a:hover { text-decoration: underline; }
+  .vendor__body { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-2); }
+  .vendor__services { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 0; padding: 0; }
+  .vendor__services li {
+    font-size: 12.5px; color: var(--ink-2); background: var(--surface-2);
+    border: 1px solid var(--rule); border-radius: 5px; padding: 4px 10px;
+  }
+
+  .first { font-size: 16px; line-height: 1.65; color: var(--ink-2); max-width: 68ch; }
+  .policy { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 28px; }
+  .policy p { color: var(--ink-2); max-width: 66ch; margin: 0 0 16px; font-size: 15.5px; line-height: 1.65; }
+  .policy h3 { margin: 22px 0 8px; font-size: 16.5px; }
+  .policy__cta { margin: 0 !important; }
+</style>

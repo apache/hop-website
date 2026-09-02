@@ -1,0 +1,20 @@
+---
+import Prose from '../layouts/Prose.astro'
+import { getCollection, render } from 'astro:content'
+
+export async function getStaticPaths () {
+  // Pages that are hubs rather than prose are .astro components of their own;
+  // Astro would otherwise build them twice from this route as well. Declared
+  const pages = await getCollection('pages')
+  return pages
+    // Underscore-prefixed entries are partials pulled into a component page.
+    .filter((p) => p.id !== '404' && !p.id.split('/').some((seg) => seg.startsWith('_')))
+    .map((page) => ({ params: { slug: page.id }, props: { page } }))
+}
+
+const { page } = Astro.props
+const { Content } = await render(page)
+---
+<Prose title={page.data.title} description={page.data.description} html={page.rendered?.html}>
+  <Content />
+</Prose>

@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro'
+---
+<Base title="Page not found">
+  <main class="notfound" id="main">
+    <p class="notfound__code">404</p>
+    <h1>We can't find that page</h1>
+    <p>It may have moved when the documentation was reorganised, or the link may be out of date.</p>
+    <p class="notfound__links">
+      <a class="btn btn--primary" href="/manual/latest/">User manual</a>
+      <a class="btn" href="/download/">Download</a>
+      <a class="btn" href="/community/contributing/">Contributing</a>
+    </p>
+  </main>
+</Base>
+
+<style>
+  .notfound { max-width: 620px; margin: 0 auto; padding: 96px 24px; text-align: center; }
+  .notfound__code { font-size: 68px; font-weight: 700; color: var(--rule-2); margin: 0; line-height: 1; font-variant-numeric: tabular-nums; }
+  .notfound h1 { margin: 12px 0 12px; }
+  .notfound p { color: var(--ink-2); }
+  .notfound__links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+</style>

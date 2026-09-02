@@ -1,0 +1,61 @@
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Fast iteration playbook: the ROOT component plus a single docs branch.
+# Full 12-version build is antora-playbook.yml.
+site:
+  title: Apache Hop
+  url: https://hop.apache.org
+  robots: allow
+asciidoc:
+  attributes:
+    # Asciidoctor's default section anchors are an empty <a> before each
+    # heading: invisible, focusable, and nameless, which is a WCAG 2.4.4
+    # failure repeated 3,168 times a build. sectlinks instead makes the heading
+    # text itself the link, so it is named by its own content and needs no
+    # JavaScript to be accessible.
+    sectanchors: ~
+    sectlinks: ''
+  extensions:
+    - '@asciidoctor/tabs'
+    - ./tools/asciidoctor-mermaid.js
+content:
+  sources:
+    - url: https://github.com/apache/hop.git
+      start_path: /docs/hop-user-manual/
+      branches: [main]
+ui:
+  bundle:
+    url: ./ui
+urls:
+  redirect_facility: static
+  latest_version_segment: latest
+  latest_prerelease_version_segment: next
+output:
+  clean: false
+  dir: ./public
+# fetch: false - reuse the cached apache/hop clone. This playbook is for
+# iterating on the theme and site/ pages; run the full playbook to pick up
+# new documentation commits.
+runtime:
+  fetch: false
+  cache_dir: ./.cache/antora
+  log:
+    # Quiet and non-blocking: this playbook is for iterating on the site, and
+    # the upstream documentation's warnings are not actionable here.
+    level: error
+    failure_level: fatal
+git:
+  fetch_depth: 1

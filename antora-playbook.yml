@@ -1,0 +1,106 @@
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Apache Hop website - single Antora playbook.
+#
+# This replaces the Hugo + Antora chain. Antora now produces the whole site:
+# the versioned manuals as before, plus the marketing/blog/community pages as a
+# ROOT component published at the site root.
+#
+# Deliberately NOT set:
+#   site.start_page          - silently clobbers the ROOT component's index.html
+#   urls.html_extension_style: indexify
+#                            - site-wide, would rewrite /manual/latest/**.html and
+#                              break the 434 documentationUrl paths compiled into
+#                              every shipped Hop binary
+#   runtime.log.failure_level: warn
+#                            - the strictest level; apache/hop's docs emit ~125
+#                              warnings, so it fails every build. See the log
+#                              block below.
+
+site:
+  title: Apache Hop
+  url: https://hop.apache.org
+  robots: allow
+
+asciidoc:
+  attributes:
+    # Asciidoctor's default section anchors are an empty <a> before each
+    # heading: invisible, focusable, and nameless, which is a WCAG 2.4.4
+    # failure repeated 3,168 times a build. sectlinks instead makes the heading
+    # text itself the link, so it is named by its own content and needs no
+    # JavaScript to be accessible.
+    sectanchors: ~
+    sectlinks: ''
+  extensions:
+    - '@asciidoctor/tabs'
+    - ./tools/asciidoctor-mermaid.js
+
+content:
+  sources:
+    - url: https://github.com/apache/hop.git
+      start_path: /docs/hop-user-manual/
+      branches: &releases
+        - main
+        - release/2.10.0
+        - release/2.11.0
+        - release/2.12.0
+        - release/2.13.0
+        - release/2.14.0
+        - release/2.15.0
+        - release/2.16.0
+        - release/2.17.0
+        - release/2.18.0
+        - release/2.18.1
+        - release/2.19.0
+
+    - url: https://github.com/apache/hop.git
+      start_path: /docs/hop-dev-manual/
+      branches: *releases
+
+ui:
+  bundle:
+    # An unzipped directory, not a zip. This is what removes gulp, browserify,
+    # postcss, eslint, stylelint and ~2,497 packages: there is no theme build.
+    url: ./ui
+
+urls:
+  redirect_facility: static   # not httpd - that writes its own root .htaccess and collides
+  latest_version_segment: latest
+  latest_prerelease_version_segment: next
+
+output:
+  # Astro builds first and owns public/; Antora adds /manual and /dev-manual to
+  # it. clean must stay false or Antora would delete the Astro half.
+  clean: false
+  dir: ./public
+
+runtime:
+  fetch: true
+  # Outside the Jenkins $WORKSPACE, which post { always { cleanWs() } } deletes -
+  # that is why every CI build is currently a cold build.
+  cache_dir: ./.cache/antora
+  log:
+    # failure_level severity runs warn < error < fatal, and the build fails on
+    # anything at or above it. 'warn' is the STRICTEST setting: apache/hop's own
+    # docs emit ~125 warnings we do not control (missing attributes, an
+    # incomplete table), so it exited 2 on every run and the chain never reached
+    # Pagefind. 'error' is the target, but it needs the 44 stale
+    # xref:tech-manual:: references burned down across 11 frozen release
+    # branches in apache/hop first - see MIGRATION.md.
+    failure_level: fatal
+
+git:
+  fetch_depth: 1   # new in Antora 3.2; the apache/hop fetch is ~120s of a 220s cold build

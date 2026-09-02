@@ -1,20 +1,32 @@
-node
-target
-node_modules
-public
-documentation
-resources
-.DS_Store
-.hugo_build.lock
-.vscode/
+# build output
+public/
+.cache/
 
-.idea
+# stale output directories from the Hugo + Antora era; may still be sitting in
+# working copies that predate the migration
+documentation/
+resources/
+.hugo_build.lock
+.pnp/
+.pnp.js
+antora-ui-hop/
+
+# dependencies
+node_modules/
+
+# editors / OS
+.vscode/
+.idea/
 *.iml
-*.tmp
 .project
 .classpath
-.metadata
-.pnp
-.pnp.js
 .settings
-antora-ui-hop/package-lock.json
+.metadata
+.DS_Store
+*.tmp
+ui/css/tokens.css
+ui/css/chrome.css
+.astro/
+ui/partials/header.hbs
+ui/partials/footer.hbs
+ui/js/

@@ -1,0 +1,40 @@
+{{!
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+    
+         http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+}}
+{{! Which engines a transform runs on, from the page's own :page-engines:
+    attribute. This used to be a table in the body, in a column beside the
+    description; as page metadata it can be stated once and presented however
+    the design wants - here, tags under the breadcrumb.
+
+    The state is carried by a symbol and by a word, never by colour alone
+    (1.4.1). The word is for screen readers only: the symbol says it on screen,
+    and reading "Hop Engine supported, Native Spark not supported" is what makes
+    the list usable when the symbols cannot be seen. }}
+{{#with (engines page.attributes.engines)}}
+<ul class="engines" data-pagefind-ignore>
+  {{#each this}}
+  <li class="engine engine--{{state}}" data-engine="{{slug}}">
+    <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+      {{#if (eq state 'supported')}}<path d="M2 6.4 4.6 9 10 3.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>{{/if}}
+      {{#if (eq state 'unsupported')}}<path d="M3 3l6 6M9 3l-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>{{/if}}
+      {{#if (eq state 'unknown')}}<path d="M4.1 4.3a1.9 1.9 0 1 1 2.6 1.8c-.5.2-.7.6-.7 1.1v.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="6" cy="9.3" r=".85" fill="currentColor"/>{{/if}}
+    </svg>
+    {{label}}
+    <span class="visually-hidden">{{#if (eq state 'supported')}}supported{{/if}}{{#if (eq state 'unsupported')}}not supported{{/if}}{{#if (eq state 'unknown')}}support unknown{{/if}}</span>
+  </li>
+  {{/each}}
+</ul>
+{{/with}}

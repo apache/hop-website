@@ -2,49 +2,36 @@
   "name": "hop-website",
   "version": "1.0.0-SNAPSHOT",
   "license": "Apache-2.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.12"
+  },
   "scripts": {
-    "build:antora": "antora --require ./menu.js --clean --fetch site.yml",
-    "build:hugo": "hugo --cleanDestinationDir",
-    "build:minify": "gulp minify",
-    "build": "run-s build:*",
-    "build-local:antora": "antora --require ./menu.js --clean --fetch site-local.yml",
-    "build-local:hugo": "hugo --cleanDestinationDir",
-    "build-local:minify": "gulp minify",
-    "build-local": "run-s build-local:*",
-    "preview": "run-s preview:*",
-    "preview:antora": "antora --require ./menu.js site.yml",
-    "preview:hugo": "hugo server -D",
-    "preview-local": "run-s preview-local:*",
-    "preview-local:antora": "antora --require ./menu.js site-local.yml",
-    "preview-local:hugo": "hugo server -D",
-    "check:links": "link-checker --disable-external --mkdocs --allow-hash-href public",
-    "check:html": "html-validate 'public/**/*.html'",
-    "checks": "run-s check:*",
-    "check-local:links": "link-checker --disable-external --url-ignore 'file:///' --mkdocs --allow-hash-href public",
-    "check-local:html": "html-validate 'public/**/*.html'",
-    "checks-local": "run-s check-local:*"
+    "dev": "astro dev",
+    "build": "npm run build:site && npm run build:docs && npm run build:search",
+    "build:site": "astro build",
+    "build:docs": "node tools/sync-tokens.mjs && node tools/sync-nav.mjs && node tools/sync-vendor.mjs && antora antora-playbook.yml && node tools/highlight-code.mjs public && node tools/external-links.mjs public && node tools/stabilise-sitemap.mjs public",
+    "build:search": "pagefind --site public --glob \"**/*.html\"",
+    "build:local": "astro build && node tools/sync-tokens.mjs && node tools/sync-nav.mjs && node tools/sync-vendor.mjs && antora antora-playbook-local.yml && node tools/highlight-code.mjs public && node tools/external-links.mjs public && node tools/stabilise-sitemap.mjs public && npm run build:search",
+    "build:hop": "astro build && node tools/sync-tokens.mjs && node tools/sync-nav.mjs && node tools/sync-vendor.mjs && antora antora-playbook-hop.yml && node tools/highlight-code.mjs public && node tools/external-links.mjs public && node tools/stabilise-sitemap.mjs public && npm run build:search",
+    "serve": "npx --yes http-server public -p ${PORT:-4000} -c-1",
+    "check:links": "link-checker public --disable-external --mkdocs --allow-hash-href --url-ignore '^/' --url-ignore '^file:'",
+    "check:html": "html-validate \"public/**/*.html\"",
+    "checks": "npm run check:links && npm run check:absolute && npm run check:contrast && npm run check:a11y && npm run check:html",
+    "check:absolute": "node tools/check-absolute-links.mjs public",
+    "check:contrast": "node tools/check-contrast.mjs",
+    "check:a11y": "node tools/check-a11y.mjs public"
   },
   "devDependencies": {
-    "@antora/lunr-extension": "^1.0.0-alpha.8",
-    "@antora/cli": "^3.0.0",
-    "@antora/site-generator": "^3.0.0",
-    "@asciidoctor/tabs": "^1.0.0-alpha.11",
-    "gulp": "~4.0",
-    "gulp-htmlmin": "~5.0",
-    "html-validate": "~5.0.2",
-    "hugo-cli": "~0.13",
-    "link-checker": "~1.4.2",
-    "npm-run-all": "^4.1.5",
-    "opal-runtime": "1.0.11"
-  },
-  "installConfig": {
-    "pnp": true
-  },
-  "dependencies": {
-    "asciidoctor": "~2.2",
-    "handlebars": "~4.4",
-    "toml": "~3.0",
-    "unzipper": "~0.10",
-    "yaml": "~1.7"
+    "@antora/cli": "3.2.0",
+    "@antora/site-generator": "3.2.0",
+    "@asciidoctor/tabs": "1.0.0-beta.6",
+    "@astrojs/markdown-satteri": "^0.4.0",
+    "astro": "^7.2.10",
+    "highlight.js": "^11.12.0",
+    "html-validate": "^11.0.0",
+    "link-checker": "^1.4.2",
+    "mermaid": "^11.17.2",
+    "pagefind": "^1.5.2"
   }
 }

@@ -1,122 +1,162 @@
 # Hop Website
 
-This repository is used to generate the Hop website
+Sources for [hop.apache.org](https://hop.apache.org).
 
-Tools used to generate the website:
+The site is built from two generators that publish into one directory:
 
- - [Git](https://git-scm.com/) a source code management tool used to fetch document sources from different
-   github repositories.
- - [Node.js](https://nodejs.org/) a JavaScript runtime used to build the website. You will need to use Node.js version 18.
- - [yarn](https://yarnpkg.com/) a blazing fast dependency and package manager tool used to download
-   and manage required libraries.
- - (installed via yarn) [Gulp](http://gulpjs.com/) a task automation tool. Used to build the Hop
-   Antora UI theme.
- - (installed via yarn) [Hugo](https://gohugo.io) a static site generator. Simplified, it takes the
-   documentation from the `content` directory and applies templates from `layouts`
-   directory and together with any resources in `static` directory generates output in
-   the `public` directory.
- - (installed via yarn) [Antora](https://antora.org/) a documentation site generator. It uses
-   Asciidoc documents from different sources.
+- **[Astro](https://astro.build)** builds the marketing, blog, community,
+  download and security pages from `src/`. Fast, component-based, and the right
+  substrate for pages that need design.
+- **[Antora](https://antora.org)** builds the versioned documentation from
+  AsciiDoc in the [apache/hop](https://github.com/apache/hop) repository,
+  publishing `/manual/` and `/dev-manual/` once per release branch. It owns
+  cross-references, includes and the version picker - and the
+  `/manual/<version>/<path>.html` URL shape that every shipped Hop binary links
+  to from its Help button.
 
-## Build with Node and yarn
+Both halves share one design system in `shared/`, so the seam is invisible.
 
-You can build the website locally using the tools `Node.js` and `yarn`.
+> This branch is a draft of a rewrite. See [MIGRATION.md](MIGRATION.md) for what
+> is done, what is not, and the traps found on the way.
 
+## Requirements
 
-### Preparing the tools
+Node.js 22.12 or newer, and npm. That is the whole list. (Astro 7 sets the
+floor; anything older fails at `astro build` rather than at install.)
 
-#### Node.js
+## Build
 
-Make sure that you have Node.js (herein "`Node`") installed.
+```sh
+npm ci
+npm run build          # Astro + all documentation versions + search index
+npm run serve          # http://localhost:4000
+```
 
-    $ node --version
+The full build fetches every release branch of apache/hop and takes several
+minutes on a cold cache. Three shorter ways in, depending on what you are
+changing:
 
-If this command fails with an error, you do not have Node.js installed.
+```sh
+npm run dev            # Astro dev server, hot reload, no documentation
+npm run build:local    # both halves, one documentation branch from GitHub
+npm run build:hop      # both halves, documentation from ../hop on disk
+```
 
-This project requires the Node LTS version 18 (e.g., V18.30.4).
+`build:hop` reads the working tree of a hop checkout sitting next to this one,
+uncommitted edits included, so an `.adoc` change is one build away instead of a
+commit and a push. `dev` never renders documentation at all: the Antora half
+only exists after a build.
 
-Please make sure to have a suitable version of Node.js installed. You have several options to install
-Node.js on your machine:
+Astro writes `public/` first and Antora adds `/manual` and `/dev-manual` to it,
+so `output.clean` is off in every playbook. Deleting `public/` by hand is safe;
+building only one half into a stale `public/` leaves the other half stale.
 
-- Install using the Node Version Manager [nvm](https://github.com/creationix/nvm)
-- Install using [Homebrew](https://brew.sh/) and [Node formulae](https://formulae.brew.sh/formula/node)
-- Install from official [Node packages](https://nodejs.org/en/download/)
+## Layout
 
-Note - If you have different Node version other than Node.js LTS version 18 you can use following command to make
-Node.js LTS version 18 as your default Node.js version.
+| Path | What it is |
+|---|---|
+| `src/pages/` | Astro routes. `.astro` for pages that need design |
+| `src/content/` | Markdown: `blog/` posts and `pages/` prose, as content collections |
+| `src/components/`, `src/layouts/` | header, footer, hero canvas, page shell |
+| `src/data/` | releases, team, events, tools, navigation - the facts pages read from |
+| `shared/` | `tokens.css` and `chrome.css` - what both halves share |
+| `static/` | served at the site root: `/img`, fonts, favicons, `doap_Hop.rdf`, `index.yaml`, `.well-known` |
+| `ui/` | the Antora UI for the documentation half |
+| `antora-playbook*.yml` | documentation sources, versions and output - one per build above |
+| `tools/` | the Markdown extensions, the sync steps, the build-time passes and the checks |
+| `.htaccess` | redirects and the 404 handler, copied to the site root on deploy |
 
-    $ nvm alias default 18
+Parts of `ui/` are generated and gitignored: `ui/css/tokens.css` and
+`ui/css/chrome.css` are copied from `shared/`, `ui/partials/header.hbs` and
+`footer.hbs` are written from `src/data/nav.mjs`, and `ui/js/` is vendored from
+a dependency. Editing those by hand is silently undone on the next build - edit
+the source they come from.
 
-Now that you have Node 18 installed, you can proceed with checking the Yarn installation.
+## Editing
 
-#### Yarn
+**A marketing or community page** is Markdown under `src/content/pages/`.
+`src/content/pages/community/ethos/index.md` publishes as `/community/ethos/`.
+A page that needs real layout is an `.astro` file in `src/pages/` instead -
+`/community/team/` is `src/pages/community/team.astro`, reading `src/data/team.mjs`.
 
-Follow [the documentation on installing](https://yarnpkg.com/en/docs/install) Yarn for your operating system.
+**A blog post** is Markdown under `src/content/blog/<year>/<month>/<slug>/index.md`
+with `title`, `description`, `publishDate`, `authors`, `categories` and
+`preview` in the frontmatter. The index, the home page teasers, the tag list
+and `/blog/index.xml` all derive from those.
 
-#### Clone and Initialize the project
+**A documentation page** lives in apache/hop, not here. Open a PR there against
+`main`; it appears under `/manual/next/` on the next build and `/manual/latest/`
+when the release branch is cut. Two page attributes are rendered by this repo's
+UI rather than by Asciidoctor:
 
-Clone the hop-webiste Git repository:
+```adoc
+:page-engines: Hop Engine=yes, Single Threaded=yes, Native Spark=no
+:page-marketplace: hop-misc-lint
+```
 
-    $ git clone https://github.com/apache/hop-website.git
+The first becomes the engine tags under the breadcrumb - names written out in
+full, states `yes`, `no` or anything else for unknown. The second marks a page
+as documenting a plugin the standard client does not ship, and takes the id the
+marketplace installs by, so the note can give the exact command.
 
+**Colours, type and spacing** are CSS custom properties in `shared/tokens.css`.
+Both halves read them, so a change lands on the whole site - and because there
+is no postcss step inlining them away, dark mode is a token override rather
+than a second stylesheet.
 
-## Build the Antora Hop UI theme
+## Markdown extensions
 
-The first step is to build the Antora UI theme used for the Hop website. The theme sources are located
-inside [Project root directory/antora-ui-hop](antora-ui-hop). Start by switching to that directory:
+Astro 7 parses Markdown with Sätteri, not remark. Two small plugins in `tools/`
+add what AsciiDoc had and Markdown does not:
 
-    $ cd antora-ui-hop
+```markdown
+> [!WARNING]
+> GitHub's alert syntax. NOTE, TIP, IMPORTANT, WARNING and CAUTION.
 
-In that directory execute:
+:::steps
+1. **[Discuss](#discuss)**
+   A container directive; the name becomes a class, and the styling lives with
+   the layout. :::checklist is the other one in use.
+:::
+```
 
-    $ yarn install # needed only once, or if dependencies change
-    $ yarn build   # to perform the ui theme build
+Both are ordinary Markdown to any other renderer, so the source still reads
+correctly on GitHub.
 
-You should see the Antora theme bundle generated in [antora-ui-hop/build/ui-bundle.zip](antora-ui-hop).
+## Build-time passes
 
-## Build the website content
+After Antora runs, three passes rewrite the built HTML. They are part of every
+build, and each prints what it did:
 
-Before you are able to build the website content the UI bundle must be present.
+| Pass | What it does |
+|---|---|
+| `tools/highlight-code.mjs` | colours code blocks with highlight.js and labels them with their language, so no highlighter runs in the browser |
+| `tools/external-links.mjs` | gives every link that leaves the site `target="_blank"` and `rel="noopener"` |
+| `tools/stabilise-sitemap.mjs` | keeps `<lastmod>` off the build clock, so an unchanged page is an unchanged file |
 
-To build the website go to the project root directory and run:
+## Checks
 
-    $ yarn install # needed only once, or if dependencies change
-    $ yarn build   # to perform the build
+```sh
+npm run checks           # all five
+npm run check:links      # relative links and anchors
+npm run check:absolute   # site-absolute links and assets, resolved from the site root
+npm run check:contrast   # WCAG 1.4.3 and 1.4.11 against the tokens, both themes
+npm run check:a11y       # the WCAG 2.1 criteria that can be read off the built HTML
+npm run check:html       # html-validate
+```
 
-You should see the generated website in the `public` directory.
+`check:contrast` reads `shared/tokens.css` rather than the output, so a colour
+added to a component instead of a token escapes it. That is the trade: the
+palette is the gate, and components take their colour from it.
 
-## Preview website locally
+Two things to know before trusting a green run. `Jenkinsfile` runs `check:links`
+and `check:absolute`, and `check:html` with `|| true`; `check:contrast` and
+`check:a11y` are not in CI at all. And `check:html` currently exhausts a 4 GB
+heap on the full site and dies, which is why it is `|| true` - it needs
+batching before it means anything.
 
-You can preview the the website on your local machine once you have the generated website available in
-the `public` directory.
+## Publishing
 
-Hugo can start a simple web server serving the generated site content so you can view it in your favorite browser.
-
-Simply call
-
-    $ yarn preview
-
-or     
-
-    $ yarn preview-local 
-
-`preview` will pull the latest docs version from [GitHub](https://github.com/apache/hop),  `preview-local` will use the (committed) documentation files from your local Hop clone. 
-
-NOTE: `preview-local` assumes your docs repository is cloned to a folder `hop` next to `hop-website` (both repositories in the same parent folder). 
-
-You will be provided with a web server running the site on [http://localhost:1313/](http://localhost:1313/)
-
-Point your favorite browser to `http://localhost:1313/` and you will see the Hop website.
-
-## Contributing
-
-The website content is added under the `content` directory, logical groups have been created to group website content. This repository will only be used for the more "static" types of information (blog/news/announcements). Software documentation will reside in a separate repository or in the same repository as the code.
-
-Asciidoc is used to write content for the website, more information about asciidoc syntax can be found [here](https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/)
-
-Images and other resources should be added in the `static` folder.
-
-## Jenkins
-This repository also contains a Jenkins hook, when you add a new branch or pull request with changed content the website is automatically build and a preview is available. When merged with main the site is redeployed
-
-You can check your pull request and see if the site is correctly rendered by going to the [Apache Builds website](https://ci-builds.apache.org/job/Hop/)
+Pushing to `main` triggers the Jenkins job in `Jenkinsfile`, which builds the
+site, verifies the artifact is not truncated, and pushes `public/` to the
+`asf-site` branch, from which ASF infrastructure serves it.

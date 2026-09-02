@@ -1,0 +1,50 @@
+---
+/*
+ * A contents list built at build time from rendered Asciidoctor HTML.
+ * Asciidoctor gives every section an id, so this needs no JavaScript and
+ * cannot flash in after paint. Shared by blog posts and prose pages.
+ */
+const { html = '', min = 3 } = Astro.props
+
+const items = [...html.matchAll(/<h2[^>]*\bid="([^"]+)"[^>]*>([\s\S]*?)<\/h2>/g)]
+  .map((m) => ({ id: m[1], text: m[2].replace(/<[^>]+>/g, '').trim() }))
+  .filter((h) => h.text)
+
+export const hasContents = (html, min = 3) =>
+  [...String(html).matchAll(/<h2[^>]*\bid="[^"]+"[^>]*>/g)].length >= min
+/*
+ * A div wrapping a named nav, rather than an aside wrapping an unnamed one:
+ * a table of contents is navigation, and the aside made this two landmarks
+ * sharing a single accessible name.
+ */
+---
+{items.length >= min && (
+  <div class="onthispage" data-pagefind-ignore>
+    <p class="onthispage__title" id="onthispage-heading">On this page</p>
+    <nav aria-labelledby="onthispage-heading">
+      <ol>{items.map((h) => <li><a href={`#${h.id}`}>{h.text}</a></li>)}</ol>
+    </nav>
+  </div>
+)}
+
+<style>
+  .onthispage {
+    position: sticky; top: calc(var(--header-h) + 24px);
+    max-height: calc(100vh - var(--header-h) - 48px); overflow-y: auto;
+    border-left: 1px solid var(--rule); padding-left: 18px;
+  }
+  .onthispage__title {
+    font-size: 11.5px; font-weight: 700; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--ink-3); margin: 0 0 12px;
+  }
+  .onthispage ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+  /* Not colour alone: a marker rule and a weight change carry the state too. */
+  .onthispage a {
+    font-size: 13.5px; line-height: 1.4; color: var(--ink-2);
+    text-decoration: none; display: block;
+    padding-left: 12px; margin-left: -20px; border-left: 2px solid transparent;
+  }
+  .onthispage a:hover { color: var(--ink); border-left-color: var(--rule-2); }
+  .onthispage a.is-active { color: var(--accent); font-weight: 600; border-left-color: var(--accent); }
+  @media (max-width: 1079px) { .onthispage { display: none; } }
+</style>

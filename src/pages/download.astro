@@ -1,0 +1,172 @@
+---
+import Base from '../layouts/Base.astro'
+import Section from '../components/Section.astro'
+import { site } from '../site.config.mjs'
+import { releases, current, containers, helm } from '../data/releases.mjs'
+
+const older = releases.slice(1)
+const fmt = (iso) => new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
+---
+<Base title="Download" description="Download Apache Hop source and binary releases, Docker images and the Helm chart.">
+  <main id="main">
+    <section class="dl-hero">
+      <div class="dl-hero__inner">
+        <p class="dl-hero__eyebrow">Latest release</p>
+        <h1>Apache Hop {current.version}</h1>
+        <p class="dl-hero__meta">Released {fmt(current.date)} &middot; requires Java&nbsp;{site.javaVersion} &middot; Apache-2.0</p>
+        <p class="dl-hero__cta">
+          <a class="btn btn--primary btn--lg" href={current.files.client.href}>Download client &middot; zip</a>
+          <a class="btn btn--lg btn--ghost" href={current.announcement}>What's new &rarr;</a>
+        </p>
+        <p class="dl-hero__verify">
+          Verify your download:{' '}
+          <a href={current.files.client.asc}>PGP signature</a> &middot;{' '}
+          <a href={current.files.client.sha512}>SHA-512</a> &middot;{' '}
+          <a href="https://downloads.apache.org/hop/KEYS">KEYS</a> &middot;{' '}
+          <a href="https://www.apache.org/dyn/closer.cgi#verify">how to verify</a>
+        </p>
+        <p class="dl-hero__src">
+          Building from source? <a href={current.files.source.href}>{current.files.source.name}</a>
+          (<a href={current.files.source.asc}>asc</a>, <a href={current.files.source.sha512}>sha512</a>)
+        </p>
+      </div>
+    </section>
+
+    <Section title="Containers" lede="Official images on Docker Hub, and the Helm chart for Kubernetes.">
+      <ul class="cards">
+        {containers.map((c) => (
+          <li class="card">
+            <div class="card__head">
+              <h3>{c.label}</h3>
+              {c.note && <p class="card__note">{c.note}</p>}
+            </div>
+            <div class="card__body">
+              <div class="snippet">
+                <code>{c.pull}</code>
+                <button type="button" class="snippet-copy" data-copy={c.pull} aria-label={`Copy ${c.pull}`}>Copy</button>
+              </div>
+              <p class="card__link"><a href={c.href}>View on Docker Hub &rarr;</a></p>
+            </div>
+          </li>
+        ))}
+        <li class="card">
+          <div class="card__head">
+            <h3>Helm</h3>
+            <p class="card__note">Kubernetes chart, served from this site</p>
+          </div>
+          <div class="card__body">
+            <div class="snippet">
+              <code>{helm.repo}</code>
+              <button type="button" class="snippet-copy" data-copy={helm.repo} aria-label="Copy helm repo add command">Copy</button>
+            </div>
+            <div class="snippet">
+              <code>{helm.install}</code>
+              <button type="button" class="snippet-copy" data-copy={helm.install} aria-label="Copy helm install command">Copy</button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </Section>
+
+    <Section title="Previous releases" lede="Older releases stay available from the Apache archive. We recommend running the latest.">
+      <table class="releases">
+        <caption class="visually-hidden">Previous Apache Hop releases with binary and source downloads</caption>
+        <thead>
+          <tr>
+            <th scope="col">Version</th>
+            <th scope="col">Date</th>
+            <th scope="col">Client</th>
+            <th scope="col">Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          {older.map((r) => (
+            <tr>
+              <th scope="row"><a href={r.announcement}>{r.version}</a></th>
+              <td>{fmt(r.date)}</td>
+              <td>
+                <a href={r.files.client.href}>zip</a>
+                <span class="sigs"><a href={r.files.client.asc}>asc</a> <a href={r.files.client.sha512}>sha512</a></span>
+              </td>
+              <td>
+                <a href={r.files.source.href}>tar.gz</a>
+                <span class="sigs"><a href={r.files.source.asc}>asc</a> <a href={r.files.source.sha512}>sha512</a></span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p class="archive">
+        Looking for something older? Everything ever released is in the{' '}
+        <a href="https://archive.apache.org/dist/hop/">Apache archive</a>.
+      </p>
+    </Section>
+  </main>
+</Base>
+
+<style>
+  .dl-hero { border-bottom: 1px solid var(--rule); background: var(--surface); }
+  .dl-hero__inner { max-width: 1180px; margin: 0 auto; padding: 64px 24px 56px; }
+  .dl-hero__eyebrow {
+    font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 12px;
+  }
+  .dl-hero h1 { font-size: clamp(32px, 4.6vw, 48px); letter-spacing: -.03em; margin: 0 0 10px; }
+  .dl-hero__meta { color: var(--ink-2); margin: 0 0 26px; font-size: 16px; }
+  .dl-hero__cta { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 22px; }
+  .dl-hero__verify, .dl-hero__src { font-size: 14px; color: var(--ink-3); margin: 0 0 6px; }
+
+  /* Stacked rather than side by side. Three narrow columns left the commands
+     wrapping inside boxes a third of the page wide, and left nowhere to say
+     anything more about an image than its name; across the full width each
+     card has an identity on the left and its commands on the right, with room
+     on both sides to grow. */
+  .cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 10px;
+    padding: 20px 24px;
+    display: grid; grid-template-columns: minmax(200px, 1fr) minmax(0, 1.5fr);
+    gap: 12px 32px; align-items: start;
+  }
+  .card h3 { margin: 0 0 4px; font-size: 17.5px; }
+  .card__note { font-size: 13.5px; color: var(--ink-3); margin: 0; }
+  .card__body > .snippet:last-child { margin-bottom: 0; }
+  .card__link { margin: 12px 0 0; font-size: 14.5px; }
+  @media (max-width: 720px) { .card { grid-template-columns: 1fr; } }
+
+  .snippet {
+    display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px;
+    background: var(--code-bg); border: 1px solid var(--rule);
+    border-radius: var(--radius); padding: 7px 7px 7px 11px;
+  }
+  /* Wrap rather than scroll. These boxes are a third of a card wide and the
+     helm repo command does not fit in one, so it was scrolling inside itself -
+     a scrollbar over a command you are meant to read in one go. */
+  .snippet code {
+    flex: 1; min-width: 0; background: none; border: 0; padding: 0;
+    font-size: 12.5px; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6;
+  }
+  .snippet-copy {
+    flex: none; font: inherit; font-size: 11.5px; font-weight: 600; padding: 4px 9px;
+    border-radius: 4px; cursor: pointer; background: var(--surface);
+    color: var(--ink-2); border: 1px solid var(--rule);
+  }
+  .snippet-copy:hover { color: var(--accent); border-color: var(--accent); }
+
+  .releases { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .releases th, .releases td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--rule); vertical-align: baseline; }
+  .releases thead th {
+    font-family: var(--mono); font-size: 11.5px; font-weight: 500; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ink-3); border-bottom-color: var(--rule-2);
+  }
+  .releases tbody th { font-weight: 600; }
+  .sigs { display: inline-block; margin-left: 10px; font-size: 12.5px; color: var(--ink-3); }
+  .sigs a { color: var(--ink-3); }
+  .sigs a:hover { color: var(--accent); }
+  .archive { margin: 20px 0 0; font-size: 14.5px; color: var(--ink-2); }
+  @media (max-width: 620px) {
+    .releases thead { display: none; }
+    .releases tr { display: grid; gap: 2px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+    .releases th, .releases td { border: 0; padding: 2px 0; }
+  }
+</style>
