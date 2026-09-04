@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plugin types | Apache Hop</title>
+<meta name="description" content="Every extension point in Hop is a plugin type. This is the catalogue: what each type does, what you annotate and implement, and what you need to know before you start.">
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Apache Hop">
+<meta property="og:title" content="Plugin types">
+<meta property="og:description" content="Every extension point in Hop is a plugin type. This is the catalogue: what each type does, what you annotate and implement, and what you need to know before you start.">
+
+<meta property="og:image" content="https://hop.apache.org/img/social-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hop.apache.org/img/social-card.png">
+
+<link rel="icon" href="../../../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="196x196" href="../../../favicon-196x196.png">
+<link rel="manifest" href="../../../site.webmanifest">
+<link rel="stylesheet" href="../../../_/css/site.css">
+
+<script>(function(){try{var t=localStorage.getItem('hop-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+</head>
+<body class="doc-page">
+<a class="skip-link" href="#main" data-pagefind-ignore>Skip to main content</a>
+<header class="site-header" data-pagefind-ignore>
+  <div class="site-header__inner">
+    <a class="brand" href="../../../" aria-label="Apache Hop home">
+      <img src="../../../img/hop-logo.svg" alt="" width="34" height="34" aria-hidden="true">
+      <span class="brand__name">Apache Hop</span>
+    </a>
+
+    <nav class="mainnav" id="mainnav" aria-label="Main">
+      <ul class="mainnav__list">
+        <li><a href="../../../blog/">Blog</a></li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-docs">
+            Documentation <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-docs">
+            <li><a href="../../../manual/latest/getting-started/">Getting started</a></li>
+            <li><a href="../../../manual/latest/">User manual</a></li>
+            <li><a href="../../../dev-manual/latest/">Developer documentation</a></li>
+            <li><a href="../../../docs/architecture/">Architecture</a></li>
+            <li><a href="../../../docs/roadmap/">Roadmap</a></li>
+          </ul>
+        </li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-community">
+            Community <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-community">
+            <li><a href="../../../community/contributing/">Contributing</a></li>
+            <li><a href="../../../community/mailing-list/">Mailing lists</a></li>
+            <li><a href="../../../community/tools/">Tools & chat</a></li>
+            <li><a href="../../../community/events/">Events & user groups</a></li>
+            <li><a href="../../../community/team/">Team</a></li>
+            <li><a href="../../../community/support/">Support</a></li>
+            <li><a href="../../../community/commercial/">Commercial support</a></li>
+            <li><a href="../../../community/ethos/">Ethos</a></li>
+            <li><a href="../../../security/">Security advisories</a></li>
+          </ul>
+        </li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-asf">
+            Apache <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-asf">
+            <li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li>
+            <li><a href="https://www.apache.org/events/current-event" rel="noopener" target="_blank">Events</a></li>
+            <li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li>
+            <li><a href="https://www.apache.org/security/" rel="noopener" target="_blank">Security</a></li>
+            <li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li>
+            <li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li>
+            <li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-tools">
+      <div class="search" role="search">
+        <label class="visually-hidden" for="search-input">Search Apache Hop</label>
+        <input id="search-input" type="search" placeholder="Search" autocomplete="off">
+      </div>
+      <span class="socials">
+        <a class="icon-btn" href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+        <a class="icon-btn" href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"/></svg></a>
+        <a class="icon-btn" href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"/></svg></a>
+        <a class="icon-btn" href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg></a>
+      </span>
+      <a class="mainnav__cta" href="../../../download/">Download</a>
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Switch theme" title="Switch theme">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+      </button>
+      <button type="button" id="nav-burger" class="icon-btn burger" aria-expanded="false" aria-controls="mainnav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="doc-shell">
+<div class="doc-nav" id="doc-nav" data-pagefind-ignore>
+  <button type="button" class="doc-nav__close icon-btn" aria-label="Close navigation">&times;</button>
+  <nav aria-label="Documentation">
+    <div class="doc-nav__group">
+      
+      <ul class="doc-nav__list">
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Getting started section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Getting started</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/getting-started.html">The Hop codebase</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/setup-dev-environment.html">Setting up your development environment</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/build-and-test.html">Building and testing</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/contributing.html">Contributing changes</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/writing-documentation.html">Writing documentation</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Architecture section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Architecture</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/execution-model.html">How a pipeline and a workflow run</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/variables-and-metadata.html">Variables, parameters and metadata</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/dependencies-and-classloading.html">Dependencies and classloading</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/logging-and-debugging.html">Logging and debugging</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/performance.html">Performance on the row hot path</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/security.html">Security for developers</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Plugin development section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Plugin development</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-development.html">How plugins work</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent is-current">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Plugin types section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/plugin-types/index.html">Plugin types</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/pipeline-workflow.html">Pipelines and workflows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/data-connectivity.html">Data and connectivity</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/metadata-configuration.html">Metadata and configuration</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/execution-observability.html">Execution and observability</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/gui.html">GUI</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/metadata-plugins.html">Metadata plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/metadata-serialization.html">Metadata serialization</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/metadata-injection.html">Metadata injection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/value-types.html">Value types</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Database plugins section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/database/index.html">Database plugins</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/creating-a-dialect.html">Creating a dialect</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/column-types.html">Column types and type rules</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/value-bindings.html">Moving values across JDBC</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/extending-another-dialect.html">Extending a dialect you don&#8217;t own</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/testing.html">Testing a database plugin</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/migrating-from-variants.html">Migrating from isXVariant()</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/gui-plugins-toolbars.html">GUI plugins and toolbars</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/engine-compatibility.html">Engine compatibility</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/lineage.html">Lineage observation hub</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/internationalisation.html">Internationalisation (i18n)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/svg-files.html">SVG files</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-samples.html">Plugin samples</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/start-your-own-plugin.html">Creating a plugin outside the Hop repository</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/marketplace-publish-plugin.html">Publishing a plugin to Nexus (marketplace)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/porting-kettle-plugins.html">Porting Kettle plugins</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Testing section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Testing</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/testing/unit-testing.html">Unit tests</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/integration-testing.html">Integration tests</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/testing/ui-testing.html">UI tests with SWTBot</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Embedding and interfaces section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Embedding and interfaces</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle SDK section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/sdk/index.html">SDK</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/hop-sdk.html">The Hop SDK</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop Web section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/hopweb/index.html">Hop Web</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/hopweb/developer-guide.html">Hop Web Developer Guide</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/hopweb/hopweb-antipatterns.html">Hop Web Antipatterns</a>
+    
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Distribution and release section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Distribution and release</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/docker-build.html">Docker Build Script</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Apache Release Process section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/apache-release/index.html">Apache Release Process</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/apache-release/creating-a-release.html">Creating a Release</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/apache-release/promoting-a-release.html">Promoting a Release</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/apache-release/checking-a-release.html">Checking a Release</a>
+    
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+    </div>
+  </nav>
+<div class="nav-foot">
+  <details class="explore">
+    <summary>
+      <span class="explore__now">
+        <span class="explore__component">Development Documentation</span>
+        <span class="explore__version">2.20.0</span>
+      </span>
+      <svg class="explore__chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </summary>
+    <div class="explore__body">
+      <div class="explore__group">
+  <p class="explore__title">Development Documentation</p>
+  <ul>
+    <li class="is-current">
+      <a href="../../../dev-manual/next/index.html">2.20.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/latest/index.html">2.19.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.18.1/index.html">2.18.1</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.18.0/index.html">2.18.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.17.0/index.html">2.17.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.16.0/index.html">2.16.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.15.0/index.html">2.15.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.14.0/index.html">2.14.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.13.0/index.html">2.13.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.12.0/index.html">2.12.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.11.0/index.html">2.11.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.10.0/index.html">2.10.0</a>
+    </li>
+  </ul>
+</div>
+
+        
+        <div class="explore__group">
+  <p class="explore__title">User manual</p>
+  <ul>
+    <li class="">
+      <a href="../../../manual/next/index.html">2.20.0 (pre-release)</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/latest/index.html">2.19.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.18.1/index.html">2.18.1</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.18.0/index.html">2.18.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.17.0/index.html">2.17.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.16.0/index.html">2.16.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.15.0/index.html">2.15.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.14.0/index.html">2.14.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.13.0/index.html">2.13.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.12.0/index.html">2.12.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.11.0/index.html">2.11.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.10.0/index.html">2.10.0</a>
+    </li>
+  </ul>
+</div>
+
+    </div>
+  </details>
+
+  <a class="nav-foot__edit" href="https://github.com/apache/hop/edit/main/docs/hop-dev-manual/modules/ROOT/pages/plugin-types/index.adoc" rel="noopener" target="_blank">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758zm1.414 1.06a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354zM11.189 6.25 9.75 4.81l-6.286 6.287a.25.25 0 0 0-.064.108l-.558 1.953 1.953-.558a.25.25 0 0 0 .108-.064z"/></svg>
+    Edit this page
+  </a>
+</div>
+</div>
+  <main class="doc-main" id="main">
+    <button type="button" class="doc-nav__open" aria-expanded="false" aria-controls="doc-nav" data-pagefind-ignore>
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      Documentation menu
+    </button>
+<nav class="breadcrumbs" data-pagefind-ignore aria-label="Breadcrumb">
+  <ol>
+    <li><a href="../../../">Home</a></li>
+    <li><span aria-current="page">Plugin development</span></li>
+    <li><a href="../../../dev-manual/next/plugin-types/index.html">Plugin types</a></li>
+  </ol>
+</nav>
+    <article class="doc">
+      <h1>Plugin types</h1>
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Almost everything in Hop is a plugin.
+Transforms and actions are the obvious ones, but so are the data types flowing through a pipeline, the engines that run it, the databases it talks to, the metadata objects you edit in the GUI, the perspectives of that GUI, and the <code>hop</code> commands you type in a terminal.</p>
+</div>
+<div class="paragraph">
+<p>There are just over thirty plugin types.
+This section is the catalogue: one entry per type, saying what it does, what you annotate, what you implement, and the things that are easy to get wrong.</p>
+</div>
+<div class="paragraph">
+<p>If you already know which type you need, jump straight to its group:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="pipeline-workflow.html" class="xref page">Pipelines and workflows</a> — transforms, actions, engines, partitioners, row distribution</p>
+</li>
+<li>
+<p><a href="data-connectivity.html" class="xref page">Data and connectivity</a> — value types, databases, compression, VFS, data streams</p>
+</li>
+<li>
+<p><a href="metadata-configuration.html" class="xref page">Metadata and configuration</a> — metadata objects, CLI commands and options, variable resolvers, password encoders, authentication</p>
+</li>
+<li>
+<p><a href="execution-observability.html" class="xref page">Execution and observability</a> — extension points, logging, execution information, data samplers, lineage sinks, server servlets</p>
+</li>
+<li>
+<p><a href="gui.html" class="xref page">GUI</a> — GUI plugins, perspectives, file types, search analysers, dialog tabs</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The rest of this page is the part that is the same for all of them.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how_a_plugin_is_found"><a class="link" href="#_how_a_plugin_is_found">How a plugin is found</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There is no registration file to edit and no service loader.
+A plugin is a class with an annotation, in a jar, in a folder Hop looks at.</p>
+</div>
+<div class="paragraph">
+<p>Discovery works in two passes, both driven by a <a href="https://smallrye.io/jandex/" rel="noopener" target="_blank">Jandex</a> annotation index:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Native plugins</dt>
+<dd>
+<p>Everything on the classpath whose jar carries a <code>META-INF/jandex.idx</code>.
+This is how the plugins built into <code>hop-core</code>, <code>hop-engine</code> and <code>hop-ui</code> are found.</p>
+</dd>
+<dt class="hdlist1">Plugin folders</dt>
+<dd>
+<p>Every jar under <code>plugins/</code> (configurable with the <code>HOP_PLUGIN_BASE_FOLDERS</code> variable, default <code>plugins</code>) that carries a <code>META-INF/jandex.idx</code>.
+This is how everything in the <code>plugins/</code> folder of the distribution is found, and how anything a user drops in later is found.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>No index, no plugin.
+The index is produced by the <code>jandex-maven-plugin</code>, which the Hop root pom already binds for every module, so a plugin inside the Hop repository gets one for free.
+A plugin built outside the Hop repository has to add the plugin itself — see <a href="../porting-kettle-plugins.html" class="xref page">Porting Kettle plugins</a> for the snippet.
+After a build you should see <code>META-INF/jandex.idx</code> inside the plugin jar.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Each plugin found in a plugin folder gets its own <code>URLClassLoader</code> covering the plugin jar plus the jars in its <code>lib/</code> folder, with the Hop classloader as parent.
+Two consequences worth remembering:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Anything already shipped in <code>lib/core</code> must <strong>not</strong> be shipped again inside the plugin — the child classloader sees the parent&#8217;s copy, and a duplicate is at best waste and at worst a subtle version conflict.</p>
+</li>
+<li>
+<p>Two plugins that need to see each other&#8217;s classes (a database dialect and its bulk loader, an SFTP connection type and the actions using it) must declare the same <code>classLoaderGroup</code>.
+Plugins in one group share a single classloader.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_registry"><a class="link" href="#_the_registry">The registry</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>All of this ends up in one place:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java">PluginRegistry.getInstance()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The registry keeps the plugins per type, along with the classloaders it created for them, so a plugin is loaded once no matter how many times it is asked for.
+You look plugins up by type and id, and load their main class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-type">PluginRegistry</span> <span class="hljs-variable">registry</span> <span class="hljs-operator">=</span> PluginRegistry.getInstance();
+<span class="hljs-type">IPlugin</span> <span class="hljs-variable">plugin</span> <span class="hljs-operator">=</span> registry.findPluginWithId(TransformPluginType.class, <span class="hljs-string">&quot;TableInput&quot;</span>);
+<span class="hljs-type">ITransformMeta</span> <span class="hljs-variable">meta</span> <span class="hljs-operator">=</span> registry.loadClass(plugin, ITransformMeta.class);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The registry is filled by the environment classes at startup, and which environment you start decides which plugin types exist:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>HopClientEnvironment.init()</code></dt>
+<dd>
+<p>the eight core types — logging, value types, databases, database type rules, extension points, password encoders, variable resolvers and VFS.</p>
+</dd>
+<dt class="hdlist1"><code>HopEnvironment.init()</code></dt>
+<dd>
+<p>the above plus everything engine-side: transforms, actions, engines, metadata, server servlets, and the rest.</p>
+</dd>
+<dt class="hdlist1"><code>HopGuiEnvironment.init()</code></dt>
+<dd>
+<p>the above plus the four GUI types.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>That layering is why a headless tool that only calls <code>HopClientEnvironment.init()</code> cannot load transforms, and why a plugin type is useless until something adds it with <code>PluginRegistry.addPluginType(&#8230;&#8203;)</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_every_plugin_type_has_in_common"><a class="link" href="#_what_every_plugin_type_has_in_common">What every plugin type has in common</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Each plugin type is a class implementing <code>IPluginType&lt;T extends Annotation&gt;</code>, in practice by extending <code>BasePluginType&lt;T&gt;</code>.
+It declares two things:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-meta">@PluginMainClassType(ITransformMeta.class)</span>   <span class="hljs-comment">// the interface your class must implement</span>
+<span class="hljs-meta">@PluginAnnotationType(Transform.class)</span>       <span class="hljs-comment">// the annotation that marks your class</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TransformPluginType</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">BasePluginType</span>&lt;Transform&gt; { ... }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The annotations differ per type, but most of them draw from the same set of attributes, which the plugin type copies into the <code>IPlugin</code> object in the registry:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unique within the plugin type, and written into <code>.hpl</code> / <code>.hwf</code> files, so it is effectively permanent.
+A comma-separated list is allowed (<code>id = "New,Old"</code>) to merge a plugin with a predecessor while staying backwards compatible with existing files.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shown in the user interface.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>description</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shown in the user interface, usually as a tooltip.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>image</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path to the SVG icon inside the plugin jar. See <a href="../svg-files.html" class="xref page">SVG Files</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>categoryDescription</code> / <code>category</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Groups the plugin in the UI, for transforms, actions, metadata types and perspectives.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>keywords</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Extra search terms for the context dialog and the search perspective.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>documentationUrl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path on the Hop documentation site, opened by the help button in the dialog.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>classLoaderGroup</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Plugins sharing this string share one classloader.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>isSeparateClassLoaderNeeded</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A fresh classloader per instantiation. Rarely what you want.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Any of the text attributes can be an i18n key instead of a literal, using a three-part <code>i18n:&lt;package&gt;:&lt;key&gt;</code> syntax.
+An empty package means "the package of the annotated class":</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-meta">@Transform(
+    id = &quot;DetectEmptyStream&quot;,
+    image = &quot;detectemptystream.svg&quot;,
+    name = &quot;i18n::DetectEmptyStream.Name&quot;,
+    description = &quot;i18n::DetectEmptyStream.Description&quot;,
+    categoryDescription = &quot;i18n:org.apache.hop.pipeline.transform:BaseTransform.Category.Flow&quot;,
+    keywords = &quot;i18n::DetectEmptyStreamMeta.keyword&quot;,
+    documentationUrl = &quot;/pipeline/transforms/detectemptystream.html&quot;)</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See <a href="../internationalisation.html" class="xref page">Internationalisation</a> for the message bundles behind those keys.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_catalogue"><a class="link" href="#_the_catalogue">The catalogue</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Plugin type</th>
+<th class="tableblock halign-left valign-top">Annotation</th>
+<th class="tableblock halign-left valign-top">Implement</th>
+<th class="tableblock halign-left valign-top">What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="4"><p class="tableblock"><strong><a href="pipeline-workflow.html" class="xref page">Pipelines and workflows</a></strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TransformPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Transform</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ITransformMeta</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A transform: the unit of work in a pipeline.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TransformEngineSupportPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@TransformEngineSupport</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(fragment)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Declares engine compatibility for a transform you do not own.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ActionPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Action</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IAction</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An action: the unit of work in a workflow.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PipelineEnginePluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@PipelineEnginePlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IPipelineEngine</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A runtime that executes pipelines.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WorkflowEnginePluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@WorkflowEnginePlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IWorkflowEngine</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A runtime that executes workflows.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PartitionerPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@PartitionerPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IPartitioner</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decides which partition a row belongs to.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RowDistributionPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@RowDistributionPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IRowDistribution</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decides which target copy a row is sent to.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="4"><p class="tableblock"><strong><a href="data-connectivity.html" class="xref page">Data and connectivity</a></strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ValueMetaPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@ValueMetaPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IValueMeta</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A data type in the row stream.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DatabasePluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@DatabaseMetaPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IDatabase</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A database dialect.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DatabaseTypeRulesPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@DatabaseTypeRulesPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IDatabaseTypeRuleProvider</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Column type mapping rules, also for dialects you do not own.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CompressionPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@CompressionPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ICompressionProvider</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A compression codec for file transforms.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VfsPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@VfsPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IVfs</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A URL scheme for Apache VFS.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DataStreamPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@DataStreamPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IDataStream</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A named source or target of rows outside a pipeline.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="4"><p class="tableblock"><strong><a href="metadata-configuration.html" class="xref page">Metadata and configuration</a></strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MetadataPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@HopMetadata</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IHopMetadata</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A metadata object type, editable in the GUI and serialised as JSON.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ConfigPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@ConfigPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IConfigOptions</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Extra options on an existing Hop command line tool.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopCommandPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@HopCommand</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IHopCommand</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A new <code>hop</code> sub-command.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ImportPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@ImportPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IHopImport</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An importer from another tool into a Hop project.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VariableResolverPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@VariableResolverPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IVariableResolver</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resolves values from a vault or secret manager.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TwoWayPasswordEncoderPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@TwoWayPasswordEncoderPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ITwoWayPasswordEncoder</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How passwords are obfuscated or encrypted in metadata.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AuthenticationProviderPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@AuthenticationProviderPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IAuthenticationProviderType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A kind of credential.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AuthenticationConsumerPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@AuthenticationConsumerPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IAuthenticationConsumerType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Something that consumes such a credential.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="4"><p class="tableblock"><strong><a href="execution-observability.html" class="xref page">Execution and observability</a></strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ExtensionPointPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@ExtensionPoint</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IExtensionPoint</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code that runs at one of Hop&#8217;s named hook points.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LoggingPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@LoggingPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ILoggingPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Participates in the logging subsystem lifecycle.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ExecutionInfoLocationPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@ExecutionInfoLocationPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IExecutionInfoLocation</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Where execution information, logs and metrics are stored.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ExecutionDataSamplerPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@ExecutionDataSamplerPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IExecutionDataSampler</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which rows are captured while a pipeline runs.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LineageSinkPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@LineageSinkPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ILineageSink</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Where lineage events are delivered.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopServerPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@HopServerServlet</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IHopServerPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An HTTP endpoint on Hop Server.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="4"><p class="tableblock"><strong><a href="gui.html" class="xref page">GUI</a></strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GuiPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@GuiPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(none)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Menus, toolbars, context actions and widgets in the Hop GUI.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopPerspectivePluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@HopPerspectivePlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IHopPerspective</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A perspective: a full screen in the Hop GUI.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopFileTypePluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@HopFileTypePlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IHopFileType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A file type the GUI recognises, opens and searches.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SearchableAnalyserPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@SearchableAnalyserPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ISearchableAnalyser</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Makes one kind of object searchable.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PipelineDialogPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@PipelineDialogPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IPipelineDialogPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An extra tab in the pipeline properties dialog.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WorkflowDialogPluginType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@WorkflowDialogPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IWorkflowDialogPlugin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An extra tab in the workflow properties dialog.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_where_plugins_live_and_how_they_ship"><a class="link" href="#_where_plugins_live_and_how_they_ship">Where plugins live, and how they ship</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Plugins that are part of Hop live under <a href="https://github.com/apache/hop/tree/main/plugins" rel="noopener" target="_blank"><code>plugins/</code></a>, grouped by what they are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>plugins/transforms</code></dt>
+<dd>
+<p>pipeline transforms</p>
+</dd>
+<dt class="hdlist1"><code>plugins/actions</code></dt>
+<dd>
+<p>workflow actions</p>
+</dd>
+<dt class="hdlist1"><code>plugins/databases</code></dt>
+<dd>
+<p>database dialects</p>
+</dd>
+<dt class="hdlist1"><code>plugins/engines</code></dt>
+<dd>
+<p>pipeline and workflow engines</p>
+</dd>
+<dt class="hdlist1"><code>plugins/tech</code></dt>
+<dd>
+<p>everything belonging to one technology (Azure, Google, AWS, FTP, SFTP, Arrow, …), often several plugin types in one module</p>
+</dd>
+<dt class="hdlist1"><code>plugins/vfs</code></dt>
+<dd>
+<p>VFS plugins that are not part of a <code>tech</code> module</p>
+</dd>
+<dt class="hdlist1"><code>plugins/valuetypes</code></dt>
+<dd>
+<p>value types</p>
+</dd>
+<dt class="hdlist1"><code>plugins/resolvers</code></dt>
+<dd>
+<p>variable resolvers</p>
+</dd>
+<dt class="hdlist1"><code>plugins/misc</code></dt>
+<dd>
+<p>everything else</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Adding one is three edits and one new file:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>A new Maven module under the right category, with the category pom as its parent, added to that pom&#8217;s <code>&lt;modules&gt;</code>.
+The parent already provides <code>hop-core</code>, <code>hop-engine</code>, <code>hop-ui</code> and SWT as <code>provided</code> dependencies, the Jandex index, and the SWTBot test stack.</p>
+</li>
+<li>
+<p><code>src/assembly/assembly.xml</code> in the module.
+Its presence activates the assembly profile that turns the module into a plugin zip.
+Copy one from a comparable plugin: it declares the zip id, ships <code>version.xml</code>, and pulls in the shared <code>assemblies/shared/hop-plugin-libs.xml</code> component that routes the plugin jar and its dependencies to the right folders.</p>
+</li>
+<li>
+<p><code>src/main/resources/version.xml</code>, a one-liner containing <code>${project.version}</code>.</p>
+</li>
+<li>
+<p>A <code>&lt;dependency&gt;</code> on the module with <code>&lt;type&gt;zip&lt;/type&gt;</code> in <code>assemblies/plugins/pom.xml</code>, which is what actually puts the plugin in the distribution.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The shared assembly component decides where each dependency lands based on its Maven scope: <code>provided</code> dependencies that are not part of Hop itself go to the shared <code>lib/core</code>, runtime dependencies go to the plugin&#8217;s own <code>lib/</code> folder, and JDBC drivers go to <code>lib/jdbc</code>.
+Review what ends up in the zip.
+Anything already in <code>lib/core</code> should be excluded.</p>
+</div>
+<div class="paragraph">
+<p>Plugins that are <strong>not</strong> part of Hop follow the same shape but build and release on their own — see <a href="../start-your-own-plugin.html" class="xref page">Creating your own plugin</a> and <a href="../marketplace-publish-plugin.html" class="xref page">Publishing a plugin to Nexus</a>.
+That route is the one to take when a dependency is not <a href="https://www.apache.org/legal/resolved.html" rel="noopener" target="_blank">Apache category A</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_documenting_and_sampling_a_plugin"><a class="link" href="#_documenting_and_sampling_a_plugin">Documenting and sampling a plugin</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Two things are easy to forget and are expected of plugins in the Hop repository:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A documentation page under <code>docs/hop-user-manual</code>, referenced from the plugin&#8217;s <code>documentationUrl</code>.</p>
+</li>
+<li>
+<p>A sample pipeline or workflow, see <a href="../plugin-samples.html" class="xref page">Plugin samples</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+    </article>
+<nav class="pagination" data-pagefind-ignore aria-label="Page">
+  <a class="pagination__prev" href="../../../dev-manual/next/plugin-development.html"><span>Previous</span><strong>How plugins work</strong></a>
+  <a class="pagination__next" href="../../../dev-manual/next/plugin-types/pipeline-workflow.html"><span>Next</span><strong>Pipelines and workflows</strong></a>
+</nav>
+  </main>
+
+<aside class="doc-toc" data-pagefind-ignore aria-label="On this page">
+  <p class="doc-toc__title">On this page</p>
+  <div class="doc-toc__body"></div>
+</aside>
+</div>
+<footer class="site-footer" data-pagefind-ignore>
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <img src="../../../img/hop-logo.svg" alt="" width="30" height="30" aria-hidden="true">
+      <div>
+        <p>The Hop Orchestration Platform &mdash; visual data and metadata orchestration, designed once and run anywhere.</p>
+        <ul class="site-footer__socials">
+        <li><a href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"/></svg></a></li>
+        <li><a href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"/></svg></a></li>
+        <li><a href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg></a></li>
+        </ul>
+      </div>
+    </div>
+    <nav class="site-footer__nav" aria-label="Footer">
+      <div>
+        <h2>Documentation</h2>
+        <ul>
+          <li><a href="../../../manual/latest/getting-started/">Getting started</a></li>
+          <li><a href="../../../manual/latest/">User manual</a></li>
+          <li><a href="../../../dev-manual/latest/">Developer docs</a></li>
+          <li><a href="../../../download/">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Community</h2>
+        <ul>
+          <li><a href="../../../community/contributing/">Contributing</a></li>
+          <li><a href="../../../community/mailing-list/">Mailing lists</a></li>
+          <li><a href="../../../community/events/">Events</a></li>
+          <li><a href="../../../community/support/">Support</a></li>
+          <li><a href="../../../community/commercial/">Commercial support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Apache</h2>
+        <ul>
+          <li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li>
+          <li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li>
+          <li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li>
+          <li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li>
+          <li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="site-footer__legal">
+    <p>
+      Copyright &copy; 2019&ndash;2026 <a href="https://www.apache.org/" rel="noopener" target="_blank">The Apache Software Foundation</a>,
+      licensed under the <a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">Apache License, Version 2.0</a>.
+    </p>
+    <p>
+      Apache, Apache Hop, Hop, and the Apache feather logo are either registered trademarks or
+      trademarks of the Apache Software Foundation in the United States and/or other countries.
+    </p>
+  </div>
+</footer>
+
+<script src="../../../js/site.js"></script>
+<script src="../../../_/js/tabs.js"></script>
+</body>
+</html>

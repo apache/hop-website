@@ -1,0 +1,187 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* ---------- tokens: light ---------- */
+:root {
+  /* Tells the browser which way round the page is, so the parts it draws
+     itself - scrollbars, form controls, the caret - match the theme instead of
+     staying light on a dark page. Without it a dark page gets a white
+     scrollbar, which is what the docs nav had. */
+  color-scheme: light;
+
+  --hop-navy: #0e3a5a;
+  --hop-pale: #c9e8fb;
+  --hop-teal: #5cc0c4;
+
+  --ground: #f6f9fb;
+  --surface: #ffffff;
+  --surface-2: #eef4f8;
+  --ink: #10222f;
+  --ink-2: #3d5666;
+  --ink-3: #5e7384;            /* 4.66:1 on --ground; was 3.83 and failed 1.4.3 */
+  --rule: #d8e3ea;
+  --rule-2: #c0d1dc;
+  /* Borders that identify a control - inputs, buttons, selects - are in scope
+     for WCAG 1.4.11 and need 3:1. Decorative borders and dividers (--rule) are
+     not, and stay light on purpose. */
+  --control-border: #6992ac;
+
+  --accent: #0d6f74;          /* teal darkened for AA on light ground */
+  --accent-hover: #0a565a;
+  --on-accent: #ffffff;
+  --link: #0e5a8a;
+
+  --note: #0d6f74;
+  --tip: #1c6f47;
+  --warning: #8f5c0d;
+  --caution: #9e2f26;
+  --important: #9e2f26;
+
+
+  /* Syntax highlighting. These are text on --code-bg, so they are held to
+     4.5:1 by check-contrast like every other colour here. */
+  --hl-comment: #5f6f7a;
+  --hl-keyword: #9333a8;
+  --hl-string: #0a6b3d;
+  --hl-number: #a24a06;
+  --hl-title: #1f5fae;
+  --hl-attr: #7a5300;
+  --hl-type: #05707a;
+  --hl-meta: #62717c;
+
+  /* Diagrams bring their own colours, so their ground stays light in both
+     themes and neither of these is overridden below. --diagram-ink is the
+     source text before the diagram is drawn, which shares that ground. */
+  --diagram-bg: #ffffff;
+  --diagram-ink: #10222f;
+
+  --code-bg: #f2f6f9;
+  --shadow-sm: 0 1px 2px rgba(16,34,47,.06);
+  --shadow: 0 2px 4px rgba(16,34,47,.05), 0 12px 28px -18px rgba(16,34,47,.28);
+
+  --sans: "Open Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  --canvas-bg: #ffffff;
+  --canvas-grid: #e6eef4;
+  --canvas-node: #ffffff;
+  --canvas-node-stroke: #cbdae5;
+  --canvas-hop: #0d6f74;
+  --canvas-err: #b04a3f;
+  --glow-a: rgba(92,192,196,.30);
+  --glow-b: rgba(14,58,90,.14);
+
+  --measure: 68ch;
+  --header-h: 60px;
+  --radius: 6px;
+}
+
+/* ---------- tokens: dark ----------
+   Redefined in two guarded places so all three viewer states resolve:
+   an explicit light choice beats a dark OS, and the toggle wins either way. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --ground: #08141d;
+    --surface: #0f202c;
+    --surface-2: #172d3c;
+    --ink: #e2edf4;
+    --ink-2: #a5bac9;
+    --ink-3: #718a9d;          /* 5.16:1 on --ground, already passing */
+    --rule: #1d3241;
+    --rule-2: #2a4557;
+    --control-border: #4a7998;
+    --accent: #5cc0c4;
+    --accent-hover: #86d6d9;
+    --on-accent: #06222a;
+    --link: #7cc4ec;
+    --note: #5cc0c4;
+    --tip: #63c99a;
+    --warning: #e0aa5c;
+    --caution: #ef8b81;
+    --important: #ef8b81;
+    --canvas-bg: #0c1a25;
+    --canvas-grid: #172c3b;
+    --canvas-node: #142836;
+    --canvas-node-stroke: #2b4759;
+    --canvas-hop: #5cc0c4;
+    --canvas-err: #ef8b81;
+    --glow-a: rgba(92,192,196,.20);
+    --glow-b: rgba(14,58,90,.42);
+    --code-bg: #132635;
+    --hl-comment: #93a7b3;
+    --hl-keyword: #e0a6f2;
+    --hl-string: #82d9a4;
+    --hl-number: #f0ac78;
+    --hl-title: #8cbcf0;
+    --hl-attr: #e9c37c;
+    --hl-type: #6fcfd8;
+    --hl-meta: #a3b4c0;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+    --shadow: 0 2px 4px rgba(0,0,0,.35), 0 12px 28px -18px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground: #08141d;
+  --surface: #0f202c;
+  --surface-2: #172d3c;
+  --ink: #e2edf4;
+  --ink-2: #a5bac9;
+  --ink-3: #718a9d;
+  --rule: #1d3241;
+  --rule-2: #2a4557;
+  --control-border: #4a7998;
+  --accent: #5cc0c4;
+  --accent-hover: #86d6d9;
+  --on-accent: #06222a;
+  --link: #7cc4ec;
+  --note: #5cc0c4;
+  --tip: #63c99a;
+  --warning: #e0aa5c;
+  --caution: #ef8b81;
+  --important: #ef8b81;
+  --canvas-bg: #0c1a25;
+  --canvas-grid: #172c3b;
+  --canvas-node: #142836;
+  --canvas-node-stroke: #2b4759;
+  --canvas-hop: #5cc0c4;
+  --canvas-err: #ef8b81;
+  --glow-a: rgba(92,192,196,.20);
+  --glow-b: rgba(14,58,90,.42);
+  --code-bg: #132635;
+  --hl-comment: #93a7b3;
+  --hl-keyword: #e0a6f2;
+  --hl-string: #82d9a4;
+  --hl-number: #f0ac78;
+  --hl-title: #8cbcf0;
+  --hl-attr: #e9c37c;
+  --hl-type: #6fcfd8;
+  --hl-meta: #a3b4c0;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+  --shadow: 0 2px 4px rgba(0,0,0,.35), 0 12px 28px -18px rgba(0,0,0,.8);
+}
+
+/* ---------- fonts ----------
+   Weight 400 is shipped here for the first time. The old theme declared
+   @font-face for 300/700/800 only, so every paragraph on the site resolved
+   down to Open Sans Light. */
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 400; font-display: swap; src: url(/font/open-sans-latin-ext-400.woff2) format("woff2"); }
+@font-face { font-family: "Open Sans"; font-style: italic; font-weight: 400; font-display: swap; src: url(/font/open-sans-latin-ext-400-italic.woff2) format("woff2"); }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 600; font-display: swap; src: url(/font/open-sans-latin-ext-600.woff2) format("woff2"); }
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 700; font-display: swap; src: url(/font/open-sans-latin-ext-700.woff2) format("woff2"); }
+

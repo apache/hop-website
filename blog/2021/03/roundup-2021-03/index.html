@@ -1,0 +1,951 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Roundup February 2021 | Apache Hop</title><link rel="canonical" href="https://hop.apache.org/blog/2021/03/roundup-2021-03/"><meta property="og:type" content="website"><meta property="og:site_name" content="Apache Hop"><meta property="og:title" content="Roundup February 2021"><meta property="og:url" content="https://hop.apache.org/blog/2021/03/roundup-2021-03/"><meta property="og:image" content="https://hop.apache.org/img/social-card.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://hop.apache.org/img/social-card.png"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="196x196" href="/favicon-196x196.png"><link rel="alternate" type="application/atom+xml" title="Apache Hop blog" href="/blog/index.xml"><link rel="manifest" href="/site.webmanifest"><script>
+    (function () { try { var t = localStorage.getItem('hop-theme'); if (t) document.documentElement.setAttribute('data-theme', t) } catch (e) {} })()
+  </script><link rel="stylesheet" href="/_astro/Base.i4S4kwIk.css"><link rel="stylesheet" href="/_astro/_..CqBFMswg.css"></head><body data-pagefind-body><a class="skip-link" href="#main" data-pagefind-ignore>Skip to main content</a><header class="site-header" data-pagefind-ignore><div class="site-header__inner"><a class="brand" href="/" aria-label="Apache Hop home"><img src="/img/hop-logo.svg" alt="" width="34" height="34" aria-hidden="true"><span class="brand__name">Apache Hop</span></a><nav class="mainnav" id="mainnav" aria-label="Main"><ul class="mainnav__list"><li><a href="/blog/">Blog</a></li><li class="has-menu"><button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-docs">Documentation<svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><ul class="submenu" id="menu-docs"><li><a href="/manual/latest/getting-started/">Getting started</a></li><li><a href="/manual/latest/">User manual</a></li><li><a href="/dev-manual/latest/">Developer documentation</a></li><li><a href="/docs/architecture/">Architecture</a></li><li><a href="/docs/roadmap/">Roadmap</a></li></ul></li><li class="has-menu"><button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-community">Community<svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><ul class="submenu" id="menu-community"><li><a href="/community/contributing/">Contributing</a></li><li><a href="/community/mailing-list/">Mailing lists</a></li><li><a href="/community/tools/">Tools &amp; chat</a></li><li><a href="/community/events/">Events &amp; user groups</a></li><li><a href="/community/team/">Team</a></li><li><a href="/community/support/">Support</a></li><li><a href="/community/commercial/">Commercial support</a></li><li><a href="/community/ethos/">Ethos</a></li><li><a href="/security/">Security advisories</a></li></ul></li><li class="has-menu"><button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-asf">Apache<svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><ul class="submenu" id="menu-asf"><li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li><li><a href="https://www.apache.org/events/current-event" rel="noopener" target="_blank">Events</a></li><li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li><li><a href="https://www.apache.org/security/" rel="noopener" target="_blank">Security</a></li><li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li><li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li><li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li></ul></li></ul></nav><div class="header-tools"><div class="search" role="search"><label class="visually-hidden" for="search-input">Search Apache Hop</label><input id="search-input" type="search" placeholder="Search" autocomplete="off"></div><span class="socials"><a class="icon-btn" href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg></a><a class="icon-btn" href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"></path></svg></a><a class="icon-btn" href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"></path></svg></a><a class="icon-btn" href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"></path></svg></a></span><a class="mainnav__cta" href="/download/">Download</a><button type="button" id="theme-toggle" class="icon-btn" aria-label="Switch theme" title="Switch theme"><svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg><svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"></path></svg></button><button type="button" id="nav-burger" class="icon-btn burger" aria-expanded="false" aria-controls="mainnav" aria-label="Open menu"><span></span><span></span><span></span></button></div></div></header><main class="post" id="main" data-astro-cid-jo55ryrt><div class="post__grid post__grid--toc" data-astro-cid-jo55ryrt><div class="post__col" data-astro-cid-jo55ryrt><p class="post__back" data-pagefind-ignore data-astro-cid-jo55ryrt><a href="/blog/" data-astro-cid-jo55ryrt>&larr; Blog</a></p><header class="post__header" data-astro-cid-jo55ryrt><h1 data-astro-cid-jo55ryrt>Roundup February 2021</h1><p class="post__meta" data-astro-cid-jo55ryrt><time datetime="2021-02-28" data-astro-cid-jo55ryrt>28 February 2021</time><span class="post__sep" aria-hidden="true" data-astro-cid-jo55ryrt>·</span><span class="post__authors" data-astro-cid-jo55ryrt>by bamaer</span></p><ul class="post__tags" data-astro-cid-jo55ryrt><li data-astro-cid-jo55ryrt><a href="/blog/tag/roundup/" data-astro-cid-jo55ryrt>Roundup</a></li></ul></header><article class="post__body" data-astro-cid-jo55ryrt><h2 id="roundup-february-2021">Roundup February 2021</h2>
+<p>As always at the start of another new month, let’s have a look at what happened at Hop over the last month. Here’s the recap for February 2021!</p>
+<p><a id="metadata-injection"></a></p>
+<h2 id="metadata-injection">Metadata Injection</h2>
+<p>Metadata injection was added to Hop months ago. As with most of the functionality that was ported from PDI/Kettle, some work was required to lift the code to the new flexibility and quality standards we’ve set for Hop. After we’ve given it some love, Hop Metadata Injection now has:</p>
+<ul>
+<li>UI improvements:
+<ul>
+<li>Fixed filter button</li>
+<li>Added source-to-target (input-to-template) mapping button</li>
+<li>Removed unneeded top level in the tree</li>
+<li>Added a “None” button when user clicks on a target key (was missing)</li>
+</ul>
+</li>
+<li>reimplemented support for additional transforms, among others CSV File Input, Group By.</li>
+</ul>
+<p><a href="/img/Roundup-2021-03/metadata-injection.png"><img src="/img/Roundup-2021-03/metadata-injection.png" alt="Metadata Injection"></a></p>
+<p><a id="dark-mode"></a></p>
+<h2 id="dark-mode">Dark Mode</h2>
+<p>“If there’s no dark mode, it doesn’t exist.”</p>
+<p>It took some tweaks to get the Hop dark mode to work correctly on all major platforms (looking at you, Mac OS!!). Since it appeared in mid-February, all Hop developers seem to have switched to dark mode overnight.</p>
+<p><a href="/img/Roundup-2021-03/dark-mode.png"><img src="/img/Roundup-2021-03/dark-mode.png" alt="Dark Mode"></a></p>
+<p><a id="beam-spark"></a></p>
+<h2 id="beam-spark-runner-improvements">Beam Spark runner improvements</h2>
+<p>The ability to run Hop pipelines on Apache Spark over Apache Beam has been available since the very early Hop days.</p>
+<p>It is now a lot easier to run pipelines on Apache Spark and Apache Flink.</p>
+<p><a href="/img/Roundup-2021-03/beam-spark.png"><img src="/img/Roundup-2021-03/beam-spark.png" alt="Beam Spark"></a></p>
+<p>Check out the updated <a href="http://hop.apache.org/manual/latest/hop-gui/pipelines/pipeline-run-configurations/beam-spark-pipeline-engine.html#_running_with_spark_submit">docs</a> to take this for a spin.</p>
+<p><a id="metadata-types"></a></p>
+<h2 id="new-metadata-types">New Metadata Types</h2>
+<p>A number of new metadata types were introduced. These are all brand new, with lots of potential use cases!</p>
+<ul>
+<li><a href="http://hop.apache.org/manual/latest/hop-server/web-service.html">Webservice</a>: expose data from a pipeline as a webservice</li>
+<li><a href="http://hop.apache.org/manual/latest/logging/logging-reflection.html">Pipeline Log and Workflow Log</a>: send pipeline and workflow logging data to a probe to be picked up in a transform. The pipeline holding that transform can do whatever is possible in Hop: write to files, send to a (graph) database, Kafka producer, …</li>
+<li>Pipeline Probe: similar to the logging probe, but for actual data. The processing pipeline in this case can be used for data quality, lineage and any imaginable use case.</li>
+</ul>
+<p><a href="/img/Roundup-2021-03/probes.png"><img src="/img/Roundup-2021-03/probes.png" alt="Probes"></a></p>
+<p><a href="/img/Roundup-2021-03/webservice.png"><img src="/img/Roundup-2021-03/webservice.png" alt="Web Service"></a></p>
+<p><a id="plugins"></a></p>
+<h2 id="new-plugins">New Plugins</h2>
+<p>The list of new plugins in Hop continues to grow. Here are the new additions for February:</p>
+<ul>
+<li>Transforms:
+<ul>
+<li><a href="http://hop.apache.org/manual/latest/plugins/transforms/coalesce.html">Coalesce</a></li>
+<li><a href="http://hop.apache.org/manual/latest/plugins/transforms/monetdbbulkloader.html">MonetDB bulk loader</a></li>
+<li><a href="http://hop.apache.org/manual/latest/logging/logging-reflection.html">Pipeline probe</a></li>
+<li><a href="http://hop.apache.org/manual/latest/plugins/transforms/sasinput.html">SAS Input</a></li>
+</ul>
+</li>
+</ul>
+<p><a id="various"></a></p>
+<h2 id="various">Various</h2>
+<h3 id="docker-improvements">Docker improvements</h3>
+<p>A number of small issues have been fixed and improvements have been made. As the number of Docker use cases continues to grow, Hop in Docker has become stable and mature.</p>
+<h3 id="export-project-to-zip">Export project to zip</h3>
+<p><a href="/img/Roundup-2021-03/export-project-to-zip.png"><img src="/img/Roundup-2021-03/export-project-to-zip.png" alt="Export project to zip"></a></p>
+<h3 id="hop-web">Hop Web</h3>
+<p>The merge of Hop Web is getting closer. We’ve closed a number of remaining issues, a war file is now included as part of the default Hop build. Expect a fully integrated Hop Web in the default Hop build soon!</p>
+<h3 id="migration-updates">Migration updates</h3>
+<p>A number of bug fixes, tweaks and improvements have been made to support migration for additional PDI/Kettle steps and job entries to Hop.
+It is now easy and safe to migrate your PDI/Kettle projects to Hop!</p>
+<h3 id="ordered-list">Ordered List</h3>
+<p>In some cases (e.g. the new Coalesce plugin), the order of fields is important. For these use cases, we now have an Ordered List:</p>
+<p><a href="/img/Roundup-2021-03/ordered-list.png"><img src="/img/Roundup-2021-03/ordered-list.png" alt="Ordered List"></a></p>
+<p><a id="community"></a></p>
+<h2 id="community">Community</h2>
+<p>The Hop community continues to grow:</p>
+<ul>
+<li>chat: 142 registered members (up from 134) <a href="https://chat.project-hop.org" rel="noopener" target="_blank">join</a></li>
+<li>LinkedIn: 387 followers (up from 375) <a href="https://www.linkedin.com/company/hop-project" rel="noopener" target="_blank">follow</a></li>
+<li>Twitter: 291 followers (up from 250) <a href="https://twitter.com/ApacheHop" rel="noopener" target="_blank">follow</a></li>
+<li>YouTube: 76 subscribers (up from 68) <a href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" rel="noopener" target="_blank">subscribe</a></li>
+</ul>
+<p>Check out the <a href="/community/team/">complete list</a> of committers and contributors.</p>
+<p>Without community contribution, Hop is just a coding club! Please feel free to join, participate in the discussion, test, file bug tickets on the software or documentation, … Contributing is a lot more than writing code.</p>
+<p>Check out our <a href="/community/contributing/">contribution guides</a> to find out more.</p>
+<p><a id="tickets"></a></p>
+<h2 id="jira-tickets">JIRA Tickets</h2>
+<p>The full list of issues that had activity over the last month is:</p>
+<h3 id="resolved-72">Resolved| (72)</h3>
+<table>
+<thead>
+<tr>
+<th>Issue</th>
+<th>Summary</th>
+<th>Components</th>
+<th>Created</th>
+<th>Updated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2016" rel="noopener" target="_blank">HOP-2016</a></td>
+<td>Variable from environment config only work after restart</td>
+<td>GUI</td>
+<td>2020-10-04</td>
+<td>2021-02-28</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2076" rel="noopener" target="_blank">HOP-2076</a></td>
+<td>port sample rows step to transform</td>
+<td>Transforms</td>
+<td>2020-10-04</td>
+<td>2021-02-28</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2104" rel="noopener" target="_blank">HOP-2104</a></td>
+<td>“Hop needs a default ““Project”” and ““Local Run Configuration”“”</td>
+<td></td>
+<td>2020-10-04</td>
+<td>2021-02-05</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2166" rel="noopener" target="_blank">HOP-2166</a></td>
+<td>Improve first-time usage experience</td>
+<td>GUI</td>
+<td>2020-11-12</td>
+<td>2021-02-05</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2407" rel="noopener" target="_blank">HOP-2407</a></td>
+<td>change selected text color</td>
+<td>Website</td>
+<td>2021-01-07</td>
+<td>2021-02-03</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2455" rel="noopener" target="_blank">HOP-2455</a></td>
+<td>attach POM to the correct phase</td>
+<td></td>
+<td>2021-01-25</td>
+<td>2021-02-28</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2474" rel="noopener" target="_blank">HOP-2474</a></td>
+<td>Add UDJE (User Defined Java Expression) to ETL Metadata Injection step</td>
+<td></td>
+<td>2021-01-28</td>
+<td>2021-02-05</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2478" rel="noopener" target="_blank">HOP-2478</a></td>
+<td>Options Dialog : ConfigPlugins are no longer showing up</td>
+<td>GUI</td>
+<td>2021-01-30</td>
+<td>2021-02-03</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2479" rel="noopener" target="_blank">HOP-2479</a></td>
+<td>Remove IPluginFolder</td>
+<td></td>
+<td>2021-01-30</td>
+<td>2021-02-01</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2480" rel="noopener" target="_blank">HOP-2480</a></td>
+<td>fix typos in website</td>
+<td>Website</td>
+<td>2021-01-31</td>
+<td>2021-02-02</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2484" rel="noopener" target="_blank">HOP-2484</a></td>
+<td>README for docker image has wrong run instructions</td>
+<td></td>
+<td>2021-02-01</td>
+<td>2021-02-02</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2485" rel="noopener" target="_blank">HOP-2485</a></td>
+<td>Docker container references wrong deployment folder</td>
+<td></td>
+<td>2021-02-01</td>
+<td>2021-02-03</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2488" rel="noopener" target="_blank">HOP-2488</a></td>
+<td>Port MonetDB Bulk Loader to Hop</td>
+<td></td>
+<td>2021-02-02</td>
+<td>2021-02-27</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2489" rel="noopener" target="_blank">HOP-2489</a></td>
+<td>Bump Apache commons-collections version 3.2.2 to commons-collections4 version 4.4</td>
+<td></td>
+<td>2021-02-02</td>
+<td>2021-02-03</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2491" rel="noopener" target="_blank">HOP-2491</a></td>
+<td>NPE when loading old project configurations</td>
+<td>GUI</td>
+<td>2021-02-03</td>
+<td>2021-02-04</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2493" rel="noopener" target="_blank">HOP-2493</a></td>
+<td>Code and logging references steps i.s.o. transforms</td>
+<td>API</td>
+<td>2021-02-03</td>
+<td>2021-02-04</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2494" rel="noopener" target="_blank">HOP-2494</a></td>
+<td>Saving a pipeline or workflow before running doesn’t work</td>
+<td>GUI</td>
+<td>2021-02-03</td>
+<td>2021-02-04</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2498" rel="noopener" target="_blank">HOP-2498</a></td>
+<td>CSV File Input: add metadata injection support</td>
+<td>Transforms</td>
+<td>2021-02-05</td>
+<td>2021-02-06</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2500" rel="noopener" target="_blank">HOP-2500</a></td>
+<td>Show last rows widget is showing incorrect data</td>
+<td>GUI, Transforms</td>
+<td>2021-02-05</td>
+<td>2021-02-28</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2501" rel="noopener" target="_blank">HOP-2501</a></td>
+<td>ETL Metadata Injection: variable and parameter passing issues</td>
+<td>Transforms</td>
+<td>2021-02-05</td>
+<td>2021-02-06</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2502" rel="noopener" target="_blank">HOP-2502</a></td>
+<td>Add toolbar icons to edit pipeline and workflow properties</td>
+<td>GUI</td>
+<td>2021-02-05</td>
+<td>2021-02-16</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2503" rel="noopener" target="_blank">HOP-2503</a></td>
+<td>Preview does not work on transforms using variables</td>
+<td></td>
+<td>2021-02-05</td>
+<td>2021-02-28</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2504" rel="noopener" target="_blank">HOP-2504</a></td>
+<td>Metadata Injection: Logging levels are not propagating</td>
+<td>Transforms</td>
+<td>2021-02-06</td>
+<td>2021-02-08</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2505" rel="noopener" target="_blank">HOP-2505</a></td>
+<td>Group By : add support for metadata injection</td>
+<td>Transforms</td>
+<td>2021-02-06</td>
+<td>2021-02-08</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2508" rel="noopener" target="_blank">HOP-2508</a></td>
+<td>Port the transform Coalesce plugin</td>
+<td>Transforms</td>
+<td>2021-02-07</td>
+<td>2021-02-09</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2509" rel="noopener" target="_blank">HOP-2509</a></td>
+<td>Add EnterOrderedListDialog to select in an order the elements of a list</td>
+<td>GUI</td>
+<td>2021-02-07</td>
+<td>2021-02-08</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2514" rel="noopener" target="_blank">HOP-2514</a></td>
+<td>merge join input steps are not correctly converted to transforms</td>
+<td>Import</td>
+<td>2021-02-10</td>
+<td>2021-02-23</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2515" rel="noopener" target="_blank">HOP-2515</a></td>
+<td>BlockingTransform type not correctly converted</td>
+<td>Import</td>
+<td>2021-02-10</td>
+<td>2021-02-23</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2516" rel="noopener" target="_blank">HOP-2516</a></td>
+<td>remove references to Project Hop</td>
+<td>Documentation</td>
+<td>2021-02-10</td>
+<td>2021-02-23</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2517" rel="noopener" target="_blank">HOP-2517</a></td>
+<td>“Environment dialog: Add a ““Create…”” button to create a new config file”</td>
+<td>GUI</td>
+<td>2021-02-11</td>
+<td>2021-02-13</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2518" rel="noopener" target="_blank">HOP-2518</a></td>
+<td>Add keyboard shortcut Ctrl+Shift+S to save as menu</td>
+<td></td>
+<td>2021-02-11</td>
+<td>2021-02-11</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2520" rel="noopener" target="_blank">HOP-2520</a></td>
+<td>full connection element not removed from workflow XML</td>
+<td>Import</td>
+<td>2021-02-12</td>
+<td>2021-02-23</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2525" rel="noopener" target="_blank">HOP-2525</a></td>
+<td>EnterMappingDialog : improve guessing and sort mapped values</td>
+<td>GUI</td>
+<td>2021-02-13</td>
+<td>2021-02-15</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2526" rel="noopener" target="_blank">HOP-2526</a></td>
+<td>Meta data injection dialog: various bugs</td>
+<td>GUI</td>
+<td>2021-02-13</td>
+<td>2021-02-15</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2531" rel="noopener" target="_blank">HOP-2531</a></td>
+<td>Integration tests: optionally generate surefire reports</td>
+<td>Infrastructure</td>
+<td>2021-02-15</td>
+<td>2021-02-15</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2532" rel="noopener" target="_blank">HOP-2532</a></td>
+<td>Hop Run: variables in environment or project are not applied to top-level parameters</td>
+<td>Hop Run</td>
+<td>2021-02-15</td>
+<td>2021-02-16</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2533" rel="noopener" target="_blank">HOP-2533</a></td>
+<td>Workflow Executor: NPE in dialog</td>
+<td>GUI, Transforms, Workflows</td>
+<td>2021-02-15</td>
+<td>2021-02-16</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2535" rel="noopener" target="_blank">HOP-2535</a></td>
+<td>Port the SAS Input step to Hop</td>
+<td>Transforms</td>
+<td>2021-02-17</td>
+<td>2021-02-19</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2536" rel="noopener" target="_blank">HOP-2536</a></td>
+<td>Long lived docker container throws NPE</td>
+<td>docker, Hop Server</td>
+<td>2021-02-17</td>
+<td>2021-02-18</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2537" rel="noopener" target="_blank">HOP-2537</a></td>
+<td>Remove inkscape metadata from SVG files</td>
+<td>GUI</td>
+<td>2021-02-18</td>
+<td>2021-02-19</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2538" rel="noopener" target="_blank">HOP-2538</a></td>
+<td>“Add ““View output”” as a context action option”</td>
+<td>Transforms</td>
+<td>2021-02-19</td>
+<td>2021-02-22</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2539" rel="noopener" target="_blank">HOP-2539</a></td>
+<td>JSON Input dialog: get fields shows white text on white background</td>
+<td>Transforms</td>
+<td>2021-02-19</td>
+<td>2021-02-20</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2543" rel="noopener" target="_blank">HOP-2543</a></td>
+<td>“Kettle Import: change pipeline run configuration to ““local”“”</td>
+<td>Import</td>
+<td>2021-02-22</td>
+<td>2021-02-23</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2544" rel="noopener" target="_blank">HOP-2544</a></td>
+<td>Kettle Import: change JobExecutor to WorkflowExecutor</td>
+<td>Import</td>
+<td>2021-02-22</td>
+<td>2021-02-23</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2545" rel="noopener" target="_blank">HOP-2545</a></td>
+<td>${Internal.Entry.Current.Folder} not working</td>
+<td>API, Import</td>
+<td>2021-02-22</td>
+<td>2021-02-23</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2546" rel="noopener" target="_blank">HOP-2546</a></td>
+<td>Workflow Executor: assume 1 row grouping if all grouping fields are blank</td>
+<td>Transforms</td>
+<td>2021-02-22</td>
+<td>2021-02-23</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2548" rel="noopener" target="_blank">HOP-2548</a></td>
+<td>Metadata Perspective: sort by metadata type name</td>
+<td>GUI</td>
+<td>2021-02-23</td>
+<td>2021-02-24</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2549" rel="noopener" target="_blank">HOP-2549</a></td>
+<td>Group By transform loses aggregation type</td>
+<td>Transforms</td>
+<td>2021-02-23</td>
+<td>2021-02-25</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2550" rel="noopener" target="_blank">HOP-2550</a></td>
+<td>Docker: simplify hop-server use case</td>
+<td>docker, Hop Server</td>
+<td>2021-02-23</td>
+<td>2021-02-24</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2552" rel="noopener" target="_blank">HOP-2552</a></td>
+<td>ExcelInput accept_stepname not replaced to accept_transform_name</td>
+<td>Transforms</td>
+<td>2021-02-24</td>
+<td>2021-02-25</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2554" rel="noopener" target="_blank">HOP-2554</a></td>
+<td>Allow logging to take place with a Hop pipeline</td>
+<td>API</td>
+<td>2021-02-24</td>
+<td>2021-02-24</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2556" rel="noopener" target="_blank">HOP-2556</a></td>
+<td>Spark runner: missing dependency</td>
+<td>API, Beam</td>
+<td>2021-02-24</td>
+<td>2021-02-24</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2557" rel="noopener" target="_blank">HOP-2557</a></td>
+<td>Spark runner : not finishing application</td>
+<td>API, Beam</td>
+<td>2021-02-24</td>
+<td>2021-02-25</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2558" rel="noopener" target="_blank">HOP-2558</a></td>
+<td>Remote pipeline engine: improve logging</td>
+<td>Hop Server</td>
+<td>2021-02-24</td>
+<td>2021-02-25</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2559" rel="noopener" target="_blank">HOP-2559</a></td>
+<td>Hop Server: broken icons in web interface</td>
+<td>Hop Server</td>
+<td>2021-02-24</td>
+<td>2021-02-25</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2560" rel="noopener" target="_blank">HOP-2560</a></td>
+<td>Docker container: Missing fonts for running hop-server</td>
+<td>docker, Hop Server</td>
+<td>2021-02-24</td>
+<td>2021-02-25</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2561" rel="noopener" target="_blank">HOP-2561</a></td>
+<td>Docker container: Make port configurable</td>
+<td>docker, Hop Server</td>
+<td>2021-02-24</td>
+<td>2021-02-25</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2562" rel="noopener" target="_blank">HOP-2562</a></td>
+<td>Remove Mouse wheel support</td>
+<td>Hop Web</td>
+<td>2021-02-24</td>
+<td>2021-02-24</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2563" rel="noopener" target="_blank">HOP-2563</a></td>
+<td>TableView widget color on Windows are bad</td>
+<td>GUI</td>
+<td>2021-02-24</td>
+<td>2021-02-24</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2565" rel="noopener" target="_blank">HOP-2565</a></td>
+<td>Beam: add a main class for executing using Spark Submit or Flink Run</td>
+<td>Beam</td>
+<td>2021-02-25</td>
+<td>2021-02-25</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2566" rel="noopener" target="_blank">HOP-2566</a></td>
+<td>Docker: libraries like snappy need libc-compat in the container</td>
+<td>docker</td>
+<td>2021-02-25</td>
+<td>2021-02-25</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2567" rel="noopener" target="_blank">HOP-2567</a></td>
+<td>Allow output rows from any transform to be streamed to another pipeline</td>
+<td>Transforms</td>
+<td>2021-02-25</td>
+<td>2021-02-28</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2569" rel="noopener" target="_blank">HOP-2569</a></td>
+<td>Bring back space while mousing over transform</td>
+<td>GUI, Transforms</td>
+<td>2021-02-26</td>
+<td>2021-02-26</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2570" rel="noopener" target="_blank">HOP-2570</a></td>
+<td>Allow a metadata editor to be set to changed or not from outside the editor</td>
+<td>API, GUI</td>
+<td>2021-02-26</td>
+<td>2021-02-26</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2571" rel="noopener" target="_blank">HOP-2571</a></td>
+<td>Expose getter/setter for metadata in IMetadataEditor</td>
+<td>API, GUI</td>
+<td>2021-02-26</td>
+<td>2021-02-26</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2572" rel="noopener" target="_blank">HOP-2572</a></td>
+<td>TableView: when a row is inserted the view is not flagged as modified</td>
+<td>API, GUI</td>
+<td>2021-02-26</td>
+<td>2021-02-26</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2574" rel="noopener" target="_blank">HOP-2574</a></td>
+<td>Keyboard shortcuts are not handled correctly</td>
+<td>API, GUI</td>
+<td>2021-02-26</td>
+<td>2021-02-27</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2576" rel="noopener" target="_blank">HOP-2576</a></td>
+<td>JSON Input step not recognizing .json file extension</td>
+<td>Transforms</td>
+<td>2021-02-26</td>
+<td>2021-02-27</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2577" rel="noopener" target="_blank">HOP-2577</a></td>
+<td>Create a Web Service metadata type</td>
+<td>Hop Server, Metadata</td>
+<td>2021-02-27</td>
+<td>2021-02-27</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2580" rel="noopener" target="_blank">HOP-2580</a></td>
+<td>Deliver a working Hop Server XML configuration file</td>
+<td>Hop Server</td>
+<td>2021-03-01</td>
+<td>2021-03-01</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2581" rel="noopener" target="_blank">HOP-2581</a></td>
+<td>Workflow Logging transform outputs same field name twice</td>
+<td>Transforms</td>
+<td>2021-03-01</td>
+<td>2021-03-01</td>
+</tr>
+</tbody>
+</table>
+<h3 id="in-progress-7">In Progress (7)</h3>
+<table>
+<thead>
+<tr>
+<th>Issue</th>
+<th>Summary</th>
+<th>Components</th>
+<th>Created</th>
+<th>Updated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2469" rel="noopener" target="_blank">HOP-2469</a></td>
+<td>Ensure that Hop complies with ASF encryption policy</td>
+<td></td>
+<td>2021-01-27</td>
+<td>2021-02-23</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2481" rel="noopener" target="_blank">HOP-2481</a></td>
+<td>disable google analytics tracking when running website locally (draft mode)</td>
+<td>Website</td>
+<td>2021-01-31</td>
+<td>2021-01-31</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2529" rel="noopener" target="_blank">HOP-2529</a></td>
+<td>Add Hop Web Docker image to build process</td>
+<td>Containers, Hop Web</td>
+<td>2021-02-14</td>
+<td>2021-03-01</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2555" rel="noopener" target="_blank">HOP-2555</a></td>
+<td>Add support for a JSON value type</td>
+<td>API</td>
+<td>2021-02-24</td>
+<td>2021-02-24</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2575" rel="noopener" target="_blank">HOP-2575</a></td>
+<td>Create a file explorer perspective</td>
+<td>GUI</td>
+<td>2021-02-26</td>
+<td>2021-03-01</td>
+</tr>
+</tbody>
+</table>
+<h3 id="open-29">Open (29)</h3>
+<table>
+<thead>
+<tr>
+<th>Issue</th>
+<th>Summary</th>
+<th>Components</th>
+<th>Created</th>
+<th>Updated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2434" rel="noopener" target="_blank">HOP-2434</a></td>
+<td>When reloading project variables they are not refreshed</td>
+<td>Metadata</td>
+<td>2021-01-17</td>
+<td>2021-02-09</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2468" rel="noopener" target="_blank">HOP-2468</a></td>
+<td>NPE in file open dialog</td>
+<td>GUI</td>
+<td>2021-01-27</td>
+<td>2021-02-03</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2482" rel="noopener" target="_blank">HOP-2482</a></td>
+<td>There will be a NullPointerException if you only regist a pipeline</td>
+<td>Hop Server</td>
+<td>2021-01-31</td>
+<td>2021-01-31</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2483" rel="noopener" target="_blank">HOP-2483</a></td>
+<td>Translator does not work under Windows</td>
+<td></td>
+<td>2021-01-31</td>
+<td>2021-02-15</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2486" rel="noopener" target="_blank">HOP-2486</a></td>
+<td>“Picking ““Create hop”” eventually brings up action picker again”</td>
+<td>GUI</td>
+<td>2021-02-02</td>
+<td>2021-02-02</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2487" rel="noopener" target="_blank">HOP-2487</a></td>
+<td>Unit tests UI issues</td>
+<td></td>
+<td>2021-02-02</td>
+<td>2021-02-03</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2490" rel="noopener" target="_blank">HOP-2490</a></td>
+<td>Issue editing Data Set</td>
+<td>GUI</td>
+<td>2021-02-03</td>
+<td>2021-02-09</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2492" rel="noopener" target="_blank">HOP-2492</a></td>
+<td>Error creating Git metadata</td>
+<td>GUI</td>
+<td>2021-02-03</td>
+<td>2021-02-09</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2496" rel="noopener" target="_blank">HOP-2496</a></td>
+<td>Translator sort i18n messages on the key</td>
+<td></td>
+<td>2021-02-03</td>
+<td>2021-02-12</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2499" rel="noopener" target="_blank">HOP-2499</a></td>
+<td>Trim option in database lookup</td>
+<td>Transforms</td>
+<td>2021-02-05</td>
+<td>2021-02-05</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2506" rel="noopener" target="_blank">HOP-2506</a></td>
+<td>Transform Fake data call private method domainName()</td>
+<td>Transforms</td>
+<td>2021-02-07</td>
+<td>2021-02-07</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2510" rel="noopener" target="_blank">HOP-2510</a></td>
+<td>Add integration tests for MQTT transforms</td>
+<td></td>
+<td>2021-02-08</td>
+<td>2021-02-08</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2511" rel="noopener" target="_blank">HOP-2511</a></td>
+<td>Merge join description is incorrect</td>
+<td>Documentation</td>
+<td>2021-02-08</td>
+<td>2021-02-08</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2519" rel="noopener" target="_blank">HOP-2519</a></td>
+<td>add string operations to Metadata Injection</td>
+<td>Transforms</td>
+<td>2021-02-12</td>
+<td>2021-02-26</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2521" rel="noopener" target="_blank">HOP-2521</a></td>
+<td>document salesforce transforms</td>
+<td>Documentation</td>
+<td>2021-02-12</td>
+<td>2021-02-12</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2522" rel="noopener" target="_blank">HOP-2522</a></td>
+<td>Javascript Step does not output booleans</td>
+<td>Transforms</td>
+<td>2021-02-12</td>
+<td>2021-02-12</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2523" rel="noopener" target="_blank">HOP-2523</a></td>
+<td>document file access over VFS</td>
+<td>Documentation</td>
+<td>2021-02-12</td>
+<td>2021-02-12</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2524" rel="noopener" target="_blank">HOP-2524</a></td>
+<td>port Dropbox steps to Hop transforms</td>
+<td>Transforms</td>
+<td>2021-02-12</td>
+<td>2021-02-12</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2530" rel="noopener" target="_blank">HOP-2530</a></td>
+<td>Add Hop Web tests to nightly test process</td>
+<td>Hop Web, Integration Testing</td>
+<td>2021-02-14</td>
+<td>2021-02-14</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2534" rel="noopener" target="_blank">HOP-2534</a></td>
+<td>Add Injection Support to AddSequence Transform</td>
+<td></td>
+<td>2021-02-15</td>
+<td>2021-02-15</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2540" rel="noopener" target="_blank">HOP-2540</a></td>
+<td>double click or modifier-click on an action or transform name without opening the dialog</td>
+<td>GUI</td>
+<td>2021-02-19</td>
+<td>2021-02-19</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2541" rel="noopener" target="_blank">HOP-2541</a></td>
+<td>add or extend tooltip to action and transform icons and text to</td>
+<td>GUI</td>
+<td>2021-02-19</td>
+<td>2021-02-19</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2547" rel="noopener" target="_blank">HOP-2547</a></td>
+<td>Update the Beam plugin to version 2.28.0</td>
+<td>API, Beam</td>
+<td>2021-02-23</td>
+<td>2021-02-23</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2551" rel="noopener" target="_blank">HOP-2551</a></td>
+<td>Error while executing Pipeline using Beam Spark pipeline engine</td>
+<td>Beam, Hop Run, Pipelines</td>
+<td>2021-02-24</td>
+<td>2021-02-25</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2553" rel="noopener" target="_blank">HOP-2553</a></td>
+<td>Error while executing Pipeline using Beam Spark pipeline engine - USING HOP GUI</td>
+<td>Beam, Pipelines</td>
+<td>2021-02-24</td>
+<td>2021-02-25</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2564" rel="noopener" target="_blank">HOP-2564</a></td>
+<td>Config folder is not picked up correctly</td>
+<td>Hop Web</td>
+<td>2021-02-24</td>
+<td>2021-03-01</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2568" rel="noopener" target="_blank">HOP-2568</a></td>
+<td>Text File Output</td>
+<td>Transforms</td>
+<td>2021-02-25</td>
+<td>2021-02-25</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2573" rel="noopener" target="_blank">HOP-2573</a></td>
+<td>Create a Hop sizing guide</td>
+<td></td>
+<td>2021-02-26</td>
+<td>2021-02-26</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2578" rel="noopener" target="_blank">HOP-2578</a></td>
+<td>Special chars in menu items not displayed correctly on macos</td>
+<td>GUI</td>
+<td>2021-02-28</td>
+<td>2021-02-28</td>
+</tr>
+</tbody>
+</table>
+<h3 id="closed-11">Closed (11)</h3>
+<table>
+<thead>
+<tr>
+<th>Issue</th>
+<th>Summary</th>
+<th>Components</th>
+<th>Created</th>
+<th>Updated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-1882" rel="noopener" target="_blank">HOP-1882</a></td>
+<td>Adding run config without name causes exception</td>
+<td>GUI</td>
+<td>2020-10-04</td>
+<td>2021-02-28</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2091" rel="noopener" target="_blank">HOP-2091</a></td>
+<td>port formula step to transform plugin</td>
+<td>Transforms</td>
+<td>2020-10-04</td>
+<td>2021-02-02</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2477" rel="noopener" target="_blank">HOP-2477</a></td>
+<td>Move interface IValueMetaConverter to package org.apache.hop.core.row[.value]</td>
+<td></td>
+<td>2021-01-30</td>
+<td>2021-02-08</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2495" rel="noopener" target="_blank">HOP-2495</a></td>
+<td>Translator wrong path for new language file</td>
+<td></td>
+<td>2021-02-03</td>
+<td>2021-02-03</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2497" rel="noopener" target="_blank">HOP-2497</a></td>
+<td>Add custom entry point extension option</td>
+<td>Containers</td>
+<td>2021-02-05</td>
+<td>2021-02-05</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2507" rel="noopener" target="_blank">HOP-2507</a></td>
+<td>ShowHelpDialog bad layout</td>
+<td></td>
+<td>2021-02-07</td>
+<td>2021-02-09</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2512" rel="noopener" target="_blank">HOP-2512</a></td>
+<td>Duplicated text in Calculator plugin description</td>
+<td>Documentation</td>
+<td>2021-02-08</td>
+<td>2021-02-09</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2513" rel="noopener" target="_blank">HOP-2513</a></td>
+<td>‘Split fields’ instead of ‘Split fields to rows’</td>
+<td>Documentation</td>
+<td>2021-02-08</td>
+<td>2021-02-09</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2528" rel="noopener" target="_blank">HOP-2528</a></td>
+<td>HOP_CONFIG_FOLDER is ignored when resolving projectHome</td>
+<td>Projects</td>
+<td>2021-02-14</td>
+<td>2021-02-14</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2542" rel="noopener" target="_blank">HOP-2542</a></td>
+<td>Display.isSystemDarkTheme is not available in RAP</td>
+<td>Hop Web</td>
+<td>2021-02-20</td>
+<td>2021-02-28</td>
+</tr>
+<tr>
+<td><a href="https://issues.apache.org/jira/browse/HOP-2579" rel="noopener" target="_blank">HOP-2579</a></td>
+<td>Fix ValueMeta image pixelized</td>
+<td>GUI</td>
+<td>2021-02-28</td>
+<td>2021-03-01</td>
+</tr>
+</tbody>
+</table>
+</article><nav class="post__nav" aria-label="More posts" data-pagefind-ignore data-astro-cid-jo55ryrt><a class="post__nav-link" href="/blog/2021/02/roundup-2021-02/" rel="prev" data-astro-cid-jo55ryrt><span data-astro-cid-jo55ryrt>Older</span><strong data-astro-cid-jo55ryrt>Roundup January 2021</strong></a><a class="post__nav-link post__nav-link--next" href="/blog/2021/04/roundup-2021-04/" rel="next" data-astro-cid-jo55ryrt><span data-astro-cid-jo55ryrt>Newer</span><strong data-astro-cid-jo55ryrt>Roundup March 2021</strong></a></nav></div><aside class="post__toc" aria-labelledby="toc-heading" data-pagefind-ignore data-astro-cid-jo55ryrt><p class="post__toc-title" id="toc-heading" data-astro-cid-jo55ryrt>On this page</p><nav data-astro-cid-jo55ryrt><ol data-astro-cid-jo55ryrt><li data-astro-cid-jo55ryrt><a href="#roundup-february-2021" data-astro-cid-jo55ryrt>Roundup February 2021</a></li><li data-astro-cid-jo55ryrt><a href="#metadata-injection" data-astro-cid-jo55ryrt>Metadata Injection</a></li><li data-astro-cid-jo55ryrt><a href="#dark-mode" data-astro-cid-jo55ryrt>Dark Mode</a></li><li data-astro-cid-jo55ryrt><a href="#beam-spark-runner-improvements" data-astro-cid-jo55ryrt>Beam Spark runner improvements</a></li><li data-astro-cid-jo55ryrt><a href="#new-metadata-types" data-astro-cid-jo55ryrt>New Metadata Types</a></li><li data-astro-cid-jo55ryrt><a href="#new-plugins" data-astro-cid-jo55ryrt>New Plugins</a></li><li data-astro-cid-jo55ryrt><a href="#various" data-astro-cid-jo55ryrt>Various</a></li><li data-astro-cid-jo55ryrt><a href="#community" data-astro-cid-jo55ryrt>Community</a></li><li data-astro-cid-jo55ryrt><a href="#jira-tickets" data-astro-cid-jo55ryrt>JIRA Tickets</a></li></ol></nav></aside></div></main><footer class="site-footer" data-pagefind-ignore><div class="site-footer__inner"><div class="site-footer__brand"><img src="/img/hop-logo.svg" alt="" width="30" height="30" aria-hidden="true"><div><p>The Hop Orchestration Platform &mdash; visual data and metadata orchestration, designed once and run anywhere.</p><ul class="site-footer__socials"><li><a href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg></a></li><li><a href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"></path></svg></a></li><li><a href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"></path></svg></a></li><li><a href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"></path></svg></a></li></ul></div></div><nav class="site-footer__nav" aria-label="Footer"><div><h2>Documentation</h2><ul><li><a href="/manual/latest/getting-started/">Getting started</a></li><li><a href="/manual/latest/">User manual</a></li><li><a href="/dev-manual/latest/">Developer docs</a></li><li><a href="/download/">Download</a></li></ul></div><div><h2>Community</h2><ul><li><a href="/community/contributing/">Contributing</a></li><li><a href="/community/mailing-list/">Mailing lists</a></li><li><a href="/community/events/">Events</a></li><li><a href="/community/support/">Support</a></li><li><a href="/community/commercial/">Commercial support</a></li></ul></div><div><h2>Apache</h2><ul><li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li><li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li><li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li><li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li><li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li></ul></div></nav></div><div class="site-footer__legal"><p>Copyright &copy; 2019&ndash;2026 <a href="https://www.apache.org/" rel="noopener" target="_blank">The Apache Software Foundation</a>, licensed under the <a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">Apache License, Version 2.0</a>.</p><p>Apache, Apache Hop, Hop, and the Apache feather logo are either registered trademarks or trademarks of the Apache Software Foundation in the United States and/or other countries.</p></div></footer><script src="/js/site.js"></script></body></html>

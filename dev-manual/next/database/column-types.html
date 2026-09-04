@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Column types and type rules | Apache Hop</title>
+<meta name="description" content="How a database column becomes a Hop value and back again, and how a dialect declares the parts it does differently.">
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Apache Hop">
+<meta property="og:title" content="Column types and type rules">
+<meta property="og:description" content="How a database column becomes a Hop value and back again, and how a dialect declares the parts it does differently.">
+
+<meta property="og:image" content="https://hop.apache.org/img/social-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hop.apache.org/img/social-card.png">
+
+<link rel="icon" href="../../../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="196x196" href="../../../favicon-196x196.png">
+<link rel="manifest" href="../../../site.webmanifest">
+<link rel="stylesheet" href="../../../_/css/site.css">
+
+<script>(function(){try{var t=localStorage.getItem('hop-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+</head>
+<body class="doc-page">
+<a class="skip-link" href="#main" data-pagefind-ignore>Skip to main content</a>
+<header class="site-header" data-pagefind-ignore>
+  <div class="site-header__inner">
+    <a class="brand" href="../../../" aria-label="Apache Hop home">
+      <img src="../../../img/hop-logo.svg" alt="" width="34" height="34" aria-hidden="true">
+      <span class="brand__name">Apache Hop</span>
+    </a>
+
+    <nav class="mainnav" id="mainnav" aria-label="Main">
+      <ul class="mainnav__list">
+        <li><a href="../../../blog/">Blog</a></li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-docs">
+            Documentation <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-docs">
+            <li><a href="../../../manual/latest/getting-started/">Getting started</a></li>
+            <li><a href="../../../manual/latest/">User manual</a></li>
+            <li><a href="../../../dev-manual/latest/">Developer documentation</a></li>
+            <li><a href="../../../docs/architecture/">Architecture</a></li>
+            <li><a href="../../../docs/roadmap/">Roadmap</a></li>
+          </ul>
+        </li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-community">
+            Community <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-community">
+            <li><a href="../../../community/contributing/">Contributing</a></li>
+            <li><a href="../../../community/mailing-list/">Mailing lists</a></li>
+            <li><a href="../../../community/tools/">Tools & chat</a></li>
+            <li><a href="../../../community/events/">Events & user groups</a></li>
+            <li><a href="../../../community/team/">Team</a></li>
+            <li><a href="../../../community/support/">Support</a></li>
+            <li><a href="../../../community/commercial/">Commercial support</a></li>
+            <li><a href="../../../community/ethos/">Ethos</a></li>
+            <li><a href="../../../security/">Security advisories</a></li>
+          </ul>
+        </li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-asf">
+            Apache <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-asf">
+            <li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li>
+            <li><a href="https://www.apache.org/events/current-event" rel="noopener" target="_blank">Events</a></li>
+            <li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li>
+            <li><a href="https://www.apache.org/security/" rel="noopener" target="_blank">Security</a></li>
+            <li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li>
+            <li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li>
+            <li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-tools">
+      <div class="search" role="search">
+        <label class="visually-hidden" for="search-input">Search Apache Hop</label>
+        <input id="search-input" type="search" placeholder="Search" autocomplete="off">
+      </div>
+      <span class="socials">
+        <a class="icon-btn" href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+        <a class="icon-btn" href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"/></svg></a>
+        <a class="icon-btn" href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"/></svg></a>
+        <a class="icon-btn" href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg></a>
+      </span>
+      <a class="mainnav__cta" href="../../../download/">Download</a>
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Switch theme" title="Switch theme">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+      </button>
+      <button type="button" id="nav-burger" class="icon-btn burger" aria-expanded="false" aria-controls="mainnav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="doc-shell">
+<div class="doc-nav" id="doc-nav" data-pagefind-ignore>
+  <button type="button" class="doc-nav__close icon-btn" aria-label="Close navigation">&times;</button>
+  <nav aria-label="Documentation">
+    <div class="doc-nav__group">
+      
+      <ul class="doc-nav__list">
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Getting started section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Getting started</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/getting-started.html">The Hop codebase</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/setup-dev-environment.html">Setting up your development environment</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/build-and-test.html">Building and testing</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/contributing.html">Contributing changes</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/writing-documentation.html">Writing documentation</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Architecture section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Architecture</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/execution-model.html">How a pipeline and a workflow run</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/variables-and-metadata.html">Variables, parameters and metadata</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/dependencies-and-classloading.html">Dependencies and classloading</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/logging-and-debugging.html">Logging and debugging</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/performance.html">Performance on the row hot path</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/security.html">Security for developers</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Plugin development section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Plugin development</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-development.html">How plugins work</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Plugin types section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/plugin-types/index.html">Plugin types</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/pipeline-workflow.html">Pipelines and workflows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/data-connectivity.html">Data and connectivity</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/metadata-configuration.html">Metadata and configuration</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/execution-observability.html">Execution and observability</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/gui.html">GUI</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/metadata-plugins.html">Metadata plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/metadata-serialization.html">Metadata serialization</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/metadata-injection.html">Metadata injection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/value-types.html">Value types</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Database plugins section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/database/index.html">Database plugins</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/creating-a-dialect.html">Creating a dialect</a>
+    
+  </li>
+  <li class="doc-nav__item is-current">
+    <a href="../../../dev-manual/next/database/column-types.html">Column types and type rules</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/value-bindings.html">Moving values across JDBC</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/extending-another-dialect.html">Extending a dialect you don&#8217;t own</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/testing.html">Testing a database plugin</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/migrating-from-variants.html">Migrating from isXVariant()</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/gui-plugins-toolbars.html">GUI plugins and toolbars</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/engine-compatibility.html">Engine compatibility</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/lineage.html">Lineage observation hub</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/internationalisation.html">Internationalisation (i18n)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/svg-files.html">SVG files</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-samples.html">Plugin samples</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/start-your-own-plugin.html">Creating a plugin outside the Hop repository</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/marketplace-publish-plugin.html">Publishing a plugin to Nexus (marketplace)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/porting-kettle-plugins.html">Porting Kettle plugins</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Testing section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Testing</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/testing/unit-testing.html">Unit tests</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/integration-testing.html">Integration tests</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/testing/ui-testing.html">UI tests with SWTBot</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Embedding and interfaces section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Embedding and interfaces</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle SDK section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/sdk/index.html">SDK</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/hop-sdk.html">The Hop SDK</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop Web section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/hopweb/index.html">Hop Web</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/hopweb/developer-guide.html">Hop Web Developer Guide</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/hopweb/hopweb-antipatterns.html">Hop Web Antipatterns</a>
+    
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Distribution and release section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Distribution and release</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/docker-build.html">Docker Build Script</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Apache Release Process section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/apache-release/index.html">Apache Release Process</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/apache-release/creating-a-release.html">Creating a Release</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/apache-release/promoting-a-release.html">Promoting a Release</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/apache-release/checking-a-release.html">Checking a Release</a>
+    
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+    </div>
+  </nav>
+<div class="nav-foot">
+  <details class="explore">
+    <summary>
+      <span class="explore__now">
+        <span class="explore__component">Development Documentation</span>
+        <span class="explore__version">2.20.0</span>
+      </span>
+      <svg class="explore__chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </summary>
+    <div class="explore__body">
+      <div class="explore__group">
+  <p class="explore__title">Development Documentation</p>
+  <ul>
+    <li class="is-current">
+      <a href="../../../dev-manual/next/index.html">2.20.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/latest/index.html">2.19.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.18.1/index.html">2.18.1</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.18.0/index.html">2.18.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.17.0/index.html">2.17.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.16.0/index.html">2.16.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.15.0/index.html">2.15.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.14.0/index.html">2.14.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.13.0/index.html">2.13.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.12.0/index.html">2.12.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.11.0/index.html">2.11.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.10.0/index.html">2.10.0</a>
+    </li>
+  </ul>
+</div>
+
+        
+        <div class="explore__group">
+  <p class="explore__title">User manual</p>
+  <ul>
+    <li class="">
+      <a href="../../../manual/next/index.html">2.20.0 (pre-release)</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/latest/index.html">2.19.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.18.1/index.html">2.18.1</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.18.0/index.html">2.18.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.17.0/index.html">2.17.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.16.0/index.html">2.16.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.15.0/index.html">2.15.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.14.0/index.html">2.14.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.13.0/index.html">2.13.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.12.0/index.html">2.12.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.11.0/index.html">2.11.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.10.0/index.html">2.10.0</a>
+    </li>
+  </ul>
+</div>
+
+    </div>
+  </details>
+
+  <a class="nav-foot__edit" href="https://github.com/apache/hop/edit/main/docs/hop-dev-manual/modules/ROOT/pages/database/column-types.adoc" rel="noopener" target="_blank">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758zm1.414 1.06a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354zM11.189 6.25 9.75 4.81l-6.286 6.287a.25.25 0 0 0-.064.108l-.558 1.953 1.953-.558a.25.25 0 0 0 .108-.064z"/></svg>
+    Edit this page
+  </a>
+</div>
+</div>
+  <main class="doc-main" id="main">
+    <button type="button" class="doc-nav__open" aria-expanded="false" aria-controls="doc-nav" data-pagefind-ignore>
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      Documentation menu
+    </button>
+<nav class="breadcrumbs" data-pagefind-ignore aria-label="Breadcrumb">
+  <ol>
+    <li><a href="../../../">Home</a></li>
+    <li><span aria-current="page">Plugin development</span></li>
+    <li><a href="../../../dev-manual/next/database/index.html">Database plugins</a></li>
+    <li><a href="../../../dev-manual/next/database/column-types.html">Column types and type rules</a></li>
+  </ol>
+</nav>
+    <article class="doc">
+      <h1>Column types and type rules</h1>
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hop has its own small set of data types, and every database has a larger and different set.
+Something has to decide that a <code>NUMBER(38,0)</code> read from Oracle is a Hop Integer, and that a Hop Integer written to PostgreSQL is a <code>BIGINT</code>.</p>
+</div>
+<div class="paragraph">
+<p>That decision is made by the dialect, not by Hop.
+Hop provides the plain JDBC behaviour; a dialect declares the parts it does differently, as rules.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_hop_types"><a class="link" href="#_the_hop_types">The Hop types</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Constant</th>
+<th class="tableblock halign-left valign-top">Java type</th>
+<th class="tableblock halign-left valign-top">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TYPE_STRING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TYPE_INTEGER</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Up to 18 significant digits.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TYPE_NUMBER</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Double</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TYPE_BIGNUMBER</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BigDecimal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For anything a double cannot hold exactly.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TYPE_DATE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.util.Date</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A precision of 1 marks "a date, not a timestamp".</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TYPE_TIMESTAMP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.sql.Timestamp</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TYPE_BOOLEAN</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TYPE_BINARY</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">byte[]</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TYPE_INET</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">InetAddress</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TYPE_JSON</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JsonNode</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TYPE_UUID</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UUID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">From the UUID value type plugin.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Two of these carry a meaning that is easy to get wrong.</p>
+</div>
+<div class="paragraph">
+<p><code>length</code> on a numeric type is the number of digits <strong>before</strong> the decimal, not the total.
+A database reports the total, so the scale has to come off.
+<code>NUMERIC(10,2)</code> is length 8, precision 2, and is written back as <code>NUMERIC(8+2, 2)</code>.
+Getting this backwards makes a column grow by its scale on every round trip.</p>
+</div>
+<div class="paragraph">
+<p><code>precision</code> of exactly 1 on a <code>TYPE_DATE</code> is a marker meaning the value is a date rather than a timestamp.
+It is not a digit count.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_a_rule"><a class="link" href="#_a_rule">A rule</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A rule is one <code>IDatabaseTypeRule</code>.
+It can answer three questions, and returns <code>null</code> from any it does not know, so a rule only has to describe what it actually does.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-type">IValueMeta</span> <span class="hljs-title function_">getValueMeta</span><span class="hljs-params">(IVariables variables, DatabaseMeta databaseMeta, DatabaseColumn column)</span>;
+<span class="hljs-type">String</span> <span class="hljs-title function_">getColumnType</span><span class="hljs-params">(IVariables variables, IDatabase database, IValueMeta valueMeta, ColumnContext context)</span>;
+<span class="hljs-type">IValueBinding</span> <span class="hljs-title function_">getBinding</span><span class="hljs-params">(IDatabase database, IValueMeta valueMeta)</span>;</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Reading a column</dt>
+<dd>
+<p><code>getValueMeta</code> claims a column and says what Hop value it is.</p>
+</dd>
+<dt class="hdlist1">Writing a column definition</dt>
+<dd>
+<p><code>getColumnType</code> gives the column type for a Hop value, without the column name. Hop adds the name and any line break.
+It is handed the dialect rather than the <code>DatabaseMeta</code> wrapper, because a dialect assembling an <code>ALTER TABLE</code> reaches this path from inside itself, where there is no wrapper. A connection option a type decision depends on lives on the dialect instance anyway, which is the same object <code>getTypeRules()</code> is answered from.</p>
+</dd>
+<dt class="hdlist1">Moving the values</dt>
+<dd>
+<p><code>getBinding</code> is only for drivers that need the values themselves handled specially, and has its own page: <a href="value-bindings.html" class="xref page">Moving values across JDBC</a>.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_declaring_rules"><a class="link" href="#_declaring_rules">Declaring rules</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A dialect returns its rules from <code>getTypeRules()</code>, built as a table rather than written as a switch.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">List</span>&lt;IDatabaseTypeRule&gt; <span class="hljs-variable">TYPE_RULES</span> <span class="hljs-operator">=</span>
+    DatabaseTypes.rules()
+        <span class="hljs-comment">// A YEAR column is reported as a date, but is really a four digit integer when the</span>
+        <span class="hljs-comment">// driver has been told not to treat it as one.</span>
+        .read(Types.DATE, Types.TIME)
+        .nativeName(<span class="hljs-string">&quot;YEAR&quot;</span>)
+        .where(
+            (variables, databaseMeta, column) -&gt; {
+              <span class="hljs-type">String</span> <span class="hljs-variable">property</span> <span class="hljs-operator">=</span>
+                  databaseMeta.getConnectionProperties(variables).getProperty(<span class="hljs-string">&quot;yearIsDateType&quot;</span>);
+              <span class="hljs-keyword">return</span> property != <span class="hljs-literal">null</span> &amp;&amp; <span class="hljs-string">&quot;false&quot;</span>.equalsIgnoreCase(property);
+            })
+        .as(IValueMeta.TYPE_INTEGER, <span class="hljs-number">4</span>, <span class="hljs-number">0</span>)
+        <span class="hljs-comment">// Postgres advises new applications to use JSONB rather than JSON.</span>
+        .write(IValueMeta.TYPE_JSON)
+        .as(<span class="hljs-string">&quot;JSONB&quot;</span>)
+        .build();
+
+<span class="hljs-meta">@Override</span>
+<span class="hljs-keyword">public</span> <span class="hljs-type">List</span>&lt;IDatabaseTypeRule&gt; <span class="hljs-title function_">getTypeRules</span><span class="hljs-params">()</span> {
+  <span class="hljs-keyword">return</span> TYPE_RULES;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Rules are matched in declaration order and the first match wins.</p>
+</div>
+<div class="sect2">
+<h3 id="_matching_a_column_to_read"><a class="link" href="#_matching_a_column_to_read">Matching a column to read</a></h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>read(int&#8230;&#8203; sqlTypes)</code></dt>
+<dd>
+<p>Match on <code>java.sql.Types</code> constants.</p>
+</dd>
+<dt class="hdlist1"><code>readNative(String&#8230;&#8203; names)</code></dt>
+<dd>
+<p>Match on the database&#8217;s own type name, ignoring case, such as <code>SDO_GEOMETRY</code> or <code>jsonb</code>.</p>
+</dd>
+<dt class="hdlist1"><code>readNativeMatching(String regex)</code></dt>
+<dd>
+<p>Match the type name against a regular expression, for databases whose type names carry a size or an affinity.</p>
+</dd>
+<dt class="hdlist1"><code>nativeName(String&#8230;&#8203;)</code></dt>
+<dd>
+<p>Chains onto <code>read(&#8230;&#8203;)</code> when both the JDBC type <strong>and</strong> the database&#8217;s name for it have to match.</p>
+</dd>
+<dt class="hdlist1"><code>where(&#8230;&#8203;)</code></dt>
+<dd>
+<p>Narrows the match.
+The simple form takes the column; the fuller form also gets the variables and the <code>DatabaseMeta</code>, for rules that depend on a connection property or on another capability of the dialect.</p>
+</dd>
+<dt class="hdlist1"><code>as(&#8230;&#8203;)</code></dt>
+<dd>
+<p>Terminal.
+Either a Hop type on its own, a Hop type with a fixed length and precision, or a Hop type whose length and precision are derived from the column.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_producing_a_column_definition_to_write"><a class="link" href="#_producing_a_column_definition_to_write">Producing a column definition to write</a></h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>write(int&#8230;&#8203; hopTypes)</code></dt>
+<dd>
+<p>The Hop types this rule spells.</p>
+</dd>
+<dt class="hdlist1"><code>where(Predicate&lt;IValueMeta&gt;)</code></dt>
+<dd>
+<p>Narrows on the value, usually its length.</p>
+</dd>
+<dt class="hdlist1"><code>as(String)</code> or <code>as(Function&lt;IValueMeta, String&gt;)</code></dt>
+<dd>
+<p>Terminal.
+Either a fixed type name, or one derived from the value for size dependent types.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_when_the_table_is_not_enough"><a class="link" href="#_when_the_table_is_not_enough">When the table is not enough</a></h3>
+<div class="paragraph">
+<p><code>rule(IDatabaseTypeRule)</code> takes a hand written rule, and <code>include(List&lt;IDatabaseTypeRule&gt;)</code> appends another set, for a dialect that shares behaviour with one it does not extend.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_resolution_order"><a class="link" href="#_resolution_order">Resolution order</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Reading a column, first match wins:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>rules contributed by a <code>@DatabaseTypeRulesPlugin</code> targeting this dialect</p>
+</li>
+<li>
+<p>the dialect&#8217;s own <code>getTypeRules()</code></p>
+</li>
+<li>
+<p>the value type plugins</p>
+</li>
+<li>
+<p>the standard JDBC mapping</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Writing a column definition:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>the dialect&#8217;s rules</p>
+</li>
+<li>
+<p>the value type&#8217;s own opinion, if it has one</p>
+</li>
+<li>
+<p>the dialect&#8217;s <code>getFieldDefinition()</code></p>
+</li>
+<li>
+<p>the fallback, below</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Two things follow from that order.
+A dialect overrides the standard behaviour simply by declaring a rule, and a plugin from outside can override a dialect, which is deliberate.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_a_type_the_database_does_not_have"><a class="link" href="#_a_type_the_database_does_not_have">A type the database does not have</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Every database can spell a string, a number and a date.
+Past those, a Hop type only reaches a column if some dialect said how, and most never do.</p>
+</div>
+<div class="paragraph">
+<p>So the last step is not a name: it is <code>ColumnTypeFallback</code>, which writes the value as something the database can actually hold.
+A JSON document becomes the widest text the dialect has, a UUID a 36 character string, an address a 45 character one, and a type Hop has never heard of — a geometry, a vector — text of its own length.
+Nothing has to be declared for that to happen, and a dialect that can do better says so with a write rule.</p>
+</div>
+<div class="paragraph">
+<p>This is why a value type should <strong>not</strong> name a column type it has not checked.
+<code>ValueMetaJson</code> used to answer <code>JSON</code> for every database, which is a type most of them do not have, and the DDL only failed once someone created a table.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_a_type_only_some_versions_have"><a class="link" href="#_a_type_only_some_versions_have">A type only some versions have</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The other half of the question is version rather than vendor.
+SQL Server grew a JSON type in 2025 and Oracle in 21c: the same dialect, connected to an older server, must write text instead.</p>
+</div>
+<div class="paragraph">
+<p>A declared type is therefore put back to the dialect before it is used, through <code>isColumnTypeAvailable</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">FIRST_VERSION_WITH_JSON</span> <span class="hljs-operator">=</span> <span class="hljs-number">17</span>;   <span class="hljs-comment">// SQL Server 2025</span>
+
+<span class="hljs-meta">@Override</span>
+<span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isColumnTypeAvailable</span><span class="hljs-params">(String columnType)</span> {
+  <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;JSON&quot;</span>.equals(columnType)) {
+    <span class="hljs-keyword">return</span> serverIsAtLeast(FIRST_VERSION_WITH_JSON);
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A no falls back the same way as a type nobody declared.
+The dialect answers from <code>ServerInfo</code>, which carries what the driver said about the server — its version and the type list from <code>DatabaseMetaData.getTypeInfo()</code> — read once per connection, when a definition is first generated.</p>
+</div>
+<div class="paragraph">
+<p>Prefer the version.
+That type list looks like the answer and is not: several drivers, MySQL&#8217;s among them, compile it in rather than asking the server, so JSON is missing from it on a MySQL that has had the type for years.</p>
+</div>
+<div class="paragraph">
+<p>Silence is not a no.
+With no connection — the golden tests, an <code>ALTER TABLE</code> assembled offline — and with a driver that will not say which version it reached, nothing contradicts the declared type and it stands.
+So declare the type your database has in its current version and let the check take care of the older ones.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <code>SUPPORTS_BOOLEAN_DATA_TYPE</code> and <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code> connection attributes are the hand-cranked version of this: a checkbox per type, defaulting to off, that the operator has to know to tick.
+<code>ColumnTypeFallback</code> already knows what those two fall back to — a date for a timestamp, <code>CHAR(1)</code> for a boolean — so a dialect that declares <code>BOOLEAN</code> and <code>TIMESTAMP</code> as rules can let the driver answer the question instead, and the two attributes can go.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rules_are_inherited"><a class="link" href="#_rules_are_inherited">Rules are inherited</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A dialect that extends another inherits its rules in the ordinary Java way.
+<code>RedshiftDatabaseMeta extends PostgreSqlDatabaseMeta</code>, so Redshift reads columns the way Postgres does without restating anything, and can prepend its own rules by overriding <code>getTypeRules()</code>.</p>
+</div>
+<div class="paragraph">
+<p>This is also how rules contributed from outside find their target: a rule written for <code>POSTGRESQL</code> applies to every dialect that extends the PostgreSQL one.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_where_to_put_a_rule"><a class="link" href="#_where_to_put_a_rule">Where to put a rule</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Put a rule in the dialect that needs it.</p>
+</div>
+<div class="paragraph">
+<p>The exception is a behaviour genuinely shared by dialects that do not extend one another.
+<code>ColumnTypeRules</code> in core holds those, named after what they do rather than after a vendor, because Generic, Hive and SingleStore all speak to a MySQL driver without extending <code>MySqlDatabaseMeta</code>.
+That list is short on purpose.
+If only one dialect needs a rule, it belongs in that dialect&#8217;s plugin.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_standard_mapping"><a class="link" href="#_the_standard_mapping">The standard mapping</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What survives when no rule claims a column is <code>StandardJdbcTypeMapper</code>, which does the plain JDBC thing and names no database.</p>
+</div>
+<div class="paragraph">
+<p>It exposes a few helpers that rules can use so that a condition does not have to restate arithmetic the mapping already does:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>numericLength(column)</code> — digits before the decimal, after the scale has been taken off</p>
+</li>
+<li>
+<p><code>numericScale(column)</code> — digits after the decimal</p>
+</li>
+<li>
+<p><code>displaySizeIsTwiceThePrecision(databaseMeta, column)</code> — the <code>CHAR(X) FOR BIT DATA</code> shape</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>That last one matters if you write a rule for binary columns.
+The check outranks every dialect rule, but rules run <strong>before</strong> the standard mapping, so a binary rule has to defer to it explicitly or the precedence silently inverts.</p>
+</div>
+</div>
+</div>
+    </article>
+<nav class="pagination" data-pagefind-ignore aria-label="Page">
+  <a class="pagination__prev" href="../../../dev-manual/next/database/creating-a-dialect.html"><span>Previous</span><strong>Creating a dialect</strong></a>
+  <a class="pagination__next" href="../../../dev-manual/next/database/value-bindings.html"><span>Next</span><strong>Moving values across JDBC</strong></a>
+</nav>
+  </main>
+
+<aside class="doc-toc" data-pagefind-ignore aria-label="On this page">
+  <p class="doc-toc__title">On this page</p>
+  <div class="doc-toc__body"></div>
+</aside>
+</div>
+<footer class="site-footer" data-pagefind-ignore>
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <img src="../../../img/hop-logo.svg" alt="" width="30" height="30" aria-hidden="true">
+      <div>
+        <p>The Hop Orchestration Platform &mdash; visual data and metadata orchestration, designed once and run anywhere.</p>
+        <ul class="site-footer__socials">
+        <li><a href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"/></svg></a></li>
+        <li><a href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"/></svg></a></li>
+        <li><a href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg></a></li>
+        </ul>
+      </div>
+    </div>
+    <nav class="site-footer__nav" aria-label="Footer">
+      <div>
+        <h2>Documentation</h2>
+        <ul>
+          <li><a href="../../../manual/latest/getting-started/">Getting started</a></li>
+          <li><a href="../../../manual/latest/">User manual</a></li>
+          <li><a href="../../../dev-manual/latest/">Developer docs</a></li>
+          <li><a href="../../../download/">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Community</h2>
+        <ul>
+          <li><a href="../../../community/contributing/">Contributing</a></li>
+          <li><a href="../../../community/mailing-list/">Mailing lists</a></li>
+          <li><a href="../../../community/events/">Events</a></li>
+          <li><a href="../../../community/support/">Support</a></li>
+          <li><a href="../../../community/commercial/">Commercial support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Apache</h2>
+        <ul>
+          <li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li>
+          <li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li>
+          <li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li>
+          <li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li>
+          <li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="site-footer__legal">
+    <p>
+      Copyright &copy; 2019&ndash;2026 <a href="https://www.apache.org/" rel="noopener" target="_blank">The Apache Software Foundation</a>,
+      licensed under the <a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">Apache License, Version 2.0</a>.
+    </p>
+    <p>
+      Apache, Apache Hop, Hop, and the Apache feather logo are either registered trademarks or
+      trademarks of the Apache Software Foundation in the United States and/or other countries.
+    </p>
+  </div>
+</footer>
+
+<script src="../../../js/site.js"></script>
+<script src="../../../_/js/tabs.js"></script>
+</body>
+</html>

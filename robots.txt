@@ -1,4 +1,2 @@
 User-agent: *
-
-Sitemap: https://hop.apache.org/sitemap.xml
-
+Allow: /

@@ -1,0 +1,301 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Apache Hop (Incubating) Maturity Self-Assessment | Apache Hop</title><meta name="description" content="Self-assessment of Apache Hop's maturity in preparation for the graduation as a Top Level Project"><link rel="canonical" href="https://hop.apache.org/community/incubator/"><meta property="og:type" content="website"><meta property="og:site_name" content="Apache Hop"><meta property="og:title" content="Apache Hop (Incubating) Maturity Self-Assessment"><meta property="og:description" content="Self-assessment of Apache Hop's maturity in preparation for the graduation as a Top Level Project"><meta property="og:url" content="https://hop.apache.org/community/incubator/"><meta property="og:image" content="https://hop.apache.org/img/social-card.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://hop.apache.org/img/social-card.png"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="196x196" href="/favicon-196x196.png"><link rel="alternate" type="application/atom+xml" title="Apache Hop blog" href="/blog/index.xml"><link rel="manifest" href="/site.webmanifest"><script>
+    (function () { try { var t = localStorage.getItem('hop-theme'); if (t) document.documentElement.setAttribute('data-theme', t) } catch (e) {} })()
+  </script><link rel="stylesheet" href="/_astro/Base.i4S4kwIk.css"><style>.crumbs[data-astro-cid-vx4iavld] ol[data-astro-cid-vx4iavld]{color:var(--ink-3);flex-wrap:wrap;gap:6px;margin:0 0 20px;padding:0;font-size:13.5px;list-style:none;display:flex}.crumbs[data-astro-cid-vx4iavld] li[data-astro-cid-vx4iavld]+li[data-astro-cid-vx4iavld]:before{content:"/";color:var(--rule-2);margin-right:6px}.crumbs[data-astro-cid-vx4iavld] a[data-astro-cid-vx4iavld]{color:var(--ink-3);text-decoration:none}.crumbs[data-astro-cid-vx4iavld] a[data-astro-cid-vx4iavld]:hover{color:var(--accent)}.crumbs[data-astro-cid-vx4iavld] span[data-astro-cid-vx4iavld]{color:var(--ink-2)}
+</style><link rel="stylesheet" href="/_astro/_..CnjD6FKw.css"></head><body data-pagefind-body><a class="skip-link" href="#main" data-pagefind-ignore>Skip to main content</a><header class="site-header" data-pagefind-ignore><div class="site-header__inner"><a class="brand" href="/" aria-label="Apache Hop home"><img src="/img/hop-logo.svg" alt="" width="34" height="34" aria-hidden="true"><span class="brand__name">Apache Hop</span></a><nav class="mainnav" id="mainnav" aria-label="Main"><ul class="mainnav__list"><li><a href="/blog/">Blog</a></li><li class="has-menu"><button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-docs">Documentation<svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><ul class="submenu" id="menu-docs"><li><a href="/manual/latest/getting-started/">Getting started</a></li><li><a href="/manual/latest/">User manual</a></li><li><a href="/dev-manual/latest/">Developer documentation</a></li><li><a href="/docs/architecture/">Architecture</a></li><li><a href="/docs/roadmap/">Roadmap</a></li></ul></li><li class="has-menu"><button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-community">Community<svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><ul class="submenu" id="menu-community"><li><a href="/community/contributing/">Contributing</a></li><li><a href="/community/mailing-list/">Mailing lists</a></li><li><a href="/community/tools/">Tools &amp; chat</a></li><li><a href="/community/events/">Events &amp; user groups</a></li><li><a href="/community/team/">Team</a></li><li><a href="/community/support/">Support</a></li><li><a href="/community/commercial/">Commercial support</a></li><li><a href="/community/ethos/">Ethos</a></li><li><a href="/security/">Security advisories</a></li></ul></li><li class="has-menu"><button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-asf">Apache<svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><ul class="submenu" id="menu-asf"><li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li><li><a href="https://www.apache.org/events/current-event" rel="noopener" target="_blank">Events</a></li><li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li><li><a href="https://www.apache.org/security/" rel="noopener" target="_blank">Security</a></li><li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li><li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li><li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li></ul></li></ul></nav><div class="header-tools"><div class="search" role="search"><label class="visually-hidden" for="search-input">Search Apache Hop</label><input id="search-input" type="search" placeholder="Search" autocomplete="off"></div><span class="socials"><a class="icon-btn" href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg></a><a class="icon-btn" href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"></path></svg></a><a class="icon-btn" href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"></path></svg></a><a class="icon-btn" href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"></path></svg></a></span><a class="mainnav__cta" href="/download/">Download</a><button type="button" id="theme-toggle" class="icon-btn" aria-label="Switch theme" title="Switch theme"><svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg><svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"></path></svg></button><button type="button" id="nav-burger" class="icon-btn burger" aria-expanded="false" aria-controls="mainnav" aria-label="Open menu"><span></span><span></span><span></span></button></div></div></header><main class="page" id="main" data-astro-cid-k7ybrh5x><div class="page__grid" data-astro-cid-k7ybrh5x><div class="page__col" data-astro-cid-k7ybrh5x><nav class="crumbs" aria-label="Breadcrumb" data-pagefind-ignore data-astro-cid-vx4iavld><ol data-astro-cid-vx4iavld><li data-astro-cid-vx4iavld><a href="/" data-astro-cid-vx4iavld>Home</a></li><li data-astro-cid-vx4iavld><span data-astro-cid-vx4iavld>Community</span></li><li data-astro-cid-vx4iavld><span aria-current="page" data-astro-cid-vx4iavld>Apache Hop (Incubating) Maturity Self-Assessment</span></li></ol></nav><header class="page__header" data-astro-cid-k7ybrh5x><h1 data-astro-cid-k7ybrh5x>Apache Hop (Incubating) Maturity Self-Assessment</h1></header><article class="prose" data-astro-cid-k7ybrh5x><h2 id="overview">Overview</h2>
+<div class="admonition admonition--tip"><p class="admonition__label">TIP</p>
+<p>Apache Hop graduated in December 2021.</p>
+</div>
+<p>This document is an assessment of the maturity of Apache Hop (Incubating) as an Apache project.</p>
+<p>This document is intended to inform the decision of mentors, community, incubator PMC and ASF Board of Directors) to graduate Hop as a top-level Apache project.</p>
+<h2 id="maturity-model-assessment">Maturity model assessment</h2>
+<p>Mentors and community members are encouraged to contribute to this page and comment on it, the following table summarizes project’s self-assessment against the <a href="http://community.apache.org/apache-way/apache-project-maturity-model.html" rel="noopener" target="_blank">Apache Maturity Model</a>.</p>
+<h3 id="code">Code</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ID</td>
+<td>Description</td>
+<td>Status</td>
+</tr>
+<tr>
+<td>CD10</td>
+<td>The project produces Open Source software for distribution to the public, at no charge.</td>
+<td>The project source code is licensed under the Apache License, version 2.0.</td>
+</tr>
+<tr>
+<td>CD20</td>
+<td>Anyone can easily discover and access the project’s code.</td>
+<td>The Apache Hop (Incubating) source code is available on <a href="https://gitbox.apache.org/repos/asf?p=hop.git" rel="noopener" target="_blank">GitBot</a> and <a href="http://github.com/apache/hop" rel="noopener" target="_blank">github</a></td>
+</tr>
+<tr>
+<td>CD30</td>
+<td>Anyone using standard, widely-available tools, can build the code in a reproducible way.</td>
+<td>The Apache Hop (Incubating) is built after each commit and integration tests are run on a daily basis on the <a href="https://ci-builds.apache.org/job/Hop/" rel="noopener" target="_blank">ASF Jenkins server</a>. + Development environment setup and build instructions are <a href="http://hop.apache.org/dev-manual/latest/setup-dev-environment.html">documented</a> on the Hop website.</td>
+</tr>
+<tr>
+<td>CD40</td>
+<td>The full history of the project’s code is available via a source code control system, in a way that allows anyone to recreate any released version.</td>
+<td>The entire commit history is available from the <a href="https://github.com/apache-hop/commit/e24b53ea7dfe6bcad9e03011d1ce88eeb1bb7edc" rel="noopener" target="_blank">beginning</a>.</td>
+</tr>
+<tr>
+<td>CD50</td>
+<td>The source code control system establishes the provenance of each line of code in a reliable way, based on strong authentication of the committer. When third parties contribute code, commit messages provide reliable information about the code provenance.</td>
+<td>The project uses the git repository, managed by Apache Infra, ensuring provenance of each line of code to a committer. All code is checked in after review and approval of a pull-request. For 3rd party contribution, the commit message and logs will include all the details of author and committer.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="licenses-and-copyright">Licenses and Copyright</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ID</td>
+<td>Description</td>
+<td>Status</td>
+</tr>
+<tr>
+<td>LC10</td>
+<td>The Apache License, version 2.0, covers the released code.</td>
+<td>Source distributions clearly state license. Convenience binaries clearly state license.</td>
+</tr>
+<tr>
+<td>LC20</td>
+<td>Libraries that are mandatory dependencies of the project’s code do not create more restrictions than the Apache License does.</td>
+<td>The list of mandatory dependencies have been reviewed to contain approved licenses only.</td>
+</tr>
+<tr>
+<td>LC30</td>
+<td>The libraries mentioned in LC20 are available as Open Source software</td>
+<td>All mandatory dependencies are available as open source software.</td>
+</tr>
+<tr>
+<td>LC40</td>
+<td>Committers are bound by an Individual Contributor Agreement (the “Apache iCLA”) that defines which code they may commit and how they need to identify code that is not their own.</td>
+<td>The project uses a repository managed by Apache Gitbox, write access requires an Apache account, which requires an ICLA on file.</td>
+</tr>
+<tr>
+<td>LC50</td>
+<td>The project clearly defines and documents the copyright ownership of everything that the project produces.</td>
+<td>All files in the source repository have appropriate headers. An automated process is in place to ensure every file has expected headers.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="releases">Releases</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ID</td>
+<td>Description</td>
+<td>Status</td>
+</tr>
+<tr>
+<td>RE10</td>
+<td>Releases consist of source code, distributed using standard and open archive formats that are expected to stay readable in the long term.</td>
+<td>Releases are available via <a href="https://dlcdn.apache.org/incubator/hop/" rel="noopener" target="_blank">https://dlcdn.apache.org/incubator/hop/</a>. Source code and convenience binaries are linked to from the <a href="http://hop.apache.org/download/">website</a>.</td>
+</tr>
+<tr>
+<td>RE20</td>
+<td>The project’s PMC (Project Management Committee, see CS10) approves each software release in order to make the release an act of the Foundation.</td>
+<td>All incubating releases have been approved by the Hop community and the Incubator, all with at least 3 (P)PMC votes and more +1 than -1.</td>
+</tr>
+<tr>
+<td>RE30</td>
+<td>Releases are signed and/or distributed along with digests that anyone can reliably use to validate the downloaded archives.</td>
+<td>Releases are signed, the keys are available from the <a href="http://hop.apache.org/download/">Hop download page</a>.</td>
+</tr>
+<tr>
+<td>RE40</td>
+<td>The project can distribute convenience binaries alongside source code, but they are not Apache Releases, they are provided with no guarantee.</td>
+<td>Convenience binaries are available from the download page, a Docker image is available from <a href="https://hub.docker.com/r/apache/hop" rel="noopener" target="_blank">Dockerbub</a></td>
+</tr>
+<tr>
+<td>RE50</td>
+<td>The project documents a repeatable release process so that someone new to the project can independently generate the complete set of artifacts required for a release.</td>
+<td>The processes to <a href="https://hop.apache.org/dev-manual/latest/apache-release/creating-a-release.html">create</a>, <a href="https://hop.apache.org/dev-manual/latest/apache-release/promoting-a-release.html">promote</a> and <a href="https://hop.apache.org/dev-manual/latest/apache-release/checking-a-release.html">check</a> a release are documented.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="quality">Quality</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ID</td>
+<td>Description</td>
+<td>Status</td>
+</tr>
+<tr>
+<td>QU10</td>
+<td>The project is open and honest about the quality of its code. Various levels of quality and maturity for various modules are natural and acceptable as long as they are clearly communicated.</td>
+<td>Open issues are listed in the public Jira and discussed in JIRA, on chat and the mailing list.</td>
+</tr>
+<tr>
+<td>QU20</td>
+<td>The project puts a very high priority on producing secure software.</td>
+<td>Security issues are treated with the highest priority. We use Apaches default way to submit security related information, which is described on the <a href="https://issues.apache.org/security/" rel="noopener" target="_blank">website</a>.</td>
+</tr>
+<tr>
+<td>QU30</td>
+<td>The project provides a well-documented, secure and private channel to report security issues, along with a documented way of responding to them.</td>
+<td></td>
+</tr>
+<tr>
+<td>QU40</td>
+<td>The project puts a high priority on backwards compatibility and aims to document any incompatible changes and provide tools and documentation to help users transition to new features.</td>
+<td>Hop tries to be as backward compatible as possible. Incompatibilities have been prevented so far, but will be documented if/when they occur.</td>
+</tr>
+<tr>
+<td>QU50</td>
+<td>The project strives to respond to documented bug reports in a timely manner.</td>
+<td>The community is very active in responding to bug reports and usually fixes them within a short time period.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="community">Community</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ID</td>
+<td>Description</td>
+<td>Status</td>
+</tr>
+<tr>
+<td>CO10</td>
+<td>The project has a well-known homepage that points to all the information required to operate according to this maturity model.</td>
+<td>The website describes the project and contains links to all relevant systems (e.g., issue tracker, confluence, source repos, mailing lists).</td>
+</tr>
+<tr>
+<td>CO20</td>
+<td>The community welcomes contributions from anyone who acts in good faith and in a respectful manner, and who adds value to the project.</td>
+<td>Committers are really welcome contributions and the commuity is actively seeking for new committers.</td>
+</tr>
+<tr>
+<td>CO30</td>
+<td>Contributions include source code, documentation, constructive bug reports, constructive discussions, marketing and generally anything that adds value to the project.</td>
+<td>The community welcomes all contributions, e.g., also blog posts or other marketing material, and is very clear about contributions being more than code.</td>
+</tr>
+<tr>
+<td>CO40</td>
+<td>The community strives to be meritocratic and gives more rights and responsibilities to contributors who, over time, add value to the project.</td>
+<td>Several committers and PPMC members have been elected during the incubation phase so far.</td>
+</tr>
+<tr>
+<td>CO50</td>
+<td>The project documents how contributors can earn more rights such as commit access or decision power, and applies these principles consistently.</td>
+<td>The process to become a committer or (P)PMC member is documented on the <a href="https://hop.apache.org/community/contributing/">website</a>.</td>
+</tr>
+<tr>
+<td>CO60</td>
+<td>The community operates based on consensus of its members (see CS10) who have decision power. Dictators, benevolent or not, are not welcome in Apache projects.</td>
+<td>The project works to build consensus. All PPMC votes have been unanimous so far.</td>
+</tr>
+<tr>
+<td>CO70</td>
+<td>The project strives to answer user questions in a timely manner.</td>
+<td>Responses to reported issues or asked questions typically are handled by the community withing a matter of a few hours</td>
+</tr>
+</tbody>
+</table>
+<h3 id="consensus-building">Consensus Building</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ID</td>
+<td>Description</td>
+<td>Status</td>
+</tr>
+<tr>
+<td>CS10</td>
+<td>The project maintains a public list of its contributors who have decision power. The project’s PMC (Project Management Committee) consists of those contributors.</td>
+<td>Committers and contributors are listed on the website’s <a href="https://hop.apache.org/community/team/">team page</a>.</td>
+</tr>
+<tr>
+<td>CS20</td>
+<td>Decisions require a consensus among PMC members and are documented on the project’s main communications channel. The PMC takes community opinions into account, but the PMC has the final word.</td>
+<td>All important decisions were made by consensus on the mailing list.</td>
+</tr>
+<tr>
+<td>CS30</td>
+<td>The project uses documented voting rules to build consensus when discussion is not sufficient.</td>
+<td>The project uses the standard ASF voting rules.</td>
+</tr>
+<tr>
+<td>CS40</td>
+<td>In Apache projects, vetoes are only valid for code commits. The person exercising the veto must justify it with a technical explanation, as per the Apache voting rules defined in CS30.</td>
+<td>The project has not used a veto at any point during incubation.</td>
+</tr>
+<tr>
+<td>CS50</td>
+<td>All “important” discussions happen asynchronously in written form on the project’s main communications channel. Offline, face-to-face or private discussions 11 that affect the project are also documented on that channel.</td>
+<td>The main communication channel is the mailing list. There are other channels, such as the chat channel, which are not used for important project discussions.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="independence">Independence</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ID</td>
+<td>Description</td>
+<td>Status</td>
+</tr>
+<tr>
+<td>IN10</td>
+<td>The project is independent from any corporate or organizational influence.</td>
+<td>The PPMC (excluding mentors) consists of members from at least 4 different organisations. Committers also come from various other organizations which are not represented in the PPMC.</td>
+</tr>
+<tr>
+<td>IN20</td>
+<td>Contributors act as themselves, not as representatives of a corporation or organization.</td>
+<td>The contributors act on their own initiative without representing a corporation or organization.</td>
+</tr>
+</tbody>
+</table>
+</article></div></div></main><footer class="site-footer" data-pagefind-ignore><div class="site-footer__inner"><div class="site-footer__brand"><img src="/img/hop-logo.svg" alt="" width="30" height="30" aria-hidden="true"><div><p>The Hop Orchestration Platform &mdash; visual data and metadata orchestration, designed once and run anywhere.</p><ul class="site-footer__socials"><li><a href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg></a></li><li><a href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"></path></svg></a></li><li><a href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"></path></svg></a></li><li><a href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"></path></svg></a></li></ul></div></div><nav class="site-footer__nav" aria-label="Footer"><div><h2>Documentation</h2><ul><li><a href="/manual/latest/getting-started/">Getting started</a></li><li><a href="/manual/latest/">User manual</a></li><li><a href="/dev-manual/latest/">Developer docs</a></li><li><a href="/download/">Download</a></li></ul></div><div><h2>Community</h2><ul><li><a href="/community/contributing/">Contributing</a></li><li><a href="/community/mailing-list/">Mailing lists</a></li><li><a href="/community/events/">Events</a></li><li><a href="/community/support/">Support</a></li><li><a href="/community/commercial/">Commercial support</a></li></ul></div><div><h2>Apache</h2><ul><li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li><li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li><li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li><li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li><li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li></ul></div></nav></div><div class="site-footer__legal"><p>Copyright &copy; 2019&ndash;2026 <a href="https://www.apache.org/" rel="noopener" target="_blank">The Apache Software Foundation</a>, licensed under the <a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">Apache License, Version 2.0</a>.</p><p>Apache, Apache Hop, Hop, and the Apache feather logo are either registered trademarks or trademarks of the Apache Software Foundation in the United States and/or other countries.</p></div></footer><script src="/js/site.js"></script></body></html>

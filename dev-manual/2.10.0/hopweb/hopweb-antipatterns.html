@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Developer Antipatterns | Apache Hop</title>
+<meta name="description" content="Due to the differences between RWT and SWT, there are some anti-patterns that should be avoided when developing webSpoon and (webSpoon-) compatible plugins.">
+
+<link rel="canonical" href="https://hop.apache.org/dev-manual/latest/hopweb/hopweb-antipatterns.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Apache Hop">
+<meta property="og:title" content="Developer Antipatterns">
+<meta property="og:description" content="Due to the differences between RWT and SWT, there are some anti-patterns that should be avoided when developing webSpoon and (webSpoon-) compatible plugins.">
+<meta property="og:url" content="https://hop.apache.org/dev-manual/latest/hopweb/hopweb-antipatterns.html">
+<meta property="og:image" content="https://hop.apache.org/img/social-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hop.apache.org/img/social-card.png">
+
+<link rel="icon" href="../../../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="196x196" href="../../../favicon-196x196.png">
+<link rel="manifest" href="../../../site.webmanifest">
+<link rel="stylesheet" href="../../../_/css/site.css">
+
+<script>(function(){try{var t=localStorage.getItem('hop-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+</head>
+<body class="doc-page">
+<a class="skip-link" href="#main" data-pagefind-ignore>Skip to main content</a>
+<header class="site-header" data-pagefind-ignore>
+  <div class="site-header__inner">
+    <a class="brand" href="../../../" aria-label="Apache Hop home">
+      <img src="../../../img/hop-logo.svg" alt="" width="34" height="34" aria-hidden="true">
+      <span class="brand__name">Apache Hop</span>
+    </a>
+
+    <nav class="mainnav" id="mainnav" aria-label="Main">
+      <ul class="mainnav__list">
+        <li><a href="../../../blog/">Blog</a></li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-docs">
+            Documentation <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-docs">
+            <li><a href="../../../manual/latest/getting-started/">Getting started</a></li>
+            <li><a href="../../../manual/latest/">User manual</a></li>
+            <li><a href="../../../dev-manual/latest/">Developer documentation</a></li>
+            <li><a href="../../../docs/architecture/">Architecture</a></li>
+            <li><a href="../../../docs/roadmap/">Roadmap</a></li>
+          </ul>
+        </li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-community">
+            Community <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-community">
+            <li><a href="../../../community/contributing/">Contributing</a></li>
+            <li><a href="../../../community/mailing-list/">Mailing lists</a></li>
+            <li><a href="../../../community/tools/">Tools & chat</a></li>
+            <li><a href="../../../community/events/">Events & user groups</a></li>
+            <li><a href="../../../community/team/">Team</a></li>
+            <li><a href="../../../community/support/">Support</a></li>
+            <li><a href="../../../community/commercial/">Commercial support</a></li>
+            <li><a href="../../../community/ethos/">Ethos</a></li>
+            <li><a href="../../../security/">Security advisories</a></li>
+          </ul>
+        </li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-asf">
+            Apache <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-asf">
+            <li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li>
+            <li><a href="https://www.apache.org/events/current-event" rel="noopener" target="_blank">Events</a></li>
+            <li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li>
+            <li><a href="https://www.apache.org/security/" rel="noopener" target="_blank">Security</a></li>
+            <li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li>
+            <li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li>
+            <li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-tools">
+      <div class="search" role="search">
+        <label class="visually-hidden" for="search-input">Search Apache Hop</label>
+        <input id="search-input" type="search" placeholder="Search" autocomplete="off">
+      </div>
+      <span class="socials">
+        <a class="icon-btn" href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+        <a class="icon-btn" href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"/></svg></a>
+        <a class="icon-btn" href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"/></svg></a>
+        <a class="icon-btn" href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg></a>
+      </span>
+      <a class="mainnav__cta" href="../../../download/">Download</a>
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Switch theme" title="Switch theme">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+      </button>
+      <button type="button" id="nav-burger" class="icon-btn burger" aria-expanded="false" aria-controls="mainnav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="doc-shell">
+<div class="doc-nav" id="doc-nav" data-pagefind-ignore>
+  <button type="button" class="doc-nav__close icon-btn" aria-label="Close navigation">&times;</button>
+  <nav aria-label="Documentation">
+    <div class="doc-nav__group">
+      
+      <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/2.10.0/getting-started.html">Getting started</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/2.10.0/upgrading-to-20.html">Plugins Upgrades to 2.x</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/2.10.0/porting-kettle-plugins.html">Porting Kettle plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/2.10.0/metadata-plugins.html">Metadata plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/2.10.0/setup-dev-environment.html">Setting up your development environment</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/2.10.0/integration-testing.html">Integration testing</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/2.10.0/internationalisation.html">Internationalisation (i18n)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/2.10.0/plugin-development.html">Plugins Development</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/2.10.0/plugin-samples.html">Plugins Samples</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle SVG Files section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/2.10.0/svg-files.html">SVG Files</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/2.10.0/start-your-own-plugin.html">Creating your own plugin</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Apache Release Process section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/2.10.0/apache-release/index.html">Apache Release Process</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/2.10.0/apache-release/creating-a-release.html">Creating a Release</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/2.10.0/apache-release/promoting-a-release.html">Promoting a Release</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/2.10.0/apache-release/checking-a-release.html">Checking a Release</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop Web section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/2.10.0/hopweb/index.html">Hop Web</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/2.10.0/hopweb/developer-guide.html">Hop Web Developer Guide</a>
+    
+  </li>
+  <li class="doc-nav__item is-current">
+    <a href="../../../dev-manual/2.10.0/hopweb/hopweb-antipatterns.html">Hop Web Antipatterns</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle SDK section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/2.10.0/sdk/index.html">SDK</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/2.10.0/sdk/hop-sdk.html">The Hop SDK</a>
+    
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+    </div>
+  </nav>
+<div class="nav-foot">
+  <details class="explore">
+    <summary>
+      <span class="explore__now">
+        <span class="explore__component">Development Documentation</span>
+        <span class="explore__version">2.10.0</span>
+      </span>
+      <svg class="explore__chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </summary>
+    <div class="explore__body">
+      <div class="explore__group">
+  <p class="explore__title">Development Documentation</p>
+  <ul>
+    <li class="">
+      <a href="../../../dev-manual/next/index.html">2.20.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/latest/index.html">2.19.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.18.1/index.html">2.18.1</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.18.0/index.html">2.18.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.17.0/index.html">2.17.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.16.0/index.html">2.16.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.15.0/index.html">2.15.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.14.0/index.html">2.14.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.13.0/index.html">2.13.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.12.0/index.html">2.12.0</a>
+    </li>
+    <li class="">
+      <a href="../../../dev-manual/2.11.0/index.html">2.11.0</a>
+    </li>
+    <li class="is-current">
+      <a href="../../../dev-manual/2.10.0/index.html">2.10.0</a>
+    </li>
+  </ul>
+</div>
+
+        
+        <div class="explore__group">
+  <p class="explore__title">User manual</p>
+  <ul>
+    <li class="">
+      <a href="../../../manual/next/index.html">2.20.0 (pre-release)</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/latest/index.html">2.19.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.18.1/index.html">2.18.1</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.18.0/index.html">2.18.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.17.0/index.html">2.17.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.16.0/index.html">2.16.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.15.0/index.html">2.15.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.14.0/index.html">2.14.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.13.0/index.html">2.13.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.12.0/index.html">2.12.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.11.0/index.html">2.11.0</a>
+    </li>
+    <li class="">
+      <a href="../../../manual/2.10.0/index.html">2.10.0</a>
+    </li>
+  </ul>
+</div>
+
+    </div>
+  </details>
+
+  <a class="nav-foot__edit" href="https://github.com/apache/hop/edit/release/2.10.0/docs/hop-dev-manual/modules/ROOT/pages/hopweb/hopweb-antipatterns.adoc" rel="noopener" target="_blank">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758zm1.414 1.06a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354zM11.189 6.25 9.75 4.81l-6.286 6.287a.25.25 0 0 0-.064.108l-.558 1.953 1.953-.558a.25.25 0 0 0 .108-.064z"/></svg>
+    Edit this page
+  </a>
+</div>
+</div>
+  <main class="doc-main" id="main">
+    <button type="button" class="doc-nav__open" aria-expanded="false" aria-controls="doc-nav" data-pagefind-ignore>
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      Documentation menu
+    </button>
+<nav class="breadcrumbs" data-pagefind-ignore aria-label="Breadcrumb">
+  <ol>
+    <li><a href="../../../">Home</a></li>
+    <li><a href="../../../dev-manual/2.10.0/hopweb/index.html">Hop Web</a></li>
+    <li><a href="../../../dev-manual/2.10.0/hopweb/hopweb-antipatterns.html">Hop Web Antipatterns</a></li>
+  </ol>
+</nav>
+    <article class="doc">
+      <h1>Developer Antipatterns</h1>
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Due to the <a href="https://www.eclipse.org/rap/developers-guide/devguide.php?topic=rwt.html" rel="noopener" target="_blank">differences between RWT and SWT</a>, there are some anti-patterns that should be avoided when developing webSpoon and (webSpoon-) compatible plugins.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_avoid_sharing_session_unique_instances_among_sessions"><a class="link" href="#_avoid_sharing_session_unique_instances_among_sessions">Avoid sharing session-unique instances among sessions</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <strong>singleton pattern</strong> is a design pattern where only one instance of a class is created.
+This pattern can be seen here and there in Spoon&#8217;s source code.
+An example is <code>GUIResource</code>, which mainly manages colors, fonts, and images.
+The following code snippet (excerpt of <a href="https://github.com/pentaho/pentaho-kettle/blob/8.0.0.0-R/ui/src/main/java/org/pentaho/di/ui/core/gui/GUIResource.java" rel="noopener" target="_blank">here</a>) illustrates how it is ensured that <code>GUIResource</code> can only be instantiated once.
+The resources (colors, fonts, and images) are accessed through <code>GUIResource.getInstance()</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GUIResource</span> {
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> GUIResource guiResource;
+
+  <span class="hljs-comment">// Making the constructor private prevents instantiation from outside</span>
+  <span class="hljs-type">private</span> <span class="hljs-title function_">GUIResource</span><span class="hljs-params">( Display display )</span> {
+  ...
+  }
+
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">GUIResource</span> <span class="hljs-title function_">getInstance</span><span class="hljs-params">()</span> {
+    <span class="hljs-keyword">if</span> ( guiResource != <span class="hljs-literal">null</span> ) {
+      <span class="hljs-keyword">return</span> guiResource;
+    }
+    guiResource = <span class="hljs-keyword">new</span> <span class="hljs-title class_">GUIResource</span>( PropsUI.getDisplay() );
+    <span class="hljs-keyword">return</span> guiResource;
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>Spoon</code> is another example that takes the singleton pattern (not strictly as it can be instantiated more than once).
+If you look at the following code snippet (excerpt of <a href="https://github.com/pentaho/pentaho-kettle/blob/8.0.0.0-R/ui/src/main/java/org/pentaho/di/ui/spoon/Spoon.java" rel="noopener" target="_blank">here</a>), you would notice that <code>Display</code> is a member field of <code>Spoon</code>.
+This means that <code>Spoon</code> can only manages a single instance of <code>Display</code>.
+The singleton pattern for <code>Spoon</code> class is nothing wrong for Spoon that servers only a single user, but makes troubles for webSpoon where <code>Display</code> is instantiated for each session.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Spoon</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ApplicationWindow</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">AddUndoPositionInterface</span>,
+    ..., PartitionSchemasProvider {
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Spoon staticSpoon;
+  <span class="hljs-keyword">private</span> Display display;
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">Spoon</span> <span class="hljs-title function_">getInstance</span><span class="hljs-params">()</span> {
+    <span class="hljs-keyword">return</span> staticSpoon;
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Fortunately, RAP/RWT provides <a href="http://www.eclipse.org/rap/developers-guide/devguide.php?topic=singletons.html&amp;version=3.3" rel="noopener" target="_blank">SingletonUtil</a> as a remedy.
+<code>Spoon.getInstance()</code> in the following code will return an instance of <code>Spoon</code> that is unique to a session.
+As a result, each instance of <code>Display</code> can be referenced by their corresponding instance of <code>Spoon</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Spoon</span> {
+  <span class="hljs-keyword">private</span> Display display;
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">Spoon</span> <span class="hljs-title function_">getInstance</span><span class="hljs-params">()</span> {
+    <span class="hljs-keyword">return</span> SingletonUtil.getSessionInstance( Spoon.class );
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The rule-of-thumb is that such a session-unique instance should accessed only by the corresponding session and not by any other.
+Let&#8217;s look at examples below how this rule can be violated.</p>
+</div>
+<div class="sect2">
+<h3 id="_example_use_of_the_static_modifier_for_session_unique_instances"><a class="link" href="#_example_use_of_the_static_modifier_for_session_unique_instances">Example: use of the static modifier for session-unique instances</a></h3>
+<div class="paragraph">
+<p>The code below violates the rule, but how?</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RepositoryOpenSaveDialog</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ThinDialog</span> {
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Image</span> <span class="hljs-variable">LOGO</span> <span class="hljs-operator">=</span> GUIResource.getInstance().getImageLogoSmall();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let us assume that <code>GUIResource</code> has already been adapted to RAP/RWT and <code>GUIResource.getInstance()</code> returns a session-unique instance of <code>GUIResource</code>.
+An instance of <code>Image</code> returned by <code>GUIResource.getInstance().getImageLogoSmall()</code> also becomes session-unique.
+When <code>RepositoryOpenSaveDialog</code> is instantiated, say in session A, <code>LOGO</code> is instantiated and assigned with an instance of <code>Image</code> unique to session A.
+By the static modifier, <code>LOGO</code> keeps the reference to that particular instance ever after and returns that instance when accessed in any later sessions.</p>
+</div>
+<div class="paragraph">
+<p>Sharing session-unique instance of <code>Image</code> is not necessarily harmful especially when the image is inherently common to all sessions (e.g., the kettle small logo).
+However, issues like <a href="https://github.com/HiromuHota/pentaho-kettle/issues/92" rel="noopener" target="_blank">#92</a> happen when the session A gets terminated and the instance of <code>Image</code> is disposed, but accessed by another session.
+To resolve these issues, remove the static modifier as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RepositoryOpenSaveDialog</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ThinDialog</span> {
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Image</span> <span class="hljs-variable">LOGO</span> <span class="hljs-operator">=</span> GUIResource.getInstance().getImageLogoSmall();
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_example_caching_session_unique_instances_in_plugins"><a class="link" href="#_example_caching_session_unique_instances_in_plugins">Example: caching session-unique instances in plugins</a></h3>
+<div class="paragraph">
+<p>PDI plugins, even in webSpoon, have application scope instead of session scope and only one instance is instantiated for each one of these plugins (= effectively singleton).
+Let&#8217;s take a look at a modified snippet of <a href="https://github.com/pentaho/big-data-plugin/blob/8.0.0.0-R/legacy/src/main/java/org/pentaho/di/core/hadoop/HadoopClusterViewTreeExtension.java" rel="noopener" target="_blank">HadoopClusterViewTreeExtension</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HadoopClusterViewTreeExtension</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ExtensionPointInterface</span> {
+  <span class="hljs-keyword">private</span> <span class="hljs-type">Spoon</span> <span class="hljs-variable">spoon</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;
+  <span class="hljs-keyword">private</span> <span class="hljs-type">Image</span> <span class="hljs-variable">hadoopClusterImage</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;
+
+  <span class="hljs-type">public</span> <span class="hljs-title function_">HadoopClusterViewTreeExtension</span><span class="hljs-params">()</span> {
+    spoon = Spoon.getInstance();
+    hadoopClusterImage = getHadoopClusterImage( spoon.getDisplay() );
+  }
+
+  <span class="hljs-keyword">private</span> <span class="hljs-type">void</span> <span class="hljs-title function_">refreshNamedClusterSubtree</span><span class="hljs-params">( SelectionTreeExtension selectionTreeExtension )</span> {
+    <span class="hljs-keyword">for</span> ( NamedCluster namedCluster : namedClusters ) {
+      createTreeItem( tiNcTitle, namedCluster.getName(), hadoopClusterImage );
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The constructor assigns a session-unique <code>Spoon</code> and (effectively) session-unique <code>Image</code> to its member fields.
+These member fields could be technically re-assigned but never in Spoon.
+In webSpoon, this code causes issues such as <a href="https://github.com/HiromuHota/pentaho-kettle/issues/23" rel="noopener" target="_blank">#23</a> and a non-reported issue resolved by <a href="https://github.com/HiromuHota/big-data-plugin/commit/adbb00a697400e52a5e42774d7464bde214dce45" rel="noopener" target="_blank">adbb00a</a>.
+To resolve the issues, stop caching session-unique instances in the member fields and retrieve them on-demand.
+The code below is the corrected one.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HadoopClusterViewTreeExtension</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ExtensionPointInterface</span> {
+  <span class="hljs-comment">// private Spoon spoon = null;</span>
+  <span class="hljs-comment">// private Image hadoopClusterImage = null;</span>
+
+  <span class="hljs-type">public</span> <span class="hljs-title function_">HadoopClusterViewTreeExtension</span><span class="hljs-params">()</span> {
+    <span class="hljs-comment">// spoon = Spoon.getInstance();</span>
+    <span class="hljs-comment">// hadoopClusterImage = getHadoopClusterImage( spoon.getDisplay() );</span>
+  }
+
+  <span class="hljs-keyword">private</span> <span class="hljs-type">void</span> <span class="hljs-title function_">refreshNamedClusterSubtree</span><span class="hljs-params">( SelectionTreeExtension selectionTreeExtension )</span> {
+    <span class="hljs-keyword">for</span> ( NamedCluster namedCluster : namedClusters ) {
+      createTreeItem( tiNcTitle, namedCluster.getName(),
+        getHadoopClusterImage( Spoon.getInstance().getDisplay() ) ) );
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_avoid_use_of_unimplemented_swt_apis"><a class="link" href="#_avoid_use_of_unimplemented_swt_apis">Avoid use of unimplemented SWT APIs</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_example_drawing_on_an_image"><a class="link" href="#_example_drawing_on_an_image">Example: drawing on an Image</a></h3>
+<div class="paragraph">
+<p>SWT can paint on any widgets or image, while RAP/RWT can only paint on <code>Canvas</code> widget.
+SWT supports the following codes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java">  <span class="hljs-type">Image</span> <span class="hljs-variable">image</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Image</span>( device, width, height );
+  <span class="hljs-type">GC</span> <span class="hljs-variable">gc</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">GC</span>( image );
+  gc.drawRectangle( <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>, <span class="hljs-number">20</span> );</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>but RWT does not.
+You can see an example of how this limitation has been overcame in <a href="https://github.com/HiromuHota/pdi-dataservice-server-plugin/commit/3a36a606d76eee40244568726d486b2b0c501fcf" rel="noopener" target="_blank">pdi-dataservice-server-plugin</a>.</p>
+</div>
+</div>
+</div>
+</div>
+    </article>
+<nav class="pagination" data-pagefind-ignore aria-label="Page">
+  <a class="pagination__prev" href="../../../dev-manual/2.10.0/hopweb/developer-guide.html"><span>Previous</span><strong>Hop Web Developer Guide</strong></a>
+  <a class="pagination__next" href="../../../dev-manual/2.10.0/sdk/index.html"><span>Next</span><strong>SDK</strong></a>
+</nav>
+  </main>
+
+<aside class="doc-toc" data-pagefind-ignore aria-label="On this page">
+  <p class="doc-toc__title">On this page</p>
+  <div class="doc-toc__body"></div>
+</aside>
+</div>
+<footer class="site-footer" data-pagefind-ignore>
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <img src="../../../img/hop-logo.svg" alt="" width="30" height="30" aria-hidden="true">
+      <div>
+        <p>The Hop Orchestration Platform &mdash; visual data and metadata orchestration, designed once and run anywhere.</p>
+        <ul class="site-footer__socials">
+        <li><a href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"/></svg></a></li>
+        <li><a href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"/></svg></a></li>
+        <li><a href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg></a></li>
+        </ul>
+      </div>
+    </div>
+    <nav class="site-footer__nav" aria-label="Footer">
+      <div>
+        <h2>Documentation</h2>
+        <ul>
+          <li><a href="../../../manual/latest/getting-started/">Getting started</a></li>
+          <li><a href="../../../manual/latest/">User manual</a></li>
+          <li><a href="../../../dev-manual/latest/">Developer docs</a></li>
+          <li><a href="../../../download/">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Community</h2>
+        <ul>
+          <li><a href="../../../community/contributing/">Contributing</a></li>
+          <li><a href="../../../community/mailing-list/">Mailing lists</a></li>
+          <li><a href="../../../community/events/">Events</a></li>
+          <li><a href="../../../community/support/">Support</a></li>
+          <li><a href="../../../community/commercial/">Commercial support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Apache</h2>
+        <ul>
+          <li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li>
+          <li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li>
+          <li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li>
+          <li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li>
+          <li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="site-footer__legal">
+    <p>
+      Copyright &copy; 2019&ndash;2026 <a href="https://www.apache.org/" rel="noopener" target="_blank">The Apache Software Foundation</a>,
+      licensed under the <a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">Apache License, Version 2.0</a>.
+    </p>
+    <p>
+      Apache, Apache Hop, Hop, and the Apache feather logo are either registered trademarks or
+      trademarks of the Apache Software Foundation in the United States and/or other countries.
+    </p>
+  </div>
+</footer>
+
+<script src="../../../js/site.js"></script>
+<script src="../../../_/js/tabs.js"></script>
+</body>
+</html>

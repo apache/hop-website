@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GUI plugins and toolbars | Apache Hop</title>
+<meta name="description" content="How Hop GUI toolbars work, how to contribute buttons with @GuiPlugin and @GuiToolbarElement, how to use GuiToolbarElementFilter, and how TextComposite / TableView expose extensible toolbars to plugins.">
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Apache Hop">
+<meta property="og:title" content="GUI plugins and toolbars">
+<meta property="og:description" content="How Hop GUI toolbars work, how to contribute buttons with @GuiPlugin and @GuiToolbarElement, how to use GuiToolbarElementFilter, and how TextComposite / TableView expose extensible toolbars to plugins.">
+
+<meta property="og:image" content="https://hop.apache.org/img/social-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hop.apache.org/img/social-card.png">
+
+<link rel="icon" href="../../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="196x196" href="../../favicon-196x196.png">
+<link rel="manifest" href="../../site.webmanifest">
+<link rel="stylesheet" href="../../_/css/site.css">
+
+<script>(function(){try{var t=localStorage.getItem('hop-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+</head>
+<body class="doc-page">
+<a class="skip-link" href="#main" data-pagefind-ignore>Skip to main content</a>
+<header class="site-header" data-pagefind-ignore>
+  <div class="site-header__inner">
+    <a class="brand" href="../../" aria-label="Apache Hop home">
+      <img src="../../img/hop-logo.svg" alt="" width="34" height="34" aria-hidden="true">
+      <span class="brand__name">Apache Hop</span>
+    </a>
+
+    <nav class="mainnav" id="mainnav" aria-label="Main">
+      <ul class="mainnav__list">
+        <li><a href="../../blog/">Blog</a></li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-docs">
+            Documentation <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-docs">
+            <li><a href="../../manual/latest/getting-started/">Getting started</a></li>
+            <li><a href="../../manual/latest/">User manual</a></li>
+            <li><a href="../../dev-manual/latest/">Developer documentation</a></li>
+            <li><a href="../../docs/architecture/">Architecture</a></li>
+            <li><a href="../../docs/roadmap/">Roadmap</a></li>
+          </ul>
+        </li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-community">
+            Community <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-community">
+            <li><a href="../../community/contributing/">Contributing</a></li>
+            <li><a href="../../community/mailing-list/">Mailing lists</a></li>
+            <li><a href="../../community/tools/">Tools & chat</a></li>
+            <li><a href="../../community/events/">Events & user groups</a></li>
+            <li><a href="../../community/team/">Team</a></li>
+            <li><a href="../../community/support/">Support</a></li>
+            <li><a href="../../community/commercial/">Commercial support</a></li>
+            <li><a href="../../community/ethos/">Ethos</a></li>
+            <li><a href="../../security/">Security advisories</a></li>
+          </ul>
+        </li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-asf">
+            Apache <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-asf">
+            <li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li>
+            <li><a href="https://www.apache.org/events/current-event" rel="noopener" target="_blank">Events</a></li>
+            <li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li>
+            <li><a href="https://www.apache.org/security/" rel="noopener" target="_blank">Security</a></li>
+            <li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li>
+            <li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li>
+            <li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-tools">
+      <div class="search" role="search">
+        <label class="visually-hidden" for="search-input">Search Apache Hop</label>
+        <input id="search-input" type="search" placeholder="Search" autocomplete="off">
+      </div>
+      <span class="socials">
+        <a class="icon-btn" href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+        <a class="icon-btn" href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"/></svg></a>
+        <a class="icon-btn" href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"/></svg></a>
+        <a class="icon-btn" href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg></a>
+      </span>
+      <a class="mainnav__cta" href="../../download/">Download</a>
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Switch theme" title="Switch theme">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+      </button>
+      <button type="button" id="nav-burger" class="icon-btn burger" aria-expanded="false" aria-controls="mainnav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="doc-shell">
+<div class="doc-nav" id="doc-nav" data-pagefind-ignore>
+  <button type="button" class="doc-nav__close icon-btn" aria-label="Close navigation">&times;</button>
+  <nav aria-label="Documentation">
+    <div class="doc-nav__group">
+      
+      <ul class="doc-nav__list">
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Getting started section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Getting started</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/getting-started.html">The Hop codebase</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/setup-dev-environment.html">Setting up your development environment</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/build-and-test.html">Building and testing</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/contributing.html">Contributing changes</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/writing-documentation.html">Writing documentation</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Architecture section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Architecture</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/architecture/execution-model.html">How a pipeline and a workflow run</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/architecture/variables-and-metadata.html">Variables, parameters and metadata</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/architecture/dependencies-and-classloading.html">Dependencies and classloading</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/architecture/logging-and-debugging.html">Logging and debugging</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/architecture/performance.html">Performance on the row hot path</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/architecture/security.html">Security for developers</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Plugin development section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Plugin development</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/plugin-development.html">How plugins work</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Plugin types section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../dev-manual/next/plugin-types/index.html">Plugin types</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/plugin-types/pipeline-workflow.html">Pipelines and workflows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/plugin-types/data-connectivity.html">Data and connectivity</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/plugin-types/metadata-configuration.html">Metadata and configuration</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/plugin-types/execution-observability.html">Execution and observability</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/plugin-types/gui.html">GUI</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/metadata-plugins.html">Metadata plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/metadata-serialization.html">Metadata serialization</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/metadata-injection.html">Metadata injection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/value-types.html">Value types</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Database plugins section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../dev-manual/next/database/index.html">Database plugins</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/database/creating-a-dialect.html">Creating a dialect</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/database/column-types.html">Column types and type rules</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/database/value-bindings.html">Moving values across JDBC</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/database/extending-another-dialect.html">Extending a dialect you don&#8217;t own</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/database/testing.html">Testing a database plugin</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/database/migrating-from-variants.html">Migrating from isXVariant()</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-current">
+    <a href="../../dev-manual/next/gui-plugins-toolbars.html">GUI plugins and toolbars</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/engine-compatibility.html">Engine compatibility</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/lineage.html">Lineage observation hub</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/internationalisation.html">Internationalisation (i18n)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/svg-files.html">SVG files</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/plugin-samples.html">Plugin samples</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/start-your-own-plugin.html">Creating a plugin outside the Hop repository</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/marketplace-publish-plugin.html">Publishing a plugin to Nexus (marketplace)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/porting-kettle-plugins.html">Porting Kettle plugins</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Testing section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Testing</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/testing/unit-testing.html">Unit tests</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/integration-testing.html">Integration tests</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/testing/ui-testing.html">UI tests with SWTBot</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Embedding and interfaces section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Embedding and interfaces</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle SDK section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../dev-manual/next/sdk/index.html">SDK</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/sdk/hop-sdk.html">The Hop SDK</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop Web section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../dev-manual/next/hopweb/index.html">Hop Web</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/hopweb/developer-guide.html">Hop Web Developer Guide</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/hopweb/hopweb-antipatterns.html">Hop Web Antipatterns</a>
+    
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Distribution and release section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Distribution and release</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/docker-build.html">Docker Build Script</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Apache Release Process section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../dev-manual/next/apache-release/index.html">Apache Release Process</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/apache-release/creating-a-release.html">Creating a Release</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/apache-release/promoting-a-release.html">Promoting a Release</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/apache-release/checking-a-release.html">Checking a Release</a>
+    
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+    </div>
+  </nav>
+<div class="nav-foot">
+  <details class="explore">
+    <summary>
+      <span class="explore__now">
+        <span class="explore__component">Development Documentation</span>
+        <span class="explore__version">2.20.0</span>
+      </span>
+      <svg class="explore__chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </summary>
+    <div class="explore__body">
+      <div class="explore__group">
+  <p class="explore__title">Development Documentation</p>
+  <ul>
+    <li class="is-current">
+      <a href="../../dev-manual/next/index.html">2.20.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/latest/index.html">2.19.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.18.1/index.html">2.18.1</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.18.0/index.html">2.18.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.17.0/index.html">2.17.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.16.0/index.html">2.16.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.15.0/index.html">2.15.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.14.0/index.html">2.14.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.13.0/index.html">2.13.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.12.0/index.html">2.12.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.11.0/index.html">2.11.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.10.0/index.html">2.10.0</a>
+    </li>
+  </ul>
+</div>
+
+        
+        <div class="explore__group">
+  <p class="explore__title">User manual</p>
+  <ul>
+    <li class="">
+      <a href="../../manual/next/index.html">2.20.0 (pre-release)</a>
+    </li>
+    <li class="">
+      <a href="../../manual/latest/index.html">2.19.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.18.1/index.html">2.18.1</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.18.0/index.html">2.18.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.17.0/index.html">2.17.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.16.0/index.html">2.16.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.15.0/index.html">2.15.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.14.0/index.html">2.14.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.13.0/index.html">2.13.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.12.0/index.html">2.12.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.11.0/index.html">2.11.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.10.0/index.html">2.10.0</a>
+    </li>
+  </ul>
+</div>
+
+    </div>
+  </details>
+
+  <a class="nav-foot__edit" href="https://github.com/apache/hop/edit/main/docs/hop-dev-manual/modules/ROOT/pages/gui-plugins-toolbars.adoc" rel="noopener" target="_blank">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758zm1.414 1.06a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354zM11.189 6.25 9.75 4.81l-6.286 6.287a.25.25 0 0 0-.064.108l-.558 1.953 1.953-.558a.25.25 0 0 0 .108-.064z"/></svg>
+    Edit this page
+  </a>
+</div>
+</div>
+  <main class="doc-main" id="main">
+    <button type="button" class="doc-nav__open" aria-expanded="false" aria-controls="doc-nav" data-pagefind-ignore>
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      Documentation menu
+    </button>
+<nav class="breadcrumbs" data-pagefind-ignore aria-label="Breadcrumb">
+  <ol>
+    <li><a href="../../">Home</a></li>
+    <li><span aria-current="page">Plugin development</span></li>
+    <li><a href="../../dev-manual/next/gui-plugins-toolbars.html">GUI plugins and toolbars</a></li>
+  </ol>
+</nav>
+    <article class="doc">
+      <h1>GUI plugins and toolbars</h1>
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hop has a lightweight system for contributing UI actions from plugins without hard-coding every button into the core GUI.
+This page explains how that system works for <strong>toolbars</strong> — the main way plugins add icons above tables, multi-line text editors, and other widgets.</p>
+</div>
+<div class="paragraph">
+<p>You will learn:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>How <code>@GuiPlugin</code> classes are discovered</p>
+</li>
+<li>
+<p>How <code>@GuiToolbarElement</code> adds a toolbar button</p>
+</li>
+<li>
+<p>How listeners receive the host widget (<code>TableView</code>, <code>TextComposite</code>, …)</p>
+</li>
+<li>
+<p>How <code>@GuiToolbarElementFilter</code> shows or hides buttons (easy to miss)</p>
+</li>
+<li>
+<p>How the <strong>TextComposite</strong> and <strong>TableView</strong> toolbars are designed for extension (SQL formatters, JSON pretty-print, export, lineage, …)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Related reading: <a href="plugin-development.html" class="xref page">Plugin development</a>, <a href="hopweb/hopweb-antipatterns.html" class="xref page">Hop Web antipatterns</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mental_model"><a class="link" href="#_mental_model">Mental model</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">@GuiPlugin class
+    └── @GuiToolbarElement(root = "Some-Toolbar-Id", id = "...", image = "...")
+            └── static or instance method  →  invoked when the user clicks
+    └── @GuiToolbarElementFilter(parentId = "Some-Toolbar-Id")   (optional)
+            └── static boolean method(String itemId, Object host)  →  show/hide</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>A <strong>host</strong> widget (for example <code>TextComposite</code> or <code>TableView</code>) creates a toolbar with a fixed <strong>root id</strong> (<code>ID_TOOLBAR</code>).</p>
+</li>
+<li>
+<p>At startup, Hop scans every <code>@GuiPlugin</code> and registers methods annotated with <code>@GuiToolbarElement</code> under that root id.</p>
+</li>
+<li>
+<p>When the host builds the toolbar, <code>GuiToolbarWidgets</code> loads all items for that root, applies filters, and wires click listeners.</p>
+</li>
+<li>
+<p>On click, Hop prefers a <strong>public static</strong> method that takes the host object as its single argument (the pattern plugins should use).</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_guiplugin_discovery"><a class="link" href="#_guiplugin_discovery">@GuiPlugin discovery</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Classes annotated with <code>@GuiPlugin</code> are registered as the <code>GuiPluginType</code> plugin type.
+At GUI startup, <code>HopGuiEnvironment.initGuiPlugins()</code> reflects over every such class and records:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>@GuiToolbarElement</code> methods → toolbar items</p>
+</li>
+<li>
+<p><code>@GuiToolbarElementFilter</code> methods → show/hide rules for a toolbar root</p>
+</li>
+<li>
+<p>Also: menu elements, keyboard shortcuts, tabs, context actions, and similar GUI contributions</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-meta">@GuiPlugin</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyToolbarContributions</span> {
+  <span class="hljs-comment">// static methods with @GuiToolbarElement / @GuiToolbarElementFilter</span>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Put the class on the plugin classpath (under <code>plugins/…</code>) so the plugin system can load it.
+<code>hop-ui</code> is typically a <code>provided</code> dependency for transform/action plugins that already ship dialogs.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+On Hop Web, reflection at registration time loads every type that appears in <strong>method and field signatures</strong> of <code>@GuiPlugin</code> classes.
+Do <strong>not</strong> put desktop-only SWT types (for example <code>org.eclipse.swt.custom.StyledText</code>) in those signatures.
+Use abstractions such as <code>TextComposite</code> instead.
+See the <code>GuiPluginWebCompatibilityTest</code> and <a href="hopweb/hopweb-antipatterns.html" class="xref page">Hop Web antipatterns</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_contributing_a_toolbar_button_guitoolbarelement"><a class="link" href="#_contributing_a_toolbar_button_guitoolbarelement">Contributing a toolbar button: @GuiToolbarElement</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Annotation (package <code>org.apache.hop.core.gui.plugin.toolbar</code>):</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>root</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Toolbar root id</strong> this item belongs to (must match the host’s <code>ID_TOOLBAR</code> / parent id).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unique item id (use a stable, namespaced string so other plugins can refer to or filter it).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>image</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SVG path loaded via the plugin classloader (for example <code>json-input.svg</code> or <code>ui/images/search.svg</code>).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>toolTip</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tooltip; use <code>i18n::Key.Name</code> for translation via <code>BaseMessages</code> / resource bundles.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>label</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional text label (buttons are usually icon-only).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defaults to <code>BUTTON</code>; also supports combo, text, label, checkbox, and so on.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>separator</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <code>true</code>, draws a separator before this item.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>extraWidth</code> / <code>alignRight</code> / …</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Layout hints for non-button types.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="_preferred_listener_shape_plugins"><a class="link" href="#_preferred_listener_shape_plugins">Preferred listener shape (plugins)</a></h3>
+<div class="paragraph">
+<p>Use a <strong>public static</strong> method with one parameter: the host widget type (or a supertype / interface).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-meta">@GuiToolbarElement(
+    root = TextComposite.ID_TOOLBAR,
+    id = &quot;textcomposite-toolbar-20010-format-json&quot;,
+    toolTip = &quot;i18n::MyPlugin.FormatJson.ToolTip&quot;,
+    separator = true,
+    image = &quot;json-input.svg&quot;)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">formatJson</span><span class="hljs-params">(TextComposite text)</span> {
+  <span class="hljs-comment">// use text.getText(), text.insert(...), text.getStyleType(), ...</span>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>GuiToolbarWidgets</code> / <code>BaseGuiWidgets</code> resolve listeners as follows:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>If a host object was registered on the toolbar, look for a <strong>static</strong> method whose single parameter is assignable from that host’s class.</p>
+</li>
+<li>
+<p>Otherwise fall back to an instance method on a plugin singleton (no-arg, or with <code>Event</code>).</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Static methods that take the host object are the reliable pattern for <strong>per-widget</strong> toolbars (<code>TableView</code>, <code>TextComposite</code>), because many instances exist at once.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_built_in_items_on_the_host_class"><a class="link" href="#_built_in_items_on_the_host_class">Built-in items on the host class</a></h3>
+<div class="paragraph">
+<p>Hosts such as <code>TableView</code> and <code>TextComposite</code> are themselves <code>@GuiPlugin</code> classes.
+Their built-in actions are also <code>@GuiToolbarElement</code> methods (sometimes static helpers on the abstract base).
+Plugin ids should use higher numeric ranges (for example <code>20000+</code>) so they sort after core items.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_showing_or_hiding_buttons_guitoolbarelementfilter"><a class="link" href="#_showing_or_hiding_buttons_guitoolbarelementfilter">Showing or hiding buttons: @GuiToolbarElementFilter</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This annotation is powerful and easy to overlook.
+It is the supported way to <strong>conditionally show</strong> toolbar items (for example only for SQL editors, only for database metadata lines, only when editable).</p>
+</div>
+<div class="sect2">
+<h3 id="_contract"><a class="link" href="#_contract">Contract</a></h3>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-meta">@GuiToolbarElementFilter(parentId = TextComposite.ID_TOOLBAR)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isButtonShown</span><span class="hljs-params">(String itemId, Object guiPluginInstance)</span> {
+  <span class="hljs-comment">// return true → show the item; false → hide it</span>
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Rule</th>
+<th class="tableblock halign-left valign-top">Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annotation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@GuiToolbarElementFilter(parentId = "&lt;toolbar-root-id&gt;")</code> — <code>parentId</code> must match the toolbar <code>root</code> / host <code>ID_TOOLBAR</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Method shape</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Must</strong> be <code>public static boolean methodName(String itemId, Object guiPluginInstance)</code>.
+Hop looks up the method with reflection using exactly <code>String.class</code> and <code>Object.class</code>.
+A signature of <code>(String, TextComposite)</code> will <strong>not</strong> be found.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>itemId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>@GuiToolbarElement.id</code> of the item currently being decided.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>guiPluginInstance</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <strong>host</strong> object registered with the toolbar (for example the <code>TextComposite</code> or <code>TableView</code> instance), typed as <code>Object</code> — cast carefully.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Return value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code> = show, <code>false</code> = hide.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Multiple filters</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All registered filters for that toolbar root are consulted.
+If <strong>any</strong> filter returns <code>false</code> for an item, the item is hidden.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_critical_pitfall_do_not_hide_everyone_elses_buttons"><a class="link" href="#_critical_pitfall_do_not_hide_everyone_elses_buttons">Critical pitfall: do not hide everyone else’s buttons</a></h3>
+<div class="paragraph">
+<p>Filters run for <strong>every</strong> toolbar item under that root, not only for your button.
+If your filter returns <code>false</code> for ids it does not own, you will hide undo, cut, find, and every other contribution.</p>
+</div>
+<div class="paragraph">
+<p>Always start with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">if</span> (!MY_BUTTON_ID.equals(itemId)) {
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-comment">// leave all other items alone</span>
+}
+<span class="hljs-comment">// then decide for MY_BUTTON_ID only</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_critical_pitfall_filters_run_mid_construction"><a class="link" href="#_critical_pitfall_filters_run_mid_construction">Critical pitfall: filters run mid-construction</a></h3>
+<div class="paragraph">
+<p><code>GuiToolbarElementFilter</code> methods are invoked when the host builds its toolbar — for <code>TextComposite</code> that is <strong>inside the base constructor</strong>, before subclasses create the underlying <code>Text</code> / <code>StyledText</code> widget.</p>
+</div>
+<div class="paragraph">
+<p>Safe in a filter:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Values set <strong>before</strong> <code>addToolbar()</code> (for example constructor <code>styleType</code>)</p>
+</li>
+<li>
+<p>Identity / type of the host object (<code>instanceof TextComposite</code>)</p>
+</li>
+<li>
+<p>Other fields already initialized on the host</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Not</strong> safe in a filter (defer to the button action instead):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>isEditable()</code>, <code>getText()</code>, <code>getSelectionText()</code>, caret position, and similar methods that touch the child text control</p>
+</li>
+<li>
+<p>Anything that assumes the host’s full construction has finished</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-comment">// Filter: only what is available at construction time</span>
+<span class="hljs-meta">@GuiToolbarElementFilter(parentId = TextComposite.ID_TOOLBAR)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isButtonShown</span><span class="hljs-params">(String buttonId, Object guiPluginInstance)</span> {
+  <span class="hljs-keyword">if</span> (!MY_ID.equals(buttonId)) {
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+  }
+  <span class="hljs-keyword">if</span> (!(guiPluginInstance <span class="hljs-keyword">instanceof</span> TextComposite text)) {
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
+  <span class="hljs-keyword">return</span> TextComposite.STYLE_TYPE_JSON.equalsIgnoreCase(text.getStyleType());
+}
+
+<span class="hljs-comment">// Action: runtime checks (editability, content, …)</span>
+<span class="hljs-meta">@GuiToolbarElement(root = TextComposite.ID_TOOLBAR, id = MY_ID, ...)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">formatJson</span><span class="hljs-params">(TextComposite text)</span> {
+  <span class="hljs-keyword">if</span> (text == <span class="hljs-literal">null</span> || text.isDisposed() || !text.isEditable()) {
+    <span class="hljs-keyword">return</span>;
+  }
+  <span class="hljs-comment">// ...</span>
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_working_example_json_format_on_textcomposite"><a class="link" href="#_working_example_json_format_on_textcomposite">Working example (JSON format on TextComposite)</a></h3>
+<div class="paragraph">
+<p>From the JSON transform plugin (<code>TextCompositeToolbarJsonFormatButton</code>):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-meta">@GuiToolbarElementFilter(parentId = TextComposite.ID_TOOLBAR)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isButtonShown</span><span class="hljs-params">(String buttonId, Object guiPluginInstance)</span> {
+  <span class="hljs-keyword">if</span> (!ID_TOOLBAR_FORMAT_JSON.equals(buttonId)) {
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+  }
+  <span class="hljs-keyword">if</span> (!(guiPluginInstance <span class="hljs-keyword">instanceof</span> TextComposite textComposite)) {
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
+  <span class="hljs-comment">// styleType only — isEditable() is checked in formatJson() at click time</span>
+  <span class="hljs-keyword">return</span> TextComposite.STYLE_TYPE_JSON.equalsIgnoreCase(textComposite.getStyleType());
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Another core example: <code>MetaSelectionLineClearDbCacheToolbarItem</code> filters a clear-cache button so it only appears for database metadata lines.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_extensible_host_textcomposite_toolbar"><a class="link" href="#_extensible_host_textcomposite_toolbar">Extensible host: TextComposite toolbar</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>org.apache.hop.ui.core.widget.TextComposite</code> is the multi-line editor used for SQL, scripts, logs, formulas, JSON, and more.
+It exposes:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">API</th>
+<th class="tableblock halign-left valign-top">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TextComposite.ID_TOOLBAR</code> (<code>"TextComposite-Toolbar"</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Root id for <code>@GuiToolbarElement.root</code> / filter <code>parentId</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Built-in items</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Undo/redo, cut/copy/paste, select all, find, find/replace (when the global “show text editor toolbar” option is on).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Constructor <code>styleType</code> / <code>getStyleType()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Semantic content type for plugins (must be set in the constructor; see below).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>selectAll()</code>, <code>insert()</code>, <code>getText()</code>, <code>setText()</code>, …</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Safe editing API that works on desktop and Hop Web backends.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="_styletype_do_not_use_instanceof"><a class="link" href="#_styletype_do_not_use_instanceof">styleType (do not use instanceof)</a></h3>
+<div class="paragraph">
+<p>On Hop Web, dialogs often replace specialized classes with a plain <code>StyledTextComp</code>.
+So <code>instanceof SQLStyledTextComp</code> is <strong>false</strong> on Hop Web even when the user is editing SQL.
+Always use <code>getStyleType()</code> when deciding plugin behavior.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Toolbar filters run when the <code>TextComposite</code> is <strong>constructed</strong> (during <code>addToolbar()</code>).
+Pass <code>styleType</code> as a <strong>constructor argument</strong> so filters see the correct value.
+Calling <code>setStyleType(&#8230;&#8203;)</code> after construction does <strong>not</strong> rebuild the toolbar or re-run filters.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-comment">// Correct: style type is known before the toolbar is built</span>
+wSql =
+    EnvironmentUtils.getInstance().isWeb()
+        ? <span class="hljs-keyword">new</span> <span class="hljs-title class_">StyledTextComp</span>(variables, shell, SWT.MULTI | ..., TextComposite.STYLE_TYPE_SQL)
+        : <span class="hljs-keyword">new</span> <span class="hljs-title class_">SQLStyledTextComp</span>(variables, shell, SWT.MULTI | ...); <span class="hljs-comment">// defaults to SQL</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Known style type constants:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Constant</th>
+<th class="tableblock halign-left valign-top">Typical use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>STYLE_TYPE_GENERIC</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default / unspecified</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>STYLE_TYPE_SQL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SQL scripts and queries</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>STYLE_TYPE_JAVASCRIPT</code> / <code>STYLE_TYPE_JAVA</code> / <code>STYLE_TYPE_SCRIPT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scripting languages</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>STYLE_TYPE_JSON</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON documents or query payloads</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>STYLE_TYPE_LOG</code> / <code>STYLE_TYPE_DIFF</code> / <code>STYLE_TYPE_REGEX</code> / <code>STYLE_TYPE_FORMULA</code> / <code>STYLE_TYPE_TEXT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Logs, diffs, expressions, free text</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>STYLE_TYPE_CQL</code> / <code>STYLE_TYPE_SOQL</code> / <code>STYLE_TYPE_DROOLS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Domain languages</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Free-form strings</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Plugins may introduce their own labels (for example <code>"Cypher"</code>) if needed</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Specialized subclasses set defaults in their constructors (<code>SQLStyledTextComp</code> → <code>SQL</code>, and so on).
+Call sites that use a plain <code>StyledTextComp</code> / <code>StyledTextVar</code> (including Hop Web stand-ins) must pass the matching <code>styleType</code> constructor argument.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ideas_enabled_by_this_spi"><a class="link" href="#_ideas_enabled_by_this_spi">Ideas enabled by this SPI</a></h3>
+<div class="paragraph">
+<p>Because any plugin can attach to <code>TextComposite.ID_TOOLBAR</code> and branch on <code>styleType</code>, you can ship optional tooling without bloating core dialogs:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>SQL pretty-print / format</p>
+</li>
+<li>
+<p>SQL lineage or “explain”</p>
+</li>
+<li>
+<p>Visual SQL builders</p>
+</li>
+<li>
+<p>JSON / XML formatters (see the sample JSON format button)</p>
+</li>
+<li>
+<p>Language-specific helpers (Cypher, SOQL, Drools, …)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Keep heavy or optional features in plugins; keep the host widget small.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_preferences_and_opt_out"><a class="link" href="#_preferences_and_opt_out">Preferences and opt-out</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Global: configuration option <strong>Show text editor toolbar</strong> (<code>PropsUi.isShowTextCompositeToolbar()</code>).</p>
+</li>
+<li>
+<p>Per instance: construct with <code>toolbarEnabled = false</code>, or pass item ids to remove.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_extensible_host_tableview_toolbar"><a class="link" href="#_extensible_host_tableview_toolbar">Extensible host: TableView toolbar</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>TableView</code> uses the same mechanism with root id <code>TableView.ID_TOOLBAR</code> (<code>"TableView-Toolbar"</code>).</p>
+</div>
+<div class="paragraph">
+<p>Built-in items cover row insert/delete, clipboard, filter, navigate-to-column, undo/redo, and more.
+Plugins contribute the same way — for example export-to-Excel / export-to-CSV toolbar buttons in the Excel and text-file plugins:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-meta">@GuiToolbarElement(
+    root = TableView.ID_TOOLBAR,
+    id = &quot;tableview-toolbar-30000-export-to-excel&quot;,
+    toolTip = &quot;i18n::ExcelWidget.ExportToolbarButton.ToolTip&quot;,
+    separator = true,
+    image = &quot;excelwriter.svg&quot;)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">export</span><span class="hljs-params">(TableView tableView)</span> {
+  <span class="hljs-comment">// ...</span>
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how_the_host_builds_the_toolbar_for_widget_authors"><a class="link" href="#_how_the_host_builds_the_toolbar_for_widget_authors">How the host builds the toolbar (for widget authors)</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you own a new composite that should accept plugin buttons:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Choose a stable public root id, for example <code>public static final String ID_TOOLBAR = "MyWidget-Toolbar";</code></p>
+</li>
+<li>
+<p>Annotate the host class (or a related <code>@GuiPlugin</code>) with built-in <code>@GuiToolbarElement</code> methods if needed</p>
+</li>
+<li>
+<p>On construction:</p>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java">toolbarWidgets = <span class="hljs-keyword">new</span> <span class="hljs-title class_">GuiToolbarWidgets</span>();
+<span class="hljs-comment">// Register under the class name elements expect to resolve</span>
+toolbarWidgets.registerGuiPluginObject(MyWidget.class.getName(), <span class="hljs-built_in">this</span>);
+
+<span class="hljs-type">IToolbarContainer</span> <span class="hljs-variable">container</span> <span class="hljs-operator">=</span>
+    ToolbarFacade.createToolbarContainer(<span class="hljs-built_in">this</span>, SWT.WRAP | SWT.LEFT | SWT.HORIZONTAL);
+toolbar = container.getControl();
+<span class="hljs-comment">// layout toolbar at the top...</span>
+toolbarWidgets.createToolbarWidgets(container, ID_TOOLBAR, removeToolItems);</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Prefer <code>ToolbarFacade</code> / <code>IToolbarContainer</code> so desktop (SWT <code>ToolBar</code>) and Hop Web (composite row layout) share one path.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_i18n_for_tooltips"><a class="link" href="#_i18n_for_tooltips">i18n for tooltips</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Prefer:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java">toolTip = <span class="hljs-string">&quot;i18n::MyClass.MyButton.ToolTip&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with a messages file under the plugin package, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">plugins/.../src/main/resources/org/example/myplugin/messages/messages_en_US.properties</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>properties</div><pre class="highlightjs highlight is-highlighted"><code class="language-properties hljs" data-lang="properties"><span class="hljs-attr">MyClass.MyButton.ToolTip</span>=<span class="hljs-string">Pretty-print JSON</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Escape variable-like tokens in properties with single quotes when needed (<code>'${VAR}'</code>) so they are not treated as interpolation.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_checklist_for_a_new_toolbar_contribution"><a class="link" href="#_checklist_for_a_new_toolbar_contribution">Checklist for a new toolbar contribution</a></h2>
+<div class="sectionbody">
+<div class="ulist checklist">
+<ul class="checklist">
+<li>
+<p><i class="fa fa-square-o"></i> Class annotated with <code>@GuiPlugin</code></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Button method uses <code>@GuiToolbarElement(root = Host.ID_TOOLBAR, id = "…", image = "…", toolTip = "i18n::…")</code></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Listener is <code>public static void name(HostType host)</code> (or a safe supertype)</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> No desktop-only SWT types in the GuiPlugin class signatures</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> If visibility depends on context: add <code>@GuiToolbarElementFilter(parentId = Host.ID_TOOLBAR)</code> with signature <code>(String, Object)</code></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Filter returns <code>true</code> for all item ids that are <strong>not</strong> yours</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Filter only uses state available at construction (<code>styleType</code>, not <code>isEditable()</code> / <code>getText()</code>)</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Runtime checks (<code>isEditable()</code>, empty text, …) live in the action method</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> For <code>TextComposite</code>: pass <code>styleType</code> in the constructor; use <code>getStyleType()</code> in filters/actions (not <code>instanceof</code>)</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> SVG image is on the plugin classpath; i18n key exists in <code>messages_en_US.properties</code></p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> Manual check on desktop and, if relevant, Hop Web</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_reference_source_locations"><a class="link" href="#_reference_source_locations">Reference source locations</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Topic</th>
+<th class="tableblock halign-left valign-top">Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Toolbar widgets runtime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ui/&#8230;&#8203;/gui/GuiToolbarWidgets.java</code>, <code>BaseGuiWidgets.java</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annotations</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>core/&#8230;&#8203;/gui/plugin/toolbar/GuiToolbarElement.java</code>, <code>GuiToolbarElementFilter.java</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Registration scan</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ui/&#8230;&#8203;/hopgui/HopGuiEnvironment.initGuiPlugins()</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Text editor host</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ui/&#8230;&#8203;/widget/TextComposite.java</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Table host</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ui/&#8230;&#8203;/widget/TableView.java</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sample JSON format button</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plugins/transforms/json/&#8230;&#8203;/ui/TextCompositeToolbarJsonFormatButton.java</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sample table export buttons</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plugins/transforms/excel/&#8230;&#8203;/TableViewExportToExcelToolbarButton.java</code>, CSV equivalent under textfile</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Metadata line filter example</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ui/&#8230;&#8203;/database/MetaSelectionLineClearDbCacheToolbarItem.java</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+    </article>
+<nav class="pagination" data-pagefind-ignore aria-label="Page">
+  <a class="pagination__prev" href="../../dev-manual/next/database/migrating-from-variants.html"><span>Previous</span><strong>Migrating from isXVariant()</strong></a>
+  <a class="pagination__next" href="../../dev-manual/next/engine-compatibility.html"><span>Next</span><strong>Engine compatibility</strong></a>
+</nav>
+  </main>
+
+<aside class="doc-toc" data-pagefind-ignore aria-label="On this page">
+  <p class="doc-toc__title">On this page</p>
+  <div class="doc-toc__body"></div>
+</aside>
+</div>
+<footer class="site-footer" data-pagefind-ignore>
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <img src="../../img/hop-logo.svg" alt="" width="30" height="30" aria-hidden="true">
+      <div>
+        <p>The Hop Orchestration Platform &mdash; visual data and metadata orchestration, designed once and run anywhere.</p>
+        <ul class="site-footer__socials">
+        <li><a href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"/></svg></a></li>
+        <li><a href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"/></svg></a></li>
+        <li><a href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg></a></li>
+        </ul>
+      </div>
+    </div>
+    <nav class="site-footer__nav" aria-label="Footer">
+      <div>
+        <h2>Documentation</h2>
+        <ul>
+          <li><a href="../../manual/latest/getting-started/">Getting started</a></li>
+          <li><a href="../../manual/latest/">User manual</a></li>
+          <li><a href="../../dev-manual/latest/">Developer docs</a></li>
+          <li><a href="../../download/">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Community</h2>
+        <ul>
+          <li><a href="../../community/contributing/">Contributing</a></li>
+          <li><a href="../../community/mailing-list/">Mailing lists</a></li>
+          <li><a href="../../community/events/">Events</a></li>
+          <li><a href="../../community/support/">Support</a></li>
+          <li><a href="../../community/commercial/">Commercial support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Apache</h2>
+        <ul>
+          <li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li>
+          <li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li>
+          <li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li>
+          <li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li>
+          <li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="site-footer__legal">
+    <p>
+      Copyright &copy; 2019&ndash;2026 <a href="https://www.apache.org/" rel="noopener" target="_blank">The Apache Software Foundation</a>,
+      licensed under the <a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">Apache License, Version 2.0</a>.
+    </p>
+    <p>
+      Apache, Apache Hop, Hop, and the Apache feather logo are either registered trademarks or
+      trademarks of the Apache Software Foundation in the United States and/or other countries.
+    </p>
+  </div>
+</footer>
+
+<script src="../../js/site.js"></script>
+<script src="../../_/js/tabs.js"></script>
+</body>
+</html>

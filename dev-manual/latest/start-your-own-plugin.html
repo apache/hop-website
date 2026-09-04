@@ -1,4 +1,451 @@
-<!doctype html> <html lang="en"> <head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width,initial-scale=1"> <title>Creating a remote plugin :: Apache Hop (Incubating)</title> <link rel="canonical" href="https://hop.apache.org/dev-manual/latest/start-your-own-plugin.html"> <meta name="generator" content="Antora 2.3.4"> <link rel="stylesheet" href="../../_/css/site-8ea79c1e80.css"> </head> <body class="article"> <div class="cookie-banner" id="cookies-eu-banner" style="display: none;"> <div id="cookies-eu-content"> By continuing to visit this site, you accept the use of <a href="../../cookie-info/">cookies.</a> <button id="cookies-eu-accept">Accept</button> </div> <button id="cookies-eu-reject">Reject</button> </div> <header class="header"> <nav class="navbar"> <div class="navbar-brand"> <a class="nav-logo" href="../.."><span>Apache Hop (Incubating)</span></a> <div id="topbar-nav" class="navbar-menu"> <div class="navbar-end"> <a class="navbar-item" href="../..../../blog/">Blog</a> <div class="navbar-item has-dropdown is-hoverable"> <a class="navbar-link" href="#">Documentation</a> <div class="navbar-dropdown"> <a class="navbar-item" href="../../manual/latest/getting-started.html">Getting started</a> <a class="navbar-item" href="../../manual/latest/">User manual</a> <a class="navbar-item" href="../../tech-manual/latest/">Technical Documentation</a> <a class="navbar-item" href="../../dev-manual/latest/">Developer Documentation</a> <a class="navbar-item" href="../../docs/architecture/">Architecture</a> <a class="navbar-item" href="../../docs/roadmap/">Roadmap</a> <a class="navbar-item" href="../../docs/qa">Q&amp;A</a> </div> </div> <div class="navbar-item has-dropdown is-hoverable"> <a class="navbar-link" href="#">Community</a> <div class="navbar-dropdown"> <a class="navbar-item" href="../../community/contributing/">Contributing</a> <a class="navbar-item" href="../../community/tools/">Tools</a> <a class="navbar-item" href="../../community/team/">Team</a> </div> </div> <a class="navbar-item" href="../..../../download/">Download</a> <div class="navbar-item has-dropdown is-hoverable"> <a class="navbar-link" href="#">About</a> <div class="navbar-dropdown"> <a class="navbar-item" href="https://www.apache.org/licenses/LICENSE-2.0">License</a> </div> </div> </div> </div> <div class="navbar-search"> <input id="search-input" type="text" placeholder="Search docs" class="ds-input" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="algolia-autocomplete-listbox-0" dir="auto"> </div> <div class="navbar-tools"> <a href="https://chat.project-hop.org" title="Chat with us" target="_blank"><svg height="30" width="30" viewBox="0 0 30 30" class="brand-icon"><path d="m 23.399705,7.0517653 c -0.811583,-1.755522 -1.98643,-3.2324028 -3.542396,-4.4727237 0.04144,0.8420009 0.131904,2.6427217 0.131904,2.6427217 0,0 0.09696,0.1272 0.13632,0.182401 1.572478,2.199681 2.147037,4.6376017 1.623358,7.2857637 -1.050239,5.309843 -6.218105,8.549046 -11.455186,7.224805 C 5.6960779,18.752172 2.6254257,14.043529 3.4949926,9.3753663 4.1813918,5.6900843 6.3558852,3.2350424 9.8870488,1.9875216 l 0.1279682,-0.048 0.100416,-0.072 C 10.543401,1.2611208 10.961,0.6477608 11.406631,0 6.0547335,0.2656 0.67230798,4.5661633 0.05570071,11.107927 -0.54103457,17.438011 3.7200163,23.083134 9.8089048,24.321855 16.154114,25.612736 22.194522,21.863214 24.019864,15.86257 24.932631,12.862008 24.719032,9.9083263 23.399704,7.0542453 Z M 8.2979624,11.010647 c 0.267552,2.546882 2.4715176,4.282562 5.0209866,4.000322 2.504829,-0.2776 4.335931,-2.731601 3.861787,-5.2146427 -0.3696,-1.936001 -0.77808,-3.864402 -1.170046,-5.796084 -0.162144,-0.7991999 -0.326208,-1.5984007 -0.49824,-2.4414407 -0.06784,0.056 -0.09936,0.0848 -0.128064,0.1128 -0.858239,0.84272 -1.715997,1.6859209 -2.574236,2.5285617 -1.045056,1.02632 -2.08867,2.053921 -3.1362212,3.077522 -1.0506224,1.02664 -1.5288936,2.279601 -1.3760624,3.7327217 z"/></svg></a> <a href="https://twitter.com/projhop" title="Follow us on Twitter" target="_blank"><svg height="30" width="30" viewBox="0 0 30 30" class="brand-icon"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.5 8.778c-.441.196-.916.328-1.414.388.509-.305.898-.787 1.083-1.362-.476.282-1.003.487-1.564.597-.448-.479-1.089-.778-1.796-.778-1.59 0-2.758 1.483-2.399 3.023-2.045-.103-3.86-1.083-5.074-2.572-.645 1.106-.334 2.554.762 3.287-.403-.013-.782-.124-1.114-.308-.027 1.14.791 2.207 1.975 2.445-.346.094-.726.116-1.112.042.313.978 1.224 1.689 2.3 1.709-1.037.812-2.34 1.175-3.647 1.021 1.09.699 2.383 1.106 3.773 1.106 4.572 0 7.154-3.861 6.998-7.324.482-.346.899-.78 1.229-1.274z"/></svg></a> <a href="https://www.linkedin.com/company/hop-project/" title="Follow us on LinkedIn" target="_blank"><svg height="30" width="30" viewBox="0 0 30 30" class="brand-icon"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a> <a href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" title="Subscribe to our YouTube channel" target="_blank"><svg height="30" width="30" viewBox="0 0 30 30" class="brand-icon"><path fill-rule="evenodd" d="M4.652 0h1.44l.988 3.702.916-3.702h1.454l-1.665 5.505v3.757h-1.431v-3.757l-1.702-5.505zm6.594 2.373c-1.119 0-1.861.74-1.861 1.835v3.349c0 1.204.629 1.831 1.861 1.831 1.022 0 1.826-.683 1.826-1.831v-3.349c0-1.069-.797-1.835-1.826-1.835zm.531 5.127c0 .372-.19.646-.532.646-.351 0-.554-.287-.554-.646v-3.179c0-.374.172-.651.529-.651.39 0 .557.269.557.651v3.179zm4.729-5.07v5.186c-.155.194-.5.512-.747.512-.271 0-.338-.186-.338-.46v-5.238h-1.27v5.71c0 .675.206 1.22.887 1.22.384 0 .918-.2 1.468-.853v.754h1.27v-6.831h-1.27zm2.203 13.858c-.448 0-.541.315-.541.763v.659h1.069v-.66c.001-.44-.092-.762-.528-.762zm-4.703.04c-.084.043-.167.109-.25.198v4.055c.099.106.194.182.287.229.197.1.485.107.619-.067.07-.092.105-.241.105-.449v-3.359c0-.22-.043-.386-.129-.5-.147-.193-.42-.214-.632-.107zm4.827-5.195c-2.604-.177-11.066-.177-13.666 0-2.814.192-3.146 1.892-3.167 6.367.021 4.467.35 6.175 3.167 6.367 2.6.177 11.062.177 13.666 0 2.814-.192 3.146-1.893 3.167-6.367-.021-4.467-.35-6.175-3.167-6.367zm-12.324 10.686h-1.363v-7.54h-1.41v-1.28h4.182v1.28h-1.41v7.54zm4.846 0h-1.21v-.718c-.223.265-.455.467-.696.605-.652.374-1.547.365-1.547-.955v-5.438h1.209v4.988c0 .262.063.438.322.438.236 0 .564-.303.711-.487v-4.939h1.21v6.506zm4.657-1.348c0 .805-.301 1.431-1.106 1.431-.443 0-.812-.162-1.149-.583v.5h-1.221v-8.82h1.221v2.84c.273-.333.644-.608 1.076-.608.886 0 1.18.749 1.18 1.631v3.609zm4.471-1.752h-2.314v1.228c0 .488.042.91.528.91.511 0 .541-.344.541-.91v-.452h1.245v.489c0 1.253-.538 2.013-1.813 2.013-1.155 0-1.746-.842-1.746-2.013v-2.921c0-1.129.746-1.914 1.837-1.914 1.161 0 1.721.738 1.721 1.914v1.656z"/></svg> <a href="https://github.com/project-hop/" title="Collaborate on GitHub"><svg class="brand-icon" viewBox="0 0 22 22"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg></a> </a></div> <button class="navbar-burger" data-target="topbar-nav" type="button"> <span></span> <span></span> <span></span> </button> </div> </nav> </header> <div class="body"> <div class="nav-container" data-component="dev-manual" data-version="latest"> <aside class="nav"> <div class="panels"> <div class="nav-panel-menu is-active" data-panel="menu"> <nav class="nav-menu"> <h3 class="title"><a href="index.html">Development Documentation</a></h3> <ul class="nav-list"> <li class="nav-item" data-depth="0"> <ul class="nav-list"> <li class="nav-item" data-depth="1"> <a class="nav-link" href="getting-started.html">Getting started</a> </li> <li class="nav-item" data-depth="1"> <a class="nav-link" href="porting-kettle-plugins.html">Porting Kettle plugins</a> </li> <li class="nav-item" data-depth="1"> <a class="nav-link" href="metadata-plugins.html">Metadata plugins</a> </li> <li class="nav-item" data-depth="1"> <a class="nav-link" href="setup-dev-environment.html">Setting up your development environment</a> </li> <li class="nav-item" data-depth="1"> <a class="nav-link" href="integration-testing.html">Integration testing</a> </li> <li class="nav-item" data-depth="1"> <a class="nav-link" href="internationalisation.html">Internationalisation (i18n)</a> </li> <li class="nav-item" data-depth="1"> <button class="nav-item-toggle"></button> <a class="nav-link" href="plugin-development.html">Plugins Development</a> <ul class="nav-list"> <li class="nav-item is-current-page" data-depth="2"> <a class="nav-link" href="start-your-own-plugin.html">Creating your own plugin</a> </li> </ul> </li> <li class="nav-item" data-depth="1"> <button class="nav-item-toggle"></button> <a class="nav-link" href="apache-release/index.html">Apache Release Process</a> <ul class="nav-list"> <li class="nav-item" data-depth="2"> <a class="nav-link" href="apache-release/creating-a-release.html">Creating a Release</a> </li> <li class="nav-item" data-depth="2"> <a class="nav-link" href="apache-release/checking-a-release.html">Checking a Release</a> </li> </ul> </li> <li class="nav-item" data-depth="1"> <button class="nav-item-toggle"></button> <a class="nav-link" href="webhop/index.html">Hop Web</a> <ul class="nav-list"> <li class="nav-item" data-depth="2"> <a class="nav-link" href="webhop/developer-guide.html">Webhop Developer Guide</a> </li> </ul> </li> <li class="nav-item" data-depth="1"> <button class="nav-item-toggle"></button> <a class="nav-link" href="sdk/index.html">SDK</a> <ul class="nav-list"> <li class="nav-item" data-depth="2"> <a class="nav-link" href="sdk/hop-sdk.html">The Hop SDK</a> </li> </ul> </li> </ul> </li> </ul> </nav> </div> <div class="nav-panel-explore" data-panel="explore"> <div class="context"> <span class="title">Development Documentation</span> <span class="version">latest</span> </div> <ul class="components"> <li class="component is-current"> <span class="title">Development Documentation</span> <ul class="versions"> <li class="version is-current is-latest"> <a href="index.html">latest</a> </li> </ul> </li> </ul> </div> </div> </aside> </div> <main> <div class="toolbar" role="navigation"> <button class="nav-toggle"></button> <nav class="breadcrumbs" aria-label="breadcrumbs"> <ul> <li><a href="index.html">Development Documentation</a></li> <li><a href="plugin-development.html">Plugins Development</a></li> <li><a href="start-your-own-plugin.html">Creating your own plugin</a></li> </ul> </nav> <div class="edit-this-page"><a href="https://github.com/apache/incubator-hop-docs/edit/asf-site/hop-dev-manual/modules/ROOT/pages/start-your-own-plugin.adoc">Edit this Page</a></div> </div> <article class="doc"> <h1 class="page">Creating a remote plugin</h1> <div id="preamble"> <div class="sectionbody"> <div class="paragraph"> <p>This guide is to help you set up and start development on a plugin that will not be included in the Hop repository. For more information on plugin types and how to add them to the Hop repository check out <a href="plugin-development.html" class="page">following guide</a>.</p> </div> <div class="paragraph"> <p>The Apache software foundation has a strict policy on source licenses including all dependencies used to provide certain functionality. To see which dependencies are allowed in an Apache project check <a href="https://www.apache.org/legal/resolved.html">following page</a>. If your plugin consists of code and dependencies in category A it can safely be added to the Hop repository and community can help maintain the code. If it uses category B or X it can no longer be added to the default distribution of Hop.</p> </div> </div> </div> <div class="sect1"> <h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>Getting started</h2> <div class="sectionbody"> <div class="paragraph"> <p>This guides assumes your are using IntelliJ for your development, some steps might be different in Eclipse.</p> </div> <div class="olist arabic"> <ol class="arabic"> <li> <p>Clone the skeleton repository found <a href="https://github.com/project-hop/hop-plugin-sample">here</a></p> </li> <li> <p>Import the project in Intellij</p> </li> <li> <p>Start coding</p> </li> </ol> </div> <div class="sect2"> <h3 id="_project_structure"><a class="anchor" href="#_project_structure"></a>Project structure</h3> <div class="paragraph"> <p>The sample project consists out of 3 main modules and 3 sub-modules</p> </div> <div class="imageblock"> <div class="content"> <img src="_images/start-your-own-plugin/plugin-sample-1.png" alt="plugin sample 1"> </div> </div> <div class="paragraph"> <p>the main modules are:</p> </div> <div class="ulist"> <ul> <li> <p>hop-action-sample</p> </li> <li> <p>hop-transform-sample</p> </li> <li> <p>assemblies</p> <div class="ulist"> <ul> <li> <p>assemblies-action-sample</p> </li> <li> <p>assemblies-transform-sample</p> </li> <li> <p>debug</p> </li> </ul> </div> </li> </ul> </div> <div class="paragraph"> <p>In our sample repository one action and one transform are provided, they all work but they do not manipulate data or perform any actions. The assemblies module is used to create a distribution or test your action or transform during development.</p> </div> </div> <div class="sect2"> <h3 id="_debugging"><a class="anchor" href="#_debugging"></a>Debugging</h3> <div class="paragraph"> <p>To debug the project create a new <code>application</code> configuration with following configuration:</p> </div> <div class="imageblock"> <div class="content"> <img src="_images/start-your-own-plugin/plugin-sample-2.png" alt="plugin sample 2"> </div> </div> <div class="paragraph"> <p>Important is the working directory, for hop to work including all the plugins provided by the project a certain folder structure is required. this is generated at the debug location using following pom.</p> </div> <div class="listingblock"> <div class="content"> <pre class="highlightjs highlight"><code>        &lt;dependency&gt;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Creating a remote plugin | Apache Hop</title>
+<meta name="description" content="This guide is to help you set up and start development on a plugin that will not be included in the Hop repository. For more information on plugin types and how to add them to the Hop repository check out the plugin development guide.">
+
+<link rel="canonical" href="https://hop.apache.org/dev-manual/latest/start-your-own-plugin.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Apache Hop">
+<meta property="og:title" content="Creating a remote plugin">
+<meta property="og:description" content="This guide is to help you set up and start development on a plugin that will not be included in the Hop repository. For more information on plugin types and how to add them to the Hop repository check out the plugin development guide.">
+<meta property="og:url" content="https://hop.apache.org/dev-manual/latest/start-your-own-plugin.html">
+<meta property="og:image" content="https://hop.apache.org/img/social-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hop.apache.org/img/social-card.png">
+
+<link rel="icon" href="../../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="196x196" href="../../favicon-196x196.png">
+<link rel="manifest" href="../../site.webmanifest">
+<link rel="stylesheet" href="../../_/css/site.css">
+
+<script>(function(){try{var t=localStorage.getItem('hop-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+</head>
+<body class="doc-page" data-pagefind-body>
+<a class="skip-link" href="#main" data-pagefind-ignore>Skip to main content</a>
+<header class="site-header" data-pagefind-ignore>
+  <div class="site-header__inner">
+    <a class="brand" href="../../" aria-label="Apache Hop home">
+      <img src="../../img/hop-logo.svg" alt="" width="34" height="34" aria-hidden="true">
+      <span class="brand__name">Apache Hop</span>
+    </a>
+
+    <nav class="mainnav" id="mainnav" aria-label="Main">
+      <ul class="mainnav__list">
+        <li><a href="../../blog/">Blog</a></li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-docs">
+            Documentation <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-docs">
+            <li><a href="../../manual/latest/getting-started/">Getting started</a></li>
+            <li><a href="../../manual/latest/">User manual</a></li>
+            <li><a href="../../dev-manual/latest/">Developer documentation</a></li>
+            <li><a href="../../docs/architecture/">Architecture</a></li>
+            <li><a href="../../docs/roadmap/">Roadmap</a></li>
+          </ul>
+        </li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-community">
+            Community <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-community">
+            <li><a href="../../community/contributing/">Contributing</a></li>
+            <li><a href="../../community/mailing-list/">Mailing lists</a></li>
+            <li><a href="../../community/tools/">Tools & chat</a></li>
+            <li><a href="../../community/events/">Events & user groups</a></li>
+            <li><a href="../../community/team/">Team</a></li>
+            <li><a href="../../community/support/">Support</a></li>
+            <li><a href="../../community/commercial/">Commercial support</a></li>
+            <li><a href="../../community/ethos/">Ethos</a></li>
+            <li><a href="../../security/">Security advisories</a></li>
+          </ul>
+        </li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-asf">
+            Apache <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-asf">
+            <li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li>
+            <li><a href="https://www.apache.org/events/current-event" rel="noopener" target="_blank">Events</a></li>
+            <li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li>
+            <li><a href="https://www.apache.org/security/" rel="noopener" target="_blank">Security</a></li>
+            <li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li>
+            <li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li>
+            <li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-tools">
+      <div class="search" role="search">
+        <label class="visually-hidden" for="search-input">Search Apache Hop</label>
+        <input id="search-input" type="search" placeholder="Search" autocomplete="off">
+      </div>
+      <span class="socials">
+        <a class="icon-btn" href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+        <a class="icon-btn" href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"/></svg></a>
+        <a class="icon-btn" href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"/></svg></a>
+        <a class="icon-btn" href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg></a>
+      </span>
+      <a class="mainnav__cta" href="../../download/">Download</a>
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Switch theme" title="Switch theme">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+      </button>
+      <button type="button" id="nav-burger" class="icon-btn burger" aria-expanded="false" aria-controls="mainnav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="doc-shell">
+<div class="doc-nav" id="doc-nav" data-pagefind-ignore>
+  <button type="button" class="doc-nav__close icon-btn" aria-label="Close navigation">&times;</button>
+  <nav aria-label="Documentation">
+    <div class="doc-nav__group">
+      
+      <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/getting-started.html">Getting started</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/upgrading-to-20.html">Plugins Upgrades to 2.x</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/porting-kettle-plugins.html">Porting Kettle plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/metadata-plugins.html">Metadata plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/metadata-serialization.html">Metadata Serialization</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/metadata-injection.html">Metadata Injection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/setup-dev-environment.html">Setting up your development environment</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/docker-build.html">Docker Build Script</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/integration-testing.html">Integration testing</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/internationalisation.html">Internationalisation (i18n)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/plugin-development.html">Plugins Development</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/marketplace-publish-plugin.html">Publishing a plugin to Nexus (marketplace)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/engine-compatibility.html">Engine compatibility</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/lineage.html">Lineage observation hub</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/plugin-samples.html">Plugins Samples</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/svg-files.html">SVG Files</a>
+    
+  </li>
+  <li class="doc-nav__item is-current">
+    <a href="../../dev-manual/latest/start-your-own-plugin.html">Creating your own plugin</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Apache Release Process section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../dev-manual/latest/apache-release/index.html">Apache Release Process</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/apache-release/creating-a-release.html">Creating a Release</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/apache-release/promoting-a-release.html">Promoting a Release</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/apache-release/checking-a-release.html">Checking a Release</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop Web section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../dev-manual/latest/hopweb/index.html">Hop Web</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/hopweb/developer-guide.html">Hop Web Developer Guide</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/hopweb/hopweb-antipatterns.html">Hop Web Antipatterns</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle SDK section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../dev-manual/latest/sdk/index.html">SDK</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/latest/sdk/hop-sdk.html">The Hop SDK</a>
+    
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+    </div>
+  </nav>
+<div class="nav-foot">
+  <details class="explore">
+    <summary>
+      <span class="explore__now">
+        <span class="explore__component">Development Documentation</span>
+        <span class="explore__version">2.19.0</span>
+      </span>
+      <svg class="explore__chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </summary>
+    <div class="explore__body">
+      <div class="explore__group">
+  <p class="explore__title">Development Documentation</p>
+  <ul>
+    <li class="">
+      <a href="../../dev-manual/next/index.html">2.20.0</a>
+    </li>
+    <li class="is-current">
+      <a href="../../dev-manual/latest/index.html">2.19.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.18.1/index.html">2.18.1</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.18.0/index.html">2.18.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.17.0/index.html">2.17.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.16.0/index.html">2.16.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.15.0/index.html">2.15.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.14.0/index.html">2.14.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.13.0/index.html">2.13.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.12.0/index.html">2.12.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.11.0/index.html">2.11.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.10.0/index.html">2.10.0</a>
+    </li>
+  </ul>
+</div>
+
+        
+        <div class="explore__group">
+  <p class="explore__title">User manual</p>
+  <ul>
+    <li class="">
+      <a href="../../manual/next/index.html">2.20.0 (pre-release)</a>
+    </li>
+    <li class="">
+      <a href="../../manual/latest/index.html">2.19.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.18.1/index.html">2.18.1</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.18.0/index.html">2.18.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.17.0/index.html">2.17.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.16.0/index.html">2.16.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.15.0/index.html">2.15.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.14.0/index.html">2.14.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.13.0/index.html">2.13.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.12.0/index.html">2.12.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.11.0/index.html">2.11.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.10.0/index.html">2.10.0</a>
+    </li>
+  </ul>
+</div>
+
+    </div>
+  </details>
+
+  <a class="nav-foot__edit" href="https://github.com/apache/hop/edit/release/2.19.0/docs/hop-dev-manual/modules/ROOT/pages/start-your-own-plugin.adoc" rel="noopener" target="_blank">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758zm1.414 1.06a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354zM11.189 6.25 9.75 4.81l-6.286 6.287a.25.25 0 0 0-.064.108l-.558 1.953 1.953-.558a.25.25 0 0 0 .108-.064z"/></svg>
+    Edit this page
+  </a>
+</div>
+</div>
+  <main class="doc-main" id="main">
+    <button type="button" class="doc-nav__open" aria-expanded="false" aria-controls="doc-nav" data-pagefind-ignore>
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      Documentation menu
+    </button>
+<nav class="breadcrumbs" data-pagefind-ignore aria-label="Breadcrumb">
+  <ol>
+    <li><a href="../../">Home</a></li>
+    <li><a href="../../dev-manual/latest/start-your-own-plugin.html">Creating your own plugin</a></li>
+  </ol>
+</nav>
+    <article class="doc">
+      <h1>Creating a remote plugin</h1>
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This guide is to help you set up and start development on a plugin that will not be included in the Hop repository.
+For more information on plugin types and how to add them to the Hop repository check out <a href="plugin-development.html" class="xref page">following guide</a>.</p>
+</div>
+<div class="paragraph">
+<p>To package a marketplace zip and publish releases to your own Nexus (including Hop version requirements and plugin dependencies), see <a href="marketplace-publish-plugin.html" class="xref page">Publishing a Hop plugin to your own Maven repository</a>.</p>
+</div>
+<div class="paragraph">
+<p>The Apache software foundation has a strict policy on source licenses including all dependencies used to provide certain functionality.
+To see which dependencies are allowed in an Apache project check <a href="https://www.apache.org/legal/resolved.html" rel="noopener" target="_blank">following page</a>.
+If your plugin consists of code and dependencies in category A it can safely be added to the Hop repository and community can help maintain the code.
+If it uses category B or X it can no longer be added to the default distribution of Hop.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_started"><a class="link" href="#_getting_started">Getting started</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This guides assumes your are using IntelliJ for your development, some steps might be different in Eclipse.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Clone the skeleton repository found <a href="https://github.com/project-hop/hop-plugin-sample" rel="noopener" target="_blank">here</a></p>
+</li>
+<li>
+<p>Import the project in Intellij</p>
+</li>
+<li>
+<p>Start coding</p>
+</li>
+</ol>
+</div>
+<div class="sect2">
+<h3 id="_project_structure"><a class="link" href="#_project_structure">Project structure</a></h3>
+<div class="paragraph">
+<p>The sample project consists out of 3 main modules and 3 sub-modules</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/start-your-own-plugin/plugin-sample-1.png" alt="plugin sample 1">
+</div>
+</div>
+<div class="paragraph">
+<p>the main modules are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>hop-action-sample</p>
+</li>
+<li>
+<p>hop-transform-sample</p>
+</li>
+<li>
+<p>assemblies</p>
+<div class="ulist">
+<ul>
+<li>
+<p>assemblies-action-sample</p>
+</li>
+<li>
+<p>assemblies-transform-sample</p>
+</li>
+<li>
+<p>debug</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In our sample repository one action and one transform are provided, they all work but they do not manipulate data or perform any actions.
+The assemblies module is used to create a distribution or test your action or transform during development.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_debugging"><a class="link" href="#_debugging">Debugging</a></h3>
+<div class="paragraph">
+<p>To debug the project create a new <code>application</code> configuration with following configuration:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/start-your-own-plugin/plugin-sample-2.png" alt="plugin sample 2">
+</div>
+</div>
+<div class="paragraph">
+<p>Important is the working directory, for hop to work including all the plugins provided by the project a certain folder structure is required. this is generated at the debug location using following pom.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">        &lt;dependency&gt;
             &lt;groupId&gt;org.apache.hop&lt;/groupId&gt;
             &lt;artifactId&gt;hop-core&lt;/artifactId&gt;
             &lt;version&gt;${hop.version}&lt;/version&gt;
@@ -54,22 +501,86 @@
                 &lt;/exclusion&gt;
             &lt;/exclusions&gt;
             &lt;scope&gt;compile&lt;/scope&gt;
-        &lt;/dependency&gt;</code></pre> </div> </div> <div class="paragraph"> <p>When compiling you will notice a plugins directory is added to the debug location, this contains all plugins distributed by the Apache Hop team, the assemblies for the sample transform and action follow the same logic to make sure they are copied to the correct location too, this allows the Hop plugin loader to find and load all the plugins for the GUI.</p> </div> </div> </div> </div> </article> </main> </div> <footer> <div class="footer"> <dl> <dt>Overview</dt> <dd><a href="../../download/">Download</a></dd> <dd><a href="../../manual/latest/">Getting started</a></dd> </dl> <dl> <dt>Community</dt> <dd><a target="_blank" href="https://issues.apache.org/jira/projects/HOP/issues">Jira</a></dd> <dd><a target="_blank" href="https://chat.project-hop.org">Chat</a></dd> <dd><a target="_blank" href="../../community/team/">Team</a></dd> </dl> <dl> <dt>About</dt> <dd><a target="_blank" href="https://www.apache.org/licenses/" title="License">License</a></dd> </dl> <p> &copy; 2019-2021 The Hop Team.<br> All marks mentioned may be trademarks or registered trademarks of their respective owners. </p> </div> </footer> <script src="../../_/js/site-8ed57175ed.js"></script> <script async src="../../_/js/vendor/highlight-41b831b4c4.js"></script> <script src="../../_/js/vendor/cookies-eu-banner-d4a1518c50.js"></script> <script> new CookiesEuBanner(function () {
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
- 
-            ga('create', 'UA-151580460-1', 'auto' ,{'anonymize_ip':true});
-            ga('send', 'pageview');
-        }, true, false); </script> <script src="../../_/js/vendor/docsearch-4983f0f1ec.min.js"></script> <!-- fetched from https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js --> <script> var search = docsearch({
-  appId: 'IEDZCR8JT4',
-  apiKey: '587e7bafb978fa5e4640ab18bfbd9b99',
-  indexName: 'hop-doc',
-  inputSelector: '#search-input',
-  autocompleteOptions: { hint: false, keyboardShortcuts: ['s'] },
-  algoliaOptions: { hitsPerPage: 10 }
-}).autocomplete
-search.on('autocomplete:closed', function () { search.autocomplete.setVal() })
-function focusSearchInput () { document.querySelector('#search-input').focus() }
-if (document.querySelector('.home-link.is-current')) window.addEventListener('load', focusSearchInput) </script> </body> </html> 
+        &lt;/dependency&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When compiling you will notice a plugins directory is added to the debug location, this contains all plugins distributed by the Apache Hop team, the assemblies for the sample transform and action follow the same logic to make sure they are copied to the correct location too, this allows the Hop plugin loader to find and load all the plugins for the GUI.</p>
+</div>
+</div>
+</div>
+</div>
+    </article>
+<nav class="pagination" data-pagefind-ignore aria-label="Page">
+  <a class="pagination__prev" href="../../dev-manual/latest/svg-files.html"><span>Previous</span><strong>SVG Files</strong></a>
+  <a class="pagination__next" href="../../dev-manual/latest/apache-release/index.html"><span>Next</span><strong>Apache Release Process</strong></a>
+</nav>
+  </main>
+
+<aside class="doc-toc" data-pagefind-ignore aria-label="On this page">
+  <p class="doc-toc__title">On this page</p>
+  <div class="doc-toc__body"></div>
+</aside>
+</div>
+<footer class="site-footer" data-pagefind-ignore>
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <img src="../../img/hop-logo.svg" alt="" width="30" height="30" aria-hidden="true">
+      <div>
+        <p>The Hop Orchestration Platform &mdash; visual data and metadata orchestration, designed once and run anywhere.</p>
+        <ul class="site-footer__socials">
+        <li><a href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"/></svg></a></li>
+        <li><a href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"/></svg></a></li>
+        <li><a href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg></a></li>
+        </ul>
+      </div>
+    </div>
+    <nav class="site-footer__nav" aria-label="Footer">
+      <div>
+        <h2>Documentation</h2>
+        <ul>
+          <li><a href="../../manual/latest/getting-started/">Getting started</a></li>
+          <li><a href="../../manual/latest/">User manual</a></li>
+          <li><a href="../../dev-manual/latest/">Developer docs</a></li>
+          <li><a href="../../download/">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Community</h2>
+        <ul>
+          <li><a href="../../community/contributing/">Contributing</a></li>
+          <li><a href="../../community/mailing-list/">Mailing lists</a></li>
+          <li><a href="../../community/events/">Events</a></li>
+          <li><a href="../../community/support/">Support</a></li>
+          <li><a href="../../community/commercial/">Commercial support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Apache</h2>
+        <ul>
+          <li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li>
+          <li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li>
+          <li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li>
+          <li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li>
+          <li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="site-footer__legal">
+    <p>
+      Copyright &copy; 2019&ndash;2026 <a href="https://www.apache.org/" rel="noopener" target="_blank">The Apache Software Foundation</a>,
+      licensed under the <a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">Apache License, Version 2.0</a>.
+    </p>
+    <p>
+      Apache, Apache Hop, Hop, and the Apache feather logo are either registered trademarks or
+      trademarks of the Apache Software Foundation in the United States and/or other countries.
+    </p>
+  </div>
+</footer>
+
+<script src="../../js/site.js"></script>
+<script src="../../_/js/tabs.js"></script>
+</body>
+</html>

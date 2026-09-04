@@ -17,12 +17,28 @@
 
 notifications:
   pullrequests: commits@hop.apache.org
-  jira_options: link label comment
+  commits: commits@hop.apache.org
+
+# A live preview at hop.staged.apache.org, served from the asf-staging branch,
+# independent of the published site. Build a branch and push the result to
+# asf-staging to review it at a real URL before it reaches hop.apache.org.
+#
+# profile: ~ is YAML for "no value", which is what gives the bare hostname; a
+# named profile would serve at hop-<profile>.staged.apache.org instead, and
+# several profiles on several branches can be staged at once.
+#
+# whoami is a guard rather than a name: infrastructure only acts on the block
+# when its value matches the branch the file is sitting on. That is what lets
+# both blocks live in one file - on asf-site the staging block is ignored, on
+# asf-staging the publish block is - and it stops a clone of either branch from
+# taking over the site until someone edits the file deliberately.
+staging:
+  profile: ~
+  whoami:  asf-staging
+
 publish:
   whoami: asf-site
-staging:
-  whoami: asf-staging
-  profile: ~
+
 github:
   description: "Apache Hop Website"
   labels:

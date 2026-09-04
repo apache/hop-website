@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+     width="42px" height="42px" viewBox="0 0 42 42" enable-background="new 0 0 42 42">
+    <g>
+        <!-- folder -->
+        <path fill="#0E3A5A" d="M4,19 L15,19 L17.5,21.5 L31,21.5 L31,35.5 L4,35.5 Z"/>
+        <path fill="#C9E8FB" d="M5.5,23 L29.5,23 L29.5,34 L5.5,34 Z"/>
+        <!-- generic files inside folder -->
+        <rect x="8.5" y="26.2" fill="#0E3A5A" width="17" height="1.4"/>
+        <rect x="8.5" y="29.6" fill="#0E3A5A" width="11" height="1.4"/>
+        <!-- result table (rows/columns grid) -->
+        <g fill="#0E3A5A">
+            <rect x="24" y="4" width="6.2" height="3.4"/>
+            <rect x="31.2" y="4" width="6.2" height="3.4"/>
+            <rect x="24" y="8.4" width="6.2" height="3.4"/>
+            <rect x="31.2" y="8.4" width="6.2" height="3.4"/>
+        </g>
+        <!-- arrow from result table down into folder -->
+        <rect x="26" y="12.5" width="2.2" height="4.5" fill="#0E3A5A"/>
+        <polygon fill="#0E3A5A" points="23.3,17 30.9,17 27.1,21.3"/>
+    </g>
+</svg>
