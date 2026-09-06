@@ -187,7 +187,17 @@ const fmtDate = (d) =>
     background: var(--surface); border: 1px solid var(--rule);
     border-radius: var(--radius); padding: 9px 9px 9px 14px; box-shadow: var(--shadow-sm);
   }
-  .hero__snippet code { flex: 1; background: none; border: 0; padding: 0; font-size: 13.5px; overflow-x: auto; white-space: nowrap; }
+  /* min-width: 0 because a flex item will not shrink below its own content
+     without it, and this content is one unbreakable line. Left as it was, the
+     command set a floor under the snippet, the snippet under the hero column,
+     and the column under the page - so at 390px the hero was wider than the
+     screen and .hero { overflow: hidden } cut the lede off mid-word. Wrapping
+     rather than scrolling, to match the download page: a scrollbar inside a
+     command is easy to miss. */
+  .hero__snippet code {
+    flex: 1; min-width: 0; background: none; border: 0; padding: 0;
+    font-size: 13.5px; white-space: pre-wrap; overflow-wrap: anywhere;
+  }
   .hero__snippet code::before { content: "$ "; color: var(--ink-3); }
   .snippet-copy {
     flex: none; font: inherit; font-size: 12px; font-weight: 600; padding: 5px 11px;
@@ -198,7 +208,9 @@ const fmtDate = (d) =>
   .hero__meta { font-size: 13.5px; color: var(--ink-3); margin: 16px 0 0; }
   @media (max-width: 940px) {
     .hero { padding: 52px 0 48px; }
-    .hero__inner { grid-template-columns: 1fr; gap: 36px; }
+    /* minmax(0,1fr), not 1fr: a bare 1fr keeps a min-content floor, so one
+       wide child can still push the column past the viewport. */
+    .hero__inner { grid-template-columns: minmax(0, 1fr); gap: 36px; }
     .hero h1 { max-width: 18ch; }
   }
 

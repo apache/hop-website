@@ -48,8 +48,11 @@ commit and a push. `dev` never renders documentation at all: the Antora half
 only exists after a build.
 
 Astro writes `public/` first and Antora adds `/manual` and `/dev-manual` to it,
-so `output.clean` is off in every playbook. Deleting `public/` by hand is safe;
-building only one half into a stale `public/` leaves the other half stale.
+so `output.clean` is off in every playbook. The order is not a preference:
+`astro build` empties its output directory, so running `build:site` on its own
+after a full build **deletes both manuals** rather than leaving them stale.
+Deleting `public/` by hand is safe; rebuilding half of it is not, and there is
+no half-build that gets the manuals back without Antora running again.
 
 ## Layout
 
