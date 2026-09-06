@@ -217,6 +217,9 @@
 <loc>https://hop.apache.org/manual/next/hop-gui/perspective-data-orchestration.html</loc>
 </url>
 <url>
+<loc>https://hop.apache.org/manual/next/hop-gui/perspective-database.html</loc>
+</url>
+<url>
 <loc>https://hop.apache.org/manual/next/hop-gui/perspective-execution-information.html</loc>
 </url>
 <url>
@@ -479,6 +482,9 @@
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/metadata-types/mongodb-connection.html</loc>
+</url>
+<url>
+<loc>https://hop.apache.org/manual/next/metadata-types/naming-scheme.html</loc>
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/metadata-types/neo4j/neo4j-connection.html</loc>
@@ -1601,6 +1607,9 @@
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/technology/azure/index.html</loc>
+</url>
+<url>
+<loc>https://hop.apache.org/manual/next/technology/calcite/index.html</loc>
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/technology/cassandra/index.html</loc>

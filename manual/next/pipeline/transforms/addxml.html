@@ -228,6 +228,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/hop-gui/perspective-database.html">Database perspective</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/hop-gui/perspective-search.html">Search</a>
     
   </li>
@@ -2241,6 +2245,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/naming-scheme.html">Naming Scheme</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/hop-server/web-service.html">Web Service</a>
     
   </li>
@@ -2282,6 +2290,10 @@
     </button>
     <a href="../../../../manual/next/technology/technology.html">Technology</a>
     <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/calcite/index.html">Apache Calcite</a>
+    
+  </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/technology/azure/index.html">Azure</a>
     
@@ -2768,6 +2780,37 @@ This is often used to limit the size of the target XML.</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sect2">
+<h3 id="_namespaces"><a class="link" href="#_namespaces">Namespaces</a></h3>
+<div class="paragraph">
+<p>Namespaces are declared like any other value: add a field in the Fields tab, mark it as an
+attribute and give it the element name of the declaration. Because the value comes from the row,
+different rows can use different namespace URIs.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>To put the root element in a default namespace, use the element name <code>xmlns</code>. A root element
+<code>catalog</code> with a field <code>xmlns</code> holding <code><a href="https://hop.apache.org" class="bare">https://hop.apache.org</a></code> generates
+<code>&lt;catalog xmlns="https://hop.apache.org"&gt;</code>. Child elements without a prefix are in that namespace
+too.</p>
+</li>
+<li>
+<p>To bind the root element to a prefix, name the root XML element <code>prefix:element</code> and declare the
+matching <code>xmlns:prefix</code> field. A root element <code>cat:catalog</code> with a field <code>xmlns:cat</code> generates
+<code>&lt;cat:catalog xmlns:cat="https://hop.apache.org"&gt;</code>. Unprefixed child elements are then <strong>not</strong> in
+that namespace; give them the prefix in their element name if they should be.</p>
+</li>
+<li>
+<p>Any further declarations, e.g. <code>xmlns:xsi</code>, can be added as attribute fields in the same way.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A prefixed root XML element without a matching <code>xmlns:prefix</code> field is an error: XML cannot use a
+prefix that is not bound to a namespace URI.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_fields_tab"><a class="link" href="#_fields_tab">Fields Tab</a></h3>
