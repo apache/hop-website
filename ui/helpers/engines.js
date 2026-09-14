@@ -27,13 +27,21 @@
  * of and it still renders: when a new engine arrives, the docs declare it and
  * nothing here needs changing. The order is the page's own.
  *
- * States are normalised to three - supported, unsupported, unknown - so the
- * docs can write yes/no, true/false or supported/unsupported and mean the same
- * thing. Anything unrecognised, "maybe" included, lands on unknown, which is
- * the honest reading of a value this does not understand.
+ * States are normalised to four - native, supported, unsupported, unknown - so
+ * the docs can write yes/no, true/false or supported/unsupported and mean the
+ * same thing. Anything unrecognised, "maybe" included, lands on unknown, which
+ * is the honest reading of a value this does not understand.
+ *
+ * "native" is a step above "supported": the engine has its own implementation
+ * of the transform (Spark doing the sort or the join itself), where "yes" on an
+ * engine like Spark means the Hop transform runs wrapped inside the engine -
+ * it works, but sees one partition at a time. The distinction is only stated
+ * where an engine makes it; for the Hop engine every "yes" is native and the
+ * pages simply say yes.
  */
 
-const SUPPORTED = new Set(['yes', 'true', 'supported'])
+const NATIVE = new Set(['native'])
+const SUPPORTED = new Set(['yes', 'true', 'supported', 'wrapped'])
 const UNSUPPORTED = new Set(['no', 'false', 'unsupported'])
 
 const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
@@ -48,7 +56,10 @@ module.exports = (value) => {
     return {
       label,
       slug: slug(label),
-      state: SUPPORTED.has(state) ? 'supported' : UNSUPPORTED.has(state) ? 'unsupported' : 'unknown',
+      state: NATIVE.has(state) ? 'native'
+        : SUPPORTED.has(state) ? 'supported'
+        : UNSUPPORTED.has(state) ? 'unsupported'
+        : 'unknown',
     }
   }).filter(Boolean)
 }

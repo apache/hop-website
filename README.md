@@ -98,7 +98,10 @@ UI rather than by Asciidoctor:
 ```
 
 The first becomes the engine tags under the breadcrumb - names written out in
-full, states `yes`, `no` or anything else for unknown. The second marks a page
+full, states `yes`, `no`, `native` or anything else for unknown. `native` is
+for an engine that implements the transform itself where `yes` would mean the
+Hop transform runs wrapped inside it, as most transforms do on Spark; use it
+only where the engine draws that line. The second marks a page
 as documenting a plugin the standard client does not ship, and takes the id the
 marketplace installs by, so the note can give the exact command.
 
