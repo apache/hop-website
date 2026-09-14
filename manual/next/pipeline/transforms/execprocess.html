@@ -2866,7 +2866,7 @@ This is the single most important thing to know about this transform: no shell i
 </div>
 <div class="paragraph">
 <p>These are passed to the process as literal arguments.
-Hop variables such as <code>{openvar}PROJECT_HOME{closevar}</code> <strong>are</strong> resolved, because Hop resolves them before the process is started.</p>
+Hop variables such as <code>${PROJECT_HOME}</code> <strong>are</strong> resolved, because Hop resolves them before the process is started.</p>
 </div>
 <div class="paragraph">
 <p>If you need shell features, run a shell explicitly and pass your command line to it as an argument, for example <code>/bin/sh</code> with arguments <code>-c</code> and <code>ls -la /tmp | wc -l</code> (see <strong>Arguments in fields</strong> below), or use the <a href="../../workflow/actions/shell.html" class="xref page">Shell</a> workflow action which is built for scripts.</p>

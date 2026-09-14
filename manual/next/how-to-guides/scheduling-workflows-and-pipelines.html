@@ -2882,7 +2882,7 @@ The script is where you set <code>HOP_JAVA_HOME</code>, <code>HOP_CONFIG_FOLDER<
 </li>
 <li>
 <p><strong>systemd</strong> expands <code>${NAME}</code> in <code>ExecStart=</code> from the unit environment.
-A literal <code>${PROJECT_HOME}</code> for hop-run has to be escaped as <code>$${PROJECT_HOME}</code> (<code>$$</code> becomes <code>$</code>) — or you call a script and never think about it.</p>
+A literal <code>${PROJECT_HOME}</code> for hop-run has to be escaped as <code>${PROJECT_HOME}</code> (<code>$$</code> becomes <code>$</code>) — or you call a script and never think about it.</p>
 </li>
 <li>
 <p>The <strong>shell</strong> expands <code>${PROJECT_HOME}</code> if you double-quote it.
@@ -2924,7 +2924,7 @@ LOG=/var/log/hop/nightly-$(<span class="hljs-built_in">date</span> +%Y%m%d-%H%M%
 <span class="hljs-string">&quot;<span class="hljs-variable">${HOP}</span>/hop-run.sh&quot;</span> \
   -e prod \
   -r <span class="hljs-built_in">local</span> \
-  -f <span class="hljs-string">&#x27;{openvar}PROJECT_HOME{closevar}/main.hwf&#x27;</span> \
+  -f <span class="hljs-string">&#x27;${PROJECT_HOME}/main.hwf&#x27;</span> \
   -l Basic \
   -lf <span class="hljs-string">&quot;<span class="hljs-variable">${LOG}</span>&quot;</span> \
   &gt;/dev/null 2&gt;&amp;1</code></pre>
@@ -2955,7 +2955,7 @@ Otherwise use the scheduler&#8217;s own "do not start a second instance" option,
 <span class="hljs-built_in">set</span> &quot;HOP=C:\hop&quot;
 
 <span class="hljs-built_in">cd</span> /d &quot;<span class="hljs-variable">%HOP%</span>&quot;
-<span class="hljs-keyword">call</span> hop-run.bat -e prod -r local -f {openvar}PROJECT_HOME{closevar}/main.hwf -l Basic
+<span class="hljs-keyword">call</span> hop-run.bat -e prod -r local -f ${PROJECT_HOME}/main.hwf -l Basic
 <span class="hljs-keyword">exit</span> /b <span class="hljs-variable">%ERRORLEVEL%</span></code></pre>
 </div>
 </div>
@@ -3159,7 +3159,7 @@ Full variable list: <a href="../docker-container.html" class="xref page">Hop in 
   -e HOP_PROJECT_NAME=your-project \
   -e HOP_ENVIRONMENT_NAME=prod \
   -e HOP_ENVIRONMENT_CONFIG_FILE_NAME_PATHS=/config/prod.json \
-  -e HOP_FILE_PATH=<span class="hljs-string">&#x27;{openvar}PROJECT_HOME{closevar}/main.hwf&#x27;</span> \
+  -e HOP_FILE_PATH=<span class="hljs-string">&#x27;${PROJECT_HOME}/main.hwf&#x27;</span> \
   -e HOP_RUN_CONFIG=<span class="hljs-built_in">local</span> \
   -v /opt/hop-projects/your-project:/files:ro \
   -v /etc/hop/environments/prod.json:/config/prod.json:ro \
@@ -3210,7 +3210,7 @@ On a cluster the same contract is a Job.</p>
                 <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">HOP_ENVIRONMENT_CONFIG_FILE_NAME_PATHS</span>
                   <span class="hljs-attr">value:</span> <span class="hljs-string">/config/prod.json</span>
                 <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">HOP_FILE_PATH</span>
-                  <span class="hljs-attr">value:</span> <span class="hljs-string">&#x27;{openvar}PROJECT_HOME{closevar}/main.hwf&#x27;</span>
+                  <span class="hljs-attr">value:</span> <span class="hljs-string">&#x27;${PROJECT_HOME}/main.hwf&#x27;</span>
                 <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">HOP_RUN_CONFIG</span>
                   <span class="hljs-attr">value:</span> <span class="hljs-string">local</span>
               <span class="hljs-attr">volumeMounts:</span>

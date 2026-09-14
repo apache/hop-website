@@ -2794,8 +2794,8 @@ Pipeline: read watermark --&gt; extract WHERE col &gt; bound --&gt; apply
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>sql</div><pre class="highlightjs highlight is-highlighted"><code class="language-sql hljs" data-lang="sql"><span class="hljs-keyword">SELECT</span> id, name, city, last_modified
   <span class="hljs-keyword">FROM</span> customer
- <span class="hljs-keyword">WHERE</span> last_modified <span class="hljs-operator">&gt;</span> <span class="hljs-string">&#x27;{openvar}LAST_SUCCESS_TS{closevar}&#x27;</span>
-   <span class="hljs-keyword">AND</span> last_modified <span class="hljs-operator">&lt;=</span> <span class="hljs-string">&#x27;{openvar}THIS_RUN_TS{closevar}&#x27;</span></code></pre>
+ <span class="hljs-keyword">WHERE</span> last_modified <span class="hljs-operator">&gt;</span> <span class="hljs-string">&#x27;${LAST_SUCCESS_TS}&#x27;</span>
+   <span class="hljs-keyword">AND</span> last_modified <span class="hljs-operator">&lt;=</span> <span class="hljs-string">&#x27;${THIS_RUN_TS}&#x27;</span></code></pre>
 </div>
 </div>
 <div class="sect2">

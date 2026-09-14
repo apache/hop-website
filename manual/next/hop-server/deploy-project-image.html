@@ -2965,7 +2965,7 @@ Use the same baked image as a job: start it, run one file, exit.</p>
   -e HOP_PROJECT_NAME=your-project \
   -e HOP_ENVIRONMENT_NAME=prod \
   -e HOP_ENVIRONMENT_CONFIG_FILE_NAME_PATHS=/config/prod.json \
-  -e HOP_FILE_PATH=<span class="hljs-string">&#x27;{openvar}PROJECT_HOME{closevar}/main.hwf&#x27;</span> \
+  -e HOP_FILE_PATH=<span class="hljs-string">&#x27;${PROJECT_HOME}/main.hwf&#x27;</span> \
   -e HOP_RUN_CONFIG=<span class="hljs-built_in">local</span> \
   -v /etc/hop/prod.json:/config/prod.json:ro \
   registry.example.com/your-project-hop-server:&lt;git-sha&gt;</code></pre>

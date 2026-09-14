@@ -3452,9 +3452,6 @@ To make a specific Google account an administrator for local/dev:</p>
 </li>
 <li>
 <p>In <code>HOP_CONFIG_FOLDER/security/security-config.json</code> (or Configuration → Security after you have access):</p>
-</li>
-</ol>
-</div>
 <div class="listingblock">
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>json</div><pre class="highlightjs highlight is-highlighted"><code class="language-json hljs" data-lang="json"><span class="hljs-punctuation">{</span>
@@ -3473,18 +3470,17 @@ To make a specific Google account an administrator for local/dev:</p>
 <span class="hljs-punctuation">}</span></code></pre>
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+</li>
 <li>
 <p>Ensure shell env does <strong>not</strong> still export Keycloak claims, then restart and log in again:</p>
-</li>
-</ol>
-</div>
 <div class="listingblock">
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash"><span class="hljs-built_in">unset</span> HOP_WEB_OAUTH_ROLE_CLAIM HOP_WEB_OAUTH_USERNAME_CLAIM
 ./docker/run-hop-web-local-with-oauth.sh</code></pre>
 </div>
+</div>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>After sign-in, your session should include the <strong>Admin</strong> role (<code>security.manage</code>) so Configuration → Security is available.

@@ -2737,10 +2737,10 @@ It then:</p>
 <p>serializes the client&#8217;s project metadata to <code>metadata.json</code> inside the ZIP</p>
 </li>
 <li>
-<p>rewrites sibling Hop files to <code>${Internal.Entry.Current.Folder}/&#8230;&#8203;</code></p>
+<p>rewrites sibling Hop files to <code>${Internal.Entry.Current.Folder}/...</code></p>
 </li>
 <li>
-<p>rewrites named data folders to <code>${DATA_PATH_n}/&#8230;&#8203;</code></p>
+<p>rewrites named data folders to <code>${DATA_PATH_n}/...</code></p>
 </li>
 <li>
 <p>adds the execution configuration XML, including the variables that were resolved on the client</p>
@@ -2858,7 +2858,7 @@ You do not pass <code>-j</code> as well.</p>
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">hop-run.sh -e prod \
   -r remote-on-server \
-  -f <span class="hljs-string">&#x27;{openvar}PROJECT_HOME{closevar}/main.hwf&#x27;</span></code></pre>
+  -f <span class="hljs-string">&#x27;${PROJECT_HOME}/main.hwf&#x27;</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2915,7 +2915,7 @@ run_on_hop_server = BashOperator(
     bash_command=(
         <span class="hljs-string">&quot;hop-run.sh -e prod &quot;</span>
         <span class="hljs-string">&quot;-r remote-on-server &quot;</span>
-        <span class="hljs-string">&quot;-f &#x27;{openvar}PROJECT_HOME{closevar}/main.hwf&#x27;&quot;</span>
+        <span class="hljs-string">&quot;-f &#x27;${PROJECT_HOME}/main.hwf&#x27;&quot;</span>
     ),
 )</code></pre>
 </div>

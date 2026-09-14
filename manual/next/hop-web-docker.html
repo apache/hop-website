@@ -3183,7 +3183,7 @@ The Helm chart does not yet declare them for you.</p>
       <span class="hljs-attr">HOP_SHARED_JDBC_FOLDERS:</span> <span class="hljs-string">/usr/local/tomcat/jdbc-drivers,/hop/jdbc</span>
       <span class="hljs-attr">HOP_WEB_SECURITY_MODE:</span> <span class="hljs-string">BASIC</span>
       <span class="hljs-attr">HOP_WEB_ADMIN_USER:</span> <span class="hljs-string">admin</span>
-      <span class="hljs-attr">HOP_WEB_ADMIN_PASSWORD:</span> {<span class="hljs-string">openvar</span>}<span class="hljs-string">HOP_WEB_ADMIN_PASSWORD{closevar}</span>
+      <span class="hljs-attr">HOP_WEB_ADMIN_PASSWORD:</span> <span class="hljs-string">${HOP_WEB_ADMIN_PASSWORD}</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">hop-config:/hop/config</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">hop-audit:/hop/audit</span>

@@ -2974,7 +2974,7 @@
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>sql</div><pre class="highlightjs highlight is-highlighted"><code class="language-sql hljs" data-lang="sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span>
 <span class="hljs-keyword">FROM</span> public.tableinput
-<span class="hljs-keyword">WHERE</span> id <span class="hljs-operator">&gt;</span> {openvar}PRM_ID{closevar};</code></pre>
+<span class="hljs-keyword">WHERE</span> id <span class="hljs-operator">&gt;</span> ${PRM_ID};</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -3038,7 +3038,7 @@ Variable substitution happens before execution and does not protect against SQL 
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>sql</div><pre class="highlightjs highlight is-highlighted"><code class="language-sql hljs" data-lang="sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span>
 <span class="hljs-keyword">FROM</span> public.tableinput
-<span class="hljs-keyword">where</span> id <span class="hljs-operator">&gt;</span> {openvar}PRM_ID{closevar} <span class="hljs-keyword">AND</span> lastdate <span class="hljs-operator">&gt;</span> ?;</code></pre>
+<span class="hljs-keyword">where</span> id <span class="hljs-operator">&gt;</span> ${PRM_ID} <span class="hljs-keyword">AND</span> lastdate <span class="hljs-operator">&gt;</span> ?;</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -3133,8 +3133,8 @@ For better performance with large datasets you can use indexed columns in <code>
 <div class="listingblock">
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>sql</div><pre class="highlightjs highlight is-highlighted"><code class="language-sql hljs" data-lang="sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span>
-<span class="hljs-keyword">FROM</span> {openvar}tableName{closevar}
-<span class="hljs-keyword">WHERE</span> {openvar}<span class="hljs-keyword">condition</span>{closevar}</code></pre>
+<span class="hljs-keyword">FROM</span> ${tableName}
+<span class="hljs-keyword">WHERE</span> ${<span class="hljs-keyword">condition</span>}</code></pre>
 </div>
 </div>
 <div class="paragraph">

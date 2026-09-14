@@ -2749,7 +2749,7 @@
 <p>Create 10 rows with a counter to loop over. Copy these rows to memory.</p>
 </div>
 <div class="paragraph">
-<p>Process each of the values in the loop individually. This example receives the loop value as a <code>$${PRM_COUNTER$}</code> parameter and prints it to the logs.</p>
+<p>Process each of the values in the loop individually. This example receives the loop value as a <code>${PRM_COUNTER}</code> parameter and prints it to the logs.</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="../_images/how-to-guides/loops-in-apache-hop/loops-copy-rows-to-result-process-one-row.png" alt="Copy rows to result - process one row" width="65%"></span></p>
@@ -3113,7 +3113,7 @@ All of this combined makes it hard to maintain and debug this type of loops.</p>
 <p>The action will continue to execute the specified workflow or pipeline until a condition is met: either a variable is set with an (optional) value, or an <code>End repeat</code> action is triggered in a child workflow.</p>
 </div>
 <div class="paragraph">
-<p>The example below runs a pipeline that increments a <code>$${COUNTER$}</code> variable with each run. If the variable values exceeds 10, a variable <code>$${END_LOOP$}</code> is set. This variable is detected by the Repeat action, and the loop stops.</p>
+<p>The example below runs a pipeline that increments a <code>${COUNTER}</code> variable with each run. If the variable values exceeds 10, a variable <code>${END_LOOP}</code> is set. This variable is detected by the Repeat action, and the loop stops.</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="../_images/how-to-guides/loops-in-apache-hop/loops-repeat-action.png" alt="Repeat Action" width="65%"></span></p>
