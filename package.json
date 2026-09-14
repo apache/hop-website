@@ -15,7 +15,7 @@
     "build:local": "astro build && node tools/sync-tokens.mjs && node tools/sync-nav.mjs && node tools/sync-vendor.mjs && antora antora-playbook-local.yml && node tools/highlight-code.mjs public && node tools/external-links.mjs public && node tools/stabilise-sitemap.mjs public && npm run build:search",
     "build:hop": "astro build && node tools/sync-tokens.mjs && node tools/sync-nav.mjs && node tools/sync-vendor.mjs && antora antora-playbook-hop.yml && node tools/highlight-code.mjs public && node tools/external-links.mjs public && node tools/stabilise-sitemap.mjs public && npm run build:search",
     "serve": "npx --yes http-server public -p ${PORT:-4000} -c-1",
-    "check:links": "link-checker public --disable-external --mkdocs --allow-hash-href --url-ignore '^/' --url-ignore '^file:'",
+    "check:links": "link-checker public --disable-external --mkdocs --allow-hash-href --url-ignore '^/' --url-ignore '^file:' --file-ignore '^(manual|dev-manual)/(?!next/)'",
     "check:html": "html-validate \"public/**/*.html\"",
     "checks": "npm run check:links && npm run check:absolute && npm run check:contrast && npm run check:a11y && npm run check:html",
     "check:absolute": "node tools/check-absolute-links.mjs public",

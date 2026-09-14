@@ -152,6 +152,22 @@ npm run check:html       # html-validate
 added to a component instead of a token escapes it. That is the trade: the
 palette is the gate, and components take their colour from it.
 
+`check:links` holds the whole site to the standard except the documentation of
+**released** versions. Pages under `manual/<version>/` and `dev-manual/<version>/`
+are skipped as *sources* of links - links *into* them are still verified - for
+every version except `next`, which is `main`. A release branch is frozen: a
+dead link in 2.14.0's docs cannot be fixed without a docs commit to
+`release/2.14.0`, and there are 37 such links across eleven branches today,
+every one of them dead on the published site for months. Counting them would
+mean either a permanently red check or a permanently ignored one. `main` is
+where a fix can land, so `main` is where the check bites: a new dead link in
+`next` fails the build, and what becomes `latest` at the next release is clean
+by construction.
+
+Antora's own `failure_level` stays at `fatal` for the same reason - it has no
+per-version setting, and `error` would fail every build on those frozen
+branches.
+
 Two things to know before trusting a green run. `Jenkinsfile` runs `check:links`
 and `check:absolute`, and `check:html` with `|| true`; `check:contrast` and
 `check:a11y` are not in CI at all. And `check:html` currently exhausts a 4 GB
