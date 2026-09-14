@@ -152,6 +152,19 @@ npm run check:html       # html-validate
 added to a component instead of a token escapes it. That is the trade: the
 palette is the gate, and components take their colour from it.
 
+`check:links` ignores two things on purpose, and the reason for each should
+outlive whoever added it:
+
+- **Fragments ending in `.adoc`** — `href="#tech-manual::docker-container.adoc"`
+  is what Antora emits for an xref it could not resolve. Nothing else produces
+  that shape. Antora already reports every one as `target of xref not found` at
+  build time, and the website cannot fix them: 33 of them are in release
+  branches of apache/hop that are frozen. Counting them here again only hides
+  new breakage behind a wall of old.
+- **`#lineage-flush`** — a missing anchor in the dev manual's `lineage.adoc`.
+  Fixed on `main` (it wanted `lineage-lifecycle`); the 2.18.x copies are frozen
+  with the typo. Drop this ignore once 2.18.x is no longer published.
+
 Two things to know before trusting a green run. `Jenkinsfile` runs `check:links`
 and `check:absolute`, and `check:html` with `|| true`; `check:contrast` and
 `check:a11y` are not in CI at all. And `check:html` currently exhausts a 4 GB
