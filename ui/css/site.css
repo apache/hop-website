@@ -56,8 +56,10 @@
 /* ---------- engine tags ----------
    Which engines a transform runs on, under the breadcrumb. The state is drawn
    by a symbol, never by colour alone, so the colours here reinforce a
-   distinction that is already made without them. All three sit on --surface
-   and are pairs check-contrast already gates. */
+   distinction that is already made without them. All of them sit on --surface
+   and are pairs check-contrast already gates. Native and supported share a
+   colour on purpose: both mean "runs here", and the double check alone says
+   which is the engine's own implementation. */
 .engines {
   display: flex; flex-wrap: wrap; gap: 6px;
   list-style: none; margin: 0 0 20px; padding: 0;
@@ -71,6 +73,7 @@
   white-space: nowrap;
 }
 .engine__mark { flex: none; }
+.engine--native .engine__mark,
 .engine--supported .engine__mark { color: var(--tip); }
 .engine--unknown .engine__mark { color: var(--warning); }
 /* An unsupported engine is still worth stating, but it is not the news on the
