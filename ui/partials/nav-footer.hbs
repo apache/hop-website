@@ -27,8 +27,11 @@
       <svg class="explore__chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </summary>
     <div class="explore__body">
-      {{! The manual you are reading comes first, then the rest. }}
-      {{#with page.component}}{{> explore-group}}{{/with}}
+      {{! The manual you are reading comes first, then the rest. For it, link each
+          version to *this page* in that version (page.versions), so switching
+          versions keeps you on the page you were reading; Antora points an entry
+          at the version's start page, flagged missing, when the page is not there. }}
+      {{#with page.component}}{{> explore-group versions=@root.page.versions current=true}}{{/with}}
       {{#each site.components}}
         {{#unless (eq this @root.page.component)}}{{> explore-group}}{{/unless}}
       {{/each}}
