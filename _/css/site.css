@@ -1,0 +1,570 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+@import 'tokens.css';
+@import 'chrome.css';
+
+/* ---------- 404 ---------- */
+.notfound { max-width: 620px; margin: 0 auto; padding: 96px 24px; text-align: center; }
+.notfound__code {
+  font-size: 68px; font-weight: 700; color: var(--rule-2);
+  margin: 0; line-height: 1; font-variant-numeric: tabular-nums;
+}
+.notfound h1 { margin: 12px 0; }
+.notfound p { color: var(--ink-2); }
+.notfound__links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+
+/* ---------- section links ----------
+   sectlinks makes each heading its own link, so it carries the heading text as
+   its accessible name. Styled to look like a heading, not a link. */
+.doc h2 a.link, .doc h3 a.link, .doc h4 a.link,
+.doc h5 a.link, .doc h6 a.link { color: inherit; text-decoration: none; }
+.doc h2 a.link:hover, .doc h3 a.link:hover, .doc h4 a.link:hover { color: var(--accent); }
+
+/* ---------- marketplace note ----------
+   Above the engine tags, because whether a thing can be installed at all comes
+   before which engines it runs on. Deliberately quieter than an admonition:
+   this is a standing fact about the page, not a warning about its content. */
+.marketplace {
+  margin: 0 0 16px; padding: 10px 14px;
+  border: 1px solid var(--rule); border-left: 3px solid var(--accent);
+  border-radius: var(--radius); background: var(--surface);
+}
+.marketplace__label {
+  display: flex; align-items: center; gap: 6px; margin: 0 0 2px;
+  font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent);
+}
+.marketplace__label svg { flex: none; }
+.marketplace__body { margin: 0; font-size: 0.92rem; color: var(--ink-2); }
+.marketplace__body code { white-space: nowrap; }
+
+/* ---------- engine tags ----------
+   Which engines a transform runs on, under the breadcrumb. The state is drawn
+   by a symbol, never by colour alone, so the colours here reinforce a
+   distinction that is already made without them. All three sit on --surface
+   and are pairs check-contrast already gates. */
+.engines {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  list-style: none; margin: 0 0 20px; padding: 0;
+}
+.engine {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 11px 3px 9px;
+  border: 1px solid var(--rule); border-radius: 100px;
+  background: var(--surface);
+  font-size: 12.5px; font-weight: 600; color: var(--ink-2);
+  white-space: nowrap;
+}
+.engine__mark { flex: none; }
+.engine--supported .engine__mark { color: var(--tip); }
+.engine--unknown .engine__mark { color: var(--warning); }
+/* An unsupported engine is still worth stating, but it is not the news on the
+   page: the whole tag recedes rather than shouting in red. */
+.engine--unsupported { color: var(--ink-3); background: none; }
+.engine--unsupported .engine__mark { color: var(--ink-3); }
+
+/* ---------- scrollbars in the side panels ----------
+   color-scheme in tokens.css already puts the browser's own scrollbar in the
+   right palette. These panels are narrow, so they also get the thin variant
+   and a thumb drawn from --control-border, the token held to 3:1 for exactly
+   this - something you have to be able to see to use. The track is left
+   transparent so it disappears into the panel until there is something to
+   drag. The ::-webkit- half is for Safari, which does not read the two
+   standard properties. */
+.doc-nav > nav,
+.doc-toc,
+.explore__body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--control-border) transparent;
+}
+.doc-nav > nav::-webkit-scrollbar,
+.doc-toc::-webkit-scrollbar,
+.explore__body::-webkit-scrollbar { width: 8px; height: 8px; }
+.doc-nav > nav::-webkit-scrollbar-track,
+.doc-toc::-webkit-scrollbar-track,
+.explore__body::-webkit-scrollbar-track { background: transparent; }
+.doc-nav > nav::-webkit-scrollbar-thumb,
+.doc-toc::-webkit-scrollbar-thumb,
+.explore__body::-webkit-scrollbar-thumb {
+  background: var(--control-border); border-radius: 100px;
+  border: 2px solid transparent; background-clip: content-box;
+}
+.doc-nav > nav:hover::-webkit-scrollbar-thumb,
+.doc-toc:hover::-webkit-scrollbar-thumb,
+.explore__body:hover::-webkit-scrollbar-thumb { background-color: var(--ink-3); }
+
+/* ---------- tables ----------
+   Asciidoctor's markup, so the classes are its: .tableblock on the table and
+   on every cell, .stretch for a full-width table, halign- and valign- for
+   alignment, and frame- and grid- for which rules are drawn.
+
+   Hop's docs add two roles of their own. Every transform and action page lays
+   its Description / Supported Engines header out as a table.table-no-borders
+   holding a table.table-supported-engines - 2,718 pages of each - so those
+   two need to look like layout rather than like data.
+
+   Admonitions are tables in Asciidoctor too, but plain ones with no
+   .tableblock class, so scoping everything here to table.tableblock leaves
+   them alone. */
+.doc table.tableblock {
+  border-collapse: collapse;
+  margin: 1.8em 0;
+  font-size: 0.95rem;
+}
+.doc table.tableblock.stretch { width: 100%; }
+.doc table.tableblock > caption.title {
+  text-align: left; font-weight: 600; color: var(--ink-2);
+  padding-bottom: 8px;
+}
+/* One border per edge, never two. Giving every cell a top and a bottom leaves
+   the line between two rows depending on the browser collapsing them into one,
+   and the header ended up with a hairline and a heavy rule stacked together.
+   Each cell draws its own bottom and its own right, so there is exactly one
+   line anywhere two cells meet. */
+.doc table.tableblock > thead > tr > th,
+.doc table.tableblock > tbody > tr > th,
+.doc table.tableblock > tbody > tr > td {
+  padding: 10px 14px;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+/* A rule between the columns rather than a gap of whitespace: these tables are
+   read across, and the second column is usually prose wide enough to lose the
+   first one's edge. Not on the last, which would be an outer frame. */
+.doc table.tableblock > thead > tr > th:last-child,
+.doc table.tableblock > tbody > tr > th:last-child,
+.doc table.tableblock > tbody > tr > td:last-child { border-right: 0; }
+/* The header sits on a heavier rule than the rows do. Safe now that the
+   borders actually collapse: it is the only border at that edge, so it draws
+   as one 2px line rather than stacking with the row below. */
+.doc table.tableblock > thead > tr > th {
+  background: var(--surface-2);
+  font-weight: 600;
+  border-top: 1px solid var(--rule);
+  border-bottom: 2px solid var(--control-border);
+}
+/* Cells hold block content - paragraphs, lists, images - which must not add
+   space at the top and bottom of the cell. */
+.doc table.tableblock > tbody > tr > td > .content > :first-child,
+.doc table.tableblock > tbody > tr > td > p.tableblock:first-child { margin-top: 0; }
+.doc table.tableblock > tbody > tr > td > .content > :last-child,
+.doc table.tableblock > tbody > tr > td > p.tableblock:last-child { margin-bottom: 0; }
+
+.doc .halign-left { text-align: left; }
+.doc .halign-center { text-align: center; }
+.doc .halign-right { text-align: right; }
+.doc .valign-top { vertical-align: top; }
+.doc .valign-middle { vertical-align: middle; }
+.doc .valign-bottom { vertical-align: bottom; }
+
+.doc table.tableblock.grid-none > thead > tr > th,
+.doc table.tableblock.grid-none > tbody > tr > th,
+.doc table.tableblock.grid-none > tbody > tr > td { border: 0; }
+
+/* The two Hop roles. Child combinators throughout, so the outer layout table
+   does not strip the borders off the engines table nested inside it. */
+/* Only reachable on the release branches published before engine support
+   became a page attribute; pages on main have no such table. */
+.doc table.table-no-borders { margin: 0; }
+.doc table.table-no-borders > tbody > tr > td {
+  border: 0;
+  padding-left: 0; padding-top: 0;
+}
+.doc table.table-supported-engines { margin: 0; }
+.doc table.table-supported-engines > tbody > tr > td { border-right: 0; }
+.doc table.table-supported-engines > tbody > tr:last-child > td { border-bottom: 0; }
+.doc table.table-no-borders > tbody > tr > td h2 { margin-top: 0; }
+.doc table.table-no-borders > tbody > tr > td + td h2 { font-size: 1.1rem; }
+.doc table.table-supported-engines > tbody > tr > td { padding: 5px 8px 5px 0; }
+.doc table.table-supported-engines p.tableblock { margin: 0; }
+
+/* ---------- tabs ----------
+   @asciidoctor/tabs converts [tabs] into a tablist and panels, and ships its
+   own stylesheet for them; this is written against the tokens instead, so tabs
+   answer to the theme. The is-loading and is-hidden rules are not decoration -
+   they are what shows one panel instead of all of them, before and after the
+   script takes over. */
+.doc .tabs { margin: 1.6em 0; }
+.doc .tabs > .content > .tablist > ul {
+  display: flex; flex-wrap: wrap; gap: 2px;
+  list-style: none; margin: 0; padding: 0;
+}
+.doc .tabs .tablist li {
+  margin: 0; padding: 7px 16px; cursor: pointer;
+  font-size: 0.92rem; font-weight: 600; color: var(--ink-2);
+  background: var(--surface-2);
+  border: 1px solid var(--rule); border-bottom: 0;
+  border-radius: 7px 7px 0 0;
+}
+.doc .tabs .tablist li p { margin: 0; }
+.doc .tabs .tablist li:hover { color: var(--ink); }
+/* The selected tab joins the panel below it: same ground, and the border
+   between them painted out. */
+.doc .tabs.is-loading .tablist li:first-child,
+.doc .tabs:not(.is-loading) .tablist li.is-selected {
+  background: var(--surface); color: var(--ink);
+  box-shadow: 0 1px 0 0 var(--surface);
+}
+.doc .tabs .tablist li:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: -2px;
+}
+.doc .tabpanel {
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--rule); border-radius: 0 7px 7px 7px;
+}
+.doc .tabpanel > :first-child { margin-top: 0; }
+.doc .tabpanel > :last-child { margin-bottom: 0; }
+.doc .tabs.is-loading .tabpanel + .tabpanel,
+.doc .tabs:not(.is-loading) .tabpanel.is-hidden { display: none; }
+
+/* ---------- admonitions ----------
+   Asciidoctor builds these as a two-cell layout table with an icon cell that
+   expects a font this UI does not load. The cells become blocks, so the kind
+   reads as a label above the text, and the label comes from the icon's own
+   title attribute - which is where Asciidoctor already writes "Note", "Tip"
+   and the rest. Same tokens and the same shape as the Markdown half's
+   admonitions, so both sides of the site match. */
+.doc .admonitionblock {
+  --admonition-accent: var(--note);
+  margin: 1.6em 0; padding: 14px 18px;
+  border: 1px solid var(--rule); border-left: 3px solid var(--admonition-accent);
+  border-radius: var(--radius); background: var(--surface);
+}
+.doc .admonitionblock.tip { --admonition-accent: var(--tip); }
+.doc .admonitionblock.warning { --admonition-accent: var(--warning); }
+.doc .admonitionblock.caution,
+.doc .admonitionblock.important { --admonition-accent: var(--caution); }
+.doc .admonitionblock table,
+.doc .admonitionblock tbody,
+.doc .admonitionblock tr { display: block; border: 0; }
+.doc .admonitionblock td { display: block; border: 0; padding: 0; }
+.doc .admonitionblock td.icon {
+  margin-bottom: 0.4em;
+  font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--admonition-accent);
+}
+.doc .admonitionblock td.icon i::before { content: attr(title); }
+.doc .admonitionblock td.content > :first-child { margin-top: 0; }
+.doc .admonitionblock td.content > :last-child { margin-bottom: 0; }
+
+/* ---------- blocks ----------
+   Asciidoctor wraps every block in a div carrying its kind, and none of them
+   had rules, so a titled listing ran its title into the code above it. */
+.doc .listingblock,
+.doc .literalblock,
+.doc .imageblock,
+.doc .openblock,
+.doc .exampleblock,
+.doc .sidebarblock,
+.doc .quoteblock,
+.doc .videoblock { margin: 1.4em 0; }
+.doc .listingblock pre,
+.doc .literalblock pre { margin: 0; }
+.doc .listingblock > .title,
+.doc .literalblock > .title,
+.doc .imageblock > .title,
+.doc .exampleblock > .title,
+.doc .openblock > .title {
+  font-size: 0.92rem; font-style: italic; color: var(--ink-2); margin-bottom: 6px;
+}
+/* Callouts: the numbered markers in the code and the list explaining them. */
+.doc .colist { margin: 0.6em 0 1.4em; font-size: 0.95rem; }
+.doc .colist table { border-collapse: collapse; }
+.doc .colist td { padding: 3px 10px 3px 0; vertical-align: top; border: 0; }
+.doc .conum[data-value] {
+  display: inline-block; min-width: 1.25em; padding: 0 .3em;
+  border-radius: 100px; background: var(--accent); color: var(--on-accent);
+  font-family: var(--sans); font-size: .75rem; font-style: normal;
+  font-weight: 700; text-align: center; line-height: 1.5;
+}
+.doc .conum[data-value]::after { content: attr(data-value); }
+.doc .conum[data-value] * { display: none; }
+
+/* ---------- code block strip ----------
+   A reserved band across the top of every listing: the language on the left,
+   the copy button on the right. Reserved with padding rather than overlaid, so
+   neither can ever land on the first line of code, and both are visible
+   without hovering - which a touch screen cannot do. */
+.doc .listingblock > .content,
+.doc .literalblock > .content { position: relative; }
+.doc .listingblock pre,
+.doc .literalblock pre { padding-top: 32px; }
+.doc .code-lang {
+  position: absolute; top: 8px; left: 16px;
+  font-family: var(--sans); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--ink-2); pointer-events: none; z-index: 1;
+}
+.doc .copy-btn {
+  position: absolute; top: 5px; right: 6px;
+  font-family: var(--sans); font-size: 11px; font-weight: 600;
+  padding: 3px 9px; border-radius: 5px;
+  border: 1px solid var(--control-border); background: var(--surface);
+  color: var(--ink-2); cursor: pointer; line-height: 1.6;
+}
+.doc .copy-btn:hover { color: var(--ink); border-color: var(--ink-3); }
+
+/* ---------- mermaid diagrams ----------
+   Before the script runs, and if it never does, this is the diagram source in
+   a code block like any other; afterwards mermaid has replaced it with an SVG.
+   Both states are styled here, which is why the padding and the border are on
+   the wrapper rather than on the pre.
+
+   The ground is light in both themes. A diagram sets its own colours, and
+   docker-build.adoc's are pale fills, so the page's dark ground is not one it
+   can sit on - it reads as a figure with its own canvas instead. The source
+   text has to be dark for the same reason, since it shares that canvas. */
+.doc .mermaidblock {
+  margin: 1.6em 0; padding: 14px 16px;
+  border: 1px solid var(--rule); border-radius: var(--radius);
+  background: var(--diagram-bg);
+  overflow-x: auto;
+}
+.doc .mermaidblock > .title {
+  font-size: 0.92rem; font-style: italic; color: var(--ink-2); margin-bottom: 8px;
+}
+.doc .mermaidblock pre.mermaid {
+  margin: 0; padding: 0; border: 0; background: none;
+  line-height: 1.5; color: var(--diagram-ink);
+}
+/* Once drawn it is a diagram, not code: centred, and free to be as wide as it
+   needs inside the wrapper's own scroll. */
+.doc .mermaidblock pre.mermaid[data-processed] {
+  text-align: center;
+}
+.doc .mermaidblock svg { max-width: 100%; height: auto; }
+
+/* ---------- syntax highlighting ----------
+   Class names are highlight.js's. The colouring runs at build time (see
+   tools/highlight-code.mjs), so these are the whole theme - and because they
+   are classes reading tokens rather than baked-in values, code answers to the
+   light and dark themes like everything else. */
+.doc pre code.hljs { background: none; padding: 0; }
+.doc .hljs-comment,
+.doc .hljs-quote { color: var(--hl-comment); font-style: italic; }
+.doc .hljs-keyword,
+.doc .hljs-selector-tag,
+.doc .hljs-subst,
+.doc .hljs-doctag,
+.doc .hljs-formula { color: var(--hl-keyword); }
+.doc .hljs-string,
+.doc .hljs-regexp,
+.doc .hljs-addition,
+.doc .hljs-attribute,
+.doc .hljs-meta .hljs-string { color: var(--hl-string); }
+.doc .hljs-number,
+.doc .hljs-literal,
+.doc .hljs-variable,
+.doc .hljs-template-variable,
+.doc .hljs-tag .hljs-attr { color: var(--hl-number); }
+.doc .hljs-title,
+.doc .hljs-section,
+.doc .hljs-selector-id { color: var(--hl-title); }
+.doc .hljs-attr,
+.doc .hljs-property,
+.doc .hljs-name,
+.doc .hljs-selector-attr,
+.doc .hljs-selector-pseudo { color: var(--hl-attr); }
+.doc .hljs-type,
+.doc .hljs-built_in,
+.doc .hljs-symbol,
+.doc .hljs-bullet,
+.doc .hljs-link { color: var(--hl-type); }
+.doc .hljs-meta,
+.doc .hljs-deletion,
+.doc .hljs-selector-class,
+.doc .hljs-comment .hljs-doctag { color: var(--hl-meta); }
+.doc .hljs-emphasis { font-style: italic; }
+.doc .hljs-strong { font-weight: 700; }
+
+/* ---------- previous / next ---------- */
+.pagination {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  /* No max-width: the grid track sets the content measure, so this lines up
+     with the right edge of the article instead of stopping short of it. */
+  margin: 56px 0 0; padding-top: 24px; border-top: 1px solid var(--rule);
+}
+.pagination a {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 16px 18px; border: 1px solid var(--rule); border-radius: 10px;
+  background: var(--surface); text-decoration: none; color: inherit;
+  transition: border-color .15s;
+}
+.pagination a:hover { border-color: var(--accent); }
+.pagination span {
+  font-family: var(--mono); font-size: 11.5px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink-3);
+}
+.pagination strong { font-size: 15px; line-height: 1.35; font-weight: 600; color: var(--ink); }
+/* When there is only a next page it must still sit on the right. */
+.pagination__next { grid-column: 2; text-align: right; }
+@media (max-width: 640px) {
+  .pagination { grid-template-columns: 1fr; }
+  .pagination__next { grid-column: 1; text-align: left; }
+}
+
+/* ---------- sidebar footer: manual, version, edit ---------- */
+.nav-foot {
+  flex: none; margin-top: 16px; padding-top: 14px;
+  border-top: 1px solid var(--rule);
+}
+.explore { border: 1px solid var(--rule); border-radius: var(--radius); background: var(--surface); }
+.explore > summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 9px 12px; cursor: pointer; list-style: none; border-radius: var(--radius);
+}
+.explore > summary::-webkit-details-marker { display: none; }
+.explore > summary:hover { background: var(--surface-2); }
+.explore__now { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.explore__component { font-size: 13.5px; font-weight: 600; color: var(--ink); }
+.explore__version { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+.explore__chev { flex: none; color: var(--ink-3); transition: transform .15s; }
+.explore[open] .explore__chev { transform: rotate(180deg); }
+.explore__body { border-top: 1px solid var(--rule); padding: 10px 12px 12px; max-height: 260px; overflow-y: auto; }
+.explore__group + .explore__group { margin-top: 12px; }
+.explore__title {
+  margin: 0 0 6px; font-size: 11px; font-weight: 700; letter-spacing: .07em;
+  text-transform: uppercase; color: var(--ink-3);
+}
+.explore__body ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; }
+.explore__body a {
+  display: block; padding: 4px 8px; border-radius: 4px;
+  font-size: 13px; color: var(--ink-2); text-decoration: none;
+}
+.explore__body a:hover { background: var(--surface-2); color: var(--ink); }
+.explore__body .is-current > a { color: var(--accent); font-weight: 600; background: var(--surface-2); }
+
+.nav-foot__edit {
+  display: flex; align-items: center; gap: 7px; margin-top: 10px;
+  font-size: 13px; color: var(--ink-3); text-decoration: none;
+}
+.nav-foot__edit:hover { color: var(--accent); }
+
+/* ---------- prose / marketing ---------- */
+/* Only the Antora 404 layout uses these now; everything else moved to the
+   Astro side, which has its own. */
+.prose-main { max-width: 1000px; margin: 0 auto; padding: 40px 24px 80px; }
+.prose { max-width: 760px; }
+.prose.wide { max-width: none; }
+.breadcrumbs ol { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 18px; padding: 0; font-size: 13.5px; color: var(--ink-3); }
+.breadcrumbs li + li::before { content: "/"; margin-right: 6px; color: var(--rule-2); }
+.breadcrumbs a { color: var(--ink-3); text-decoration: none; }
+.breadcrumbs a:hover { color: var(--accent); }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 20px; border-radius: var(--radius);
+  border: 1px solid var(--control-border); background: var(--surface);
+  color: var(--ink); font-weight: 600; font-size: 15px; text-decoration: none;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn--primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.btn--primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--on-accent); }
+
+/* ---------- doc shell ---------- */
+/* Left-anchored, not centred: the navigation tree sits against the left of the
+   viewport behind a normal page margin, and the content starts straight after
+   it. The content track has an explicit maximum rather than 1fr, so surplus
+   width falls to the right of the page instead of pooling between the article
+   and the contents list. */
+.doc-shell {
+  max-width: 1560px; margin: 0; padding: 0 32px;
+  display: grid;
+  grid-template-columns: 288px minmax(0, 800px) minmax(190px, 240px);
+  gap: 56px; align-items: start;
+}
+
+.doc-nav, .doc-toc {
+  position: sticky; top: calc(var(--header-h) + 16px);
+  max-height: calc(100vh - var(--header-h) - 32px);
+  padding: 24px 0;
+}
+.doc-toc { overflow-y: auto; }
+/* The tree scrolls; the manual/version block and the edit link stay pinned to
+   the bottom of the sidebar, as they are on the live site. */
+.doc-nav { display: flex; flex-direction: column; overflow: hidden; }
+.doc-nav > nav { flex: 1; overflow-y: auto; min-height: 0; }
+.doc-nav__close { display: none; }
+.doc-nav__title { font-weight: 700; font-size: 14px; margin: 0 0 8px; color: var(--ink); }
+.doc-nav__group + .doc-nav__group { margin-top: 20px; }
+.doc-nav__list { list-style: none; margin: 0; padding: 0; }
+.doc-nav__list .doc-nav__list { padding-left: 14px; display: none; }
+.doc-nav__item.is-open > .doc-nav__list { display: block; }
+.doc-nav__item { position: relative; }
+.doc-nav__item > a, .doc-nav__item > span {
+  display: block; padding: 4px 8px 4px 20px; border-radius: 4px;
+  font-size: 14px; color: var(--ink-2); text-decoration: none; line-height: 1.4;
+}
+.doc-nav__item > a:hover { background: var(--surface-2); color: var(--ink); }
+.doc-nav__item.is-current > a { background: var(--surface-2); color: var(--accent); font-weight: 600; }
+.doc-nav__expand {
+  position: absolute; left: 0; top: 3px;
+  width: 18px; height: 18px; padding: 0; display: flex; align-items: center; justify-content: center;
+  background: none; border: 0; color: var(--ink-3); cursor: pointer; border-radius: 3px;
+}
+.doc-nav__expand svg { transition: transform .15s; }
+.doc-nav__item.is-open > .doc-nav__expand svg { transform: rotate(90deg); }
+
+.doc-main { padding: 28px 0 64px; min-width: 0; }
+
+/* Only reachable route to the sidebar below 1000px, where it is off-canvas. */
+.doc-nav__open {
+  display: none; align-items: center; gap: 8px;
+  font: inherit; font-size: 14.5px; font-weight: 600; cursor: pointer;
+  padding: 9px 14px; margin-bottom: 20px; border-radius: var(--radius);
+  border: 1px solid var(--control-border); background: var(--surface); color: var(--ink);
+}
+.doc-nav__open:hover { border-color: var(--accent); color: var(--accent); }
+@media (max-width: 1000px) { .doc-nav__open { display: inline-flex; } }
+.doc { max-width: none; }   /* the grid track sets the measure */
+.doc-toc__title { font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 10px; }
+/* The active entry was signalled by colour alone, between two colours of
+   almost the same lightness - a WCAG 1.4.1 failure and hard to see for anyone.
+   It now carries a marker rule and a weight change as well. */
+.doc-toc a {
+  display: block; padding: 3px 0 3px 12px; font-size: 13.5px;
+  color: var(--ink-2); text-decoration: none; line-height: 1.4;
+  border-left: 2px solid transparent; margin-left: -14px;
+}
+.doc-toc a:hover { color: var(--ink); border-left-color: var(--rule-2); }
+.doc-toc a.is-active { color: var(--accent); font-weight: 600; border-left-color: var(--accent); }
+.doc-toc .toc-h3 { padding-left: 24px; }
+
+@media (max-width: 1400px) {
+  .doc-shell { grid-template-columns: 268px minmax(0, 800px) minmax(180px, 220px); gap: 40px; padding: 0 24px; }
+}
+@media (max-width: 1200px) {
+  .doc-shell { grid-template-columns: 250px minmax(0, 1fr); gap: 40px; }
+  .doc-toc { display: none; }
+}
+@media (max-width: 1000px) {
+  .doc-shell { grid-template-columns: minmax(0, 1fr); }
+  .doc-nav {
+    display: none; position: fixed; inset: 0; z-index: 60;
+    background: var(--surface); padding: 20px; max-height: none;
+  }
+  .doc-nav[data-open="true"] { display: block; }
+  .doc-nav__close { display: inline-flex; position: absolute; top: 14px; right: 14px; font-size: 22px; }
+  .doc-nav[data-open="true"] { overflow-y: auto; padding-top: 56px; }
+}
+

@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI advisor plugins | Apache Hop</title>
+<meta name="description" content="How to add an AI advisor for a new file type, metadata editor or other GUI location without changing Hop core.">
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Apache Hop">
+<meta property="og:title" content="AI advisor plugins">
+<meta property="og:description" content="How to add an AI advisor for a new file type, metadata editor or other GUI location without changing Hop core.">
+
+<meta property="og:image" content="https://hop.apache.org/img/social-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hop.apache.org/img/social-card.png">
+
+<link rel="icon" href="../../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="196x196" href="../../favicon-196x196.png">
+<link rel="manifest" href="../../site.webmanifest">
+<link rel="stylesheet" href="../../_/css/site.css">
+
+<script>(function(){try{var t=localStorage.getItem('hop-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+</head>
+<body class="doc-page">
+<a class="skip-link" href="#main" data-pagefind-ignore>Skip to main content</a>
+<header class="site-header" data-pagefind-ignore>
+  <div class="site-header__inner">
+    <a class="brand" href="../../" aria-label="Apache Hop home">
+      <img src="../../img/hop-logo.svg" alt="" width="34" height="34" aria-hidden="true">
+      <span class="brand__name">Apache Hop</span>
+    </a>
+
+    <nav class="mainnav" id="mainnav" aria-label="Main">
+      <ul class="mainnav__list">
+        <li><a href="../../blog/">Blog</a></li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-docs">
+            Documentation <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-docs">
+            <li><a href="../../manual/latest/getting-started/">Getting started</a></li>
+            <li><a href="../../manual/latest/">User manual</a></li>
+            <li><a href="../../dev-manual/latest/">Developer documentation</a></li>
+            <li><a href="../../docs/architecture/">Architecture</a></li>
+            <li><a href="../../docs/roadmap/">Roadmap</a></li>
+          </ul>
+        </li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-community">
+            Community <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-community">
+            <li><a href="../../community/contributing/">Contributing</a></li>
+            <li><a href="../../community/mailing-list/">Mailing lists</a></li>
+            <li><a href="../../community/tools/">Tools & chat</a></li>
+            <li><a href="../../community/events/">Events & user groups</a></li>
+            <li><a href="../../community/team/">Team</a></li>
+            <li><a href="../../community/support/">Support</a></li>
+            <li><a href="../../community/commercial/">Commercial support</a></li>
+            <li><a href="../../community/ethos/">Ethos</a></li>
+            <li><a href="../../security/">Security advisories</a></li>
+          </ul>
+        </li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-asf">
+            Apache <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-asf">
+            <li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li>
+            <li><a href="https://www.apache.org/events/current-event" rel="noopener" target="_blank">Events</a></li>
+            <li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li>
+            <li><a href="https://www.apache.org/security/" rel="noopener" target="_blank">Security</a></li>
+            <li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li>
+            <li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li>
+            <li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-tools">
+      <div class="search" role="search">
+        <label class="visually-hidden" for="search-input">Search Apache Hop</label>
+        <input id="search-input" type="search" placeholder="Search" autocomplete="off">
+      </div>
+      <span class="socials">
+        <a class="icon-btn" href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+        <a class="icon-btn" href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"/></svg></a>
+        <a class="icon-btn" href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"/></svg></a>
+        <a class="icon-btn" href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg></a>
+      </span>
+      <a class="mainnav__cta" href="../../download/">Download</a>
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Switch theme" title="Switch theme">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+      </button>
+      <button type="button" id="nav-burger" class="icon-btn burger" aria-expanded="false" aria-controls="mainnav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="doc-shell">
+<div class="doc-nav" id="doc-nav" data-pagefind-ignore>
+  <button type="button" class="doc-nav__close icon-btn" aria-label="Close navigation">&times;</button>
+  <nav aria-label="Documentation">
+    <div class="doc-nav__group">
+      
+      <ul class="doc-nav__list">
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Getting started section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Getting started</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/getting-started.html">The Hop codebase</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/setup-dev-environment.html">Setting up your development environment</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/build-and-test.html">Building and testing</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/contributing.html">Contributing changes</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/writing-documentation.html">Writing documentation</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Architecture section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Architecture</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/architecture/execution-model.html">How a pipeline and a workflow run</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/architecture/variables-and-metadata.html">Variables, parameters and metadata</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/architecture/dependencies-and-classloading.html">Dependencies and classloading</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/architecture/logging-and-debugging.html">Logging and debugging</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/architecture/performance.html">Performance on the row hot path</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/architecture/security.html">Security for developers</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Plugin development section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Plugin development</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/plugin-development.html">How plugins work</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Plugin types section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../dev-manual/next/plugin-types/index.html">Plugin types</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/plugin-types/pipeline-workflow.html">Pipelines and workflows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/plugin-types/data-connectivity.html">Data and connectivity</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/plugin-types/metadata-configuration.html">Metadata and configuration</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/plugin-types/execution-observability.html">Execution and observability</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/plugin-types/gui.html">GUI</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/plugin-types/diagram-exporters.html">Diagram exporters</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-current">
+    <a href="../../dev-manual/next/ai-advisor-plugins.html">AI advisor plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/metadata-plugins.html">Metadata plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/metadata-serialization.html">Metadata serialization</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/metadata-injection.html">Metadata injection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/value-types.html">Value types</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Database plugins section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../dev-manual/next/database/index.html">Database plugins</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/database/creating-a-dialect.html">Creating a dialect</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/database/column-types.html">Column types and type rules</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/database/value-bindings.html">Moving values across JDBC</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/database/extending-another-dialect.html">Extending a dialect you don&#8217;t own</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/database/testing.html">Testing a database plugin</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/database/migrating-from-variants.html">Migrating from isXVariant()</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/gui-plugins-toolbars.html">GUI plugins and toolbars</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/engine-compatibility.html">Engine compatibility</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/lineage.html">Lineage observation hub</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/internationalisation.html">Internationalisation (i18n)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/svg-files.html">SVG files</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/plugin-samples.html">Plugin samples</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/start-your-own-plugin.html">Creating a plugin outside the Hop repository</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/marketplace-publish-plugin.html">Publishing a plugin to Nexus (marketplace)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/porting-kettle-plugins.html">Porting Kettle plugins</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Testing section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Testing</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/testing/unit-testing.html">Unit tests</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/integration-testing.html">Integration tests</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/testing/ui-testing.html">UI tests with SWTBot</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Embedding and interfaces section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Embedding and interfaces</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle SDK section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../dev-manual/next/sdk/index.html">SDK</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/sdk/hop-sdk.html">The Hop SDK</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop Web section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../dev-manual/next/hopweb/index.html">Hop Web</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/hopweb/developer-guide.html">Hop Web Developer Guide</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/hopweb/hopweb-antipatterns.html">Hop Web Antipatterns</a>
+    
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Distribution and release section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Distribution and release</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/docker-build.html">Docker Build Script</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Apache Release Process section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../dev-manual/next/apache-release/index.html">Apache Release Process</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/apache-release/creating-a-release.html">Creating a Release</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/apache-release/promoting-a-release.html">Promoting a Release</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../dev-manual/next/apache-release/checking-a-release.html">Checking a Release</a>
+    
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+    </div>
+  </nav>
+<div class="nav-foot">
+  <details class="explore">
+    <summary>
+      <span class="explore__now">
+        <span class="explore__component">Development Documentation</span>
+        <span class="explore__version">2.20.0</span>
+      </span>
+      <svg class="explore__chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </summary>
+    <div class="explore__body">
+      <div class="explore__group">
+  <p class="explore__title">Development Documentation</p>
+  <ul>
+    <li class="is-current">
+      <a href="../../dev-manual/next/index.html">2.20.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/latest/index.html">2.19.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.18.1/index.html">2.18.1</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.18.0/index.html">2.18.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.17.0/index.html">2.17.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.16.0/index.html">2.16.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.15.0/index.html">2.15.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.14.0/index.html">2.14.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.13.0/index.html">2.13.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.12.0/index.html">2.12.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.11.0/index.html">2.11.0</a>
+    </li>
+    <li class="">
+      <a href="../../dev-manual/2.10.0/index.html">2.10.0</a>
+    </li>
+  </ul>
+</div>
+
+        
+        <div class="explore__group">
+  <p class="explore__title">User manual</p>
+  <ul>
+    <li class="">
+      <a href="../../manual/next/index.html">2.20.0 (pre-release)</a>
+    </li>
+    <li class="">
+      <a href="../../manual/latest/index.html">2.19.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.18.1/index.html">2.18.1</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.18.0/index.html">2.18.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.17.0/index.html">2.17.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.16.0/index.html">2.16.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.15.0/index.html">2.15.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.14.0/index.html">2.14.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.13.0/index.html">2.13.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.12.0/index.html">2.12.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.11.0/index.html">2.11.0</a>
+    </li>
+    <li class="">
+      <a href="../../manual/2.10.0/index.html">2.10.0</a>
+    </li>
+  </ul>
+</div>
+
+    </div>
+  </details>
+
+  <a class="nav-foot__edit" href="https://github.com/apache/hop/edit/main/docs/hop-dev-manual/modules/ROOT/pages/ai-advisor-plugins.adoc" rel="noopener" target="_blank">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758zm1.414 1.06a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354zM11.189 6.25 9.75 4.81l-6.286 6.287a.25.25 0 0 0-.064.108l-.558 1.953 1.953-.558a.25.25 0 0 0 .108-.064z"/></svg>
+    Edit this page
+  </a>
+</div>
+</div>
+  <main class="doc-main" id="main">
+    <button type="button" class="doc-nav__open" aria-expanded="false" aria-controls="doc-nav" data-pagefind-ignore>
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      Documentation menu
+    </button>
+<nav class="breadcrumbs" data-pagefind-ignore aria-label="Breadcrumb">
+  <ol>
+    <li><a href="../../">Home</a></li>
+    <li><span aria-current="page">Plugin development</span></li>
+    <li><a href="../../dev-manual/next/ai-advisor-plugins.html">AI advisor plugins</a></li>
+  </ol>
+</nav>
+    <article class="doc">
+      <h1>AI advisor plugins</h1>
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The AI Assistant workbench is a host.
+It does not know about Data Vault models, lineage views, or your metadata editor.
+You add those by shipping two things in <strong>your</strong> plugin:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>An <code>@AiAdvisorPlugin</code> / <code>IAiAdvisor</code> — prompt, inclusions, optional graph edits.</p>
+</li>
+<li>
+<p>One or more <code>@GuiToolbarElement</code> / <code>@GuiContextAction</code> methods on the editor that already owns the subject — toolbar, canvas, table, note, …</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Hop never enumerates locations.
+A location is a string you invent.</p>
+</div>
+<div class="paragraph">
+<p>The user-facing workbench is documented in <a href="../../manual/next/hop-gui/perspective-ai-advisor.html" class="xref page">AI Assistant</a>.
+This page is the plugin contract.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mental_model"><a class="link" href="#_mental_model">Mental model</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">Your file type / metadata editor
+    └── @GuiToolbarElement  /  @GuiContextAction
+            └── builds AiAdvisorOpenRequest
+                    location, areaLabel, artifact, preferFloatingWindow
+            └── HopGui.openAiAdvisorSession(request)
+                    └── extension point HopGuiAiAdvisorOpenSession
+                            └── hop-tech-ai workbench (no-op if the plugin is absent)
+
+Your IAiAdvisor  (@AiAdvisorPlugin)            // omit classLoaderGroup
+    └── locations = { "data-vault-graph" }     // same string
+    └── buildPrompt(AiAdvisorRequest)          // cast artifact, honour inclusions
+    └── optional parseResponse / previewProposal / validate / apply / afterApply / summarizeApplied</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Three JARs stay decoupled:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Module</th>
+<th class="tableblock halign-left valign-top">What you may depend on</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop-core</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IAiAdvisor</code>, <code>AiAdvisorOpenRequest</code>, <code>AiAdvisorLocations</code>, <code>HopExtensionPoint.HopGuiAiAdvisorOpenSession</code>.
+No langchain4j, no SWT.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop-ui</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGui.openAiAdvisorSession(request)</code> from a toolbar or context action.
+Still no <code>hop-tech-ai</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop-tech-ai</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The workbench, Language Model Chat, langchain4j.
+Third-party advisor JARs must <strong>not</strong> set <code>classLoaderGroup = "hop-ai"</code> and must <strong>not</strong> compile against this module.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>If <code>plugins/tech/ai</code> is missing, <code>openAiAdvisorSession</code> is a silent no-op.
+That is how privacy-sensitive installs remove AI.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_location_ids"><a class="link" href="#_location_ids">Location ids</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>AiAdvisorLocations</code> in <code>hop-core</code> only lists ids <strong>Hop itself</strong> uses:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Constant</th>
+<th class="tableblock halign-left valign-top">When Hop uses it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pipeline-graph</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pipeline canvas and pipeline toolbar <strong>AI Help</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>workflow-graph</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Workflow canvas and workflow toolbar <strong>AI Help</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>perspective</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CTRL-SHIFT-A</code>, <strong>New session</strong>, Tools menu</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Everything else is yours.
+Typical ids for hopper-edw-style plugins:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>data-vault-graph</code></p>
+</li>
+<li>
+<p><code>business-vault-graph</code></p>
+</li>
+<li>
+<p><code>dimensional-graph</code></p>
+</li>
+<li>
+<p><code>source-model-graph</code></p>
+</li>
+<li>
+<p><code>lineage-view</code></p>
+</li>
+<li>
+<p><code>execution-map</code></p>
+</li>
+<li>
+<p>a metadata type key (<code>rdbms</code>, <code>neo4j-connection</code>, …) when Help lives on that editor</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Put the same string on <code>@AiAdvisorPlugin(locations = {…})</code> and on <code>AiAdvisorOpenRequest.setLocation(…)</code>.
+The workbench does not validate the id against a registry.</p>
+</div>
+<div class="paragraph">
+<p>Empty <code>locations()</code> means the workbench may offer the advisor on any session.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_open_a_session_from_your_gui"><a class="link" href="#_open_a_session_from_your_gui">Open a session from your GUI</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Build the request in <code>hop-core</code> types only, then hand it to <code>HopGui</code>.
+The class names in the example are illustrative (a Data Vault graph).
+Replace them with your file type&#8217;s graph, context id and toolbar root.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-meta">@GuiPlugin</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">VaultAiGuiPlugin</span> {
+
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">LOCATION</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;data-vault-graph&quot;</span>;
+
+  <span class="hljs-meta">@GuiToolbarElement(
+      root = HopGuiVaultGraph.GUI_PLUGIN_TOOLBAR_PARENT_ID,
+      id = &quot;HopGuiVaultGraph-ToolBar-10048-ai-help&quot;,
+      toolTip = &quot;i18n::HopGuiVaultGraph.Toolbar.AiHelp.Tooltip&quot;,
+      image = &quot;ai-provider.svg&quot;)</span>
+  <span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title function_">openFromToolbar</span><span class="hljs-params">()</span> {
+    <span class="hljs-type">HopGuiVaultGraph</span> <span class="hljs-variable">graph</span> <span class="hljs-operator">=</span> <span class="hljs-comment">/* active vault graph */</span>;
+    <span class="hljs-keyword">if</span> (graph == <span class="hljs-literal">null</span> || graph.getModel() == <span class="hljs-literal">null</span>) {
+      <span class="hljs-keyword">return</span>;
+    }
+    open(graph, graph.getModel(), <span class="hljs-literal">null</span>);
+  }
+
+  <span class="hljs-meta">@GuiContextAction(
+      id = &quot;vault-graph-ai-help&quot;,
+      parentId = HopGuiVaultContext.CONTEXT_ID,
+      type = GuiActionType.Modify,
+      name = &quot;i18n::HopGuiVaultGraph.AiHelp.Name&quot;,
+      tooltip = &quot;i18n::HopGuiVaultGraph.AiHelp.Tooltip&quot;,
+      image = &quot;ai-provider.svg&quot;,
+      category = &quot;Help&quot;,
+      categoryOrder = &quot;1&quot;)</span>
+  <span class="hljs-keyword">public</span> <span class="hljs-type">void</span> <span class="hljs-title function_">openFromCanvas</span><span class="hljs-params">(HopGuiVaultContext context)</span> {
+    <span class="hljs-keyword">if</span> (context.getVaultGraph() != <span class="hljs-literal">null</span>) {
+      open(context.getVaultGraph(), context.getVaultGraph().getModel(), <span class="hljs-literal">null</span>);
+    }
+  }
+
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">open</span><span class="hljs-params">(HopGuiVaultGraph graph, Object model, String focusName)</span> {
+    <span class="hljs-type">AiAdvisorOpenRequest</span> <span class="hljs-variable">request</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AiAdvisorOpenRequest</span>();
+    request.setAdvisorPluginId(<span class="hljs-string">&quot;data-vault-advisor&quot;</span>);
+    request.setLocation(LOCATION);
+    request.setAreaLabel(<span class="hljs-string">&quot;Data Vault&quot;</span>);
+    request.setPreferFloatingWindow(<span class="hljs-literal">true</span>);
+    request.setArtifact(model);
+    request.setArtifactName(model.toString()); <span class="hljs-comment">// a stable display name</span>
+    request.setArtifactKind(<span class="hljs-string">&quot;data-vault&quot;</span>);
+    request.setTitle(model.toString());
+    request.setFocusNodeName(focusName);
+    <span class="hljs-keyword">try</span> {
+      graph.getHopGui().openAiAdvisorSession(request);
+    } <span class="hljs-keyword">catch</span> (HopException e) {
+      <span class="hljs-comment">// log; the extension point is absent when hop-tech-ai is not installed</span>
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>PipelineAiGuiPlugin</code> / <code>WorkflowAiGuiPlugin</code> in <code>plugins/tech/ai</code> are the same pattern for Hop&#8217;s own graphs.</p>
+</div>
+<div class="sect2">
+<h3 id="_aiadvisoropenrequest_fields"><a class="link" href="#_aiadvisoropenrequest_fields"><code>AiAdvisorOpenRequest</code> fields</a></h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>advisorPluginId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@AiAdvisorPlugin</code> id to select in the workbench combo.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>location</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Free-form id. Session reuse keys on this plus advisor id and artifact name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>areaLabel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Session-tree group ("Pipelines", "Data Vault", "Lineage"). Falls back to "General" when empty.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>preferFloatingWindow</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code> when the user is looking at a subject that must stay on screen.
+The workbench then opens (or reuses) a floating window instead of switching to the AI perspective.
+Set this on graph toolbars and canvas Help.
+Leave it <code>false</code> for <code>CTRL-SHIFT-A</code> / unbound sessions.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>artifact</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The open object (<code>PipelineMeta</code>, your vault model, …).
+The advisor casts it in <code>buildPrompt</code>.
+Keep SWT widgets <strong>off</strong> this object; pass a <code>logSupplier</code> for logs.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>artifactName</code> / <code>artifactKind</code> / <code>title</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reuse and display.
+<code>artifactName</code> should be stable for a given file (name, not a transient hash).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>focusNodeName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional transform, action, table, … the user right-clicked.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>logSupplier</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional <code>Supplier&lt;String&gt;</code> read on the UI thread before the background call.
+Use it for execution logs that live in SWT widgets.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>reuseExisting</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default <code>true</code>.
+The store reuses a session with the same advisor id, location and artifact name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>attributes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A <code>Map&lt;String,Object&gt;</code> copied onto the session (new session: replace; reuse: merge, incoming keys win).
+The engine copies it onto every <code>AiAdvisorRequest</code> for <code>buildPrompt</code>.
+Do <strong>not</strong> put SWT / <code>HopGui</code> here.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>If a dialog or dock is already open, that layout is reused even when <code>preferFloatingWindow</code> is true.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_implement_iaiadvisor"><a class="link" href="#_implement_iaiadvisor">Implement <code>IAiAdvisor</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Keep langchain4j and SWT off this class.
+<code>buildPrompt</code> must not call the model; the workbench does that through Language Model Chat.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-meta">@AiAdvisorPlugin(
+    id = &quot;data-vault-advisor&quot;,
+    name = &quot;i18n::DataVaultAiAdvisor.Name&quot;,
+    description = &quot;i18n::DataVaultAiAdvisor.Description&quot;,
+    image = &quot;ai-provider.svg&quot;,
+    locations = {&quot;data-vault-graph&quot;})</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DataVaultAiAdvisor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">IAiAdvisor</span> {
+
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">ID</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;data-vault-advisor&quot;</span>;
+
+  <span class="hljs-meta">@Override</span>
+  <span class="hljs-keyword">public</span> <span class="hljs-type">String</span> <span class="hljs-title function_">getId</span><span class="hljs-params">()</span> {
+    <span class="hljs-keyword">return</span> ID;
+  }
+
+  <span class="hljs-meta">@Override</span>
+  <span class="hljs-keyword">public</span> <span class="hljs-type">String</span> <span class="hljs-title function_">getName</span><span class="hljs-params">()</span> {
+    <span class="hljs-keyword">return</span> BaseMessages.getString(PKG, <span class="hljs-string">&quot;DataVaultAiAdvisor.Name&quot;</span>);
+  }
+
+  <span class="hljs-meta">@Override</span>
+  <span class="hljs-keyword">public</span> <span class="hljs-type">String</span>[] <span class="hljs-title function_">getLocations</span><span class="hljs-params">()</span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[] {<span class="hljs-string">&quot;data-vault-graph&quot;</span>};
+  }
+
+  <span class="hljs-meta">@Override</span>
+  <span class="hljs-keyword">public</span> <span class="hljs-type">List</span>&lt;AiAdvisorScenario&gt; <span class="hljs-title function_">listScenarios</span><span class="hljs-params">()</span> {
+    <span class="hljs-keyword">return</span> List.of(
+        <span class="hljs-keyword">new</span> <span class="hljs-title class_">AiAdvisorScenario</span>(<span class="hljs-string">&quot;dv-general&quot;</span>, <span class="hljs-string">&quot;General&quot;</span>, <span class="hljs-string">&quot;Questions about this vault model&quot;</span>),
+        <span class="hljs-keyword">new</span> <span class="hljs-title class_">AiAdvisorScenario</span>(<span class="hljs-string">&quot;dv-hub&quot;</span>, <span class="hljs-string">&quot;Hub design&quot;</span>, <span class="hljs-string">&quot;Business keys and hub grain&quot;</span>));
+  }
+
+  <span class="hljs-meta">@Override</span>
+  <span class="hljs-keyword">public</span> <span class="hljs-type">List</span>&lt;String&gt; <span class="hljs-title function_">listBaselineSharing</span><span class="hljs-params">()</span> {
+    <span class="hljs-keyword">return</span> List.of(<span class="hljs-string">&quot;model outline&quot;</span>);
+  }
+
+  <span class="hljs-meta">@Override</span>
+  <span class="hljs-keyword">public</span> <span class="hljs-type">List</span>&lt;AiAdvisorInclusion&gt; <span class="hljs-title function_">listInclusions</span><span class="hljs-params">()</span> {
+    <span class="hljs-keyword">return</span> List.of(
+        <span class="hljs-keyword">new</span> <span class="hljs-title class_">AiAdvisorInclusion</span>(
+            <span class="hljs-string">&quot;checks&quot;</span>,
+            <span class="hljs-string">&quot;Include model check results&quot;</span>,
+            <span class="hljs-literal">false</span>,
+            <span class="hljs-string">&quot;Validation messages for this model&quot;</span>,
+            <span class="hljs-string">&quot;check results&quot;</span>),
+        catalogInclusion(),
+        <span class="hljs-keyword">new</span> <span class="hljs-title class_">AiAdvisorInclusion</span>(
+            <span class="hljs-string">&quot;metadata&quot;</span>,
+            <span class="hljs-string">&quot;Include selected metadata&quot;</span>,
+            <span class="hljs-literal">false</span>,
+            <span class="hljs-string">&quot;JSON of metadata objects the user picks&quot;</span>,
+            <span class="hljs-string">&quot;metadata&quot;</span>));
+  }
+
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">AiAdvisorInclusion</span> <span class="hljs-title function_">catalogInclusion</span><span class="hljs-params">()</span> {
+    <span class="hljs-type">AiAdvisorInclusion</span> <span class="hljs-variable">inclusion</span> <span class="hljs-operator">=</span>
+        <span class="hljs-keyword">new</span> <span class="hljs-title class_">AiAdvisorInclusion</span>(
+            <span class="hljs-string">&quot;catalog&quot;</span>,
+            <span class="hljs-string">&quot;Include catalog sources&quot;</span>,
+            <span class="hljs-literal">false</span>,
+            <span class="hljs-string">&quot;Record definitions the user picks&quot;</span>,
+            <span class="hljs-string">&quot;catalog sources&quot;</span>);
+    inclusion.setPicker(<span class="hljs-literal">true</span>);
+    inclusion.setMultiSelect(<span class="hljs-literal">true</span>);
+    <span class="hljs-keyword">return</span> inclusion;
+  }
+
+  <span class="hljs-meta">@Override</span>
+  <span class="hljs-keyword">public</span> <span class="hljs-type">List</span>&lt;AiAdvisorInclusionChoice&gt; <span class="hljs-title function_">listInclusionChoices</span><span class="hljs-params">(
+      String inclusionId, AiAdvisorRequest request)</span> {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-string">&quot;catalog&quot;</span>.equals(inclusionId)) {
+      <span class="hljs-keyword">return</span> List.of();
+    }
+    <span class="hljs-keyword">return</span> List.of(
+        <span class="hljs-keyword">new</span> <span class="hljs-title class_">AiAdvisorInclusionChoice</span>(<span class="hljs-string">&quot;SRC_ORDERS&quot;</span>, <span class="hljs-string">&quot;Orders&quot;</span>),
+        <span class="hljs-keyword">new</span> <span class="hljs-title class_">AiAdvisorInclusionChoice</span>(<span class="hljs-string">&quot;SRC_CUSTOMER&quot;</span>, <span class="hljs-string">&quot;Customer&quot;</span>));
+  }
+
+  <span class="hljs-meta">@Override</span>
+  <span class="hljs-keyword">public</span> <span class="hljs-type">AiAdvisorPrompt</span> <span class="hljs-title function_">buildPrompt</span><span class="hljs-params">(AiAdvisorRequest request)</span> <span class="hljs-keyword">throws</span> HopException {
+    <span class="hljs-keyword">if</span> (!(request.getArtifact() <span class="hljs-keyword">instanceof</span> MyVaultModel model)) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HopException</span>(<span class="hljs-string">&quot;No Data Vault model is bound to this session.&quot;</span>);
+    }
+    <span class="hljs-type">String</span> <span class="hljs-variable">system</span> <span class="hljs-operator">=</span> loadPreambleAndScenario(request.getScenarioId());
+    <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();
+    user.append(<span class="hljs-string">&quot;User question:\n&quot;</span>).append(request.getUserPrompt()).append(<span class="hljs-string">&quot;\n\n&quot;</span>);
+    user.append(<span class="hljs-string">&quot;Model structure JSON:\n&quot;</span>).append(serializeStructure(model)).append(<span class="hljs-string">&quot;\n\n&quot;</span>);
+    <span class="hljs-keyword">if</span> (request.inclusionEnabled(<span class="hljs-string">&quot;checks&quot;</span>)) {
+      user.append(<span class="hljs-string">&quot;Check results JSON:\n&quot;</span>).append(serializeChecks(model, request)).append(<span class="hljs-string">&quot;\n\n&quot;</span>);
+    }
+    <span class="hljs-keyword">if</span> (request.inclusionEnabled(<span class="hljs-string">&quot;catalog&quot;</span>)) {
+      user.append(<span class="hljs-string">&quot;Catalog sources: &quot;</span>)
+          .append(request.selectedInclusionIds(<span class="hljs-string">&quot;catalog&quot;</span>))
+          .append(<span class="hljs-string">&quot;\n\n&quot;</span>);
+    }
+    <span class="hljs-comment">// Workbench appends selected metadata when inclusion id is &quot;metadata&quot;.</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AiAdvisorPrompt</span>(system, user.toString());
+  }
+}</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_inclusions"><a class="link" href="#_inclusions">Inclusions</a></h3>
+<div class="paragraph">
+<p>The workbench shows a collapsible <strong>Sharing</strong> line: a short summary of what this send includes (question, any baseline the advisor always sends, then each opted-in inclusion).
+Expand it to see the checkboxes.</p>
+</div>
+<div class="paragraph">
+<p>Each <code>AiAdvisorInclusion</code> is one optional extra.
+Best practice: <code>defaultSelected = false</code> for sensitive extras (logs, full XML, selected metadata).
+A plugin-id catalog may default on so <code>hop_proposals</code> can use real plugin ids.</p>
+</div>
+<div class="paragraph">
+<p><code>listBaselineSharing()</code> supplies the short phrases for context you always put in the prompt (for example <code>graph structure</code>).
+Leave it empty if the question is the only baseline.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Id</th>
+<th class="tableblock halign-left valign-top">Workbench behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">any string you choose</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Checkbox only.
+You honour <code>request.inclusionEnabled(id)</code> in <code>buildPrompt</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">any string with <code>picker = true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Checkbox <strong>and</strong> a <strong>Select…</strong> button.
+The workbench calls <code>listInclusionChoices(id, request)</code> (no SWT).
+Chosen <strong>ids</strong> are on <code>request.selectedInclusionIds(id)</code> and persist on the session.
+Empty choices → the workbench shows a short message and unchecks the inclusion.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>metadata</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Checkbox <strong>and</strong> a <strong>Select metadata…</strong> picker of Hop <code>@HopMetadata</code> objects.
+Not routed through <code>listInclusionChoices</code>.
+Selected type-key/name pairs are on <code>request.getMetadataSelections()</code>.
+<code>hop-tech-ai</code> serialises those objects (secrets redacted) when the box is checked.
+Default should be off.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Ids <code>checks</code>, <code>catalog</code>, <code>xml</code> and <code>logs</code> are what the bundled pipeline/workflow advisors use.
+They are not reserved; using the same ids on another advisor is a convention, not a requirement.</p>
+</div>
+<div class="paragraph">
+<p>Default-on inclusions cost tokens on every send.
+Default-off inclusions (full XML, logs, metadata) are the ones that can leak secrets or personal data.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_aiadvisorrequest_on_each_turn"><a class="link" href="#_aiadvisorrequest_on_each_turn"><code>AiAdvisorRequest</code> on each turn</a></h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Set by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>location</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The open request.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>artifact</code>, <code>focusNodeName</code>, <code>logExcerpt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The session (log excerpt is captured on the UI thread).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>inclusions</code>, <code>metadataSelections</code>, <code>inclusionSelections</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The session pane checkboxes, Hop metadata picker, and generic Select… pickers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>scenarioId</code>, <code>userPrompt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The combo and the question field.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>followUp</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code> after a successful prior turn.
+Large context (catalog, XML, logs) is usually first-turn only; you decide.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>attributes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Copied from the session (which came from <code>AiAdvisorOpenRequest.attributes</code>).
+<code>HopGui</code> is injected only on the <strong>apply</strong> request, never on <code>buildPrompt</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>variables</code>, <code>metadataProvider</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Hop GUI session.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>appliedChangeSummaries</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What the user applied from earlier proposal blocks (<code>summarizeApplied</code>).</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>After <code>buildPrompt</code> returns, the workbench appends standing notes to the <strong>system</strong> prompt, in this order:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Plugin files (no Hop-tech-ai dependency):</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>{plugin-folder}/ai-context.md</code> — every advisor in that plugin</p>
+</li>
+<li>
+<p><code>{plugin-folder}/ai-context/&lt;advisor-id&gt;.md</code> — one advisor (for example <code>ai-context/data-vault-advisor.md</code>)</p>
+</li>
+<li>
+<p>The same paths on the plugin classpath (JAR root) if the folder file is missing</p>
+</li>
+<li>
+<p>The folder file <strong>wins</strong> when both exist, so an install can edit notes without rebuilding</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>IAiAdvisor.getStandingContext()</code> when non-empty (computed notes; prefer files)</p>
+</li>
+<li>
+<p>Configuration → <strong>Extra context</strong> and <strong>Context files</strong> (default <code>${PROJECT_HOME}/AGENTS.md</code>)</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Missing files are skipped. Your <code>buildPrompt</code> does not load these.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_proposals_optional"><a class="link" href="#_proposals_optional">Proposals (optional)</a></h3>
+<div class="paragraph">
+<p>The default <code>parseResponse</code> extracts ` <code><code>hop_proposals ` JSON blocks (`AiProposalParser</code> in hop-core).
+Override <code>parseResponse</code> only when you use a different fence (for example ` </code>`dv_proposals `).
+The workbench never parses proposals itself.</p>
+</div>
+<div class="paragraph">
+<p>Proposal <code>type</code> is a free string (<code>ADD_TRANSFORM</code>, <code>CREATE_HUB</code>, <code>CLIPBOARD_TRANSFORMS</code>, <code>SAVE_METADATA</code>, …).
+Unknown types must not be dropped — validate them as blocked with a reason, or apply them in your own applier.</p>
+</div>
+<div class="paragraph">
+<p>The workbench itself copies <code>CLIPBOARD_TRANSFORMS</code>, <code>CLIPBOARD_ACTIONS</code>, and <code>CLIPBOARD_METADATA</code> to the system clipboard after <code>applyProposals</code>, and saves <code>SAVE_METADATA</code> through the metadata serializer.
+Pipeline and workflow appliers skip those types so a mixed selection still applies graph edits (<code>REPLACE_TRANSFORM</code> / <code>REPLACE_ACTION</code> keep name and location).
+Third-party advisors can emit the same type names without depending on hop-tech-ai appliers.</p>
+</div>
+<div class="paragraph">
+<p>Override <code>previewProposal</code> to show domain text (DDL, diffs) in the review dialog.
+Return null to keep the default parameter list.</p>
+</div>
+<div class="paragraph">
+<p>Override <code>summarizeApplied</code> so follow-up turns get <code>ADD_HUB: Create H_CUSTOMER</code> instead of <code>unknown change</code>.
+The default is <code>type: description</code>.
+Pipeline/workflow advisors already produce the richer <code>ADD_TRANSFORM: name (pluginId)</code> wording.</p>
+</div>
+<div class="paragraph">
+<p>After <code>applyProposals</code> succeeds the workbench calls <code>afterApply</code> on the UI thread, then refreshes any Explorer tab whose <code>IHopFileTypeHandler.getSubject()</code> is the session artifact (<code>setChanged</code> on Hop graphs, <code>redraw</code> / <code>updateGui</code> on other handlers).
+Custom file types should still implement <code>afterApply</code> for undo using <code>request.getAttributes().get(AiAdvisorRequest.ATTR_HOP_GUI)</code> and <code>request.getArtifact()</code>.</p>
+</div>
+<div class="paragraph">
+<p>Chat-only advisors leave apply / afterApply / summarize as the defaults.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_classloading"><a class="link" href="#_classloading">Classloading</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>IAiAdvisor</code> lives in <strong>hop-core</strong>.
+Two plugin classloaders both see the same interface.
+<code>PluginRegistry.loadClass(&#8230;&#8203;, IAiAdvisor.class)</code> does <strong>not</strong> require a shared group.</p>
+</div>
+<div class="paragraph">
+<p>Set <code>classLoaderGroup = "hop-ai"</code> <strong>only</strong> on classes that live in <code>plugins/tech/ai</code> (or that must load langchain4j / <code>org.apache.hop.ai.engine.*</code>).</p>
+</div>
+<div class="paragraph">
+<p>Third-party advisor plugins:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>@AiAdvisorPlugin</code> — <strong>omit</strong> <code>classLoaderGroup</code> (empty default).</p>
+</li>
+<li>
+<p><code>@GuiPlugin</code> toolbar/context that only builds <code>AiAdvisorOpenRequest</code> and calls <code>HopGui.openAiAdvisorSession</code> — <strong>omit</strong> <code>classLoaderGroup</code>.</p>
+</li>
+<li>
+<p>Compile against <code>hop-core</code> + <code>hop-ui</code> only. Never compile against <code>hop-tech-ai</code>.</p>
+</li>
+<li>
+<p>Do not bundle langchain4j.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If <code>plugins/tech/ai</code> is removed, <code>openAiAdvisorSession</code> is still a silent no-op; the third-party advisor plugin still loads.</p>
+</div>
+<div class="paragraph">
+<p>The workbench combo lists advisors whose <code>locations()</code> match the session (plus advisors with empty locations).
+A <code>data-vault-graph</code> session does not offer Pipeline AI Help.
+The unbound perspective lists every advisor.</p>
+</div>
+<div class="paragraph">
+<p>Do not put hopper-edw location ids in <code>AiAdvisorLocations</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_privacy"><a class="link" href="#_privacy">Privacy</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The assistant sends whatever you put in the prompt to an external service.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Never hard-code secrets in the artifact.
+Use environment variables or a <a href="plugin-types/metadata-configuration.html" class="xref page">variable resolver</a>.</p>
+</li>
+<li>
+<p>Redact passwords, tokens and API keys in XML, logs and JSON you append.
+Named fields matching <code>password</code>, <code>secret</code>, <code>token</code>, <code>api-key</code> are redacted by the workbench for XML, logs and selected metadata; literals in SQL, notes and oddly named fields are not.</p>
+</li>
+<li>
+<p>Keep personal records out of sample rows, notes and logs you include.</p>
+</li>
+<li>
+<p>Default new inclusions <strong>off</strong> when they send bulk XML, logs or metadata.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_checklist"><a class="link" href="#_checklist">Checklist</a></h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Invent a location id. Do not add it to <code>AiAdvisorLocations</code>.</p>
+</li>
+<li>
+<p>Implement <code>IAiAdvisor</code> with that id on <code>locations</code>. Omit <code>classLoaderGroup</code>.</p>
+</li>
+<li>
+<p>Add toolbar and/or context-menu plugins on the editor that owns the subject (also omit <code>classLoaderGroup</code>).</p>
+</li>
+<li>
+<p>Build <code>AiAdvisorOpenRequest</code> (location, area label, artifact, attributes, <code>preferFloatingWindow</code> when the subject should stay visible).</p>
+</li>
+<li>
+<p>Call <code>hopGui.openAiAdvisorSession(request)</code> — not <code>AiAdvisorViews</code>.</p>
+</li>
+<li>
+<p>Honour inclusions in <code>buildPrompt</code>; use id <code>metadata</code> for Hop metadata, <code>picker = true</code> + <code>listInclusionChoices</code> for anything else (catalog names, …).</p>
+</li>
+<li>
+<p>Keep <code>defaultSelected = false</code> for sensitive extras. A plugin-id catalog may default on. Set <code>summary</code> and <code>listBaselineSharing()</code> so the collapsed Sharing line is accurate.</p>
+</li>
+<li>
+<p>Keep SWT and langchain4j off <code>IAiAdvisor</code>.</p>
+</li>
+<li>
+<p>Ship standing notes as <code>ai-context.md</code> and/or <code>ai-context/&lt;id&gt;.md</code> in the plugin folder (or JAR root).</p>
+</li>
+<li>
+<p>Emit <code>hop_proposals</code> unless you override <code>parseResponse</code>. Override <code>previewProposal</code> for custom review text.</p>
+</li>
+<li>
+<p>Implement <code>afterApply</code> and <code>summarizeApplied</code> if you apply custom proposal types.</p>
+</li>
+<li>
+<p>Verify AI still disappears when <code>plugins/tech/ai</code> is removed, and that your advisor JAR still loads.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+    </article>
+<nav class="pagination" data-pagefind-ignore aria-label="Page">
+  <a class="pagination__prev" href="../../dev-manual/next/plugin-types/diagram-exporters.html"><span>Previous</span><strong>Diagram exporters</strong></a>
+  <a class="pagination__next" href="../../dev-manual/next/metadata-plugins.html"><span>Next</span><strong>Metadata plugins</strong></a>
+</nav>
+  </main>
+
+<aside class="doc-toc" data-pagefind-ignore aria-label="On this page">
+  <p class="doc-toc__title">On this page</p>
+  <div class="doc-toc__body"></div>
+</aside>
+</div>
+<footer class="site-footer" data-pagefind-ignore>
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <img src="../../img/hop-logo.svg" alt="" width="30" height="30" aria-hidden="true">
+      <div>
+        <p>The Hop Orchestration Platform &mdash; visual data and metadata orchestration, designed once and run anywhere.</p>
+        <ul class="site-footer__socials">
+        <li><a href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"/></svg></a></li>
+        <li><a href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"/></svg></a></li>
+        <li><a href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg></a></li>
+        </ul>
+      </div>
+    </div>
+    <nav class="site-footer__nav" aria-label="Footer">
+      <div>
+        <h2>Documentation</h2>
+        <ul>
+          <li><a href="../../manual/latest/getting-started/">Getting started</a></li>
+          <li><a href="../../manual/latest/">User manual</a></li>
+          <li><a href="../../dev-manual/latest/">Developer docs</a></li>
+          <li><a href="../../download/">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Community</h2>
+        <ul>
+          <li><a href="../../community/contributing/">Contributing</a></li>
+          <li><a href="../../community/mailing-list/">Mailing lists</a></li>
+          <li><a href="../../community/events/">Events</a></li>
+          <li><a href="../../community/support/">Support</a></li>
+          <li><a href="../../community/commercial/">Commercial support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Apache</h2>
+        <ul>
+          <li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li>
+          <li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li>
+          <li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li>
+          <li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li>
+          <li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="site-footer__legal">
+    <p>
+      Copyright &copy; 2019&ndash;2026 <a href="https://www.apache.org/" rel="noopener" target="_blank">The Apache Software Foundation</a>,
+      licensed under the <a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">Apache License, Version 2.0</a>.
+    </p>
+    <p>
+      Apache, Apache Hop, Hop, and the Apache feather logo are either registered trademarks or
+      trademarks of the Apache Software Foundation in the United States and/or other countries.
+    </p>
+  </div>
+</footer>
+
+<script src="../../js/site.js"></script>
+<script src="../../_/js/tabs.js"></script>
+</body>
+</html>

@@ -1,592 +1,248 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Blog on Hop</title>
-    <link>https://hop.apache.org/blog/</link>
-    <description>Recent content in Blog on Hop</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sun, 16 Aug 2026 00:00:00 +0200</lastBuildDate><atom:link href="https://hop.apache.org/blog/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Apache Hop 2.19 is available!</title>
-      <link>https://hop.apache.org/blog/2026/08/hop-2.19.0/</link>
-      <pubDate>Sun, 16 Aug 2026 00:00:00 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2026/08/hop-2.19.0/</guid>
-      <description>The Apache Hop community is happy to announce the release of Apache Hop 2.19!
- This release brings the largest set of changes we’ve delivered so far: 22 contributors, including 6 first-time contributors, worked on new features, improvements, and fixes over the past three months, closing 337 issues.
-    
- Let&amp;#39;s take a closer look at what Hop 2.19 brings: The Marketplace Native Spark engine Databricks file system support Append support for Cloud File systems SFTP metadata type Open and edit more file types Split view in the UI Redis vCard support Notable Bug Fixes New contributors Get Apache Hop 2.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 2.18.1 is available!!</title>
-      <link>https://hop.apache.org/blog/2026/06/hop-2.18.1/</link>
-      <pubDate>Thu, 18 Jun 2026 06:44:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2026/06/hop-2.18.1/</guid>
-      <description>The Apache Hop community is excited to announce the release of Apache Hop 2.18.1!
- This is a patch release to address some regressions that have happened between 2.17.0 and 2.18.0. The following issues have been solved:
-   Text file input no longer returned row numbers if configured to return those
-  Merge Rows (diff) regression with row lay-out
-  Get file names filter on type (files/Folders) did not work anymore</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 2.18 is available!!</title>
-      <link>https://hop.apache.org/blog/2026/06/hop-2.18.0/</link>
-      <pubDate>Mon, 01 Jun 2026 06:44:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2026/06/hop-2.18.0/</guid>
-      <description>The Apache Hop community is excited to announce the release of Apache Hop 2.18!
- This release is the result of three months of focused development, collaboration, and rigorous testing. With 280 closed tickets by 21 contributors, including 10 first-time contributors, 2.18 brings significant new capabilities, deeper integrations, and a range of improvements that make Apache Hop more powerful and enjoyable to work with every day. A sincere thank you to every contributor, tester, and user who invested their time and expertise into making this release possible.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 2.17 is available!!</title>
-      <link>https://hop.apache.org/blog/2026/02/hop-2.17.0/</link>
-      <pubDate>Fri, 06 Feb 2026 06:44:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2026/02/hop-2.17.0/</guid>
-      <description>The Apache Hop community is proud to announce the release of Apache Hop 2.17!
- After another three months of hard work, collaboration, and testing, this release closes 194 tickets by 18 contributors, delivers powerful new capabilities, important integrations, and a series of quality-of-life improvements to make data orchestration even more flexible, robust, and enterprise-ready. We want to extend a heartfelt thank you to every contributor, tester, and user who helped shape this release.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 2.16 is available!!</title>
-      <link>https://hop.apache.org/blog/2025/11/hop-2.16.0/</link>
-      <pubDate>Mon, 17 Nov 2025 06:44:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2025/11/hop-2.16.0/</guid>
-      <description>The Apache Hop community is proud to announce the release of Apache Hop 2.16!
- After another three months of hard work, collaboration, and testing, this release closes 111 tickets by 22 contributors, delivers powerful new capabilities, important integrations, and a series of quality-of-life improvements to make data orchestration even more flexible, robust, and enterprise-ready. We want to extend a heartfelt thank you to every contributor, tester, and user who helped shape this release.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 2.15 is available!!</title>
-      <link>https://hop.apache.org/blog/2025/08/hop-2.15.0/</link>
-      <pubDate>Wed, 20 Aug 2025 06:44:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2025/08/hop-2.15.0/</guid>
-      <description>The Apache Hop community is proud to announce the release of Apache Hop 2.15!
- After three months of hard work, collaboration, and relentless testing, this release closes 95 tickets by 17 contributors, including important bug fixes, usability improvements, and new features designed to make your data orchestration simpler and more powerful.
- We want to extend a heartfelt thank you to every contributor, tester, and user who helped shape this release.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 2.14 is available!!</title>
-      <link>https://hop.apache.org/blog/2025/05/hop-2.14.0/</link>
-      <pubDate>Mon, 19 May 2025 06:44:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2025/05/hop-2.14.0/</guid>
-      <description>After about two months of work on 35 tickets by 7 contributors, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.14.0.
- A huge thank you to everyone who made this possible.
-    
- Let&amp;#39;s take a closer look at what Hop 2.14 brings: Updated release cycle Mail server metadata type Various improvements and fixes Community GitHub Issues   or download Hop 2.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 2.13 is available!!</title>
-      <link>https://hop.apache.org/blog/2025/04/hop-2.13.0/</link>
-      <pubDate>Tue, 22 Apr 2025 06:44:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2025/04/hop-2.13.0/</guid>
-      <description>After about two months of work on 84 tickets by 8 contributors, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.13.0.
- A huge thank you to everyone who made this possible.
-    
- Let&amp;#39;s take a closer look at what Hop 2.13 brings: Multiple GCP Storage locations MySQL Bulk Loader Transform Various improvements Community GitHub Issues   or download Hop 2.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 2.12 is available!!</title>
-      <link>https://hop.apache.org/blog/2025/02/hop-2.12.0/</link>
-      <pubDate>Wed, 19 Feb 2025 06:44:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2025/02/hop-2.12.0/</guid>
-      <description>After about two months of work on 58 tickets by 11 contributors, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.12.0.
- A huge thank you to everyone who made this possible.
-    
- Let&amp;#39;s take a closer look at what Hop 2.12 brings: Variable resolvers Various improvements Community GitHub Issues   or download Hop 2.12.0  right away.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 2.11 is available!!</title>
-      <link>https://hop.apache.org/blog/2024/12/hop-2.11.0/</link>
-      <pubDate>Mon, 09 Dec 2024 06:44:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2024/12/hop-2.11.0/</guid>
-      <description>After about two months of work on 109 tickets by 16 contributors, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.11.0.
- A huge thank you to everyone who made this possible.
-    
- Let&amp;#39;s take a closer look at what Hop 2.11 brings: 4 NLP and LLM transforms Git improvements Syntax highlighting UI improvements Various changes Community GitHub Issues   or download Hop 2.</description>
-    </item>
-    
-    <item>
-      <title>Moving away from Mattermost</title>
-      <link>https://hop.apache.org/blog/2024/10/moving-away-from-mattermost/</link>
-      <pubDate>Mon, 14 Oct 2024 06:44:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2024/10/moving-away-from-mattermost/</guid>
-      <description>Hi Everyone,
- As discussed on the mailing lists recently, the Apache Hop community will move away from the Mattermost chat and switch to GitHub Discussions and the ASF Slack workspace for more informal community discussions.
- As discussed in the mailing list thread, there are a couple of reasons to do this:
-   The current Mattermost chat isn’t hosted on an offical Apache Hop (sub)domain, which is something we can’t change.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 2.10 is available!!</title>
-      <link>https://hop.apache.org/blog/2024/10/hop-2.10.0/</link>
-      <pubDate>Mon, 07 Oct 2024 06:44:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2024/10/hop-2.10.0/</guid>
-      <description>After about four months of work on 139 tickets, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.10.0.
- A huge thank you to everyone who made this possible.
-    
- Let&amp;#39;s take a closer look at what Hop 2.10 brings: Notable bug fixes New Features Block code execution in UDJC and UDJE Ability to configure multiple Azure accounts File Explorer perspective improvements   Community GitHub Issues   or download Hop 2.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 2.9 is available!!</title>
-      <link>https://hop.apache.org/blog/2024/05/hop-2.9.0/</link>
-      <pubDate>Tue, 28 May 2024 06:44:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2024/05/hop-2.9.0/</guid>
-      <description>After more than three months of work on 83 tickets, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.9.0.
- A huge thank you to everyone who made this possible.
-    
- Let&amp;#39;s take a closer look at what Hop 2.9 brings: Static Schema Static Schema Metadata Type Schema Mapping transform   CrateDB database dialect and bulk loader Various Community GitHub Issues   or download Hop 2.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 2.8 is available!!</title>
-      <link>https://hop.apache.org/blog/2024/03/hop-2.8.0/</link>
-      <pubDate>Wed, 13 Mar 2024 08:44:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2024/03/hop-2.8.0/</guid>
-      <description>After more than three months of work on 79 tickets, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.8.0.
- A huge thank you to everyone who made this possible.
-    
- Let&amp;#39;s take a closer look at what Hop 2.8 brings: Two new AWS transforms AWS SNS Notify AWS SQS Reader   Various Community GitHub Issues   or download Hop 2.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 2.7 is available!!</title>
-      <link>https://hop.apache.org/blog/2023/12/hop-2.7.0/</link>
-      <pubDate>Fri, 01 Dec 2023 09:49:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2023/12/hop-2.7.0/</guid>
-      <description>The Apache Hop PMC is proud to announce the release of version 2.7.0, this release contains 51 tickets and some work that has not been covered by tickets.
- A huge thank you to everyone who made this possible.
-    
- Let&amp;#39;s take a closer look at what Hop 2.7 brings: Redshift Bulk loader JDBC Driver refactoring Improvements Enhanced JSON Ouput Formula Transform Underline transform names Improved Brazilian   Community GitHub Issues   or download Hop 2.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 2.6 is available!!</title>
-      <link>https://hop.apache.org/blog/2023/09/hop-2.6.0/</link>
-      <pubDate>Mon, 18 Sep 2023 06:49:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2023/09/hop-2.6.0/</guid>
-      <description>After a summer of hard work on 65 tickets, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.6.0.
- A huge thank you to everyone who made this possible.
-    
- Let&amp;#39;s take a closer look at what Hop 2.6 brings: Apache Beam Upgrade and doc updates New Google Transforms Google Analytics 4 Google Sheets Input and Output   Community GitHub Issues   or download Hop 2.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 2.5 is available!!</title>
-      <link>https://hop.apache.org/blog/2023/06/hop-2.5.0/</link>
-      <pubDate>Mon, 12 Jun 2023 06:49:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2023/06/hop-2.5.0/</guid>
-      <description>After another two months of work on exactly 100 tickets, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.5.0.
- A huge thank you to everyone who made this possible.
-    
- Let&amp;#39;s take a closer look at what Hop 2.5 brings: Apache Beam Upgrade Documentation Beam and Google Dataflow how-to guide Extended Apache Airflow how-to guide Looping how-to guide   Hop Gui Improvements Various changes and improvements Community GitHub Issues   or download Hop 2.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 2.4 is available!!</title>
-      <link>https://hop.apache.org/blog/2023/03/hop-2.4.0/</link>
-      <pubDate>Fri, 31 Mar 2023 06:49:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2023/03/hop-2.4.0/</guid>
-      <description>After another two months of work on 98 tickets, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.4.0.
- A huge thank you to everyone who made this possible.
-    
- Let&amp;#39;s take a closer look at what Hop 2.4 brings: New Features Improvements Container image Community GitHub Issues   or download Hop 2.4.0  right away.
- Apache Hop 2.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 2.3 is available!!</title>
-      <link>https://hop.apache.org/blog/2023/01/hop-2.3.0/</link>
-      <pubDate>Mon, 30 Jan 2023 07:49:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2023/01/hop-2.3.0/</guid>
-      <description>After almost two months of work on 82 tickets, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.3.0.
- A huge thank you to everyone who made this possible.
-    
- Let&amp;#39;s take a closer look at what Hop 2.3 brings: Weblate - New Translation tool Documentation updates Vertica Bulk Loader Community GitHub Issues   or download Hop 2.3.0  right away.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 2.2 is available!!</title>
-      <link>https://hop.apache.org/blog/2022/12/hop-2.2.0/</link>
-      <pubDate>Tue, 06 Dec 2022 07:49:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2022/12/hop-2.2.0/</guid>
-      <description>After almost two months of work on over 160 tickets, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.2.0.
- A huge thank you to everyone who made this possible.
-    
- Let&amp;#39;s take a closer look at what Hop 2.2 brings: Hop GUI improvements Welcome Dialog A new navigation viewport New data grid toolbars instead of right-click menu Configuration perspective Hop Web   Various component upgrades Apache Beam and Google Dataflow Various Community JIRA   or download Hop 2.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 2.1 is available!!</title>
-      <link>https://hop.apache.org/blog/2022/10/hop-2.1.0/</link>
-      <pubDate>Fri, 14 Oct 2022 07:49:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2022/10/hop-2.1.0/</guid>
-      <description>After four and a half months of work, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.1.0.
- A huge thank you to everyone who made this possible.
-    
- Let&amp;#39;s take a closer look at what Hop 2.1 brings: MongoDB Apache Beam Execution Information Framework and Data Profiling Kubernetes Documentation New plugins Community JIRA   or download Hop 2.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 2.0 is available!!</title>
-      <link>https://hop.apache.org/blog/2022/06/hop-2.0.0/</link>
-      <pubDate>Thu, 02 Jun 2022 07:49:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2022/06/hop-2.0.0/</guid>
-      <description>After three months of work, the Apache Hop community is pleased to announce the general availability of Apache Hop 2.0.0. A huge thank you to everyone who made this possible.
-    
- Let&amp;#39;s take a closer look at what Hop 2.0 brings: Upgrade to Java 11 Chinese translations New transform plugins Apache Avro File Output Apache Doris Bulk Loader Drools Rules Accumulator Drools Rules Executor Formula   Apache Beam upgrade Various Variable Annotations Dimension Lookup/Update new dialog Integration tests   Community JIRA   or download Hop 2.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 1.2 is available!!</title>
-      <link>https://hop.apache.org/blog/2022/03/hop-1.2.0/</link>
-      <pubDate>Tue, 08 Mar 2022 07:59:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2022/03/hop-1.2.0/</guid>
-      <description>The Apache Hop community is pleased to announce the general availability of Apache Hop 1.2.0. A huge thank you to everyone involved to made this possible.
- Read on for an overview of what has changed in this release or download Hop 1.2.0 right away.
- Hop Gui Hop Gui continues to evolve. The following list of improvements will make you even more productive in Hop.
-   HOP-3298: Hop Gui now remembers the last environment you used when you switch to a project.</description>
-    </item>
-    
-    <item>
-      <title>Roundup January 2022</title>
-      <link>https://hop.apache.org/blog/2022/02/roundup-2022-02/</link>
-      <pubDate>Thu, 03 Feb 2022 07:59:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2022/02/roundup-2022-02/</guid>
-      <description>As always at the start of another new month, let&amp;#39;s have a look at what happened at Hop over the last month. Here&amp;#39;s the recap for January 2022! Hop Graduation - Apache Software Foundation Press Release Apache Hop 1.1.0 Various Community new Contributions New Committers the Apache Hop Community in numbers   JIRA Activity   Hop Graduation - Apache Software Foundation Press Release Everyone who follows Apache Hop knows we graduated to a Top-Level Project in the final days of 2021.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop 1.1 is available!!</title>
-      <link>https://hop.apache.org/blog/2022/01/hop-1.1.0/</link>
-      <pubDate>Mon, 24 Jan 2022 07:59:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2022/01/hop-1.1.0/</guid>
-      <description>After four months of work, the Apache Hop community is pleased to announce the general availability of Apache Hop 1.1.0. A huge thank you to everyone who made this possible.
-    
- Let&amp;#39;s take a closer look at what Hop 1.1 brings: Known Issue Hop Server Docker Apache Beam updates and improvements New and updated plugins Hop Gui improvements Various Community JIRA Download Hop 1.1.0   or download Hop 1.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop Graduates as a Top-Level Project</title>
-      <link>https://hop.apache.org/blog/2022/01/hop-graduation/</link>
-      <pubDate>Thu, 20 Jan 2022 07:59:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2022/01/hop-graduation/</guid>
-      <description>Apache Hop Graduates as a Top-Level Project DISCLAIMER: this is a reprint of the official Apache Software Foundation press release about Hop’s graduation.
-   The Apache Software Foundation Announces Open Source data orchestration platform Apache® Hop™ as a Top-Level Project Wilmington, DE, Jan. 18, 2022 (GLOBE NEWSWIRE) — The Apache Software Foundation (ASF), the all-volunteer developers, stewards, and incubators of more than 350 Open Source projects and initiatives, announced today Apache® Hop™ as a Top-Level Project (TLP).</description>
-    </item>
-    
-    <item>
-      <title>Roundup December 2021</title>
-      <link>https://hop.apache.org/blog/2022/01/roundup-2021-12/</link>
-      <pubDate>Mon, 10 Jan 2022 07:59:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2022/01/roundup-2021-12/</guid>
-      <description>As always at the start of another new month, let&amp;#39;s have a look at what happened at Hop over the last month. Here&amp;#39;s the recap for December 2021! Graduation - Hop is now a Top Level Project Hop 1.1.0 preparation Hop 2.0 preparation - Java 11 build is taking shape Lots and lots of improvements and bug fixes New Transform Plugins Hop Server Log4j removed Various   Community JIRA Activity   Graduation - Hop is now a Top Level Project As an early Christmas present, Apache Hop’s graduation was confirmed by that ASF Board on December, 16th.</description>
-    </item>
-    
-    <item>
-      <title>Roundup November 2021</title>
-      <link>https://hop.apache.org/blog/2021/12/roundup-2021-11/</link>
-      <pubDate>Thu, 02 Dec 2021 07:59:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2021/12/roundup-2021-11/</guid>
-      <description>As always at the start of another new month, let&amp;#39;s have a look at what happened at Hop over the last month. Here&amp;#39;s the recap for November 2021! Graduation preparation Hop 1.1.0 preparation Hop Server   Neo4j Graph Output Lots and lots of bug fixes and improvements   New plugins Apache Hop 2.0 preparation. Community Hop Mailing lists 3Hx - Hot Hop Hangouts Hop Community   JIRA Activity   Graduation preparation After the release of Hop 1.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop (Incubating) 1.0 is available!!</title>
-      <link>https://hop.apache.org/blog/2021/10/hop-1.0.0/</link>
-      <pubDate>Tue, 05 Oct 2021 07:59:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2021/10/hop-1.0.0/</guid>
-      <description>After more than two years of work, the Apache Hop community is pleased to announce the general availability of Apache Hop (Incubating) 1.0.
-    
- This 1.0 release is the result of a massive amount of work by the Apache Hop community.
- Let&amp;#39;s take a closer look at what Hop 1.0 brings: Code Architecture, cleanup, refactoring Hop GUI and a uniform set of tools Projects and Environments Portable runtimes: design once, run anywhere Unit, Integration and Regression Testing Life cycle management Community   Code Architecture, cleanup, refactoring Since Apache Hop started from the Kettle (Pentaho Data Integration) code base in late 2019, no stone has been left unturned.</description>
-    </item>
-    
-    <item>
-      <title>Roundup July, August 2021</title>
-      <link>https://hop.apache.org/blog/2021/09/roundup-2021-08/</link>
-      <pubDate>Thu, 02 Sep 2021 07:59:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2021/09/roundup-2021-08/</guid>
-      <description>As always at the start of another new month, let’s have a look at what happened at Hop over the last month. Here’s the recap for July and August 2021!
- Hop 0.99 Release On August 7th, the Hop community released Apache Hop (Incubating) 0.99. As discussed at length in the release announcement, 0.99 is our last stop before Hop 1.0.
- Since we want 1.0 to be as robust as possible, the focus has been on hardening Hop, so we worked hard on finding and fixing as many bugs as possible.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop (Incubating) 0.99 Release Available!</title>
-      <link>https://hop.apache.org/blog/2021/08/hop-0.99/</link>
-      <pubDate>Sat, 07 Aug 2021 07:59:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2021/08/hop-0.99/</guid>
-      <description>The Hop community is pleased to announce the availability of the Apache Hop (Incubating) 0.99 release, our last stop before Hop 1.0.
- This release contains over 3 months of work. Since our 0.70 release in late April, we’ve seen a lot of activity in a variety of areas. The focus for this release was on hardening Hop to deliver our users the most scalable, robust, documented and tested Hop experience possible.</description>
-    </item>
-    
-    <item>
-      <title>Roundup June 2021</title>
-      <link>https://hop.apache.org/blog/2021/07/roundup-2021-07/</link>
-      <pubDate>Fri, 02 Jul 2021 07:59:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2021/07/roundup-2021-07/</guid>
-      <description>As always at the start of another new month, let’s have a look at what happened at Hop over the last month. Here’s the recap for June 2021!
- Here are some quick links for the restless souls among you: Hop 0.99 Release process VFS Improvements Importer Improvements Hop Web Various 3Hx (Hot Hop Hangout) Sessions Community JIRA Activity     Hop 0.99 Release process We’ve created a couple of release candidate for Apache Hop (Incubating) 0.</description>
-    </item>
-    
-    <item>
-      <title>Roundup May 2021</title>
-      <link>https://hop.apache.org/blog/2021/06/roundup-2021-06/</link>
-      <pubDate>Tue, 01 Jun 2021 08:59:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2021/06/roundup-2021-06/</guid>
-      <description>As always at the start of another new month, let’s have a look at what happened at Hop over the last month. Here’s the recap for May 2021!
- Here are some quick links for the restless souls among you: Hop 0.99 Release process started Avro Support Various 3Hx (Hot Hop Hangout) Sessions Community JIRA Activity     Hop 0.99 Release process started At the very end of the month (on May, 27th), the release process for Hop 0.</description>
-    </item>
-    
-    <item>
-      <title>Roundup April 2021</title>
-      <link>https://hop.apache.org/blog/2021/05/roundup-2021-05/</link>
-      <pubDate>Sat, 01 May 2021 08:59:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2021/05/roundup-2021-05/</guid>
-      <description>As always at the start of another new month, let’s have a look at what happened at Hop over the last month. Here’s the recap for April 2021!
- Here are some quick links for the restless souls among you: 0.70 release 3Hx (Hot Hop Hangout) Sessions Documentation, Samples, Integration tests Various Hop search Community JIRA Activity     0.70 release On April, 12th, the Hop community release Apache Hop (Incubating) 0.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop (Incubating) 0.70 Release Available!</title>
-      <link>https://hop.apache.org/blog/2021/04/release-0.70/</link>
-      <pubDate>Mon, 12 Apr 2021 07:59:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2021/04/release-0.70/</guid>
-      <description>The Hop community is pleased to announce the availability of the Apache Hop (Incubating) 0.70 release.
- This release contains about 2.5 months of work. Since our 0.60 release in late January, we’ve seen a lot of activity in a variety of areas. Hop contributors not only worked on code: we’ve received contributions in artwork, translations, documentation etc. We have more than 45 new plugins, and a total of 223 jira tickets were implemented.</description>
-    </item>
-    
-    <item>
-      <title>Roundup March 2021</title>
-      <link>https://hop.apache.org/blog/2021/04/roundup-2021-04/</link>
-      <pubDate>Wed, 31 Mar 2021 08:59:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2021/04/roundup-2021-04/</guid>
-      <description>As always at the start of another new month, let’s have a look at what happened at Hop over the last month. Here’s the recap for March 2021!
- The list of items we need to cover in the monthly reports continues to grow. Here are some quick links for the restless souls among you: Neo4j integration New file explorer perspective New Metadata Types VFS Drivers New Plugins Various Community JIRA Activity     Neo4j integration We’re really excited to welcome full Neo4j integration in Hop!</description>
-    </item>
-    
-    <item>
-      <title>Roundup February 2021</title>
-      <link>https://hop.apache.org/blog/2021/03/roundup-2021-03/</link>
-      <pubDate>Sun, 28 Feb 2021 10:01:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2021/03/roundup-2021-03/</guid>
-      <description>As always at the start of another new month, let’s have a look at what happened at Hop over the last month. Here’s the recap for February 2021!
- We have quite a lot of ground to cover. Here are some quick links for the restless souls among you: Metadata Injection Dark Mode Beam Spark runner improvements New Metadata Types New Plugins Various Community JIRA Tickets     Metadata Injection Metadata injection was added to Hop months ago.</description>
-    </item>
-    
-    <item>
-      <title>Roundup January 2021</title>
-      <link>https://hop.apache.org/blog/2021/02/roundup-2021-02/</link>
-      <pubDate>Tue, 02 Feb 2021 10:01:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2021/02/roundup-2021-02/</guid>
-      <description>As always at the start of another new month, let’s have a look at what happened at Hop over the last month. Here’s the recap for January 2021!
-   Apache Hop (Incubating) 0.60 Released Apache Hop (Incubating) 0.60 was released in late January.
- With 0.60 being the first Hop release as an Incubating ASF project, we focused on adopting the &amp;#34;Apache Way&amp;#34;, and made this a source code only release.</description>
-    </item>
-    
-    <item>
-      <title>Apache Hop (Incubating) 0.60 released</title>
-      <link>https://hop.apache.org/blog/2021/01/release-0.60/</link>
-      <pubDate>Tue, 26 Jan 2021 10:01:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2021/01/release-0.60/</guid>
-      <description>Less than three months since Project Hop joined the ASF Incubator (late October 2020), we’re happy to announce Apache Hop 0.60, our first release as an incubating project at the Apache Software Foundation.
-   Apache Hop (Incubating) 0.60 - Source only As stated earlier, one of the main goal of the incubator program is to give projects the time to adopt &amp;#34;The Apache Way&amp;#34;. As such, it took us a bit of time to get the entire process straightened out.</description>
-    </item>
-    
-    <item>
-      <title>Roundup December 2020</title>
-      <link>https://hop.apache.org/blog/2021/01/roundup-2021-01/</link>
-      <pubDate>Sun, 03 Jan 2021 10:01:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2021/01/roundup-2021-01/</guid>
-      <description>Welcome in 2021, happy new year!
- While the world has seen its share of problems in 2020, it’s been a roller coaster for Hop!
- Our community continued to work tirelessly in December, even through the holiday period.
- Let’s have a look at what happened in this last burst of productivity for 2020. With this pace of development, 2021 will be a great year for Hop!
- A special shout out to Nicolas Adment, who was on an absolute roll in December!</description>
-    </item>
-    
-    <item>
-      <title>Roundup November 2020</title>
-      <link>https://hop.apache.org/blog/2020/12/roundup-2020-12/</link>
-      <pubDate>Mon, 30 Nov 2020 10:01:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2020/12/roundup-2020-12/</guid>
-      <description>With 2020 coming to a close, we’ve started preparing for 0.50, which will be our first Apache release. We’ll have more news on that soon!
- At the start of the final month of 2020, let’s have a closer look at what happened at Apache Hop in November.
-   Apache Hop Incubation - infrastructure Our migration to the Apache Software Foundation infrastructure is now done. All references to Project Hop have been changed to Apache Hop (Incubating).</description>
-    </item>
-    
-    <item>
-      <title>Roundup September, October 2020</title>
-      <link>https://hop.apache.org/blog/2020/11/roundup-2020-11/</link>
-      <pubDate>Mon, 09 Nov 2020 10:01:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2020/11/roundup-2020-11/</guid>
-      <description>We’ve had another couple of busy months at Apache Hop. A lot of these changes have been happening in the background, but are very exciting nevertheless. As we’re getting close to finalizing the background work, we’ll soon have more time to work on Hop platform features again.
- Here’s what happened over the last two months.
-   Hop joins the Apache Software Foundation, becomes Apache Hop (Incubating)</description>
-    </item>
-    
-    <item>
-      <title>Hop Joins the ASF</title>
-      <link>https://hop.apache.org/blog/2020/10/hop-joins-the-asf/</link>
-      <pubDate>Sat, 31 Oct 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2020/10/hop-joins-the-asf/</guid>
-      <description>Apache Hop - Incubation Proposal Accepted From the very start with Hop, we haven’t exactly been secretive about our intention to join the Apache Software Foundation (ASF) and donate Project Hop to the ASF as Apache Hop.
- After almost a year of work on Project Hop, we’re very happy to announce we’ve reached a first milestone: the Apache Hop proposal was submitted to the incubator mailing list on September, 9th and has been accepted!</description>
-    </item>
-    
-    <item>
-      <title>Preview Release 0.30</title>
-      <link>https://hop.apache.org/blog/2020/07/preview-release-0.30/</link>
-      <pubDate>Tue, 21 Jul 2020 12:01:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2020/07/preview-release-0.30/</guid>
-      <description>It has been about 2 months since our latest release, and a lot has happened!
- We’re happy to announce to availability of our 0.30 preview release. Please take it for a spin. If you find a bug, please create a bug ticket, if there’s functionality you’d like to see, please create a feature request.
- Direct download here
- Getting Started Guide
- Release Notes: 0.30
- Over 100 tickets have been closed in this release, here we will discuss the major changes.</description>
-    </item>
-    
-    <item>
-      <title>Roundup July, August 2020</title>
-      <link>https://hop.apache.org/blog/2020/08/roundup-2020-08/</link>
-      <pubDate>Sat, 27 Jun 2020 12:01:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2020/08/roundup-2020-08/</guid>
-      <description>We released 0.30 in late July, followed by a couple of weeks of slower progress because of summer holidays, but here we are with a roundup for July and August.
- After all the heavy lifting we did in the first half of the year, Project Hop now entered a feature-freeze phase. The focus now is on bug fixing, documentation and hardening the platform. Minor new features may continue to appear, just don’t expect any spectacular new functionality for now.</description>
-    </item>
-    
-    <item>
-      <title>Roundup June 2020</title>
-      <link>https://hop.apache.org/blog/2020/06/roundup-2020-06/</link>
-      <pubDate>Sat, 27 Jun 2020 12:01:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2020/06/roundup-2020-06/</guid>
-      <description>Another month has passed, so here we are with a new roundup!
- A lot of work has been done in the last couple of weeks. A huge thanks to Matt, who implemented most of the functionality that was added this month.
- Here’s what happened in June!
-   Environments → Projects, Environments and Purposes The environments system, introduced earlier this year, was significantly extended.
-   a project is a set of workflows and pipelines with their datasets, tests etc.</description>
-    </item>
-    
-    <item>
-      <title>Roundup May 2020</title>
-      <link>https://hop.apache.org/blog/2020/05/roundup-2020-05/</link>
-      <pubDate>Tue, 02 Jun 2020 12:01:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2020/05/roundup-2020-05/</guid>
-      <description>Another month has passed, so here we are with a new roundup!
- In early May, we released version 0.21. Check the release announcement here
- We would like to thank everyone who tested 0.21 and created feature requests and bug tickets. Fixing the bugs and implementing the feature requests will keep us busy for another couple of weeks.
- Apart from the topics discussed below, we have continued to walk the path of major code cleanup and refactoring.</description>
-    </item>
-    
-    <item>
-      <title>Preview Release 0.21</title>
-      <link>https://hop.apache.org/blog/2020/05/preview-release-0.21/</link>
-      <pubDate>Thu, 07 May 2020 12:01:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2020/05/preview-release-0.21/</guid>
-      <description>In the month since we released 0.10, we’ve added enough functionality to Project Hop for another preview release.
- We’re happy to announce to availability of our 0.21 preview release. Please take it for a spin. If you find a bug, please create a bug ticket, if there’s functionality you’d like to see, please create a feature request.
- Direct download here
- Getting Started Guide
- Release Notes: 0.20, 0.</description>
-    </item>
-    
-    <item>
-      <title>Roundup April 2020</title>
-      <link>https://hop.apache.org/blog/2020/04/roundup-2020-04/</link>
-      <pubDate>Sun, 03 May 2020 12:01:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2020/04/roundup-2020-04/</guid>
-      <description>Another month has passed time for a new roundup! Previous month has been a hectic one, we had our first preview version (0.10) and are currently getting close to releasing 0.20!
- We would like to thank everyone that tested 0.10 and created feature requests and issues, we have not yet been able to solve all of them but so many changes were made we feel like 0.20 is at its place.</description>
-    </item>
-    
-    <item>
-      <title>Preview Release 0.10</title>
-      <link>https://hop.apache.org/blog/2020/04/release-preview-0.1/</link>
-      <pubDate>Thu, 09 Apr 2020 12:01:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2020/04/release-preview-0.1/</guid>
-      <description>After more than half a year of hard work, we felt the time was right to show the world what we have been working on.
- We’re happy to announce to availability of our 0.10 preview release. Please take it for a spin. If you find a bug, please create a bug ticket, if there’s functionality you’d like to see, please create a feature request.
- Direct download here
- Getting Started Guide</description>
-    </item>
-    
-    <item>
-      <title>Roundup March 2020</title>
-      <link>https://hop.apache.org/blog/2020/03/roundup-2020-03/</link>
-      <pubDate>Tue, 31 Mar 2020 12:01:56 +0200</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2020/03/roundup-2020-03/</guid>
-      <description>A new month, a new roundup! We’re getting very close to a first preview release, expect it to see the light of day in the coming week (don’t haunt us if it’s a week later). We have continued to walk the path of major code cleanup and refactoring. Because we don’t want to bore you with the technical stuff (those interested in the technical stuff come and ask in our #dev channel ) here is an overview of what you can see.</description>
-    </item>
-    
-    <item>
-      <title>Roundup February 2020</title>
-      <link>https://hop.apache.org/blog/2020/02/roundup-2020-02/</link>
-      <pubDate>Sun, 08 Mar 2020 12:38:42 +0100</pubDate>
-      
-      <guid>https://hop.apache.org/blog/2020/02/roundup-2020-02/</guid>
-      <description>Currently we are working on creating a first public preview version of the Hop Orchestration Platform. Expect this version to give you a first overview of what the future of Hop will be offering, we are not following a specific roadmap and are working on all fronts. The main focus of the preview version is UI changes.
- Following items contain the biggest changes but much more is happening.
-   UI We are completely rewriting the Hop UI, creating a new experience on how to create data pipelines.</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Apache Hop</title>
+  <link href="https://hop.apache.org/blog/"/>
+  <link rel="self" href="https://hop.apache.org/blog/index.xml"/>
+  <id>https://hop.apache.org/blog/</id>
+  <updated>2026-08-15T22:00:00.000Z</updated>
+  <entry>
+    <title>Apache Hop 2.19 is available!</title>
+    <link href="https://hop.apache.org/blog/2026/08/hop-2.19.0/"/>
+    <id>https://hop.apache.org/blog/2026/08/hop-2.19.0/</id>
+    <updated>2026-08-15T22:00:00.000Z</updated>
+    <author><name>Adalennis</name></author>
+    <summary>Apache Hop 2.19 Released</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 2.18.1 is available!!</title>
+    <link href="https://hop.apache.org/blog/2026/06/hop-2.18.1/"/>
+    <id>https://hop.apache.org/blog/2026/06/hop-2.18.1/</id>
+    <updated>2026-06-18T04:44:56.000Z</updated>
+    <author><name>hansva</name></author>
+    <summary>Apache Hop 2.18.1 Released</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 2.18 is available!!</title>
+    <link href="https://hop.apache.org/blog/2026/06/hop-2.18.0/"/>
+    <id>https://hop.apache.org/blog/2026/06/hop-2.18.0/</id>
+    <updated>2026-06-01T04:44:56.000Z</updated>
+    <author><name>hansva</name></author>
+    <summary>Apache Hop 2.18 Released</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 2.17 is available!!</title>
+    <link href="https://hop.apache.org/blog/2026/02/hop-2.17.0/"/>
+    <id>https://hop.apache.org/blog/2026/02/hop-2.17.0/</id>
+    <updated>2026-02-06T04:44:56.000Z</updated>
+    <author><name>hansva</name></author>
+    <summary>Apache Hop 2.17 Released</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 2.16 is available!!</title>
+    <link href="https://hop.apache.org/blog/2025/11/hop-2.16.0/"/>
+    <id>https://hop.apache.org/blog/2025/11/hop-2.16.0/</id>
+    <updated>2025-11-17T04:44:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Apache Hop 2.16 Released</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 2.15 is available!!</title>
+    <link href="https://hop.apache.org/blog/2025/08/hop-2.15.0/"/>
+    <id>https://hop.apache.org/blog/2025/08/hop-2.15.0/</id>
+    <updated>2025-08-20T04:44:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Apache Hop 2.15 Released</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 2.14 is available!!</title>
+    <link href="https://hop.apache.org/blog/2025/05/hop-2.14.0/"/>
+    <id>https://hop.apache.org/blog/2025/05/hop-2.14.0/</id>
+    <updated>2025-05-19T04:44:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Apache Hop 2.14 Released</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 2.13 is available!!</title>
+    <link href="https://hop.apache.org/blog/2025/04/hop-2.13.0/"/>
+    <id>https://hop.apache.org/blog/2025/04/hop-2.13.0/</id>
+    <updated>2025-04-22T04:44:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Apache Hop 2.13 Released</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 2.12 is available!!</title>
+    <link href="https://hop.apache.org/blog/2025/02/hop-2.12.0/"/>
+    <id>https://hop.apache.org/blog/2025/02/hop-2.12.0/</id>
+    <updated>2025-02-19T04:44:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Apache Hop 2.12 Released</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 2.11 is available!!</title>
+    <link href="https://hop.apache.org/blog/2024/12/hop-2.11.0/"/>
+    <id>https://hop.apache.org/blog/2024/12/hop-2.11.0/</id>
+    <updated>2024-12-09T04:44:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Apache Hop 2.11 Released</summary>
+  </entry>
+  <entry>
+    <title>Moving away from Mattermost</title>
+    <link href="https://hop.apache.org/blog/2024/10/moving-away-from-mattermost/"/>
+    <id>https://hop.apache.org/blog/2024/10/moving-away-from-mattermost/</id>
+    <updated>2024-10-14T04:44:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Moving away from Mattermost</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 2.10 is available!!</title>
+    <link href="https://hop.apache.org/blog/2024/10/hop-2.10.0/"/>
+    <id>https://hop.apache.org/blog/2024/10/hop-2.10.0/</id>
+    <updated>2024-10-07T04:44:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Apache Hop 2.10 Released</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 2.9 is available!!</title>
+    <link href="https://hop.apache.org/blog/2024/05/hop-2.9.0/"/>
+    <id>https://hop.apache.org/blog/2024/05/hop-2.9.0/</id>
+    <updated>2024-05-28T04:44:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Apache Hop 2.9 Released</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 2.8 is available!!</title>
+    <link href="https://hop.apache.org/blog/2024/03/hop-2.8.0/"/>
+    <id>https://hop.apache.org/blog/2024/03/hop-2.8.0/</id>
+    <updated>2024-03-13T06:44:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Apache Hop 2.8 Released</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 2.7 is available!!</title>
+    <link href="https://hop.apache.org/blog/2023/12/hop-2.7.0/"/>
+    <id>https://hop.apache.org/blog/2023/12/hop-2.7.0/</id>
+    <updated>2023-12-01T07:49:56.000Z</updated>
+    <author><name>hansva</name></author>
+    <summary>Apache Hop 2.7 Released</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 2.6 is available!!</title>
+    <link href="https://hop.apache.org/blog/2023/09/hop-2.6.0/"/>
+    <id>https://hop.apache.org/blog/2023/09/hop-2.6.0/</id>
+    <updated>2023-09-18T04:49:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Apache Hop 2.6 Released</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 2.5 is available!!</title>
+    <link href="https://hop.apache.org/blog/2023/06/hop-2.5.0/"/>
+    <id>https://hop.apache.org/blog/2023/06/hop-2.5.0/</id>
+    <updated>2023-06-12T04:49:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Apache Hop 2.5 Released</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 2.4 is available!!</title>
+    <link href="https://hop.apache.org/blog/2023/03/hop-2.4.0/"/>
+    <id>https://hop.apache.org/blog/2023/03/hop-2.4.0/</id>
+    <updated>2023-03-31T04:49:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Apache Hop 2.4 Released</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 2.3 is available!!</title>
+    <link href="https://hop.apache.org/blog/2023/01/hop-2.3.0/"/>
+    <id>https://hop.apache.org/blog/2023/01/hop-2.3.0/</id>
+    <updated>2023-01-30T05:49:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Apache Hop 2.3 Released</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 2.2 is available!!</title>
+    <link href="https://hop.apache.org/blog/2022/12/hop-2.2.0/"/>
+    <id>https://hop.apache.org/blog/2022/12/hop-2.2.0/</id>
+    <updated>2022-12-06T05:49:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Apache Hop 2.2 Released</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 2.1 is available!!</title>
+    <link href="https://hop.apache.org/blog/2022/10/hop-2.1.0/"/>
+    <id>https://hop.apache.org/blog/2022/10/hop-2.1.0/</id>
+    <updated>2022-10-14T05:49:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Apache Hop 2.1 Released</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 2.0 is available!!</title>
+    <link href="https://hop.apache.org/blog/2022/06/hop-2.0.0/"/>
+    <id>https://hop.apache.org/blog/2022/06/hop-2.0.0/</id>
+    <updated>2022-06-02T05:49:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Apache Hop 2.0 Released</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 1.2 is available!!</title>
+    <link href="https://hop.apache.org/blog/2022/03/hop-1.2.0/"/>
+    <id>https://hop.apache.org/blog/2022/03/hop-1.2.0/</id>
+    <updated>2022-03-08T05:59:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Apache Hop 1.2 Released</summary>
+  </entry>
+  <entry>
+    <title>Roundup January 2022</title>
+    <link href="https://hop.apache.org/blog/2022/02/roundup-2022-02/"/>
+    <id>https://hop.apache.org/blog/2022/02/roundup-2022-02/</id>
+    <updated>2022-02-03T05:59:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Roundup January 2022</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop 1.1 is available!!</title>
+    <link href="https://hop.apache.org/blog/2022/01/hop-1.1.0/"/>
+    <id>https://hop.apache.org/blog/2022/01/hop-1.1.0/</id>
+    <updated>2022-01-24T05:59:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Apache Hop 1.1 Released</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop Graduates as a Top-Level Project</title>
+    <link href="https://hop.apache.org/blog/2022/01/hop-graduation/"/>
+    <id>https://hop.apache.org/blog/2022/01/hop-graduation/</id>
+    <updated>2022-01-20T05:59:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Apache Hop graduates as a Top-Level Project at the Apache Software Foundation</summary>
+  </entry>
+  <entry>
+    <title>Roundup December 2021</title>
+    <link href="https://hop.apache.org/blog/2022/01/roundup-2021-12/"/>
+    <id>https://hop.apache.org/blog/2022/01/roundup-2021-12/</id>
+    <updated>2022-01-10T05:59:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Roundup December 2021</summary>
+  </entry>
+  <entry>
+    <title>Roundup November 2021</title>
+    <link href="https://hop.apache.org/blog/2021/12/roundup-2021-11/"/>
+    <id>https://hop.apache.org/blog/2021/12/roundup-2021-11/</id>
+    <updated>2021-12-02T05:59:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Roundup November 2021</summary>
+  </entry>
+  <entry>
+    <title>Apache Hop (Incubating) 1.0 is available!!</title>
+    <link href="https://hop.apache.org/blog/2021/10/hop-1.0.0/"/>
+    <id>https://hop.apache.org/blog/2021/10/hop-1.0.0/</id>
+    <updated>2021-10-05T05:59:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Apache Hop 1.0 Released</summary>
+  </entry>
+  <entry>
+    <title>Roundup July, August 2021</title>
+    <link href="https://hop.apache.org/blog/2021/09/roundup-2021-08/"/>
+    <id>https://hop.apache.org/blog/2021/09/roundup-2021-08/</id>
+    <updated>2021-09-02T05:59:56.000Z</updated>
+    <author><name>bamaer</name></author>
+    <summary>Roundup July, August 2021</summary>
+  </entry>
+</feed>

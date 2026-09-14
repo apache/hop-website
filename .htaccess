@@ -18,3 +18,7 @@ RewriteRule "^tech-manual/[^/]+/logging/.*$" "/dev-manual/latest/architecture/lo
 RewriteRule "^tech-manual/[^/]+/hop-logo-and-icons\.html$" "/community/branding/" [R=permanent,L]
 RewriteRule "^tech-manual/[^/]+/_attachments/BrandGuideline_Hop\.pdf$" "/graphical_resources/brand_guideline_hop.pdf" [R=permanent,L]
 RewriteRule "^tech-manual/(.*)$" "/manual/latest/" [R=permanent,L]
+
+# A themed 404 is built and published but was never served: real misses got the
+# stock httpd HTML-2.0 page instead.
+ErrorDocument 404 /404.html
