@@ -1,0 +1,122 @@
+---
+import Base from '../../layouts/Base.astro'
+import Breadcrumbs from '../../components/Breadcrumbs.astro'
+import Section from '../../components/Section.astro'
+import { lists } from '../../data/mailing-lists.mjs'
+import { getCollection } from 'astro:content'
+
+const known = new Set((await getCollection('pages')).map((p) => `/${p.id}/`))
+---
+<Base
+  title="Mailing lists"
+  description="Apache Hop's mailing lists: users@ for questions about using Hop, dev@ for development of Hop itself, and commits@ for change notifications.">
+  <main id="main">
+    <div class="intro">
+      <Breadcrumbs path="/community/mailing-list/" title="Mailing lists" known={known} />
+      <h1>Mailing lists</h1>
+      <p class="intro__lede">
+        The mailing lists are where the Apache Hop community happens: questions get answered,
+        proposals get discussed and decisions get made, all in public and in the archive.
+      </p>
+      <div class="pick">
+        <p><strong>Not sure which one?</strong> Use <a href="#users">users@</a>. It has the most
+        people reading it, and questions about using Hop belong there rather than on dev@.</p>
+      </div>
+    </div>
+
+    <Section divider={false}>
+      <ul class="lists">
+        {lists.map((l) => (
+          <li class="list" id={l.name}>
+            <div class="list__head">
+              <h2>{l.title}</h2>
+              <code>{l.address}</code>
+            </div>
+            <p class="list__purpose">{l.purpose}</p>
+            {l.note && <p class="list__note">{l.note}</p>}
+            <p class="list__actions">
+              <a class="btn btn--primary" href={l.subscribe}>Subscribe</a>
+              <a class="btn" href={l.archive}>Browse the archive</a>
+              <a class="list__unsub" href={l.unsubscribe}>Unsubscribe</a>
+            </p>
+          </li>
+        ))}
+      </ul>
+    </Section>
+
+    <Section title="How subscribing works">
+      <div class="how">
+        <ol>
+          <li>Send an empty mail to the subscribe address &mdash; the buttons above open one for you.</li>
+          <li>You will get a confirmation request back. Reply to it, again with an empty mail.</li>
+          <li>That is it. You are subscribed, and you can post by writing to the list address.</li>
+        </ol>
+        <p>
+          You do not need to subscribe to read: every list is public and fully searchable in the{' '}
+          <a href="https://lists.apache.org/">Apache archives</a>.
+        </p>
+      </div>
+    </Section>
+
+    <Section title="Posting etiquette">
+      <ul class="etiquette">
+        <li>
+          <h3>Send plain text, not HTML</h3>
+          <p>HTML mail is much more likely to be caught as spam and rejected, and it reads badly
+          in the archives that other people will search later.</p>
+        </li>
+        <li>
+          <h3>Ask on the list, not in private mail</h3>
+          <p>An answer in the archive helps the next person with the same question. Private mail
+          to a committer helps exactly one person.</p>
+        </li>
+        <li>
+          <h3>Include enough to reproduce</h3>
+          <p>Hop version, operating system, what you ran, what happened and what you expected.
+          A pipeline that shows the problem is worth several paragraphs of description.</p>
+        </li>
+        <li>
+          <h3>Search first</h3>
+          <p>The archives go back to the start of the project, and a great many questions have
+          been answered already.</p>
+        </li>
+      </ul>
+      <p class="coc">
+        Everything here is covered by the{' '}
+        <a href="https://www.apache.org/foundation/policies/conduct">ASF code of conduct</a>.
+      </p>
+    </Section>
+  </main>
+</Base>
+
+<style>
+  .intro { max-width: 1180px; margin: 0 auto; padding: 36px 24px 0; }
+  .intro h1 { font-size: clamp(30px, 4vw, 42px); letter-spacing: -.028em; margin: 0 0 14px; }
+  .intro__lede { font-size: 18px; line-height: 1.6; color: var(--ink-2); max-width: 62ch; margin: 0 0 22px; }
+  .pick {
+    border-left: 3px solid var(--accent); background: var(--surface);
+    border-radius: 0 var(--radius) var(--radius) 0; padding: 14px 18px; max-width: 62ch;
+  }
+  .pick p { margin: 0; font-size: 15.5px; color: var(--ink-2); }
+
+  .lists { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+  .list { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 26px; scroll-margin-top: 90px; }
+  .list__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 14px; margin-bottom: 10px; }
+  .list__head h2 { margin: 0; font-size: 21px; }
+  .list__head code { font-size: 14px; }
+  .list__purpose { margin: 0 0 8px; font-size: 16px; line-height: 1.6; color: var(--ink-2); max-width: 68ch; }
+  .list__note { margin: 0 0 18px; font-size: 14.5px; color: var(--ink-3); max-width: 68ch; }
+  .list__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 0; }
+  .list__unsub { font-size: 14px; color: var(--ink-3); }
+
+  .how { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 26px; }
+  .how ol { margin: 0 0 16px; padding-left: 1.2em; }
+  .how li { font-size: 15.5px; line-height: 1.65; color: var(--ink-2); }
+  .how li + li { margin-top: 6px; }
+  .how p { margin: 0; font-size: 15.5px; color: var(--ink-2); }
+
+  .etiquette { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .etiquette h3 { margin: 0 0 6px; font-size: 16.5px; }
+  .etiquette p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-2); }
+  .coc { margin: 26px 0 0; font-size: 15px; color: var(--ink-2); }
+</style>

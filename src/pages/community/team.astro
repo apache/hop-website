@@ -1,0 +1,58 @@
+---
+import Base from '../../layouts/Base.astro'
+import Breadcrumbs from '../../components/Breadcrumbs.astro'
+import Section from '../../components/Section.astro'
+import PersonList from '../../components/PersonList.astro'
+import { pmc, committers } from '../../data/team.mjs'
+import { getCollection } from 'astro:content'
+
+const known = new Set((await getCollection('pages')).map((p) => `/${p.id}/`))
+---
+<Base
+  title="Team"
+  description="The Apache Hop project management committee and committers, and how to join them.">
+  <main id="main">
+    <div class="intro">
+      <Breadcrumbs path="/community/team/" title="Team" known={known} />
+      <h1>Team</h1>
+      <p class="intro__lede">
+        Apache Hop is built by a community of contributors from many organisations.
+        The people below hold committer or PMC status; far more people contribute
+        without either, and that is how everyone here started.
+      </p>
+    </div>
+
+    <Section title="Project Management Committee" lede="The PMC is responsible for the project's direction, its releases and its community." divider={false}>
+      <PersonList people={pmc} />
+    </Section>
+
+    <Section title="Committers" lede="Committers have write access to the repositories and review and merge contributions.">
+      <PersonList people={committers} />
+    </Section>
+
+    <Section>
+      <div class="join">
+        <h2>Not on this list?</h2>
+        <p>
+          There is no application form. Committers are proposed by the PMC on the strength of
+          sustained contribution &mdash; code, documentation, reviews, release testing or helping
+          other users. Start anywhere and the rest follows.
+        </p>
+        <p class="join__cta">
+          <a class="btn btn--primary" href="/community/contributing/">How to contribute</a>
+          <a class="btn" href="/community/mailing-list/">Mailing lists</a>
+        </p>
+      </div>
+    </Section>
+  </main>
+</Base>
+
+<style>
+  .intro { max-width: 1180px; margin: 0 auto; padding: 36px 24px 0; }
+  .intro h1 { font-size: clamp(30px, 4vw, 42px); letter-spacing: -.028em; margin: 0 0 14px; }
+  .intro__lede { font-size: 18px; line-height: 1.6; color: var(--ink-2); max-width: 62ch; margin: 0; }
+  .join { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 32px; }
+  .join h2 { margin: 0 0 10px; font-size: 22px; }
+  .join p { color: var(--ink-2); max-width: 60ch; margin: 0 0 18px; }
+  .join__cta { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; }
+</style>

@@ -1,0 +1,48 @@
+---
+import '../../shared/tokens.css'
+import '../../shared/chrome.css'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import { site } from '../site.config.mjs'
+
+const { title, description, bodyClass, ogImage = '/img/social-card.png' } = Astro.props
+const path = Astro.url.pathname
+const pageTitle = title ? `${title} | ${site.title}` : site.title
+const canonical = new URL(path, site.url).href
+const image = new URL(ogImage, site.url).href
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{pageTitle}</title>
+  {description && <meta name="description" content={description} />}
+  <link rel="canonical" href={canonical} />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={site.title} />
+  <meta property="og:title" content={title || site.title} />
+  {description && <meta property="og:description" content={description} />}
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={image} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content={image} />
+
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="196x196" href="/favicon-196x196.png" />
+  <link rel="alternate" type="application/atom+xml" title="Apache Hop blog" href="/blog/index.xml" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  {/* Set the theme before first paint so a dark-mode reader never sees a flash. */}
+  <script is:inline>
+    (function () { try { var t = localStorage.getItem('hop-theme'); if (t) document.documentElement.setAttribute('data-theme', t) } catch (e) {} })()
+  </script>
+</head>
+<body class={bodyClass} data-pagefind-body>
+  <Header path={path} />
+  <slot />
+  <Footer />
+  <script src="/js/site.js" is:inline></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{{!
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+    
+         http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+}}
+{{#if page.navigation.[0]}}
+{{! A div around the named nav, not an aside: the nav inside already carries
+    the label, and wrapping it in a complementary landmark added a second,
+    unnamed one to the page outline for the same content. }}
+<div class="doc-nav" id="doc-nav" data-pagefind-ignore>
+  <button type="button" class="doc-nav__close icon-btn" aria-label="Close navigation">&times;</button>
+  <nav aria-label="Documentation">
+    {{#each page.navigation}}
+    <div class="doc-nav__group">
+      {{#if content}}<p class="doc-nav__title">{{#if url}}<a href="{{relativize url}}">{{{content}}}</a>{{else}}{{{content}}}{{/if}}</p>{{/if}}
+      {{#if items}}{{> nav-tree items=items}}{{/if}}
+    </div>
+    {{/each}}
+  </nav>
+{{> nav-footer}}
+</div>
+{{/if}}

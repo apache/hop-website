@@ -1,0 +1,33 @@
+---
+// A page section with the site's standard measure and rhythm. Every home page
+// band uses this, so the container rules live in exactly one place - the bug
+// in the first port was that these rules were scoped to a wrapper element that
+// the Astro version no longer had, so every section rendered full-bleed.
+const { title, lede, id, divider = true } = Astro.props
+---
+<section class:list={['section', { 'section--divider': divider, 'section--bare': !title && !lede }]} id={id}>
+  {title && <h2>{title}</h2>}
+  {lede && <p class="section__lede">{lede}</p>}
+  <slot />
+</section>
+
+<style>
+  .section { max-width: 1180px; margin: 0 auto; padding: 80px 24px; }
+  /* A section with no heading of its own is a container, not a band, so it
+     does not need to open with a band's worth of space - but only when the
+     thing above it already closed with one. Two sections in a row put 160px of
+     nothing between two parts of the same page; a bare section after an intro
+     block, which ends flush, would have nothing at all. So the bottom is what
+     sets the gap and the top only gives way to it. */
+  .section + :global(.section--bare) { padding-top: 0; }
+  .section--divider + :global(.section--divider) { border-top: 1px solid var(--rule); }
+  .section h2 {
+    font-size: clamp(25px, 3vw, 34px);
+    letter-spacing: -.022em; margin: 0 0 12px; max-width: 22ch;
+  }
+  .section__lede {
+    font-size: 17px; line-height: 1.6; color: var(--ink-2);
+    max-width: 62ch; margin: 0 0 40px;
+  }
+  @media (max-width: 640px) { .section { padding: 56px 20px; } }
+</style>

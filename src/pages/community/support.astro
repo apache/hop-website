@@ -1,0 +1,147 @@
+---
+import Base from '../../layouts/Base.astro'
+import Breadcrumbs from '../../components/Breadcrumbs.astro'
+import Section from '../../components/Section.astro'
+import { getCollection } from 'astro:content'
+
+const known = new Set((await getCollection('pages')).map((p) => `/${p.id}/`))
+
+const routes = [
+  {
+    title: 'Ask a question',
+    href: '/community/mailing-list/',
+    body: 'Post to the users mailing list. The whole community reads it, and the answer stays in a public archive for the next person with the same problem.',
+    cta: 'Mailing lists',
+  },
+  {
+    title: 'Report a bug',
+    href: 'https://github.com/apache/hop/issues',
+    body: 'Open an issue on GitHub. The checklist below is what turns a report into something a developer can act on.',
+    cta: 'GitHub Issues',
+  },
+]
+
+const checklist = [
+  { q: 'Which versions?', a: 'Hop itself, plus anything it is talking to — the database, the driver, the runtime. This is the single most useful thing you can include.' },
+  { q: 'Which platform and JDK?', a: 'Operating system and Java version. If you are running in a container, which image and which tag.' },
+  { q: 'The whole stack trace', a: 'Not the first few lines. Exceptions get wrapped, and the cause at the bottom is usually the one that matters. We are good at skimming past the rest.' },
+  { q: 'Logs, at debug level', a: 'Raising the log level often turns a puzzling failure into an obvious one.' },
+  { q: 'The pipeline or workflow', a: 'A small file that reproduces the problem is worth several paragraphs describing it — and it is the fastest route to a fix.' },
+  { q: 'Did it work before?', a: 'A version, a configuration change or an upgrade that lines up with the breakage narrows things down enormously.' },
+  { q: 'Has it been reported?', a: 'A quick search of the issue tracker and the mailing list archive sometimes finds the answer outright.' },
+]
+---
+<Base
+  title="Support"
+  description="How to get help with Apache Hop: the mailing lists, the issue tracker, what to include in a report, and where to find commercial support.">
+  <main id="main">
+    <div class="intro">
+      <Breadcrumbs path="/community/support/" title="Support" known={known} />
+      <h1>Support</h1>
+      <p class="intro__lede">
+        Help with Hop comes from the community, in the open. Everything below is volunteer
+        effort &mdash; which is also why a well-formed question tends to get answered fast.
+      </p>
+    </div>
+
+    <Section title="Where to go" divider={false}>
+      <ul class="routes">
+        {routes.map((r) => (
+          <li class="route">
+            <h3>{r.title}</h3>
+            <p>{r.body}</p>
+            <p class="route__cta"><a href={r.href}>{r.cta} &rarr;</a></p>
+          </li>
+        ))}
+      </ul>
+      <p class="routes__note">
+        Ask in public, and prefer the mailing list. It is not about protecting anyone's time:
+        the list is archived and indexed, so an answer there is still helping people in a year.
+        A reply in a chat channel, or in a direct message to a committer, helps exactly one
+        person and is gone by the following week.
+      </p>
+    </Section>
+
+    <Section title="What to include" lede="The more of this you can answer up front, the fewer round trips it takes to get you unstuck.">
+      <dl class="checklist">
+        {checklist.map((c) => (
+          <div class="check">
+            <dt>{c.q}</dt>
+            <dd>{c.a}</dd>
+          </div>
+        ))}
+      </dl>
+    </Section>
+
+    <Section title="Getting an answer sooner">
+      <ul class="faster">
+        <li>
+          <h3>Reproduce it in something small</h3>
+          <p>A cut-down pipeline, workflow or unit test that shows the problem removes all the
+          guesswork. If you think it is a bug, a failing test case makes it undeniable.</p>
+        </li>
+        <li>
+          <h3>Send a fix</h3>
+          <p>If you are already in the code, a pull request is very welcome &mdash; and it is the
+          quickest possible path from problem to resolution.</p>
+        </li>
+      </ul>
+    </Section>
+
+    <Section title="Commercial support">
+      <div class="commercial">
+        <p>
+          The community answers questions for free, but it cannot promise a response time. If
+          you need an SLA, training, mentoring or a migration done for you, several companies
+          offer that around Hop. The Hop PMC does not endorse, rank or vet them &mdash; the list
+          is there for information.
+        </p>
+        <p class="commercial__cta">
+          <a class="btn btn--primary" href="/community/commercial/">Commercial Hop offerings</a>
+        </p>
+      </div>
+    </Section>
+
+    <Section title="Elsewhere on the web">
+      <p class="elsewhere">
+        Plenty of people write about Hop outside the project. Those sites are not maintained by
+        the Hop community and can go out of date, but they are often useful:{' '}
+        <a href="https://www.google.com/search?q=apache+hop">search the web</a>, or browse{' '}
+        <a href="https://medium.com/codex/build-data-pipeline-with-apache-hop-62417ecee303">write-ups</a>{' '}
+        and <a href="http://diethardsteiner.github.io/">technical blogs</a>.
+      </p>
+    </Section>
+  </main>
+</Base>
+
+<style>
+  .intro { max-width: 1180px; margin: 0 auto; padding: 36px 24px 0; }
+  .intro h1 { font-size: clamp(30px, 4vw, 42px); letter-spacing: -.028em; margin: 0 0 14px; }
+  .intro__lede { font-size: 18px; line-height: 1.6; color: var(--ink-2); max-width: 62ch; margin: 0; }
+
+  .routes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
+  .route { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 22px; }
+  .route h3 { margin: 0 0 8px; font-size: 17px; }
+  .route p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-2); }
+  .route__cta { margin-top: 12px !important; font-weight: 600; }
+  .routes__note { margin: 24px 0 0; font-size: 15.5px; color: var(--ink-2); max-width: 70ch; }
+
+  .checklist { margin: 0; display: grid; gap: 2px; }
+  .check {
+    display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 20px;
+    padding: 16px 0; border-bottom: 1px solid var(--rule);
+  }
+  .check:last-child { border-bottom: 0; }
+  .check dt { font-weight: 600; font-size: 15.5px; }
+  .check dd { margin: 0; font-size: 15.5px; line-height: 1.6; color: var(--ink-2); max-width: 68ch; }
+  @media (max-width: 640px) { .check { grid-template-columns: 1fr; gap: 4px; } }
+
+  .faster { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .faster h3 { margin: 0 0 6px; font-size: 16.5px; }
+  .faster p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-2); }
+
+  .commercial { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 28px; }
+  .commercial p { color: var(--ink-2); max-width: 66ch; margin: 0 0 18px; }
+  .commercial__cta { margin: 0 !important; }
+  .elsewhere { font-size: 15.5px; color: var(--ink-2); max-width: 70ch; }
+</style>

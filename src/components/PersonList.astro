@@ -1,0 +1,127 @@
+---
+/*
+ * A list of people. Replaces a Markdown table with a Twitter-icon column.
+ *
+ * The avatar is a monogram derived from the person's initials, tinted from a
+ * hash of their Apache id. No external avatar service: the enforced ASF CSP
+ * allows images only from self and *.apache.org, and there is no reliable
+ * per-committer avatar there - so a deterministic monogram beats a broken img.
+ */
+const { people = [], sort = true } = Astro.props
+
+/* Sort by first name. localeCompare with base sensitivity keeps accented names
+   in place - François sorts as Francois, not after Z. */
+const ordered = sort
+  ? [...people].sort((a, b) =>
+      String(a.name).localeCompare(String(b.name), 'en', { sensitivity: 'base' }))
+  : people
+
+/* Social links are a small map per person rather than a single field, so a
+   person can carry more than one and the set can grow without touching the
+   markup. Icons are inline: the ASF CSP allows images only from self and
+   *.apache.org, so no icon service. */
+const NETWORKS = {
+  email: {
+    label: 'email',
+    href: (v) => `mailto:${v}`,
+    path: 'M1.5 4.5h21a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5h-21A1.5 1.5 0 0 1 0 18V6a1.5 1.5 0 0 1 1.5-1.5m.53 1.97 9.44 6.3a1 1 0 0 0 1.06 0l9.44-6.3H2.03M22.5 8.3l-8.91 5.94a3 3 0 0 1-3.18 0L1.5 8.3V18h21z',
+  },
+  linkedin: {
+    label: 'LinkedIn',
+    href: (v) => (v.startsWith('http') ? v : `https://www.linkedin.com/in/${v}`),
+    path: 'M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0',
+  },
+  twitter: {
+    label: 'Twitter',
+    href: (v) => (v.startsWith('http') ? v : `https://twitter.com/${v}`),
+    path: 'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z',
+  },
+}
+const linksFor = (p) =>
+  Object.entries(NETWORKS)
+    .filter(([key]) => p[key])
+    .map(([key, net]) => ({ key, label: net.label, path: net.path, href: net.href(p[key]) }))
+
+const initials = (name) =>
+  name.split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0]).join('').toUpperCase()
+
+// Stable hue per person so the page looks the same on every build.
+const hue = (seed) => {
+  let h = 0
+  for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) % 360
+  return h
+}
+---
+<ul class="people">
+  {ordered.map((p) => (
+    <li class="person">
+      <span class="person__avatar" aria-hidden="true" style={`--h:${hue(p.id || p.name)}`}>{initials(p.name)}</span>
+      <div class="person__body">
+        <p class="person__name">{p.name}</p>
+        <p class="person__meta" title={[p.id, ...(p.orgs ?? []).map((o) => o.name)].join(' · ')}>
+          <a class="person__id" href={`https://people.apache.org/phonebook.html?uid=${p.id}`}>{p.id}</a>
+          {(p.orgs ?? []).map((o) => (
+            <span class="person__org">{o.href ? <a href={o.href}>{o.name}</a> : o.name}</span>
+          ))}
+        </p>
+      </div>
+      <span class="person__links">
+        {linksFor(p).map((l) => (
+          <a class="person__link" href={l.href} aria-label={`${p.name} on ${l.label}`}>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={l.path}/></svg>
+          </a>
+        ))}
+      </span>
+    </li>
+  ))}
+</ul>
+
+<style>
+  /* Wider tracks than the content strictly needs, so the id/organisation line
+     never has to wrap. When it wrapped, cards in the same row ended up with
+     different content heights and the names stopped lining up across the row. */
+  .people {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 10px; align-items: stretch;
+  }
+  .person {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--surface); border: 1px solid var(--rule);
+    border-radius: 10px; padding: 12px 14px; min-height: 64px;
+    transition: border-color .15s;
+  }
+  .person:hover { border-color: var(--rule-2); }
+  .person__avatar {
+    flex: none; width: 40px; height: 40px; border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 13.5px; font-weight: 700; letter-spacing: .02em;
+    color: hsl(var(--h) 42% 30%);
+    background: hsl(var(--h) 46% 91%);
+  }
+  :global(:root[data-theme="dark"]) .person__avatar { color: hsl(var(--h) 55% 82%); background: hsl(var(--h) 30% 22%); }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"])) .person__avatar { color: hsl(var(--h) 55% 82%); background: hsl(var(--h) 30% 22%); }
+  }
+  .person__body { min-width: 0; flex: 1; }
+  /* Every card is exactly two lines: name, then id and organisation. Anything
+     too long is truncated rather than allowed to reflow the card. */
+  .person__name {
+    margin: 0; font-weight: 600; font-size: 15px; line-height: 1.35;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .person__meta {
+    margin: 1px 0 0; font-size: 13px; line-height: 1.35; color: var(--ink-3);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .person__id { font-family: var(--mono); color: var(--ink-3); text-decoration: none; }
+  .person__id:hover { color: var(--accent); }
+  .person__org::before { content: " · "; color: var(--rule-2); }
+  .person__org a { color: inherit; text-decoration: none; }
+  .person__org a:hover { color: var(--accent); text-decoration: underline; }
+  /* Fixed-width so the text column ends at the same x in every card whether a
+     person has none, one or two links. */
+  .person__links { flex: none; display: flex; gap: 2px; justify-content: flex-end; width: 92px; }
+  .person__link { color: var(--ink-3); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 6px; }
+  .person__link:hover { color: var(--accent); background: var(--surface-2); }
+</style>

@@ -1,0 +1,72 @@
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Editing the documentation itself: builds the manuals from a hop checkout
+# sitting next to this one, worktree and all, so a change to an .adoc file
+# shows up on the next build with nothing to commit, push or fetch.
+#
+#   git clone https://github.com/apache/hop.git ../hop
+#   npm run build:hop
+#
+# antora-playbook-local.yml is the one for working on the site itself: same
+# single branch, but pulled from GitHub and cached. Full 12-version build is
+# antora-playbook.yml.
+site:
+  title: Apache Hop
+  url: https://hop.apache.org
+  robots: allow
+asciidoc:
+  attributes:
+    # Asciidoctor's default section anchors are an empty <a> before each
+    # heading: invisible, focusable, and nameless, which is a WCAG 2.4.4
+    # failure repeated 3,168 times a build. sectlinks instead makes the heading
+    # text itself the link, so it is named by its own content and needs no
+    # JavaScript to be accessible.
+    sectanchors: ~
+    sectlinks: ''
+  extensions:
+    - '@asciidoctor/tabs'
+    - ./tools/asciidoctor-mermaid.js
+content:
+  sources:
+    # A path rather than a URL, and HEAD rather than a branch name: together
+    # those tell Antora to read the working tree, uncommitted edits included.
+    - url: ../hop
+      start_path: /docs/hop-user-manual/
+      branches: HEAD
+    - url: ../hop
+      start_path: /docs/hop-dev-manual/
+      branches: HEAD
+ui:
+  bundle:
+    url: ./ui
+urls:
+  redirect_facility: static
+  latest_version_segment: latest
+  latest_prerelease_version_segment: next
+output:
+  clean: false
+  dir: ./public
+# Nothing to fetch: the content source is a directory on disk.
+runtime:
+  fetch: false
+  cache_dir: ./.cache/antora
+  log:
+    # Quiet and non-blocking. Warnings from the documentation are the point of
+    # this playbook, but they should not stop the build while you are editing.
+    level: error
+    failure_level: fatal
+git:
+  fetch_depth: 1

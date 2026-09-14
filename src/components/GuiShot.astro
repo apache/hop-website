@@ -1,0 +1,40 @@
+---
+/*
+ * The hero visual: the actual Hop GUI.
+ *
+ * Cropped from the 2.17 release screenshot to drop a stray selection rectangle
+ * in the original capture and to bleed off the bottom edge, so the window
+ * reads as continuing past the frame rather than being a small floating
+ * picture. Replace with a purpose-shot capture when someone takes one - see
+ * MIGRATION.md.
+ */
+const { src = '/img/home/hop-gui.png' } = Astro.props
+---
+<div class="shot">
+  <img
+    src={src}
+    width="1052" height="428"
+    fetchpriority="high" decoding="async"
+    alt="The Hop GUI: a pipeline named abort-basic on the design canvas, with Test Data, a filter and an Abort transform joined by hops, and the project file explorer alongside." />
+</div>
+
+<style>
+  .shot {
+    position: relative;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    background: var(--surface);
+    overflow: hidden;
+    /* Bleed the bottom edge away so the window continues past the frame. */
+    max-height: 400px;
+  }
+  .shot img { display: block; width: 100%; height: auto; }
+  .shot::after {
+    content: "";
+    position: absolute; left: 0; right: 0; bottom: 0; height: 90px;
+    background: linear-gradient(to bottom, transparent, var(--ground));
+    pointer-events: none;
+  }
+  @media (max-width: 940px) { .shot { max-height: none; } .shot::after { display: none; } }
+</style>

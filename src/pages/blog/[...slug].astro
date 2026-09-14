@@ -1,0 +1,207 @@
+---
+import Base from '../../layouts/Base.astro'
+import { getCollection, render } from 'astro:content'
+import { tagsOf, tagSlug } from '../../data/post-types.mjs'
+
+export async function getStaticPaths () {
+  const posts = (await getCollection('blog'))
+    .sort((a, b) => (b.data.publishDate?.getTime() ?? 0) - (a.data.publishDate?.getTime() ?? 0))
+
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    // Newer posts sort first, so the *next* entry in the array is the older post.
+    props: { post, newer: posts[i - 1] ?? null, older: posts[i + 1] ?? null },
+  }))
+}
+
+const { post, newer, older } = Astro.props
+const { Content } = await render(post)
+
+/* Build the contents list at build time from the rendered HTML. Asciidoctor
+   gives every section an id, so this needs no JavaScript and cannot flash in
+   after paint. Short posts get no sidebar and the column simply centres. */
+const html = post.rendered?.html ?? ''
+const toc = [...html.matchAll(/<h2[^>]*\bid="([^"]+)"[^>]*>([\s\S]*?)<\/h2>/g)]
+  .map((m) => ({ id: m[1], text: m[2].replace(/<[^>]+>/g, '').trim() }))
+  .filter((h) => h.text)
+const hasToc = toc.length >= 3
+
+const date = post.data.publishDate
+const stamp = date
+  ? date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
+  : null
+const tags = tagsOf(post)
+const authors = (post.data.authors ?? '').split(',').map((a) => a.trim()).filter(Boolean)
+---
+<Base title={post.data.title} description={post.data.description}>
+  <main class="post" id="main">
+    <div class:list={['post__grid', { 'post__grid--toc': hasToc }]}>
+      <div class="post__col">
+        <p class="post__back" data-pagefind-ignore><a href="/blog/">&larr; Blog</a></p>
+
+        <header class="post__header">
+          <h1>{post.data.title}</h1>
+          <p class="post__meta">
+            {stamp && <time datetime={date.toISOString().slice(0, 10)}>{stamp}</time>}
+            {stamp && authors.length > 0 && <span class="post__sep" aria-hidden="true">·</span>}
+            {authors.length > 0 && <span class="post__authors">by {authors.join(', ')}</span>}
+          </p>
+          {tags.length > 0 && (
+            <ul class="post__tags">
+              {tags.map((t) => <li><a href={`/blog/tag/${tagSlug(t)}/`}>{t}</a></li>)}
+            </ul>
+          )}
+        </header>
+
+        <article class="post__body">
+          <Content />
+        </article>
+
+        {(newer || older) && (
+          <nav class="post__nav" aria-label="More posts" data-pagefind-ignore>
+            {older ? (
+              <a class="post__nav-link" href={`/blog/${older.id}/`} rel="prev">
+                <span>Older</span><strong>{older.data.title}</strong>
+              </a>
+            ) : <span />}
+            {newer && (
+              <a class="post__nav-link post__nav-link--next" href={`/blog/${newer.id}/`} rel="next">
+                <span>Newer</span><strong>{newer.data.title}</strong>
+              </a>
+            )}
+          </nav>
+        )}
+      </div>
+
+      {hasToc && (
+        <aside class="post__toc" aria-labelledby="toc-heading" data-pagefind-ignore>
+          <p class="post__toc-title" id="toc-heading">On this page</p>
+          <nav>
+            <ol>{toc.map((h) => <li><a href={`#${h.id}`}>{h.text}</a></li>)}</ol>
+          </nav>
+        </aside>
+      )}
+    </div>
+  </main>
+</Base>
+
+<style>
+  .post { max-width: 1180px; margin: 0 auto; padding: 40px 24px 24px; }
+
+  /* One grid owns the measure so the header, body, contents list and post
+     navigation all share the same left edge. Pinning the 72ch column to the
+     left of a 1180px container left a dead gutter on the right; centring the
+     column and the sidebar separately misaligned them against each other. */
+  .post__grid { display: grid; grid-template-columns: minmax(0, 760px); justify-content: center; }
+  .post__col { min-width: 0; }
+
+  @media (min-width: 1080px) {
+    .post__grid--toc {
+      grid-template-columns: minmax(0, 760px) 210px;
+      gap: 0 56px; align-items: start;
+    }
+  }
+
+  .post__back { font-size: 14.5px; margin: 0 0 28px; }
+  .post__header { margin-bottom: 36px; }
+  .post__header h1 { font-size: clamp(30px, 4vw, 44px); letter-spacing: -.028em; margin: 0 0 14px; }
+
+  .post__meta {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px;
+    margin: 0; font-size: 15px; color: var(--ink-3);
+  }
+  .post__meta time { font-variant-numeric: tabular-nums; }
+  .post__sep { color: var(--rule-2); }
+
+  .post__tags { list-style: none; display: flex; flex-wrap: wrap; gap: 7px; margin: 16px 0 0; padding: 0; }
+  .post__tags a {
+    display: block; font-size: 12.5px; font-weight: 600; color: var(--accent);
+    background: var(--surface-2); border: 1px solid var(--rule);
+    border-radius: 999px; padding: 4px 12px; text-decoration: none;
+    transition: border-color .15s, background .15s;
+  }
+  .post__tags a:hover { border-color: var(--accent); background: var(--surface); }
+  .post__nav {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--rule);
+  }
+  .post__nav-link {
+    display: flex; flex-direction: column; gap: 4px;
+    text-decoration: none; color: inherit;
+    border: 1px solid var(--rule); border-radius: 10px; padding: 16px 18px;
+    background: var(--surface); transition: border-color .15s;
+  }
+  .post__nav-link:hover { border-color: var(--accent); }
+  .post__nav-link span { font-size: 12px; font-family: var(--mono); color: var(--ink-3); text-transform: uppercase; letter-spacing: .08em; }
+  .post__nav-link strong { font-size: 15px; line-height: 1.35; color: var(--ink); font-weight: 600; }
+  .post__nav-link--next { text-align: right; }
+
+  .post__toc {
+    position: sticky; top: calc(var(--header-h) + 24px);
+    max-height: calc(100vh - var(--header-h) - 48px); overflow-y: auto;
+    border-left: 1px solid var(--rule); padding-left: 18px;
+  }
+  .post__toc-title {
+    font-size: 11.5px; font-weight: 700; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--ink-3); margin: 0 0 12px;
+  }
+  .post__toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+  /* Not colour alone: a marker rule and a weight change carry the state too. */
+  .post__toc a {
+    display: block; font-size: 13.5px; line-height: 1.4; color: var(--ink-2);
+    text-decoration: none; padding-left: 12px; margin-left: -20px;
+    border-left: 2px solid transparent;
+  }
+  .post__toc a:hover { color: var(--ink); border-left-color: var(--rule-2); }
+  .post__toc a.is-active { color: var(--accent); font-weight: 600; border-left-color: var(--accent); }
+  @media (max-width: 1079px) { .post__toc { display: none; } }
+  @media (max-width: 640px) { .post__nav { grid-template-columns: 1fr; } .post__nav-link--next { text-align: left; } }
+</style>
+
+<style is:global>
+  /* The post body is Asciidoctor output, so scoped hashes never reach it. */
+  .post__body { max-width: none; }
+  .post__body > * { max-width: 100%; }
+  .post__body h2 { font-size: clamp(21px, 2.4vw, 26px); margin: 2.2em 0 .5em; padding-bottom: .3em; border-bottom: 1px solid var(--rule); }
+  .post__body h3 { font-size: 18.5px; margin: 1.8em 0 .4em; }
+  .post__body p, .post__body li { font-size: 16.5px; line-height: 1.7; }
+  .post__body ul, .post__body ol { padding-left: 1.3em; }
+  .post__body li + li { margin-top: .35em; }
+
+  /* Roundup posts carry wide Jira tables. Let them use the full column and
+     scroll rather than crushing six columns into the reading measure. */
+  .post__body .tablecontainer, .post__body table { width: 100%; }
+  .post__body table { border-collapse: collapse; font-size: 14.5px; display: block; overflow-x: auto; }
+  .post__body table th, .post__body table td {
+    border: 1px solid var(--rule); padding: 8px 11px; text-align: left; vertical-align: top;
+  }
+  .post__body table th { background: var(--surface-2); font-weight: 600; white-space: nowrap; }
+
+  .post__body .imageblock { margin: 1.8em 0; }
+  .post__body .imageblock img {
+    border: 1px solid var(--rule); border-radius: 8px; background: var(--surface);
+  }
+  .post__body .imageblock .title, .post__body .title { font-size: 13.5px; color: var(--ink-3); margin-top: 8px; }
+  /* Admonitions. The accent is set once per type and read by both the label
+     and the left edge, so a new type needs one line. See
+     tools/remark-admonitions.mjs for the syntax. */
+  .post__body .admonition {
+    --admonition-accent: var(--note);
+    margin: 1.6em 0; padding: 14px 18px;
+    border: 1px solid var(--rule); border-left: 3px solid var(--admonition-accent);
+    border-radius: var(--radius); background: var(--surface);
+  }
+  .post__body .admonition--tip { --admonition-accent: var(--tip); }
+  .post__body .admonition--warning { --admonition-accent: var(--warning); }
+  .post__body .admonition--caution,
+  .post__body .admonition--important { --admonition-accent: var(--caution); }
+  .post__body .admonition > :first-child { margin-top: 0; }
+  .post__body .admonition > :last-child { margin-bottom: 0; }
+  .post__body .admonition__label {
+    margin: 0 0 0.4em; font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--admonition-accent);
+  }
+  .post__body pre { font-size: 13.5px; }
+  .post__body .listingblock { margin: 1.6em 0; }
+</style>

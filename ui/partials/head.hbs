@@ -1,0 +1,41 @@
+{{!
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+    
+         http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+}}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{#if page.title}}{{{detag page.title}}} | {{site.title}}{{else}}{{site.title}}{{/if}}</title>
+{{#with page.description}}<meta name="description" content="{{this}}">{{/with}}
+{{#with page.keywords}}<meta name="keywords" content="{{this}}">{{/with}}
+{{#with page.canonicalUrl}}<link rel="canonical" href="{{this}}">{{/with}}
+
+{{! Social cards. The old site sent a 150x159 logo as og:image on all 7,289 pages. }}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{site.title}}">
+<meta property="og:title" content="{{#if page.title}}{{{detag page.title}}}{{else}}{{site.title}}{{/if}}">
+{{#with page.description}}<meta property="og:description" content="{{this}}">{{/with}}
+{{#with page.canonicalUrl}}<meta property="og:url" content="{{this}}">{{/with}}
+<meta property="og:image" content="{{site.url}}/img/social-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{site.url}}/img/social-card.png">
+
+<link rel="icon" href="{{siteRootPath}}/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="196x196" href="{{siteRootPath}}/favicon-196x196.png">
+<link rel="manifest" href="{{siteRootPath}}/site.webmanifest">
+<link rel="stylesheet" href="{{uiRootPath}}/css/site.css">
+
+{{! Set the theme before first paint so a dark-mode reader never sees a white flash.
+    Inline and tiny by necessity - it must run before the body renders. }}
+<script>(function(){try{var t=localStorage.getItem('hop-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>

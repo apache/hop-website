@@ -1,0 +1,63 @@
+---
+/*
+ * Events as a list rather than a five-column table. The table crammed a
+ * paragraph of description into one cell, which is what made the page
+ * unreadable; here the description is prose under the heading and the date,
+ * language and link are metadata beside it.
+ */
+const { events = [], empty = 'Nothing scheduled right now.' } = Astro.props
+
+const LANGS = { EN: 'English', DE: 'German', PT: 'Portuguese', ES: 'Spanish', 'JP-EN': 'Japanese / English' }
+const fmt = (iso) => {
+  const d = new Date(iso + 'T00:00:00Z')
+  return isNaN(d) ? iso : d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
+}
+---
+{events.length === 0 ? (
+  <p class="empty">{empty}</p>
+) : (
+  <ol class="events">
+    {events.map((e) => (
+      <li class="event">
+        <div class="event__when">
+          <time datetime={e.date}>{fmt(e.date)}</time>
+          {e.lang && <span class="event__lang" title={LANGS[e.lang] ?? e.lang}>{e.lang}</span>}
+        </div>
+        <div class="event__body">
+          <h3>{e.name}</h3>
+          {e.description && e.description !== '-' && <p>{e.description}</p>}
+          {e.link && e.link.href && (
+            <p class="event__link"><a href={e.link.href}>{e.link.label || 'More'} &rarr;</a></p>
+          )}
+        </div>
+      </li>
+    ))}
+  </ol>
+)}
+
+<style>
+  .events { list-style: none; margin: 0; padding: 0; }
+  .event {
+    display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 20px;
+    padding: 20px 0; border-bottom: 1px solid var(--rule);
+  }
+  .event:last-child { border-bottom: 0; }
+  .event__when { display: flex; flex-direction: column; gap: 7px; align-items: flex-start; }
+  .event__when time {
+    font-family: var(--mono); font-size: 13px; color: var(--ink-3);
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .event__lang {
+    font-size: 11px; font-weight: 700; letter-spacing: .06em;
+    color: var(--accent); background: var(--surface-2);
+    border: 1px solid var(--rule); border-radius: 4px; padding: 2px 7px;
+  }
+  .event__body h3 { margin: 0 0 6px; font-size: 17px; line-height: 1.35; }
+  .event__body p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-2); max-width: 68ch; }
+  .event__link { margin-top: 8px !important; font-size: 14.5px !important; }
+  .empty { color: var(--ink-3); font-size: 15.5px; margin: 0; }
+  @media (max-width: 620px) {
+    .event { grid-template-columns: 1fr; gap: 6px; }
+    .event__when { flex-direction: row; align-items: center; gap: 10px; }
+  }
+</style>

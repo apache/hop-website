@@ -1,0 +1,90 @@
+---
+import Base from '../../layouts/Base.astro'
+import Breadcrumbs from '../../components/Breadcrumbs.astro'
+import Section from '../../components/Section.astro'
+import { getCollection, getEntry, render } from 'astro:content'
+
+/* This page was a two-column AsciiDoc table - "Area | Further Information" -
+   used as a page layout. That is a card grid, so it is one now. The prose that
+   followed the table still lives in Markdown and is rendered below. */
+const ways = [
+  { title: 'Report a bug', href: 'https://github.com/apache/hop/issues',
+    body: 'Open an issue on GitHub with enough detail to reproduce the problem.',
+    more: { label: 'Working with GitHub', href: '/community/contribution-guides/github-guide/' } },
+  { title: 'Contribute code', href: '/community/contribution-guides/code-contribution-guide/',
+    body: 'Pick up an issue, open a pull request, and work through review with the community.' },
+  { title: 'Review code', href: '/community/contribution-guides/code-review-guide/',
+    body: 'Reviewing other people’s pull requests is one of the most useful things you can do.' },
+  { title: 'Help prepare a release', href: '/community/contribution-guides/release-contribution-guide/',
+    body: 'Test release candidates and help get a vote over the line.' },
+  { title: 'Write documentation', href: '/community/contribution-guides/documentation-contribution-guide/',
+    body: 'The manuals live beside the code in apache/hop, so a docs change is a normal pull request.' },
+  { title: 'Translate Hop', href: '/community/contribution-guides/translation-contribution-guide/',
+    body: 'Help make Hop usable in more languages.' },
+  { title: 'Improve the website', href: '/community/contribution-guides/website-contribution-guide/',
+    body: 'This site is in apache/hop-website and takes pull requests like anything else.' },
+  { title: 'Support other users', href: '/community/tools/',
+    body: 'Answer questions on Slack, on GitHub Discussions, on Stack Overflow under the hop tag, and in issues that are really questions.' },
+  { title: 'Spread the word',
+    body: 'Organise or attend a Hop meetup, talk about what you built, or write for the blog.',
+    more: { label: 'Events and user groups', href: '/community/events/' } },
+]
+
+const known = new Set((await getCollection('pages')).map((p) => `/${p.id}/`))
+const further = await getEntry('pages', 'community/contributing/_further-reading')
+const { Content } = await render(further)
+---
+<Base
+  title="How to contribute"
+  description="Apache Hop is built by an open community. Report a bug, write code or documentation, review pull requests, translate, or help other users.">
+  <main id="main">
+    <div class="intro">
+      <Breadcrumbs path="/community/contributing/" title="How to contribute" known={known} />
+      <h1>How to contribute</h1>
+      <p class="intro__lede">
+        Apache Hop is developed by an open and friendly community, and contributing goes well
+        beyond writing code. Everything below is a real way to help, and none of it needs
+        permission to start.
+      </p>
+    </div>
+
+    <Section title="Ways to contribute" divider={false}>
+      <ul class="ways">
+        {ways.map((w) => (
+          <li class="way">
+            <h3>{w.href ? <a href={w.href}>{w.title}</a> : w.title}</h3>
+            <p>{w.body}</p>
+            {w.more && <p class="way__more"><a href={w.more.href}>{w.more.label} &rarr;</a></p>}
+          </li>
+        ))}
+      </ul>
+      <p class="ways__ask">
+        Any other questions? Ask on the <a href="/community/mailing-list/">mailing lists</a> &mdash;
+        that is where the project actually happens.
+      </p>
+    </Section>
+
+    <Section>
+      <article class="prose"><Content /></article>
+    </Section>
+  </main>
+</Base>
+
+<style>
+  .intro { max-width: 1180px; margin: 0 auto; padding: 36px 24px 0; }
+  .intro h1 { font-size: clamp(30px, 4vw, 42px); letter-spacing: -.028em; margin: 0 0 14px; }
+  .intro__lede { font-size: 18px; line-height: 1.6; color: var(--ink-2); max-width: 62ch; margin: 0; }
+
+  .ways { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(272px, 1fr)); gap: 18px; }
+  .way {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 10px;
+    padding: 22px; transition: border-color .15s, transform .15s;
+  }
+  .way:hover { border-color: var(--rule-2); transform: translateY(-2px); }
+  .way h3 { margin: 0 0 8px; font-size: 17px; line-height: 1.3; }
+  .way h3 a { text-decoration: none; }
+  .way h3 a:hover { text-decoration: underline; }
+  .way p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-2); }
+  .way__more { margin-top: 10px !important; font-size: 14.5px !important; }
+  .ways__ask { margin: 28px 0 0; font-size: 16px; color: var(--ink-2); }
+</style>

@@ -1,0 +1,86 @@
+---
+import Base from '../../../layouts/Base.astro'
+import { getCollection } from 'astro:content'
+import { typeOf, previewOf, tagsOf, tagSlug } from '../../../data/post-types.mjs'
+
+export async function getStaticPaths () {
+  const { tagsOf, tagSlug } = await import('../../../data/post-types.mjs')
+  const posts = await getCollection('blog')
+  const byTag = new Map()
+  for (const post of posts) {
+    for (const tag of tagsOf(post)) {
+      const slug = tagSlug(tag)
+      if (!byTag.has(slug)) byTag.set(slug, { label: tag, posts: [] })
+      byTag.get(slug).posts.push(post)
+    }
+  }
+  return [...byTag].map(([slug, { label, posts }]) => ({
+    params: { tag: slug },
+    props: { label, posts },
+  }))
+}
+
+const { label, posts: raw } = Astro.props
+const posts = raw
+  .sort((a, b) => (b.data.publishDate?.getTime() ?? 0) - (a.data.publishDate?.getTime() ?? 0))
+  .map((p) => ({
+    id: p.id, title: p.data.title, date: p.data.publishDate,
+    authors: p.data.authors, type: typeOf(p), preview: previewOf(p), tags: tagsOf(p),
+  }))
+
+const short = (d) => d ? d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }) : ''
+const chip = (t) => ({ release: 'Release', roundup: 'Roundup', news: 'News' })[t]
+---
+<Base title={`Tagged “${label}”`} description={`Apache Hop blog posts tagged ${label}.`}>
+  <main class="tagpage" id="main" data-pagefind-ignore>
+    <p class="tagpage__back"><a href="/blog/">&larr; Blog</a></p>
+    <h1>Tagged <em>{label}</em></h1>
+    <p class="tagpage__count">{posts.length} {posts.length === 1 ? 'post' : 'posts'}</p>
+
+    <ul class="grid">
+      {posts.map((p) => (
+        <li class="card">
+          <a href={`/blog/${p.id}/`}>
+            <p class="meta">
+              <span class:list={['chip', `chip--${p.type}`]}>{chip(p.type)}</span>
+              <time datetime={p.date?.toISOString().slice(0, 10)}>{short(p.date)}</time>
+              {p.authors && <span class="meta__by">{p.authors}</span>}
+            </p>
+            <h2>{p.title}</h2>
+            {p.preview && <p class="card__preview">{p.preview}</p>}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </main>
+</Base>
+
+<style>
+  .tagpage { max-width: 1180px; margin: 0 auto; padding: 40px 24px 24px; }
+  .tagpage__back { font-size: 14.5px; margin: 0 0 24px; }
+  .tagpage h1 { font-size: clamp(28px, 3.6vw, 38px); letter-spacing: -.026em; margin: 0 0 6px; }
+  .tagpage h1 em { font-style: normal; color: var(--accent); }
+  .tagpage__count { font-family: var(--mono); font-size: 13px; color: var(--ink-3); margin: 0 0 28px; }
+  .grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+  .card > a {
+    display: flex; flex-direction: column; height: 100%; text-decoration: none; color: inherit;
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 12px;
+    padding: 20px 22px 22px; transition: border-color .15s, transform .15s;
+  }
+  .card > a:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card h2 { margin: 0; font-size: 17px; line-height: 1.32; }
+  .card__preview {
+    margin: 9px 0 0; font-size: 14.5px; line-height: 1.6; color: var(--ink-2);
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 10px; }
+  .meta time, .meta__by { font-family: var(--mono); font-size: 12.5px; color: var(--ink-3); }
+  .meta__by::before { content: "· "; color: var(--rule-2); }
+  .chip {
+    font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 999px; border: 1px solid var(--rule);
+    background: var(--surface-2); color: var(--ink-2);
+  }
+  .chip--release { color: var(--accent); }
+  .chip--roundup { color: var(--brand); }
+</style>
