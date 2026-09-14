@@ -15,13 +15,15 @@
     limitations under the License.
 }}
 {{! One manual and its versions. Rendered from nav-footer twice: once for the
-    manual you are reading, then once per other manual. }}
+    manual you are reading (current=true, versions=page.versions so each link
+    lands on the same page in that version), then once per other manual
+    (versions=component.versions, so each link lands on the version's start page). }}
 <div class="explore__group">
   <p class="explore__title">{{{title}}}</p>
   <ul>
     {{#each versions}}
-    <li class="{{#if (and (eq .. @root.page.component) (eq this @root.page.componentVersion))}}is-current{{/if}}">
-      <a href="{{{relativize ./url}}}">{{./displayVersion}}</a>
+    <li{{#if (and ../current (eq ./version @root.page.componentVersion.version))}} class="is-current"{{else if ./missing}} class="is-missing"{{/if}}>
+      <a href="{{{relativize ./url}}}"{{#if ./missing}} title="This page does not exist in {{./displayVersion}}; opens the start page"{{/if}}>{{./displayVersion}}</a>
     </li>
     {{/each}}
   </ul>

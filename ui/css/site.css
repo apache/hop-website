@@ -456,6 +456,7 @@
 }
 .explore__body a:hover { background: var(--surface-2); color: var(--ink); }
 .explore__body .is-current > a { color: var(--accent); font-weight: 600; background: var(--surface-2); }
+.explore__body .is-missing > a { color: var(--ink-3); font-style: italic; }
 
 .nav-foot__edit {
   display: flex; align-items: center; gap: 7px; margin-top: 10px;
