@@ -564,6 +564,71 @@ The parent/child relations between those channels live in <code>LoggingRegistry.
 This is the same path a <code>logBasic()</code> call from a <a href="../../../manual/latest/pipeline/transforms/userdefinedjavaclass.html" class="xref page">User Defined Java Class</a> takes: the transform&#8217;s own channel, the same store.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_slf4j_and_the_log4j2_binding"><a class="link" href="#_slf4j_and_the_log4j2_binding">SLF4J and the Log4j2 binding</a></h3>
+<div class="paragraph">
+<p>The log records hop writes to the store are mirrored to SLF4J by <code>Slf4jLoggingEventListener</code> and, in turn, to Log4j2 through the <code>log4j-slf4j2-impl</code> binding.
+The binding is a configuration concern, not a Hop one: bring your own <code>log4j2.xml</code> (or <code>logback.xml</code>, or JUL) on the classpath and the stack emits whatever the provider expects, without touching Hop code.
+A minimal <code>log4j2.xml</code> is shipped in <code>hop-core.jar</code>. Hop&#8217;s own log lines are already printed by Hop&#8217;s console writer (<code>ConsoleLoggingEventListener</code>), so in that default configuration the <code>org.apache.hop</code> logger has no appender and is not additive: nothing is printed twice. Warnings and errors from third-party libraries reach the console through the root logger.</p>
+</div>
+<div class="paragraph">
+<p>To route Hop&#8217;s own lines through Log4j2 instead (a JSON layout, a Kafka appender, an OpenTelemetry appender, &#8230;&#8203;):</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Supply your own configuration, for example <code>HOP_OPTIONS="-Dlog4j2.configurationFile=/path/to/log4j2.xml"</code>, and add an <code>AppenderRef</code> to the <code>org.apache.hop</code> logger.</p>
+</li>
+<li>
+<p>Set <code>HOP_DISABLE_CONSOLE_LOGGING=Y</code> to switch off Hop&#8217;s own console writer, otherwise every line is printed both by Hop and by Log4j2.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><code>LogChannel</code> keeps feeding <code>HopLogStore</code> synchronously regardless of the binding, so the GUI, the execution information location and the server keep working even when the external logger is reconfigured, and no Log4j2 configuration can empty those log views.</p>
+</div>
+<div class="sect3">
+<h4 id="_hop_context_as_mdc"><a class="link" href="#_hop_context_as_mdc">Hop context as MDC</a></h4>
+<div class="paragraph">
+<p>While dispatching a record, the listener publishes the Hop execution context to the SLF4J MDC so custom appenders (agent, collector, Kafka, OpenTelemetry) can correlate records without parsing the message text.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">MDC key</th>
+<th class="tableblock halign-left valign-top">Example</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop.logChannelId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>04f3…</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Hop channel id of the record, the same key used to look the line up in <code>HopLogStore</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop.logLevel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>7</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The native Hop log level code of the record, preserving all seven Hop levels even though SLF4J exposes five.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop.subject</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/opt/import/pipeline.hpl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The detailed subject of the log object, normally the pipeline or workflow filename.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The keys are also exposed as constants on <code>Slf4jLoggingEventListener</code>: <code>MDC_CHANNEL_ID</code>, <code>MDC_LOG_LEVEL</code> and <code>MDC_SUBJECT</code>.
+MDC is scoped to a single dispatch and is cleared once the record is handed to SLF4J, so it never leaks to another thread.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">

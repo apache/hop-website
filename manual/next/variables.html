@@ -2114,6 +2114,27 @@
     <a href="../../manual/next/metadata-types/data-set.html">Data Set</a>
     
   </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Data Stream section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../manual/next/metadata-types/data-stream/data-stream.html">Data Stream</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../manual/next/metadata-types/data-stream/arrow-file-stream.html">Apache Arrow File Stream</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../manual/next/metadata-types/data-stream/arrow-flight.html">Apache Arrow Flight Stream</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../manual/next/metadata-types/data-stream/arrow-random-access-file.html">Apache Arrow Random Access File</a>
+    
+  </li>
+</ul>
+
+  </li>
   <li class="doc-nav__item">
     <a href="../../manual/next/metadata-types/dbt-project.html">dbt Project</a>
     
@@ -3365,6 +3386,13 @@ This only makes a difference for extremely short lived pipelines.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HOP_S3_VFS_PART_SIZE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">5MB</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The default part size for multi-part uploads of new files to S3 (added and used by by the <a href="vfs/aws-s3-vfs.html" class="xref page">AWS S3</a> VFS plugin)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HOP_SERVER_CROSS_SITE_POLICY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">same-site</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Which browser requests Hop Server accepts, based on the Sec-Fetch-Site header: <code>same-site</code> (the default) rejects cross-site requests, <code>same-origin</code> also rejects same-site ones, and <code>off</code> disables the check.
+Clients that send no Sec-Fetch-* headers at all, such as hop-run or the Hop GUI, are never affected.
+See <a href="hop-server/index.html" class="xref page">Hop Server</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HOP_SERVER_DETECTION_TIMER</p></td>

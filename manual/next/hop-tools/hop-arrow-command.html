@@ -2114,6 +2114,27 @@
     <a href="../../../manual/next/metadata-types/data-set.html">Data Set</a>
     
   </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Data Stream section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/next/metadata-types/data-stream/data-stream.html">Data Stream</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/data-stream/arrow-file-stream.html">Apache Arrow File Stream</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/data-stream/arrow-flight.html">Apache Arrow Flight Stream</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/data-stream/arrow-random-access-file.html">Apache Arrow Random Access File</a>
+    
+  </li>
+</ul>
+
+  </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/dbt-project.html">dbt Project</a>
     
@@ -2722,15 +2743,37 @@
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">sh hop arrow --<span class="hljs-built_in">help</span>
 Usage: hop arrow [-hV] [--arrow-flight-host=&lt;hostname&gt;]
-                 [--arrow-flight-port=&lt;port&gt;] [-e=&lt;environmentOption&gt;]
+                 [--arrow-flight-password=&lt;password&gt;]
+                 [--arrow-flight-port=&lt;port&gt;]
+                 [--arrow-flight-tls-certificate=&lt;tlsCertificateFile&gt;]
+                 [--arrow-flight-tls-client-ca=&lt;tlsClientCertificateAuthorityFile&gt;]
+                 [--arrow-flight-tls-key=&lt;tlsPrivateKeyFile&gt;]
+                 [--arrow-flight-username=&lt;username&gt;] [-e=&lt;environmentOption&gt;]
                  [-j=&lt;projectOption&gt;]
 Run the hop arrow <span class="hljs-built_in">command</span> to start a flight or socket server
       --arrow-flight-host=&lt;hostname&gt;
                   The hostname on <span class="hljs-built_in">which</span> the Apache Arrow Flight server will
                     listen, defaults to 0.0.0.0
+      --arrow-flight-password=&lt;password&gt;
+                  The password belonging to --arrow-flight-username. Can be an
+                    encrypted password or a variable expression.
       --arrow-flight-port=&lt;port&gt;
                   The port on <span class="hljs-built_in">which</span> the Apache Arrow Flight server will listen,
                     defaults to 33333
+      --arrow-flight-tls-certificate=&lt;tlsCertificateFile&gt;
+                  The PEM file with the certificate chain of the Apache Arrow
+                    Flight server. Specify this together with
+                    --arrow-flight-tls-key to serve over TLS.
+      --arrow-flight-tls-client-ca=&lt;tlsClientCertificateAuthorityFile&gt;
+                  The PEM file with the certificate authority used to verify
+                    client certificates (mutual TLS). Needs TLS to be enabled.
+      --arrow-flight-tls-key=&lt;tlsPrivateKeyFile&gt;
+                  The PEM file with the PKCS#8 private key of the Apache Arrow
+                    Flight server certificate
+      --arrow-flight-username=&lt;username&gt;
+                  The user name clients need to present to the Apache Arrow
+                    Flight server. Without it the server accepts
+                    unauthenticated clients.
   -e, --environment=&lt;environmentOption&gt;
                   The name of the lifecycle environment to use
   -h, --<span class="hljs-built_in">help</span>      Show this <span class="hljs-built_in">help</span> message and <span class="hljs-built_in">exit</span>.
@@ -2778,6 +2821,87 @@ The rows are stored in memory so that they can be picked up.</p>
 <p>Reading data from the Flight server with Hop is as simple as referencing the same Data Stream with the xref</p>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_transport_security_and_authentication"><a class="link" href="#_transport_security_and_authentication">Transport security and authentication</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default the Flight server speaks plain gRPC and accepts every client that can reach the port.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Without the options below, anything that can open a connection to the port can read the data the server streams, and that data travels in the clear.
+Until you enable TLS and authentication, treat the Flight server as a trusted-network-only service and keep it off any interface it does not need to be on (use <code>--arrow-flight-host</code> to bind it to a single address).
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_tls"><a class="link" href="#_tls">TLS</a></h3>
+<div class="paragraph">
+<p>Pass a certificate chain and its PKCS#8 private key to serve over TLS:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">hop arrow --project my-project \
+  --arrow-flight-tls-certificate /etc/hop/flight/server.crt \
+  --arrow-flight-tls-key /etc/hop/flight/server.key</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Both files are read through <a href="../vfs.html" class="xref page">Apache VFS</a>, so they can live anywhere Hop can reach.
+The clients then connect with <code>grpc+tls://</code> instead of <code>grpc://</code>.</p>
+</div>
+<div class="paragraph">
+<p>To also require clients to present a certificate of their own (mutual TLS), add the certificate authority to verify them with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">  --arrow-flight-tls-client-ca /etc/hop/flight/client-ca.crt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Client certificate verification needs TLS to be enabled.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_authentication"><a class="link" href="#_authentication">Authentication</a></h3>
+<div class="paragraph">
+<p>Pass a user name and password to make the server reject anonymous clients:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">hop arrow --project my-project \
+  --arrow-flight-username hop \
+  --arrow-flight-password <span class="hljs-string">&#x27;${FLIGHT_PASSWORD}&#x27;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The password accepts a variable expression or a password encrypted with the <a href="hop-encrypt.html" class="xref page">hop-encrypt</a> tool, so it does not have to appear in plain text in a startup script.</p>
+</div>
+<div class="paragraph">
+<p>Clients authenticate with the user name and password, and the server hands them a bearer token which is used for the calls that follow.
+The <a href="../metadata-types/data-stream/arrow-flight.html" class="xref page">Apache Arrow Flight Data Stream</a> has matching <strong>Username</strong> and <strong>Password</strong> fields; other clients use the standard Flight <code>Authorization</code> handshake, for example <code>pyarrow.flight.FlightClient.authenticate_basic_token()</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Authentication without TLS means the credentials are sent in the clear. The server logs a warning when you do that. Enable both.
+</td>
+</tr>
+</table>
+</div>
+</div>
 <div class="sect2">
 <h3 id="_supported_options"><a class="link" href="#_supported_options">Supported options:</a></h3>
 <div class="ulist">
@@ -2787,6 +2911,21 @@ The rows are stored in memory so that they can be picked up.</p>
 </li>
 <li>
 <p><code>--arrow-flight-port</code> : Listening port (default: 33333)</p>
+</li>
+<li>
+<p><code>--arrow-flight-tls-certificate</code> : PEM file with the server certificate chain, enables TLS</p>
+</li>
+<li>
+<p><code>--arrow-flight-tls-key</code> : PEM file with the PKCS#8 private key for that certificate</p>
+</li>
+<li>
+<p><code>--arrow-flight-tls-client-ca</code> : PEM file with the CA used to verify client certificates (mutual TLS)</p>
+</li>
+<li>
+<p><code>--arrow-flight-username</code> : The user name clients need to present</p>
+</li>
+<li>
+<p><code>--arrow-flight-password</code> : The password for that user, optionally encrypted or a variable</p>
 </li>
 <li>
 <p><code>--project</code> : Used to find the Data Stream metadata to reference</p>

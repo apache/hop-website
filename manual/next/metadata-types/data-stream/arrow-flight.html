@@ -2114,6 +2114,27 @@
     <a href="../../../../manual/next/metadata-types/data-set.html">Data Set</a>
     
   </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Data Stream section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../../manual/next/metadata-types/data-stream/data-stream.html">Data Stream</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/data-stream/arrow-file-stream.html">Apache Arrow File Stream</a>
+    
+  </li>
+  <li class="doc-nav__item is-current">
+    <a href="../../../../manual/next/metadata-types/data-stream/arrow-flight.html">Apache Arrow Flight Stream</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/data-stream/arrow-random-access-file.html">Apache Arrow Random Access File</a>
+    
+  </li>
+</ul>
+
+  </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/dbt-project.html">dbt Project</a>
     
@@ -2701,7 +2722,9 @@
 <nav class="breadcrumbs" data-pagefind-ignore aria-label="Breadcrumb">
   <ol>
     <li><a href="../../../../">Home</a></li>
-    <li><a href="../../../../manual/next/metadata-types/data-stream/arrow-flight.html">Apache Arrow Flight Data Stream</a></li>
+    <li><a href="../../../../manual/next/metadata-types/index.html">Metadata Types</a></li>
+    <li><a href="../../../../manual/next/metadata-types/data-stream/data-stream.html">Data Stream</a></li>
+    <li><a href="../../../../manual/next/metadata-types/data-stream/arrow-flight.html">Apache Arrow Flight Stream</a></li>
   </ol>
 </nav>
     <article class="doc">
@@ -2758,8 +2781,48 @@ If they do not match exactly, an error is thrown.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Maximum Buffer Size</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The maximum number of rows that will be kept in the buffer on the Hop Flight server. Set it high enough to avoid losing rows. As a ballpark figure, take the throughput in rows/s and multiply that by 10 for the buffer size to avoid issues. (default: 10M)</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Hop Flight hostname</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The hostname on which the Hop Flight server can be reached. (default: localhost)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Hop Flight port</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The port on which the Hop Flight server can be reached. (default: 33333)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Use TLS</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connect over TLS instead of plain gRPC. The server needs to be started with a certificate and a private key, see the <a href="../../hop-tools/hop-arrow-command.html" class="xref page"><code>hop arrow</code> command</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Verify the server certificate</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verify the certificate the Flight server presents. Only switch this off for testing with a self-signed certificate. (default: enabled)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Trusted certificates file</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional PEM file with the certificate authority to trust when verifying the server certificate. Leave it empty to use the JVM trust store.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Client certificate file</strong> / <strong>Client private key file</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional PEM files with the client certificate and its private key, for a server started with <code>--arrow-flight-tls-client-ca</code> (mutual TLS). Specify both or neither.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Username</strong> / <strong>Password</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The credentials to authenticate with, for a server started with <code>--arrow-flight-username</code>. Leave the username empty when the server does not require authentication.</p></td>
+</tr>
 </tbody>
 </table>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The TLS and credential fields are only used by Hop itself when it connects to the server. The hostname, port and <strong>Use TLS</strong> settings are also what the server advertises to clients in the endpoint it returns, so they need to describe how clients reach the server, not how it binds.
+</td>
+</tr>
+</table>
+</div>
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -2787,6 +2850,9 @@ This is an IPC system, not a safe data queue.  The purpose is to hand data over 
 </li>
 <li>
 <p>The Flight server must be started separately using the <code>hop arrow</code> <a href="../../hop-tools/hop-arrow-command.html" class="xref page">command</a>.</p>
+</li>
+<li>
+<p>Transport security and authentication are off unless the server is started with the matching options. Without them the data travels in the clear and anything that can reach the port can read it.</p>
 </li>
 </ul>
 </div>
@@ -2818,6 +2884,15 @@ This is an IPC system, not a safe data queue.  The purpose is to hand data over 
 <span class="hljs-comment"># Connect to your Flight server</span>
 client = flight.FlightClient(<span class="hljs-string">&quot;grpc://localhost:33333&quot;</span>)   <span class="hljs-comment"># or &quot;grpc://0.0.0.0:33333&quot;</span>
 
+<span class="hljs-comment"># On a server started with TLS and credentials, connect like this instead:</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment">#   with open(&quot;server.crt&quot;, &quot;rb&quot;) as f:</span>
+<span class="hljs-comment">#       client = flight.FlightClient(&quot;grpc+tls://localhost:33333&quot;, tls_root_certs=f.read())</span>
+<span class="hljs-comment">#   token_pair = client.authenticate_basic_token(b&quot;hop&quot;, b&quot;s3cr3t&quot;)</span>
+<span class="hljs-comment">#   options = flight.FlightCallOptions(headers=[token_pair])</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># and pass `options` to get_flight_info() and do_get().</span>
+
 <span class="hljs-comment"># Define the stream name (must match what your server expects: the name of the Data Stream metadata element)</span>
 stream_name = <span class="hljs-string">&quot;FlightStream&quot;</span>
 
@@ -2844,6 +2919,10 @@ table = reader.read_all()
 </div>
 </div>
     </article>
+<nav class="pagination" data-pagefind-ignore aria-label="Page">
+  <a class="pagination__prev" href="../../../../manual/next/metadata-types/data-stream/arrow-file-stream.html"><span>Previous</span><strong>Apache Arrow File Stream</strong></a>
+  <a class="pagination__next" href="../../../../manual/next/metadata-types/data-stream/arrow-random-access-file.html"><span>Next</span><strong>Apache Arrow Random Access File</strong></a>
+</nav>
   </main>
 
 <aside class="doc-toc" data-pagefind-ignore aria-label="On this page">

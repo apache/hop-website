@@ -2114,6 +2114,27 @@
     <a href="../../../manual/next/metadata-types/data-set.html">Data Set</a>
     
   </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Data Stream section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/next/metadata-types/data-stream/data-stream.html">Data Stream</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/data-stream/arrow-file-stream.html">Apache Arrow File Stream</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/data-stream/arrow-flight.html">Apache Arrow Flight Stream</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/data-stream/arrow-random-access-file.html">Apache Arrow Random Access File</a>
+    
+  </li>
+</ul>
+
+  </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/dbt-project.html">dbt Project</a>
     
@@ -3290,7 +3311,7 @@ The page is split into tabs:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>General</strong> — authentication mode (<code>NONE</code> / <code>EXTERNAL</code> / <code>BASIC</code> / <code>OAUTH2</code>) and login welcome message</p>
+<p><strong>General</strong> — authentication mode (<code>NONE</code> / <code>EXTERNAL</code> / <code>BASIC</code> / <code>OAUTH2</code>), login welcome message, and the <a href="#_cross_site_requests_to_the_hop_server_api">cross-site policy</a> for <code>/hop/*</code></p>
 </li>
 <li>
 <p><strong>OAuth</strong> — OIDC issuer, client id/secret, redirect, scopes, role/username claims, PKCE</p>
@@ -3487,6 +3508,64 @@ To make a specific Google account an administrator for local/dev:</p>
 Other users without a mapping fall back to the <strong>User</strong> role.</p>
 </div>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cross_site_requests_to_the_hop_server_api"><a class="link" href="#_cross_site_requests_to_the_hop_server_api">Cross-site requests to the Hop Server API</a></h3>
+<div class="paragraph">
+<p>Hop Web co-deploys the Hop Server API on <code>/hop/*</code>.
+Those servlets answer state-changing operations on <code>GET</code> — a single URL starts a pipeline, stops a workflow or removes one — so without a check, a web page an operator happens to be visiting can drive them in the operator&#8217;s browser, using the session cookie the browser attaches by itself.</p>
+</div>
+<div class="paragraph">
+<p>Hop Web therefore rejects requests whose <a href="https://developer.mozilla.org/docs/Web/HTTP/Headers/Sec-Fetch-Site" rel="noopener" target="_blank"><code>Sec-Fetch-Site</code></a> header says they were started by another site, answering <code>403 Forbidden</code> before authentication and before the RBAC check run.
+This is the same policy the standalone <a href="../hop-server/index.html" class="xref page">Hop Server</a> applies, and it is set the same way:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>same-site</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The default.
+Rejects requests started by a site on a different registrable domain.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>same-origin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Also rejects requests started by another host of the same domain, so only Hop Web&#8217;s own pages may drive the API.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>off</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Does not look at <code>Sec-Fetch-Site</code> at all.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Set it in <strong>Configuration → Security → General</strong>, as <code>crossSitePolicy</code> in <code>security-config.json</code>, or with the <code>HOP_SERVER_CROSS_SITE_POLICY</code> environment variable (which overrides the config file).
+A <code>crossSitePolicy</code> init-param on the <code>CrossSiteRequest</code> filter in <code>web.xml</code> pins it for a single deployment and wins over both.</p>
+</div>
+<div class="paragraph">
+<p>Only browsers send <code>Sec-Fetch-<strong></code> headers, and requests without them are always accepted, so hop-run, the Hop GUI, <code>curl</code> and your own automation calling <code>/hop/</strong></code> are unaffected.
+Following a link to <code>/hop/*</code> <strong>from another site</strong> does land on a <code>403</code>; Hop Web&#8217;s own UI is unaffected because its calls are same-origin.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This guards the Hop Server API only. The Hop Web UI itself (<code>/ui</code>) is not covered by this filter.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">

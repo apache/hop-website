@@ -2114,6 +2114,27 @@
     <a href="../../../manual/next/metadata-types/data-set.html">Data Set</a>
     
   </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Data Stream section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/next/metadata-types/data-stream/data-stream.html">Data Stream</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/data-stream/arrow-file-stream.html">Apache Arrow File Stream</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/data-stream/arrow-flight.html">Apache Arrow Flight Stream</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/data-stream/arrow-random-access-file.html">Apache Arrow Random Access File</a>
+    
+  </li>
+</ul>
+
+  </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/dbt-project.html">dbt Project</a>
     
@@ -2734,6 +2755,7 @@
 </li>
 <li><a href="#_enterprise_air_gapped">Enterprise / air-gapped</a>
 <ul class="sectlevel2">
+<li><a href="#marketplace-spec-repository-credentials">Repositories declared by an install spec</a></li>
 <li><a href="#_authentication_type">Authentication type</a></li>
 <li><a href="#_how_stored_passwords_are_protected">How stored passwords are protected</a></li>
 </ul>
@@ -3507,7 +3529,7 @@ path. Omit the filter (or pass an empty string) to list every optional plugin. M
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>repositories</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">List of Maven base URLs used when <strong>applying</strong> this file. Order: first = primary, rest = fallbacks. Each item: <code>id</code>, <code>url</code>, optional <code>username</code> / <code>password</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List of Maven base URLs used when <strong>applying</strong> this file. Order: first = primary, rest = fallbacks. Each item: <code>id</code>, <code>url</code>, optional <code>username</code> / <code>password</code>. A repository here only inherits configured credentials when it points at a repository manager that is already configured — see <a href="#marketplace-spec-repository-credentials">Repositories declared by an install spec</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>plugins</code></p></td>
@@ -3588,6 +3610,18 @@ path. Omit the filter (or pass an empty string) to list every optional plugin. M
 </div>
 <div class="paragraph">
 <p>Username and password are resolved separately, so the two can come from different sources: a repository entry that sets only <code>username</code> is combined with <code>HOP_MARKETPLACE_PASSWORD</code> from the environment. Such a mixed pair counts as deliberately configured — the anonymous retry described below applies only when the repository entry supplies neither field.</p>
+</div>
+<div class="sect2">
+<h3 id="marketplace-spec-repository-credentials"><a class="link" href="#marketplace-spec-repository-credentials">Repositories declared by an install spec</a></h3>
+<div class="paragraph">
+<p>An install spec carried by a project can declare its own <code>repositories</code>. Because that URL comes from the project rather than from the operator, the configured credentials are only reused for it when the project points at the <strong>same</strong> repository manager they belong to — the same scheme, host and port as a repository in <code>hop-config</code>. The path may differ, so a second repository on the same Nexus or Artifactory keeps working.</p>
+</div>
+<div class="paragraph">
+<p>A spec repository on any other host gets only what the spec itself declares. Neither the <code>username</code> / <code>password</code> stored on a configured repository nor the global <code>HOP_MARKETPLACE_USERNAME</code> / <code>HOP_MARKETPLACE_PASSWORD</code> pair is sent to it, so enabling a project cannot make Hop hand the operator&#8217;s repository credentials to an address of the project&#8217;s choosing. The log says so at basic level when credentials are withheld this way.</p>
+</div>
+<div class="paragraph">
+<p>To give such a repository credentials, set <code>username</code> / <code>password</code> on its entry in the spec (prefer a variable over a literal secret), or set the repository-scoped <code>HOP_MARKETPLACE_&lt;ID&gt;_USERNAME</code> / <code>_PASSWORD</code> variables for the <code>id</code> the spec uses — those name one repository, so they still apply.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_authentication_type"><a class="link" href="#_authentication_type">Authentication type</a></h3>

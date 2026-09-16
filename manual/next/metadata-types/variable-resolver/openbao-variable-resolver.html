@@ -2114,6 +2114,27 @@
     <a href="../../../../manual/next/metadata-types/data-set.html">Data Set</a>
     
   </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Data Stream section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../../manual/next/metadata-types/data-stream/data-stream.html">Data Stream</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/data-stream/arrow-file-stream.html">Apache Arrow File Stream</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/data-stream/arrow-flight.html">Apache Arrow Flight Stream</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/data-stream/arrow-random-access-file.html">Apache Arrow Random Access File</a>
+    
+  </li>
+</ul>
+
+  </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/dbt-project.html">dbt Project</a>
     
@@ -2765,7 +2786,7 @@ The editor is the same as the <a href="hashicorp-vault-variable-resolver.html" c
 <div class="ulist">
 <ul>
 <li>
-<p>Validate HTTPS connections?: It&#8217;s recommended to enable connection validation in production. This secures the connection with the X.509 certificate specified in one of either next option.</p>
+<p>Validate HTTPS connections?: Verifies the certificate the OpenBAO server presents. On for new resolvers. Leave it on in production, and identify the certificate with one of the two PEM options below when the server does not use a certificate from a public CA.</p>
 </li>
 <li>
 <p>PEM file path: The name of the file (VFS) containing the X.509 certificate string</p>
@@ -2780,6 +2801,27 @@ The editor is the same as the <a href="hashicorp-vault-variable-resolver.html" c
 <p>Read connection timeout: The timeout in milliseconds when reading.</p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Validate HTTPS connections?</strong> became the default in Hop 2.20.
+The option is stored in the resolver, so resolvers created before that keep the setting they have: verification stays off in every resolver definition that was saved with the box unticked, whatever Hop version you upgrade to.
+Open your OpenBAO and Vault resolvers and check the option rather than assuming the upgrade covered them.
+Hop logs a warning when a resolver reaches an <code>https</code> address without verifying the certificate.</p>
+</div>
+<div class="paragraph">
+<p>A resolver that verifies the certificate needs to be able to build the chain to a trusted root.
+Against an OpenBAO with a self-signed certificate or one signed by a private CA, give the resolver that certificate through <strong>PEM file path</strong> or <strong>PEM string</strong>; without it the lookup fails and the expression is left unresolved.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>The variable expression you can resolve with this plugin type is (as always) in the following format:</p>

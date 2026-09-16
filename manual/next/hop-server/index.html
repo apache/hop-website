@@ -2114,6 +2114,27 @@
     <a href="../../../manual/next/metadata-types/data-set.html">Data Set</a>
     
   </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Data Stream section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/next/metadata-types/data-stream/data-stream.html">Data Stream</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/data-stream/arrow-file-stream.html">Apache Arrow File Stream</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/data-stream/arrow-flight.html">Apache Arrow Flight Stream</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/data-stream/arrow-random-access-file.html">Apache Arrow Random Access File</a>
+    
+  </li>
+</ul>
+
+  </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/dbt-project.html">dbt Project</a>
     
@@ -2771,7 +2792,14 @@ Run a Hop server
   -V, --version           Print version information and <span class="hljs-built_in">exit</span>.
   -ws, --workflow-status=&lt;workflowName&gt;
                           List the status of the workflow with this name (also
-                            specify the -<span class="hljs-built_in">id</span> option)</code></pre>
+                            specify the -<span class="hljs-built_in">id</span> option)
+      -xs, --cross-site-policy=&lt;crossSitePolicy&gt;
+                          Which browser requests this server accepts, based on
+                            the Sec-Fetch-Site header: <span class="hljs-string">&#x27;same-site&#x27;</span> (the
+                            default) rejects cross-site requests, <span class="hljs-string">&#x27;same-origin&#x27;</span>
+                            also rejects same-site ones, and <span class="hljs-string">&#x27;off&#x27;</span> disables the
+                            check. Clients that send no Sec-Fetch-* headers,
+                            such as hop-run or the Hop GUI, are never affected.</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2864,6 +2892,12 @@ This is provided for by the 'projects' plugin.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">--shutdown-timeout</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Default: 0<br>
 The maximum number of seconds to wait for running pipelines and workflows to finish when the server shuts down (0 shuts down immediately). Can also be set with the <code>HOP_SERVER_SHUTDOWN_TIMEOUT</code> environment variable.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-xs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">--cross-site-policy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default: same-site<br>
+Which browser requests the server accepts: <code>same-site</code>, <code>same-origin</code> or <code>off</code>. Can also be set with the <code>HOP_SERVER_CROSS_SITE_POLICY</code> environment variable. See <a href="#_cross_site_requests">Cross-site requests</a>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -3434,6 +3468,80 @@ When the timeout elapses while executions are still running, the server shuts do
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cross_site_requests"><a class="link" href="#_cross_site_requests">Cross-site requests</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Hop Server servlets answer state-changing operations on <code>GET</code>: a single URL starts a pipeline, stops a workflow or removes one from the server.
+That is convenient for automation, but it also means a web page an operator happens to be visiting can drive the server simply by pointing an image, a form or a link at it, using the operator&#8217;s browser and their credentials.</p>
+</div>
+<div class="paragraph">
+<p>To close that path, Hop Server rejects requests whose <a href="https://developer.mozilla.org/docs/Web/HTTP/Headers/Sec-Fetch-Site" rel="noopener" target="_blank"><code>Sec-Fetch-Site</code></a> header says they were started by another site, answering them with an HTTP <code>403 Forbidden</code> before authentication or any servlet runs.</p>
+</div>
+<div class="paragraph">
+<p>Only browsers send <code>Sec-Fetch-*</code> headers.
+hop-run, the Hop GUI, <code>curl</code> and your own automation send none at all, and requests without the header are always accepted, so <strong>existing integrations are not affected</strong>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>--cross-site-policy</code> option (or the <code>HOP_SERVER_CROSS_SITE_POLICY</code> environment variable) picks how strict the server is:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>same-site</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The default.
+Rejects requests started by a site on a different registrable domain.
+A link or a form on another host of the same domain — a second Hop server, an intranet portal, the same host on another port — is still accepted.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>same-origin</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Also rejects requests started by another host of the same domain, so only the server&#8217;s own pages may drive it.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>off</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Does not look at <code>Sec-Fetch-Site</code> at all.
+An escape hatch for a deployment that turns out to need cross-site browser access; it leaves the server open to the requests described above.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell"> ./hop-server.sh 127.0.0.1 8080 --cross-site-policy same-origin</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Two consequences worth knowing about:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Following a link to the server <strong>from another site</strong> lands on a <code>403</code>, including a plain click-through to the status page.
+Typing the address or using a bookmark sends <code>Sec-Fetch-Site: none</code> and keeps working, as does every link on the server&#8217;s own pages.</p>
+</li>
+<li>
+<p>A <code>Sec-Fetch-Site</code> value the server does not recognise, or more than one of them on the same request, is rejected as well.
+A client that cannot send the header correctly can always send nothing at all.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This is a defence against one specific attack, not a substitute for the basics: keep authentication enabled, change the default <code>cluster</code>/<code>cluster</code> credentials and do not expose the server to an untrusted network.</p>
+</div>
+<div class="paragraph">
+<p>Hop Web applies the same policy to the Hop Server API it co-deploys on <code>/hop/*</code>, configured in its own security settings — see <a href="../hop-gui/hop-web.html" class="xref page">Hop Web</a>.</p>
 </div>
 </div>
 </div>
