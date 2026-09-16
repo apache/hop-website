@@ -2754,6 +2754,9 @@
 <p><strong>Refresh</strong> — reload the selected connected connection, or the connection list</p>
 </li>
 <li>
+<p><strong>Edit connection</strong> — open this connection in the Metadata perspective (or a dialog if that perspective is disabled)</p>
+</li>
+<li>
 <p><strong>Open SQL editor</strong> — new SQL tab for the selected connection (<code>SELECT * FROM table</code> when a table is selected)</p>
 </li>
 <li>
@@ -2873,7 +2876,10 @@
 <p>Each placement has its own workbench instance (connection tree, SQL tabs, operations). The perspective stays available with <code>Ctrl+Shift+D</code>. SQL editor tabs (connection, file or buffer, unsaved edits) are remembered per project when you close the window or dock and when you restart Hop Gui. Query results are not stored.</p>
 </div>
 <div class="paragraph">
-<p><strong>SQL</strong> on a table-output (or bulk-loader, lookup, update, …) transform dialog opens this floating window on the transform&#8217;s connection: the schema/table tree refreshes in the background while you edit and run the generated SQL. The same happens from the database explorer (Open SQL, Generate DDL, Truncate).</p>
+<p><strong>SQL</strong> on a table-output (or bulk-loader, lookup, update, …) transform dialog opens this floating window on the transform&#8217;s connection: the schema/table tree refreshes in the background while you edit and run the generated SQL. The same happens from the database explorer (Open SQL, Generate DDL, Truncate). The explorer toolbar also has <strong>Open in Database perspective</strong>, which closes the explorer and switches to this perspective on the explorer&#8217;s connection.</p>
+</div>
+<div class="paragraph">
+<p>On the relational database connection metadata editor, <strong>Open in Database</strong> does the same from the other direction: it activates this perspective on that connection so you can explore and query immediately.</p>
 </div>
 </div>
 </div>
