@@ -1100,6 +1100,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/plugincatalog.html">Plugin Catalog</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/postgresbulkloader.html">PostgreSQL bulk loader</a>
     
   </li>
@@ -2965,6 +2969,9 @@
 <p>Get not answered messages</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>The selected value is stored with the workflow (XML tag <code>valueimaplist</code>, for example <code>imaplistunread</code>). Reopening the action keeps the same Retrieve option.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2974,7 +2981,7 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">After retrieved</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>specfiy the action to perform on email messages after retrieval:</p>
+<p>specify the action to perform on email messages after retrieval:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -3075,6 +3082,21 @@
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_notes"><a class="link" href="#_notes">Notes</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>IMAP <strong>Retrieve</strong> (unread, new, flagged, and the other list options) is stored with the workflow. Saving and reopening keeps the selected option.</p>
+</li>
+<li>
+<p>Workflows saved in Hop 2.13 still load: date conditions such as <code>ignore</code> and IMAP list codes such as <code>imaplistunread</code> are accepted, not only integer indexes.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

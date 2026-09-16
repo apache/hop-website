@@ -1100,6 +1100,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/plugincatalog.html">Plugin Catalog</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/postgresbulkloader.html">PostgreSQL bulk loader</a>
     
   </li>
@@ -2777,7 +2781,25 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enable external entity for XSD validation</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Allow the XSD validation to resolve external references (XXE). Unchecked by default, which has three effects:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A <code>DOCTYPE</code> declaration or an external entity in the XML being validated is refused and the action fails.</p>
+</li>
+<li>
+<p>XSD sources <strong>none (default)</strong> and <strong>is defined inside XML</strong> do not work: the <code>xsi:schemaLocation</code> / <code>xsi:noNamespaceSchemaLocation</code> reference is not resolved, not even when it points at a local file. Both options need the checkbox.</p>
+</li>
+<li>
+<p>A schema that pulls in another schema over the network with <code>xs:include</code> or <code>xs:import</code> (for example the W3C <code>xml.xsd</code>) needs the checkbox. Local file and relative includes keep working without it.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Only check this when the XML documents and the schemas you validate against are trusted. The default for new actions can be changed with the <code>ALLOW_EXTERNAL_ENTITIES_FOR_XSD_VALIDATION</code> Java system property.</p>
+</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">XSD Source</p></td>
@@ -2787,13 +2809,13 @@
 <div class="ulist">
 <ul>
 <li>
-<p>none (default)</p>
+<p>none (default) - requires <strong>Enable external entity for XSD validation</strong></p>
 </li>
 <li>
 <p>is a file, let me specify filename</p>
 </li>
 <li>
-<p>is defined inside XML</p>
+<p>is defined inside XML - requires <strong>Enable external entity for XSD validation</strong></p>
 </li>
 </ul>
 </div></div></td>
