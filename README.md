@@ -47,6 +47,22 @@ uncommitted edits included, so an `.adoc` change is one build away instead of a
 commit and a push. `dev` never renders documentation at all: the Antora half
 only exists after a build.
 
+Build and serve are two commands because they are two steps, but they are almost
+always run together. Two scripts pair them up:
+
+```sh
+./run-website.sh             # npm run build, then npm run serve
+./run-website-local.sh       # npm run build:hop, then npm run serve
+./run-website-local.sh --fast   # documentation only, seconds instead of a minute
+```
+
+Both take `--port` and `--no-serve`, and run `npm ci` first if `node_modules` is
+missing. `--fast` re-runs Antora alone, which rewrites `/manual` and
+`/dev-manual` and touches nothing else: no Astro pages, no regenerated header
+and footer, no search index. That makes it the loop to stay in while editing
+`.adoc` files, and it needs a full build to have populated `public/` once
+before it has anything to write into.
+
 Astro writes `public/` first and Antora adds `/manual` and `/dev-manual` to it,
 so `output.clean` is off in every playbook. The order is not a preference:
 `astro build` empties its output directory, so running `build:site` on its own
