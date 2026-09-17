@@ -530,8 +530,8 @@
 The built-in set is small — string, integer, number, big number, date, timestamp, boolean, binary — and it is extensible.</p>
 </div>
 <div class="paragraph">
-<p><code>UUID</code> and <code>JSON</code> are value types.
-A geometry type, a vector type or a money type would be too.</p>
+<p><code>UUID</code>, <code>JSON</code> and <code>Vector</code> are value types.
+A geometry type or a money type would be too.</p>
 </div>
 </div>
 </div>
@@ -601,7 +601,7 @@ Reach for the simpler option first.</p>
 <td class="content">
 <div class="paragraph">
 <p>Type ids are plain integers and there is no allocation registry.
-The built-in types use low numbers and the shipped plugins use <code>20</code> for Avro and <code>32</code> for UUID.</p>
+The built-in types use low numbers and the shipped plugins use <code>20</code> for Avro, <code>32</code> for UUID, <code>303</code> for the Neo4j Graph type and <code>1536</code> for Vector.</p>
 </div>
 <div class="paragraph">
 <p>Two plugins that pick the same id will collide, and the failure will not be obvious.
