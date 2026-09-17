@@ -1183,6 +1183,12 @@
 <loc>https://hop.apache.org/manual/next/pipeline/transforms/pgpencryptstream.html</loc>
 </url>
 <url>
+<loc>https://hop.apache.org/manual/next/pipeline/transforms/pgvector-search.html</loc>
+</url>
+<url>
+<loc>https://hop.apache.org/manual/next/pipeline/transforms/pgvector-upsert.html</loc>
+</url>
+<url>
 <loc>https://hop.apache.org/manual/next/pipeline/transforms/pipeline-data-probe.html</loc>
 </url>
 <url>
