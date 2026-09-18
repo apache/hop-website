@@ -2934,6 +2934,30 @@ The official image already includes the standard plugin set; extra JDBC drivers 
 </div>
 </div>
 <div class="sect1">
+<h2 id="_response_compression"><a class="link" href="#_response_compression">Response compression</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hop Web talks to the browser in JSON, and the pipeline canvas and the transform selector are sent as SVG documents that run to several hundred kB for a large pipeline or a full plugin list.
+gzip shrinks these responses four to five times, which keeps the interface responsive on slower links.</p>
+</div>
+<div class="paragraph">
+<p>The <code>apache/hop-web</code> image enables compression on its Tomcat connector; its <code>conf/server.xml</code> is <code>docker/resources/server.xml</code> in the Hop source tree.
+If you deploy <code>hop.war</code> on your own Tomcat, add it to the HTTP connector in <code>conf/server.xml</code>; <code>image/svg+xml</code> is not in Tomcat&#8217;s default list:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>xml</div><pre class="highlightjs highlight is-highlighted"><code class="language-xml hljs" data-lang="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Connector</span> <span class="hljs-attr">port</span>=<span class="hljs-string">&quot;8080&quot;</span> <span class="hljs-attr">protocol</span>=<span class="hljs-string">&quot;HTTP/1.1&quot;</span>
+           <span class="hljs-attr">compression</span>=<span class="hljs-string">&quot;on&quot;</span>
+           <span class="hljs-attr">compressibleMimeType</span>=<span class="hljs-string">&quot;text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json,application/xml,image/svg+xml&quot;</span>
+           <span class="hljs-attr">...</span> /&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Other servlet containers and reverse proxies have an equivalent setting.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_using_the_hop_cli_tools_in_hop_web"><a class="link" href="#_using_the_hop_cli_tools_in_hop_web">Using the Hop CLI tools in Hop Web.</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
