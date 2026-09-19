@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>What is Apache Hop? | Apache Hop</title>
-<meta name="description" content="Getting Started (1/8): before we&#x27;re diving into Hop, we&#x27;ll have a quick look at the visual design, metadata, kernel + plugin architecture and runtimes">
+<meta name="description" content="Getting Started (1/9): Apache Hop is a metadata-driven data integration and orchestration platform. Pipelines and workflows are designed visually and then managed like any other software project.">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/getting-started/hop-what-is-hop.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
 <meta property="og:title" content="What is Apache Hop?">
-<meta property="og:description" content="Getting Started (1/8): before we&#x27;re diving into Hop, we&#x27;ll have a quick look at the visual design, metadata, kernel + plugin architecture and runtimes">
+<meta property="og:description" content="Getting Started (1/9): Apache Hop is a metadata-driven data integration and orchestration platform. Pipelines and workflows are designed visually and then managed like any other software project.">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/getting-started/hop-what-is-hop.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -121,15 +121,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-concepts.html">Hop Concepts</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../manual/next/getting-started/hop-download-install.html">Download &amp; Install</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-tools.html">Tools</a>
+    <a href="../../../manual/next/getting-started/hop-concepts.html">Hop Concepts</a>
     
   </li>
   <li class="doc-nav__item">
@@ -137,11 +133,19 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-gui-pipelines.html">Pipelines</a>
+    <a href="../../../manual/next/getting-started/hop-gui-pipelines.html">Your first pipeline</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-gui-workflows.html">Workflows</a>
+    <a href="../../../manual/next/getting-started/hop-gui-workflows.html">Your first workflow</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/getting-started/hop-projects.html">Projects and environments</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/getting-started/hop-tools.html">The Hop toolbox</a>
     
   </li>
   <li class="doc-nav__item">
@@ -245,6 +249,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/hop-gui/shortcuts.html">Keyboard Shortcuts</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-gui/canvas-mouse.html">Canvas Mouse Gestures</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2740,68 +2748,162 @@
 </nav>
     <article class="doc">
       <h1>What is Apache Hop?</h1>
-      <div class="sect1">
-<h2 id="_visual_design_and_metadata"><a class="link" href="#_visual_design_and_metadata">Visual Design and Metadata</a></h2>
+      <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Apache Hop, short for <strong>H</strong>op <strong>O</strong>rchestration <strong>P</strong>latform, is a data orchestration and data engineering platform that aims to facilitate all aspects of data and metadata orchestration.
-Hop lets you focus on the problem you&#8217;re trying to solve without technology getting in the way.
-Simple tasks should be easy, complex tasks need to be possible.</p>
-</div>
-<div class="paragraph">
-<p>Hop allows data professionals to work <strong>visually</strong>, using <strong>metadata</strong> to describe how data should be processed.
-Visual design enables data developers to focus on <strong>what</strong> they want to do instead of <strong>how</strong> that task needs to be done.
-This focus on the task at hand lets Hop developers be more productive than they would be when writing code.</p>
+<p>Apache Hop is a <strong>metadata-driven data integration and data orchestration platform</strong>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_architecture"><a class="link" href="#_architecture">Architecture</a></h2>
+<h2 id="_metadata_driven"><a class="link" href="#_metadata_driven">Metadata driven</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Hop was designed to be as flexible as possible: at the core is the small but powerful Hop engine.
-All functionality is added through plugins: the default Hop installation comes with about 400 plugins.
-You can remove or add third-party plugins according to your needs to tailor Hop to be exactly what you need.
-Hop is designed to work in any scenario, from IoT to huge volumes of data, on-prem, in the cloud, on a bare OS or in containers and kubernetes.</p>
+<p>Everything in Hop is metadata.</p>
+</div>
+<div class="paragraph">
+<p>The pipelines that read, combine and transform your data are metadata.
+So are the workflows that orchestrate them, the connections to the databases, files and services you work with, and the run configurations that decide where and how any of it executes.</p>
+</div>
+<div class="paragraph">
+<p>Nothing in a Hop pipeline is bound to a specific database, file format or processing engine.
+A pipeline describes <strong>what</strong> should happen to your data; the metadata around it decides <strong>where</strong> that happens and <strong>against what</strong>.
+That separation is what lets the same pipeline run against a developer&#8217;s local database and a production warehouse, or on your laptop and on a Spark cluster, without being rewritten.</p>
+</div>
+<div class="paragraph">
+<p>Hop takes this a step further with <a href="../pipeline/metadata-injection.html" class="xref page">metadata injection</a>: a template pipeline that receives its metadata at runtime, so one pipeline can process a hundred different files or tables instead of you building a hundred near-identical pipelines.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_flexible_runtimes"><a class="link" href="#_flexible_runtimes">Flexible Runtimes</a></h2>
+<h2 id="_built_to_fit_your_architecture"><a class="link" href="#_built_to_fit_your_architecture">Built to fit your architecture</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Hop developers create <strong>workflows</strong> and <strong>pipelines</strong> in a visual development environment called Hop Gui.
-These workflows and pipelines can be executed on a variety of engines: workflows and pipelines can run on the native Hop engine, both locally and remotely.
-Pipelines can also run on Apache Spark, Apache Flink and Google Dataflow through the Apache Beam runtime configurations.<br></p>
+<p>Hop is designed to blend into the data architecture you already run: relational databases, files, object stores on AWS, Azure and Google Cloud, NoSQL and graph databases, message queues, REST and SOAP services, SaaS platforms.
+Hop connects them and moves data between them.</p>
 </div>
 <div class="paragraph">
-<p>In workflows and pipelines, hundreds of operations can be applied on the data: read from and write to a variety of source and target platforms, but also combine, enrich, clean and in many other ways manipulate data.
-Depending on the engine and selected functionality, your data can be processed in batch, streaming or in a batch/streaming hybrid.</p>
+<p>That is also why Hop is deliberately lightweight.
+At the core is a small, fast engine; everything else is a plugin, and you add or remove plugins to make your installation exactly what you need and nothing more.
+The plugin architecture is open, so you can write your own and load them the same way.</p>
+</div>
+<div class="paragraph">
+<p>The result runs anywhere from an edge device in an IoT scenario to a cluster processing very large volumes, on bare metal, in a container, or on Kubernetes.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_use_cases"><a class="link" href="#_use_cases">Use Cases</a></h2>
+<h2 id="_designed_visually_managed_like_software"><a class="link" href="#_designed_visually_managed_like_software">Designed visually, managed like software</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A number of common use cases for Hop are:</p>
+<p>Hop developers build pipelines and workflows <strong>visually</strong>, in a full development environment called <a href="../hop-gui/index.html" class="xref page">Hop Gui</a>, available on Windows, macOS and Linux and in the browser as <a href="../hop-gui/hop-web.html" class="xref page">Hop Web</a>.</p>
+</div>
+<div class="paragraph">
+<p>Visual design means you describe the problem instead of the plumbing, and it means the next person to open your pipeline can see what it does at a glance instead of reading through hundreds of lines of code.</p>
+</div>
+<div class="paragraph">
+<p>What Hop does <strong>not</strong> do is trap that work in a proprietary tool.
+A pipeline is a plain file on disk, and a project is an ordinary folder of them.
+From that point on, a Hop project is managed like any other software project:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Version control</dt>
+<dd>
+<p>Projects and environments live in Git. Branch, review, diff and roll back like any other repository. Hop Gui has <a href="../hop-gui/hop-gui-git.html" class="xref page">git integration</a> built in, so you can do most of it without leaving the tool.</p>
+</dd>
+<dt class="hdlist1">Unit tests</dt>
+<dd>
+<p><a href="../pipeline/pipeline-unit-testing.html" class="xref page">Pipeline unit tests</a> validate a pipeline&#8217;s output against a golden data set. Logging tells you a pipeline ran; a unit test tells you it produced the right data. Regression tests keep a fixed bug fixed.</p>
+</dd>
+<dt class="hdlist1">Static analysis</dt>
+<dd>
+<p><a href="../linting/index.html" class="xref page">Linting</a> checks pipelines, workflows and metadata without running them or connecting to anything, so it is safe to run on every commit.</p>
+</dd>
+<dt class="hdlist1">CI/CD</dt>
+<dd>
+<p>Everything Hop needs to run is on the command line, so building, testing and deploying a Hop project is an ordinary build pipeline. Promote the same project from development through test to production by pointing it at a different environment.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_flexible_runtimes"><a class="link" href="#_flexible_runtimes">Flexible runtimes</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You design a pipeline once and choose at runtime where it executes.
+A <a href="../pipeline/pipeline-run-configurations/pipeline-run-configurations.html" class="xref page">run configuration</a> is metadata like everything else, so switching engines does not mean redesigning anything.</p>
+</div>
+<div class="paragraph">
+<p>Workflows run on Hop&#8217;s own engine, <a href="../pipeline/pipeline-run-configurations/native-local-pipeline-engine.html" class="xref page">locally</a> or on a remote <a href="../hop-server/index.html" class="xref page">Hop Server</a>.</p>
+</div>
+<div class="paragraph">
+<p>Pipelines have more options:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Engine</th>
+<th class="tableblock halign-left valign-top">What it&#8217;s for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../pipeline/pipeline-run-configurations/native-local-pipeline-engine.html" class="xref page">Native local</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The default. Runs on the machine you&#8217;re on, and handles a very large share of real workloads on its own.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../pipeline/pipeline-run-configurations/native-remote-pipeline-engine.html" class="xref page">Native remote</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The same engine on a <a href="../hop-server/index.html" class="xref page">Hop Server</a>, with <a href="../pipeline/pipeline-run-configurations/native-load-balancing-pipeline-engine.html" class="xref page">load balancing</a> across several servers when you need it.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../pipeline/pipeline-run-configurations/native-spark-pipeline-engine.html" class="xref page">Native Spark</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Executes the pipeline directly as a Spark job, without translating it through another framework. Runs locally, on a cluster through <code>spark-submit</code>, and on <a href="../pipeline/spark/databricks.html" class="xref page">Databricks</a>. This is also the path to <a href="../pipeline/spark/lakehouse.html" class="xref page">Delta Lake and Apache Iceberg</a> tables.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../pipeline/beam/getting-started-with-beam.html" class="xref page">Apache Beam</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mainly used to run pipelines on <a href="../pipeline/pipeline-run-configurations/beam-dataflow-pipeline-engine.html" class="xref page">Google Cloud Dataflow</a>. Beam run configurations for <a href="../pipeline/pipeline-run-configurations/beam-spark-pipeline-engine.html" class="xref page">Spark</a> and <a href="../pipeline/pipeline-run-configurations/beam-flink-pipeline-engine.html" class="xref page">Flink</a> are also available.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Depending on the engine and the transforms you use, data is processed in batch, streaming, or a mix of the two.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_use_cases"><a class="link" href="#_use_cases">Use cases</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hop is used for, among many other things:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Loading large data sets into databases taking advantage of the cloud, clustered, and massively parallel processing environments.</p>
+<p>Populating and maintaining data warehouses, with built-in support for Slowly Changing Dimensions (SCD), <a href="../how-to-guides/change-data-capture.html" class="xref page">Change Data Capture (CDC)</a> and surrogate keys.</p>
 </li>
 <li>
-<p>Data warehouse population with built-in support for Slowly Changing Dimensions (SCD), <a href="../how-to-guides/change-data-capture.html" class="xref page">Change Data Capture (CDC)</a>, and surrogate key creation.</p>
+<p>Loading large data sets into databases, data warehouses and cloud object storage.</p>
 </li>
 <li>
-<p>Integrate between diverse data architectures, combining relational databases, files, NoSQL databases like Neo4j, MongoDB, Cassandra etc</p>
+<p>Building and maintaining <a href="../pipeline/spark/lakehouse.html" class="xref page">lakehouse tables</a> on Delta Lake and Apache Iceberg.</p>
 </li>
 <li>
-<p>Data migration between different databases and applications.</p>
+<p>Integrating across diverse architectures: relational databases, files, object stores, NoSQL and graph databases such as MongoDB, Cassandra and Neo4j, REST and SOAP services, and SaaS platforms.</p>
 </li>
 <li>
-<p>Data profiling and data cleansing.</p>
+<p>Processing streaming data, for example from Apache Kafka, on its own or alongside batch.</p>
+</li>
+<li>
+<p>Migrating data between databases and applications.</p>
+</li>
+<li>
+<p>Data profiling, validation and cleansing.</p>
 </li>
 </ul>
 </div>
@@ -2810,7 +2912,7 @@ Depending on the engine and selected functionality, your data can be processed i
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../manual/next/getting-started/index.html"><span>Previous</span><strong>Getting Started</strong></a>
-  <a class="pagination__next" href="../../../manual/next/getting-started/hop-concepts.html"><span>Next</span><strong>Hop Concepts</strong></a>
+  <a class="pagination__next" href="../../../manual/next/getting-started/hop-download-install.html"><span>Next</span><strong>Download &amp; Install</strong></a>
 </nav>
   </main>
 

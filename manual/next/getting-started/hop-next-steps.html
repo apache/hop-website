@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Next Steps | Apache Hop</title>
-<meta name="description" content="Getting Started (8/8): You now know the basic Hop terminology and tools, and you&#x27;ve created and have run your first pipeline and workflow. Here&#x27;s an overview of topics you could explore to continue building your Hop knowledge.">
+<title>Next steps | Apache Hop</title>
+<meta name="description" content="Getting Started (9/9): You&#x27;ve built and run a pipeline, a workflow and a project. Here&#x27;s where to go next, depending on what you want to do.">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/getting-started/hop-next-steps.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
-<meta property="og:title" content="Next Steps">
-<meta property="og:description" content="Getting Started (8/8): You now know the basic Hop terminology and tools, and you&#x27;ve created and have run your first pipeline and workflow. Here&#x27;s an overview of topics you could explore to continue building your Hop knowledge.">
+<meta property="og:title" content="Next steps">
+<meta property="og:description" content="Getting Started (9/9): You&#x27;ve built and run a pipeline, a workflow and a project. Here&#x27;s where to go next, depending on what you want to do.">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/getting-started/hop-next-steps.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -121,15 +121,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-concepts.html">Hop Concepts</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../manual/next/getting-started/hop-download-install.html">Download &amp; Install</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-tools.html">Tools</a>
+    <a href="../../../manual/next/getting-started/hop-concepts.html">Hop Concepts</a>
     
   </li>
   <li class="doc-nav__item">
@@ -137,11 +133,19 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-gui-pipelines.html">Pipelines</a>
+    <a href="../../../manual/next/getting-started/hop-gui-pipelines.html">Your first pipeline</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-gui-workflows.html">Workflows</a>
+    <a href="../../../manual/next/getting-started/hop-gui-workflows.html">Your first workflow</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/getting-started/hop-projects.html">Projects and environments</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/getting-started/hop-tools.html">The Hop toolbox</a>
     
   </li>
   <li class="doc-nav__item is-current">
@@ -245,6 +249,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/hop-gui/shortcuts.html">Keyboard Shortcuts</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-gui/canvas-mouse.html">Canvas Mouse Gestures</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2739,51 +2747,150 @@
   </ol>
 </nav>
     <article class="doc">
-      <h1>Next Steps</h1>
-      <div class="paragraph">
-<p>You now know what Hop is and how to create your first workflows and pipelines.</p>
+      <h1>Next steps</h1>
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>You&#8217;ve built a pipeline, orchestrated it from a workflow, handled a failure path, and put both in a project.
+That is the core loop of working with Hop. Everything else is more of it.</p>
 </div>
 <div class="paragraph">
-<p>There&#8217;s a lot more to discover in Hop.
-Here are a couple of topics you may want to look into:</p>
+<p>Where you go next depends on what you&#8217;re trying to do.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_build_more_pipelines"><a class="link" href="#_build_more_pipelines">Build more pipelines</a></h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><a href="../pipeline/pipelines.html" class="xref page">Pipelines</a> takes closer look at the various aspects of creating and running pipelines, and contains the entire list of transforms that are at your disposal</p>
+<p><a href="../pipeline/pipelines.html" class="xref page">Pipelines</a> - the full picture, including the complete <a href="../pipeline/transforms.html" class="xref page">list of transforms</a></p>
 </li>
 <li>
-<p><a href="../workflow/workflows.html" class="xref page">Workflows</a> takes a closer look at the various aspects of create and running workflows, and contains the entire list of actions that are at your disposal</p>
+<p><a href="../pipeline/run-preview-debug-pipeline.html" class="xref page">Run, Preview and Debug a Pipeline</a> - preview a subset, pause on a condition, step through rows</p>
 </li>
 <li>
-<p><a href="../fields-parameters-variables.html" class="xref page">Fields, parameters, and variables</a> compares the three ways Hop moves data and configuration</p>
+<p><a href="../pipeline/errorhandling.html" class="xref page">Error Handling</a> - send failing rows down a separate hop instead of stopping</p>
 </li>
 <li>
-<p><a href="../how-to-guides/change-data-capture.html" class="xref page">Change Data Capture</a> covers the three ways Hop detects inserts, updates and deletes: log sniffing, filtered selection, and snapshot comparison.</p>
+<p><a href="../fields-parameters-variables.html" class="xref page">Fields, parameters and variables</a> - three things that look alike in the UI and behave differently</p>
 </li>
 <li>
-<p><a href="../best-practices/index.html" class="xref page">Best Practices</a> covers a number of things you might want to think about while using Apache Hop.</p>
-</li>
-<li>
-<p><a href="../projects/index.html" class="xref page">Projects</a> explains how to work with projects and environments</p>
-</li>
-<li>
-<p><a href="../how-to-guides/scheduling-workflows-and-pipelines.html" class="xref page">Scheduling workflows and pipelines</a> shows how to start a run from cron, systemd, Jenkins, a Kubernetes CronJob or Apache Airflow</p>
-</li>
-<li>
-<p><a href="../hop-server/deploying.html" class="xref page">Deploying Hop Server</a> covers the three common ways to get a project onto a running server</p>
-</li>
-<li>
-<p><a href="../vfs.html" class="xref page">VFS</a> explains how you can access resources in the 3 main cloud platforms: AWS, Azure and GCP.</p>
-</li>
-<li>
-<p><a href="../logging/logging-basics.html" class="xref page">Logging</a> explains how to configure Hop for your desired log level and target platform</p>
+<p><a href="../pipeline/pipeline-unit-testing.html" class="xref page">Pipeline Unit Tests</a> - golden data sets and assertions for your pipelines</p>
 </li>
 </ul>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_orchestrate_more"><a class="link" href="#_orchestrate_more">Orchestrate more</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../workflow/workflows.html" class="xref page">Workflows</a> - the full picture, including the complete <a href="../workflow/actions.html" class="xref page">list of actions</a></p>
+</li>
+<li>
+<p><a href="../how-to-guides/scheduling-workflows-and-pipelines.html" class="xref page">Scheduling workflows and pipelines</a> - cron, systemd, Jenkins, Kubernetes CronJob and Apache Airflow</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_connect_to_your_data"><a class="link" href="#_connect_to_your_data">Connect to your data</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../database/databases.html" class="xref page">Databases</a> - relational connections and the drivers Hop ships</p>
+</li>
+<li>
+<p><a href="../vfs.html" class="xref page">VFS</a> - read and write on AWS, Azure and GCP as if they were local files</p>
+</li>
+<li>
+<p><a href="../how-to-guides/change-data-capture.html" class="xref page">Change Data Capture</a> - log sniffing, filtered selection and snapshot comparison</p>
+</li>
+<li>
+<p><a href="../metadata-types/index.html" class="xref page">Metadata types</a> - everything you can define once and reuse</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_run_it_somewhere_else"><a class="link" href="#_run_it_somewhere_else">Run it somewhere else</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../projects/index.html" class="xref page">Projects</a> - the full reference for projects and environments</p>
+</li>
+<li>
+<p><a href="../hop-server/deploying.html" class="xref page">Deploying Hop Server</a> - three ways to get a project onto a running server</p>
+</li>
+<li>
+<p><a href="../docker-container.html" class="xref page">Hop in Docker</a> - the <code>apache/hop</code> image</p>
+</li>
+<li>
+<p><a href="../pipeline/pipeline-run-configurations/pipeline-run-configurations.html" class="xref page">Pipeline run configurations</a> - run the same pipeline on Apache Spark, Apache Flink or Google Dataflow without changing it</p>
+</li>
+<li>
+<p><a href="../logging/logging-basics.html" class="xref page">Logging</a> - log levels and where to send the output</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_work_like_a_team"><a class="link" href="#_work_like_a_team">Work like a team</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../hop-gui/hop-gui-git.html" class="xref page">Working with git</a> - commit, diff and browse history from inside Hop Gui</p>
+</li>
+<li>
+<p><a href="../best-practices/index.html" class="xref page">Best Practices</a> - what experienced Hop developers wish they had known</p>
+</li>
+<li>
+<p><a href="../linting/index.html" class="xref page">Linting</a> - static checks on pipelines, workflows and metadata, locally or in CI</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_coming_from_kettle_or_pdi"><a class="link" href="#_coming_from_kettle_or_pdi">Coming from Kettle or PDI?</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../hop-vs-kettle/hop-vs-kettle.html" class="xref page">Hop vs Kettle</a> - what changed and why</p>
+</li>
+<li>
+<p><a href="../hop-vs-kettle/if-you-know-kettle.html" class="xref page">If you know Kettle</a> - the vocabulary mapping</p>
+</li>
+<li>
+<p><a href="../hop-vs-kettle/import-kettle-projects.html" class="xref page">Upgrade Kettle to Hop</a> - convert an existing repository</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_get_help"><a class="link" href="#_get_help">Get help</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hop is an Apache project, and the community is where questions get answered.
+See <a href="https://hop.apache.org/community/">the community pages</a> for the mailing lists, chat and issue tracker.</p>
+</div>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
-  <a class="pagination__prev" href="../../../manual/next/getting-started/hop-gui-workflows.html"><span>Previous</span><strong>Workflows</strong></a>
+  <a class="pagination__prev" href="../../../manual/next/getting-started/hop-tools.html"><span>Previous</span><strong>The Hop toolbox</strong></a>
   <a class="pagination__next" href="../../../manual/next/hop-vs-kettle/index.html"><span>Next</span><strong>Kettle/PDI and Hop</strong></a>
 </nav>
   </main>

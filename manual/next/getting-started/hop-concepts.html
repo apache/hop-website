@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Hop Concepts | Apache Hop</title>
-<meta name="description" content="Getting Started (2/8): before going into the details of workflows and pipelines, we&#x27;ll walk through the core terminology used in Hop.">
+<meta name="description" content="Getting Started (3/9): before going into the details of workflows and pipelines, we&#x27;ll walk through the core terminology used in Hop.">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/getting-started/hop-concepts.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
 <meta property="og:title" content="Hop Concepts">
-<meta property="og:description" content="Getting Started (2/8): before going into the details of workflows and pipelines, we&#x27;ll walk through the core terminology used in Hop.">
+<meta property="og:description" content="Getting Started (3/9): before going into the details of workflows and pipelines, we&#x27;ll walk through the core terminology used in Hop.">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/getting-started/hop-concepts.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -120,16 +120,12 @@
     <a href="../../../manual/next/getting-started/hop-what-is-hop.html">What is Hop</a>
     
   </li>
-  <li class="doc-nav__item is-current">
-    <a href="../../../manual/next/getting-started/hop-concepts.html">Hop Concepts</a>
-    
-  </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/getting-started/hop-download-install.html">Download &amp; Install</a>
     
   </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-tools.html">Tools</a>
+  <li class="doc-nav__item is-current">
+    <a href="../../../manual/next/getting-started/hop-concepts.html">Hop Concepts</a>
     
   </li>
   <li class="doc-nav__item">
@@ -137,11 +133,19 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-gui-pipelines.html">Pipelines</a>
+    <a href="../../../manual/next/getting-started/hop-gui-pipelines.html">Your first pipeline</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-gui-workflows.html">Workflows</a>
+    <a href="../../../manual/next/getting-started/hop-gui-workflows.html">Your first workflow</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/getting-started/hop-projects.html">Projects and environments</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/getting-started/hop-tools.html">The Hop toolbox</a>
     
   </li>
   <li class="doc-nav__item">
@@ -245,6 +249,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/hop-gui/shortcuts.html">Keyboard Shortcuts</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-gui/canvas-mouse.html">Canvas Mouse Gestures</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2763,6 +2771,12 @@ All transforms in a pipeline run in parallel.</p>
 All actions in a workflow run sequentially by default.</p>
 </li>
 <li>
+<p><strong>Metadata items</strong> are the definitions you create once and reuse everywhere: relational database connections, <a href="../pipeline/pipeline-run-configurations/pipeline-run-configurations.html" class="xref page">run configurations</a>, <a href="../metadata-types/hop-server.html" class="xref page">Hop Servers</a>, <a href="../metadata-types/data-set.html" class="xref page">data sets</a>, <a href="../metadata-types/pipeline-unit-test.html" class="xref page">unit tests</a>, and many more.
+A pipeline refers to a database connection by name; the connection itself is defined once, in the project.
+Change it in one place and everything that uses it follows.
+See the <a href="../metadata-types/index.html" class="xref page">full list of metadata types</a>.</p>
+</li>
+<li>
 <p><strong>Projects</strong> are logical collections of hop code and configuration.
 <strong>Environments</strong> contain the environment-specific (e.g. dev, uat, prd) metadata.</p>
 </li>
@@ -2877,8 +2891,8 @@ Example: the 'dev' environment for the 'Sales' project specifies to read from ho
 </div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
-  <a class="pagination__prev" href="../../../manual/next/getting-started/hop-what-is-hop.html"><span>Previous</span><strong>What is Hop</strong></a>
-  <a class="pagination__next" href="../../../manual/next/getting-started/hop-download-install.html"><span>Next</span><strong>Download &amp; Install</strong></a>
+  <a class="pagination__prev" href="../../../manual/next/getting-started/hop-download-install.html"><span>Previous</span><strong>Download &amp; Install</strong></a>
+  <a class="pagination__next" href="../../../manual/next/getting-started/hop-gui.html"><span>Next</span><strong>Hop Gui Overview</strong></a>
 </nav>
   </main>
 

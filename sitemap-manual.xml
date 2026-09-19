@@ -178,6 +178,9 @@
 <loc>https://hop.apache.org/manual/next/getting-started/hop-next-steps.html</loc>
 </url>
 <url>
+<loc>https://hop.apache.org/manual/next/getting-started/hop-projects.html</loc>
+</url>
+<url>
 <loc>https://hop.apache.org/manual/next/getting-started/hop-tools.html</loc>
 </url>
 <url>
@@ -188,6 +191,9 @@
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/hop-doc/index.html</loc>
+</url>
+<url>
+<loc>https://hop.apache.org/manual/next/hop-gui/canvas-mouse.html</loc>
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/hop-gui/disable-ui-elements.html</loc>
@@ -1577,6 +1583,9 @@
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/snippets/hop-concepts/workflow.html</loc>
+</url>
+<url>
+<loc>https://hop.apache.org/manual/next/snippets/hop-gui/perspectives-list.html</loc>
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/snippets/hop-tools/hop-conf.html</loc>

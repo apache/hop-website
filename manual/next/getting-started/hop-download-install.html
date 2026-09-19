@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Download and Install Hop | Apache Hop</title>
-<meta name="description" content="Getting Started (3/8): Installing Hop is as easy and accessible as possible: download, unzip, start.">
+<title>Download and install Hop | Apache Hop</title>
+<meta name="description" content="Getting Started (2/9): installing Hop is download, unzip, start. This page also covers the Java requirement, the Docker images, and the one configuration step worth doing before you begin.">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/getting-started/hop-download-install.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
-<meta property="og:title" content="Download and Install Hop">
-<meta property="og:description" content="Getting Started (3/8): Installing Hop is as easy and accessible as possible: download, unzip, start.">
+<meta property="og:title" content="Download and install Hop">
+<meta property="og:description" content="Getting Started (2/9): installing Hop is download, unzip, start. This page also covers the Java requirement, the Docker images, and the one configuration step worth doing before you begin.">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/getting-started/hop-download-install.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -120,16 +120,12 @@
     <a href="../../../manual/next/getting-started/hop-what-is-hop.html">What is Hop</a>
     
   </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-concepts.html">Hop Concepts</a>
-    
-  </li>
   <li class="doc-nav__item is-current">
     <a href="../../../manual/next/getting-started/hop-download-install.html">Download &amp; Install</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-tools.html">Tools</a>
+    <a href="../../../manual/next/getting-started/hop-concepts.html">Hop Concepts</a>
     
   </li>
   <li class="doc-nav__item">
@@ -137,11 +133,19 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-gui-pipelines.html">Pipelines</a>
+    <a href="../../../manual/next/getting-started/hop-gui-pipelines.html">Your first pipeline</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-gui-workflows.html">Workflows</a>
+    <a href="../../../manual/next/getting-started/hop-gui-workflows.html">Your first workflow</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/getting-started/hop-projects.html">Projects and environments</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/getting-started/hop-tools.html">The Hop toolbox</a>
     
   </li>
   <li class="doc-nav__item">
@@ -245,6 +249,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/hop-gui/shortcuts.html">Keyboard Shortcuts</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-gui/canvas-mouse.html">Canvas Mouse Gestures</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2739,53 +2747,228 @@
   </ol>
 </nav>
     <article class="doc">
-      <h1>Download and Install Hop</h1>
+      <h1>Download and install Hop</h1>
       <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Hop is designed to be as easy and accessible to use as possible.</p>
-</div>
-<div class="paragraph">
-<p>Getting and starting Hop couldn&#8217;t be easier:</p>
+<p>Hop is designed to be as easy and accessible to use as possible.
+There is no installer and no server to set up: download, unzip, start.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_download"><a class="link" href="#_download">Download</a></h2>
+<h2 id="_check_your_java"><a class="link" href="#_check_your_java">Check your Java</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Download Hop from the <a href="http://hop.apache.org/download/">downloads page</a>.</p>
+<p>Hop is self-contained. The only thing it needs is a Java runtime.</p>
+</div>
+<div class="paragraph">
+<p>The official Java version for Hop is <strong>21</strong>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">java -version</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">openjdk version &quot;21.0.10&quot; 2026-01-20
+OpenJDK Runtime Environment (build 21.0.10)
+OpenJDK 64-Bit Server VM (build 21.0.10, mixed mode, sharing)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If that command is not found, or reports an older version, install a Java 21 runtime first.
+See <a href="../supported-jvms.html" class="xref page">Supported Java Versions</a> for which runtimes are known to work, and which one to avoid.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_prerequisites"><a class="link" href="#_prerequisites">Prerequisites</a></h2>
+<h2 id="_download_and_unzip"><a class="link" href="#_download_and_unzip">Download and unzip</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Hop is self contained, all you need is a Java runtime.
-Hop official java version is 21. Check the <a href="https://java.com/en/download/help/download_options.html" rel="noopener" target="_blank">Java docs</a> to download and install a Java runtime for your operating system.</p>
+<p>Download the client from the <a href="https://hop.apache.org/download/">Apache Hop downloads page</a> and unzip it to a folder of your choice.</p>
+</div>
+<div class="paragraph">
+<p>That folder is your Hop installation.
+Everything you need is in it:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">What</th>
+<th class="tableblock halign-left valign-top">Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The launcher scripts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop</code>, <code>hop.bat</code> and the individual <code>hop-<strong>.sh</code> / <code>hop-</strong>.bat</code> scripts</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configuration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>config/</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Plugins</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plugins/</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Projects created for you</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>config/projects/default</code> and <code>config/projects/samples</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_one_step_worth_doing_now"><a class="link" href="#_one_step_worth_doing_now">One step worth doing now</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default Hop keeps its configuration inside the installation folder.
+That means an upgrade - a new unzip - leaves your projects and settings behind in the old folder.</p>
+</div>
+<div class="paragraph">
+<p>Point Hop at a user-level configuration folder instead, once, before you start:</p>
+</div>
+<div id="_tabs_1" class="openblock tabs is-loading">
+<div class="content">
+<div class="ulist tablist">
+<ul>
+<li id="_tabs_1_windows" class="tab">
+<p>Windows</p>
+</li>
+<li id="_tabs_1_linux_macos" class="tab">
+<p>Linux, macOS</p>
+</li>
+</ul>
+</div>
+<div id="_tabs_1_windows--panel" class="tabpanel" aria-labelledby="_tabs_1_windows">
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">hop.bat setup apply --defaults</code></pre>
+</div>
+</div>
+</div>
+<div id="_tabs_1_linux_macos--panel" class="tabpanel" aria-labelledby="_tabs_1_linux_macos">
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">./hop setup apply --defaults</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Restart Hop afterwards.
+You can do the same thing from the GUI later with <strong>Tools &#8594; Configure Hop environment&#8230;&#8203;</strong>.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="../hop-tools/hop-setup.html" class="xref page">Hop Setup</a> for what it changes and how to undo it.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_install"><a class="link" href="#_install">Install</a></h2>
+<h2 id="_start_hop_gui"><a class="link" href="#_start_hop_gui">Start Hop Gui</a></h2>
+<div class="sectionbody">
+<div id="_tabs_2" class="openblock tabs is-loading">
+<div class="content">
+<div class="ulist tablist">
+<ul>
+<li id="_tabs_2_windows" class="tab">
+<p>Windows</p>
+</li>
+<li id="_tabs_2_linux_macos" class="tab">
+<p>Linux, macOS</p>
+</li>
+</ul>
+</div>
+<div id="_tabs_2_windows--panel" class="tabpanel" aria-labelledby="_tabs_2_windows">
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">hop-gui.bat</code></pre>
+</div>
+</div>
+</div>
+<div id="_tabs_2_linux_macos--panel" class="tabpanel" aria-labelledby="_tabs_2_linux_macos">
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">./hop-gui.sh</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The first start takes a little longer than the ones after it, because Hop scans and registers its plugins.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_other_ways_to_run_hop"><a class="link" href="#_other_ways_to_run_hop">Other ways to run Hop</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Unzip Hop to a folder of your choice.
-From that folder, you&#8217;ll be able to run the different Hop <a href="../hop-tools/index.html" class="xref page">tools</a> through their corresponding scripts.</p>
+<p>Unzipping the client is the right way to start, but it is not the only option:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 45%;">
+<col style="width: 30%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">When you&#8217;d use it</th>
+<th class="tableblock halign-left valign-top">Read more</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Docker - <code>apache/hop</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Running pipelines and workflows in a container, and Hop Server. This is how most production deployments run.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../docker-container.html" class="xref page">Hop in Docker</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Docker - <code>apache/hop-web</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hop Gui in a browser, for shared or hosted development environments.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-web-docker.html" class="xref page">Hop Web in Docker</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hop Web</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The same Hop Gui, running in a browser instead of on your desktop.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-gui/hop-web.html" class="xref page">Hop Web</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<a href="../installation-configuration.html" class="xref page">Installation and Configuration</a> covers system requirements, memory settings and the environment variables Hop reads at startup.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Recommended next step: point Hop at a user-level config folder so upgrades keep your projects and settings. In Hop Gui use <strong>Tools → Configure Hop environment&#8230;&#8203;</strong>, or from the install directory run <code>./hop setup apply --defaults</code> (then restart). See <a href="../hop-tools/hop-setup.html" class="xref page">Hop setup</a>.</p>
-</div>
-<div class="paragraph">
-<p>Now that you have Hop installed, let&#8217;s have a look at all of the Hop tools you have at your disposal.</p>
+<p>Now that Hop is running, let&#8217;s look at the words Hop uses for things.</p>
 </div>
 </div>
 </div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
-  <a class="pagination__prev" href="../../../manual/next/getting-started/hop-concepts.html"><span>Previous</span><strong>Hop Concepts</strong></a>
-  <a class="pagination__next" href="../../../manual/next/getting-started/hop-tools.html"><span>Next</span><strong>Tools</strong></a>
+  <a class="pagination__prev" href="../../../manual/next/getting-started/hop-what-is-hop.html"><span>Previous</span><strong>What is Hop</strong></a>
+  <a class="pagination__next" href="../../../manual/next/getting-started/hop-concepts.html"><span>Next</span><strong>Hop Concepts</strong></a>
 </nav>
   </main>
 

@@ -121,15 +121,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-concepts.html">Hop Concepts</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../manual/next/getting-started/hop-download-install.html">Download &amp; Install</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-tools.html">Tools</a>
+    <a href="../../../manual/next/getting-started/hop-concepts.html">Hop Concepts</a>
     
   </li>
   <li class="doc-nav__item">
@@ -137,11 +133,19 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-gui-pipelines.html">Pipelines</a>
+    <a href="../../../manual/next/getting-started/hop-gui-pipelines.html">Your first pipeline</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-gui-workflows.html">Workflows</a>
+    <a href="../../../manual/next/getting-started/hop-gui-workflows.html">Your first workflow</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/getting-started/hop-projects.html">Projects and environments</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/getting-started/hop-tools.html">The Hop toolbox</a>
     
   </li>
   <li class="doc-nav__item">
@@ -245,6 +249,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/hop-gui/shortcuts.html">Keyboard Shortcuts</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-gui/canvas-mouse.html">Canvas Mouse Gestures</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2900,7 +2908,14 @@ Hops will be shown in bold when a transform or action can be dropped on it
 <td class="tableblock halign-left valign-top"><p class="tableblock">Use double click on canvas?</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">double-click instead of single click on e.g. transform and action dialogs.</p>
 <p class="tableblock">enabled: double-click on a transform or action icon to open its properties. A single click on the icon opens the context dialog.
-disabled (default): (single) click on a transform or action icon to open the context dialog. (single) click on a transform or action name to open its properties</p></td>
+disabled (default): (single) click on a transform or action icon to open the context dialog. (single) click on a transform or action name to open its properties.</p>
+<p class="tableblock">See <a href="canvas-mouse.html" class="xref page">Canvas mouse gestures</a> for every click in both modes.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use right click for the context dialog</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A right click (Ctrl-click or two-finger click on macOS) opens the context dialog of whatever is under the pointer, and a left click never does: it selects, clears the selection, or presses a badge. Names and badges keep opening their editors on a left click.</p>
+<p class="tableblock">See <a href="canvas-mouse.html" class="xref page">Canvas mouse gestures</a> for every click in both modes.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 </tr>
 <tr>
@@ -2984,6 +2999,11 @@ disabled (default): (single) click on a transform or action icon to open the con
 <td class="tableblock halign-left valign-top"><p class="tableblock">Show a toolbar above tables</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Show a toolbar with options to cut/copy/paste, move lines up/down, navigate to a column, manage <a href="../pipeline/run-preview-debug-pipeline.html#table-views" class="xref page">table views</a> etc in table grids (e.g. in preview dialogs, transform configuration options)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Allow dialogs to open on any screen (macOS only)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Off: transform, action and metadata dialogs follow the Hop window and stay above it. On: they open as windows of their own that you can move to another screen. The macOS section only appears on macOS.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Dark mode</p></td>

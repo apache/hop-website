@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Workflows | Apache Hop</title>
-<meta name="description" content="Getting Started (7/8): Workflows in Hop are where you&#x27;ll do most of the orchestration work: set the stage by fetching files, checking resource availability etc before your start to do actually run workflows and pipelines. We&#x27;ll walk through what it takes to build and run a basic first workflow.">
+<title>Your first workflow | Apache Hop</title>
+<meta name="description" content="Getting Started (6/9): build a workflow that runs the pipeline you just created, and takes a different path depending on whether it worked.">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/getting-started/hop-gui-workflows.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
-<meta property="og:title" content="Workflows">
-<meta property="og:description" content="Getting Started (7/8): Workflows in Hop are where you&#x27;ll do most of the orchestration work: set the stage by fetching files, checking resource availability etc before your start to do actually run workflows and pipelines. We&#x27;ll walk through what it takes to build and run a basic first workflow.">
+<meta property="og:title" content="Your first workflow">
+<meta property="og:description" content="Getting Started (6/9): build a workflow that runs the pipeline you just created, and takes a different path depending on whether it worked.">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/getting-started/hop-gui-workflows.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -121,15 +121,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-concepts.html">Hop Concepts</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../manual/next/getting-started/hop-download-install.html">Download &amp; Install</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-tools.html">Tools</a>
+    <a href="../../../manual/next/getting-started/hop-concepts.html">Hop Concepts</a>
     
   </li>
   <li class="doc-nav__item">
@@ -137,11 +133,19 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-gui-pipelines.html">Pipelines</a>
+    <a href="../../../manual/next/getting-started/hop-gui-pipelines.html">Your first pipeline</a>
     
   </li>
   <li class="doc-nav__item is-current">
-    <a href="../../../manual/next/getting-started/hop-gui-workflows.html">Workflows</a>
+    <a href="../../../manual/next/getting-started/hop-gui-workflows.html">Your first workflow</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/getting-started/hop-projects.html">Projects and environments</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/getting-started/hop-tools.html">The Hop toolbox</a>
     
   </li>
   <li class="doc-nav__item">
@@ -245,6 +249,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/hop-gui/shortcuts.html">Keyboard Shortcuts</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-gui/canvas-mouse.html">Canvas Mouse Gestures</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2735,66 +2743,53 @@
   <ol>
     <li><a href="../../../">Home</a></li>
     <li><a href="../../../manual/next/getting-started/index.html">Getting Started</a></li>
-    <li><a href="../../../manual/next/getting-started/hop-gui-workflows.html">Workflows</a></li>
+    <li><a href="../../../manual/next/getting-started/hop-gui-workflows.html">Your first workflow</a></li>
   </ol>
 </nav>
     <article class="doc">
-      <h1>Workflows</h1>
+      <h1>Your first workflow</h1>
       <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In <a href="hop-concepts.html" class="xref page">Concepts</a>, we walked through workflows, actions and hops.
-Let’s remember:</p>
+<p>A pipeline moves rows.
+A workflow decides <strong>what runs, in what order, and what happens when something fails</strong>.</p>
+</div>
+<div class="paragraph">
+<p>That difference is the point of this chapter.
+We&#8217;ll build a workflow that runs the pipeline from the <a href="hop-gui-pipelines.html" class="xref page">previous chapter</a> and reports a different message depending on the outcome.</p>
+</div>
+<div class="paragraph">
+<p>Remember from <a href="hop-concepts.html" class="xref page">Concepts</a>:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>A <em>workflow</em> is by default a sequential process that has a starting point and one or more endpoints.</p>
+<p>A <strong>workflow</strong> is a sequence of <strong>actions</strong> connected by <strong>hops</strong>, with a start point and one or more end points.</p>
 </li>
 <li>
-<p>An <em>action</em> is an item of workflow functionality that executes pipelines already implemented or any other element that allows orchestrating the execution of the data integration processes.</p>
+<p>Unlike transforms in a pipeline, actions run <strong>one after another</strong>, not in parallel.</p>
 </li>
 <li>
-<p>A <em>hop</em> in a <em>workflow</em> can conditionally connect <em>actions</em> and determine which <em>action</em> the <em>workflow</em> needs to execute next.</p>
+<p>A <strong>hop</strong> in a workflow can be conditional: it decides which action runs next based on whether the previous one succeeded.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_create_a_workflow"><a class="link" href="#_create_a_workflow">Create a Workflow</a></h2>
+<h2 id="_create_a_workflow"><a class="link" href="#_create_a_workflow">Create a workflow</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are two ways to create a workflow.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Click on the New option on the Horizontal toolbar and select the Workflow option.</p>
-</li>
-</ul>
+<p>Click <strong>New</strong> in the main toolbar and pick <strong>Workflow</strong>, or use <strong>File &#8594; New &#8594; Workflow</strong>.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-workflow-1.png" alt="gs hop gui create workflow 1"></span></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>File &#8594; New &#8594; Workflow</p>
-</li>
-</ul>
+<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-workflow-1.png" alt="The New option in the main toolbar"></span></p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-workflow-2.png" alt="gs hop gui create workflow 2"></span></p>
+<p>Your new workflow already contains one action.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-workflow-3.png" alt="gs hop gui create workflow 3"></span></p>
-</div>
-<div class="paragraph">
-<p>Your new workflow is created, and you’ll see the dialog below.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-workflow-4.png" alt="gs hop gui create workflow 4"></span></p>
+<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-workflow-4.png" alt="A new workflow with the Start action"></span></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2803,37 +2798,240 @@ Let’s remember:</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Note that when you create a workflow, Apache Hop automatically adds <a href="http://localhost:1313/manual/latest/workflow/actions/start.html" target="_blank" rel="noopener">Start</a> action by default.
+Hop adds a <a href="../workflow/actions/start.html" class="xref page">Start</a> action to every new workflow. It is where execution begins, and it is also where you configure a schedule if you want the workflow to repeat.
 </td>
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>Save the workflow as <code>first-workflow.hwf</code>, in the same folder as <code>first-pipeline.hpl</code>.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_add_and_connect_actions"><a class="link" href="#_add_and_connect_actions">Add and connect actions</a></h2>
+<h2 id="_run_the_pipeline_from_the_workflow"><a class="link" href="#_run_the_pipeline_from_the_workflow">Run the pipeline from the workflow</a></h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_add_actions"><a class="link" href="#_add_actions">Add Actions</a></h3>
 <div class="paragraph">
-<p>Now you are ready to add the first action.
-Click anywhere in the workflow canvas, the area where you’ll see the image below.</p>
+<p>Click anywhere on the canvas to open the context dialog, search for <code>Pipeline</code> and add the <a href="../workflow/actions/pipeline.html" class="xref page">Pipeline</a> action.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-workflow-5.png" alt="gs hop gui create workflow 5"></span></p>
+<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-workflow-6.png" alt="The workflow context dialog"></span></p>
 </div>
 <div class="paragraph">
-<p>After clicking you will see a dialog:</p>
+<p>Open the new action and set:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Action name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>run first pipeline</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pipeline</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${PROJECT_HOME}/first-pipeline.hpl</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>This is the step the workflow exists for, so it is worth being precise about it: the <strong>Pipeline</strong> field is what ties the workflow to the pipeline you built.
+Use the <strong>Browse</strong> button if you prefer to pick the file, but note what Hop fills in.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-workflow-6.png" alt="gs hop gui create workflow 6"></span></p>
+<p><code>${PROJECT_HOME}</code> is a variable that points at the folder of the current project.
+Using it instead of an absolute path is what lets the same workflow run on your laptop, on a colleague&#8217;s machine and on a server.
+You&#8217;ll see more of this in <a href="hop-projects.html" class="xref page">Projects and environments</a>.</p>
 </div>
 <div class="paragraph">
-<p>Just like you did with pipelines, use the search box in this dialog to find the actions you need.
-Click or use the arrow keys and hit enter to add an action to your workflow.</p>
+<p>Now connect <strong>Start</strong> to <code>run first pipeline</code>.
+Creating a hop works exactly as it does in a pipeline:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>shift-drag</strong> from one action to the other, or</p>
+</li>
+<li>
+<p><strong>scroll-drag</strong>, or</p>
+</li>
+<li>
+<p>click the action and use the <strong>Create hop</strong> <span class="image"><img src="../_images/getting-started/icons/HOP.svg" alt="Create hop" width="25px"></span> button in its context dialog.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>For now, add a <a href="../workflow/actions/pipeline.html" class="xref page">Pipeline</a> action to your workflow.</p>
+<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-workflow-add-pipeline-action.png" alt="The Pipeline action connected to Start"></span></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_react_to_the_outcome"><a class="link" href="#_react_to_the_outcome">React to the outcome</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A workflow that only runs one thing is not doing much.
+Let&#8217;s make it respond to what happened.</p>
+</div>
+<div class="paragraph">
+<p>Add two <a href="../workflow/actions/writetolog.html" class="xref page">Write to log</a> actions:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Action name</th>
+<th class="tableblock halign-left valign-top">Log level</th>
+<th class="tableblock halign-left valign-top">Log message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>report success</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Basic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Orders file written.</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>report failure</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Error</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>The orders pipeline failed.</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Create a hop from <code>run first pipeline</code> to <code>report success</code>, and a second hop from <code>run first pipeline</code> to <code>report failure</code>.</p>
+</div>
+<div class="paragraph">
+<p>By default both hops are green: they fire when the action succeeds.
+Right-click the hop to <code>report failure</code> and choose <strong>Failure hop</strong>.
+It turns red.</p>
+</div>
+<div class="paragraph">
+<p>You now have the basic shape of every production workflow:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Start  ──▶  run first pipeline  ──✔──▶  report success
+                     │
+                     └───────────✘──▶  report failure</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Right-clicking a hop gives you three choices:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Hop type</th>
+<th class="tableblock halign-left valign-top">Colour</th>
+<th class="tableblock halign-left valign-top">When the next action runs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Unconditional hop</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">black</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">always, whatever the previous action did</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Success hop</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">green</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">only when the previous action succeeded</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Failure hop</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">red</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">only when the previous action failed</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>This is the main thing workflows give you that pipelines cannot: pipelines have no notion of "and if that fails, do this instead".</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_run_the_workflow"><a class="link" href="#_run_the_workflow">Run the workflow</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Save with <code>CTRL-S</code>, then press <strong>F8</strong> or click <strong>Run</strong>.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-workflow-run.png" alt="The workflow run options dialog"></span></p>
+</div>
+<div class="paragraph">
+<p>A workflow run configuration decides <strong>where</strong> the workflow runs.
+A <code>local</code> one is created for you the first time you start Hop Gui.
+Select it and click <strong>Launch</strong>.</p>
+</div>
+<div class="paragraph">
+<p>The <strong>Execution Results</strong> panel works like the pipeline one.
+Its <strong>Metrics</strong> tab lists one line per action, in the order they ran, with the comment, result and reason for each.</p>
+</div>
+<div class="paragraph">
+<p>You should see <code>Start</code>, <code>run first pipeline</code> and <code>report success</code> execute, and <code>report failure</code> skipped.
+In the <strong>Logging</strong> tab you&#8217;ll find your own message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">report success - Orders file written.</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prove_the_failure_path_works"><a class="link" href="#_prove_the_failure_path_works">Prove the failure path works</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An error path you have never seen run is a guess, not a safety net.</p>
+</div>
+<div class="paragraph">
+<p>Open <code>run first pipeline</code> and change the <strong>Pipeline</strong> field to a file that does not exist, for example <code>${PROJECT_HOME}/nope.hpl</code>.
+Run the workflow again.</p>
+</div>
+<div class="paragraph">
+<p>This time <code>run first pipeline</code> fails, <code>report success</code> is skipped and your error message appears in the log.
+The workflow itself is marked as failed, which is what a scheduler or a <a href="../hop-server/index.html" class="xref page">Hop Server</a> would pick up.</p>
+</div>
+<div class="paragraph">
+<p>Set the <strong>Pipeline</strong> field back when you&#8217;re done.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_you_learned"><a class="link" href="#_what_you_learned">What you learned</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Workflows run actions in sequence; pipelines run transforms in parallel.</p>
+</li>
+<li>
+<p>A Pipeline action is how a workflow runs a pipeline, and <code>${PROJECT_HOME}</code> is how it stays portable.</p>
+</li>
+<li>
+<p>Hops in a workflow are conditional, and that is where error handling lives.</p>
+</li>
+<li>
+<p>Every new workflow starts from a <a href="../workflow/actions/start.html" class="xref page">Start</a> action, which is also where scheduling is configured.</p>
+</li>
+</ul>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -2842,64 +3040,21 @@ Click or use the arrow keys and hit enter to add an action to your workflow.</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-check the <a href="../workflow/actions.html" class="xref page">full list of actions</a>.
-There are over 50 actions available in Hop 0.70, but you&#8217;ll soon get to know the most commonly used ones.
+check the <a href="../workflow/actions.html" class="xref page">full list of actions</a> for everything you can orchestrate: files, mail, conditions, scripts, other workflows, and more.
 </td>
 </tr>
 </table>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_create_a_hop"><a class="link" href="#_create_a_hop">Create a hop</a></h3>
 <div class="paragraph">
-<p>Creating a hop is identical to creating a hop in a pipeline:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>shift-drag</strong>: while holding down the shift key on your keyboard.
-Click on an action, while holding down your primary mouse button, drag to the second action.
-Release the primary mouse button and the shift key.</p>
-</li>
-<li>
-<p><strong>scroll-drag</strong>: scroll-click on an action , while holding down your mouse’s scroll button, drag to the second action.
-Release the scroll button.</p>
-</li>
-<li>
-<p>click on an action in your pipeline to open the '<strong>click anywhere</strong>' dialog.
-Click the 'Create hop' <span class="image"><img src="../_images/getting-started/icons/HOP.svg" alt="Create hop" width="25px"></span> button and select the action you want to create the hop to.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-workflow-add-pipeline-action.png" alt="gs hop gui create workflow add pipeline action"></span></p>
-</div>
-<div class="paragraph">
-<p>Save your workflow:</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-workflow-save.png" alt="gs hop gui create workflow save"></span></p>
-</div>
-<div class="paragraph">
-<p>At first, we have the Workflow run configuration session.
-A Workflow Run Configuration is a metadata object in Apache Hop and defines where the workflow is executed.</p>
-</div>
-<div class="paragraph">
-<p>Select the 'local' workflow runtime configuration that is available by default in your Hop installation and click 'Launch'.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-workflow-run.png" alt="gs hop gui create workflow run"></span></p>
-</div>
-<div class="paragraph">
-<p>You’ll now have an execution results pane very similar to the pipeline execution results.</p>
-</div>
+<p>You have now built and run both Hop file types.
+Next, we&#8217;ll put them in a project so the paths keep working outside your own machine.</p>
 </div>
 </div>
 </div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
-  <a class="pagination__prev" href="../../../manual/next/getting-started/hop-gui-pipelines.html"><span>Previous</span><strong>Pipelines</strong></a>
-  <a class="pagination__next" href="../../../manual/next/getting-started/hop-next-steps.html"><span>Next</span><strong>Next Steps</strong></a>
+  <a class="pagination__prev" href="../../../manual/next/getting-started/hop-gui-pipelines.html"><span>Previous</span><strong>Your first pipeline</strong></a>
+  <a class="pagination__next" href="../../../manual/next/getting-started/hop-projects.html"><span>Next</span><strong>Projects and environments</strong></a>
 </nav>
   </main>
 

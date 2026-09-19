@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Pipelines | Apache Hop</title>
-<meta name="description" content="Getting Started (6/8): Pipelines are one of the two main file types in Hop. Learn how to add transforms and connect them through hops before your run, preview and debug your first pipeline.">
+<title>Your first pipeline | Apache Hop</title>
+<meta name="description" content="Getting Started (5/9): build, preview and run your first pipeline. You&#x27;ll create rows, add a sequence number, look at the data before you run anything, and write the result to a file.">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/getting-started/hop-gui-pipelines.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
-<meta property="og:title" content="Pipelines">
-<meta property="og:description" content="Getting Started (6/8): Pipelines are one of the two main file types in Hop. Learn how to add transforms and connect them through hops before your run, preview and debug your first pipeline.">
+<meta property="og:title" content="Your first pipeline">
+<meta property="og:description" content="Getting Started (5/9): build, preview and run your first pipeline. You&#x27;ll create rows, add a sequence number, look at the data before you run anything, and write the result to a file.">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/getting-started/hop-gui-pipelines.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -121,15 +121,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-concepts.html">Hop Concepts</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../manual/next/getting-started/hop-download-install.html">Download &amp; Install</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-tools.html">Tools</a>
+    <a href="../../../manual/next/getting-started/hop-concepts.html">Hop Concepts</a>
     
   </li>
   <li class="doc-nav__item">
@@ -137,11 +133,19 @@
     
   </li>
   <li class="doc-nav__item is-current">
-    <a href="../../../manual/next/getting-started/hop-gui-pipelines.html">Pipelines</a>
+    <a href="../../../manual/next/getting-started/hop-gui-pipelines.html">Your first pipeline</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-gui-workflows.html">Workflows</a>
+    <a href="../../../manual/next/getting-started/hop-gui-workflows.html">Your first workflow</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/getting-started/hop-projects.html">Projects and environments</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/getting-started/hop-tools.html">The Hop toolbox</a>
     
   </li>
   <li class="doc-nav__item">
@@ -245,6 +249,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/hop-gui/shortcuts.html">Keyboard Shortcuts</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-gui/canvas-mouse.html">Canvas Mouse Gestures</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2735,99 +2743,64 @@
   <ol>
     <li><a href="../../../">Home</a></li>
     <li><a href="../../../manual/next/getting-started/index.html">Getting Started</a></li>
-    <li><a href="../../../manual/next/getting-started/hop-gui-pipelines.html">Pipelines</a></li>
+    <li><a href="../../../manual/next/getting-started/hop-gui-pipelines.html">Your first pipeline</a></li>
   </ol>
 </nav>
     <article class="doc">
-      <h1>Pipelines</h1>
+      <h1>Your first pipeline</h1>
       <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In <a href="hop-concepts.html" class="xref page">Concepts</a>, we walked through pipelines, transforms and hops.
-Let’s remember:</p>
+<p>In <a href="hop-concepts.html" class="xref page">Concepts</a> we said a pipeline is a set of transforms connected by hops, and that all transforms run in parallel.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>A pipeline consists of a chain of transforms that read, process or write data.
-Transforms are connected by hops.
-Hops have a direction but can&#8217;t create loops, which effectively makes Pipelines DAGs (Directed Acyclic Graphs).</p>
-</li>
-<li>
-<p>A transform is each basic operation in your pipeline.
-Each transform performs an operation on the data: reads from a source, operates on data in the pipeline or writes to to a target.</p>
-</li>
-<li>
-<p>A hop in a pipeline passes data between transforms.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>This page turns that into a working pipeline.
+It is deliberately small, but it is a complete one: it creates data, changes it, lets you look at it, and writes it out.
+That read - change - write shape is what almost every pipeline you build later will look like.</p>
+</div>
+<div class="paragraph">
+<p>You will need nothing but a Hop installation.
+No database, no sample files, no network.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_create_a_pipeline"><a class="link" href="#_create_a_pipeline">Create a Pipeline</a></h2>
+<h2 id="_create_a_pipeline"><a class="link" href="#_create_a_pipeline">Create a pipeline</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are two ways to create a pipeline.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>click on the <strong>New</strong> option on the Horizontal toolbar and select the Pipeline option.</p>
-</li>
-</ul>
+<p>Click <strong>New</strong> in the main toolbar and pick <strong>Pipeline</strong>, or use <strong>File &#8594; New &#8594; Pipeline</strong>.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-pipeline-1.png" alt="gs hop gui create pipeline 1"></span></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>File &#8594; New &#8594; Pipeline ￼
-<span class="image"><img src="../_images/getting-started/gs-hop-gui-create-pipeline-2.png" alt="gs hop gui create pipeline 2"></span><br>
-<span class="image"><img src="../_images/getting-started/gs-hop-gui-create-pipeline-3.png" alt="gs hop gui create pipeline 3"></span></p>
-</li>
-</ul>
+<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-pipeline-1.png" alt="The New option in the main toolbar"></span></p>
 </div>
 <div class="paragraph">
-<p>Your new pipeline is created.
-You’ll see the dialog below.</p>
+<p>You now have an empty pipeline canvas, with the pipeline toolbar above it.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-pipeline-4.png" alt="gs hop gui create pipeline 4" width="65%"></span></p>
+<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-pipeline-4.png" alt="An empty pipeline canvas"></span></p>
+</div>
+<div class="paragraph">
+<p>Save it right away with <code>CTRL-S</code> and call it <code>first-pipeline.hpl</code>.
+Hop can run a pipeline straight from the editor, but you will need the file on disk in the <a href="hop-gui-workflows.html" class="xref page">next chapter</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_add_and_connect_transforms"><a class="link" href="#_add_and_connect_transforms">Add and connect Transforms</a></h2>
+<h2 id="_add_the_first_transform"><a class="link" href="#_add_the_first_transform">Add the first transform</a></h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_add_transforms"><a class="link" href="#_add_transforms">Add Transforms</a></h3>
 <div class="paragraph">
-<p>Now you are ready to add the first transform.
-Click anywhere in the pipeline canvas, the area where you’ll see the image below.</p>
+<p>Click anywhere on the empty canvas.
+The context dialog opens: this is how you add transforms.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-pipeline-5.png" alt="gs hop gui create pipeline 5"></span></p>
+<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-pipeline-6.png" alt="The context dialog"></span></p>
 </div>
 <div class="paragraph">
-<p>After clicking you will see the context dialog.
-This is the dialog you&#8217;ll use every time you need to select transforms to add to your pipeline.</p>
+<p>Type in the search box to filter, then click or use the arrow keys and <strong>Enter</strong> to add.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-pipeline-6.png" alt="gs hop gui create pipeline 6"></span></p>
-</div>
-<div class="paragraph">
-<p>Use the search box in this dialog to find the transforms you need.
-Click or use the arrow keys and hit enter to add a transform to your pipeline.</p>
-</div>
-<div class="paragraph">
-<p>Start with a <a href="../pipeline/pipeline-sources.html" class="xref page">pipeline source</a> (a transform that does not need incoming hops).
-Search for <code>pipeline source</code> in this dialog, or pick Generate Rows.
-For now, add a <a href="../pipeline/transforms/rowgenerator.html" class="xref page">Generate Rows</a> and a <a href="../pipeline/transforms/addsequence.html" class="xref page">Add Sequence</a> transform to your pipeline.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-pipeline-add-two-transforms.png" alt="gs hop gui create pipeline add two transforms"></span></p>
+<p>Every pipeline has to start with a <a href="../pipeline/pipeline-sources.html" class="xref page">pipeline source</a>: a transform that produces rows instead of reading them from an incoming hop.
+Search for <code>Generate rows</code> and add it.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -2836,82 +2809,189 @@ For now, add a <a href="../pipeline/transforms/rowgenerator.html" class="xref pa
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-check the <a href="../pipeline/transforms.html" class="xref page">full list of transforms</a>.
-There are 186 transforms available in Hop 0.99, but you&#8217;ll soon get to know the most commonly used ones.
+search for <code>pipeline source</code> in the context dialog to see all transforms that can start a pipeline.
 </td>
 </tr>
 </table>
-</div>
 </div>
 <div class="sect2">
-<h3 id="_create_a_hop"><a class="link" href="#_create_a_hop">Create a Hop</a></h3>
+<h3 id="_configure_generate_rows"><a class="link" href="#_configure_generate_rows">Configure Generate rows</a></h3>
 <div class="paragraph">
-<p>There are a number of ways to create a hop:</p>
+<p>Double-click the new transform to open its dialog, and set:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>shift-drag</strong>: while holding down the shift key on your keyboard.
-Click on a transform, while holding down your primary mouse button, drag to the second transform.
-Release the primary mouse button and the shift key.</p>
-</li>
-<li>
-<p><strong>scroll-drag</strong>: scroll-click on a transform , while holding down your mouse’s scroll button, drag to the second transform.
-Release the scroll button.</p>
-</li>
-<li>
-<p>click on a transform in your pipeline to open the context dialog (the dialog you opened in the '<strong>click anywhere</strong>' step).
-Click the 'Create hop' <span class="image"><img src="../_images/getting-started/icons/HOP.svg" alt="Create hop" width="25px"></span> button and select the transform you want to create the hop to.</p>
-</li>
-</ul>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transform name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>generate orders</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Limit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>100</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>In the <strong>Fields</strong> table at the bottom, add one row:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>product</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Widget</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Click <strong>OK</strong>.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-pipeline-create-hop.png" alt="gs hop gui create pipeline create hop"></span></p>
+<p>This transform now produces 100 identical rows, each with a single <code>product</code> field.
+Identical rows are not very interesting, so let&#8217;s make them distinct.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_run_your_pipeline"><a class="link" href="#_run_your_pipeline">Run your pipeline</a></h2>
+<h2 id="_add_a_second_transform_and_connect_it"><a class="link" href="#_add_a_second_transform_and_connect_it">Add a second transform and connect it</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Running a pipeline to see how it performs can be done in one of the following tasks:</p>
+<p>Click the canvas again, search for <code>Add sequence</code> and add it.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-pipeline-add-two-transforms.png" alt="Two transforms on the canvas"></span></p>
+</div>
+<div class="paragraph">
+<p>Open it and set:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transform name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>number the orders</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>order_id</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Start at value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1000</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Increment by</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Leave <strong>Use counter to calculate sequence</strong> checked.
+That is the default, and it means Hop counts internally instead of asking a database for the next value, so this works without a database connection.</p>
+</div>
+<div class="paragraph">
+<p>Now connect the two transforms.
+There are three ways to create a hop:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Using the Run icon.</p>
+<p><strong>shift-drag</strong>: hold <strong>Shift</strong>, press your primary mouse button on <code>generate orders</code>, drag to <code>number the orders</code> and release.</p>
 </li>
-</ul>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-run-pipeline-1.png" alt="gs hop gui run pipeline 1"></span></p>
-</div>
-<div class="ulist">
-<ul>
 <li>
-<p>Select Run and click on Start Execution from the toolbar.</p>
+<p><strong>scroll-drag</strong>: press the scroll button on <code>generate orders</code>, drag to <code>number the orders</code> and release.</p>
 </li>
-</ul>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-run-pipeline-2.png" alt="gs hop gui run pipeline 2"></span></p>
-</div>
-<div class="ulist">
-<ul>
 <li>
-<p>Press F8</p>
+<p>click <code>generate orders</code> to open its context dialog and use the <strong>Create hop</strong> <span class="image"><img src="../_images/getting-started/icons/HOP.svg" alt="Create hop" width="25px"></span> button.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>You will see the Run Options dialog.</p>
+<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-create-pipeline-create-hop.png" alt="Creating a hop between two transforms"></span></p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-run-pipeline-3.png" alt="gs hop gui run pipeline 3"></span><br></p>
+<p>The arrow on the hop shows which way the rows travel.
+Hops in a pipeline cannot form a loop.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_look_at_the_data_before_you_run_anything"><a class="link" href="#_look_at_the_data_before_you_run_anything">Look at the data before you run anything</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This is the step that makes Hop quick to work with, and it is worth learning before anything else.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-run-pipeline-4.png" alt="gs hop gui run pipeline 4"></span></p>
+<p>Right-click <code>number the orders</code> and choose <strong>Preview &amp; debug output</strong>, then click <strong>Quick Launch</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Hop runs just enough of the pipeline to fill a preview window, and shows you the actual rows:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">product</th>
+<th class="tableblock halign-left valign-top">order_id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Widget</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Widget</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1001</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Widget</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1002</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Two things are worth noticing.</p>
+</div>
+<div class="paragraph">
+<p><code>order_id</code> exists even though no transform "wrote" it to disk: fields are created as rows travel down the pipeline.
+And you got this without configuring an output, a connection or a run configuration.
+Preview early and often - it is much faster than running a whole pipeline to find out that a field is wrong.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -2920,65 +3000,171 @@ Click the 'Create hop' <span class="image"><img src="../_images/getting-started/
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-a 'local' runtime configuration is created when you first start Hop Gui.
-Check the available <a href="../pipeline/pipeline-run-configurations/pipeline-run-configurations.html" class="xref page">runtime configurations</a> for other engines to run your pipelines on.
+<a href="../pipeline/run-preview-debug-pipeline.html" class="xref page">Run, Preview and Debug a Pipeline</a> covers previewing a subset of rows, pausing on a condition, and debugging.
 </td>
 </tr>
 </table>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_write_the_result_out"><a class="link" href="#_write_the_result_out">Write the result out</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Make sure your configuration is selected and hit Launch.</p>
+<p>A preview is not a result. Let&#8217;s write the rows to a file.</p>
 </div>
 <div class="paragraph">
-<p>You&#8217;ll see green check marks in the upper right corner of the transforms when a pipeline ran successfully.</p>
+<p>Click the canvas, search for <code>Text file output</code> and add it.
+Create a hop from <code>number the orders</code> to the new transform.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-run-pipeline-5.png" alt="gs hop gui run pipeline 5"></span></p>
+<p>Open it and, on the <strong>File</strong> tab, set:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transform name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>write orders</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Filename</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>${java.io.tmpdir}/hop-orders</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Extension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>csv</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code>${java.io.tmpdir}</code> is a <a href="../fields-parameters-variables.html" class="xref page">variable</a>.
+Hop exposes every Java system property as one, so this resolves to your system&#8217;s temporary folder on any operating system.
+Anywhere Hop accepts a path, it accepts a variable.</p>
 </div>
 <div class="paragraph">
-<p>After each run, the execution results are displayed in the panel on the bottom of your window.
-The Execution Results contains two tabs:</p>
+<p>Go to the <strong>Fields</strong> tab and click <strong>Get Fields</strong>.
+Hop reads the fields coming in over the hop and fills the table with <code>product</code> and <code>order_id</code>.
+Click <strong>OK</strong>.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<strong>Get Fields</strong> only works when the incoming hop exists and the transforms before it are configured, because Hop asks them what they produce. If the table stays empty, check the hop.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_run_the_pipeline"><a class="link" href="#_run_the_pipeline">Run the pipeline</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Press <strong>F8</strong>, or click <strong>Run</strong> in the pipeline toolbar.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-run-pipeline-1.png" alt="The Run button in the pipeline toolbar"></span></p>
+</div>
+<div class="paragraph">
+<p>The run options dialog opens.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-run-pipeline-3.png" alt="The pipeline run options dialog"></span></p>
+</div>
+<div class="paragraph">
+<p>A <code>local</code> <a href="../pipeline/pipeline-run-configurations/pipeline-run-configurations.html" class="xref page">pipeline run configuration</a> is created the first time you start Hop Gui.
+Select it and click <strong>Launch</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Green check marks in the corner of each transform mean the pipeline finished without errors.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-run-pipeline-5.png" alt="A pipeline that ran successfully"></span></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_read_the_results"><a class="link" href="#_read_the_results">Read the results</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <strong>Execution Results</strong> panel at the bottom of the window is where you find out what happened.</p>
+</div>
+<div class="paragraph">
+<p>The <strong>Metrics</strong> tab shows one line per transform, with rows read, written and rejected, and the time each one took.
+<code>write orders</code> should show 100 rows written.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-run-pipeline-6.png" alt="The Metrics tab"></span></p>
+</div>
+<div class="paragraph">
+<p>The <strong>Logging</strong> tab shows the log for the run, at the log level you picked in the run options dialog.
+When something goes wrong, this is where the reason is.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-run-pipeline-7.png" alt="The logging tab"></span></p>
+</div>
+<div class="paragraph">
+<p>Now open <code>hop-orders.csv</code> in your temporary folder.
+The log line for <code>write orders</code> tells you the full path if you are not sure where that is.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>csv</div><pre class="highlightjs highlight"><code class="language-csv hljs" data-lang="csv">product;order_id
+Widget;1000
+Widget;1001
+Widget;1002</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That is a complete pipeline: it created data, changed it, and wrote it somewhere you can use it.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_you_learned"><a class="link" href="#_what_you_learned">What you learned</a></h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>transform metrics</p>
+<p>A pipeline starts with a <a href="../pipeline/pipeline-sources.html" class="xref page">source</a> transform and moves rows along hops.</p>
 </li>
 <li>
-<p>logging</p>
+<p>Fields are created and changed as rows travel; you don&#8217;t declare them up front.</p>
+</li>
+<li>
+<p><strong>Preview</strong> shows you real rows without running or configuring the whole pipeline.</p>
+</li>
+<li>
+<p>Variables work anywhere Hop accepts a path.</p>
+</li>
+<li>
+<p><strong>Execution Results</strong> tells you how many rows moved and what went wrong.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The Transform Metrics tab displays metrics per transform.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-run-pipeline-6.png" alt="gs hop gui run pipeline 6"></span></p>
-</div>
-<div class="paragraph">
-<p>The logging tab displays the log of the pipeline according to the log level chosen on execution.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-run-pipeline-7.png" alt="gs hop gui run pipeline 7"></span></p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-for more detailed information, check out the <a href="../pipeline/run-preview-debug-pipeline.html" class="xref page">Run, Preview and Debug a Pipeline</a> page.
-</td>
-</tr>
-</table>
+<p>Next, we&#8217;ll build a workflow that runs this pipeline and reacts to whether it worked.</p>
 </div>
 </div>
 </div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../manual/next/getting-started/hop-gui.html"><span>Previous</span><strong>Hop Gui Overview</strong></a>
-  <a class="pagination__next" href="../../../manual/next/getting-started/hop-gui-workflows.html"><span>Next</span><strong>Workflows</strong></a>
+  <a class="pagination__next" href="../../../manual/next/getting-started/hop-gui-workflows.html"><span>Next</span><strong>Your first workflow</strong></a>
 </nav>
   </main>
 

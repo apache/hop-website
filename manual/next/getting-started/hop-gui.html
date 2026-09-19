@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hop Gui | Apache Hop</title>
-<meta name="description" content="Getting Started (5/8): Hop Gui is Hop&#x27;s visual development environment where you design, run and debug your workflows and pipelines. In this step, we&#x27;ll take a quick tour of the user interface and describe some of the functionalities in Hop GUI.">
+<title>Hop Gui overview | Apache Hop</title>
+<meta name="description" content="Getting Started (4/9): Hop Gui is Hop&#x27;s visual development environment. A quick tour of the window, the toolbars and the perspectives before you build your first pipeline.">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/getting-started/hop-gui.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
-<meta property="og:title" content="Hop Gui">
-<meta property="og:description" content="Getting Started (5/8): Hop Gui is Hop&#x27;s visual development environment where you design, run and debug your workflows and pipelines. In this step, we&#x27;ll take a quick tour of the user interface and describe some of the functionalities in Hop GUI.">
+<meta property="og:title" content="Hop Gui overview">
+<meta property="og:description" content="Getting Started (4/9): Hop Gui is Hop&#x27;s visual development environment. A quick tour of the window, the toolbars and the perspectives before you build your first pipeline.">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/getting-started/hop-gui.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -121,15 +121,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-concepts.html">Hop Concepts</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../manual/next/getting-started/hop-download-install.html">Download &amp; Install</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-tools.html">Tools</a>
+    <a href="../../../manual/next/getting-started/hop-concepts.html">Hop Concepts</a>
     
   </li>
   <li class="doc-nav__item is-current">
@@ -137,11 +133,19 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-gui-pipelines.html">Pipelines</a>
+    <a href="../../../manual/next/getting-started/hop-gui-pipelines.html">Your first pipeline</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-gui-workflows.html">Workflows</a>
+    <a href="../../../manual/next/getting-started/hop-gui-workflows.html">Your first workflow</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/getting-started/hop-projects.html">Projects and environments</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/getting-started/hop-tools.html">The Hop toolbox</a>
     
   </li>
   <li class="doc-nav__item">
@@ -245,6 +249,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/hop-gui/shortcuts.html">Keyboard Shortcuts</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-gui/canvas-mouse.html">Canvas Mouse Gestures</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2739,20 +2747,20 @@
   </ol>
 </nav>
     <article class="doc">
-      <h1>Hop Gui</h1>
+      <h1>Hop Gui overview</h1>
       <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Apache Hop GUI is your local development environment to build, run, preview and debug workflows and pipelines.</p>
+<p>Hop Gui is where you build, run, preview and debug workflows and pipelines.</p>
+</div>
+<div class="paragraph">
+<p>Before we start building, here&#8217;s a short tour so you know what you&#8217;re looking at.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_start_the_apache_hop_gui"><a class="link" href="#_start_the_apache_hop_gui">Start the Apache Hop GUI</a></h2>
+<h2 id="_start_hop_gui"><a class="link" href="#_start_hop_gui">Start Hop Gui</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>As we&#8217;ve seen in <a href="hop-tools.html" class="xref page">Hop Tools</a>, starting Hop-Gui is easy:</p>
-</div>
 <div id="_tabs_1" class="openblock tabs is-loading">
 <div class="content">
 <div class="ulist tablist">
@@ -2775,7 +2783,7 @@
 <div id="_tabs_1_linux_macos--panel" class="tabpanel" aria-labelledby="_tabs_1_linux_macos">
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">￼./hop-gui.sh</code></pre>
+<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">./hop-gui.sh</code></pre>
 </div>
 </div>
 </div>
@@ -2784,31 +2792,39 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_walking_through_the_hop_gui"><a class="link" href="#_walking_through_the_hop_gui">Walking through the Hop GUI</a></h2>
+<h2 id="_the_main_window"><a class="link" href="#_the_main_window">The main window</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>After starting the Apache Hop GUI, you’ll be presented with the window below.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-overview-1.png" alt="Hop Gui Overview"></span></p>
+<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-overview-1.png" alt="The Hop Gui window"></span></p>
 </div>
 <div class="paragraph">
 <p>&#160;<br></p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s divide the view into two parts:</p>
+<p>There are two toolbars, and everything else is the work area.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-overview-2.png" alt="Hop Gui Overview"></span>
-￼</p>
+<p><span class="image"><img src="../_images/getting-started/gs-hop-gui-overview-2.png" alt="The Hop Gui toolbars"></span></p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>The <strong>main toolbar</strong> offers a range of functions, including creating new files (such as pipelines and workflows) and adding metadata. It also provides options for managing projects and environments, as well as tools specifically for handling pipelines, workflows, and project settings.</p>
-</li>
-<li>
-<p>The <strong>perspectives toolbar</strong> includes switcher icons between the various perspectives.</p>
+<div class="paragraph">
+<p>The <strong>main toolbar</strong>, along the top, creates new files (pipelines, workflows, metadata), opens and saves them, and holds the run and preview controls for whatever you have open.</p>
+</div>
+<div class="paragraph">
+<p>The <strong>perspectives toolbar</strong>, down the left-hand side, switches between the different things you can do in Hop Gui.</p>
+</div>
+<div class="paragraph">
+<p>At the <strong>bottom left</strong> of the status bar you&#8217;ll find the active project and environment.
+You&#8217;ll use those in <a href="hop-projects.html" class="xref page">Projects and environments</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_perspectives"><a class="link" href="#_perspectives">Perspectives</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A perspective is a mode of the whole window.
+You&#8217;ll spend nearly all of your time in the first one, Data Orchestration, which is where pipelines and workflows are edited.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -2827,7 +2843,10 @@
 <p><span class="image"><img src="../_images/icons/folder.svg" alt="folder" width="24px"></span> <a href="../hop-gui/perspective-file-explorer.html" class="xref page">File explorer</a></p>
 </li>
 <li>
-<p><span class="image"><img src="../_images/icons/database.svg" alt="database" width="24px"></span> <a href="../hop-gui/perspective-database.html" class="xref page">Database</a></p>
+<p><span class="image"><img src="../_images/icons/database.svg" alt="database" width="24px"></span> <a href="../hop-gui/perspective-database.html" class="xref page">Database</a> (also as a floating window or bottom-dock tab)</p>
+</li>
+<li>
+<p><span class="image"><img src="../_images/icons/ai-provider.svg" alt="ai provider" width="24px"></span> <a href="../hop-gui/perspective-ai-advisor.html" class="xref page">AI Assistant</a> (also as a floating window or bottom-dock tab; off by default)</p>
 </li>
 <li>
 <p><span class="image"><img src="../_images/icons/plugin.svg" alt="plugin" width="24px"></span> <a href="../hop-gui/perspective-plugin.html" class="xref page">Plugins explorer</a></p>
@@ -2837,21 +2856,65 @@
 </li>
 </ul>
 </div>
-</li>
-</ul>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Project-wide search is not a left-toolbar perspective. Open it with <code>CTRL-F</code> (<strong>Edit → Find</strong>). See <a href="../hop-gui/perspective-search.html" class="xref page">Search</a>.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s see how we can use Hop Gui to do what Hop is all about: create pipelines and workflows!</p>
+<p>Switch perspective by clicking its icon, or cycle through them with <code>CTRL-SHIFT-arrow-up</code> and <code>CTRL-SHIFT-arrow-down</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_worth_knowing_early"><a class="link" href="#_worth_knowing_early">Worth knowing early</a></h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Click anywhere</dt>
+<dd>
+<p>Most of Hop Gui is driven by clicking on empty canvas or on an item, which opens a context dialog with everything you can do from there.
+You&#8217;ll use it constantly in the next chapter.</p>
+</dd>
+<dt class="hdlist1"><code>CTRL-F</code> searches everything</dt>
+<dd>
+<p>Not just the open file: it searches metadata, pipelines and workflows across the project.
+See <a href="../hop-gui/perspective-search.html" class="xref page">Search</a>.</p>
+</dd>
+<dt class="hdlist1">There are shortcuts for most things</dt>
+<dd>
+<p>See <a href="../hop-gui/shortcuts.html" class="xref page">Keyboard Shortcuts</a>.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+the <a href="../hop-gui/index.html" class="xref page">Hop Gui</a> section of this manual has the detailed tour, including how to <a href="../hop-gui/disable-ui-elements.html" class="xref page">hide parts of the UI</a> for new users.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>INFO: check the <a href="../hop-gui/index.html" class="xref page">Hop Gui</a> section of the Hop documentation for a more detailed tour of the Hop Gui.</p>
+<p>Let&#8217;s build a pipeline.</p>
 </div>
 </div>
 </div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
-  <a class="pagination__prev" href="../../../manual/next/getting-started/hop-tools.html"><span>Previous</span><strong>Tools</strong></a>
-  <a class="pagination__next" href="../../../manual/next/getting-started/hop-gui-pipelines.html"><span>Next</span><strong>Pipelines</strong></a>
+  <a class="pagination__prev" href="../../../manual/next/getting-started/hop-concepts.html"><span>Previous</span><strong>Hop Concepts</strong></a>
+  <a class="pagination__next" href="../../../manual/next/getting-started/hop-gui-pipelines.html"><span>Next</span><strong>Your first pipeline</strong></a>
 </nav>
   </main>
 

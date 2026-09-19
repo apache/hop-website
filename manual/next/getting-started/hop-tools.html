@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hop Tools | Apache Hop</title>
-<meta name="description" content="Getting Started (4/8): Hop comes with a number of GUI and command line tools to not only design and run workflows and pipelines, but also to manage your projects and environments, to search import, translate and more.">
+<title>The Hop toolbox | Apache Hop</title>
+<meta name="description" content="Getting Started (8/9): Hop ships a set of command line tools next to Hop Gui, for running, configuring, searching, importing and serving your projects.">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/getting-started/hop-tools.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
-<meta property="og:title" content="Hop Tools">
-<meta property="og:description" content="Getting Started (4/8): Hop comes with a number of GUI and command line tools to not only design and run workflows and pipelines, but also to manage your projects and environments, to search import, translate and more.">
+<meta property="og:title" content="The Hop toolbox">
+<meta property="og:description" content="Getting Started (8/9): Hop ships a set of command line tools next to Hop Gui, for running, configuring, searching, importing and serving your projects.">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/getting-started/hop-tools.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -121,15 +121,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-concepts.html">Hop Concepts</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../manual/next/getting-started/hop-download-install.html">Download &amp; Install</a>
     
   </li>
-  <li class="doc-nav__item is-current">
-    <a href="../../../manual/next/getting-started/hop-tools.html">Tools</a>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/getting-started/hop-concepts.html">Hop Concepts</a>
     
   </li>
   <li class="doc-nav__item">
@@ -137,11 +133,19 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-gui-pipelines.html">Pipelines</a>
+    <a href="../../../manual/next/getting-started/hop-gui-pipelines.html">Your first pipeline</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/getting-started/hop-gui-workflows.html">Workflows</a>
+    <a href="../../../manual/next/getting-started/hop-gui-workflows.html">Your first workflow</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/getting-started/hop-projects.html">Projects and environments</a>
+    
+  </li>
+  <li class="doc-nav__item is-current">
+    <a href="../../../manual/next/getting-started/hop-tools.html">The Hop toolbox</a>
     
   </li>
   <li class="doc-nav__item">
@@ -245,6 +249,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/hop-gui/shortcuts.html">Keyboard Shortcuts</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-gui/canvas-mouse.html">Canvas Mouse Gestures</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2735,43 +2743,28 @@
   <ol>
     <li><a href="../../../">Home</a></li>
     <li><a href="../../../manual/next/getting-started/index.html">Getting Started</a></li>
-    <li><a href="../../../manual/next/getting-started/hop-tools.html">Tools</a></li>
+    <li><a href="../../../manual/next/getting-started/hop-tools.html">The Hop toolbox</a></li>
   </ol>
 </nav>
     <article class="doc">
-      <h1>Hop Tools</h1>
+      <h1>The Hop toolbox</h1>
       <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Hop contains a number of tools that are optimized for the various tasks Hop developers and administrators need to perform.</p>
+<p>You&#8217;ll spend most of your time in Hop Gui, but a project that only runs from a desktop GUI is not much use in production.</p>
+</div>
+<div class="paragraph">
+<p>The split is roughly this: <strong>designing</strong> pipelines and workflows and <strong>creating</strong> metadata is what Hop Gui is for.
+<strong>Configuring</strong> and <strong>running</strong> them is where the command line takes over, and that is the half a scheduler, a container or a CI/CD pipeline needs.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_hop_gui"><a class="link" href="#_hop_gui">Hop GUI</a></h2>
+<h2 id="_one_command_to_start_them_all"><a class="link" href="#_one_command_to_start_them_all">One command to start them all</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Hop Gui is the visual IDE where Hop data developers create, test, run and manage the life cycle for workflows and pipelines.
-In addition to functionality for development and life cycle management, Hop Gui contains tools and perspectives to manage projects and environments, to search and manage metadata, to manage and version control a large variety of files and to explore logging in a Neo4j graph.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Hop Gui is designed to be platform independent.<br>
-<a href="../hop-gui/hop-web.html" class="xref page">Hop Web</a> is a version of Hop Gui that works on browsers and mobile devices.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The command below starts Hop GUI for your operating system.</p>
-</div>
-<div class="paragraph">
-<p>&nbsp;<br></p>
+<p>Since Hop 2.x there is a single <code>hop</code> launcher in the installation folder.
+It replaces the individual <code>hop-run</code>, <code>hop-conf</code>, <code>hop-gui</code>, &#8230;&#8203; scripts, and plugins can add their own commands to it.</p>
 </div>
 <div id="_tabs_1" class="openblock tabs is-loading">
 <div class="content">
@@ -2788,490 +2781,224 @@ Hop Gui is designed to be platform independent.<br>
 <div id="_tabs_1_windows--panel" class="tabpanel" aria-labelledby="_tabs_1_windows">
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">hop-gui.bat</code></pre>
+<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">hop.bat help</code></pre>
 </div>
 </div>
 </div>
 <div id="_tabs_1_linux_macos--panel" class="tabpanel" aria-labelledby="_tabs_1_linux_macos">
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./hop-gui.sh</code></pre>
+<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">./hop help</code></pre>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>Expected output: Hop Gui starts.</p>
+<p><code>help</code> lists the commands available in <strong>your</strong> installation, which depends on the plugins you have installed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">Commands:
+  help     Display help information about the specified command.
+  conf     Configure Hop
+  encrypt  Encrypt secrets
+  gui      The Hop GUI
+  import   Import metadata
+  run      Run a pipeline or workflow
+  search   Search in Hop metadata
+  server   Run a Hop server
+  setup    Configure Hop environment variables</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Two options are worth knowing before anything else, because nearly every command takes them:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-j</code>, <code>--project</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">enable a project before the command runs</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-e</code>, <code>--environment</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">enable an environment before the command runs</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>So running your workflow from the <a href="hop-projects.html" class="xref page">previous chapter</a> looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">./hop run -j getting-started -r local -f &#x27;${PROJECT_HOME}/first-workflow.hwf&#x27;</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+the older <code>hop-run.sh</code>, <code>hop-conf.sh</code> and friends still ship and still work. New examples in this manual use <code>hop &lt;command&gt;</code>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_hop_conf"><a class="link" href="#_hop_conf">Hop Conf</a></h2>
+<h2 id="_the_tools"><a class="link" href="#_the_tools">The tools</a></h2>
 <div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 30%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tool</th>
+<th class="tableblock halign-left valign-top">What you use it for</th>
+<th class="tableblock halign-left valign-top">Read more</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop gui</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The visual development environment: build, preview, run and debug pipelines and workflows.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-tools/hop-gui.html" class="xref page">Hop Gui</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop run</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Run a pipeline or workflow. This is what a scheduler, a CI job or a container calls.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-run/index.html" class="xref page">Hop Run</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop conf</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manage projects, environments and cloud configuration from a script.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-tools/hop-conf/hop-conf.html" class="xref page">Hop Conf</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop setup</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Point Hop at a user-level config folder so your projects and settings survive an upgrade.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-tools/hop-setup.html" class="xref page">Hop Setup</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop server</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Run a Hop Server to execute pipelines and workflows remotely, over REST.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-server/index.html" class="xref page">Hop Server</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop search</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Search across all the metadata in a project: which pipeline uses this connection, where is this field set.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-tools/hop-search.html" class="xref page">Hop Search</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop encrypt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Obfuscate a password so it isn&#8217;t stored in clear text in a configuration file.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-tools/hop-encrypt.html" class="xref page">Hop Encrypt</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop import</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Convert a Kettle/PDI repository into a Hop project.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-vs-kettle/import-kettle-projects.html" class="xref page">Import Kettle projects</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop doc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generate documentation for your own Hop project, in Markdown or HTML.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-tools/hop-doc.html" class="xref page">Hop Doc</a></p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
-<p>Hop Conf is a command line tool to manage various aspects of your Hop configuration: projects, environments, cloud configuration and more</p>
+<p>Some tools are optional plugins rather than part of the standard client:</p>
 </div>
-<div class="paragraph">
-<p>The example <code>hop-conf</code> command below lists your available projects.</p>
-</div>
-<div class="paragraph">
-<p>&nbsp;<br></p>
-</div>
-<div id="_tabs_2" class="openblock tabs is-loading">
-<div class="content">
-<div class="ulist tablist">
-<ul>
-<li id="_tabs_2_windows" class="tab">
-<p>Windows</p>
-</li>
-<li id="_tabs_2_linux_macos" class="tab">
-<p>Linux, macOS</p>
-</li>
-</ul>
-</div>
-<div id="_tabs_2_windows--panel" class="tabpanel" aria-labelledby="_tabs_2_windows">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">hop-conf.bat -pl</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Expected output:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">C:\Program Files\Microsoft\jdk-11.0.17.8-hotspot\\bin\java&quot; -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam -Xmx2048m -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Conf -DHOP_AUTO_CREATE_CONFIG=Y org.apache.hop.config.HopConfig  -pl
-===[Starting HopConfig]=========================================================
-Projects:
-  default : config/projects/default
-    Configuration file: file:\C:\&lt;YOUR_PATH&gt;\hop\config\projects\default\project-config.json
-  samples : config/projects/samples
-    Parent project: default
-    Configuration file: file:\C:\&lt;YOUR_PATH&gt;\hop\config\projects\samples\project-config.json</code></pre>
-</div>
-</div>
-</div>
-<div id="_tabs_2_linux_macos--panel" class="tabpanel" aria-labelledby="_tabs_2_linux_macos">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./hop-conf.sh -pl</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Expected output:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">Projects:
-  default : config/projects/default
-    Configuration file: file:&lt;YOUR_PATH&gt;/hop/config/projects/default/project-config.json
-  samples : config/projects/samples
-    Parent project: default
-    Configuration file: file:&lt;YOUR_PATH&gt;/hop/config/projects/samples/project-config.json</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>See the <a href="../hop-tools/hop-conf/hop-conf.html" class="xref page">Hop Tools &#8594; Hop Conf</a> documentation for more information.</p>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 50%;">
+<col style="width: 30%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Tool</th>
+<th class="tableblock halign-left valign-top">What you use it for</th>
+<th class="tableblock halign-left valign-top">Read more</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Marketplace</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Install optional plugins into a running Hop client from a Maven repository.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-tools/hop-marketplace.html" class="xref page">Hop Marketplace</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop lint</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Static analysis over a project: check pipelines, workflows and metadata without running them. Useful as a build step.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-tools/hop-lint.html" class="xref page">Hop Lint</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PyHop</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Drive Hop from Python.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-tools/hop-python/hop-python.html" class="xref page">Hop Python</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hop Arrow</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expose pipeline output over an Apache Arrow Flight server.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-tools/hop-arrow-command.html" class="xref page">Hop Arrow</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Hop Gui also runs in a browser. See <a href="../hop-gui/hop-web.html" class="xref page">Hop Web</a> and <a href="../hop-web-docker.html" class="xref page">Hop Web in Docker</a>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_hop_encrypt"><a class="link" href="#_hop_encrypt">Hop Encrypt</a></h2>
+<h2 id="_try_one"><a class="link" href="#_try_one">Try one</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Hop Encrypt is a command line tool that obfuscates or encrypts a plain text password for use in XML, password or metadata files.
-Make sure to also copy the password encryption prefix to indicate the obfuscated nature of the password.
-Hop will then be able to make the distinction between regular plain text passwords and obfuscated ones.</p>
-</div>
-<div class="paragraph">
-<p>&nbsp;<br></p>
-</div>
-<div class="paragraph">
-<p>The example below prints the encrypted Hop password <code>mypassword</code>.</p>
-</div>
-<div class="paragraph">
-<p>&nbsp;<br></p>
-</div>
-<div id="_tabs_3" class="openblock tabs is-loading">
-<div class="content">
-<div class="ulist tablist">
-<ul>
-<li id="_tabs_3_windows" class="tab">
-<p>Windows</p>
-</li>
-<li id="_tabs_3_linux_macos" class="tab">
-<p>Linux, macOS</p>
-</li>
-</ul>
-</div>
-<div id="_tabs_3_windows--panel" class="tabpanel" aria-labelledby="_tabs_3_windows">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">hop-encrypt.bat -hop mypassword</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Expected output:</p>
+<p>The quickest way to see the command line in action is to run something you already built:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">===[Environment Settings - hop-encrypt.bat]====================================
-Java identified as &quot;C:\Program Files\Microsoft\jdk-11.0.17.8-hotspot\\bin\java&quot;
-HOP_OPTIONS=-Xmx64m -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=GUI
-Command to start Hop will be:
-&quot;C:\Program Files\Microsoft\jdk-11.0.17.8-hotspot\\bin\java&quot; -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam -Xmx64m -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=GUI org.apache.hop.core.encryption.Encr  -hop mypassword
-===[Starting HopEncrypt]=========================================================
-Encrypted 2be98afc86aa79f9dbb18bd63c99dbdde</code></pre>
-</div>
-</div>
-</div>
-<div id="_tabs_3_linux_macos--panel" class="tabpanel" aria-labelledby="_tabs_3_linux_macos">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./hop-encrypt.sh -hop mypassword</code></pre>
+<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">./hop run -j getting-started -r local -f &#x27;${PROJECT_HOME}/first-pipeline.hpl&#x27;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Expected output:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">Encrypted 2be98afc86aa79f9dbb18bd63c99dbdde</code></pre>
-</div>
-</div>
-</div>
-</div>
+<p>You get the same log you saw in the <strong>Logging</strong> tab of Hop Gui, on stdout.
+That is the whole deployment story for a lot of Hop projects: the same file, the same run configuration, started by cron, a Kubernetes CronJob or Airflow instead of by you.</p>
 </div>
 <div class="paragraph">
-<p>See the <a href="../hop-tools/hop-encrypt.html" class="xref page">Hop Tools &#8594; Hop Encrypt</a> documentation for more information.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_hop_run"><a class="link" href="#_hop_run">Hop Run</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Hop Run is a command line tool to run workflows and pipelines, with options to (list or) specify projects, environments, properties and run configurations.</p>
-</div>
-<div class="paragraph">
-<p>The example below runs the <code>switch-case-basic.hpl</code> pipeline in the samples project (<code>-j</code>) with the <a href="../pipeline/pipeline-run-configurations/native-local-pipeline-engine.html" class="xref page">local native pipeline run configuration</a> (<code>-r</code>).</p>
-</div>
-<div class="paragraph">
-<p>&nbsp;<br></p>
-</div>
-<div id="_tabs_4" class="openblock tabs is-loading">
-<div class="content">
-<div class="ulist tablist">
-<ul>
-<li id="_tabs_4_windows" class="tab">
-<p>Windows</p>
-</li>
-<li id="_tabs_4_linux_macos" class="tab">
-<p>Linux, macOS</p>
-</li>
-</ul>
-</div>
-<div id="_tabs_4_windows--panel" class="tabpanel" aria-labelledby="_tabs_4_windows">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">hop-run.bat -r local -j samples -f ${PROJECT_HOME}/transforms/switch-case-basic.hpl</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Expected output:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">C:\&lt;YOUR_PATH&gt;\hop&gt;echo off
-===[Environment Settings - hop-run.bat]===================================
-Java identified as &quot;C:\Program Files\Microsoft\jdk-11.0.17.8-hotspot\\bin\java&quot;
-HOP_OPTIONS=&quot;-Xmx2048m&quot; -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y
-Consolidated parameters to pass to HopRun are
--r local -j samples -f ${PROJECT_HOME}/transforms/switch-case-basic.hpl
-Command to start HopRun will be:
-&quot;C:\Program Files\Microsoft\jdk-11.0.17.8-hotspot\\bin\java&quot; -classpath lib\core\*;lib\beam\*;lib\swt\win64\*
--Djava.library.path=lib\core;lib\beam &quot;-Xmx2048m&quot; -DHOP_AUDIT_FOLDER=.\audit
--DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Run -DHOP_AUTO_CREATE_CONFIG=Y org.apache.hop.run.HopRun
--r local -j samples -f ${PROJECT_HOME}/transforms/switch-case-basic.hpl
-===[Starting HopRun]=========================================================
-2022/12/16 07:07:47 - HopRun - Enabling project &#x27;samples&#x27;
-2022/12/16 07:07:47 - HopRun - Starting pipeline: config/projects/samples/transforms/switch-case-basic.hpl
-2022/12/16 07:07:47 - switch-case-basic - Executing this pipeline using the Local Pipeline Engine with run configuration &#x27;local&#x27;
-2022/12/16 07:07:47 - switch-case-basic - Execution started for pipeline [switch-case-basic]
-2022/12/16 07:07:47 - Test Data.0 - Finished processing (I=0, O=0, R=0, W=5, U=0, E=0)
-2022/12/16 07:07:47 - Switch id.0 - Finished processing (I=0, O=0, R=5, W=5, U=0, E=0)
-2022/12/16 07:07:47 - Output 2.0 - Finished processing (I=0, O=0, R=1, W=1, U=0, E=0)
-2022/12/16 07:07:47 - Output 1.0 - Finished processing (I=0, O=0, R=1, W=1, U=0, E=0)
-2022/12/16 07:07:47 - Output 4.0 - Finished processing (I=0, O=0, R=1, W=1, U=0, E=0)
-2022/12/16 07:07:47 - Output default.0 - Finished processing (I=0, O=0, R=1, W=1, U=0, E=0)
-2022/12/16 07:07:47 - Output 3.0 - Finished processing (I=0, O=0, R=1, W=1, U=0, E=0)
-2022/12/16 07:07:47 - switch-case-basic - Pipeline duration : 0.435 seconds [  0.435&quot; ]</code></pre>
-</div>
-</div>
-</div>
-<div id="_tabs_4_linux_macos--panel" class="tabpanel" aria-labelledby="_tabs_4_linux_macos">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">./hop-run.sh -r local -j samples -f ${PROJECT_HOME}/transforms/switch-case-basic.hpl</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Expected output:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">2022/12/16 06:59:03 - HopRun - Enabling project &#x27;samples&#x27;
-2022/12/16 06:59:03 - HopRun - Relative path filename specified: config/projects/samples//transforms/switch-case-basic.hpl
-2022/12/16 06:59:03 - HopRun - Starting pipeline: config/projects/samples//transforms/switch-case-basic.hpl
-2022/12/16 06:59:03 - switch-case-basic - Executing this pipeline using the Local Pipeline Engine with run configuration &#x27;local&#x27;
-2022/12/16 06:59:03 - switch-case-basic - Execution started for pipeline [switch-case-basic]
-2022/12/16 06:59:04 - Test Data.0 - Finished processing (I=0, O=0, R=0, W=5, U=0, E=0)
-2022/12/16 06:59:04 - Switch id.0 - Finished processing (I=0, O=0, R=5, W=5, U=0, E=0)
-2022/12/16 06:59:04 - Output default.0 - Finished processing (I=0, O=0, R=1, W=1, U=0, E=0)
-2022/12/16 06:59:04 - Output 1.0 - Finished processing (I=0, O=0, R=1, W=1, U=0, E=0)
-2022/12/16 06:59:04 - Output 4.0 - Finished processing (I=0, O=0, R=1, W=1, U=0, E=0)
-2022/12/16 06:59:04 - Output 3.0 - Finished processing (I=0, O=0, R=1, W=1, U=0, E=0)
-2022/12/16 06:59:04 - Output 2.0 - Finished processing (I=0, O=0, R=1, W=1, U=0, E=0)
-2022/12/16 06:59:04 - switch-case-basic - Pipeline duration : 0.668 seconds [  0.668&quot; ]</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p><a href="../hop-run/index.html" class="xref page">Hop Tools &#8594; Hop Run</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_hop_search"><a class="link" href="#_hop_search">Hop Search</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Hop Search is a command line tool to search all metadata available in a specific project or environment.</p>
-</div>
-<div class="paragraph">
-<p>The example below searches in the samples project <code>-j</code> for <code>switch-case</code>.</p>
-</div>
-<div class="paragraph">
-<p>&nbsp;<br></p>
-</div>
-<div id="_tabs_5" class="openblock tabs is-loading">
-<div class="content">
-<div class="ulist tablist">
-<ul>
-<li id="_tabs_5_windows" class="tab">
-<p>Windows</p>
-</li>
-<li id="_tabs_5_linux_macos" class="tab">
-<p>Linux, macOS</p>
-</li>
-</ul>
-</div>
-<div id="_tabs_5_windows--panel" class="tabpanel" aria-labelledby="_tabs_5_windows">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">hop-search.bat -j samples -x switch-case</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Expected output:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">C:\&lt;YOUR_PATH&gt;\hop&gt;echo off
-===[Environment Settings - hop-search.bat]===================================
-Java identified as &quot;C:\Program Files\Microsoft\jdk-11.0.17.8-hotspot\\bin\java&quot;
-HOP_OPTIONS=-Xmx2048m -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Search
--DHOP_AUTO_CREATE_CONFIG=Y
-Command to start Hop will be:
-&quot;C:\Program Files\Microsoft\jdk-11.0.17.8-hotspot\\bin\java&quot; -classpath lib\core\*;lib\beam\*;lib\swt\win64\*
--Djava.library.path=lib\core;lib\beam -Xmx2048m -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows
--DHOP_PLATFORM_RUNTIME=Search -DHOP_AUTO_CREATE_CONFIG=Y org.apache.hop.config.HopConfig  -j samples -x switch-case
-===[Starting HopConfig]=========================================================
-Enabling project &#x27;samples&#x27;
-Searching in project : samples
-Searching for [switch-case]  Case sensitive? true  Regular expression? true
-Searching in location : Project samples
------------------------------------------------------------------------------------
-file:///C:/&lt;YOUR_PATH&gt;/hop/config/projects/samples/beam/pipelines/switch-case.hpl : null(switch-case) : matching property value: switch-case    file:///C:/&lt;YOUR_PATH&gt;/hop/config/projects/samples/beam/pipelines/switch-case.hpl : switch-case(switch-case) : matching property value: switch-case
-file:///C:/&lt;YOUR_PATH&gt;/hop/config/projects/samples/beam/pipelines/switch-case.hpl : switch-case(switch-case) : pipeline transform property : filePrefix</code></pre>
-</div>
-</div>
-</div>
-<div id="_tabs_5_linux_macos--panel" class="tabpanel" aria-labelledby="_tabs_5_linux_macos">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">./hop-search.sh -j samples -x switch-case</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Expected output:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">Enabling project &#x27;samples&#x27;
-Searching in project : samples
-Searching for [switch-case]  Case sensitive? true  Regular expression? true
-Searching in location : Project samples
------------------------------------------------------------------------------------
-file://&lt;YOUR_PATH&gt;/hop/config/projects/samples/beam/pipelines/switch-case.hpl : null(switch-case) : matching property value: switch-case
-file://&lt;YOUR_PATH&gt;/hop/config/projects/samples/beam/pipelines/switch-case.hpl : switch-case(switch-case) : matching property value: switch-case
-file://&lt;YOUR_PATH&gt;/hop/config/projects/samples/beam/pipelines/switch-case.hpl : switch-case(switch-case) : pipeline transform property : filePrefix</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>See the <a href="../hop-tools/hop-search.html" class="xref page">Hop Tools &#8594; Hop Search</a> documentation for more information.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_hop_server"><a class="link" href="#_hop_server">Hop Server</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Hop Server is a web service interface to manage and run workflows and pipelines.</p>
-</div>
-<div class="paragraph">
-<p>The example command below starts the most basic server on your machine <code>localhost</code> on port <code>8081</code>.</p>
-</div>
-<div class="paragraph">
-<p>&nbsp;<br></p>
-</div>
-<div id="_tabs_6" class="openblock tabs is-loading">
-<div class="content">
-<div class="ulist tablist">
-<ul>
-<li id="_tabs_6_windows" class="tab">
-<p>Windows</p>
-</li>
-<li id="_tabs_6_linux_macos" class="tab">
-<p>Linux, macOS</p>
-</li>
-</ul>
-</div>
-<div id="_tabs_6_windows--panel" class="tabpanel" aria-labelledby="_tabs_6_windows">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">hop-server.bat localhost 8081</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Expected output:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">C:\&lt;YOUR_PATH\hop&gt;echo off
-===[Environment Settings - hop-server.bat]====================================
-Java identified as &quot;C:\Program Files\Microsoft\jdk-11.0.17.8-hotspot\\bin\java&quot;
-HOP_OPTIONS=-Xmx2048m -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=GUI -DHOP_AUTO_CREATE_CONFIG=Y
-Command to start Hop will be:
-&quot;C:\Program Files\Microsoft\jdk-11.0.17.8-hotspot\\bin\java&quot; -classpath lib\core\*;lib\beam\*;lib\swt\win64\*
--Djava.library.path=lib\core;lib\beam -Xmx2048m -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows
--DHOP_PLATFORM_RUNTIME=GUI -DHOP_AUTO_CREATE_CONFIG=Y org.apache.hop.www.HopServer  localhost 8081
-===[Starting HopServer]=========================================================
-2022/12/16 07:33:44 - HopServer - Enabling project &#x27;default&#x27;
-2022/12/16 07:33:44 - HopServer - Installing timer to purge stale objects after 1440 minutes.
-2022/12/16 07:33:44 - HopServer - Created listener for webserver @ address : localhost:8081</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Your Hop Server is available at http://localhost:8081, log on with the default username <code>cluster</code>, password <code>cluster</code>.</p>
-</div>
-<div class="paragraph">
-<p>Hit <code>CTRL-C</code> to stop the server.</p>
-</div>
-</div>
-<div id="_tabs_6_linux_macos--panel" class="tabpanel" aria-labelledby="_tabs_6_linux_macos">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./hop-server.sh localhost 8081</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Expected output:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">2022/12/16 07:20:19 - HopServer - Enabling project &#x27;default&#x27;
-2022/12/16 07:20:19 - HopServer - Installing timer to purge stale objects after 1440 minutes.
-2022/12/16 07:20:19 - HopServer - Created listener for webserver @ address : localhost:8081</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Your Hop Server is available at http://localhost:8081, log on with the default username <code>cluster</code>, password <code>cluster</code>.</p>
-</div>
-<div class="paragraph">
-<p>Hit <code>CTRL-C</code> to stop the server.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Read more about <a href="../hop-server/index.html" class="xref page">Hop Server</a></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_hop_import"><a class="link" href="#_hop_import">Hop Import</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Hop Import is a command line tool to import PDI/Kettle jobs and transformations into Apache Hop.<br></p>
-</div>
-<div class="paragraph">
-<p>Hop Import does a lot more than just a code conversion from jobs to workflows and transformations to pipelines: database connections are converted to Apache Hop rdbms connections, variables are parsed and imported, and everything is bundled into a full Apache Hop project.</p>
-</div>
-<div class="paragraph">
-<p>&nbsp;<br></p>
-</div>
-<div class="paragraph">
-<p>The example command below prints the <code>hop-import</code> help. Check the <a href="../hop-vs-kettle/import-kettle-projects.html" class="xref page">Import Kettle (PDI) Projects in Apache Hop</a> docs for more information.</p>
-</div>
-<div class="paragraph">
-<p>&nbsp;<br></p>
-</div>
-<div id="_tabs_7" class="openblock tabs is-loading">
-<div class="content">
-<div class="ulist tablist">
-<ul>
-<li id="_tabs_7_windows" class="tab">
-<p>Windows</p>
-</li>
-<li id="_tabs_7_linux_macos" class="tab">
-<p>Linux, macOS</p>
-</li>
-</ul>
-</div>
-<div id="_tabs_7_windows--panel" class="tabpanel" aria-labelledby="_tabs_7_windows">
-<div class="listingblock">
-<div class="content">
-<pre>hop-import.bat</pre>
-</div>
-</div>
-</div>
-<div id="_tabs_7_linux_macos--panel" class="tabpanel" aria-labelledby="_tabs_7_linux_macos">
-<div class="listingblock">
-<div class="content">
-<pre>./hop-import.sh</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Read more at <a href="../hop-vs-kettle/import-kettle-projects.html" class="xref page">Import Kettle (PDI) projects</a></p>
+<p>See <a href="../how-to-guides/scheduling-workflows-and-pipelines.html" class="xref page">Scheduling workflows and pipelines</a> for the details.</p>
 </div>
 </div>
 </div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
-  <a class="pagination__prev" href="../../../manual/next/getting-started/hop-download-install.html"><span>Previous</span><strong>Download &amp; Install</strong></a>
-  <a class="pagination__next" href="../../../manual/next/getting-started/hop-gui.html"><span>Next</span><strong>Hop Gui Overview</strong></a>
+  <a class="pagination__prev" href="../../../manual/next/getting-started/hop-projects.html"><span>Previous</span><strong>Projects and environments</strong></a>
+  <a class="pagination__next" href="../../../manual/next/getting-started/hop-next-steps.html"><span>Next</span><strong>Next Steps</strong></a>
 </nav>
   </main>
 

@@ -121,15 +121,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/getting-started/hop-concepts.html">Hop Concepts</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../../manual/next/getting-started/hop-download-install.html">Download &amp; Install</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/getting-started/hop-tools.html">Tools</a>
+    <a href="../../../../manual/next/getting-started/hop-concepts.html">Hop Concepts</a>
     
   </li>
   <li class="doc-nav__item">
@@ -137,11 +133,19 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/getting-started/hop-gui-pipelines.html">Pipelines</a>
+    <a href="../../../../manual/next/getting-started/hop-gui-pipelines.html">Your first pipeline</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/getting-started/hop-gui-workflows.html">Workflows</a>
+    <a href="../../../../manual/next/getting-started/hop-gui-workflows.html">Your first workflow</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/getting-started/hop-projects.html">Projects and environments</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/getting-started/hop-tools.html">The Hop toolbox</a>
     
   </li>
   <li class="doc-nav__item">
@@ -245,6 +249,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/hop-gui/shortcuts.html">Keyboard Shortcuts</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/hop-gui/canvas-mouse.html">Canvas Mouse Gestures</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2983,8 +2991,70 @@ Conversion from other types is not supported: convert to String first if an inte
 <p><strong>Databases</strong></p>
 </div>
 <div class="paragraph">
-<p>Hop binds a vector to a prepared statement using its text form, which a PostgreSQL <code>vector</code> column (provided by the pgvector extension) accepts directly.
-No dialect currently emits a native vector column type when Hop generates DDL, so a generated <code>CREATE TABLE</code> produces a text column that has to be adjusted by hand.</p>
+<p>When Hop generates DDL, a vector field becomes the database&#8217;s own vector column wherever there is one:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Database</th>
+<th class="tableblock halign-left valign-top">Dimension known</th>
+<th class="tableblock halign-left valign-top">Dimension unknown</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PostgreSQL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VECTOR(n)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VECTOR</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Oracle 23ai and later</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VECTOR(n, FLOAT32)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VECTOR(*, *)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SQL Server 2025 and later</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VECTOR(n)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MySQL 9 and later</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VECTOR(n)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CrateDB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>FLOAT_VECTOR(n)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DuckDB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>FLOAT[n]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>FLOAT[]</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Whether the type is available is decided per server rather than per database product.
+Oracle and SQL Server grew their vector type at a known release, so the dialect compares the version the driver reports.
+On PostgreSQL the type comes from the pgvector extension, which is installed per database, so the dialect looks for the type in the list the driver reports instead of comparing versions.
+A connection to a database without the extension therefore writes a text column, and so does a server older than the release that introduced the type.
+Generating DDL without a connection keeps the native type, because an unknown server is not treated as a server that lacks it.</p>
+</div>
+<div class="paragraph">
+<p>A database with no vector type of its own writes a text column, which holds the canonical form above.
+That is also what a vector without a dimension falls back to where the native type has no unsized spelling.</p>
+</div>
+<div class="paragraph">
+<p>Hop sends the value in whatever form the database accepts, which is not always the text form:
+PostgreSQL needs it as an unspecified type so the server applies the column&#8217;s own input function, MySQL takes its storage format of one little endian float32 per dimension, and CrateDB takes a float array.
+Oracle, SQL Server and DuckDB accept the text form as it stands.
+None of this is configurable, and none of it changes what a pipeline looks like.</p>
 </div>
 <div class="paragraph">
 <p><strong>Dimensions</strong></p>
