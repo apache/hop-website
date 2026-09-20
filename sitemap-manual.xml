@@ -1141,6 +1141,9 @@
 <loc>https://hop.apache.org/manual/next/pipeline/transforms/mysqlbulkloader.html</loc>
 </url>
 <url>
+<loc>https://hop.apache.org/manual/next/pipeline/transforms/neo4j-cypher-builder.html</loc>
+</url>
+<url>
 <loc>https://hop.apache.org/manual/next/pipeline/transforms/neo4j-cypher.html</loc>
 </url>
 <url>
@@ -1340,6 +1343,12 @@
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/pipeline/transforms/sortedschemamerge.html</loc>
+</url>
+<url>
+<loc>https://hop.apache.org/manual/next/pipeline/transforms/spark-file-input.html</loc>
+</url>
+<url>
+<loc>https://hop.apache.org/manual/next/pipeline/transforms/spark-file-output.html</loc>
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/pipeline/transforms/spark-lake-table-input.html</loc>
