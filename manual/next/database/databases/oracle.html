@@ -2984,6 +2984,46 @@ See the note in <a href="#_tls_tcps_connections">TLS (TCPS) connections</a> abov
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_national_character_and_lob_columns"><a class="link" href="#_national_character_and_lob_columns">National character and LOB columns</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Oracle keeps two sets of string types.
+<code>VARCHAR2</code>, <code>CHAR</code> and <code>CLOB</code> store text in the database character set; <code>NVARCHAR2</code>, <code>NCHAR</code> and <code>NCLOB</code> store it in the national character set, which is where text goes that the database character set cannot represent.</p>
+</div>
+<div class="paragraph">
+<p>The JDBC driver treats the two differently, and a value written to a national column the way a <code>VARCHAR2</code> is written comes back wrong&#8201;&#8212;&#8201;usually as question marks or replacement characters, because the driver converted it to the database character set on the way in.
+Hop writes each of these columns with the JDBC call the driver expects for it, so a transform such as <a href="../../pipeline/transforms/tableoutput.html" class="xref page">Table Output</a> needs nothing configured for national text to survive the round trip.</p>
+</div>
+<div class="paragraph">
+<p>Hop learns the column type from the prepared statement itself: the Oracle JDBC driver describes the target columns of an <code>INSERT</code> or <code>UPDATE</code> once, when the statement is first written to, so this costs one round trip per prepared statement rather than per row.
+A driver too old to describe its bind parameters, or a statement it cannot parse, falls back to the plain <code>VARCHAR2</code> call Hop always used.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+A connection-level alternative is the driver property <code>oracle.jdbc.defaultNChar=true</code>, which makes the driver bind every string as national text. It is not needed with Hop, and it has a cost: Oracle then converts <code>VARCHAR2</code> columns in <code>WHERE</code> clauses to compare them, which can stop indexes on those columns being used.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_values_longer_than_the_column"><a class="link" href="#_values_longer_than_the_column">Values longer than the column</a></h3>
+<div class="paragraph">
+<p>Hop writes the value it has, whatever the column is: <code>CLOB</code> and <code>NCLOB</code> are streamed whole however long they are, and a string bound to a <code>VARCHAR2(n)</code> or <code>NVARCHAR2(n)</code> is passed to Oracle at its full length.</p>
+</div>
+<div class="paragraph">
+<p>Fitting it is Oracle&#8217;s decision, not Hop&#8217;s.
+A value too wide for its column fails the row with <code>ORA-12899: value too large for column</code>, which is what you want to see: the alternative is a pipeline that finishes green having quietly dropped the overflow.
+Give the column the width the data needs, or use a LOB type, and handle the error rows the way you would any other rejected row.</p>
+</div>
+</div>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/database/databases/netezza.html"><span>Previous</span><strong>Netezza</strong></a>
