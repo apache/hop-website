@@ -3053,12 +3053,17 @@ When using the Beam engines it uses <code>org.apache.beam.sdk.io.synthetic.Synth
 <div class="sect2">
 <h3 id="_unsupported_transforms"><a class="link" href="#_unsupported_transforms">Unsupported transforms</a></h3>
 <div class="paragraph">
-<p>A few transforms are simply not supported because we haven&#8217;t found a good way to do this on Beam yet:</p>
+<p>A few transforms are simply not supported because we haven&#8217;t found a good way to do this on Beam yet.
+They all depend on seeing the rows in a particular order, or on holding state for the whole data set in one place, and a Beam pipeline re-shuffles rows across workers to maximize parallelism.
+Each of these transforms would therefore only ever see the slice of the data one worker happens to hold, and would quietly produce a wrong result, so the Beam engines refuse them with an error instead:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="../transforms/uniquerows.html" class="xref page">Unique Rows</a></p>
+<p><a href="../transforms/uniquerows.html" class="xref page">Unique Rows</a> : Use the <code>Memory Group By</code> instead</p>
+</li>
+<li>
+<p><a href="../transforms/uniquerowsbyhashset.html" class="xref page">Unique Rows (HashSet)</a> : Use the <code>Memory Group By</code> instead</p>
 </li>
 <li>
 <p><a href="../transforms/groupby.html" class="xref page">Group By</a> : Use the <code>Memory Group By</code> instead</p>
@@ -3067,6 +3072,9 @@ When using the Beam engines it uses <code>org.apache.beam.sdk.io.synthetic.Synth
 <p><a href="../transforms/sort.html" class="xref page">Sort Rows</a></p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>The Hop GUI knows about this list: when you set the canvas palette filter to a Beam engine these transforms are hidden, and running a pipeline that still contains one is blocked with the reason shown above.</p>
 </div>
 <div class="paragraph">
 <p>The <a href="../transforms/rowdenormaliser.html" class="xref page">Denormaliser</a> transform works technically correct on Apache Beam in release 1.1.0 and later.

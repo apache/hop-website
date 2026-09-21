@@ -2853,6 +2853,24 @@ When the number of rows is too large to fit into memory, use a combination of <a
 </tr>
 </table>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>That fallback to <a href="sort.html" class="xref page">Sort Rows</a> and <a href="groupby.html" class="xref page">Group By</a> only applies to the Hop engines.
+Neither of those transforms runs on the Beam engines or on the native Spark engine.</p>
+</div>
+<div class="paragraph">
+<p>On those engines Memory Group By is the aggregation to reach for: it is translated into the engine&#8217;s own grouping operation (<code>org.apache.beam.sdk.transforms.GroupByKey</code> on Beam, a Spark shuffle on native Spark) rather than run as a Hop transform per worker, so neither the sorting nor the memory limit described above applies.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
