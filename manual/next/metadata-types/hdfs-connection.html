@@ -748,6 +748,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/embedtext.html">Embed text</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/enhancedjsonoutput.html">Enhanced JSON output</a>
     
   </li>
@@ -1369,6 +1373,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/terafast.html">Teradata Bulk Loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/textchunker.html">Text chunker</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2946,6 +2954,10 @@ That is the library-conflict and OpenShift-network path this plugin exists to av
 <div class="paragraph">
 <p>The plugin re-logs from the keytab in Java (JAAS).
 It does not call the <code>kinit</code> binary and does not use Hadoop <code>UserGroupInformation</code>.</p>
+</div>
+<div class="paragraph">
+<p>Parallel Parquet File Output copies (and other concurrent VFS writers) share one HTTP connection pool per named connection.
+Kerberos SPNEGO is generated per NameNode / HttpFS / Knox request and does <strong>not</strong> hold the login lock while file bytes are uploaded, so several files can be written at once.</p>
 </div>
 </div>
 <div class="sect2">

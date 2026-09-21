@@ -748,6 +748,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/embedtext.html">Embed text</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/enhancedjsonoutput.html">Enhanced JSON output</a>
     
   </li>
@@ -1369,6 +1373,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/terafast.html">Teradata Bulk Loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/textchunker.html">Text chunker</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3044,10 +3052,49 @@ Hop Web co-deploys the RAP UI, RAP service handlers, and the Hop Server servlet 
 The Hop Server API under <code>/hop/<strong></code> follows the same authorization as the rest of Hop Web.
 In the authenticated modes (<code>BASIC</code>, <code>EXTERNAL</code>, <code>OAUTH2</code>) each endpoint requires the matching permission from the caller&#8217;s role — for example a *Read-only</strong> user can call <code>status</code> and the status/image endpoints but not <code>addPipeline</code>, <code>startPipeline</code>, <code>execWorkflow</code>, or the register/remove endpoints, and an <strong>Operator</strong> can run and stop but not deploy (<code>add*</code>) or remove.
 Endpoints that are not recognized are denied by default.
-In mode <code>NONE</code> (the default, open install) <code>/hop/*</code> is unauthenticated just like <code>/ui</code>; put an authentication layer in front of Hop Web for any shared deployment.
+In mode <code>NONE</code> (the default, open install) the two surfaces behave differently:
 </td>
 </tr>
 </table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>/ui</code> stays <strong>open by design</strong> — mode <code>NONE</code> is the single-user / trusted-network install and the UI is the product.</p>
+</li>
+<li>
+<p><code>/hop/*</code> is <strong>closed by default</strong> and returns <code>403</code>, because mode <code>NONE</code> has no user identity to authorize against and the Hop Server API can run and deploy pipelines and workflows.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To use Hop Web as an execution server in mode <code>NONE</code>, opt in explicitly:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Configuration perspective → Security → General → Expose the Hop Server API without authentication</strong>, or</p>
+</li>
+<li>
+<p>set <code>HOP_WEB_ALLOW_UNAUTHENTICATED_SERVER_API=true</code> (persisted as <code>allowUnauthenticatedServerApi</code> in <code>security-config.json</code>).</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+With that option on, anyone who can reach <code>/hop/*</code> can deploy and execute pipelines and workflows without credentials. Only enable it behind your own network controls (private network, firewall, service mesh, authenticating reverse proxy).
+The option applies to mode <code>NONE</code> only — <code>BASIC</code>, <code>EXTERNAL</code>, and <code>OAUTH2</code> always enforce the per-endpoint role permission and ignore it.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Put an authentication layer in front of Hop Web for any shared deployment.</p>
 </div>
 <div class="sect2">
 <h3 id="_built_in_hop_roles"><a class="link" href="#_built_in_hop_roles">Built-in Hop roles</a></h3>
@@ -3163,6 +3210,24 @@ To keep audit data across container restarts, mount a volume and set the same pa
 <h3 id="_tomcat_basic_authentication_external"><a class="link" href="#_tomcat_basic_authentication_external">Tomcat BASIC authentication (EXTERNAL)</a></h3>
 <div class="paragraph">
 <p>The default Hop Web docker image picks up <code>tomcat-users.xml</code> and <code>web.xml</code> files and moves them to the correct location before Hop Web starts.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Mode <code>EXTERNAL</code> is <strong>delegation, not enforcement</strong>.
+Hop itself does not challenge anyone in this mode: it only reads the <code>Principal</code> the servlet container (or authenticating reverse proxy) put on the request.
+The <code>web.xml</code> that ships with Hop Web contains no <code>&lt;security-constraint&gt;</code>, so selecting <code>EXTERNAL</code> without supplying your own constraint over <code>/<strong></code> leaves <code>/ui</code> <strong>completely open</strong>.
+The Security perspective makes that contradiction visible rather than hiding it: the General tab shows an authenticated mode (<code>EXTERNAL</code>), while the status line for the same session still reads <code>Session is unrestricted (no AuthN). Config mode: EXTERNAL.</code>
+If you see that combination, the container is not challenging anyone.
+<code>/hop/</strong></code> still returns <code>401</code> (no principal), and Hop logs a warning on every unauthenticated UI session, but the UI itself is unprotected.
+Always pair <code>EXTERNAL</code> with a <code>&lt;security-constraint&gt;</code> + <code>&lt;login-config&gt;</code> covering <code>/*</code> (see <a href="#hop-web-external-full-webxml">the full <code>web.xml</code> sample</a>) or with a proxy that rejects unauthenticated requests before they reach Tomcat.
+</td>
+</tr>
+</table>
 </div>
 <div class="sect3">
 <h4 id="_single_user_minimal"><a class="link" href="#_single_user_minimal">Single user (minimal)</a></h4>
@@ -3330,6 +3395,10 @@ Further hardening of remaining mutation paths continues in subsequent releases.<
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>HOP_WEB_SEED_DEMO_USERS</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code> to seed admin, developer, operator, viewer (password = username) when the store is empty</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HOP_WEB_ALLOW_UNAUTHENTICATED_SERVER_API</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code> to open the embedded Hop Server API (<code>/hop/*</code>) in mode <code>NONE</code>. Off by default; ignored in the authenticated modes. Only use behind your own network controls.</p></td>
 </tr>
 </tbody>
 </table>
@@ -3645,7 +3714,7 @@ These tokens are not revoked when you log off or when an administrator changes t
 <p>Hop creates <code>jdbc-token.secret</code> with owner-only permissions (<code>0600</code>) on local filesystems when it can. Anyone who can read that file can mint tokens for any user.</p>
 </div>
 <div class="sect3">
-<h4 id="_full_web_xml_with_tomcat_basic_single_role_external"><a class="link" href="#_full_web_xml_with_tomcat_basic_single_role_external">Full web.xml with Tomcat BASIC (single role, EXTERNAL)</a></h4>
+<h4 id="hop-web-external-full-webxml"><a class="link" href="#hop-web-external-full-webxml">Full web.xml with Tomcat BASIC (single role, EXTERNAL)</a></h4>
 <div class="paragraph">
 <p>The following sample <code>web.xml</code> extends Hop Web&#8217;s default <code>web.xml</code> with the <code>&lt;security-constraint /&gt;</code> and <code>&lt;login-config /&gt;</code> elements required for basic authentication.</p>
 </div>

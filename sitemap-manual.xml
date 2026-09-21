@@ -931,6 +931,9 @@
 <loc>https://hop.apache.org/manual/next/pipeline/transforms/emailinput.html</loc>
 </url>
 <url>
+<loc>https://hop.apache.org/manual/next/pipeline/transforms/embedtext.html</loc>
+</url>
+<url>
 <loc>https://hop.apache.org/manual/next/pipeline/transforms/enhancedjsonoutput.html</loc>
 </url>
 <url>
@@ -1418,6 +1421,9 @@
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/pipeline/transforms/terafast.html</loc>
+</url>
+<url>
+<loc>https://hop.apache.org/manual/next/pipeline/transforms/textchunker.html</loc>
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/pipeline/transforms/textfileinput.html</loc>

@@ -748,6 +748,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/embedtext.html">Embed text</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/enhancedjsonoutput.html">Enhanced JSON output</a>
     
   </li>
@@ -1369,6 +1373,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/terafast.html">Teradata Bulk Loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/textchunker.html">Text chunker</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2900,6 +2908,10 @@ A GitHub Copilot-style OAuth provider is an extension point; it is not bundled.<
 <td class="tableblock halign-left valign-top"><p class="tableblock">Model identifier for the chosen provider. <strong>Refresh models</strong> fills the combo from the live catalog when the provider supports it. For Hugging Face, a model id is sent to the inference router; an <code>http(s)</code> URL is called as a dedicated endpoint. If this field is empty, Base URL is used instead.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Models per role</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional. One model for each role this provider serves, so a single provider can back a chat transform and an embedding transform at the same time. See below.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Timeout (seconds)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HTTP timeout for completions.</p></td>
 </tr>
@@ -2911,6 +2923,66 @@ A GitHub Copilot-style OAuth provider is an extension point; it is not bundled.<
 </table>
 <div class="paragraph">
 <p>When Language Model Chat points at an AI Provider, extra transform options (proxy, retries, mock, I/O fields) are not taken from the provider.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_models_per_role"><a class="link" href="#_models_per_role">Models per role</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A provider endpoint usually serves more than one kind of model. The same OpenAI key reaches a chat model and an embedding model; the same Ollama server serves both, and a reranker besides. <strong>Models per role</strong> lets one provider object cover all of them, so the base URL and the API key are configured once.</p>
+</div>
+<div class="paragraph">
+<p>Each row pairs a role with a model name:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Role</th>
+<th class="tableblock halign-left valign-top">Used by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CHAT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Conversation and completion, for example Language Model Chat and the AI Advisor.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>EMBEDDING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Turning text into a vector, for example <a href="../pipeline/transforms/embedtext.html" class="xref page">Embed text</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SCORING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scoring a passage against a query, used by rerankers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IMAGE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image generation.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MODERATION</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Content moderation.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A transform never asks which role to use: it needs one kind of model and looks up that role. Point a chat transform and an embedding transform at the same provider and each finds its own model.</p>
+</div>
+<div class="paragraph">
+<p>Use at most one row per role, since that is what makes the lookup unambiguous. A transform that needs a different model than the provider&#8217;s default for its role can override it on the transform itself.</p>
+</div>
+<div class="sect2">
+<h3 id="_relationship_to_model_name"><a class="link" href="#_relationship_to_model_name">Relationship to Model name</a></h3>
+<div class="paragraph">
+<p><strong>Model name</strong> above is the chat model, and it stays that way. A provider with no rows in this table behaves exactly as before: <code>CHAT</code> falls back to <strong>Model name</strong>, and nothing else resolves.</p>
+</div>
+<div class="paragraph">
+<p>The fallback is deliberately limited to <code>CHAT</code>. Handing a chat model to an embedding endpoint fails inside the provider with a message that is hard to act on, so a provider with no <code>EMBEDDING</code> row reports that plainly instead.</p>
+</div>
 </div>
 </div>
 </div>
