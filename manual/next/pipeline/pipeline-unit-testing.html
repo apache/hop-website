@@ -3053,7 +3053,7 @@ By default, you should see the active pipeline filename here.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Replace a database connection with another</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">specify a list of database connections for this pipeline that you&#8217;d like to swap out for a test-specific connection.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">specify a list of database connections for this pipeline that you&#8217;d like to swap out for a test-specific connection. The swap rewrites those relational connection references on the in-memory test copy, including lookups, and does not change the project connection.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Variables</p></td>

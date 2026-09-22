@@ -2957,6 +2957,9 @@ Switch / Case  or  Filter Rows               (route on operation)
 <li>
 <p><strong>Scheduled drain</strong>: enable <strong>Stop when idle</strong> (and an idle timeout) so a workflow can start the pipeline, empty the topic, and finish. That is the “queue + schedule” pattern.</p>
 </li>
+<li>
+<p><strong>Timed window</strong>: set <strong>Max consume duration (ms)</strong> when the topic never goes idle (a low continuous trickle) but you still want a scheduled run to process for a fixed time and then finish.</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
