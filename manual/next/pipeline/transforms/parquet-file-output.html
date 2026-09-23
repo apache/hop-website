@@ -2869,12 +2869,6 @@
 <p>The date optionally referenced in the output file name(s) will be the start of the pipeline execution.</p>
 </li>
 <li>
-<p>Hop Date and Timestamp types are serialized as milliseconds since <code>1970-01-01 00:00:00.000</code> UTC, with the Parquet <code>timestamp-millis</code> logical type.</p>
-</li>
-<li>
-<p>Strings, BigNumbers, JSON and UUID values are written as UTF-8 strings.</p>
-</li>
-<li>
 <p>Rows are buffered in memory until a row group is full (see the <strong>Row group size</strong> option), then encoded, compressed and written.
 Memory use is therefore bounded by the row group size (times the number of copies and, when partitioning, the number of open partitions), not by the split size.</p>
 </li>
@@ -3085,6 +3079,77 @@ Leave empty to output all input fields.</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_hop_to_parquet_types"><a class="link" href="#_hop_to_parquet_types">Hop to Parquet types</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Every field is written as an optional column of the <a href="https://parquet.apache.org/docs/file-format/types/logicaltypes/" rel="noopener" target="_blank">Parquet type</a> below.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Hop type</th>
+<th class="tableblock halign-left valign-top">Parquet column</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT64</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DOUBLE</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BigNumber with a length of 1 to 38</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DECIMAL(length, precision), rounded with the rounding type of the field.
+A value with more digits before the decimal point than the column holds stops the transform with an error.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BigNumber without a length, or longer than 38</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING, the number as text</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOLEAN</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIMESTAMP(MILLIS), adjusted to UTC</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timestamp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIMESTAMP(MICROS), adjusted to UTC.
+The nanoseconds beyond the microsecond are dropped.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Binary</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BINARY</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON, the JSON text</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UUID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UUID, the 16 bytes of the UUID</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Other Hop types can&#8217;t be written to Parquet.</p>
 </div>
 </div>
 </div>

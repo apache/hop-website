@@ -2863,20 +2863,18 @@
 <div class="ulist">
 <ul>
 <li>
-<p>To support reading from any location through Apache VFS each file is loaded into memory (one at a time).
-Make sure to allocate enough memory to allow this.</p>
+<p>Files are read in place through Apache VFS: local files directly, other locations (S3, Azure, &#8230;&#8203;) by seeking in the file.</p>
 </li>
 <li>
-<p>Long values can be de-serialized to Dates if they are EPOC: milliseconds since <code>1970-01-01 00:00:00.000</code></p>
+<p>All input values are passed to the output.</p>
 </li>
 <li>
-<p>Parquet Binary fields are considered to be Hop Strings but you can read them as Hop Binary.</p>
+<p>A column must have the same type in every file read by the transform, or be read into a Hop type both of its types convert to (see the table below).
+A value which can&#8217;t be converted stops the transform with an error naming the Parquet column, its type and the field.</p>
 </li>
 <li>
-<p>All input values are passed to the output</p>
-</li>
-<li>
-<p>INT96 is converted to the Hop Binary data type.</p>
+<p>Timestamps annotated as adjusted to UTC are instants.
+The ones which aren&#8217;t hold the date and time fields of a local time, taken in the time zone of the Hop JVM.</p>
 </li>
 </ul>
 </div>
@@ -2920,6 +2918,110 @@ This row can then be used to extract metadata with the <a href="metastructure.ht
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Get fields button</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">With this button you can select a parquet file from which we&#8217;ll read the schema to populate the Fields grid.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_parquet_to_hop_types"><a class="link" href="#_parquet_to_hop_types">Parquet to Hop types</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <strong>Get fields</strong> button proposes a Hop type for every column, based on its <a href="https://parquet.apache.org/docs/file-format/types/logicaltypes/" rel="noopener" target="_blank">logical type</a> or, without one, its physical type.
+You can pick another Hop type from the last column instead.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parquet column</th>
+<th class="tableblock halign-left valign-top">Get fields proposes</th>
+<th class="tableblock halign-left valign-top">Can also be read as</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOLEAN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String, Integer (1 or 0)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT32, INT64, INT(8/16/32/64, signed), INT(8/16/32, unsigned)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String, Number, BigNumber</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT(64, unsigned)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BigNumber</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String, Number, Integer (up to 9223372036854775807)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DECIMAL (on INT32, INT64, FIXED_LEN_BYTE_ARRAY or BINARY)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BigNumber, with the precision as length and the scale as precision</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String, Number, Integer (the fraction is dropped), Binary (the stored bytes)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FLOAT, DOUBLE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String, BigNumber, Integer (rounded)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FLOAT16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String, BigNumber, Integer (rounded), Binary (the stored bytes)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DATE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date, midnight in the local time zone</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timestamp. String, Integer, Number and BigNumber get the stored number of days.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIME (MILLIS, MICROS, NANOS)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timestamp, the time on 1970-01-01</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date. String, Integer, Number and BigNumber get the stored number.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TIMESTAMP (MILLIS, MICROS, NANOS)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timestamp, with its full precision</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date. String, Integer, Number and BigNumber get the stored number.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT96</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timestamp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING, ENUM</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BigNumber (text holding a number), JSON (text holding JSON), Binary</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String, BigNumber (text holding a number), Binary</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UUID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UUID, or String when the UUID value type isn&#8217;t installed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String, Binary</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BINARY, FIXED_LEN_BYTE_ARRAY without a logical type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Binary</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String (UTF-8 text), JSON, BigNumber (text holding a number, or else the unscaled bytes of a decimal with the length and precision of the field)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BSON, INTERVAL, GEOMETRY, GEOGRAPHY</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Binary</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LIST, MAP, VARIANT and other nested columns</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">Not supported</p></td>
 </tr>
 </tbody>
 </table>
