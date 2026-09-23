@@ -2841,7 +2841,43 @@
 <p>You can use this transform to normalize repeating groups of columns.</p>
 </div>
 <div class="paragraph">
-<p><strong>Important</strong>: When combining multiple columns with different meta types (e.g., String and Integer) into a new field, no automatic type conversion is performed. Instead the first meta type is set. This lack of conversion may lead to issues with subsequent transformations on the resulting data rows. It is strongly advised to ensure that the data types of values being put into the same field are aligned before normalization.</p>
+<p>For every row it reads, the transform writes one row per type. Each input field goes into the new field it names on the row of its type, whatever order the fields are listed in. A type that has no field for one of the new fields leaves that field empty (<code>null</code>) on its rows.</p>
+</div>
+<div class="paragraph">
+<p>A type can fill each new field from only one input field: listing two fields with the same type and the same new field is an error.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_data_types_of_the_new_fields"><a class="link" href="#_data_types_of_the_new_fields">Data types of the new fields</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A new field is filled from a different input field on every row, so its data type depends on all of them:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>When the input fields filling a new field share a data type, the new field has that type, with the length, precision and format of the first of them. The values are passed on unchanged.</p>
+</li>
+<li>
+<p>When they do not, the new field is a String, and every value is converted to text using the format of the input field it comes from. To control how a number or a date is written, set the format on that input field before this transform, for example with a <a href="selectvalues.html" class="xref page">Select Values</a> transform.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, normalising a String, an Integer and a Number into one field gives a String field holding <code>a</code>, <code>1</code> and <code>1.2</code>. <strong>Verify</strong> on this transform warns about every new field that is filled from input fields of different data types.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Before Hop 2.20, a new field took the data type of the first input field filling it, and the values of the other input fields were passed on unchanged. Rows with a value that did not match that type failed further down the pipeline, for example in a Sort rows transform that writes rows to disk.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -3056,6 +3092,111 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">824-21-0000</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">City</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Scottieview</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_normalized_data_example_3"><a class="link" href="#_normalized_data_example_3">Normalized data (example 3)</a></h3>
+<div class="paragraph">
+<p>Several new fields can be filled at once. With this input:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Date</th>
+<th class="tableblock halign-left valign-top">PR1_SL</th>
+<th class="tableblock halign-left valign-top">PR1_NR</th>
+<th class="tableblock halign-left valign-top">PR2_SL</th>
+<th class="tableblock halign-left valign-top">PR2_NR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2003-01-01</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">100</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">250</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>set <strong>Typefield</strong> = "Product" and fill the <strong>Fields table</strong> like this:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Fieldname</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">New field</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PR1_SL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Product1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sales</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PR1_NR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Product1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PR2_NR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Product2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PR2_SL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Product2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sales</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The result has one row per product, each value in the new field it names:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Date</th>
+<th class="tableblock halign-left valign-top">Product</th>
+<th class="tableblock halign-left valign-top">Sales</th>
+<th class="tableblock halign-left valign-top">Number</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2003-01-01</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Product1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">100</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2003-01-01</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Product2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">250</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
 </tr>
 </tbody>
 </table>

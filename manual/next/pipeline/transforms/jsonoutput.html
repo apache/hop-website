@@ -2908,7 +2908,10 @@ Currently available 3 types of operation:</p>
 <p>Nr. rows in a block</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Number of rows that are combined as one JSON Array <br></p>
+<p>Number of rows that are combined as one JSON Array. Use 0 to combine all rows in a single block. <br></p>
+</div>
+<div class="paragraph">
+<p>When the number of input rows is not a multiple of this value, the remaining rows are written as a last, smaller block.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2928,7 +2931,10 @@ A new file will be generated for each block
 <p>Output value</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Output field name</p>
+<p>Name of the field that will hold the generated JSON.<br></p>
+</div>
+<div class="paragraph">
+<p>When the operation writes an output value, the transform emits one row per block: the input fields of the last row of that block, followed by the JSON of the block. The other rows of the block are not passed on. When the operation only writes to a file, all input rows are passed on unchanged.</p>
 </div></div></td>
 </tr>
 <tr>
