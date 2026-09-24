@@ -2965,7 +2965,7 @@ They do <strong>not</strong> change the value stored in a database.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Format / Conversion mask</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Number or date pattern used to parse and print the value.
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number, date or Boolean pattern used to parse and print the value.
 See <a href="../formatting-values.html" class="xref page">Formatting numbers and dates</a>.</p></td>
 </tr>
 <tr>
@@ -2974,6 +2974,7 @@ See <a href="../formatting-values.html" class="xref page">Formatting numbers and
 Number / BigNumber: significant digits.
 Integer: display width (leading zeros when writing).
 Date: length of the printed string (for example <code>4</code> prints only the year).
+Boolean without a Format: <code>3</code> or more prints <code>true</code> / <code>false</code>, anything else prints <code>Y</code> / <code>N</code>.
 Use <code>-1</code> when unset.</p></td>
 </tr>
 <tr>

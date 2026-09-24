@@ -544,7 +544,11 @@ The class which carries this annotation will contain the metadata.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>key : this uniquely identifies the plugin and will be the name of the folder in which the metadata resides when serialising to JSON (see below)</p>
+<p>key : this uniquely identifies the plugin and will be the name of the folder in which the metadata resides when serialising to JSON (see below).
+Use lower-case words separated by dashes, see <a href="#metadata-key-naming">Choosing a key</a>.</p>
+</li>
+<li>
+<p>legacyKeys : the keys this metadata type was known under before its key was renamed (optional), see <a href="#metadata-key-renaming">Renaming a key</a></p>
 </li>
 <li>
 <p>name : a human-readable name</p>
@@ -562,6 +566,63 @@ The class which carries this annotation will contain the metadata.</p>
 </div>
 <div class="paragraph">
 <p>Example: <a href="https://github.com/apache/hop/blob/f8f2ad2d0bc0cfd143ae90cc32e73b6c9e1cda78/engine/src/main/java/org/apache/hop/partition/PartitionSchema.java#L47" rel="noopener" target="_blank">PartitionSchema.java</a></p>
+</div>
+<div class="sect2">
+<h3 id="metadata-key-naming"><a class="link" href="#metadata-key-naming">Choosing a key</a></h3>
+<div class="paragraph">
+<p>The key is more than an internal ID.
+It is the name of the folder in a project which holds the metadata objects (<code>metadata/&lt;key&gt;/&lt;name&gt;.json</code>), it is written into the metadata exported for remote execution, and it is the ID used to disable the type in <code>disabledGuiElements</code>.
+Users see it and check it into version control, so it is effectively public.</p>
+</div>
+<div class="paragraph">
+<p>Use lower-case words separated by dashes (kebab-case) which describe the type, like the existing <code>pipeline-run-configuration</code>, <code>sftp-connection</code> or <code>mail-server-connection</code>.
+Don&#8217;t use the Java class name or PascalCase (<code>MailServerConnection</code>): the folders in a project then no longer follow one convention.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="metadata-key-renaming"><a class="link" href="#metadata-key-renaming">Renaming a key</a></h3>
+<div class="paragraph">
+<p>Changing the key of an existing metadata type would make all the objects users already have invisible, because they live in a folder named after the old key.
+If you have to rename a key, move the old one to <code>legacyKeys</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-meta">@HopMetadata(
+    key = &quot;mail-server-connection&quot;,
+    legacyKeys = {&quot;MailServerConnection&quot;},
+    name = &quot;i18n::MailServerConnection.name&quot;,
+    ...)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MailServerConnection</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HopMetadataBase</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">IHopMetadata</span> {</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With a legacy key in place:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>objects in the folder named after the legacy key are still listed and loaded.
+If an object exists in both folders, the one in the folder named after the current key wins.</p>
+</li>
+<li>
+<p>saving an object always writes it to the folder named after the current key and removes the copy in the legacy folder.
+Projects move to the new folder one object at a time, as users edit them.</p>
+</li>
+<li>
+<p>deleting an object removes it from all the folders.</p>
+</li>
+<li>
+<p>a metadata export which uses the legacy key, for example one sent by an older Hop client to a Hop server, is still understood.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Code which looks for metadata files or compares type keys should use <code>HopMetadataUtil.getAllKeys()</code>, <code>HopMetadataUtil.matchesKey()</code> or <code>JsonMetadataSerializer.findFilename()</code> rather than the <code>key</code> alone, so it also finds objects which haven&#8217;t moved yet.</p>
+</div>
+<div class="paragraph">
+<p>Note that older Hop versions only know the old key: once an object has been saved by a newer version, older versions no longer see it.
+Mention the rename in the release notes.</p>
+</div>
 </div>
 </div>
 </div>

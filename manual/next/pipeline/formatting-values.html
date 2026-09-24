@@ -2840,7 +2840,7 @@ They do <strong>not</strong> change the value stored in a database.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Format / Conversion mask</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Number or date pattern used to parse and print the value.
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number, date or Boolean pattern used to parse and print the value.
 See <a href="#">Formatting numbers and dates</a>.</p></td>
 </tr>
 <tr>
@@ -2849,6 +2849,7 @@ See <a href="#">Formatting numbers and dates</a>.</p></td>
 Number / BigNumber: significant digits.
 Integer: display width (leading zeros when writing).
 Date: length of the printed string (for example <code>4</code> prints only the year).
+Boolean without a Format: <code>3</code> or more prints <code>true</code> / <code>false</code>, anything else prints <code>Y</code> / <code>N</code>.
 Use <code>-1</code> when unset.</p></td>
 </tr>
 <tr>
@@ -3470,6 +3471,153 @@ Lenient parsing will shift <code>02:30</code> to some other local time and you w
 <p>When you <strong>write</strong> dates to text, CSV, JSON or logs from a DST-observing JVM, use a mask with an offset, or set the output field&#8217;s Date Time Zone to <code>UTC</code>.
 Otherwise a reader in another zone — or the same pipeline after a DST weekend — will not reconstruct the instant you had.</p>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_boolean_formats"><a class="link" href="#_boolean_formats">Boolean formats</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Boolean format is the text for true, a slash, and the text for false.
+It is used both to print a Boolean and to read one from text.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Format</th>
+<th class="tableblock halign-left valign-top">true</th>
+<th class="tableblock halign-left valign-top">false</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true/false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Y/N</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Y</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>N</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1/0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>yes/no</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>yes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>no</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Without a format, the Length of the field decides how a Boolean is printed.
+See <a href="../concepts.html#boolean-type" class="xref page">Boolean</a> for the details.</p>
+</div>
+<div class="sect2">
+<h3 id="boolean-own-format"><a class="link" href="#boolean-own-format">Your own true and false text</a></h3>
+<div class="paragraph">
+<p>The list above only holds suggestions.
+You can type any pair into the Format column, so a file can use the words of its readers' language:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Format</th>
+<th class="tableblock halign-left valign-top">true</th>
+<th class="tableblock halign-left valign-top">false</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Ja/Nee</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Ja</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Nee</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Ja/Nein</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Ja</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Nein</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Oui/Non</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Oui</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Non</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Sí/No</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Sí</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>No</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>on/off</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>on</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>off</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>For example, to write German Booleans with <a href="transforms/textfileoutput.html" class="xref page">Text File Output</a>:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open the <strong>Fields</strong> tab and click <strong>Get Fields</strong>.</p>
+</li>
+<li>
+<p>Check that the <strong>Type</strong> of the field is <code>Boolean</code>.
+Text File Output does not convert types, so a field that arrives as a String has to be converted first, for example with <a href="transforms/selectvalues.html" class="xref page">Select Values</a>.</p>
+</li>
+<li>
+<p>Type <code>Ja/Nein</code> in the <strong>Format</strong> column.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Every <code>true</code> is then written as <code>Ja</code> and every <code>false</code> as <code>Nein</code>, whatever format or length the field had before.
+A null stays empty.</p>
+</div>
+<div class="paragraph">
+<p>To read such a file again, give the field the same Format in <a href="transforms/textfileinput.html" class="xref page">Text File Input</a> or in the Meta-data tab of <a href="transforms/selectvalues.html" class="xref page">Select Values</a>.
+Reading ignores case, so <code>ja</code>, <code>JA</code> and <code>Ja</code> are all true.
+Text that matches neither word falls back to the standard rules: <code>Y</code>, <code>yes</code>, <code>true</code> and <code>1</code> are true, anything else is false.</p>
+</div>
+<div class="paragraph">
+<p>Keep these rules in mind when you define your own format:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Use exactly one slash: the text before it means true, the text after it means false.
+Neither word can contain a slash, and a mask with more than one slash (such as the date mask <code>yyyy/MM/dd</code>) is not treated as a Boolean format.</p>
+</li>
+<li>
+<p>Both words must be non-empty.</p>
+</li>
+<li>
+<p>Spaces around the slash are not part of the words: <code>Ja / Nein</code> writes <code>Ja</code> and <code>Nein</code>.</p>
+</li>
+<li>
+<p>Pick two words that differ in more than upper and lower case.
+Reading ignores case, so a format like <code>Yes/yes</code> could never tell true from false and is not treated as a Boolean format.</p>
+</li>
+<li>
+<p>Text File Output ignores all formats when <strong>Fast data dump (no formatting)</strong> is enabled, and then writes <code>true</code> or <code>false</code>.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

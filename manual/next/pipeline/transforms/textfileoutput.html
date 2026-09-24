@@ -3021,7 +3021,8 @@ UNIX files have lines are separated by linefeeds.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Fast data dump (no formatting)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Improves the performance when dumping large amounts of data to a text file by not including any formatting information.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Improves the performance when dumping large amounts of data to a text file by not including any formatting information.
+Field formats are ignored, so a Boolean is written as <code>true</code> or <code>false</code>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Split every &#8230;&#8203; rows</p></td>
@@ -3066,7 +3067,9 @@ The table below describes each of the options for configuring the field properti
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Format</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Select a format to apply to the field value. Only applies to numbers and dates.
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select a format to apply to the field value. Applies to numbers, dates and Booleans.
+For a Boolean, the format is the text for true, a slash and the text for false, so <code>Ja/Nein</code> writes German words instead of <code>Y</code> / <code>N</code>.
+You can type your own pair, see <a href="../formatting-values.html#boolean-own-format" class="xref page">Your own true and false text</a>.
 See <a href="../formatting-values.html" class="xref page">Formatting numbers and dates</a>.</p></td>
 </tr>
 <tr>
