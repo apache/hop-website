@@ -2792,45 +2792,45 @@
     Single Threaded
     <span class="visually-hidden">supported</span>
   </li>
-  <li class="engine engine--supported" data-engine="native-spark">
+  <li class="engine engine--unsupported" data-engine="native-spark">
     <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
       
-      <path d="M2 6.4 4.6 9 10 3.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
       
+      <path d="M3 3l6 6M9 3l-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
       
     </svg>
     Native Spark
-    <span class="visually-hidden">supported</span>
+    <span class="visually-hidden">not supported</span>
   </li>
-  <li class="engine engine--unknown" data-engine="beam-spark">
+  <li class="engine engine--unsupported" data-engine="beam-spark">
     <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
       
       
+      <path d="M3 3l6 6M9 3l-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
       
-      <path d="M4.1 4.3a1.9 1.9 0 1 1 2.6 1.8c-.5.2-.7.6-.7 1.1v.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="6" cy="9.3" r=".85" fill="currentColor"/>
     </svg>
     Beam Spark
-    <span class="visually-hidden">support unknown</span>
+    <span class="visually-hidden">not supported</span>
   </li>
-  <li class="engine engine--unknown" data-engine="beam-flink">
+  <li class="engine engine--unsupported" data-engine="beam-flink">
     <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
       
       
+      <path d="M3 3l6 6M9 3l-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
       
-      <path d="M4.1 4.3a1.9 1.9 0 1 1 2.6 1.8c-.5.2-.7.6-.7 1.1v.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="6" cy="9.3" r=".85" fill="currentColor"/>
     </svg>
     Beam Flink
-    <span class="visually-hidden">support unknown</span>
+    <span class="visually-hidden">not supported</span>
   </li>
-  <li class="engine engine--unknown" data-engine="beam-dataflow">
+  <li class="engine engine--unsupported" data-engine="beam-dataflow">
     <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
       
       
+      <path d="M3 3l6 6M9 3l-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
       
-      <path d="M4.1 4.3a1.9 1.9 0 1 1 2.6 1.8c-.5.2-.7.6-.7 1.1v.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="6" cy="9.3" r=".85" fill="currentColor"/>
     </svg>
     Beam Dataflow
-    <span class="visually-hidden">support unknown</span>
+    <span class="visually-hidden">not supported</span>
   </li>
 </ul>
     <article class="doc">
@@ -2839,7 +2839,61 @@
 <h2 id="_description"><a class="link" href="#_description">Description</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Join Rows (cartesian product) transform allows you to combine/join multiple input streams (<a href="https://en.wikipedia.org/wiki/Cartesian_product" target="_blank" rel="noopener">Cartesian product</a>) without joining on keys. It works best with one row from each stream. You can add a  condition to only join when a condition is met.</p>
+<p>The Join Rows (cartesian product) transform allows you to combine/join multiple input streams (<a href="https://en.wikipedia.org/wiki/Cartesian_product" target="_blank" rel="noopener">Cartesian product</a>) without joining on keys.
+Every row of one stream is combined with every row of the other streams, so the number of output rows is the product of the number of rows of all streams.
+You can add a condition to only write the combinations that meet it.</p>
+</div>
+<div class="paragraph">
+<p>The transform works like a lookup:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>It first reads all the rows of the other streams, the ones that are not the main stream.
+It writes them to temporary files, and keeps a stream in memory as well when it has no more than <strong>Max. cache size</strong> rows.</p>
+</li>
+<li>
+<p>Then it reads the main stream one row at a time, and writes the combinations of that row with all the rows of the other streams before it reads the next main row.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The rows of the main stream are never kept, so make the largest stream the main stream.
+Since the other streams are read completely before the first main row is joined, they can&#8217;t depend on the main stream.
+When one of the streams has no rows, the transform writes no rows at all.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This transform is not supported on the distributed pipeline engines: neither the Beam engines nor the native Spark engine.
+A cartesian product needs every row of every input in one place, and these engines spread the rows over many workers, bundles or partitions, so combinations would go missing.
+The Hop GUI hides the transform when the canvas palette filter is set to one of these engines, and running a pipeline that still contains it is refused, both in the GUI and with <code>hop-run</code>.</p>
+</div>
+<div class="paragraph">
+<p>To build a cartesian product on these engines, add the same constant field to both inputs with an <a href="addconstant.html" class="xref page">Add Constants</a> transform and join them with a <a href="mergejoin.html" class="xref page">Merge Join</a> on that field.
+See <a href="../beam/getting-started-with-beam.html#_unsupported_transforms" class="xref page">Getting started with Beam</a> and <a href="../pipeline-run-configurations/native-spark-pipeline-engine.html#transforms-not-supported-on-native-spark" class="xref page">Transforms not supported on Native Spark</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The transform gives the same result on the <a href="../pipeline-run-configurations/single-threaded-pipeline-engine.html" class="xref page">single threaded engine</a> as on the Hop engine.
+That engine runs the previous transforms first, so all the rows of the other streams are there when Join Rows starts.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -2864,7 +2918,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Temp directory</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specify the name of the directory where the system stores temporary files in case you want to combine more then the cached number of rows.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specify the name of the directory where the system stores temporary files in case you want to combine more than the cached number of rows.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TMP-file prefix</p></td>
@@ -2872,11 +2926,11 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Max. cache size</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The number of rows to cache before the system reads data from temporary files; required when you want to combine large row sets that do not fit into memory.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The maximum number of rows of a stream to keep in memory. A stream with more rows is read back from its temporary file for every main row; required when you want to combine large row sets that do not fit into memory.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Main transform to read from</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies the transform from which to read most of the data; while the data from other transforms are cached or spooled to disk, the data from this transform is not.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The main stream: the transform from which to read most of the data. The rows of the other transforms are cached or spooled to disk, the rows of this transform are not. When left empty, the first input stream is the main stream.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The Condition(s)</p></td>

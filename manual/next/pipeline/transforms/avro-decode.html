@@ -2888,8 +2888,12 @@ Note: The "Avro type" column is informational only.
 It&#8217;s not used at runtime.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Get fields button</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">You can use the "Get fields" button to retrieve the fields from the schema present in the metadata of the specified Avro Record source field.  If there&#8217;s no metadata in this field, in case of sourcing from a Kafka consumer for example, you can opt to read from an Avro file.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get fields from file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Retrieves fields from the schema on the selected Avro Record source field, when that field already has one (for example after Avro Encode). If there is no schema, pick an Avro file. The fields are taken from the first record. Rows are added to the table.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get fields from JSON</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Paste JSON instead of reading a file. Three forms are accepted: a Hop Avro value with <code>schema</code> and <code>data</code>, an Avro record schema, or one sample record (the JSON shown when previewing an Avro value, including from Kafka). A sample record&#8217;s types are a best effort: JSON null becomes String, and only the top-level fields are added. Rows are added to the table.</p></td>
 </tr>
 </tbody>
 </table>
