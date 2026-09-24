@@ -220,6 +220,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/hop-gui/vfs-file-explorer.html">VFS File Explorer</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/hop-gui/hop-gui-popup-dialog.html">Popup Dialog</a>
     
   </li>
@@ -2860,12 +2864,30 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">URL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The base URL pointing to the WSDL document that will be retrieved</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The location of the WSDL document.
+This is either an <code>http://</code> or <code>https://</code> URL, or a file, for example <code>${PROJECT_HOME}/wsdl/service.wsdl</code>.
+A file can be on any file system Hop can read: a local folder, a <code>file://</code> URL, S3, Azure, a named VFS connection and so on.
+Variables are resolved, both in the dialog and when the pipeline runs.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Browse&#8230;&#8203; (button)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select a WSDL file.
+Its location is put in the URL field and the WSDL is loaded, as with the Load button.
+A file in your project folder is kept relative to <code>${PROJECT_HOME}</code>, so the pipeline keeps working when the project moves.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Load (button)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The load button loads the WSDL at the specified URL and tries to automatically populate the input and output tabs and fields.
 NOTE: If this doesn&#8217;t work, you can still try to manually specify the input and output fields using the "Add Input" and "Add Output" buttons.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Operation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The operation of the web service to call.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Operation request name (optional)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">On occasion the WSDL gives back the wrong operation request name to put in the body.
+Put in the correct one (as expected by the service) here.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The number of rows per call</p></td>
@@ -2882,6 +2904,11 @@ For compatibility reasons, we kept the old engine around to make sure older tran
 <td class="tableblock halign-left valign-top"><p class="tableblock">Specify the name of the repeating element in the output XML (if any).</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Return the complete reply from the service as a String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Don&#8217;t parse the reply of the service: pass the complete SOAP reply on as a String.
+You need to specify a single String output field to receive it.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HTTP authentication</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Here you can put the username and password if these are required for the web service.</p></td>
 </tr>
@@ -2893,6 +2920,56 @@ For compatibility reasons, we kept the old engine around to make sure older tran
 <td class="tableblock halign-left valign-top"><p class="tableblock">Add Input / Add Output</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">These buttons will allow you to manually specify the input and output specifications of the WSDL service.
 Note: The data of the input fields can be escaped by the Calculator transform and the function "Mask XML content from string A"</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_wsdl_files_and_imports"><a class="link" href="#_wsdl_files_and_imports">WSDL files and imports</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A WSDL can import other WSDL documents (<code>&lt;import location="&#8230;&#8203;"&gt;</code>) and XML schemas (<code>&lt;xsd:import schemaLocation="&#8230;&#8203;"&gt;</code>, <code>&lt;xsd:include&gt;</code>).
+A relative location is looked up next to the document that names it, on the same file system or web server as that document: a WSDL on S3 finds its imports on S3.
+An imported document can import others in turn.</p>
+</div>
+<div class="paragraph">
+<p>HTTP authentication is used to fetch the WSDL over <code>http://</code> or <code>https://</code>, its imports from the same host, and to call the service itself.
+It is not sent to any other host a WSDL imports from.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_input_and_output_fields"><a class="link" href="#_input_and_output_fields">Input and output fields</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After loading the WSDL and selecting an operation, the input and output tabs list the fields of the request and the reply.
+When a WSDL can&#8217;t be loaded, you can fill them in yourself with "Add Input" and "Add Output", for example from a request and reply you captured with a tool like SoapUI.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Column</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the field in the Hop pipeline: the input field that provides the value, or the output field that receives it.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WS Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the XML element in the SOAP request or reply, without its namespace prefix.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WS Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The XML schema type of the element: <code>string</code>, <code>int</code>, <code>integer</code>, <code>short</code>, <code>boolean</code>, <code>date</code>, <code>time</code>, <code>datetime</code>, <code>double</code>, <code>float</code>, <code>base64Binary</code> or <code>decimal</code>.
+Dates, times and booleans are formatted to match this type in the request.</p></td>
 </tr>
 </tbody>
 </table>

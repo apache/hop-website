@@ -220,6 +220,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-gui/vfs-file-explorer.html">VFS File Explorer</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/hop-gui/hop-gui-popup-dialog.html">Popup Dialog</a>
     
   </li>
@@ -2947,6 +2951,41 @@ disabled (default): (single) click on a transform or action icon to open the con
 <td class="tableblock halign-left valign-top"><p class="tableblock">Draw border around names on canvas?</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If this option is enabled, a border will be drawn around the names of transforms and actions on the canvas.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tooltips</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>A group of its own in the <strong>Pipeline and Workflow canvas</strong> section: one checkbox per kind of tooltip the canvas shows when the mouse rests on something. Untick a kind to stop only that one; <strong>Show tooltip when hovering over a hop or Action/Transform</strong> in the <strong>Tooltips</strong> section of the General tab still switches all of them off at once.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Edit hint on transform and action names</strong>: the "Click to edit" hint on a name.</p>
+</li>
+<li>
+<p><strong>Transform and action descriptions</strong>: the description on an icon and its info badge, along with the transform partitioning and whether a transform can start a pipeline.</p>
+</li>
+<li>
+<p><strong>Deprecation warnings</strong>: the warning on the icon of a deprecated transform or action, and its replacement.</p>
+</li>
+<li>
+<p><strong>Hop details</strong>: the source, target and status of a hop when the mouse rests on its line, and the badges on it: info, error, copies, row distribution, target streams and the conditions of workflow hops.</p>
+</li>
+<li>
+<p><strong>Execution results</strong>: after a run, the failure logs, the output rows a transform or hop holds, the result of an action and where a workflow restarted from a checkpoint.</p>
+</li>
+<li>
+<p><strong>Note links</strong>: where a hyperlink in a note leads.</p>
+</li>
+<li>
+<p><strong>Plugin tooltips</strong>: tooltips that plugins add to the canvas, such as the custom debug levels.</p>
+</li>
+<li>
+<p><strong>Selection cleared notice</strong>: the short "Selection cleared" notice after a click on the empty canvas while something was selected.</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">all on</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Use global bookmarks in the file dialog</p></td>

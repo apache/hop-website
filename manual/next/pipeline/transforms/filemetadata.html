@@ -220,6 +220,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/hop-gui/vfs-file-explorer.html">VFS File Explorer</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/hop-gui/hop-gui-popup-dialog.html">Popup Dialog</a>
     
   </li>
@@ -2899,11 +2903,48 @@ Tab, semicolon, comma are provided by default.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enclosure candidates</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">List of delimiters to try while detecting the file layout.
+<td class="tableblock halign-left valign-top"><p class="tableblock">List of enclosure characters to try while detecting the file layout.
 Double and single quote are provided by default.</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_detection_rules"><a class="link" href="#_detection_rules">Detection rules</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_enclosures"><a class="link" href="#_enclosures">Enclosures</a></h3>
+<div class="paragraph">
+<p>An enclosure opens a field when it is the first character of the field.
+It closes the field when it is followed by the delimiter or the end of the line.
+Inside an enclosed field:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>delimiters are part of the value: <code>"Smith, Bob"</code> is one field.</p>
+</li>
+<li>
+<p>a doubled enclosure is an escaped enclosure: <code>"BOB ""ROBERT"" SMITH"</code>.</p>
+</li>
+<li>
+<p>any other enclosure is part of the value as well: <code>"BOB "ROBERT" SMITH"</code> is one field.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>An enclosure in the middle of a field that is not enclosed, such as <code>5" pipe</code>, does not open a field, and the line does not fit that enclosure.
+The same goes for a line that ends inside an enclosed field: fields spanning several lines are not supported.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_numbers"><a class="link" href="#_numbers">Numbers</a></h3>
+<div class="paragraph">
+<p>A number column gets the precision of the value with the most decimals, read with the detected decimal symbol.
+The suggested mask keeps all of those decimals: <code>123.58</code> and <code>90524.10</code> give the mask <code>#.00</code> and a precision of 2.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -2919,6 +2960,9 @@ Double and single quote are provided by default.</p></td>
 </li>
 <li>
 <p>delimiter</p>
+</li>
+<li>
+<p>enclosure</p>
 </li>
 <li>
 <p>field_count</p>
