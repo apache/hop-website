@@ -2913,7 +2913,9 @@ Note: This name has to be unique in a single pipeline.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Schema filename</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Filepath to write or read the schema from.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Filepath to write or read the schema from.
+The path can contain variables, for example <code>${PROJECT_HOME}/schemas/customer.avsc</code>, and can point to any file system Hop supports (local, <code>s3://</code>, <code>azure://</code>, <code>gs://</code>, &#8230;&#8203;).
+When <strong>Automatically create schema</strong> is disabled, the transform reads the schema from this file before it writes the first row, and fails if the file can&#8217;t be read or isn&#8217;t a valid Avro schema.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Create parent folder</p></td>
