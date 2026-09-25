@@ -2775,7 +2775,9 @@
 </nav>
     <article class="doc">
       <h1>Hop Gui</h1>
-      <div class="paragraph">
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
 <p>Hop Gui is Hop&#8217;s visual development environment. You&#8217;ll spend a lot of time here in the various perspectives of Hop GUI.</p>
 </div>
 <div class="paragraph">
@@ -2819,6 +2821,47 @@ Check the chapters on <a href="../pipeline/pipelines.html" class="xref page">pip
 For Docker volume mounts and upgrades, see <a href="../hop-web-docker.html" class="xref page">Hop Web in Docker</a>.</p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_bottom_panel"><a class="link" href="#_bottom_panel">Bottom panel</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The button at the bottom left of the window shows or hides the bottom panel.
+With the panel open and nothing in it, the tab bar shows only <strong>+</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/hop-gui/bottom-panel-empty.png" alt="The bottom panel open and empty" width="45%">
+</div>
+</div>
+<div class="paragraph">
+<p>Click <strong>+</strong> and choose a tool: Terminal, Search, Database, or VFS File Explorer.
+Terminal and search add another tab each time.
+Database and the <a href="vfs-file-explorer.html" class="xref page">VFS file explorer</a> open their tab, or focus it when it is already there.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/hop-gui/bottom-panel-tabs.png" alt="Database" width="90%" height="and Search open together in the bottom panel.">
+</div>
+</div>
+<div class="paragraph">
+<p>The execution-results button stays above the panel button and is only there in the file explorer, on a pipeline or workflow.</p>
+</div>
+<div class="paragraph">
+<p><code>CTRL-J</code> shows the terminal, and hides the panel when a terminal tab is already selected.
+<code>CTRL-SHIFT-J</code> opens another terminal.
+<code>CTRL-F</code> still opens Search Everywhere.
+<strong>Show all results</strong> opens a search tab in the bottom panel, and <strong>+</strong> → Search does the same for an empty query.</p>
+</div>
+<div class="paragraph">
+<p>In the <a href="perspective-configuration.html" class="xref page">Configuration perspective</a>, on the General tab, <strong>Enable embedded terminal</strong> turns the built-in terminal off on desktops where it misbehaves.
+Search, the database workbench, and the VFS file explorer stay available.
+Hop Web has no embedded terminal.
+An administrator can also force the terminal off by excluding <code>40010-menu-tools-terminal</code> in <a href="disable-ui-elements.html" class="xref page">disabledGuiElements.xml</a>.</p>
+</div>
+</div>
 </div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
@@ -2891,6 +2934,7 @@ For Docker volume mounts and upgrades, see <a href="../hop-web-docker.html" clas
 </footer>
 
 <script src="../../../js/site.js"></script>
+<script src="../../../js/matomo.js"></script>
 <script src="../../../_/js/tabs.js"></script>
 </body>
 </html>
