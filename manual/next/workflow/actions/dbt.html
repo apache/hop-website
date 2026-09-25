@@ -2833,6 +2833,11 @@
 <div class="sect1">
 <h2 id="_options"><a class="link" href="#_options">Options</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>The options are organized on four tabs. The action name is above them and applies to all of them.</p>
+</div>
+<div class="sect2">
+<h3 id="_dbt_project"><a class="link" href="#_dbt_project">dbt project</a></h3>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -2846,10 +2851,6 @@
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Action name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the workflow action.</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">dbt project</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="../../metadata-types/dbt-project.html" class="xref page">dbt Project</a> metadata object to run against.</p></td>
 </tr>
@@ -2861,6 +2862,23 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Target</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The dbt target (<code>--target</code>). Overrides the default target of the dbt project when set.</p></td>
 </tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_selection"><a class="link" href="#_selection">Selection</a></h3>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">--select</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Passed to dbt as <code>--select</code>, using dbt&#8217;s node selection syntax. Several selectors can be given in one value, separated by spaces.</p></td>
@@ -2870,6 +2888,27 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Passed to dbt as <code>--exclude</code>.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">--full-refresh</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed to dbt as <code>--full-refresh</code>. dbt only accepts the flag for <code>run</code>, <code>build</code> and <code>seed</code>, so it is left out for the other operations.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_execution"><a class="link" href="#_execution">Execution</a></h3>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">--threads</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Passed to dbt as <code>--threads</code>. Left empty, dbt uses the thread count from <code>profiles.yml</code>.</p></td>
 </tr>
@@ -2878,13 +2917,26 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Wall-clock limit for the dbt run. When it is reached, dbt and the processes it started are stopped and the action fails. Empty or <code>0</code> waits for dbt however long it takes.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--full-refresh</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Passed to dbt as <code>--full-refresh</code>. dbt only accepts the flag for <code>run</code>, <code>build</code> and <code>seed</code>, so it is left out for the other operations.</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Emit OpenLineage</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Run dbt through <code>dbt-ol</code> and point it at the collector Hop&#8217;s own lineage sink uses. See <a href="#_lineage">Lineage</a>.</p></td>
 </tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_variables"><a class="link" href="#_variables">Variables</a></h3>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Variables (--vars)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name/value pairs passed to dbt as <code>--vars</code>. See <a href="#_dbt_variables">dbt variables</a>.</p></td>
@@ -2895,6 +2947,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 </div>
 <div class="sect1">
