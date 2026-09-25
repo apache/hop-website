@@ -3180,8 +3180,15 @@ The fields are grouped on tabs: <strong>General</strong>, <strong>Configuration 
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Configuration files</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">One or more files that define environment-specific variables</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One or more files that define environment-specific variables. Each row is a filename and a description</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Short note about that file. It is stored in the JSON file, not on the environment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -3208,7 +3215,7 @@ The fields are grouped on tabs: <strong>General</strong>, <strong>Configuration 
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Edit&#8230;&#8203;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Open the selected configuration file to set variable names, values and descriptions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Open the selected configuration file to set its description and the variable names, values and descriptions</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -3228,11 +3235,35 @@ See <a href="../best-practices/index.html" class="xref page">Best practices: sec
 <p><span class="image"><img src="../_images/hop-gui/environment/environment-files.png" alt="Environment configuration files" width="90%"></span></p>
 </div>
 <div class="paragraph">
-<p><strong>Edit&#8230;&#8203;</strong> opens the described variables dialog for the selected file:</p>
+<p><strong>Edit&#8230;&#8203;</strong> opens the described variables dialog for the selected file.
+The description at the top of that dialog is the same file description as the <strong>Description</strong> column.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="../_images/hop-gui/environment/environment-variables.png" alt="Environment Variables" width="80%">
+</div>
+</div>
+<div class="paragraph">
+<p>The description is written into the configuration file when you confirm the environment dialog.
+A file whose description did not change is left as it is.
+A file that does not exist yet is created when the description is not empty.
+Hover a row to see that description and the variables stored in the file.
+Values are shown as they are written, not with variables resolved.
+The value is hidden when the variable name contains <code>password</code>, <code>passwd</code>, <code>secret</code>, <code>token</code> or <code>credential</code>, and when the value is an encrypted Hop password.</p>
+</div>
+<div class="paragraph">
+<p>A configuration file looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>json</div><pre class="highlightjs highlight is-highlighted"><code class="language-json hljs" data-lang="json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;description&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Warehouse connection for this environment&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;variables&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;name&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;DB_HOSTNAME&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;value&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;db.example.com&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;description&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Warehouse host&quot;</span>
+  <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
