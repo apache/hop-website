@@ -146,6 +146,7 @@ ${columns}
 </footer>
 
 <script src="{{siteRootPath}}/js/site.js"></script>
+<script src="{{siteRootPath}}/js/matomo.js"></script>
 <script src="{{uiRootPath}}/js/tabs.js"></script>
 `
 
