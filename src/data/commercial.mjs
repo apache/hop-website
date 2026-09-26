@@ -39,13 +39,21 @@
 
 const entries = [
   {
+    // // Verbatim, as supplied by the company on their website.
+    name: 'Avizing', 
+    href: 'https://www.avizing.com',
+    market: 'USA',
+    services: ['Migration', 'Services', 'Consultancy'],
+    body: 'Avizing designs, containerizes, and operates Apache Hop data pipelines that run reliably in your cloud: versioned in Git, secured with a proper secrets manager, backed up, and monitored. AI and large language models are primary contributors to every engagement, in how we build and in what your pipelines can do'
+  },
+  {
     // Verbatim, as supplied by the company. Do not edit for style: this is
     // their copy, and the page's own policy says entries are theirs to write.
     name: 'know.bi',
-    href: 'https://www.know-bi.be/contact',
+    href: 'https://www.know.bi/contactus',
     market: 'Global',                        // confirmed by the PMC
-    services: ['Migration', 'Installation', 'Coaching', 'Training', 'Enterprise support'],
-    body: 'know.bi helps organizations be successful with Apache Hop. Started by a number of the core Hop committers and Hop project founders, know.bi has in-depth knowledge of the Hop platform and can support your organization to hit the ground running with Hop. The services provided by know.bi include migrations, certified installations, coaching, training and enterprise-level support.',
+    services: ['Migration', 'Installation', 'Coaching', 'Training', 'Commercial support'],
+    body: 'know.bi powers enterprise data engineering with Putki: production-ready add-ons, patch releases, and commercial support for Apache Hop. Founded by Apache Hop co-founders and PMC members, know.bi combines deep platform expertise with Putki software, offering certified installations, migrations, custom development, training, and hands-on coaching.',
   },
   {
     // Verbatim, as supplied by the company. Do not edit for style.
