@@ -3100,7 +3100,7 @@ Verify is a question somebody asked, and reads the answers to in context; the li
 </div>
 </div>
 <div class="paragraph">
-<p><code>severity</code> is what the linter reports the remark as, whatever severity the transform gave it, and <code>enabled: false</code> drops it.
+<p><code>severity</code> on a rule that covers every remark is a cap: a remark above it is lowered to it, and one below it keeps the severity the transform gave it, so a comment is never reported as a warning. On a rule narrowed with <code>appliesTo</code> or <code>messageKey</code>, <code>severity</code> is what the linter reports those remarks as, higher or lower than the transform gave them. <code>enabled: false</code> drops the remarks the rule covers.
 Two optional keys narrow a rule to less than every remark:</p>
 </div>
 <div class="ulist">
@@ -3109,7 +3109,7 @@ Two optional keys narrow a rule to less than every remark:</p>
 <p><code>appliesTo</code> — the plugin ids of the transforms or actions it covers, as for any other rule.</p>
 </li>
 <li>
-<p><code>messageKey</code> — one single check, named as <code>&lt;i18n package&gt;:&lt;key&gt;</code> for the message it prints, the same form Hop&#8217;s plugin annotations use. The key is resolved through the plugin&#8217;s own message bundle, so the rule keeps matching in every language rather than depending on the English wording. A key that no longer resolves matches nothing rather than everything.</p>
+<p><code>messageKey</code> — one single check, named as <code>&lt;i18n package&gt;:&lt;key&gt;</code> for the message it prints, the same form Hop&#8217;s plugin annotations use. The key is resolved through the plugin&#8217;s own message bundle, so the rule keeps matching in every language rather than depending on the English wording. For a check that fills values into its message, such as a connection or field name, the rule matches whatever values the check filled in. A key that no longer resolves matches nothing rather than everything.</p>
 </li>
 </ul>
 </div>
@@ -3127,7 +3127,9 @@ Two optional keys narrow a rule to less than every remark:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Findings from a native rule carry that rule&#8217;s id, so they suppress by id like any other:</p>
+<p>Findings from a native rule carry that rule&#8217;s id, so they suppress by id like any other.
+A check that sets an error code of its own, such as <code>CONNECTION_DOES_NOT_EXIST</code>, is reported under that code instead, unless a rule naming its plugin or its message matched it.
+A suppression or baseline entry can name either the code or the native rule that classified the finding, and one naming the code keeps working when a rule naming that check is added later:</p>
 </div>
 <div class="listingblock">
 <div class="content">
