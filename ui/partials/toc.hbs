@@ -16,7 +16,7 @@
 }}
 {{#if page.contents}}
 {{#with (or page.attributes.toc site.keys.toc)}}{{/with}}
-<aside class="doc-toc" data-pagefind-ignore aria-label="On this page">
+<aside class="doc-toc" data-pagefind-ignore aria-label="On this page" data-levels="{{#if page.attributes.toclevels}}{{page.attributes.toclevels}}{{else}}2{{/if}}">
   <p class="doc-toc__title">On this page</p>
   <div class="doc-toc__body"></div>
 </aside>
