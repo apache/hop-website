@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title> Spark lake table input | Apache Hop</title>
-<meta name="description" content="Spark lake table input reads Delta Lake or Apache Iceberg tables on the native Spark pipeline engine, with optional time travel and projection.">
+<title> Lake table input | Apache Hop</title>
+<meta name="description" content="Lake table input reads Apache Iceberg tables on the Hop engine and Delta Lake or Apache Iceberg tables on the native Spark engine, with optional time travel and projection.">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/pipeline/transforms/spark-lake-table-input.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
-<meta property="og:title" content=" Spark lake table input">
-<meta property="og:description" content="Spark lake table input reads Delta Lake or Apache Iceberg tables on the native Spark pipeline engine, with optional time travel and projection.">
+<meta property="og:title" content=" Lake table input">
+<meta property="og:description" content="Lake table input reads Apache Iceberg tables on the Hop engine and Delta Lake or Apache Iceberg tables on the native Spark engine, with optional time travel and projection.">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/pipeline/transforms/spark-lake-table-input.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -184,6 +184,10 @@
     <a href="../../../../manual/next/installation-configuration.html">Installation and Configuration</a>
     
   </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/sizing.html">Sizing guide</a>
+    
+  </li>
   <li class="doc-nav__item is-parent">
     <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop in Docker section">
       <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -346,6 +350,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/beam/flink-k8s-operator-running-hop-pipeline.html">Running a Hop pipeline using the Flink Kubernetes Operator</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/beam/developing-beam-transforms.html">Developing a Beam transform</a>
     
   </li>
 </ul>
@@ -536,6 +544,38 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamdebeziuminput.html">Beam Debezium input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamelasticsearchinput.html">Beam Elasticsearch input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamelasticsearchoutput.html">Beam Elasticsearch output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beammqttinput.html">Beam MQTT input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beammqttoutput.html">Beam MQTT output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamsnowflakeinput.html">Beam Snowflake input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamsnowflakeoutput.html">Beam Snowflake output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamsplunkoutput.html">Beam Splunk output</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/beamfileinput.html">Beam file input</a>
     
   </li>
@@ -569,6 +609,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/beamkinesisproduce.html">Beam Kinesis produce</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beampartition.html">Beam partition</a>
     
   </li>
   <li class="doc-nav__item">
@@ -653,6 +697,14 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/csvinput.html">CSV file input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/cypher-builder.html">Cypher builder</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/cypher-output.html">Cypher output</a>
     
   </li>
   <li class="doc-nav__item">
@@ -788,6 +840,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/extractgraph.html">Extract graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/fake.html">Fake data</a>
     
   </li>
@@ -820,6 +876,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/generate-graph-csvs.html">Generate graph CSVs</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/generaterandomvalue.html">Generate Random Value</a>
     
   </li>
@@ -833,6 +893,14 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/getfilesrowcount.html">Get files rowcount</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/get-graph-logging-info.html">Get graph logging info</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/get-graph-schema.html">Get graph schema</a>
     
   </li>
   <li class="doc-nav__item">
@@ -873,6 +941,18 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/google-sheets-output.html">Google Sheets output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/graph-output.html">Graph output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/graph-query.html">Graph query</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/graph-vector-search.html">Graph vector search</a>
     
   </li>
   <li class="doc-nav__item">
@@ -951,6 +1031,14 @@
     <a href="../../../../manual/next/pipeline/transforms/kafkaproducer.html">Kafka producer</a>
     
   </li>
+  <li class="doc-nav__item is-current">
+    <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-input.html">Lake table input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-output.html">Lake table output</a>
+    
+  </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/languagemodelchat.html">Language model chat</a>
     
@@ -977,6 +1065,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/mapping-output.html">Mapping output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/maskfields.html">Mask fields</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1040,35 +1132,7 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-cypher.html">Neo4j Cypher</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-cypher-builder.html">Neo4j Cypher builder</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-gencsv.html">Neo4j generate CSVs</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-getloginfo.html">Neo4j Get Logging Info</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-graphoutput.html">Neo4j graph output</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/neo4j-import.html">Neo4j import</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-output.html">Neo4j output</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-split-graph.html">Neo4j split graph</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1287,20 +1351,12 @@
     <a href="../../../../manual/next/pipeline/transforms/spark-file-output.html">Spark file output</a>
     
   </li>
-  <li class="doc-nav__item is-current">
-    <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-input.html">Spark lake table input</a>
-    
-  </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-maintenance.html">Spark lake table maintenance</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-merge.html">Spark lake table merge</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-output.html">Spark lake table output</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1313,6 +1369,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/splitfieldtorows.html">Split fields to rows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/split-graph.html">Split graph</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1433,6 +1493,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/verticabulkloader.html">Vertica Bulk Loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/watchfiles.html">Watch Files</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1571,15 +1635,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/check-graph-database-connections.html">Check graph database connections</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/folderisempty.html">Check if a folder is empty</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/xmlwellformed.html">Check if XML file is well-formed</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/workflow/actions/neo4j-checkconnections.html">Check Neo4j connections</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1615,6 +1679,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/create-property-graph.html">Create property graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/databricks-job-run.html">Databricks job run</a>
     
   </li>
@@ -1632,6 +1700,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/deletefile.html">Delete file</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/deleteexecutioninfo.html">Delete execution information</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1695,6 +1767,18 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/graph-constraint.html">Graph constraint</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/graph-index.html">Graph index</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/graph-script.html">Graph script</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/http.html">HTTP</a>
     
   </li>
@@ -1723,18 +1807,6 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/workflow/actions/neo4j-constraint.html">Neo4j constraint</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/workflow/actions/neo4j-cypherscript.html">Neo4j Cypher script</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/workflow/actions/neo4j-index.html">Neo4j index</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/ping.html">Ping a host</a>
     
   </li>
@@ -1756,6 +1828,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/repeat.html">Repeat</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/runlinter.html">Run Linter</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1912,11 +1988,19 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/vfs/git-vfs.html">Git</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/vfs/hdfs-vfs.html">HDFS</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/vfs/minio-vfs.html">MinIO</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/vfs/smb-vfs.html">SMB</a>
     
   </li>
 </ul>
@@ -2206,7 +2290,7 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/metadata-types/neo4j/neo4j-location-type.html">Neo4j location</a>
+    <a href="../../../../manual/next/metadata-types/graphs/graph-database-location.html">Graph database location</a>
     
   </li>
 </ul>
@@ -2221,7 +2305,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/git-vfs-connection.html">Git repository</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/google-storage-authentication.html">Google Storage Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/graphs/graph-database-connection.html">Graph Database Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2233,7 +2325,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/spark-catalog.html">Lakehouse catalog</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/mail-server-connection.html">Mail Server Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/masking-pattern.html">Masking Pattern</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2245,11 +2345,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/metadata-types/neo4j/neo4j-connection.html">Neo4j Connection</a>
+    <a href="../../../../manual/next/metadata-types/graphs/neo4j-connection.html">Neo4j Connection</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/metadata-types/neo4j/neo4j-graphmodel.html">Neo4j Graph Model</a>
+    <a href="../../../../manual/next/metadata-types/graphs/graph-model.html">Graph Model</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2293,15 +2393,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/smb-connection.html">SMB Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/splunk-connection.html">Splunk Connection</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/jms-connection.html">JMS connection</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/metadata-types/spark-catalog.html">Spark Catalog</a>
     
   </li>
   <li class="doc-nav__item is-parent">
@@ -2396,6 +2496,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/age/index.html">Apache AGE</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/technology/calcite/index.html">Apache Calcite</a>
     
   </li>
@@ -2405,6 +2509,18 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/technology/cassandra/index.html">Cassandra</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/falkordb/index.html">FalkorDB</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/graph-databases/index.html">Graph databases</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/gremlin/index.html">Gremlin</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2616,6 +2732,14 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/how-to-guides/graphrag.html">GraphRAG: answer questions from a knowledge graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/how-to-guides/high-volume-scd2.html">High-volume SCD2 loads</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/how-to-guides/logging-pipeline-log.html">Logging pipeline data with pipeline log</a>
     
   </li>
@@ -2772,7 +2896,7 @@
     <li><a href="../../../../">Home</a></li>
     <li><a href="../../../../manual/next/pipeline/pipelines.html">Pipelines</a></li>
     <li><a href="../../../../manual/next/pipeline/transforms.html">Transforms</a></li>
-    <li><a href="../../../../manual/next/pipeline/transforms/spark-lake-table-input.html">Spark lake table input</a></li>
+    <li><a href="../../../../manual/next/pipeline/transforms/spark-lake-table-input.html">Lake table input</a></li>
   </ol>
 </nav>
 <aside class="marketplace" aria-labelledby="marketplace-note">
@@ -2784,19 +2908,19 @@
   </p>
   <p class="marketplace__body">
     This is not part of the standard Apache Hop client. Install it via the
-    marketplace or use <code>hop marketplace install hop-engines-spark</code>.
+    marketplace or use <code>hop marketplace install hop-tech-lakehouse</code>.
   </p>
 </aside>
 <ul class="engines" data-pagefind-ignore>
-  <li class="engine engine--unsupported" data-engine="hop-engine">
+  <li class="engine engine--supported" data-engine="hop-engine">
     <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
       
+      <path d="M2 6.4 4.6 9 10 3.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
       
-      <path d="M3 3l6 6M9 3l-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
       
     </svg>
     Hop Engine
-    <span class="visually-hidden">not supported</span>
+    <span class="visually-hidden">supported</span>
   </li>
   <li class="engine engine--unsupported" data-engine="single-threaded">
     <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
@@ -2850,18 +2974,34 @@
   </li>
 </ul>
     <article class="doc">
-      <h1><span class="image image-doc-icon"><img src="../../_images/transforms/icons/spark-lake-table-input.svg" alt="Spark lake table input transform Icon"></span> Spark lake table input</h1>
+      <h1><span class="image image-doc-icon"><img src="../../_images/transforms/icons/spark-lake-table-input.svg" alt="Lake table input transform Icon"></span> Lake table input</h1>
       <div class="sect1">
 <h2 id="_description"><a class="link" href="#_description">Description</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Spark lake table input</strong> reads an open table format table (<a href="https://delta.io/" rel="noopener" target="_blank">Delta Lake</a> or <a href="https://iceberg.apache.org/" rel="noopener" target="_blank">Apache Iceberg</a>) as a Spark SQL <code>Dataset</code> on the <a href="../spark/getting-started-with-native-spark.html" class="xref page">native Spark pipeline engine</a>.</p>
+<p><strong>Lake table input</strong> reads an open table format table: <a href="https://iceberg.apache.org/" rel="noopener" target="_blank">Apache Iceberg</a> or <a href="https://delta.io/" rel="noopener" target="_blank">Delta Lake</a>.</p>
 </div>
 <div class="paragraph">
 <p>It supports <strong>PATH</strong> and <strong>TABLE</strong> identifiers, optional field projection, and <strong>time travel</strong> by version/snapshot or timestamp.</p>
 </div>
 <div class="paragraph">
-<p>This transform is <strong>not</strong> available on the local Hop engine or on Beam engines. Connector JARs ship with the native Spark plugin; see <a href="../spark/lakehouse.html" class="xref page">Lakehouse tables on the native Spark engine</a>.</p>
+<p>The transform runs on two engines:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>On the <strong>Hop engine</strong> (local and remote) it reads Apache Iceberg tables with the Iceberg Java library. All files are read through Hop VFS, so a table can live anywhere Hop can reach: local disk, S3, MinIO, Azure, Google Cloud Storage. See <a href="#hop-engine">On the Hop engine</a>.</p>
+</li>
+<li>
+<p>On the <a href="../spark/getting-started-with-native-spark.html" class="xref page">native Spark pipeline engine</a> it reads Delta Lake and Iceberg tables as a Spark SQL <code>Dataset</code>. Connector JARs ship with the native Spark plugin; see <a href="../spark/lakehouse.html" class="xref page">Lakehouse tables on the native Spark engine</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>It isn&#8217;t available on Beam engines.</p>
+</div>
+<div class="paragraph">
+<p>The transform is part of the Lakehouse plugin (<code>hop-tech-lakehouse</code>). On the native Spark engine the Native Spark engine plugin (<code>hop-engines-spark</code>) is needed as well. Both can be installed with the marketplace when they aren&#8217;t in your Hop distribution.</p>
 </div>
 </div>
 </div>
@@ -2902,8 +3042,8 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Used when mode is TABLE. Multi-part name: <code>catalog.namespace.table</code>.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Spark Catalog metadata name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Optional Hop <a href="../../metadata-types/spark-catalog.html" class="xref page">Spark Catalog</a> entry to register for TABLE mode (Iceberg Hadoop/REST, …). Leave empty if the catalog is already configured on the session.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Catalog metadata name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="../../metadata-types/spark-catalog.html" class="xref page">lakehouse catalog</a> to use in TABLE mode (Iceberg Hadoop/REST, …). On the Spark engine you can leave it empty if the catalog is already configured on the session.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Time travel type</p></td>
@@ -2915,11 +3055,11 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Time travel timestamp</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Spark-parseable timestamp string when type is TIMESTAMP, e.g. <code>2024-01-15 10:30:00</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timestamp when type is TIMESTAMP, e.g. <code>2024-01-15 10:30:00</code>. The Hop engine also accepts an ISO-8601 timestamp with an offset and epoch milliseconds.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Extra options</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Optional Spark read options as <code>key=value</code> lines (advanced).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional Spark read options as <code>key=value</code> lines (advanced). Not used on the Hop engine.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Fields</p></td>
@@ -2969,6 +3109,49 @@
 </div>
 </div>
 <div class="sect1">
+<h2 id="hop-engine"><a class="link" href="#hop-engine">On the Hop engine</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>On the local and remote Hop engines the transform reads Apache Iceberg tables. Delta Lake tables give an error that asks you to use the Spark engine for now.</p>
+</div>
+<div class="paragraph">
+<p><strong>Finding the table</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>PATH</strong> mode reads the table in the given folder. The folder can be any Hop VFS location, for example <code><a href="file:///data/orders" class="bare">file:///data/orders</a></code> or <code>s3://lake/orders</code>. When the table has a <code>metadata/version-hint.text</code> file (tables written by a Hadoop catalog, by the Spark engine in PATH mode, or by Lake table output on the Hop engine) the version it names is read. Otherwise the newest metadata file is read.</p>
+</li>
+<li>
+<p><strong>TABLE</strong> mode looks the table up through the selected <a href="../../metadata-types/spark-catalog.html" class="xref page">lakehouse catalog</a>. The Hop engine supports the <code>hadoop</code> and <code>rest</code> catalog types. A catalog name in front of the identifier (<code>lake.db.orders</code>) is dropped, so the same identifier works on both engines. With a REST catalog the files are read through Hop VFS, unless the catalog&#8217;s extra configuration names another <code>io-impl</code>, for example <code>org.apache.iceberg.aws.s3.S3FileIO</code> for credentials vended by the catalog.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Reading</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Iceberg plans the read: it skips the files and row groups that can&#8217;t match, using the statistics in the table metadata.</p>
+</li>
+<li>
+<p>Delete files written by other engines (position and equality deletes, for example from Flink or Spark) are applied.</p>
+</li>
+<li>
+<p>Without a field list all columns are returned, with these Hop types: booleans as Boolean, integers as Integer, floating point numbers as Number, decimals as BigNumber, dates as Date, timestamps as Timestamp, binary values as Binary and everything else as String. Dates and timestamps without a time zone (<code>date</code>, <code>timestamp</code>, <code>timestamp_ns</code>) are read as local dates and date-times in the time zone of the Hop JVM, as Parquet Input does, so the wall-clock value in the table is kept. Timestamps with a time zone (<code>timestamptz</code>) are instants and keep their point in time. With a field list the columns are returned in the order of the list and converted to the type of each field.</p>
+</li>
+<li>
+<p>When the transform runs as several copies, the copies share the table between them. Each part of a data file is read by exactly one copy.</p>
+</li>
+<li>
+<p>A time travel timestamp without a time zone is in the time zone of the Hop server.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_metadata_injection"><a class="link" href="#_metadata_injection">Metadata injection</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -2991,7 +3174,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Prefer Lake Table Input over <strong>Spark file input</strong> for <code>delta</code> / <code>iceberg</code> so session extensions, <code>hop_iceberg</code> PATH catalog, and probes stay consistent.</p>
+<p>On the Spark engine, prefer Lake table input over <strong>Spark file input</strong> for <code>delta</code> / <code>iceberg</code> so session extensions, Iceberg PATH catalogs, and probes stay consistent.</p>
 </li>
 <li>
 <p>See the <a href="../spark/lakehouse.html" class="xref page">lakehouse guide</a> for packaging, PATH vs TABLE, and troubleshooting.</p>
@@ -3009,10 +3192,10 @@
 <p><a href="../spark/lakehouse.html" class="xref page">Lakehouse tables on the native Spark engine</a></p>
 </li>
 <li>
-<p><a href="spark-lake-table-output.html" class="xref page">Spark lake table output</a></p>
+<p><a href="spark-lake-table-output.html" class="xref page">Lake table output</a></p>
 </li>
 <li>
-<p><a href="../../metadata-types/spark-catalog.html" class="xref page">Spark Catalog</a></p>
+<p><a href="../../metadata-types/spark-catalog.html" class="xref page">Lakehouse catalog</a></p>
 </li>
 </ul>
 </div>
@@ -3020,12 +3203,12 @@
 </div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
-  <a class="pagination__prev" href="../../../../manual/next/pipeline/transforms/spark-file-output.html"><span>Previous</span><strong>Spark file output</strong></a>
-  <a class="pagination__next" href="../../../../manual/next/pipeline/transforms/spark-lake-table-maintenance.html"><span>Next</span><strong>Spark lake table maintenance</strong></a>
+  <a class="pagination__prev" href="../../../../manual/next/pipeline/transforms/kafkaproducer.html"><span>Previous</span><strong>Kafka producer</strong></a>
+  <a class="pagination__next" href="../../../../manual/next/pipeline/transforms/spark-lake-table-output.html"><span>Next</span><strong>Lake table output</strong></a>
 </nav>
   </main>
 
-<aside class="doc-toc" data-pagefind-ignore aria-label="On this page">
+<aside class="doc-toc" data-pagefind-ignore aria-label="On this page" data-levels="2">
   <p class="doc-toc__title">On this page</p>
   <div class="doc-toc__body"></div>
 </aside>

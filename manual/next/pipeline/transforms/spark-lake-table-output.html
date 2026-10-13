@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title> Spark lake table output | Apache Hop</title>
-<meta name="description" content="Spark lake table output writes Delta Lake or Apache Iceberg tables on the native Spark pipeline engine with ACID commit semantics.">
+<title> Lake table output | Apache Hop</title>
+<meta name="description" content="Lake table output writes Apache Iceberg tables on the Hop engine and Delta Lake or Apache Iceberg tables on the native Spark engine, with ACID commit semantics.">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/pipeline/transforms/spark-lake-table-output.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
-<meta property="og:title" content=" Spark lake table output">
-<meta property="og:description" content="Spark lake table output writes Delta Lake or Apache Iceberg tables on the native Spark pipeline engine with ACID commit semantics.">
+<meta property="og:title" content=" Lake table output">
+<meta property="og:description" content="Lake table output writes Apache Iceberg tables on the Hop engine and Delta Lake or Apache Iceberg tables on the native Spark engine, with ACID commit semantics.">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/pipeline/transforms/spark-lake-table-output.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -184,6 +184,10 @@
     <a href="../../../../manual/next/installation-configuration.html">Installation and Configuration</a>
     
   </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/sizing.html">Sizing guide</a>
+    
+  </li>
   <li class="doc-nav__item is-parent">
     <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop in Docker section">
       <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -346,6 +350,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/beam/flink-k8s-operator-running-hop-pipeline.html">Running a Hop pipeline using the Flink Kubernetes Operator</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/beam/developing-beam-transforms.html">Developing a Beam transform</a>
     
   </li>
 </ul>
@@ -536,6 +544,38 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamdebeziuminput.html">Beam Debezium input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamelasticsearchinput.html">Beam Elasticsearch input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamelasticsearchoutput.html">Beam Elasticsearch output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beammqttinput.html">Beam MQTT input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beammqttoutput.html">Beam MQTT output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamsnowflakeinput.html">Beam Snowflake input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamsnowflakeoutput.html">Beam Snowflake output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamsplunkoutput.html">Beam Splunk output</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/beamfileinput.html">Beam file input</a>
     
   </li>
@@ -569,6 +609,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/beamkinesisproduce.html">Beam Kinesis produce</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beampartition.html">Beam partition</a>
     
   </li>
   <li class="doc-nav__item">
@@ -653,6 +697,14 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/csvinput.html">CSV file input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/cypher-builder.html">Cypher builder</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/cypher-output.html">Cypher output</a>
     
   </li>
   <li class="doc-nav__item">
@@ -788,6 +840,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/extractgraph.html">Extract graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/fake.html">Fake data</a>
     
   </li>
@@ -820,6 +876,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/generate-graph-csvs.html">Generate graph CSVs</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/generaterandomvalue.html">Generate Random Value</a>
     
   </li>
@@ -833,6 +893,14 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/getfilesrowcount.html">Get files rowcount</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/get-graph-logging-info.html">Get graph logging info</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/get-graph-schema.html">Get graph schema</a>
     
   </li>
   <li class="doc-nav__item">
@@ -873,6 +941,18 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/google-sheets-output.html">Google Sheets output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/graph-output.html">Graph output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/graph-query.html">Graph query</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/graph-vector-search.html">Graph vector search</a>
     
   </li>
   <li class="doc-nav__item">
@@ -952,6 +1032,14 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-input.html">Lake table input</a>
+    
+  </li>
+  <li class="doc-nav__item is-current">
+    <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-output.html">Lake table output</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/languagemodelchat.html">Language model chat</a>
     
   </li>
@@ -977,6 +1065,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/mapping-output.html">Mapping output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/maskfields.html">Mask fields</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1040,35 +1132,7 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-cypher.html">Neo4j Cypher</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-cypher-builder.html">Neo4j Cypher builder</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-gencsv.html">Neo4j generate CSVs</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-getloginfo.html">Neo4j Get Logging Info</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-graphoutput.html">Neo4j graph output</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/neo4j-import.html">Neo4j import</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-output.html">Neo4j output</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-split-graph.html">Neo4j split graph</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1288,19 +1352,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-input.html">Spark lake table input</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-maintenance.html">Spark lake table maintenance</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-merge.html">Spark lake table merge</a>
-    
-  </li>
-  <li class="doc-nav__item is-current">
-    <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-output.html">Spark lake table output</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1313,6 +1369,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/splitfieldtorows.html">Split fields to rows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/split-graph.html">Split graph</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1433,6 +1493,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/verticabulkloader.html">Vertica Bulk Loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/watchfiles.html">Watch Files</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1571,15 +1635,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/check-graph-database-connections.html">Check graph database connections</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/folderisempty.html">Check if a folder is empty</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/xmlwellformed.html">Check if XML file is well-formed</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/workflow/actions/neo4j-checkconnections.html">Check Neo4j connections</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1615,6 +1679,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/create-property-graph.html">Create property graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/databricks-job-run.html">Databricks job run</a>
     
   </li>
@@ -1632,6 +1700,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/deletefile.html">Delete file</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/deleteexecutioninfo.html">Delete execution information</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1695,6 +1767,18 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/graph-constraint.html">Graph constraint</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/graph-index.html">Graph index</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/graph-script.html">Graph script</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/http.html">HTTP</a>
     
   </li>
@@ -1723,18 +1807,6 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/workflow/actions/neo4j-constraint.html">Neo4j constraint</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/workflow/actions/neo4j-cypherscript.html">Neo4j Cypher script</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/workflow/actions/neo4j-index.html">Neo4j index</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/ping.html">Ping a host</a>
     
   </li>
@@ -1756,6 +1828,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/repeat.html">Repeat</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/runlinter.html">Run Linter</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1912,11 +1988,19 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/vfs/git-vfs.html">Git</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/vfs/hdfs-vfs.html">HDFS</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/vfs/minio-vfs.html">MinIO</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/vfs/smb-vfs.html">SMB</a>
     
   </li>
 </ul>
@@ -2206,7 +2290,7 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/metadata-types/neo4j/neo4j-location-type.html">Neo4j location</a>
+    <a href="../../../../manual/next/metadata-types/graphs/graph-database-location.html">Graph database location</a>
     
   </li>
 </ul>
@@ -2221,7 +2305,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/git-vfs-connection.html">Git repository</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/google-storage-authentication.html">Google Storage Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/graphs/graph-database-connection.html">Graph Database Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2233,7 +2325,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/spark-catalog.html">Lakehouse catalog</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/mail-server-connection.html">Mail Server Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/masking-pattern.html">Masking Pattern</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2245,11 +2345,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/metadata-types/neo4j/neo4j-connection.html">Neo4j Connection</a>
+    <a href="../../../../manual/next/metadata-types/graphs/neo4j-connection.html">Neo4j Connection</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/metadata-types/neo4j/neo4j-graphmodel.html">Neo4j Graph Model</a>
+    <a href="../../../../manual/next/metadata-types/graphs/graph-model.html">Graph Model</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2293,15 +2393,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/smb-connection.html">SMB Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/splunk-connection.html">Splunk Connection</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/jms-connection.html">JMS connection</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/metadata-types/spark-catalog.html">Spark Catalog</a>
     
   </li>
   <li class="doc-nav__item is-parent">
@@ -2396,6 +2496,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/age/index.html">Apache AGE</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/technology/calcite/index.html">Apache Calcite</a>
     
   </li>
@@ -2405,6 +2509,18 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/technology/cassandra/index.html">Cassandra</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/falkordb/index.html">FalkorDB</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/graph-databases/index.html">Graph databases</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/gremlin/index.html">Gremlin</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2616,6 +2732,14 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/how-to-guides/graphrag.html">GraphRAG: answer questions from a knowledge graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/how-to-guides/high-volume-scd2.html">High-volume SCD2 loads</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/how-to-guides/logging-pipeline-log.html">Logging pipeline data with pipeline log</a>
     
   </li>
@@ -2772,7 +2896,7 @@
     <li><a href="../../../../">Home</a></li>
     <li><a href="../../../../manual/next/pipeline/pipelines.html">Pipelines</a></li>
     <li><a href="../../../../manual/next/pipeline/transforms.html">Transforms</a></li>
-    <li><a href="../../../../manual/next/pipeline/transforms/spark-lake-table-output.html">Spark lake table output</a></li>
+    <li><a href="../../../../manual/next/pipeline/transforms/spark-lake-table-output.html">Lake table output</a></li>
   </ol>
 </nav>
 <aside class="marketplace" aria-labelledby="marketplace-note">
@@ -2784,19 +2908,19 @@
   </p>
   <p class="marketplace__body">
     This is not part of the standard Apache Hop client. Install it via the
-    marketplace or use <code>hop marketplace install hop-engines-spark</code>.
+    marketplace or use <code>hop marketplace install hop-tech-lakehouse</code>.
   </p>
 </aside>
 <ul class="engines" data-pagefind-ignore>
-  <li class="engine engine--unsupported" data-engine="hop-engine">
+  <li class="engine engine--supported" data-engine="hop-engine">
     <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
       
+      <path d="M2 6.4 4.6 9 10 3.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
       
-      <path d="M3 3l6 6M9 3l-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
       
     </svg>
     Hop Engine
-    <span class="visually-hidden">not supported</span>
+    <span class="visually-hidden">supported</span>
   </li>
   <li class="engine engine--unsupported" data-engine="single-threaded">
     <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
@@ -2850,18 +2974,31 @@
   </li>
 </ul>
     <article class="doc">
-      <h1><span class="image image-doc-icon"><img src="../../_images/transforms/icons/spark-lake-table-output.svg" alt="Spark lake table output transform Icon"></span> Spark lake table output</h1>
+      <h1><span class="image image-doc-icon"><img src="../../_images/transforms/icons/spark-lake-table-output.svg" alt="Lake table output transform Icon"></span> Lake table output</h1>
       <div class="sect1">
 <h2 id="_description"><a class="link" href="#_description">Description</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Spark lake table output</strong> writes the incoming Spark <code>Dataset</code> to a <a href="https://delta.io/" rel="noopener" target="_blank">Delta Lake</a> or <a href="https://iceberg.apache.org/" rel="noopener" target="_blank">Apache Iceberg</a> table using table-format commit semantics on the <a href="../spark/getting-started-with-native-spark.html" class="xref page">native Spark pipeline engine</a>.</p>
+<p><strong>Lake table output</strong> writes the incoming rows to an <a href="https://iceberg.apache.org/" rel="noopener" target="_blank">Apache Iceberg</a> or <a href="https://delta.io/" rel="noopener" target="_blank">Delta Lake</a> table, using the table format&#8217;s commits so readers never see a half-written run.</p>
 </div>
 <div class="paragraph">
-<p>Unlike <strong>Spark file output</strong> (classic file formats), the <strong>default save mode is ErrorIfExists</strong> so ACID tables are not overwritten by accident.</p>
+<p>The <strong>default save mode is ErrorIfExists</strong>, so an existing table isn&#8217;t overwritten by accident.</p>
 </div>
 <div class="paragraph">
-<p>This transform is <strong>native Spark only</strong>. Connectors ship with the native Spark plugin; see <a href="../spark/lakehouse.html" class="xref page">Lakehouse tables on the native Spark engine</a>.</p>
+<p>The transform runs on two engines:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>On the <strong>Hop engine</strong> (local and remote) it writes Apache Iceberg tables with the Iceberg Java library, through Hop VFS, and passes the rows on unchanged. See <a href="#hop-engine">On the Hop engine</a>.</p>
+</li>
+<li>
+<p>On the <a href="../spark/getting-started-with-native-spark.html" class="xref page">native Spark pipeline engine</a> it writes the incoming <code>Dataset</code> to a Delta Lake or Iceberg table. Connectors ship with the native Spark plugin; see <a href="../spark/lakehouse.html" class="xref page">Lakehouse tables on the native Spark engine</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The transform is part of the Lakehouse plugin (<code>hop-tech-lakehouse</code>). On the native Spark engine the Native Spark engine plugin (<code>hop-engines-spark</code>) is needed as well. Both can be installed with the marketplace when they aren&#8217;t in your Hop distribution.</p>
 </div>
 </div>
 </div>
@@ -2901,8 +3038,8 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">TABLE mode: e.g. <code>lake.db.orders</code>.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Spark Catalog metadata name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Optional <a href="../../metadata-types/spark-catalog.html" class="xref page">Spark Catalog</a> Hop metadata for TABLE mode.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Catalog metadata name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="../../metadata-types/spark-catalog.html" class="xref page">lakehouse catalog</a> for TABLE mode. Optional on the Spark engine.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Save mode</p></td>
@@ -2914,18 +3051,113 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Coalesce</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Optional partition count before write (e.g. <code>1</code> for a single file layout — costs a shuffle).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional partition count before write (e.g. <code>1</code> for a single file layout — costs a shuffle). Spark engine only.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Extra options</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Optional Spark write options as <code>key=value</code> lines (advanced).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional Spark write options as <code>key=value</code> lines (advanced). Spark engine only.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_behaviour"><a class="link" href="#_behaviour">Behaviour</a></h2>
+<h2 id="hop-engine"><a class="link" href="#hop-engine">On the Hop engine</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>On the local and remote Hop engines the transform writes Apache Iceberg tables. Delta Lake tables give an error that asks you to use the Spark engine for now.</p>
+</div>
+<div class="paragraph">
+<p><strong>One commit per pipeline run</strong></p>
+</div>
+<div class="paragraph">
+<p>Every copy of the transform writes its own Parquet files. Nothing is visible in the table until the whole pipeline has finished:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>When the pipeline ends without errors, all files of the run are committed as one Iceberg snapshot. The snapshot summary records the pipeline name (<code>hop.pipeline</code>) and the run&#8217;s log channel id (<code>hop.run-id</code>).</p>
+</li>
+<li>
+<p>When the pipeline fails or is stopped, the files are deleted and the table is left as it was. This includes a failure in a transform <strong>after</strong> Lake table output: the run is rolled back, like a database transaction.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Save modes</strong></p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Save mode</th>
+<th class="tableblock halign-left valign-top">Table exists</th>
+<th class="tableblock halign-left valign-top">Table doesn&#8217;t exist</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ErrorIfExists</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The pipeline fails, the table is left alone</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The table is created</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Append</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The rows are added</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The table is created</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Overwrite</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All rows of the table are replaced by the rows of this run. The run fails instead if another writer changed the table since the run started.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The table is created</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ignore</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nothing is written; the rows are still passed on</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The table is created</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A new table gets its columns from the incoming rows (Integer as <code>long</code>, Number as <code>double</code>, BigNumber as <code>decimal</code>, String as <code>string</code>, Boolean as <code>boolean</code>, Date and Timestamp as <code>timestamp</code> without time zone, Binary as <code>binary</code>) and identity partitions on the <strong>Partition by</strong> columns. It is created in the same commit as its first rows, so a failed run doesn&#8217;t leave an empty table behind. When the table exists, the rows are matched to its columns by name.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A BigNumber column gets the field&#8217;s length as precision (at most 38) and its precision as scale when the length is greater than 0; otherwise it is <code>decimal(38, 10)</code>.</p>
+</li>
+<li>
+<p>Dates and timestamps are written as the wall-clock time in the time zone of the Hop JVM, so they read back unchanged on the Hop engine, as with Parquet Output. Into an existing <code>timestamptz</code> column they are written as instants.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Unlike the Spark engine, Overwrite on the Hop engine keeps the table&#8217;s schema and partitioning and only replaces its rows.</p>
+</div>
+<div class="paragraph">
+<p><strong>Where the table is</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>PATH</strong> mode writes the table in the given Hop VFS folder, in the layout of Hadoop catalogs and of the Spark engine&#8217;s PATH mode (<code>metadata/v&lt;N&gt;.metadata.json</code> plus <code>version-hint.text</code>). The Spark and Hop engines can read and write the same table. A folder that holds a table managed by a catalog is refused: write that table through its catalog in TABLE mode.</p>
+</li>
+<li>
+<p><strong>TABLE</strong> mode writes through the selected lakehouse catalog. The Hop engine supports the <code>hadoop</code> and <code>rest</code> catalog types.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>On a local file system (<code>file://</code>), a PATH table commit publishes the new metadata file with an operation that fails if another writer already committed that version: a hard link, or an exclusive create where hard links aren&#8217;t supported. Several pipelines can write the same table there; of two conflicting commits one fails and is retried. On HDFS, object stores like S3 and other non-local Hop VFS locations, the commit checks that the version is free and then writes it, which isn&#8217;t atomic between writers, so a PATH table there should have one writer at a time. When several pipelines write such a table at the same time, use a REST catalog.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_on_the_spark_engine"><a class="link" href="#_on_the_spark_engine">On the Spark engine</a></h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -2939,7 +3171,7 @@
 <p><strong>Delta PATH:</strong> <code>format("delta").mode(…).save(path)</code> (requires Delta extension + <code>DeltaCatalog</code> on the session — hop-run applies these when Delta transforms are present).</p>
 </li>
 <li>
-<p><strong>Iceberg PATH:</strong> <code>writeTo(hop_iceberg.\`uri\</code>).using("iceberg")` with the built-in <code>hop_iceberg</code> Hadoop catalog.</p>
+<p><strong>Iceberg PATH:</strong> <code>writeTo(hop_iceberg_&lt;hash&gt;.\`table\</code>).using("iceberg")`, with a Hadoop catalog whose warehouse is the table&#8217;s parent folder, so the table is written at its path.</p>
 </li>
 <li>
 <p><strong>Iceberg TABLE:</strong> <code>writeTo(catalog.ns.table).using("iceberg")</code>.</p>
@@ -2974,7 +3206,7 @@
 <p>Requires exactly one main-stream upstream hop (the data to write).</p>
 </li>
 <li>
-<p>For upserts, use <a href="spark-lake-table-merge.html" class="xref page">Spark lake table merge</a> instead of Overwrite.</p>
+<p>For upserts on the Spark engine, use <a href="spark-lake-table-merge.html" class="xref page">Spark lake table merge</a> instead of Overwrite.</p>
 </li>
 <li>
 <p>Packaging, session conf, and troubleshooting: <a href="../spark/lakehouse.html" class="xref page">lakehouse guide</a>.</p>
@@ -2992,7 +3224,7 @@
 <p><a href="../spark/lakehouse.html" class="xref page">Lakehouse tables on the native Spark engine</a></p>
 </li>
 <li>
-<p><a href="spark-lake-table-input.html" class="xref page">Spark lake table input</a></p>
+<p><a href="spark-lake-table-input.html" class="xref page">Lake table input</a></p>
 </li>
 <li>
 <p><a href="spark-lake-table-merge.html" class="xref page">Spark lake table merge</a></p>
@@ -3003,12 +3235,12 @@
 </div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
-  <a class="pagination__prev" href="../../../../manual/next/pipeline/transforms/spark-lake-table-merge.html"><span>Previous</span><strong>Spark lake table merge</strong></a>
-  <a class="pagination__next" href="../../../../manual/next/pipeline/transforms/spark-sql.html"><span>Next</span><strong>Spark SQL</strong></a>
+  <a class="pagination__prev" href="../../../../manual/next/pipeline/transforms/spark-lake-table-input.html"><span>Previous</span><strong>Lake table input</strong></a>
+  <a class="pagination__next" href="../../../../manual/next/pipeline/transforms/languagemodelchat.html"><span>Next</span><strong>Language model chat</strong></a>
 </nav>
   </main>
 
-<aside class="doc-toc" data-pagefind-ignore aria-label="On this page">
+<aside class="doc-toc" data-pagefind-ignore aria-label="On this page" data-levels="2">
   <p class="doc-toc__title">On this page</p>
   <div class="doc-toc__body"></div>
 </aside>

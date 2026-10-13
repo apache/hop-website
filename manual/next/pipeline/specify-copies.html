@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Specify Copies | Apache Hop</title>
-<meta name="description" content="The Specify Copies allows transforms in a pipeline to run with multiple copies (threads). This can be used to improve performance when applied correctly.">
+<meta name="description" content="Specify copies runs a transform in multiple threads on the local Hop pipeline engine. Beam (including Flink) and native Spark ignore the copy count as a thread count.">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/pipeline/specify-copies.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
 <meta property="og:title" content="Specify Copies">
-<meta property="og:description" content="The Specify Copies allows transforms in a pipeline to run with multiple copies (threads). This can be used to improve performance when applied correctly.">
+<meta property="og:description" content="Specify copies runs a transform in multiple threads on the local Hop pipeline engine. Beam (including Flink) and native Spark ignore the copy count as a thread count.">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/pipeline/specify-copies.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -184,6 +184,10 @@
     <a href="../../../manual/next/installation-configuration.html">Installation and Configuration</a>
     
   </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/sizing.html">Sizing guide</a>
+    
+  </li>
   <li class="doc-nav__item is-parent">
     <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop in Docker section">
       <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -346,6 +350,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/beam/flink-k8s-operator-running-hop-pipeline.html">Running a Hop pipeline using the Flink Kubernetes Operator</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/beam/developing-beam-transforms.html">Developing a Beam transform</a>
     
   </li>
 </ul>
@@ -536,6 +544,38 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamdebeziuminput.html">Beam Debezium input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamelasticsearchinput.html">Beam Elasticsearch input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamelasticsearchoutput.html">Beam Elasticsearch output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beammqttinput.html">Beam MQTT input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beammqttoutput.html">Beam MQTT output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamsnowflakeinput.html">Beam Snowflake input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamsnowflakeoutput.html">Beam Snowflake output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamsplunkoutput.html">Beam Splunk output</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/beamfileinput.html">Beam file input</a>
     
   </li>
@@ -569,6 +609,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/beamkinesisproduce.html">Beam Kinesis produce</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beampartition.html">Beam partition</a>
     
   </li>
   <li class="doc-nav__item">
@@ -653,6 +697,14 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/csvinput.html">CSV file input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/cypher-builder.html">Cypher builder</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/cypher-output.html">Cypher output</a>
     
   </li>
   <li class="doc-nav__item">
@@ -788,6 +840,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/extractgraph.html">Extract graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/fake.html">Fake data</a>
     
   </li>
@@ -820,6 +876,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/generate-graph-csvs.html">Generate graph CSVs</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/generaterandomvalue.html">Generate Random Value</a>
     
   </li>
@@ -833,6 +893,14 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/getfilesrowcount.html">Get files rowcount</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/get-graph-logging-info.html">Get graph logging info</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/get-graph-schema.html">Get graph schema</a>
     
   </li>
   <li class="doc-nav__item">
@@ -873,6 +941,18 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/google-sheets-output.html">Google Sheets output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/graph-output.html">Graph output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/graph-query.html">Graph query</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/graph-vector-search.html">Graph vector search</a>
     
   </li>
   <li class="doc-nav__item">
@@ -952,6 +1032,14 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/spark-lake-table-input.html">Lake table input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/spark-lake-table-output.html">Lake table output</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/languagemodelchat.html">Language model chat</a>
     
   </li>
@@ -977,6 +1065,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/mapping-output.html">Mapping output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/maskfields.html">Mask fields</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1040,35 +1132,7 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-cypher.html">Neo4j Cypher</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-cypher-builder.html">Neo4j Cypher builder</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-gencsv.html">Neo4j generate CSVs</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-getloginfo.html">Neo4j Get Logging Info</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-graphoutput.html">Neo4j graph output</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/neo4j-import.html">Neo4j import</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-output.html">Neo4j output</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-split-graph.html">Neo4j split graph</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1288,19 +1352,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/spark-lake-table-input.html">Spark lake table input</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/spark-lake-table-maintenance.html">Spark lake table maintenance</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/spark-lake-table-merge.html">Spark lake table merge</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/spark-lake-table-output.html">Spark lake table output</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1313,6 +1369,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/splitfieldtorows.html">Split fields to rows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/split-graph.html">Split graph</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1433,6 +1493,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/verticabulkloader.html">Vertica Bulk Loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/watchfiles.html">Watch Files</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1571,15 +1635,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/check-graph-database-connections.html">Check graph database connections</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/folderisempty.html">Check if a folder is empty</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/xmlwellformed.html">Check if XML file is well-formed</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/workflow/actions/neo4j-checkconnections.html">Check Neo4j connections</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1615,6 +1679,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/create-property-graph.html">Create property graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/databricks-job-run.html">Databricks job run</a>
     
   </li>
@@ -1632,6 +1700,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/deletefile.html">Delete file</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/deleteexecutioninfo.html">Delete execution information</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1695,6 +1767,18 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/graph-constraint.html">Graph constraint</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/graph-index.html">Graph index</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/graph-script.html">Graph script</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/http.html">HTTP</a>
     
   </li>
@@ -1723,18 +1807,6 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/workflow/actions/neo4j-constraint.html">Neo4j constraint</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/workflow/actions/neo4j-cypherscript.html">Neo4j Cypher script</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/workflow/actions/neo4j-index.html">Neo4j index</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/ping.html">Ping a host</a>
     
   </li>
@@ -1756,6 +1828,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/repeat.html">Repeat</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/runlinter.html">Run Linter</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1912,11 +1988,19 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/vfs/git-vfs.html">Git</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/vfs/hdfs-vfs.html">HDFS</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/vfs/minio-vfs.html">MinIO</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/vfs/smb-vfs.html">SMB</a>
     
   </li>
 </ul>
@@ -2206,7 +2290,7 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/metadata-types/neo4j/neo4j-location-type.html">Neo4j location</a>
+    <a href="../../../manual/next/metadata-types/graphs/graph-database-location.html">Graph database location</a>
     
   </li>
 </ul>
@@ -2221,7 +2305,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/git-vfs-connection.html">Git repository</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/google-storage-authentication.html">Google Storage Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/graphs/graph-database-connection.html">Graph Database Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2233,7 +2325,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/spark-catalog.html">Lakehouse catalog</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/mail-server-connection.html">Mail Server Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/masking-pattern.html">Masking Pattern</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2245,11 +2345,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/metadata-types/neo4j/neo4j-connection.html">Neo4j Connection</a>
+    <a href="../../../manual/next/metadata-types/graphs/neo4j-connection.html">Neo4j Connection</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/metadata-types/neo4j/neo4j-graphmodel.html">Neo4j Graph Model</a>
+    <a href="../../../manual/next/metadata-types/graphs/graph-model.html">Graph Model</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2293,15 +2393,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/smb-connection.html">SMB Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/splunk-connection.html">Splunk Connection</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/jms-connection.html">JMS connection</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/metadata-types/spark-catalog.html">Spark Catalog</a>
     
   </li>
   <li class="doc-nav__item is-parent">
@@ -2396,6 +2496,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/technology/age/index.html">Apache AGE</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/technology/calcite/index.html">Apache Calcite</a>
     
   </li>
@@ -2405,6 +2509,18 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/technology/cassandra/index.html">Cassandra</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/technology/falkordb/index.html">FalkorDB</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/technology/graph-databases/index.html">Graph databases</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/technology/gremlin/index.html">Gremlin</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2616,6 +2732,14 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/how-to-guides/graphrag.html">GraphRAG: answer questions from a knowledge graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/how-to-guides/high-volume-scd2.html">High-volume SCD2 loads</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/how-to-guides/logging-pipeline-log.html">Logging pipeline data with pipeline log</a>
     
   </li>
@@ -2799,6 +2923,31 @@ increasing the number of copies for your transforms is not a silver bullet or a 
 </div>
 </div>
 <div class="sect1">
+<h2 id="supported-engines"><a class="link" href="#supported-engines">Supported engines</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The copy count starts one thread per copy only on the <a href="pipeline-run-configurations/native-local-pipeline-engine.html" class="xref page">local Hop pipeline engine</a>.
+The <a href="pipeline-run-configurations/native-remote-pipeline-engine.html" class="xref page">remote</a> and <a href="pipeline-run-configurations/native-load-balancing-pipeline-engine.html" class="xref page">load-balancing</a> engines apply it only when the pipeline runs with that local engine on a Hop Server.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="pipeline-run-configurations/single-threaded-pipeline-engine.html" class="xref page">single-threaded</a> engine creates the same copies, but it drives every transform from one thread, so the copies do not run in parallel.</p>
+</div>
+<div class="paragraph">
+<p>Beam engines do not use the number as a thread count.
+That includes <a href="pipeline-run-configurations/beam-flink-pipeline-engine.html" class="xref page">Flink</a>, <a href="pipeline-run-configurations/beam-spark-pipeline-engine.html" class="xref page">Spark</a>, <a href="pipeline-run-configurations/beam-dataflow-pipeline-engine.html" class="xref page">Dataflow</a> and the <a href="pipeline-run-configurations/beam-direct-pipeline-engine.html" class="xref page">Direct</a> runner.
+Those runners choose their own parallelism.
+On Beam the copies field is a flag string, not a thread count: <code>SINGLE_BEAM</code> asks the engine to try to run the transform once (Flink still runs that work in parallel), and <code>BATCH</code> batches rows before they reach the transform.
+See <a href="beam/getting-started-with-beam.html" class="xref page">Getting started with Apache Beam</a>.
+<a href="transforms/rowgenerator.html" class="xref page">Generate rows</a> is the one transform that reads a numeric copy count on Beam, and only as the number of initial bundles of its synthetic source.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="pipeline-run-configurations/native-spark-pipeline-engine.html" class="xref page">native Spark</a> engine ignores the copy count.
+Its parallelism comes from Spark partitions.
+See <a href="spark/getting-started-with-native-spark.html" class="xref page">Getting started with the native Spark pipeline engine</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_changing_the_number_of_copies_for_a_transform"><a class="link" href="#_changing_the_number_of_copies_for_a_transform">Changing the number of copies for a transform</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -2940,7 +3089,7 @@ As with any performance optimization exercises, make tiny changes and measure pe
 </nav>
   </main>
 
-<aside class="doc-toc" data-pagefind-ignore aria-label="On this page">
+<aside class="doc-toc" data-pagefind-ignore aria-label="On this page" data-levels="2">
   <p class="doc-toc__title">On this page</p>
   <div class="doc-toc__body"></div>
 </aside>

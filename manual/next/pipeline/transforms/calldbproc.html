@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title> Call DB procedure | Apache Hop</title>
-<meta name="description" content="The Call DB Procedure transform allows you to execute a database procedure (or function) and get the result(s) back.">
+<meta name="description" content="The Call DB Procedure transform calls a database procedure or function and returns a scalar value, output parameters, or result rows.">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/pipeline/transforms/calldbproc.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
 <meta property="og:title" content=" Call DB procedure">
-<meta property="og:description" content="The Call DB Procedure transform allows you to execute a database procedure (or function) and get the result(s) back.">
+<meta property="og:description" content="The Call DB Procedure transform calls a database procedure or function and returns a scalar value, output parameters, or result rows.">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/pipeline/transforms/calldbproc.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -184,6 +184,10 @@
     <a href="../../../../manual/next/installation-configuration.html">Installation and Configuration</a>
     
   </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/sizing.html">Sizing guide</a>
+    
+  </li>
   <li class="doc-nav__item is-parent">
     <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop in Docker section">
       <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -346,6 +350,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/beam/flink-k8s-operator-running-hop-pipeline.html">Running a Hop pipeline using the Flink Kubernetes Operator</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/beam/developing-beam-transforms.html">Developing a Beam transform</a>
     
   </li>
 </ul>
@@ -536,6 +544,38 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamdebeziuminput.html">Beam Debezium input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamelasticsearchinput.html">Beam Elasticsearch input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamelasticsearchoutput.html">Beam Elasticsearch output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beammqttinput.html">Beam MQTT input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beammqttoutput.html">Beam MQTT output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamsnowflakeinput.html">Beam Snowflake input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamsnowflakeoutput.html">Beam Snowflake output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamsplunkoutput.html">Beam Splunk output</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/beamfileinput.html">Beam file input</a>
     
   </li>
@@ -569,6 +609,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/beamkinesisproduce.html">Beam Kinesis produce</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beampartition.html">Beam partition</a>
     
   </li>
   <li class="doc-nav__item">
@@ -653,6 +697,14 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/csvinput.html">CSV file input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/cypher-builder.html">Cypher builder</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/cypher-output.html">Cypher output</a>
     
   </li>
   <li class="doc-nav__item">
@@ -788,6 +840,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/extractgraph.html">Extract graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/fake.html">Fake data</a>
     
   </li>
@@ -820,6 +876,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/generate-graph-csvs.html">Generate graph CSVs</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/generaterandomvalue.html">Generate Random Value</a>
     
   </li>
@@ -833,6 +893,14 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/getfilesrowcount.html">Get files rowcount</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/get-graph-logging-info.html">Get graph logging info</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/get-graph-schema.html">Get graph schema</a>
     
   </li>
   <li class="doc-nav__item">
@@ -873,6 +941,18 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/google-sheets-output.html">Google Sheets output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/graph-output.html">Graph output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/graph-query.html">Graph query</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/graph-vector-search.html">Graph vector search</a>
     
   </li>
   <li class="doc-nav__item">
@@ -952,6 +1032,14 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-input.html">Lake table input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-output.html">Lake table output</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/languagemodelchat.html">Language model chat</a>
     
   </li>
@@ -977,6 +1065,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/mapping-output.html">Mapping output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/maskfields.html">Mask fields</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1040,35 +1132,7 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-cypher.html">Neo4j Cypher</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-cypher-builder.html">Neo4j Cypher builder</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-gencsv.html">Neo4j generate CSVs</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-getloginfo.html">Neo4j Get Logging Info</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-graphoutput.html">Neo4j graph output</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/neo4j-import.html">Neo4j import</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-output.html">Neo4j output</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-split-graph.html">Neo4j split graph</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1288,19 +1352,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-input.html">Spark lake table input</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-maintenance.html">Spark lake table maintenance</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-merge.html">Spark lake table merge</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-output.html">Spark lake table output</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1313,6 +1369,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/splitfieldtorows.html">Split fields to rows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/split-graph.html">Split graph</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1433,6 +1493,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/verticabulkloader.html">Vertica Bulk Loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/watchfiles.html">Watch Files</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1571,15 +1635,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/check-graph-database-connections.html">Check graph database connections</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/folderisempty.html">Check if a folder is empty</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/xmlwellformed.html">Check if XML file is well-formed</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/workflow/actions/neo4j-checkconnections.html">Check Neo4j connections</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1615,6 +1679,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/create-property-graph.html">Create property graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/databricks-job-run.html">Databricks job run</a>
     
   </li>
@@ -1632,6 +1700,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/deletefile.html">Delete file</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/deleteexecutioninfo.html">Delete execution information</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1695,6 +1767,18 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/graph-constraint.html">Graph constraint</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/graph-index.html">Graph index</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/graph-script.html">Graph script</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/http.html">HTTP</a>
     
   </li>
@@ -1723,18 +1807,6 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/workflow/actions/neo4j-constraint.html">Neo4j constraint</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/workflow/actions/neo4j-cypherscript.html">Neo4j Cypher script</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/workflow/actions/neo4j-index.html">Neo4j index</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/ping.html">Ping a host</a>
     
   </li>
@@ -1756,6 +1828,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/repeat.html">Repeat</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/runlinter.html">Run Linter</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1912,11 +1988,19 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/vfs/git-vfs.html">Git</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/vfs/hdfs-vfs.html">HDFS</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/vfs/minio-vfs.html">MinIO</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/vfs/smb-vfs.html">SMB</a>
     
   </li>
 </ul>
@@ -2206,7 +2290,7 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/metadata-types/neo4j/neo4j-location-type.html">Neo4j location</a>
+    <a href="../../../../manual/next/metadata-types/graphs/graph-database-location.html">Graph database location</a>
     
   </li>
 </ul>
@@ -2221,7 +2305,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/git-vfs-connection.html">Git repository</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/google-storage-authentication.html">Google Storage Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/graphs/graph-database-connection.html">Graph Database Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2233,7 +2325,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/spark-catalog.html">Lakehouse catalog</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/mail-server-connection.html">Mail Server Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/masking-pattern.html">Masking Pattern</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2245,11 +2345,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/metadata-types/neo4j/neo4j-connection.html">Neo4j Connection</a>
+    <a href="../../../../manual/next/metadata-types/graphs/neo4j-connection.html">Neo4j Connection</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/metadata-types/neo4j/neo4j-graphmodel.html">Neo4j Graph Model</a>
+    <a href="../../../../manual/next/metadata-types/graphs/graph-model.html">Graph Model</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2293,15 +2393,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/smb-connection.html">SMB Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/splunk-connection.html">Splunk Connection</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/jms-connection.html">JMS connection</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/metadata-types/spark-catalog.html">Spark Catalog</a>
     
   </li>
   <li class="doc-nav__item is-parent">
@@ -2396,6 +2496,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/age/index.html">Apache AGE</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/technology/calcite/index.html">Apache Calcite</a>
     
   </li>
@@ -2405,6 +2509,18 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/technology/cassandra/index.html">Cassandra</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/falkordb/index.html">FalkorDB</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/graph-databases/index.html">Graph databases</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/gremlin/index.html">Gremlin</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2613,6 +2729,14 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/how-to-guides/joins-lookups.html">Joins and lookups</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/how-to-guides/graphrag.html">GraphRAG: answer questions from a knowledge graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/how-to-guides/high-volume-scd2.html">High-volume SCD2 loads</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2843,15 +2967,32 @@
 <h2 id="_description"><a class="link" href="#_description">Description</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Call DB Procedure transform allows you to execute a database procedure (or function) and get the result(s) back.
-With MySQL and JDBC, it is not possible to retrieve the result set of a stored procedure.
-Stored procedures and functions can only return values through their function arguments and those arguments must be defined in the Parameters section of the DB Procedure Call configuration.</p>
+<p>Call DB procedure runs a stored procedure or function once for every incoming row. With no incoming hop it runs once.</p>
+</div>
+<div class="paragraph">
+<p>The call can return a scalar function value and <code>OUT</code> or <code>INOUT</code> parameters, or the rows of the procedure&#8217;s first result set. Row mode does not accept <code>OUT</code> or <code>INOUT</code> arguments. Some databases only return those values after the result set has been consumed, and reading them first discards the rows. Hop reports that combination from the transform check and stops at runtime instead of returning no rows. Later result sets are read and discarded so procedure errors still surface. An empty first result set produces no output row for that input row. With a scalar result type, <code>OUT</code> values are added to the row and <code>INOUT</code> values replace the incoming field of the same name.</p>
+</div>
+<div class="paragraph">
+<p>A procedure that only returns a result set can also be called from <a href="tableinput.html" class="xref page">Table Input</a>. MySQL and MariaDB accept a <code>CALL</code> statement. Many other JDBC drivers accept the call escape:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>sql</div><pre class="highlightjs highlight is-highlighted"><code class="language-sql hljs" data-lang="sql">{<span class="hljs-keyword">call</span> list_customers()}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>PostgreSQL functions are usually read with <code>SELECT * FROM procedure_name(&#8230;&#8203;)</code>. Use Table Input when the call is ordinary SQL and you only need the result set. Use Call DB procedure when the procedure needs <code>IN</code>, <code>OUT</code>, or <code>INOUT</code> arguments from the stream, or when you want one call per incoming row. Output parameters and result rows are separate choices; do not combine them.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_options"><a class="link" href="#_options">Options</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>The dialog is split into <strong>General</strong>, <strong>Parameters</strong>, and <strong>Fields</strong> tabs.</p>
+</div>
+<div class="sect2">
+<h3 id="_general"><a class="link" href="#_general">General</a></h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -2866,63 +3007,112 @@ Stored procedures and functions can only return values through their function ar
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Transform name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the transform; this name has to be unique in a single pipeline</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the transform. This name has to be unique in a single pipeline.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Connection</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the database connection on which the procedure resides</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database connection on which the procedure resides.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Proc-name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the procedure or function to call</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Procedure name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the procedure or function to call. Variables are supported.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Find it</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Click to search on the specified database connection for available procedures and functions (Oracle and SQL Server only)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Find procedure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lists the procedures JDBC reports for the selected connection. Some drivers return none; type the name when the list is empty.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enable auto</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">In some instances you want to perform updates</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">commit</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">in the database using the specified procedure.
-In that case you can either have the changes performed using auto-commit or not.
-If auto-commit is disabled, a single commit is being performed after the last row is received by this transform.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable auto commit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When auto commit is off, Hop commits once after the last row is processed.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Result name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the result of the function call; leave blank if this is a procedure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the function return value. Leave this blank when the procedure has no scalar return. Ignored when the result type is Row; the stored name is kept if you switch back.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Result type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Type of the result of the function call; not used in case of a procedure.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>List of parameters that the procedure or function needs</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Field name: Name of the field.</p>
-</li>
-<li>
-<p>Direction: Can be either IN (input only), OUT (output only), INOUT (value is changed on the database).</p>
-</li>
-<li>
-<p>Type: Used for output parameters so that Hop knows what returns</p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Get Fields</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fills in all the fields in the input streams to make your life easier; delete the lines you don&#8217;t need and re-order the remaining lines</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hop type of the function return value, or <strong>Row</strong> to output the rows of the first result set. <strong>Row</strong> cannot be combined with <code>OUT</code> or <code>INOUT</code> arguments.</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sect2">
+<h3 id="_parameters"><a class="link" href="#_parameters">Parameters</a></h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Argument name. For <code>IN</code> and <code>INOUT</code> this is also the incoming stream field.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Direction</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IN</code> (input only), <code>OUT</code> (output only), or <code>INOUT</code> (the incoming value is sent and replaced with the returned value). <code>OUT</code> and <code>INOUT</code> are not allowed when the result type is <strong>Row</strong>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hop type of the argument. Output parameters need this so Hop knows what the driver returns.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get Fields</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Button on the dialog. Fills the grid from the incoming stream and sets each direction to <code>IN</code>. Remove the rows you do not need.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_fields"><a class="link" href="#_fields">Fields</a></h3>
+<div class="paragraph">
+<p>This tab is available when the result type is <strong>Row</strong>. The listed columns are appended to the incoming row. Columns that are missing from the result set are null. Only the columns you list are added; an empty list still emits one output row per result row, with the incoming fields.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get fields</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reads the column names, types, format, length, and precision of the first result set, in the same way <a href="tableinput.html" class="xref page">Table Input</a> reads query fields. Hop asks the driver for callable-statement metadata first and does not run the procedure when that metadata is available. When the driver has none, Hop asks for confirmation and then executes the procedure with null values for <code>IN</code> and <code>INOUT</code> arguments, limits the read to one row when the driver allows it, and rolls the connection back when the driver allows that. A procedure that commits itself, or a driver that refuses to turn auto-commit off, can still change data.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output field name. Matched to the result-set column by label, then by name, ignoring case. Variables are resolved.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hop type of the output field.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Format</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional conversion mask.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Length</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Field length. Empty means unspecified.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Precision</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Field precision. Empty means unspecified.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
     </article>
@@ -2932,7 +3122,7 @@ If auto-commit is disabled, a single commit is being performed after the last ro
 </nav>
   </main>
 
-<aside class="doc-toc" data-pagefind-ignore aria-label="On this page">
+<aside class="doc-toc" data-pagefind-ignore aria-label="On this page" data-levels="2">
   <p class="doc-toc__title">On this page</p>
   <div class="doc-toc__body"></div>
 </aside>

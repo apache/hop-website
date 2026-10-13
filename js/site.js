@@ -158,7 +158,12 @@
   var tocBody = document.querySelector('.doc-toc__body')
   var article = document.querySelector('.doc')
   if (tocBody && article) {
-    var headings = article.querySelectorAll('h2[id], h3[id]')
+    /* How deep to go, from the page's :page-toclevels: (2 = h2+h3, the default). */
+    var tocAside = document.querySelector('.doc-toc')
+    var levels = parseInt((tocAside && tocAside.dataset.levels) || '2', 10)
+    if (isNaN(levels) || levels < 1) levels = 2
+    var wanted = ['h2[id]', 'h3[id]', 'h4[id]', 'h5[id]'].slice(0, Math.min(levels, 4))
+    var headings = article.querySelectorAll(wanted.join(', '))
     if (headings.length < 2) {
       var aside = document.querySelector('.doc-toc')
       if (aside) aside.style.display = 'none'
@@ -167,7 +172,7 @@
         var a = document.createElement('a')
         a.href = '#' + h.id
         a.textContent = h.textContent.replace(/¶/g, '').trim()
-        if (h.tagName === 'H3') a.className = 'toc-h3'
+        if (h.tagName !== 'H2') a.className = 'toc-' + h.tagName.toLowerCase()
         tocBody.appendChild(a)
       })
       spy(tocBody, article)

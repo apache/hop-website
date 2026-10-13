@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Pipelines | Apache Hop</title>
-<meta name="description" content="Pipelines, together with workflows, are the main building blocks in Hop. Pipelines perform the heavy data lifting: in a pipeline, you read data from one or more sources, perform a number of operations (joins, lookups, filters and lots more) and finally write the processed data to one or more target platforms.">
+<meta name="description" content="Pipelines perform the heavy data lifting in Apache Hop: reading, transforming, enriching, cleaning, validating, and writing data across diverse platforms in a streaming, parallel execution model.">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/pipeline/pipelines.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
 <meta property="og:title" content="Pipelines">
-<meta property="og:description" content="Pipelines, together with workflows, are the main building blocks in Hop. Pipelines perform the heavy data lifting: in a pipeline, you read data from one or more sources, perform a number of operations (joins, lookups, filters and lots more) and finally write the processed data to one or more target platforms.">
+<meta property="og:description" content="Pipelines perform the heavy data lifting in Apache Hop: reading, transforming, enriching, cleaning, validating, and writing data across diverse platforms in a streaming, parallel execution model.">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/pipeline/pipelines.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -184,6 +184,10 @@
     <a href="../../../manual/next/installation-configuration.html">Installation and Configuration</a>
     
   </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/sizing.html">Sizing guide</a>
+    
+  </li>
   <li class="doc-nav__item is-parent">
     <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop in Docker section">
       <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -346,6 +350,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/beam/flink-k8s-operator-running-hop-pipeline.html">Running a Hop pipeline using the Flink Kubernetes Operator</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/beam/developing-beam-transforms.html">Developing a Beam transform</a>
     
   </li>
 </ul>
@@ -536,6 +544,38 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamdebeziuminput.html">Beam Debezium input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamelasticsearchinput.html">Beam Elasticsearch input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamelasticsearchoutput.html">Beam Elasticsearch output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beammqttinput.html">Beam MQTT input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beammqttoutput.html">Beam MQTT output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamsnowflakeinput.html">Beam Snowflake input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamsnowflakeoutput.html">Beam Snowflake output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamsplunkoutput.html">Beam Splunk output</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/beamfileinput.html">Beam file input</a>
     
   </li>
@@ -569,6 +609,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/beamkinesisproduce.html">Beam Kinesis produce</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beampartition.html">Beam partition</a>
     
   </li>
   <li class="doc-nav__item">
@@ -653,6 +697,14 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/csvinput.html">CSV file input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/cypher-builder.html">Cypher builder</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/cypher-output.html">Cypher output</a>
     
   </li>
   <li class="doc-nav__item">
@@ -788,6 +840,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/extractgraph.html">Extract graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/fake.html">Fake data</a>
     
   </li>
@@ -820,6 +876,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/generate-graph-csvs.html">Generate graph CSVs</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/generaterandomvalue.html">Generate Random Value</a>
     
   </li>
@@ -833,6 +893,14 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/getfilesrowcount.html">Get files rowcount</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/get-graph-logging-info.html">Get graph logging info</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/get-graph-schema.html">Get graph schema</a>
     
   </li>
   <li class="doc-nav__item">
@@ -873,6 +941,18 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/google-sheets-output.html">Google Sheets output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/graph-output.html">Graph output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/graph-query.html">Graph query</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/graph-vector-search.html">Graph vector search</a>
     
   </li>
   <li class="doc-nav__item">
@@ -952,6 +1032,14 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/spark-lake-table-input.html">Lake table input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/spark-lake-table-output.html">Lake table output</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/languagemodelchat.html">Language model chat</a>
     
   </li>
@@ -977,6 +1065,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/mapping-output.html">Mapping output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/maskfields.html">Mask fields</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1040,35 +1132,7 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-cypher.html">Neo4j Cypher</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-cypher-builder.html">Neo4j Cypher builder</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-gencsv.html">Neo4j generate CSVs</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-getloginfo.html">Neo4j Get Logging Info</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-graphoutput.html">Neo4j graph output</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/neo4j-import.html">Neo4j import</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-output.html">Neo4j output</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-split-graph.html">Neo4j split graph</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1288,19 +1352,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/spark-lake-table-input.html">Spark lake table input</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/spark-lake-table-maintenance.html">Spark lake table maintenance</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/spark-lake-table-merge.html">Spark lake table merge</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/spark-lake-table-output.html">Spark lake table output</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1313,6 +1369,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/splitfieldtorows.html">Split fields to rows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/split-graph.html">Split graph</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1433,6 +1493,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/verticabulkloader.html">Vertica Bulk Loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/watchfiles.html">Watch Files</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1571,15 +1635,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/check-graph-database-connections.html">Check graph database connections</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/folderisempty.html">Check if a folder is empty</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/xmlwellformed.html">Check if XML file is well-formed</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/workflow/actions/neo4j-checkconnections.html">Check Neo4j connections</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1615,6 +1679,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/create-property-graph.html">Create property graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/databricks-job-run.html">Databricks job run</a>
     
   </li>
@@ -1632,6 +1700,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/deletefile.html">Delete file</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/deleteexecutioninfo.html">Delete execution information</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1695,6 +1767,18 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/graph-constraint.html">Graph constraint</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/graph-index.html">Graph index</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/graph-script.html">Graph script</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/http.html">HTTP</a>
     
   </li>
@@ -1723,18 +1807,6 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/workflow/actions/neo4j-constraint.html">Neo4j constraint</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/workflow/actions/neo4j-cypherscript.html">Neo4j Cypher script</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/workflow/actions/neo4j-index.html">Neo4j index</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/ping.html">Ping a host</a>
     
   </li>
@@ -1756,6 +1828,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/repeat.html">Repeat</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/runlinter.html">Run Linter</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1912,11 +1988,19 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/vfs/git-vfs.html">Git</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/vfs/hdfs-vfs.html">HDFS</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/vfs/minio-vfs.html">MinIO</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/vfs/smb-vfs.html">SMB</a>
     
   </li>
 </ul>
@@ -2206,7 +2290,7 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/metadata-types/neo4j/neo4j-location-type.html">Neo4j location</a>
+    <a href="../../../manual/next/metadata-types/graphs/graph-database-location.html">Graph database location</a>
     
   </li>
 </ul>
@@ -2221,7 +2305,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/git-vfs-connection.html">Git repository</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/google-storage-authentication.html">Google Storage Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/graphs/graph-database-connection.html">Graph Database Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2233,7 +2325,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/spark-catalog.html">Lakehouse catalog</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/mail-server-connection.html">Mail Server Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/masking-pattern.html">Masking Pattern</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2245,11 +2345,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/metadata-types/neo4j/neo4j-connection.html">Neo4j Connection</a>
+    <a href="../../../manual/next/metadata-types/graphs/neo4j-connection.html">Neo4j Connection</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/metadata-types/neo4j/neo4j-graphmodel.html">Neo4j Graph Model</a>
+    <a href="../../../manual/next/metadata-types/graphs/graph-model.html">Graph Model</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2293,15 +2393,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/smb-connection.html">SMB Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/splunk-connection.html">Splunk Connection</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/jms-connection.html">JMS connection</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/metadata-types/spark-catalog.html">Spark Catalog</a>
     
   </li>
   <li class="doc-nav__item is-parent">
@@ -2396,6 +2496,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/technology/age/index.html">Apache AGE</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/technology/calcite/index.html">Apache Calcite</a>
     
   </li>
@@ -2405,6 +2509,18 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/technology/cassandra/index.html">Cassandra</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/technology/falkordb/index.html">FalkorDB</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/technology/graph-databases/index.html">Graph databases</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/technology/gremlin/index.html">Gremlin</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2616,6 +2732,14 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/how-to-guides/graphrag.html">GraphRAG: answer questions from a knowledge graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/how-to-guides/high-volume-scd2.html">High-volume SCD2 loads</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/how-to-guides/logging-pipeline-log.html">Logging pipeline data with pipeline log</a>
     
   </li>
@@ -2776,102 +2900,544 @@
     <article class="doc">
       <h1>Pipelines</h1>
       <div class="sect1">
-<h2 id="_pipelines_overview"><a class="link" href="#_pipelines_overview">Pipelines overview</a></h2>
+<h2 id="_what_pipelines_actually_do"><a class="link" href="#_what_pipelines_actually_do">What Pipelines Actually Do</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Pipelines, together with workflows, are the main building blocks in Hop. Pipelines perform the heavy data lifting: in a pipeline, you read data from one or more sources, perform a number of operations (joins, lookups, filters and lots more) and finally write the processed data to one or more target platforms.</p>
+<p>Pipelines are the <strong>data workers</strong> of Apache Hop.
+Where <a href="../workflow/workflows.html" class="xref page">workflows</a> orchestrate tasks and make decisions, pipelines do the heavy data processing: they read data from one or more sources, transform, enrich, and validate it in-flight, and write the processed records to one or more destination systems.</p>
 </div>
 <div class="paragraph">
-<p>Pipelines are a network of <a href="transforms.html" class="xref page">transforms</a>, connected by hops. Just like the <a href="../workflow/actions.html" class="xref page">actions</a> in a workflow, each transform is a small piece of functionality. The combination of a number of transforms allow Hop developers to build powerful data processing and, in combination with workflows, orchestration solutions.</p>
-</div>
-<div class="paragraph">
-<p>Even though there is some visual resemblance, workflows and pipelines operate very differently.</p>
-</div>
-<div class="paragraph">
-<p>The core principles of pipelines are:</p>
+<p>Pipelines are designed for high throughput and low latency:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>pipelines are networks. Each transform in a pipeline is part of the network.</p>
+<p><strong>Ingestion</strong>: Read structured and unstructured data from relational databases, cloud object storage (S3, GCS, Azure Blob), local or network files via the <a href="../vfs.html" class="xref page">Virtual File System (VFS)</a>, message queues (Apache Kafka, JMS, AWS SQS), or REST APIs.</p>
 </li>
 <li>
-<p>a pipeline runs all of its transforms in parallel. All transforms are started and process data simultaneously. In a simple pipeline where you read data from a large file, do some processing and finally write to a database table, you&#8217;re typically still reading from the file while you&#8217;re already loading data to the database.</p>
+<p><strong>Transformation &amp; Cleansing</strong>: Filter invalid rows, calculate values, standardize date and number formats, manipulate strings, parse JSON or XML, handle missing values, and execute business rules.</p>
 </li>
 <li>
-<p>data flows through the various transforms in a pipeline over hops. In contrast to workflow hops, pipeline hops typically don&#8217;t have an exit status. Pipelines do have some routing capabilities through e.g. <a href="transforms/filterrows.html" class="xref page">Filter Rows</a> transform and <a href="errorhandling.html" class="xref page">error handling</a>, but the core pipeline principle still applies: the pipeline is a network, and data flow through the network in parallel.</p>
+<p><strong>Lookups &amp; Joins</strong>: Enrich streaming records by joining data streams or performing real-time lookups against database tables, in-memory caches, or static datasets.</p>
+</li>
+<li>
+<p><strong>Loading</strong>: Insert, update, or bulk load rows into relational databases, cloud data warehouses (Snowflake, BigQuery, Redshift), lakehouse tables (Delta Lake, Apache Iceberg), search indexes, or messaging topics.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_example_pipeline_walk_through"><a class="link" href="#_example_pipeline_walk_through">Example pipeline walk-through</a></h2>
+<h2 id="_under_the_hood_how_a_pipeline_executes"><a class="link" href="#_under_the_hood_how_a_pipeline_executes">Under the Hood: How a Pipeline Executes</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The example below shows a very basic pipeline. This is what happens when we run this pipeline:</p>
+<p>Even though a pipeline diagram looks like a flowchart, it does <strong>not</strong> execute step-by-step.
+A pipeline is an active streaming dataflow network.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 280" width="880" height="280">
+  <defs>
+    <style>
+      .pl-bg { fill: #f8fafc; }
+      .pl-card { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .pl-card-source { fill: #ffffff; stroke: #00a3a6; stroke-width: 2.5; rx: 8px; }
+      .pl-card-target { fill: #ffffff; stroke: #f59e0b; stroke-width: 2.5; rx: 8px; }
+
+      .pl-text-title { font-family: system-ui, -apple-system, sans-serif; font-size: 15px; font-weight: 700; fill: #0e3a5a; }
+      .pl-text-subtitle { font-family: system-ui, -apple-system, sans-serif; font-size: 12px; fill: #64748b; }
+      .pl-text-tag { font-family: system-ui, -apple-system, sans-serif; font-size: 10.5px; font-weight: 700; text-transform: uppercase; }
+      .pl-text-metric { font-family: system-ui, -apple-system, sans-serif; font-size: 12px; font-weight: 700; }
+      .pl-text-buffer-title { font-family: system-ui, -apple-system, sans-serif; font-size: 12.5px; font-weight: 700; fill: #0e3a5a; }
+
+      .pl-hop-line { stroke: #94a3b8; stroke-width: 3; stroke-dasharray: 6 4; fill: none; }
+      .pl-buffer-box { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .pl-bar-normal { fill: #00a3a6; rx: 2px; }
+      .pl-bar-warn { fill: #f59e0b; rx: 2px; }
+      .pl-bar-empty { fill: #e2e8f0; rx: 2px; }
+      .pl-ribbon { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1; rx: 6px; }
+      .pl-ribbon-text { font-family: system-ui, -apple-system, sans-serif; font-size: 12px; font-weight: 600; fill: #334155; }
+
+      .pl-pulse-warn { animation: pl-pulseWarning 2s infinite ease-in-out; }
+
+      @keyframes pl-pulseWarning {
+        0%, 100% { filter: drop-shadow(0 0 2px rgba(245, 158, 11, 0.4)); }
+        50% { filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.8)); }
+      }
+
+      /* Animated streaming row tokens */
+      .pl-dot-stream1 { animation: pl-streamAnim1 2s infinite linear; }
+      .pl-dot-stream2 { animation: pl-streamAnim2 2s infinite linear; }
+
+      @keyframes pl-streamAnim1 {
+        0% { transform: translateX(0px); opacity: 0; }
+        15% { opacity: 1; }
+        85% { opacity: 1; }
+        100% { transform: translateX(160px); opacity: 0; }
+      }
+
+      @keyframes pl-streamAnim2 {
+        0% { transform: translateX(0px); opacity: 0; }
+        15% { opacity: 1; }
+        85% { opacity: 1; }
+        100% { transform: translateX(160px); opacity: 0; }
+      }
+      .pl-ink-muted { fill: #475569; }
+
+      /* Dark mode. The OS preference is the default, but the Hop site also has
+         its own light/dark toggle which sets data-theme on the page root, so
+         both have to be honoured -- and an explicit light choice has to win
+         over a dark OS. */
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) .pl-bg { fill: #0f172a; }
+        :root:not([data-theme="light"]) .pl-card { fill: #1e293b; stroke: #334155; }
+        :root:not([data-theme="light"]) .pl-card-source { fill: #1e293b; stroke: #00a3a6; }
+        :root:not([data-theme="light"]) .pl-card-target { fill: #1e293b; stroke: #f59e0b; }
+        :root:not([data-theme="light"]) .pl-text-title { fill: #f1f5f9; }
+        :root:not([data-theme="light"]) .pl-text-subtitle { fill: #94a3b8; }
+        :root:not([data-theme="light"]) .pl-text-buffer-title { fill: #cbd5e1; }
+        :root:not([data-theme="light"]) .pl-buffer-box { fill: #0f172a; stroke: #334155; }
+        :root:not([data-theme="light"]) .pl-bar-empty { fill: #334155; }
+        :root:not([data-theme="light"]) .pl-hop-line { stroke: #475569; }
+        :root:not([data-theme="light"]) .pl-ribbon { fill: #1e293b; stroke: #334155; }
+        :root:not([data-theme="light"]) .pl-ribbon-text { fill: #cbd5e1; }
+        :root:not([data-theme="light"]) .pl-ink-muted { fill: #94a3b8; }
+      }
+
+      :root[data-theme="dark"] .pl-bg { fill: #0f172a; }
+      :root[data-theme="dark"] .pl-card { fill: #1e293b; stroke: #334155; }
+      :root[data-theme="dark"] .pl-card-source { fill: #1e293b; stroke: #00a3a6; }
+      :root[data-theme="dark"] .pl-card-target { fill: #1e293b; stroke: #f59e0b; }
+      :root[data-theme="dark"] .pl-text-title { fill: #f1f5f9; }
+      :root[data-theme="dark"] .pl-text-subtitle { fill: #94a3b8; }
+      :root[data-theme="dark"] .pl-text-buffer-title { fill: #cbd5e1; }
+      :root[data-theme="dark"] .pl-buffer-box { fill: #0f172a; stroke: #334155; }
+      :root[data-theme="dark"] .pl-bar-empty { fill: #334155; }
+      :root[data-theme="dark"] .pl-hop-line { stroke: #475569; }
+      :root[data-theme="dark"] .pl-ribbon { fill: #1e293b; stroke: #334155; }
+      :root[data-theme="dark"] .pl-ribbon-text { fill: #cbd5e1; }
+      :root[data-theme="dark"] .pl-ink-muted { fill: #94a3b8; }
+    </style>
+
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#00a3a6" />
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="880" height="280" rx="10" class="pl-bg" />
+
+  <!-- Top Title Banner -->
+  <g transform="translate(25, 16)">
+    <rect width="830" height="36" rx="6" fill="#0e3a5a" />
+    <circle cx="20" cy="18" r="6" fill="#00a3a6" />
+    <text x="36" y="23" font-family="system-ui, -apple-system, sans-serif" font-size="14.5" font-weight="700" fill="#ffffff">
+      Pipeline Streaming Execution Model
+    </text>
+    <text x="300" y="23" font-family="system-ui, -apple-system, sans-serif" font-size="12.5" fill="#94a3b8">
+      — All transforms run concurrently; rows stream through in-memory buffers
+    </text>
+  </g>
+
+  <!-- TRANSFORM 1: SOURCE -->
+  <g transform="translate(25, 75)">
+    <rect width="170" height="135" class="pl-card-source" />
+    <rect x="12" y="12" width="64" height="20" rx="4" fill="#e0f2fe" />
+    <text x="44" y="26" text-anchor="middle" class="pl-text-tag" fill="#0284c7">SOURCE</text>
+    <circle cx="152" cy="22" r="5" fill="#10b981" />
+
+    <text x="14" y="60" class="pl-text-title">Table Input</text>
+    <text x="14" y="80" class="pl-text-subtitle">Reads customer rows</text>
+    <line x1="14" y1="96" x2="156" y2="96" stroke="#e2e8f0" stroke-width="1" />
+    <text x="14" y="118" class="pl-text-metric" fill="#00a3a6">~8,000 rows/s</text>
+  </g>
+
+  <!-- HOP 1 (Connects Transform 1 to Transform 2) -->
+  <g transform="translate(195, 142)">
+    <line x1="0" y1="0" x2="160" y2="0" class="pl-hop-line" marker-end="url(#arrow)" />
+
+    <!-- Animated row tokens -->
+    <g class="pl-dot-stream1">
+      <circle cx="12" cy="0" r="5" fill="#00a3a6" />
+      <circle cx="52" cy="0" r="5" fill="#00a3a6" />
+      <circle cx="92" cy="0" r="5" fill="#00a3a6" />
+      <circle cx="132" cy="0" r="5" fill="#00a3a6" />
+    </g>
+
+    <!-- Row Buffer Container 1 (Centered on hop) -->
+    <g transform="translate(25, -54)">
+      <rect width="110" height="108" class="pl-buffer-box" />
+      <text x="55" y="20" text-anchor="middle" class="pl-text-buffer-title">Row Buffer</text>
+      <text x="55" y="35" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" class="pl-ink-muted">Capacity: 10k</text>
+
+      <!-- Visual buffer level bars -->
+      <g transform="translate(15, 45)">
+        <rect x="0" y="0" width="12" height="26" class="pl-bar-normal" />
+        <rect x="17" y="0" width="12" height="26" class="pl-bar-normal" />
+        <rect x="34" y="0" width="12" height="26" class="pl-bar-normal" />
+        <rect x="51" y="0" width="12" height="26" class="pl-bar-empty" />
+        <rect x="68" y="0" width="12" height="26" class="pl-bar-empty" />
+      </g>
+      <text x="55" y="94" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" font-weight="700" fill="#00a3a6">Flowing</text>
+    </g>
+  </g>
+
+  <!-- TRANSFORM 2: INTERMEDIATE -->
+  <g transform="translate(355, 75)">
+    <rect width="170" height="135" class="pl-card" />
+    <rect x="12" y="12" width="86" height="20" rx="4" fill="#f3e8ff" />
+    <text x="55" y="26" text-anchor="middle" class="pl-text-tag" fill="#7e22ce">TRANSFORM</text>
+    <circle cx="152" cy="22" r="5" fill="#10b981" />
+
+    <text x="14" y="60" class="pl-text-title">Lookup &amp; Clean</text>
+    <text x="14" y="80" class="pl-text-subtitle">Enriches &amp; validates</text>
+    <line x1="14" y1="96" x2="156" y2="96" stroke="#e2e8f0" stroke-width="1" />
+    <text x="14" y="118" class="pl-text-metric" fill="#7e22ce">Paused (Throttled)</text>
+  </g>
+
+  <!-- HOP 2 (Connects Transform 2 to Transform 3) -->
+  <g transform="translate(525, 142)">
+    <line x1="0" y1="0" x2="160" y2="0" class="pl-hop-line" marker-end="url(#arrow)" />
+
+    <!-- Animated row tokens (amber/throttled) -->
+    <g class="pl-dot-stream2">
+      <circle cx="15" cy="0" r="5" fill="#f59e0b" />
+      <circle cx="65" cy="0" r="5" fill="#f59e0b" />
+      <circle cx="115" cy="0" r="5" fill="#f59e0b" />
+    </g>
+
+    <!-- Row Buffer Container 2 (Full - Back-pressure) -->
+    <g transform="translate(25, -54)" class="pl-pulse-warn">
+      <rect width="110" height="108" class="pl-buffer-box" stroke="#f59e0b" stroke-width="2.5" />
+      <text x="55" y="20" text-anchor="middle" class="pl-text-buffer-title" fill="#d97706">Buffer Full!</text>
+      <text x="55" y="35" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="600" fill="#d97706">10k / 10k</text>
+
+      <!-- Visual buffer level bars (Full) -->
+      <g transform="translate(15, 45)">
+        <rect x="0" y="0" width="12" height="26" class="pl-bar-warn" />
+        <rect x="17" y="0" width="12" height="26" class="pl-bar-warn" />
+        <rect x="34" y="0" width="12" height="26" class="pl-bar-warn" />
+        <rect x="51" y="0" width="12" height="26" class="pl-bar-warn" />
+        <rect x="68" y="0" width="12" height="26" class="pl-bar-warn" />
+      </g>
+      <text x="55" y="94" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#d97706">Back-Pressure</text>
+    </g>
+  </g>
+
+  <!-- TRANSFORM 3: TARGET SINK -->
+  <g transform="translate(685, 75)">
+    <rect width="170" height="135" class="pl-card-target" />
+    <rect x="12" y="12" width="86" height="20" rx="4" fill="#fef3c7" />
+    <text x="55" y="26" text-anchor="middle" class="pl-text-tag" fill="#b45309">TARGET SINK</text>
+    <circle cx="152" cy="22" r="5" fill="#10b981" />
+
+    <text x="14" y="60" class="pl-text-title">Database Insert</text>
+    <text x="14" y="80" class="pl-text-subtitle">Writes to warehouse</text>
+    <line x1="14" y1="96" x2="156" y2="96" stroke="#e2e8f0" stroke-width="1" />
+    <text x="14" y="118" class="pl-text-metric" fill="#b45309">~2,000 rows/s</text>
+  </g>
+
+  <!-- Bottom Explanatory Ribbon -->
+  <g transform="translate(25, 226)">
+    <rect width="830" height="38" class="pl-ribbon" />
+    <circle cx="20" cy="19" r="4.5" fill="#f59e0b" />
+    <text x="34" y="23" class="pl-ribbon-text">
+      Back-Pressure: When Database Insert is slower than Table Input, the row buffer fills up and automatically pauses Table Input.
+    </text>
+  </g>
+</svg>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_1_the_parallel_nature"><a class="link" href="#_1_the_parallel_nature">1. The Parallel Nature</a></h3>
+<div class="paragraph">
+<p>When you run a pipeline, <strong>all transforms start at the exact same moment</strong>.
+Each transform operates as an independent worker running simultaneously alongside every other transform.</p>
+</div>
+<div class="paragraph">
+<p>In a traditional batch script, step 1 must finish reading an entire million-row file before step 2 can start processing.
+In a Hop pipeline:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>the pipeline has 7 transforms. All 7 of these transforms become active when we start the pipeline.</p>
+<p>The input transform begins reading the first rows from your file.</p>
 </li>
 <li>
-<p>the "read-25M-records" transform starts reading data from a file, and pushes that data down the stream to "perform-calculations" and the following transforms. Since reading 25 million records takes a while, some data may already have finished processing while we&#8217;re still reading records from the file.</p>
+<p>It immediately pushes those rows down the hop to the next transform.</p>
 </li>
 <li>
-<p>the "lookup-sql-data" matches data we read from the file with data we retrieved from the "read-sql-data" transform. The <a href="transforms/streamlookup.html" class="xref page">Stream Lookup</a> accepts input from the "read-sql-data", which is shown with the information icon <span class="image"><img src="../_images/icons/info.svg" alt="info"></span> on the hop.</p>
+<p>The downstream transforms begin filtering and calculating right away.</p>
 </li>
 <li>
-<p>once the data from the file and sql query are matched, we check a condition with the <a href="transforms/filterrows.html" class="xref page">Filter Rows</a> transform in "condition?". The output of this data is passed to "write-to-table" or "write-to-file", depending on whether the condition outcome was true or false.</p>
+<p>While the input transform is reading row 50,000, intermediate transforms are processing row 25,000, and the output transform is already writing row 10,000 to the database!</p>
 </li>
 </ul>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_2_in_memory_row_buffers"><a class="link" href="#_2_in_memory_row_buffers">2. In-Memory Row Buffers</a></h3>
 <div class="paragraph">
-<p><span class="image"><img src="../_images/hop-gui/pipeline/basic-pipeline.png" alt="Pipelines - basic pipeline" width="65%"></span></p>
+<p>Data travels between transforms along <strong>hops</strong>.
+Behind every hop sits an <strong>in-memory row buffer</strong> (a queue with a default capacity of 10,000 rows, configurable in the pipeline properties dialog).</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An upstream transform pushes rows into the buffer.</p>
+</li>
+<li>
+<p>The downstream transform pulls rows out of the buffer to do its work.</p>
+</li>
+<li>
+<p>Data streams directly through memory from transform to transform, avoiding slow intermediate temporary files on disk.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_automatic_back_pressure"><a class="link" href="#_3_automatic_back_pressure">3. Automatic Back-Pressure</a></h3>
+<div class="paragraph">
+<p>What happens when an output database or web service is slower than a fast file reader?
+Hop handles this automatically with <strong>back-pressure</strong>:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>If the downstream transform cannot keep up, the row buffer between the two transforms fills up to its maximum capacity (e.g. 10,000 rows).</p>
+</li>
+<li>
+<p>Once the buffer is full, the upstream transform automatically pauses reading until the downstream transform consumes rows and makes room.</p>
+</li>
+<li>
+<p>This pause naturally ripples backward through the entire pipeline all the way to the initial source transform.</p>
+</li>
+<li>
+<p>When the downstream transform catches up, the upstream transform resumes processing automatically.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Thanks to back-pressure, your pipelines automatically adapt to varying speeds and the memory held between transforms stays bounded, no matter how many millions or billions of rows you process.
+Note that back-pressure governs the row buffers on the hops only.
+Transforms that have to collect a whole set before they can emit a row&#8201;&#8212;&#8201;<a href="transforms/streamlookup.html" class="xref page">Stream Lookup</a>, <a href="transforms/memgroupby.html" class="xref page">Memory Group By</a> and similar&#8201;&#8212;&#8201;hold that set in memory and still need to fit in the heap.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_scaling_and_partitioning"><a class="link" href="#_4_scaling_and_partitioning">4. Scaling and Partitioning</a></h3>
+<div class="paragraph">
+<p>When a single transform becomes a performance bottleneck (such as a complex calculation or slow API call), Hop provides built-in tools to scale:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Multiple Copies</strong>: You can tell the local Hop pipeline engine to run multiple parallel copies of any transform (e.g., 4 or 8 copies). Hop distributes rows across these copies to saturate available CPU cores (<code><a href="specify-copies.html" class="xref page">Specify copies</a></code>). The copy count is not a thread count on Beam (including Flink) or native Spark.</p>
+</li>
+<li>
+<p><strong>Data Partitioning</strong>: Partition data streams across worker threads of the local Hop pipeline engine according to partition rules (<code><a href="partitioning.html" class="xref page">Partitioning</a></code>). A partition schema is not applied on Beam or native Spark.</p>
+</li>
+<li>
+<p><strong>Row-Level Error Handling</strong>: Route rejected or malformed rows into an alternate error stream without stopping the pipeline (<code><a href="errorhandling.html" class="xref page">Error Handling</a></code>).</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_next_steps"><a class="link" href="#_next_steps">Next steps</a></h2>
+<h2 id="_pipeline_execution_engines"><a class="link" href="#_pipeline_execution_engines">Pipeline Execution Engines</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Pipelines are an extensive topic. Check the pages below to learn more about working with pipelines:</p>
+<p>In Apache Hop, your pipeline design (<code>.hpl</code>) contains pure metadata and does not hardcode where or how it runs.
+You choose an engine via a <a href="pipeline-run-configurations/pipeline-run-configurations.html" class="xref page">Pipeline Run Configuration</a>.</p>
+</div>
+<div class="paragraph">
+<p>Hop provides several purpose-built pipeline engines:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22%;">
+<col style="width: 38%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Engine</th>
+<th class="tableblock halign-left valign-top">Best For</th>
+<th class="tableblock halign-left valign-top">How It Operates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="pipeline-run-configurations/native-local-pipeline-engine.html" class="xref page">Native Local</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Workstations, local testing, and standard single-server production jobs.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Runs locally in the Hop JVM, using multi-threaded in-memory streaming with row buffers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="pipeline-run-configurations/native-remote-pipeline-engine.html" class="xref page">Native Remote</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Offloading jobs to dedicated servers or cloud instances.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sends pipeline metadata to a remote <a href="../hop-server/index.html" class="xref page">Hop Server</a> over HTTP, streaming logs and metrics back to the client.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="pipeline-run-configurations/native-load-balancing-pipeline-engine.html" class="xref page">Native Load-balancing</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spreading separate pipeline runs over a group of servers.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Assigns each pipeline to one server from a configured group, using an even-load or pack algorithm, and retries on another server when the chosen one is at capacity.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="pipeline-run-configurations/beam-flink-pipeline-engine.html" class="xref page">Beam Flink</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Massive batch processing and low-latency continuous streaming at enterprise scale.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Translates the pipeline into an Apache Flink streaming or batch application running on a Flink cluster.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="pipeline-run-configurations/beam-spark-pipeline-engine.html" class="xref page">Beam Spark</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Distributed batch data processing on existing Apache Spark clusters.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Compiles the pipeline into an Apache Beam job executed on an Apache Spark cluster.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="pipeline-run-configurations/beam-dataflow-pipeline-engine.html" class="xref page">Beam Google Dataflow</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Serverless, auto-scaling big data pipelines on Google Cloud.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deploys the pipeline to Google Cloud Dataflow, with automatic resource provisioning and horizontal scaling.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="pipeline-run-configurations/beam-direct-pipeline-engine.html" class="xref page">Beam Direct</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Testing Beam pipelines locally before deploying to Flink, Spark, or Dataflow.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Executes Apache Beam pipelines locally on your machine for quick verification.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="pipeline-run-configurations/native-spark-pipeline-engine.html" class="xref page">Native Spark</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lakehouse architectures, Delta Lake, and Apache Iceberg tables.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Executes natively on Apache Spark using Spark SQL and DataFrames without requiring Beam.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="pipeline-run-configurations/single-threaded-pipeline-engine.html" class="xref page">Single Threaded</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Micro-batches, low-latency API handling, and deterministic debugging.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Executes transforms sequentially on a single thread, passing batches of rows one transform at a time. Ideal for embedded use and sub-pipelines.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_popular_real_world_scenarios"><a class="link" href="#_popular_real_world_scenarios">Popular Real-World Scenarios</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Here is how pipelines are commonly used in modern data architectures:</p>
+</div>
+<div class="sect2">
+<h3 id="_1_high_throughput_batch_ingestion_data_warehousing"><a class="link" href="#_1_high_throughput_batch_ingestion_data_warehousing">1. High-Throughput Batch Ingestion &amp; Data Warehousing</a></h3>
+<div class="paragraph">
+<p>Pipelines extract millions of records from operational databases (ERP, CRM) or files (CSV, Parquet, Excel) stored on S3 or Azure Blob storage.
+The pipeline cleanses fields, checks referential integrity with cached lookups, and bulk loads data directly into analytical databases like Snowflake, BigQuery, PostgreSQL, or Redshift.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_continuous_real_time_streaming"><a class="link" href="#_2_continuous_real_time_streaming">2. Continuous Real-Time Streaming</a></h3>
+<div class="paragraph">
+<p>A pipeline listens 24/7 to an Apache Kafka topic using the <a href="transforms/kafkaconsumer.html" class="xref page">Kafka Consumer</a> transform.
+As events arrive, the pipeline deserializes JSON or Avro payloads, enriches them with static metadata, computes rolling metrics, and streams outputs directly to monitoring dashboards or operational stores.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_interactive_workstation_development_live_preview"><a class="link" href="#_3_interactive_workstation_development_live_preview">3. Interactive Workstation Development &amp; Live Preview</a></h3>
+<div class="paragraph">
+<p>While building data pipelines in the Hop GUI, data engineers do not need to wait for full batch runs to see if their logic works.
+By right-clicking any transform and selecting <strong>Preview &amp; debug output</strong>, you can inspect real data rows flowing through that transform immediately.
+See <a href="run-preview-debug-pipeline.html" class="xref page">Run, Preview and Debug a Pipeline</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_automated_cicd_regression_testing"><a class="link" href="#_4_automated_cicd_regression_testing">4. Automated CI/CD Regression Testing</a></h3>
+<div class="paragraph">
+<p>Pipelines can be linked with golden datasets using the <a href="pipeline-unit-testing.html" class="xref page">Pipeline Unit Testing</a> framework.
+In continuous integration (CI) environments (e.g. GitHub Actions, GitLab CI), tests run automatically headlessly with <code>hop-run</code> to verify that data transformations produce expected results before code is merged or deployed.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_5_embedded_in_custom_applications"><a class="link" href="#_5_embedded_in_custom_applications">5. Embedded in Custom Applications</a></h3>
+<div class="paragraph">
+<p>Using Hop&#8217;s runtime libraries, developers can embed pipelines directly inside custom Java applications.
+The host application dynamically configures variables, launches the pipeline, and consumes output data streams without launching the GUI.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_6_python_data_science_with_pyhop"><a class="link" href="#_6_python_data_science_with_pyhop">6. Python Data Science with PyHop</a></h3>
+<div class="paragraph">
+<p>Data scientists can use the <a href="../hop-tools/hop-python/hop-python.html" class="xref page">PyHop</a> library to control Hop from Python scripts.
+Pipelines can be triggered programmatically, and high-volume data streams can be passed directly into pandas or Polars DataFrames using Apache Arrow in-memory IPC without touching disk.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_example_pipeline_walk_through"><a class="link" href="#_example_pipeline_walk_through">Example Pipeline Walk-Through</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The example below shows a typical real-world pipeline design:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/hop-gui/pipeline/basic-pipeline.png" alt="Pipelines - basic pipeline" width="75%"></span></p>
+</div>
+<div class="paragraph">
+<p>When this pipeline runs:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>All 7 transforms start simultaneously.</p>
+</li>
+<li>
+<p>The <code>read-25M-records</code> transform begins reading from a file and pushes rows downstream.</p>
+</li>
+<li>
+<p>The <code>perform-calculations</code> transform processes those incoming rows concurrently.</p>
+</li>
+<li>
+<p>The <code>lookup-sql-data</code> transform enriches the rows with reference data retrieved from <code>read-sql-data</code> using a <a href="transforms/streamlookup.html" class="xref page">Stream Lookup</a>.</p>
+</li>
+<li>
+<p>The <a href="transforms/filterrows.html" class="xref page">Filter Rows</a> transform splits rows based on a business condition: matching rows go to <code>write-to-table</code>, while non-matching rows go to <code>write-to-file</code>.</p>
+</li>
+<li>
+<p>Rows flow continuously through the buffers until all records are processed.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_steps"><a class="link" href="#_next_steps">Next Steps</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To dive deeper into building and managing pipelines, explore:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="hop-pipeline-editor.html" class="xref page">Pipeline Editor</a></p>
+<p><a href="hop-pipeline-editor.html" class="xref page">Pipeline Editor</a> — Learn your way around the pipeline visual designer.</p>
 </li>
 <li>
-<p><a href="create-pipeline.html" class="xref page">Create a Pipeline</a></p>
+<p><a href="create-pipeline.html" class="xref page">Create a Pipeline</a> — Step-by-step instructions for creating and saving pipelines.</p>
 </li>
 <li>
-<p><a href="run-preview-debug-pipeline.html" class="xref page">Run, Preview and Debug a Pipeline</a></p>
+<p><a href="pipeline-sources.html" class="xref page">Pipeline Sources</a> — The transforms that can start a pipeline.</p>
 </li>
 <li>
-<p><a href="pipeline-run-configurations/pipeline-run-configurations.html" class="xref page">Pipeline Run Configurations</a></p>
+<p><a href="transforms.html" class="xref page">Transforms Catalog</a> — Browse the complete library of over 100 transforms.</p>
 </li>
 <li>
-<p><a href="metadata-injection.html" class="xref page">Metadata Injection</a></p>
+<p><a href="run-preview-debug-pipeline.html" class="xref page">Run, Preview and Debug a Pipeline</a> — Techniques for inspecting live rows in-flight.</p>
 </li>
 <li>
-<p><a href="partitioning.html" class="xref page">Partitioning</a></p>
+<p><a href="pipeline-metrics.html" class="xref page">Pipeline Metrics</a> — Understand row counters, speeds, and buffer metrics.</p>
 </li>
 <li>
-<p><a href="beam/getting-started-with-beam.html" class="xref page">Getting started with Apache Beam</a></p>
+<p><a href="metadata-injection.html" class="xref page">Metadata Injection</a> — Generate dynamic, metadata-driven pipelines at runtime.</p>
 </li>
 <li>
-<p><a href="spark/getting-started-with-native-spark.html" class="xref page">Getting started with the native Spark pipeline engine</a></p>
+<p><a href="beam/getting-started-with-beam.html" class="xref page">Getting Started with Apache Beam</a> — Scale out pipelines on Flink, Spark, and Google Cloud Dataflow.</p>
 </li>
 <li>
-<p><a href="spark/lakehouse.html" class="xref page">Lakehouse tables on the native Spark engine (Delta / Iceberg)</a></p>
-</li>
-<li>
-<p><a href="pipeline-sources.html" class="xref page">Pipeline sources</a></p>
-</li>
-<li>
-<p><a href="transforms.html" class="xref page">Transforms</a></p>
+<p><a href="spark/getting-started-with-native-spark.html" class="xref page">Getting Started with Native Spark</a> — Run natively on Spark clusters and lakehouse tables.</p>
 </li>
 </ul>
 </div>
@@ -2884,7 +3450,7 @@
 </nav>
   </main>
 
-<aside class="doc-toc" data-pagefind-ignore aria-label="On this page">
+<aside class="doc-toc" data-pagefind-ignore aria-label="On this page" data-levels="2">
   <p class="doc-toc__title">On this page</p>
   <div class="doc-toc__body"></div>
 </aside>

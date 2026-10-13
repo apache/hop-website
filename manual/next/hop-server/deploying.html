@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Deploying Hop Server | Apache Hop</title>
-<meta name="description" content="How to get a Hop project onto a Hop Server: bake it into a Docker image, send it from a client with export resources, or check it out with git on the host.">
+<meta name="description" content="How to get a Hop project onto a Hop Server: bake it into a Docker image, send it from a client with export resources, check it out with git on the host, or run the stock apache/hop image and read the project through a Git VFS connection.">
 
 
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
 <meta property="og:title" content="Deploying Hop Server">
-<meta property="og:description" content="How to get a Hop project onto a Hop Server: bake it into a Docker image, send it from a client with export resources, or check it out with git on the host.">
+<meta property="og:description" content="How to get a Hop project onto a Hop Server: bake it into a Docker image, send it from a client with export resources, check it out with git on the host, or run the stock apache/hop image and read the project through a Git VFS connection.">
 
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -184,6 +184,10 @@
     <a href="../../../manual/next/installation-configuration.html">Installation and Configuration</a>
     
   </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/sizing.html">Sizing guide</a>
+    
+  </li>
   <li class="doc-nav__item is-parent">
     <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop in Docker section">
       <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -346,6 +350,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/beam/flink-k8s-operator-running-hop-pipeline.html">Running a Hop pipeline using the Flink Kubernetes Operator</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/beam/developing-beam-transforms.html">Developing a Beam transform</a>
     
   </li>
 </ul>
@@ -536,6 +544,38 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamdebeziuminput.html">Beam Debezium input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamelasticsearchinput.html">Beam Elasticsearch input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamelasticsearchoutput.html">Beam Elasticsearch output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beammqttinput.html">Beam MQTT input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beammqttoutput.html">Beam MQTT output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamsnowflakeinput.html">Beam Snowflake input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamsnowflakeoutput.html">Beam Snowflake output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamsplunkoutput.html">Beam Splunk output</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/beamfileinput.html">Beam file input</a>
     
   </li>
@@ -569,6 +609,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/beamkinesisproduce.html">Beam Kinesis produce</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beampartition.html">Beam partition</a>
     
   </li>
   <li class="doc-nav__item">
@@ -653,6 +697,14 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/csvinput.html">CSV file input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/cypher-builder.html">Cypher builder</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/cypher-output.html">Cypher output</a>
     
   </li>
   <li class="doc-nav__item">
@@ -788,6 +840,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/extractgraph.html">Extract graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/fake.html">Fake data</a>
     
   </li>
@@ -820,6 +876,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/generate-graph-csvs.html">Generate graph CSVs</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/generaterandomvalue.html">Generate Random Value</a>
     
   </li>
@@ -833,6 +893,14 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/getfilesrowcount.html">Get files rowcount</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/get-graph-logging-info.html">Get graph logging info</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/get-graph-schema.html">Get graph schema</a>
     
   </li>
   <li class="doc-nav__item">
@@ -873,6 +941,18 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/google-sheets-output.html">Google Sheets output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/graph-output.html">Graph output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/graph-query.html">Graph query</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/graph-vector-search.html">Graph vector search</a>
     
   </li>
   <li class="doc-nav__item">
@@ -952,6 +1032,14 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/spark-lake-table-input.html">Lake table input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/spark-lake-table-output.html">Lake table output</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/languagemodelchat.html">Language model chat</a>
     
   </li>
@@ -977,6 +1065,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/mapping-output.html">Mapping output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/maskfields.html">Mask fields</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1040,35 +1132,7 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-cypher.html">Neo4j Cypher</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-cypher-builder.html">Neo4j Cypher builder</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-gencsv.html">Neo4j generate CSVs</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-getloginfo.html">Neo4j Get Logging Info</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-graphoutput.html">Neo4j graph output</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/neo4j-import.html">Neo4j import</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-output.html">Neo4j output</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-split-graph.html">Neo4j split graph</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1288,19 +1352,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/spark-lake-table-input.html">Spark lake table input</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/spark-lake-table-maintenance.html">Spark lake table maintenance</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/spark-lake-table-merge.html">Spark lake table merge</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/spark-lake-table-output.html">Spark lake table output</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1313,6 +1369,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/splitfieldtorows.html">Split fields to rows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/split-graph.html">Split graph</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1433,6 +1493,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/verticabulkloader.html">Vertica Bulk Loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/watchfiles.html">Watch Files</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1571,15 +1635,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/check-graph-database-connections.html">Check graph database connections</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/folderisempty.html">Check if a folder is empty</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/xmlwellformed.html">Check if XML file is well-formed</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/workflow/actions/neo4j-checkconnections.html">Check Neo4j connections</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1615,6 +1679,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/create-property-graph.html">Create property graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/databricks-job-run.html">Databricks job run</a>
     
   </li>
@@ -1632,6 +1700,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/deletefile.html">Delete file</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/deleteexecutioninfo.html">Delete execution information</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1695,6 +1767,18 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/graph-constraint.html">Graph constraint</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/graph-index.html">Graph index</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/graph-script.html">Graph script</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/http.html">HTTP</a>
     
   </li>
@@ -1723,18 +1807,6 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/workflow/actions/neo4j-constraint.html">Neo4j constraint</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/workflow/actions/neo4j-cypherscript.html">Neo4j Cypher script</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/workflow/actions/neo4j-index.html">Neo4j index</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/ping.html">Ping a host</a>
     
   </li>
@@ -1756,6 +1828,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/repeat.html">Repeat</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/runlinter.html">Run Linter</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1912,11 +1988,19 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/vfs/git-vfs.html">Git</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/vfs/hdfs-vfs.html">HDFS</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/vfs/minio-vfs.html">MinIO</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/vfs/smb-vfs.html">SMB</a>
     
   </li>
 </ul>
@@ -2206,7 +2290,7 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/metadata-types/neo4j/neo4j-location-type.html">Neo4j location</a>
+    <a href="../../../manual/next/metadata-types/graphs/graph-database-location.html">Graph database location</a>
     
   </li>
 </ul>
@@ -2221,7 +2305,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/git-vfs-connection.html">Git repository</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/google-storage-authentication.html">Google Storage Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/graphs/graph-database-connection.html">Graph Database Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2233,7 +2325,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/spark-catalog.html">Lakehouse catalog</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/mail-server-connection.html">Mail Server Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/masking-pattern.html">Masking Pattern</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2245,11 +2345,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/metadata-types/neo4j/neo4j-connection.html">Neo4j Connection</a>
+    <a href="../../../manual/next/metadata-types/graphs/neo4j-connection.html">Neo4j Connection</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/metadata-types/neo4j/neo4j-graphmodel.html">Neo4j Graph Model</a>
+    <a href="../../../manual/next/metadata-types/graphs/graph-model.html">Graph Model</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2293,15 +2393,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/smb-connection.html">SMB Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/splunk-connection.html">Splunk Connection</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/jms-connection.html">JMS connection</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/metadata-types/spark-catalog.html">Spark Catalog</a>
     
   </li>
   <li class="doc-nav__item is-parent">
@@ -2396,6 +2496,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/technology/age/index.html">Apache AGE</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/technology/calcite/index.html">Apache Calcite</a>
     
   </li>
@@ -2405,6 +2509,18 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/technology/cassandra/index.html">Cassandra</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/technology/falkordb/index.html">FalkorDB</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/technology/graph-databases/index.html">Graph databases</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/technology/gremlin/index.html">Gremlin</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2616,6 +2732,14 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/how-to-guides/graphrag.html">GraphRAG: answer questions from a knowledge graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/how-to-guides/high-volume-scd2.html">High-volume SCD2 loads</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/how-to-guides/logging-pipeline-log.html">Logging pipeline data with pipeline log</a>
     
   </li>
@@ -2787,11 +2911,11 @@ See <a href="../how-to-guides/scheduling-workflows-and-pipelines.html" class="xr
 <p>This page is the deployment story: after you develop a project, how does a running Hop Server get the files and the configuration it needs?</p>
 </div>
 <div class="paragraph">
-<p>The same three patterns are how a project reaches any runtime, not only a server.
+<p>The same four patterns are how a project reaches any runtime, not only a server.
 For the wider picture&#8201;&#8212;&#8201;containers, schedulers, secrets, object storage and run history on a cloud platform&#8201;&#8212;&#8201;see <a href="../cloud.html" class="xref page">Running Apache Hop in the cloud</a>.</p>
 </div>
 <div class="paragraph">
-<p>There are three patterns that cover almost every production setup:</p>
+<p>There are four patterns that cover almost every production setup:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2804,6 +2928,10 @@ You can roll that image as a long-lived Hop Server, but you often do not need to
 </li>
 <li>
 <p><a href="deploy-git-checkout.html" class="xref page">Git checkout on the server</a>&#8201;&#8212;&#8201;the host has a clone; updating is <code>git pull</code>.</p>
+</li>
+<li>
+<p><a href="#StandardApacheHopContainer">Standard apache/hop container</a>&#8201;&#8212;&#8201;the published image, unchanged.
+JDBC drivers and marketplace plugins are installed when the container starts, and the pipelines and workflows are read from git through a named VFS connection.</p>
 </li>
 </ul>
 </div>
@@ -2834,6 +2962,7 @@ The official Docker image does this from <code>HOP_PROJECT_*</code> / <code>HOP_
 On a host you register the project and environment once with <a href="../hop-tools/hop-conf/hop-conf.html" class="xref page">hop-conf</a>, then start the server with <code>-e</code>.
 The environment already references its project, so you do not pass <code>-j</code> as well.
 This is how <a href="deploy-project-image.html" class="xref page">the image</a> and <a href="deploy-git-checkout.html" class="xref page">the git checkout</a> work.
+The <a href="#StandardApacheHopContainer">standard container</a> is the same shape with a smaller folder: the enabled project holds the Git connection and the metadata the run needs, and <code>HOP_FILE_PATH</code> points at a file inside the repository.
 Environment configuration files must be present <strong>on the server</strong>.</p>
 </li>
 <li>
@@ -2856,10 +2985,11 @@ When both a project and <code>&lt;metadata_folder&gt;</code> are set, both provi
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 14.2857%;">
-<col style="width: 28.5714%;">
-<col style="width: 28.5714%;">
-<col style="width: 28.5715%;">
+<col style="width: 11.1111%;">
+<col style="width: 22.2222%;">
+<col style="width: 22.2222%;">
+<col style="width: 22.2222%;">
+<col style="width: 22.2223%;">
 </colgroup>
 <thead>
 <tr>
@@ -2867,6 +2997,7 @@ When both a project and <code>&lt;metadata_folder&gt;</code> are set, both provi
 <th class="tableblock halign-left valign-top">Project in a Docker image</th>
 <th class="tableblock halign-left valign-top">Export resources from a client</th>
 <th class="tableblock halign-left valign-top">Git checkout on the server</th>
+<th class="tableblock halign-left valign-top">Standard <code>apache/hop</code> container</th>
 </tr>
 </thead>
 <tbody>
@@ -2875,45 +3006,208 @@ When both a project and <code>&lt;metadata_folder&gt;</code> are set, both provi
 <td class="tableblock halign-left valign-top"><p class="tableblock">The image (immutable per build)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The client (Airflow, hop-run, Hop Gui)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The server host (working tree)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The git remote.
+The container holds a small project (the connection and the metadata) and checks the repository out when a file is opened</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">How you update</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Rebuild and roll the container</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Change the client project; the next run sends a new ZIP</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>git pull</code> (restart only for environment or server config)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Change the revision on the connection.
+A moving branch is fetched again when the connection says so</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Environment configuration</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Mounted or injected on the <strong>server</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Applied on the <strong>client</strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Files on the <strong>server</strong>, usually outside the clone</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mounted or injected on the <strong>server</strong></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Extra files (JDBC, plugins, <code>.properties</code>, JSON schemas)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>COPY</code> into the image or a volume</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Not sent.</strong> Must already exist on the server, or be rewritten with the named-resource folder mapping</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Present in the clone or installed on the host</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Downloaded at start, or mounted.
+See <a href="#StandardApacheHopContainer">Standard apache/hop container</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">File paths</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>${PROJECT_HOME}</code> is real on the server</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paths are rewritten; see the <a href="deploy-export-resources.html" class="xref page">export resources caveats</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>${PROJECT_HOME}</code> is the clone directory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The file you run is a Git VFS URL such as <code>ops:///workflows/daily.hwf</code>.
+<code>${PROJECT_HOME}</code> is the small local project, not the repository</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Best for</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enterprise CI/CD, Kubernetes, OpenShift; the same image as a short-lived job <strong>or</strong> a long-lived server</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Orchestrators that already have the project; a server that should not own files</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Smaller or ops-friendly hosts with git access</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A platform where building and rolling a custom image is the expensive step</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Poor fit</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">You cannot rebuild images</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">You cannot rebuild images.
+Use <a href="#StandardApacheHopContainer">Standard apache/hop container</a> instead</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Heavy file I/O, extra config files, large data files</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">You cannot (or must not) run <code>git pull</code> on production hosts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Projects that open their files through <code>${PROJECT_HOME}</code>, or metadata that has to be read from inside the repository</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="StandardApacheHopContainer"><a class="link" href="#StandardApacheHopContainer">Standard apache/hop container</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The published <code>apache/hop</code> image can take the place of a derived image.
+A Jenkins, GitHub Actions or GitLab CI job usually builds that derived image to add JDBC drivers, install a few marketplace plugins, and clone the project.
+Here the entrypoint installs the drivers and the plugins before Hop starts, and a <a href="../metadata-types/git-vfs-connection.html" class="xref page">Git repository</a> connection checks the project out when Hop opens a file.</p>
+</div>
+<div class="paragraph">
+<p>The checkout is read-only by default.
+A write changes the working copy on disk, and nothing is committed or pushed.</p>
+</div>
+<div class="paragraph">
+<p>This needs Hop 2.20, which is where <code>HOP_PLUGINS_DOWNLOAD</code> and the Git VFS plugin arrive together.
+<code>HOP_DRIVERS_DOWNLOAD</code> is already in 2.19.</p>
+</div>
+<div class="sect2">
+<h3 id="_drivers_and_plugins"><a class="link" href="#_drivers_and_plugins">Drivers and plugins</a></h3>
+<div class="paragraph">
+<p>Set <code>HOP_DRIVERS_DOWNLOAD</code> to a comma-separated list of driver ids, and <code>HOP_DRIVERS_ACCEPT_LICENSE=true</code> when one of them is a restricted driver (Oracle, MySQL, MariaDB, DB2, &#8230;&#8203;).
+<code>HOP_DRIVERS_MAVEN_REPO</code> points the download at an internal Nexus or Artifactory.
+See <a href="../docker-container.html#DownloadingJDBCDrivers" class="xref page">Downloading JDBC drivers</a>.
+A jar that <code>hop driver list</code> does not know is still a file you mount.</p>
+</div>
+<div class="paragraph">
+<p>Set <code>HOP_PLUGINS_DOWNLOAD</code> to the marketplace plugins the run needs.
+The Git driver is one of them: <code>hop-tech-git-vfs</code>.
+The stock image does not contain it.
+A private plugin and that Apache plugin can be listed together; <code>HOP_PLUGINS_MAVEN_REPO</code> is tried first and the other configured repositories are still used.
+See <a href="../docker-container.html#DownloadingMarketplacePlugins" class="xref page">Downloading Marketplace plugins</a>.</p>
+</div>
+<div class="paragraph">
+<p>A later start skips a plugin whose receipt version is already on disk.
+Drivers are downloaded on every start.
+<code>lib/jdbc</code> and the plugins directory have to be writable.
+On a read-only root filesystem, point <code>HOP_SHARED_JDBC_FOLDERS</code> and <code>HOP_PLUGIN_BASE_FOLDERS</code> at a volume.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_project_you_mount"><a class="link" href="#_the_project_you_mount">The project you mount</a></h3>
+<div class="paragraph">
+<p>Set <code>HOP_PROJECT_FOLDER</code> to a real directory.
+Hop resolves that home before it loads named VFS connections, and the Git scheme exists only after the connection has been read from a folder Hop can already open.</p>
+</div>
+<div class="paragraph">
+<p>Mount a small project that holds the connection and the metadata the run needs.
+The pipelines and workflows stay in the remote repository.
+The mount in the example is read-only, so <code>project-config.json</code> has to be in it already.
+The entrypoint keeps that file (<code>--project-keep-config-file</code>).
+A missing file would be created with <strong>Enforce executions in project home</strong> turned on, and hop-run would then refuse <code>ops:///workflows/daily.hwf</code> because that path is outside <code>/bootstrap</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>json</div><pre class="highlightjs highlight is-highlighted"><code class="language-json hljs" data-lang="json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;metadataBaseFolder&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;${PROJECT_HOME}/metadata&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;parentProjectName&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;default&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;enforcingExecutionInHome&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span>
+<span class="hljs-punctuation">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>parentProjectName</code> set to <code>default</code> picks up the <code>local</code> run configuration shipped in the image.
+The <code>metadata/</code> directory inside the git repository is a different folder.
+Hop reads metadata from the bootstrap project (and from that <code>default</code> parent), which is where database connections the pipeline uses belong.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">docker run --<span class="hljs-built_in">rm</span> \
+  -e HOP_DRIVERS_DOWNLOAD=<span class="hljs-string">&quot;oracle,mariadb:3.4.1&quot;</span> \
+  -e HOP_DRIVERS_ACCEPT_LICENSE=<span class="hljs-literal">true</span> \
+  -e HOP_PLUGINS_DOWNLOAD=<span class="hljs-string">&quot;hop-tech-git-vfs&quot;</span> \
+  -e HOP_PROJECT_FOLDER=/bootstrap \
+  -e HOP_PROJECT_NAME=bootstrap \
+  -e HOP_ENVIRONMENT_NAME=prod \
+  -e HOP_ENVIRONMENT_CONFIG_FILE_NAME_PATHS=/config/prod.json \
+  -e HOP_FILE_PATH=<span class="hljs-string">&#x27;ops:///workflows/daily.hwf&#x27;</span> \
+  -e HOP_RUN_CONFIG=<span class="hljs-built_in">local</span> \
+  -v /etc/hop/bootstrap:/bootstrap:ro \
+  -v /etc/hop/environments/prod.json:/config/prod.json:ro \
+  -v /etc/hop/secrets/deploy-key:/run/secrets/deploy-key:ro \
+  -v /etc/hop/secrets/known_hosts:/run/secrets/known_hosts:ro \
+  apache/hop:&lt;version&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>/bootstrap</code> also needs <code>metadata/git-vfs-connection/ops.json</code>.
+<code>HOP_RUN_CONFIG=local</code> resolves through the <code>default</code> parent, so you only add a run configuration file when the run should use a different one.</p>
+</div>
+<div class="paragraph">
+<p>Omit <code>HOP_FILE_PATH</code> and <code>HOP_RUN_CONFIG</code> and the same container starts Hop Server instead of hop-run.
+The server still needs the bootstrap project, the connection and the key.</p>
+</div>
+<div class="paragraph">
+<p>The connection for an SSH deploy key, GitHub or GitLab, looks like this.
+<code>authType</code> is the name of the enum value.
+<code>name</code> is the VFS scheme.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>json</div><pre class="highlightjs highlight is-highlighted"><code class="language-json hljs" data-lang="json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;name&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ops&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;repositoryUrl&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;git@git.example.com:data/your-project.git&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;revision&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;a1b2c3d4e5f6789012345678901234567890abcd&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;authType&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;DEPLOY_KEY&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;privateKeyFile&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/run/secrets/deploy-key&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;sshUser&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;git&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;knownHostsFile&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/run/secrets/known_hosts&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;readOnly&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+<span class="hljs-punctuation">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A GitLab deploy token is the same file with <code>authType</code> set to <code>USERNAME_PASSWORD</code>, an <code>https://</code> repository URL, the token&#8217;s user name, and the token as the password.
+The token needs the <code>read_repository</code> scope.
+Leave the token out of the URL.</p>
+</div>
+<div class="paragraph">
+<p>Pin <code>revision</code> to a commit id.
+Leave the checkout folder empty on a short-lived container: the working copy goes under the temporary directory and disappears with the container.
+A long-lived server should set a checkout folder and a maximum checkout age, so a later commit on a branch is picked up without a restart.
+See <a href="../metadata-types/git-vfs-connection.html" class="xref page">Git repository</a>.</p>
+</div>
+<div class="paragraph">
+<p>Mount a <code>known_hosts</code> file, as in the example.
+<code>acceptUnknownHosts</code> set to <code>true</code> is the alternative when the host key cannot be supplied.
+A fresh container has no <code>~/.ssh/known_hosts</code>, and the connection refuses the server until one of those two is set.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_what_the_paths_mean"><a class="link" href="#_what_the_paths_mean">What the paths mean</a></h3>
+<div class="paragraph">
+<p><code>ops:///workflows/daily.hwf</code> is that file in the repository the connection named <code>ops</code> checked out.</p>
+</div>
+<div class="paragraph">
+<p><code>${PROJECT_HOME}</code> is <code>/bootstrap</code>, the folder you mounted.
+A pipeline stored as <code>${PROJECT_HOME}/pipelines/load.hpl</code> resolves against that folder.</p>
+</div>
+<div class="paragraph">
+<p>A path relative to the file that is running stays on the git scheme.
+For a workflow opened as <code>ops:///workflows/daily.hwf</code>, <code>${Internal.Entry.Current.Folder}</code> is the <code>workflows</code> directory inside the checkout, so a workflow that refers to its neighbours that way keeps reading the repository.</p>
+</div>
+<div class="paragraph">
+<p>A project that reaches its files through <code>${PROJECT_HOME}</code> still wants <a href="deploy-project-image.html" class="xref page">an image</a> or <a href="deploy-git-checkout.html" class="xref page">a checkout</a>.</p>
+</div>
+<div class="paragraph">
+<p>The container needs the git host on every start.
+The connection names the revision, and the image tag names the Hop version.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -2926,7 +3220,8 @@ There is no long-lived Hop Server to keep alive, upgrade or authenticate.</p>
 <div class="paragraph">
 <p>The official <code>apache/hop</code> image does both jobs.
 Set <code>HOP_FILE_PATH</code> and <code>HOP_RUN_CONFIG</code> and the entrypoint runs <a href="../hop-run/index.html" class="xref page">hop-run</a> and exits.
-Omit them and it starts Hop Server.</p>
+Omit them and it starts Hop Server.
+On the <a href="#StandardApacheHopContainer">stock image</a>, <code>HOP_FILE_PATH</code> can be a Git VFS URL.</p>
 </div>
 <div class="paragraph">
 <p>Because the container disappears when the run finishes, send <a href="../metadata-types/execution-information-location.html" class="xref page">execution information</a> somewhere that outlives it: a mounted volume (file or caching-file location), a relational database, OpenSearch, Neo4j or Elastic.
@@ -3032,7 +3327,7 @@ For a project baked into an image that is often the better production pattern&#8
 </nav>
   </main>
 
-<aside class="doc-toc" data-pagefind-ignore aria-label="On this page">
+<aside class="doc-toc" data-pagefind-ignore aria-label="On this page" data-levels="2">
   <p class="doc-toc__title">On this page</p>
   <div class="doc-toc__body"></div>
 </aside>

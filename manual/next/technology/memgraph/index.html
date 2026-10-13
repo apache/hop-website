@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Memgraph | Apache Hop</title>
-<meta name="description" content="Apache Hop has extensive support for the Neo4j graph database. Memgraph is largely compatible with Neo4j and can use a lot of the Neo4j functionality in Apache Hop.">
+<meta name="description" content="Apache Hop reads from and writes to Memgraph graphs with Cypher over the Bolt protocol.">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/technology/memgraph/index.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
 <meta property="og:title" content="Memgraph">
-<meta property="og:description" content="Apache Hop has extensive support for the Neo4j graph database. Memgraph is largely compatible with Neo4j and can use a lot of the Neo4j functionality in Apache Hop.">
+<meta property="og:description" content="Apache Hop reads from and writes to Memgraph graphs with Cypher over the Bolt protocol.">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/technology/memgraph/index.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -184,6 +184,10 @@
     <a href="../../../../manual/next/installation-configuration.html">Installation and Configuration</a>
     
   </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/sizing.html">Sizing guide</a>
+    
+  </li>
   <li class="doc-nav__item is-parent">
     <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop in Docker section">
       <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -346,6 +350,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/beam/flink-k8s-operator-running-hop-pipeline.html">Running a Hop pipeline using the Flink Kubernetes Operator</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/beam/developing-beam-transforms.html">Developing a Beam transform</a>
     
   </li>
 </ul>
@@ -536,6 +544,38 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamdebeziuminput.html">Beam Debezium input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamelasticsearchinput.html">Beam Elasticsearch input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamelasticsearchoutput.html">Beam Elasticsearch output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beammqttinput.html">Beam MQTT input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beammqttoutput.html">Beam MQTT output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamsnowflakeinput.html">Beam Snowflake input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamsnowflakeoutput.html">Beam Snowflake output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamsplunkoutput.html">Beam Splunk output</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/beamfileinput.html">Beam file input</a>
     
   </li>
@@ -569,6 +609,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/beamkinesisproduce.html">Beam Kinesis produce</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beampartition.html">Beam partition</a>
     
   </li>
   <li class="doc-nav__item">
@@ -653,6 +697,14 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/csvinput.html">CSV file input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/cypher-builder.html">Cypher builder</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/cypher-output.html">Cypher output</a>
     
   </li>
   <li class="doc-nav__item">
@@ -788,6 +840,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/extractgraph.html">Extract graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/fake.html">Fake data</a>
     
   </li>
@@ -820,6 +876,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/generate-graph-csvs.html">Generate graph CSVs</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/generaterandomvalue.html">Generate Random Value</a>
     
   </li>
@@ -833,6 +893,14 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/getfilesrowcount.html">Get files rowcount</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/get-graph-logging-info.html">Get graph logging info</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/get-graph-schema.html">Get graph schema</a>
     
   </li>
   <li class="doc-nav__item">
@@ -873,6 +941,18 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/google-sheets-output.html">Google Sheets output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/graph-output.html">Graph output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/graph-query.html">Graph query</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/graph-vector-search.html">Graph vector search</a>
     
   </li>
   <li class="doc-nav__item">
@@ -952,6 +1032,14 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-input.html">Lake table input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-output.html">Lake table output</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/languagemodelchat.html">Language model chat</a>
     
   </li>
@@ -977,6 +1065,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/mapping-output.html">Mapping output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/maskfields.html">Mask fields</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1040,35 +1132,7 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-cypher.html">Neo4j Cypher</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-cypher-builder.html">Neo4j Cypher builder</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-gencsv.html">Neo4j generate CSVs</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-getloginfo.html">Neo4j Get Logging Info</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-graphoutput.html">Neo4j graph output</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/neo4j-import.html">Neo4j import</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-output.html">Neo4j output</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-split-graph.html">Neo4j split graph</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1288,19 +1352,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-input.html">Spark lake table input</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-maintenance.html">Spark lake table maintenance</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-merge.html">Spark lake table merge</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-output.html">Spark lake table output</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1313,6 +1369,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/splitfieldtorows.html">Split fields to rows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/split-graph.html">Split graph</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1433,6 +1493,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/verticabulkloader.html">Vertica Bulk Loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/watchfiles.html">Watch Files</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1571,15 +1635,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/check-graph-database-connections.html">Check graph database connections</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/folderisempty.html">Check if a folder is empty</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/xmlwellformed.html">Check if XML file is well-formed</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/workflow/actions/neo4j-checkconnections.html">Check Neo4j connections</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1615,6 +1679,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/create-property-graph.html">Create property graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/databricks-job-run.html">Databricks job run</a>
     
   </li>
@@ -1632,6 +1700,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/deletefile.html">Delete file</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/deleteexecutioninfo.html">Delete execution information</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1695,6 +1767,18 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/graph-constraint.html">Graph constraint</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/graph-index.html">Graph index</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/graph-script.html">Graph script</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/http.html">HTTP</a>
     
   </li>
@@ -1723,18 +1807,6 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/workflow/actions/neo4j-constraint.html">Neo4j constraint</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/workflow/actions/neo4j-cypherscript.html">Neo4j Cypher script</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/workflow/actions/neo4j-index.html">Neo4j index</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/ping.html">Ping a host</a>
     
   </li>
@@ -1756,6 +1828,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/repeat.html">Repeat</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/runlinter.html">Run Linter</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1912,11 +1988,19 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/vfs/git-vfs.html">Git</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/vfs/hdfs-vfs.html">HDFS</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/vfs/minio-vfs.html">MinIO</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/vfs/smb-vfs.html">SMB</a>
     
   </li>
 </ul>
@@ -2206,7 +2290,7 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/metadata-types/neo4j/neo4j-location-type.html">Neo4j location</a>
+    <a href="../../../../manual/next/metadata-types/graphs/graph-database-location.html">Graph database location</a>
     
   </li>
 </ul>
@@ -2221,7 +2305,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/git-vfs-connection.html">Git repository</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/google-storage-authentication.html">Google Storage Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/graphs/graph-database-connection.html">Graph Database Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2233,7 +2325,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/spark-catalog.html">Lakehouse catalog</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/mail-server-connection.html">Mail Server Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/masking-pattern.html">Masking Pattern</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2245,11 +2345,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/metadata-types/neo4j/neo4j-connection.html">Neo4j Connection</a>
+    <a href="../../../../manual/next/metadata-types/graphs/neo4j-connection.html">Neo4j Connection</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/metadata-types/neo4j/neo4j-graphmodel.html">Neo4j Graph Model</a>
+    <a href="../../../../manual/next/metadata-types/graphs/graph-model.html">Graph Model</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2293,15 +2393,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/smb-connection.html">SMB Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/splunk-connection.html">Splunk Connection</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/jms-connection.html">JMS connection</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/metadata-types/spark-catalog.html">Spark Catalog</a>
     
   </li>
   <li class="doc-nav__item is-parent">
@@ -2396,6 +2496,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/age/index.html">Apache AGE</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/technology/calcite/index.html">Apache Calcite</a>
     
   </li>
@@ -2405,6 +2509,18 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/technology/cassandra/index.html">Cassandra</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/falkordb/index.html">FalkorDB</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/graph-databases/index.html">Graph databases</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/gremlin/index.html">Gremlin</a>
     
   </li>
   <li class="doc-nav__item is-current">
@@ -2616,6 +2732,14 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/how-to-guides/graphrag.html">GraphRAG: answer questions from a knowledge graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/how-to-guides/high-volume-scd2.html">High-volume SCD2 loads</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/how-to-guides/logging-pipeline-log.html">Logging pipeline data with pipeline log</a>
     
   </li>
@@ -2792,10 +2916,9 @@
 <h2 id="_description"><a class="link" href="#_description">Description</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="https://www.memgraph.com" target="_blank" rel="noopener">Memgraph</a> is largely compatible with Neo4j and can use a lot of the Neo4j functionality in Apache Hop. Memgraph focuses on in-memory, realtime and scalable analytics.</p>
-</div>
-<div class="paragraph">
-<p>The Memgraph compatibility with Neo4j allows you to use a lot of the Neo4j functionality in Apache Hop with Memgraph.</p>
+<p><a href="https://www.memgraph.com" target="_blank" rel="noopener">Memgraph</a> is an in-memory graph database for realtime and scalable analytics which speaks Cypher over the Bolt protocol.
+Hop connects to it with a <a href="../../metadata-types/graphs/graph-database-connection.html" class="xref page">graph database connection</a> of the Memgraph type.
+See <a href="../graph-databases/index.html" class="xref page">Graph databases</a> for the other graph databases Hop works with.</p>
 </div>
 </div>
 </div>
@@ -2803,39 +2926,139 @@
 <h2 id="_run_memgraph_in_docker"><a class="link" href="#_run_memgraph_in_docker">Run Memgraph in docker</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <code>--bolt-server-name-for-init=Neo4j/</code> parameter needs to be set to allow Apache Hop to connect to a Memgraph database over the <code>bolt</code> protocol. More information is available in the <a href="https://memgraph.com/docs/memgraph/connect-to-memgraph/drivers/java" target="_blank" rel="noopener">memgraph docs</a>.</p>
-</div>
-<div class="paragraph">
 <p>Example command to start a Memgraph server in a container:</p>
 </div>
 <div class="paragraph">
-<p><code>docker run -it -p 7687:7687 -p 7444:7444 -p 3000:3000 -e MEMGRAPH="--bolt-server-name-for-init=Neo4j/" memgraph/memgraph-platform</code></p>
+<p><code>docker run -it -p 7687:7687 memgraph/memgraph</code></p>
+</div>
+<div class="paragraph">
+<p>Memgraph Lab, the browser of Memgraph, runs in a container of its own: <code>docker run -p 3000:3000 memgraph/lab</code>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_what_works"><a class="link" href="#_what_works">What works</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Use a <a href="../../metadata-types/graphs/graph-database-connection.html" class="xref page">graph database connection</a> of the Memgraph type. With it, these work:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="../../metadata-types/neo4j/neo4j-connection.html" class="xref page">Neo4j connections</a>: make sure to specify <code>bolt</code> instead of the default <code>neo4j</code> protocol</p>
+<p><a href="../../pipeline/transforms/graph-query.html" class="xref page">Graph query</a>, including <strong>Return graph</strong></p>
 </li>
 <li>
-<p>most of the <a href="../../pipeline/transforms/neo4j-graphoutput.html" class="xref page">Neo4j graph output</a>, <a href="../../pipeline/transforms/neo4j-output.html" class="xref page">Neo4j output</a>, <a href="../../pipeline/transforms/neo4j-cypher.html" class="xref page">Cypher transforms</a> and <a href="../../workflow/actions/neo4j-cypherscript.html" class="xref page">actions</a> (except for index manipulation, see below) seem to work correctly. Please create a <a href="https://github.com/apache/hop/issues/" rel="noopener" target="_blank">bug ticket</a> if you find any issues.</p>
+<p><a href="../../pipeline/transforms/graph-output.html" class="xref page">Graph output</a>, including the validation against the graph model and its indexes</p>
+</li>
+<li>
+<p><a href="../../pipeline/transforms/cypher-output.html" class="xref page">Cypher output</a></p>
+</li>
+<li>
+<p><a href="../../pipeline/transforms/cypher-builder.html" class="xref page">Cypher builder</a></p>
+</li>
+<li>
+<p><a href="../../pipeline/transforms/split-graph.html" class="xref page">Split graph</a> and <a href="../../pipeline/transforms/generate-graph-csvs.html" class="xref page">Generate graph CSVs</a></p>
+</li>
+<li>
+<p><a href="../../workflow/actions/graph-script.html" class="xref page">Graph script</a></p>
+</li>
+<li>
+<p><a href="../../workflow/actions/graph-index.html" class="xref page">Graph index</a> and <a href="../../workflow/actions/graph-constraint.html" class="xref page">Graph constraint</a>, in Memgraph&#8217;s syntax, see <a href="#_memgraph_syntax">Memgraph syntax</a></p>
+</li>
+<li>
+<p><a href="../../workflow/actions/check-graph-database-connections.html" class="xref page">Check graph database connections</a></p>
+</li>
+<li>
+<p>Execution logging (<code>HOP_GRAPH_LOGGING_CONNECTION</code>), the <a href="../../pipeline/transforms/get-graph-logging-info.html" class="xref page">Get graph logging info</a> transform and the <a href="../../hop-gui/perspective-graph-logging.html" class="xref page">Graph logging perspective</a></p>
+</li>
+<li>
+<p>The <a href="../../metadata-types/graphs/graph-database-location.html" class="xref page">graph database location</a> for execution information</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_known_issues"><a class="link" href="#_known_issues">known issues</a></h2>
+<h2 id="_what_doesnt_work"><a class="link" href="#_what_doesnt_work">What doesn&#8217;t work</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../../pipeline/transforms/neo4j-import.html" class="xref page">Neo4j import</a>: it runs neo4j-admin. Load the files of Generate graph CSVs with plain column names and <code>LOAD CSV</code> instead.</p>
+</li>
+<li>
+<p>Named indexes and constraints: Memgraph identifies them by their label and properties. The Graph index and Graph constraint actions ignore the names you give them, and drop them by label and properties.</p>
+</li>
+<li>
+<p>Node key constraints (a combination of properties which has to exist and be unique, a Neo4j Enterprise feature) and constraints on relationships: Memgraph doesn&#8217;t have them. The Graph constraint action only offers unique and existence constraints on nodes.</p>
+</li>
+<li>
+<p>Edge indexes on more than one property, and existence constraints on more than one property.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_memgraph_syntax"><a class="link" href="#_memgraph_syntax">Memgraph syntax</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Memgraph&#8217;s index syntax differs from the Neo4j syntax, which causes the <a href="../../workflow/actions/neo4j-index.html" class="xref page">Neo4j index</a> and <a href="../../workflow/actions/neo4j-constraint.html" class="xref page">Neo4j constraint</a> actions to fail.</p>
+<p>The Memgraph connection type makes Hop generate Memgraph&#8217;s syntax, like a SQL dialect does for relational databases:</p>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Operation</th>
+<th class="tableblock halign-left valign-top">Statement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Graph index: node index</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CREATE INDEX ON :Person(id)</code>, with several properties <code>CREATE INDEX ON :Person(a, b)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Graph index: relationship index</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CREATE EDGE INDEX ON :KNOWS(since)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Graph index: drop</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DROP INDEX ON :Person(id)</code>, <code>DROP EDGE INDEX ON :KNOWS(since)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Graph constraint: unique</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CREATE CONSTRAINT ON (n:Person) ASSERT n.id IS UNIQUE</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Graph constraint: existence</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CREATE CONSTRAINT ON (n:Person) ASSERT EXISTS (n.name)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Graph constraint: drop</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DROP CONSTRAINT ON (n:Person) ASSERT n.id IS UNIQUE</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Graph output and Cypher output with <strong>Create indexes</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A unique constraint for a single key property, an index for several</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
-<p>Creating indexes through a Cypher action or a Cypher transform fails with an error similar to <code>ERROR: org.neo4j.driver.exceptions.ClientException: Index manipulation not allowed in multicommand transactions.</code>.</p>
+<p>Memgraph doesn&#8217;t run some statements in an explicit transaction: information queries like <code>SHOW INDEX INFO</code>, and index and constraint changes.
+Hop runs them on their own, in auto-commit transactions: in the Graph index and Graph constraint actions, in the Graph script action, and in the Graph query transform when every statement of a batch is one of them.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_known_issues"><a class="link" href="#_known_issues">Known issues</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>With a <a href="../../metadata-types/graphs/neo4j-connection.html" class="xref page">Neo4j connection</a> (protocol <code>bolt</code>) instead of a Memgraph connection, Hop uses the Neo4j syntax and transactions: creating indexes and constraints fails, for example with <code>Index manipulation not allowed in multicommand transactions.</code>.
+Change the type of the connection to Memgraph to solve this: <a href="../../metadata-types/graphs/graph-database-connection.html#_converting_a_neo4j_connection" class="xref page">convert</a> the Neo4j connection to a graph database connection and select the Memgraph type.</p>
 </div>
 <div class="paragraph">
 <p>Check the <a href="https://memgraph.com/docs/memgraph/reference-guide/indexing" target="_blank" rel="noopener">Memgraph docs</a> for more information on indexing.</p>
@@ -2844,12 +3067,12 @@
 </div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
-  <a class="pagination__prev" href="../../../../manual/next/technology/cassandra/index.html"><span>Previous</span><strong>Cassandra</strong></a>
+  <a class="pagination__prev" href="../../../../manual/next/technology/gremlin/index.html"><span>Previous</span><strong>Gremlin</strong></a>
   <a class="pagination__next" href="../../../../manual/next/technology/neo4j/index.html"><span>Next</span><strong>Neo4j</strong></a>
 </nav>
   </main>
 
-<aside class="doc-toc" data-pagefind-ignore aria-label="On this page">
+<aside class="doc-toc" data-pagefind-ignore aria-label="On this page" data-levels="2">
   <p class="doc-toc__title">On this page</p>
   <div class="doc-toc__body"></div>
 </aside>

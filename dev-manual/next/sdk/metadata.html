@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Metadata and Providers | Apache Hop</title>
+<meta name="description" content="Working with Hop metadata elements, metadata providers (Json, Memory, Multi, Serializable), serializers, JSON persistence, and GUI integration with MetaSelectionLine.">
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Apache Hop">
+<meta property="og:title" content="Metadata and Providers">
+<meta property="og:description" content="Working with Hop metadata elements, metadata providers (Json, Memory, Multi, Serializable), serializers, JSON persistence, and GUI integration with MetaSelectionLine.">
+
+<meta property="og:image" content="https://hop.apache.org/img/social-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hop.apache.org/img/social-card.png">
+
+<link rel="icon" href="../../../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="196x196" href="../../../favicon-196x196.png">
+<link rel="manifest" href="../../../site.webmanifest">
+<link rel="stylesheet" href="../../../_/css/site.css">
+
+<script>(function(){try{var t=localStorage.getItem('hop-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+</head>
+<body class="doc-page">
+<a class="skip-link" href="#main" data-pagefind-ignore>Skip to main content</a>
+<header class="site-header" data-pagefind-ignore>
+  <div class="site-header__inner">
+    <a class="brand" href="../../../" aria-label="Apache Hop home">
+      <img src="../../../img/hop-logo.svg" alt="" width="34" height="34" aria-hidden="true">
+      <span class="brand__name">Apache Hop</span>
+    </a>
+
+    <nav class="mainnav" id="mainnav" aria-label="Main">
+      <ul class="mainnav__list">
+        <li><a href="../../../blog/">Blog</a></li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-docs">
+            Documentation <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-docs">
+            <li><a href="../../../manual/latest/getting-started/">Getting started</a></li>
+            <li><a href="../../../manual/latest/">User manual</a></li>
+            <li><a href="../../../dev-manual/latest/">Developer documentation</a></li>
+            <li><a href="../../../docs/architecture/">Architecture</a></li>
+            <li><a href="../../../docs/roadmap/">Roadmap</a></li>
+          </ul>
+        </li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-community">
+            Community <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-community">
+            <li><a href="../../../community/contributing/">Contributing</a></li>
+            <li><a href="../../../community/mailing-list/">Mailing lists</a></li>
+            <li><a href="../../../community/tools/">Tools & chat</a></li>
+            <li><a href="../../../community/events/">Events & user groups</a></li>
+            <li><a href="../../../community/team/">Team</a></li>
+            <li><a href="../../../community/support/">Support</a></li>
+            <li><a href="../../../community/commercial/">Commercial support</a></li>
+            <li><a href="../../../community/ethos/">Ethos</a></li>
+            <li><a href="../../../security/">Security advisories</a></li>
+          </ul>
+        </li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-asf">
+            Apache <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-asf">
+            <li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li>
+            <li><a href="https://www.apache.org/events/current-event" rel="noopener" target="_blank">Events</a></li>
+            <li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li>
+            <li><a href="https://www.apache.org/security/" rel="noopener" target="_blank">Security</a></li>
+            <li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li>
+            <li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li>
+            <li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-tools">
+      <div class="search" role="search">
+        <label class="visually-hidden" for="search-input">Search Apache Hop</label>
+        <input id="search-input" type="search" placeholder="Search" autocomplete="off">
+      </div>
+      <span class="socials">
+        <a class="icon-btn" href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+        <a class="icon-btn" href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"/></svg></a>
+        <a class="icon-btn" href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"/></svg></a>
+        <a class="icon-btn" href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg></a>
+      </span>
+      <a class="mainnav__cta" href="../../../download/">Download</a>
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Switch theme" title="Switch theme">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+      </button>
+      <button type="button" id="nav-burger" class="icon-btn burger" aria-expanded="false" aria-controls="mainnav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="doc-shell">
+<div class="doc-nav" id="doc-nav" data-pagefind-ignore>
+  <button type="button" class="doc-nav__close icon-btn" aria-label="Close navigation">&times;</button>
+  <nav aria-label="Documentation">
+    <div class="doc-nav__group">
+      
+      <ul class="doc-nav__list">
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Getting started section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Getting started</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/getting-started.html">The Hop codebase</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/setup-dev-environment.html">Setting up your development environment</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/build-and-test.html">Building and testing</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/contributing.html">Contributing changes</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/writing-documentation.html">Writing documentation</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Architecture section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Architecture</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/execution-model.html">How a pipeline and a workflow run</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/variables-and-metadata.html">Variables, parameters and metadata</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/dependencies-and-classloading.html">Dependencies and classloading</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/logging-and-debugging.html">Logging and debugging</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/performance.html">Performance on the row hot path</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/security.html">Security for developers</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Plugin development section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Plugin development</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-development.html">How plugins work</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Plugin types section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/plugin-types/index.html">Plugin types</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/pipeline-workflow.html">Pipelines and workflows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/data-connectivity.html">Data and connectivity</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/metadata-configuration.html">Metadata and configuration</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/execution-observability.html">Execution and observability</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/gui.html">GUI</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/diagram-exporters.html">Diagram exporters</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/ai-advisor-plugins.html">AI advisor plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/metadata-plugins.html">Metadata plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/metadata-serialization.html">Metadata serialization</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/metadata-injection.html">Metadata injection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/value-types.html">Value types</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Database plugins section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/database/index.html">Database plugins</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/creating-a-dialect.html">Creating a dialect</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/column-types.html">Column types and type rules</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/value-bindings.html">Moving values across JDBC</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/extending-another-dialect.html">Extending a dialect you don&#8217;t own</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/testing.html">Testing a database plugin</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/migrating-from-variants.html">Migrating from isXVariant()</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/gui-plugins-toolbars.html">GUI plugins and toolbars</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/annotation-derived-widgets.html">Annotation derived widgets</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/engine-compatibility.html">Engine compatibility</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/lineage.html">Lineage observation hub</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/internationalisation.html">Internationalisation (i18n)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/svg-files.html">SVG files</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-samples.html">Plugin samples</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/start-your-own-plugin.html">Creating a plugin outside the Hop repository</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/marketplace-publish-plugin.html">Publishing a plugin to Nexus (marketplace)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/porting-kettle-plugins.html">Porting Kettle plugins</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Testing section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Testing</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/testing/unit-testing.html">Unit tests</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/integration-testing.html">Integration tests</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/testing/ui-testing.html">UI tests with SWTBot</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Embedding and interfaces section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Embedding and interfaces</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle The Hop SDK section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/sdk/index.html">The Hop SDK</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/pipelines.html">Pipelines API</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/workflows.html">Workflows API</a>
+    
+  </li>
+  <li class="doc-nav__item is-current">
+    <a href="../../../dev-manual/next/sdk/metadata.html">Metadata and Providers</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/vfs.html">File Handling with HopVFS</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/logging.html">Logging Subsystem</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Plugin Development Guide section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/sdk/plugins/index.html">Plugin Development Guide</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/transforms.html">Transforms</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/actions.html">Actions</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/metadata.html">Metadata Elements</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/databases.html">Database Dialects</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/gui.html">GUI Plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/file-types.html">Hop File Types</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/variable-resolvers.html">Variable Resolvers</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/extension-points.html">Extension Points</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/commands.html">Hop Commands</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/configuration.html">Configuration Plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/perspectives.html">Perspectives</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/vfs.html">VFS Plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/value-types.html">Value Types</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/servlets.html">Hop Server Servlets</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/execution-info.html">Execution Information Locations</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/hop-sdk.html">Legacy SDK Guide</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop Web section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/hopweb/index.html">Hop Web</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/hopweb/developer-guide.html">Hop Web Developer Guide</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/hopweb/hopweb-antipatterns.html">Hop Web Antipatterns</a>
+    
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Distribution and release section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Distribution and release</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/docker-build.html">Docker Build Script</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Apache Release Process section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/apache-release/index.html">Apache Release Process</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/apache-release/creating-a-release.html">Creating a Release</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/apache-release/promoting-a-release.html">Promoting a Release</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/apache-release/checking-a-release.html">Checking a Release</a>
+    
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+    </div>
+  </nav>
+<div class="nav-foot">
+  <details class="explore">
+    <summary>
+      <span class="explore__now">
+        <span class="explore__component">Development Documentation</span>
+        <span class="explore__version">2.20.0</span>
+      </span>
+      <svg class="explore__chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </summary>
+    <div class="explore__body">
+      <div class="explore__group">
+  <p class="explore__title"></p>
+  <ul>
+    <li class="is-current">
+      <a href="../../../dev-manual/next/sdk/metadata.html">2.20.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/latest/index.html" title="This page does not exist in 2.19.0; opens the start page">2.19.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/2.18.1/index.html" title="This page does not exist in 2.18.1; opens the start page">2.18.1</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/2.18.0/index.html" title="This page does not exist in 2.18.0; opens the start page">2.18.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/2.17.0/index.html" title="This page does not exist in 2.17.0; opens the start page">2.17.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/2.16.0/index.html" title="This page does not exist in 2.16.0; opens the start page">2.16.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/2.15.0/index.html" title="This page does not exist in 2.15.0; opens the start page">2.15.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/2.14.0/index.html" title="This page does not exist in 2.14.0; opens the start page">2.14.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/2.13.0/index.html" title="This page does not exist in 2.13.0; opens the start page">2.13.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/2.12.0/index.html" title="This page does not exist in 2.12.0; opens the start page">2.12.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/2.11.0/index.html" title="This page does not exist in 2.11.0; opens the start page">2.11.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/2.10.0/index.html" title="This page does not exist in 2.10.0; opens the start page">2.10.0</a>
+    </li>
+  </ul>
+</div>
+
+        
+        <div class="explore__group">
+  <p class="explore__title">User manual</p>
+  <ul>
+    <li>
+      <a href="../../../manual/next/index.html">2.20.0 (pre-release)</a>
+    </li>
+    <li>
+      <a href="../../../manual/latest/index.html">2.19.0</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.18.1/index.html">2.18.1</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.18.0/index.html">2.18.0</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.17.0/index.html">2.17.0</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.16.0/index.html">2.16.0</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.15.0/index.html">2.15.0</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.14.0/index.html">2.14.0</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.13.0/index.html">2.13.0</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.12.0/index.html">2.12.0</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.11.0/index.html">2.11.0</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.10.0/index.html">2.10.0</a>
+    </li>
+  </ul>
+</div>
+
+    </div>
+  </details>
+
+  <a class="nav-foot__edit" href="https://github.com/apache/hop/edit/main/docs/hop-dev-manual/modules/ROOT/pages/sdk/metadata.adoc" rel="noopener" target="_blank">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758zm1.414 1.06a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354zM11.189 6.25 9.75 4.81l-6.286 6.287a.25.25 0 0 0-.064.108l-.558 1.953 1.953-.558a.25.25 0 0 0 .108-.064z"/></svg>
+    Edit this page
+  </a>
+</div>
+</div>
+  <main class="doc-main" id="main">
+    <button type="button" class="doc-nav__open" aria-expanded="false" aria-controls="doc-nav" data-pagefind-ignore>
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      Documentation menu
+    </button>
+<nav class="breadcrumbs" data-pagefind-ignore aria-label="Breadcrumb">
+  <ol>
+    <li><a href="../../../">Home</a></li>
+    <li><span aria-current="page">Embedding and interfaces</span></li>
+    <li><a href="../../../dev-manual/next/sdk/index.html">The Hop SDK</a></li>
+    <li><a href="../../../dev-manual/next/sdk/metadata.html">Metadata and Providers</a></li>
+  </ol>
+</nav>
+    <article class="doc">
+      <h1>Metadata and Providers</h1>
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Metadata objects in Apache Hop define shared, reusable configurations: relational database connections, pipeline run configurations, execution information locations, dataset definitions, variable resolvers, and dozens of other components.
+Decoupling metadata from pipelines and workflows allows workflows to run across development, testing, and production environments simply by pointing to different metadata providers.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_metadata_model"><a class="link" href="#_the_metadata_model">The Metadata Model</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A metadata element is a Plain Old Java Object (POJO) implementing <code>IHopMetadata</code> (typically by extending <code>HopMetadataBase</code>) and annotated with <code>@HopMetadata</code> and <code>@HopMetadataProperty</code>.</p>
+</div>
+<div class="sect2">
+<h3 id="_defining_a_metadata_object"><a class="link" href="#_defining_a_metadata_object">Defining a Metadata Object</a></h3>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">import</span> org.apache.hop.metadata.api.HopMetadata;
+<span class="hljs-keyword">import</span> org.apache.hop.metadata.api.HopMetadataBase;
+<span class="hljs-keyword">import</span> org.apache.hop.metadata.api.HopMetadataProperty;
+<span class="hljs-keyword">import</span> org.apache.hop.metadata.api.IHopMetadata;
+<span class="hljs-keyword">import</span> lombok.Getter;
+<span class="hljs-keyword">import</span> lombok.Setter;
+
+<span class="hljs-meta">@HopMetadata(
+    key = &quot;custom-connection&quot;,                // Kebab-case directory identifier
+    legacyKeys = {&quot;CustomConnection&quot;},        // Backward compatibility keys
+    name = &quot;Custom Connection&quot;,
+    description = &quot;Defines a connection to an external API&quot;,
+    image = &quot;custom-connection.svg&quot;,
+    category = &quot;Connection&quot;
+)</span>
+<span class="hljs-meta">@Getter</span>
+<span class="hljs-meta">@Setter</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomConnection</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HopMetadataBase</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">IHopMetadata</span> {
+
+  <span class="hljs-meta">@HopMetadataProperty</span>
+  <span class="hljs-keyword">private</span> String hostname;
+
+  <span class="hljs-meta">@HopMetadataProperty</span>
+  <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">port</span> <span class="hljs-operator">=</span> <span class="hljs-number">8080</span>;
+
+  <span class="hljs-meta">@HopMetadataProperty(password = true)</span>
+  <span class="hljs-keyword">private</span> String apiKey;
+
+  <span class="hljs-type">public</span> <span class="hljs-title function_">CustomConnection</span><span class="hljs-params">()</span> {
+    <span class="hljs-built_in">super</span>();
+  }
+
+  <span class="hljs-type">public</span> <span class="hljs-title function_">CustomConnection</span><span class="hljs-params">(String name, String hostname, <span class="hljs-type">int</span> port, String apiKey)</span> {
+    <span class="hljs-built_in">this</span>.name = name;
+    <span class="hljs-built_in">this</span>.hostname = hostname;
+    <span class="hljs-built_in">this</span>.port = port;
+    <span class="hljs-built_in">this</span>.apiKey = apiKey;
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_key_naming_conventions"><a class="link" href="#_key_naming_conventions">Key Naming Conventions</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><code>key</code></strong>: Always use lower-case kebab-case (<code>mail-server-connection</code>, <code>pipeline-run-configuration</code>). This determines the folder name under <code>metadata/&lt;key&gt;/</code> in the project.</p>
+</li>
+<li>
+<p><strong><code>legacyKeys</code></strong>: When renaming a key, always retain the old keys in <code>legacyKeys</code> so existing installations do not silently lose their saved metadata.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_providers_and_serializers"><a class="link" href="#_providers_and_serializers">Providers and Serializers</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hop manages metadata persistence through the <code>IHopMetadataProvider</code> interface.
+A provider acts as a factory for <code>IHopMetadataSerializer&lt;T&gt;</code>, which provides type-safe CRUD operations.</p>
+</div>
+<div class="sect2">
+<h3 id="_performing_crud_operations"><a class="link" href="#_performing_crud_operations">Performing CRUD Operations</a></h3>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">import</span> org.apache.hop.metadata.api.IHopMetadataProvider;
+<span class="hljs-keyword">import</span> org.apache.hop.metadata.api.IHopMetadataSerializer;
+
+<span class="hljs-type">IHopMetadataProvider</span> <span class="hljs-variable">provider</span> <span class="hljs-operator">=</span> ...;
+
+<span class="hljs-comment">// Obtain a serializer for your metadata class</span>
+<span class="hljs-type">IHopMetadataSerializer</span>&lt;CustomConnection&gt; <span class="hljs-variable">serializer</span> <span class="hljs-operator">=</span>
+    provider.getSerializer(CustomConnection.class);
+
+<span class="hljs-comment">// 1. Create and Save</span>
+<span class="hljs-type">CustomConnection</span> <span class="hljs-variable">conn</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">CustomConnection</span>(<span class="hljs-string">&quot;AnalyticsServer&quot;</span>, <span class="hljs-string">&quot;analytics.internal&quot;</span>, <span class="hljs-number">9000</span>, <span class="hljs-string">&quot;secret123&quot;</span>);
+serializer.save(conn);
+
+<span class="hljs-comment">// 2. Check Existence</span>
+<span class="hljs-type">boolean</span> <span class="hljs-variable">exists</span> <span class="hljs-operator">=</span> serializer.exists(<span class="hljs-string">&quot;AnalyticsServer&quot;</span>);
+
+<span class="hljs-comment">// 3. Load by Name</span>
+<span class="hljs-type">CustomConnection</span> <span class="hljs-variable">loaded</span> <span class="hljs-operator">=</span> serializer.load(<span class="hljs-string">&quot;AnalyticsServer&quot;</span>);
+
+<span class="hljs-comment">// 4. List All Names</span>
+<span class="hljs-type">List</span>&lt;String&gt; <span class="hljs-variable">names</span> <span class="hljs-operator">=</span> serializer.listObjectNames();
+
+<span class="hljs-comment">// 5. Load All Objects</span>
+<span class="hljs-type">List</span>&lt;CustomConnection&gt; <span class="hljs-variable">allConnections</span> <span class="hljs-operator">=</span> serializer.loadAll();
+
+<span class="hljs-comment">// 6. Delete</span>
+serializer.delete(<span class="hljs-string">&quot;AnalyticsServer&quot;</span>);</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_four_metadata_providers"><a class="link" href="#_the_four_metadata_providers">The Four Metadata Providers</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hop ships four core metadata provider implementations suited for different runtime environments:</p>
+</div>
+<div class="sect2">
+<h3 id="_1_jsonmetadataprovider_filesystem_project"><a class="link" href="#_1_jsonmetadataprovider_filesystem_project">1. JsonMetadataProvider (Filesystem / Project)</a></h3>
+<div class="paragraph">
+<p>The standard provider used by the Hop GUI and Hop CLI.
+It persists each metadata element as an individual JSON file under <code>metadata/&lt;key&gt;/&lt;name&gt;.json</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">import</span> org.apache.hop.metadata.serializer.json.JsonMetadataProvider;
+
+<span class="hljs-comment">// Point to the root metadata folder of a project</span>
+<span class="hljs-type">String</span> <span class="hljs-variable">metadataRootFolder</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;/home/dev/projects/sales-etl/metadata&quot;</span>;
+<span class="hljs-type">JsonMetadataProvider</span> <span class="hljs-variable">jsonProvider</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonMetadataProvider</span>(
+    twoWayPasswordEncoder,
+    metadataRootFolder,
+    variables
+);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_memorymetadataprovider_in_memory_unit_tests"><a class="link" href="#_2_memorymetadataprovider_in_memory_unit_tests">2. MemoryMetadataProvider (In-Memory / Unit Tests)</a></h3>
+<div class="paragraph">
+<p>Stores metadata entirely in memory in Java hash maps without touching disk.
+Ideal for:
+* Unit and integration testing where test isolation is critical.
+* Ephemeral serverless executions where disk writes are restricted.
+* Dynamically injecting temporary connections during runtime.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">import</span> org.apache.hop.metadata.serializer.memory.MemoryMetadataProvider;
+
+<span class="hljs-type">MemoryMetadataProvider</span> <span class="hljs-variable">memoryProvider</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MemoryMetadataProvider</span>(
+    twoWayPasswordEncoder,
+    variables
+);
+
+<span class="hljs-comment">// Populate with mock connections</span>
+<span class="hljs-type">IHopMetadataSerializer</span>&lt;CustomConnection&gt; <span class="hljs-variable">serializer</span> <span class="hljs-operator">=</span>
+    memoryProvider.getSerializer(CustomConnection.class);
+serializer.save(<span class="hljs-keyword">new</span> <span class="hljs-title class_">CustomConnection</span>(<span class="hljs-string">&quot;TestConn&quot;</span>, <span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">8080</span>, <span class="hljs-string">&quot;test-key&quot;</span>));</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_multimetadataprovider_hierarchical_layered"><a class="link" href="#_3_multimetadataprovider_hierarchical_layered">3. MultiMetadataProvider (Hierarchical / Layered)</a></h3>
+<div class="paragraph">
+<p>Delegates across multiple metadata providers.
+Hop uses <code>MultiMetadataProvider</code> to combine project-specific metadata with global shared metadata.
+Lookups walk the list from the end, so the <strong>last</strong> provider that has an object wins.
+A save that does not name a provider writes to that same last provider.
+Put parent or shared providers first and the project provider last.
+A provider added after the project overrides the project on read and becomes the save target.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">import</span> org.apache.hop.metadata.serializer.multi.MultiMetadataProvider;
+
+<span class="hljs-type">List</span>&lt;IHopMetadataProvider&gt; <span class="hljs-variable">providers</span> <span class="hljs-operator">=</span> List.of(
+    sharedGlobalProvider, <span class="hljs-comment">// Earlier: used when no later provider has this name</span>
+    projectJsonProvider   <span class="hljs-comment">// Last: wins on read and receives default saves</span>
+);
+
+<span class="hljs-type">MultiMetadataProvider</span> <span class="hljs-variable">multiProvider</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MultiMetadataProvider</span>(
+    twoWayPasswordEncoder,
+    providers,
+    variables
+);
+
+<span class="hljs-comment">// Load walks backwards. The project provider is checked before the shared one.</span>
+<span class="hljs-type">CustomConnection</span> <span class="hljs-variable">conn</span> <span class="hljs-operator">=</span> multiProvider.getSerializer(CustomConnection.class).load(<span class="hljs-string">&quot;CentralDb&quot;</span>);
+
+<span class="hljs-comment">// Save with no metadata provider name on the object writes to the last provider.</span>
+multiProvider.getSerializer(CustomConnection.class).save(newConnection);</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_serializablemetadataprovider_remote_serialization"><a class="link" href="#_4_serializablemetadataprovider_remote_serialization">4. SerializableMetadataProvider (Remote Serialization)</a></h3>
+<div class="paragraph">
+<p>Bundles all metadata from a provider into a single serializable JSON string.
+This is used by Hop clients to bundle and transmit project metadata across network boundaries to Hop Server or remote containerized runners:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">import</span> org.apache.hop.core.metadata.SerializableMetadataProvider;
+
+<span class="hljs-comment">// Serialize all metadata in a provider into a JSON string:</span>
+<span class="hljs-type">SerializableMetadataProvider</span> <span class="hljs-variable">serializableProvider</span> <span class="hljs-operator">=</span>
+    <span class="hljs-keyword">new</span> <span class="hljs-title class_">SerializableMetadataProvider</span>(multiProvider);
+<span class="hljs-type">String</span> <span class="hljs-variable">metadataJson</span> <span class="hljs-operator">=</span> serializableProvider.toJson();
+
+<span class="hljs-comment">// On the remote engine, reconstitute the metadata provider:</span>
+<span class="hljs-type">SerializableMetadataProvider</span> <span class="hljs-variable">remoteProvider</span> <span class="hljs-operator">=</span>
+    <span class="hljs-keyword">new</span> <span class="hljs-title class_">SerializableMetadataProvider</span>(metadataJson);</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_gui_integration_and_dialogs"><a class="link" href="#_gui_integration_and_dialogs">GUI Integration and Dialogs</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When writing transform, action, or metadata dialogs, metadata selection is a common requirement.</p>
+</div>
+<div class="sect2">
+<h3 id="_1_metaselectionline_in_hand_coded_swt_dialogs"><a class="link" href="#_1_metaselectionline_in_hand_coded_swt_dialogs">1. MetaSelectionLine in Hand-Coded SWT Dialogs</a></h3>
+<div class="paragraph">
+<p><code>MetaSelectionLine&lt;T&gt;</code> is a composite widget that renders a combo box listing all available metadata objects of type <code>T</code> from the current <code>IHopMetadataProvider</code>. It includes buttons to create a <strong>New</strong> instance, <strong>Edit</strong> the selected instance, or <strong>Refresh</strong> the list:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">import</span> org.apache.hop.ui.core.widget.MetaSelectionLine;
+
+<span class="hljs-type">MetaSelectionLine</span>&lt;CustomConnection&gt; <span class="hljs-variable">wConnection</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MetaSelectionLine</span>&lt;&gt;(
+    variables,
+    metadataProvider,
+    CustomConnection.class,
+    shell,
+    SWT.NONE,
+    <span class="hljs-string">&quot;Custom Connection&quot;</span>,
+    <span class="hljs-string">&quot;Select the external API connection to use&quot;</span>
+);
+
+<span class="hljs-comment">// Populate the combo with available objects from the provider:</span>
+wConnection.fillItems();
+
+<span class="hljs-comment">// Select an active item:</span>
+wConnection.setText(<span class="hljs-string">&quot;AnalyticsServer&quot;</span>);
+
+<span class="hljs-comment">// Retrieve selected item:</span>
+<span class="hljs-type">String</span> <span class="hljs-variable">selectedName</span> <span class="hljs-operator">=</span> wConnection.getText();</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_declarative_selection_with_guicompositewidgets"><a class="link" href="#_2_declarative_selection_with_guicompositewidgets">2. Declarative Selection with GuiCompositeWidgets</a></h3>
+<div class="paragraph">
+<p>In modern Hop dialogs, avoid manual widget layouts.
+Annotate your Meta class with <code>@GuiWidgetElement(type = GuiElementType.METADATA)</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">import</span> org.apache.hop.core.gui.plugin.GuiPlugin;
+<span class="hljs-keyword">import</span> org.apache.hop.core.gui.plugin.GuiWidgetElement;
+<span class="hljs-keyword">import</span> org.apache.hop.core.gui.plugin.GuiElementType;
+<span class="hljs-keyword">import</span> org.apache.hop.core.gui.plugin.GuiWidgetGroupType;
+<span class="hljs-keyword">import</span> org.apache.hop.metadata.api.HopMetadataProperty;
+
+<span class="hljs-meta">@GuiPlugin</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyTransformMeta</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">BaseTransformMeta</span>&lt;MyTransform, MyTransformData&gt; {
+
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">GUI_PLUGIN_ELEMENT_PARENT_ID</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;MyTransformDialog-Parent&quot;</span>;
+
+  <span class="hljs-meta">@GuiWidgetElement(
+      id = &quot;connection&quot;,
+      order = &quot;0100&quot;,
+      type = GuiElementType.METADATA,
+      metadata = CustomConnection.class,
+      label = &quot;i18n::MyTransform.Connection.Label&quot;,
+      toolTip = &quot;i18n::MyTransform.Connection.Tooltip&quot;,
+      parentId = GUI_PLUGIN_ELEMENT_PARENT_ID,
+      groupType = GuiWidgetGroupType.BOXES,
+      group = &quot;Connection Settings&quot;
+  )</span>
+  <span class="hljs-meta">@HopMetadataProperty(key = &quot;connection&quot;)</span>
+  <span class="hljs-keyword">private</span> String connectionName;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When <code>GuiCompositeWidgets.addScrolledComposite()</code> renders this group, it instantiates and wires a <code>MetaSelectionLine&lt;CustomConnection&gt;</code>.
+The dialog layout around that call is <a href="../annotation-derived-widgets.html" class="xref page">Annotation derived widgets</a>.</p>
+</div>
+</div>
+</div>
+</div>
+    </article>
+<nav class="pagination" data-pagefind-ignore aria-label="Page">
+  <a class="pagination__prev" href="../../../dev-manual/next/sdk/workflows.html"><span>Previous</span><strong>Workflows API</strong></a>
+  <a class="pagination__next" href="../../../dev-manual/next/sdk/vfs.html"><span>Next</span><strong>File Handling with HopVFS</strong></a>
+</nav>
+  </main>
+
+<aside class="doc-toc" data-pagefind-ignore aria-label="On this page" data-levels="2">
+  <p class="doc-toc__title">On this page</p>
+  <div class="doc-toc__body"></div>
+</aside>
+</div>
+<footer class="site-footer" data-pagefind-ignore>
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <img src="../../../img/hop-logo.svg" alt="" width="30" height="30" aria-hidden="true">
+      <div>
+        <p>The Hop Orchestration Platform &mdash; visual data and metadata orchestration, designed once and run anywhere.</p>
+        <ul class="site-footer__socials">
+        <li><a href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"/></svg></a></li>
+        <li><a href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"/></svg></a></li>
+        <li><a href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg></a></li>
+        </ul>
+      </div>
+    </div>
+    <nav class="site-footer__nav" aria-label="Footer">
+      <div>
+        <h2>Documentation</h2>
+        <ul>
+          <li><a href="../../../manual/latest/getting-started/">Getting started</a></li>
+          <li><a href="../../../manual/latest/">User manual</a></li>
+          <li><a href="../../../dev-manual/latest/">Developer docs</a></li>
+          <li><a href="../../../download/">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Community</h2>
+        <ul>
+          <li><a href="../../../community/contributing/">Contributing</a></li>
+          <li><a href="../../../community/mailing-list/">Mailing lists</a></li>
+          <li><a href="../../../community/events/">Events</a></li>
+          <li><a href="../../../community/support/">Support</a></li>
+          <li><a href="../../../community/commercial/">Commercial support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Apache</h2>
+        <ul>
+          <li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li>
+          <li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li>
+          <li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li>
+          <li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li>
+          <li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="site-footer__legal">
+    <p>
+      Copyright &copy; 2019&ndash;2026 <a href="https://www.apache.org/" rel="noopener" target="_blank">The Apache Software Foundation</a>,
+      licensed under the <a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">Apache License, Version 2.0</a>.
+    </p>
+    <p>
+      Apache, Apache Hop, Hop, and the Apache feather logo are either registered trademarks or
+      trademarks of the Apache Software Foundation in the United States and/or other countries.
+    </p>
+  </div>
+</footer>
+
+<script src="../../../js/site.js"></script>
+<script src="../../../js/matomo.js"></script>
+<script src="../../../_/js/tabs.js"></script>
+</body>
+</html>

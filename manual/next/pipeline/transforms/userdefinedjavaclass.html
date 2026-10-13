@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title> User Defined Java Class | Apache Hop</title>
-<meta name="description" content="The User Defined Java Class transform allows you to enter User Defined Java Class to drive the functionality of a complete transform.">
+<meta name="description" content="The User Defined Java Class transform runs a Java class body you type in the dialog, compiled at runtime with Janino, as the transform.">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/pipeline/transforms/userdefinedjavaclass.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
 <meta property="og:title" content=" User Defined Java Class">
-<meta property="og:description" content="The User Defined Java Class transform allows you to enter User Defined Java Class to drive the functionality of a complete transform.">
+<meta property="og:description" content="The User Defined Java Class transform runs a Java class body you type in the dialog, compiled at runtime with Janino, as the transform.">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/pipeline/transforms/userdefinedjavaclass.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -184,6 +184,10 @@
     <a href="../../../../manual/next/installation-configuration.html">Installation and Configuration</a>
     
   </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/sizing.html">Sizing guide</a>
+    
+  </li>
   <li class="doc-nav__item is-parent">
     <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop in Docker section">
       <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -346,6 +350,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/beam/flink-k8s-operator-running-hop-pipeline.html">Running a Hop pipeline using the Flink Kubernetes Operator</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/beam/developing-beam-transforms.html">Developing a Beam transform</a>
     
   </li>
 </ul>
@@ -536,6 +544,38 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamdebeziuminput.html">Beam Debezium input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamelasticsearchinput.html">Beam Elasticsearch input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamelasticsearchoutput.html">Beam Elasticsearch output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beammqttinput.html">Beam MQTT input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beammqttoutput.html">Beam MQTT output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamsnowflakeinput.html">Beam Snowflake input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamsnowflakeoutput.html">Beam Snowflake output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beamsplunkoutput.html">Beam Splunk output</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/beamfileinput.html">Beam file input</a>
     
   </li>
@@ -569,6 +609,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/beamkinesisproduce.html">Beam Kinesis produce</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/beampartition.html">Beam partition</a>
     
   </li>
   <li class="doc-nav__item">
@@ -653,6 +697,14 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/csvinput.html">CSV file input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/cypher-builder.html">Cypher builder</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/cypher-output.html">Cypher output</a>
     
   </li>
   <li class="doc-nav__item">
@@ -788,6 +840,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/extractgraph.html">Extract graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/fake.html">Fake data</a>
     
   </li>
@@ -820,6 +876,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/generate-graph-csvs.html">Generate graph CSVs</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/generaterandomvalue.html">Generate Random Value</a>
     
   </li>
@@ -833,6 +893,14 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/getfilesrowcount.html">Get files rowcount</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/get-graph-logging-info.html">Get graph logging info</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/get-graph-schema.html">Get graph schema</a>
     
   </li>
   <li class="doc-nav__item">
@@ -873,6 +941,18 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/google-sheets-output.html">Google Sheets output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/graph-output.html">Graph output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/graph-query.html">Graph query</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/graph-vector-search.html">Graph vector search</a>
     
   </li>
   <li class="doc-nav__item">
@@ -952,6 +1032,14 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-input.html">Lake table input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-output.html">Lake table output</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/languagemodelchat.html">Language model chat</a>
     
   </li>
@@ -977,6 +1065,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/mapping-output.html">Mapping output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/maskfields.html">Mask fields</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1040,35 +1132,7 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-cypher.html">Neo4j Cypher</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-cypher-builder.html">Neo4j Cypher builder</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-gencsv.html">Neo4j generate CSVs</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-getloginfo.html">Neo4j Get Logging Info</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-graphoutput.html">Neo4j graph output</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/neo4j-import.html">Neo4j import</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-output.html">Neo4j output</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/neo4j-split-graph.html">Neo4j split graph</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1288,19 +1352,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-input.html">Spark lake table input</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-maintenance.html">Spark lake table maintenance</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-merge.html">Spark lake table merge</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/pipeline/transforms/spark-lake-table-output.html">Spark lake table output</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1313,6 +1369,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/splitfieldtorows.html">Split fields to rows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/split-graph.html">Split graph</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1433,6 +1493,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/verticabulkloader.html">Vertica Bulk Loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/watchfiles.html">Watch Files</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1571,15 +1635,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/check-graph-database-connections.html">Check graph database connections</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/folderisempty.html">Check if a folder is empty</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/xmlwellformed.html">Check if XML file is well-formed</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/workflow/actions/neo4j-checkconnections.html">Check Neo4j connections</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1615,6 +1679,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/create-property-graph.html">Create property graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/databricks-job-run.html">Databricks job run</a>
     
   </li>
@@ -1632,6 +1700,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/deletefile.html">Delete file</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/deleteexecutioninfo.html">Delete execution information</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1695,6 +1767,18 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/graph-constraint.html">Graph constraint</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/graph-index.html">Graph index</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/graph-script.html">Graph script</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/http.html">HTTP</a>
     
   </li>
@@ -1723,18 +1807,6 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/workflow/actions/neo4j-constraint.html">Neo4j constraint</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/workflow/actions/neo4j-cypherscript.html">Neo4j Cypher script</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/workflow/actions/neo4j-index.html">Neo4j index</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/ping.html">Ping a host</a>
     
   </li>
@@ -1756,6 +1828,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/repeat.html">Repeat</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/runlinter.html">Run Linter</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1912,11 +1988,19 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/vfs/git-vfs.html">Git</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/vfs/hdfs-vfs.html">HDFS</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/vfs/minio-vfs.html">MinIO</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/vfs/smb-vfs.html">SMB</a>
     
   </li>
 </ul>
@@ -2206,7 +2290,7 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/metadata-types/neo4j/neo4j-location-type.html">Neo4j location</a>
+    <a href="../../../../manual/next/metadata-types/graphs/graph-database-location.html">Graph database location</a>
     
   </li>
 </ul>
@@ -2221,7 +2305,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/git-vfs-connection.html">Git repository</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/google-storage-authentication.html">Google Storage Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/graphs/graph-database-connection.html">Graph Database Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2233,7 +2325,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/spark-catalog.html">Lakehouse catalog</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/mail-server-connection.html">Mail Server Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/masking-pattern.html">Masking Pattern</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2245,11 +2345,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/metadata-types/neo4j/neo4j-connection.html">Neo4j Connection</a>
+    <a href="../../../../manual/next/metadata-types/graphs/neo4j-connection.html">Neo4j Connection</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../../manual/next/metadata-types/neo4j/neo4j-graphmodel.html">Neo4j Graph Model</a>
+    <a href="../../../../manual/next/metadata-types/graphs/graph-model.html">Graph Model</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2293,15 +2393,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/smb-connection.html">SMB Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/splunk-connection.html">Splunk Connection</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/jms-connection.html">JMS connection</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../../manual/next/metadata-types/spark-catalog.html">Spark Catalog</a>
     
   </li>
   <li class="doc-nav__item is-parent">
@@ -2396,6 +2496,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/age/index.html">Apache AGE</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/technology/calcite/index.html">Apache Calcite</a>
     
   </li>
@@ -2405,6 +2509,18 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/technology/cassandra/index.html">Cassandra</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/falkordb/index.html">FalkorDB</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/graph-databases/index.html">Graph databases</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/gremlin/index.html">Gremlin</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2613,6 +2729,14 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/how-to-guides/joins-lookups.html">Joins and lookups</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/how-to-guides/graphrag.html">GraphRAG: answer questions from a knowledge graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/how-to-guides/high-volume-scd2.html">High-volume SCD2 loads</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2843,22 +2967,77 @@
 <h2 id="_description"><a class="link" href="#_description">Description</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The User Defined Java Class transform allows you to enter User Defined Java Class to drive the functionality of a complete transform.</p>
+<p>The User Defined Java Class transform runs Java code you type in the dialog as the implementation of one transform.</p>
 </div>
 <div class="paragraph">
-<p>In essence, this transform allows you to program your own plugin in a transform.</p>
+<p>It is not a place to build a full plugin.
+A real plugin is the right tool when the logic is reused, needs its own dialog, or needs more than a class body.
+This transform is for a small piece of logic that has to run as fast as a normal transform.</p>
 </div>
 <div class="paragraph">
-<p>The goal of this transform is not to allow a user to do full-scale Java development inside a transform.</p>
+<p>The code is compiled when the pipeline starts by the <a href="https://janino-compiler.github.io/janino/" target="_blank" rel="noopener">Janino</a> libraries.
+You do not write a <code>.java</code> file, a <code>package</code> line, an <code>import</code> line, or a <code>class</code> declaration.
+Each tab is the <strong>body</strong> of one class: fields and methods only.
+The tab name is the class name, so it has to be a valid Java identifier.
+A new transform starts with one tab named <code>Processor</code>.</p>
 </div>
 <div class="paragraph">
-<p>Obviously we have a whole plugin system available to help with that part.</p>
+<p>Janino already imports these packages, so classes from them can be used by their simple name:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>org.apache.hop.pipeline.transforms.userdefinedjavaclass</code></p>
+</li>
+<li>
+<p><code>org.apache.hop.pipeline.transform</code></p>
+</li>
+<li>
+<p><code>org.apache.hop.core.row</code></p>
+</li>
+<li>
+<p><code>org.apache.hop.core</code></p>
+</li>
+<li>
+<p><code>org.apache.hop.core.exception</code></p>
+</li>
+<li>
+<p><code>org.apache.hop.pipeline</code></p>
+</li>
+<li>
+<p><code>org.apache.hop.pipeline.engine</code></p>
+</li>
+<li>
+<p><code>org.apache.hop.workflow</code></p>
+</li>
+<li>
+<p><code>org.apache.hop.workflow.action</code></p>
+</li>
+<li>
+<p><code>org.apache.hop.core.plugins</code></p>
+</li>
+<li>
+<p><code>org.apache.hop.core.variables</code></p>
+</li>
+<li>
+<p><code>java.util</code></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>The goal is to allow users to define methods and logic with as little as code as possible, executed as fast as possible.</p>
+<p>Anything else needs a fully qualified name.
+Put extra jars in <code>plugins/transforms/janino/lib</code> so this transform can load them.
+See <a href="../../installation-configuration.html" class="xref page">Installation and configuration</a>.</p>
 </div>
 <div class="paragraph">
-<p>For this we use the <a href="https://janino-compiler.github.io/janino/" target="_blank" rel="noopener">Janino</a> project libraries that compile Java code in the form of classes at runtime.</p>
+<p>One tab is the <strong>transform class</strong>.
+Right-click that tab and choose <strong>Set as transform Class</strong>.
+Hop compiles it as a subclass of its own transform base and adds the constructor, so do not write a constructor yourself.
+That class is the one Hop calls while the pipeline runs.
+Other tabs are helper classes.
+They are compiled first, in alphabetical order of the tab name, and the transform class can use them with <code>new</code>.
+A helper can use another helper only when that other helper&#8217;s name sorts first.
+Choosing <strong>OK</strong> or <strong>Test class</strong> with no transform class asks whether the first tab should become one.</p>
 </div>
 </div>
 </div>
@@ -2882,7 +3061,22 @@
 <p>Transform name</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Name of the transform.</p>
+<p>Name of the transform.
+This name has to be unique in the pipeline.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Java target version</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Java language level Janino uses to compile every class tab.
+Choose a value from 6 to 21.
+A pipeline that does not store the option, or stores a value outside that range, is compiled as Java 6.
+The level does not unlock newer language features.
+Janino accepts generics, the diamond operator, for-each loops, <code>switch</code> on strings, and text blocks at every level.
+It rejects lambdas, method references, <code>var</code>, switch expressions, records, pattern matching in <code>instanceof</code>, and multi-type <code>catch</code> at every level, including 21.
+Use anonymous classes, explicit types, and plain <code>switch</code> statements instead.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2890,7 +3084,18 @@
 <p>Class code</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The Java code.</p>
+<p>The class body of the selected tab.
+See <a href="#the-class">The class</a>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Classes and code fragments</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Tree of class tabs, code snippets, and the input, info, and output fields.
+Double-click or drag an entry to insert it at the cursor.
+See <a href="#classes-and-snippets">Classes and code snippets</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2898,23 +3103,26 @@
 <p>Fields</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>List of output fields.</p>
+<p>Output fields this transform adds.
+Each row is one field:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Fieldname: Output field name.</p>
+<p><strong>Fieldname</strong>: name of the output field.</p>
 </li>
 <li>
-<p>Type: Type of field.</p>
+<p><strong>Type</strong>: Hop data type. See <a href="../../concepts.html#data-types" class="xref page">Data types</a>.</p>
 </li>
 <li>
-<p>Length: Length of the field.</p>
-</li>
-<li>
-<p>Precision: Precision of the field.</p>
+<p><strong>Length</strong> and <strong>Precision</strong>: see <a href="../formatting-values.html" class="xref page">Formatting numbers and dates</a>.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p><strong>Clear the result fields?</strong> drops every incoming field from the output layout.
+Leave it unchecked to keep the incoming fields and append the rows in this table.
+<code>createOutputRow()</code> follows the same choice: it copies the input row when the box is unchecked, and allocates an empty output row when the box is checked.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2922,18 +3130,19 @@
 <p>Parameters</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>You can use the Parameters table to avoid using hard-coded string values, such as field names (customer for example).</p>
+<p>Named values the class reads with <code>getParameter(tag)</code>, so field names and other constants are not hard-coded.
+See <a href="#parameters">Parameters</a>.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Tag: The parameter tag.</p>
+<p><strong>Tag</strong>: the name passed to <code>getParameter</code>.</p>
 </li>
 <li>
-<p>Value: The parameter value.</p>
+<p><strong>Value</strong>: the text returned for that tag. Variables in the value are resolved.</p>
 </li>
 <li>
-<p>Description: Description of the parameter.</p>
+<p><strong>Description</strong>: comment. Not visible to the class.</p>
 </li>
 </ul>
 </div></div></td>
@@ -2943,18 +3152,19 @@
 <p>Info transforms</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Additional transforms to read data from</p>
+<p>Extra input hops, separate from the main input that <code>getRow()</code> reads.
+See <a href="#info-and-target">Info transforms and target transforms</a>.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Tag</p>
+<p><strong>Tag</strong>: the name passed to <code>findInfoRowSet</code>.</p>
 </li>
 <li>
-<p>Transform: Which transform to read from.</p>
+<p><strong>Transform</strong>: an upstream transform already connected to this one.</p>
 </li>
 <li>
-<p>Description</p>
+<p><strong>Description</strong>: label shown for that info hop.</p>
 </li>
 </ul>
 </div></div></td>
@@ -2964,18 +3174,19 @@
 <p>Target transforms</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Destination Transform</p>
+<p>Specific output hops the class writes to with <code>putRowTo</code>, instead of the ordinary output of <code>putRow</code>.
+See <a href="#info-and-target">Info transforms and target transforms</a>.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Tag</p>
+<p><strong>Tag</strong>: the name passed to <code>findTargetRowSet</code>.</p>
 </li>
 <li>
-<p>Transform: Which transform to output to.</p>
+<p><strong>Transform</strong>: a downstream transform already connected to this one.</p>
 </li>
 <li>
-<p>Description</p>
+<p><strong>Description</strong>: label shown for that target hop.</p>
 </li>
 </ul>
 </div></div></td>
@@ -2985,7 +3196,8 @@
 <p>Test class</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Tests the class.</p>
+<p>Compiles the classes and previews them on generated rows.
+See <a href="#test-class">Test class</a>.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2993,218 +3205,510 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_usage"><a class="link" href="#_usage">Usage</a></h2>
+<h2 id="the-class"><a class="link" href="#the-class">The class</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_process_rows"><a class="link" href="#_process_rows">Process rows</a></h3>
+<h3 id="_which_methods_are_called"><a class="link" href="#_which_methods_are_called">Which methods are called</a></h3>
 <div class="paragraph">
-<p>The Processor code defines the processRow() method, which is the heart of the transform.
-This method is called by the pipeline in a tight loop and will continue until false is returned.</p>
+<p>Hop drives the transform class the same way it drives any other transform.
+Three methods matter:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>init()</code></dt>
+<dd>
+<p>Called once while the pipeline is preparing to start.
+Return <code>true</code> when initialization worked, or <code>false</code> to make the pipeline abort.
+The default implementation initializes the transform.
+Override it to open files or connections, and call <code>parent.initImpl()</code> (or <code>super.init()</code>) so that still happens.</p>
+</dd>
+<dt class="hdlist1"><code>processRow()</code></dt>
+<dd>
+<p>The method that does the work.
+You have to implement it; the class does not compile without it.
+Once execution has started, Hop calls it in a tight loop.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Return <code>true</code> to be called again.</p>
+</li>
+<li>
+<p>When there is nothing left to do, call <code>setOutputDone()</code> and return <code>false</code>.</p>
+</li>
+<li>
+<p><code>getRow()</code> blocks until the next row from the main input arrives, and returns <code>null</code> when that input is finished.
+That <code>null</code> is the usual place to call <code>setOutputDone()</code> and return <code>false</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>An exception thrown out of <code>processRow()</code> stops the pipeline: the error is logged, the error count is set, and the transform marks its output done.
+Catch a bad row yourself and send it to the error hop when the pipeline should keep going.
+See <a href="#error-handling">Error handling</a>.</p>
+</div>
+</dd>
+<dt class="hdlist1"><code>dispose()</code></dt>
+<dd>
+<p>Called once when this transform stops running, after its last <code>processRow()</code> call.
+Close what <code>init()</code> opened.
+Call <code>parent.disposeImpl()</code> (or <code>super.dispose()</code>).</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><code>initBeforeStart()</code> exists as well and is called once after <code>init()</code>, just before the threads start.
+Most classes do not need it.</p>
+</div>
+<div class="paragraph">
+<p>The dialog inserts starter code for <code>processRow()</code>, <code>init()</code>, and <code>dispose()</code> from the <strong>Code Snippets</strong> tree (<strong>Implement processRow</strong>, <strong>Implement init</strong>, <strong>Implement dispose</strong>).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_example"><a class="link" href="#_example">Example</a></h3>
+<div class="paragraph">
+<p>This class reads two input fields and writes a third.
+On the <strong>Parameters</strong> tab, add tags <code>FIRSTNAME_FIELD</code>, <code>LASTNAME_FIELD</code>, and <code>NAME_FIELD</code> with values <code>firstname</code>, <code>lastname</code>, and <code>name</code>.
+On the <strong>Fields</strong> tab, add one output field named <code>name</code>, type String.
+The transform class tab can stay named <code>Processor</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java">String firstnameField;
-String lastnameField;
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java">String firstNameField;
+String lastNameField;
 String nameField;
 
-<span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">processRow</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> HopException
-{
-    <span class="hljs-comment">// Let&#x27;s look up parameters only once for performance reason.</span>
-    <span class="hljs-comment">//</span>
-    <span class="hljs-keyword">if</span> (first) {
-      firstnameField = getParameter(<span class="hljs-string">&quot;FIRSTNAME_FIELD&quot;</span>);
-      lastnameField = getParameter(<span class="hljs-string">&quot;LASTNAME_FIELD&quot;</span>);
-      nameField = getParameter(<span class="hljs-string">&quot;NAME_FIELD&quot;</span>);
-      first=<span class="hljs-literal">false</span>;
-    }
-
-    <span class="hljs-comment">// First, get a row from the default input hop</span>
-    <span class="hljs-comment">//</span>
-    <span class="hljs-type">Object</span>[] <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> getRow();
-
-    <span class="hljs-comment">// If the row object is null, we are done processing.</span>
-    <span class="hljs-comment">//</span>
-    <span class="hljs-keyword">if</span> (r == <span class="hljs-literal">null</span>) {
-      setOutputDone();
-      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-    }
-
-    <span class="hljs-comment">// It is always safest to call createOutputRow() to ensure that your output row&#x27;s Object[] is large</span>
-    <span class="hljs-comment">// enough to handle any new fields you are creating in this transform.</span>
-    <span class="hljs-comment">//</span>
-    <span class="hljs-type">Object</span>[] <span class="hljs-variable">outputRow</span> <span class="hljs-operator">=</span> createOutputRow(r, data.outputRowMeta.size());
-
-    <span class="hljs-type">String</span> <span class="hljs-variable">firstname</span> <span class="hljs-operator">=</span> get(Fields.In, firstnameField).getString(r);
-    <span class="hljs-type">String</span> <span class="hljs-variable">lastname</span> <span class="hljs-operator">=</span> get(Fields.In, lastnameField).getString(r);
-
-    <span class="hljs-comment">// Set the value in the output field</span>
-    <span class="hljs-comment">//</span>
-    <span class="hljs-type">String</span> <span class="hljs-variable">name</span> <span class="hljs-operator">=</span> firstname+<span class="hljs-string">&quot; &quot;</span>+lastname;
-    get(Fields.Out, nameField).setValue(outputRow, name);
-
-    <span class="hljs-comment">// putRow will send the row on to the default output hop.</span>
-    <span class="hljs-comment">//</span>
-    putRow(data.outputRowMeta, outputRow);
-
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_error_handling"><a class="link" href="#_error_handling">Error handling</a></h3>
-<div class="paragraph">
-<p>If you want Hop to handle errors that may occur while running your class in a pipeline, you must implement for your own error handling code.
-Before adding any error handling code, right-click on the User Defined Java Class transform in the Hop client canvas and select Error Handling in the menu that appears.
-The resulting transform error handling settings dialog box contains options for specifying an error target transform and associated field names that you will use to implement error handling in your defined code.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">try</span> {
-
-<span class="hljs-type">Object</span>     <span class="hljs-variable">numList</span> <span class="hljs-operator">=</span> strsList.stream()
-                        .map( <span class="hljs-keyword">new</span> <span class="hljs-title class_">ToInteger</span>() )
-                     .sorted( <span class="hljs-keyword">new</span> <span class="hljs-title class_">ReverseCase</span>() )
-                     .collect( Collectors.toList() );
-
-    get( Fields.Out, <span class="hljs-string">&quot;reverseOrder&quot;</span> ).setValue( row, numList.toString() );
-
-} <span class="hljs-keyword">catch</span> (NumberFormatException ex) {
-    <span class="hljs-comment">// Number List contains a value that cannot be converteds to an Integer.</span>
-    rowInError = <span class="hljs-literal">true</span>;
-    errMsg = ex.getMessage();
-    errCnt = errCnt + <span class="hljs-number">1</span>;
-}
-
-<span class="hljs-keyword">if</span> ( !rowInError ) {
-    putRow( data.outputRowMeta, row );
-} <span class="hljs-keyword">else</span> {
-    <span class="hljs-comment">// Output errors to the error hop. Right click on transform and choose &quot;Error Handling...&quot;</span>
-    putError(data.outputRowMeta, row, errCnt, errMsg, <span class="hljs-string">&quot;Not allowed&quot;</span>, <span class="hljs-string">&quot;DEC_0&quot;</span>);
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The try in the code sample above tests to see if numList contains valid numbers.
-If the list contains a number that is not valid, putError is used to handle the error and direct it to the wlog: ErrorPath transform in the sample pipeline.
-The ErrorPath transform is also specified in the Target transforms tab of the User Define Java Class transform.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_logging"><a class="link" href="#_logging">Logging</a></h3>
-<div class="paragraph">
-<p>You need to implement logging in your defined transform if you want Hop to log data actions from your class, such as read, write, output, or update data.
-The following code is an example of how to implement logging:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java">putRow( data.outputMeta, r );
-
-<span class="hljs-keyword">if</span> ( checkFeedback( getLinesOutput() ) ) {
-  <span class="hljs-keyword">if</span> ( log.isBasic() ) {
-    logBasic( <span class="hljs-string">&quot;Have I got rows for you! &quot;</span> + getLinesOutput() );
+<span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">processRow</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> HopException {
+  <span class="hljs-comment">// Resolve the parameter tags once. The values are the field names.</span>
+  <span class="hljs-comment">//</span>
+  <span class="hljs-keyword">if</span> (first) {
+    firstNameField = getParameter(<span class="hljs-string">&quot;FIRSTNAME_FIELD&quot;</span>);
+    lastNameField = getParameter(<span class="hljs-string">&quot;LASTNAME_FIELD&quot;</span>);
+    nameField = getParameter(<span class="hljs-string">&quot;NAME_FIELD&quot;</span>);
+    first = <span class="hljs-literal">false</span>;
   }
+
+  <span class="hljs-comment">// Read one row from the main input hop. null means that input is finished.</span>
+  <span class="hljs-comment">//</span>
+  <span class="hljs-type">Object</span>[] <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> getRow();
+  <span class="hljs-keyword">if</span> (r == <span class="hljs-literal">null</span>) {
+    setOutputDone();
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
+
+  <span class="hljs-type">String</span> <span class="hljs-variable">firstName</span> <span class="hljs-operator">=</span> get(Fields.In, firstNameField).getString(r);
+  <span class="hljs-type">String</span> <span class="hljs-variable">lastName</span> <span class="hljs-operator">=</span> get(Fields.In, lastNameField).getString(r);
+
+  <span class="hljs-comment">// Copy the input row and make room for the fields added on the Fields tab.</span>
+  <span class="hljs-comment">// When &quot;Clear the result fields?&quot; is checked this is a new empty row instead,</span>
+  <span class="hljs-comment">// so the input values above must be read from r, not from outputRow.</span>
+  <span class="hljs-comment">//</span>
+  <span class="hljs-type">Object</span>[] <span class="hljs-variable">outputRow</span> <span class="hljs-operator">=</span> createOutputRow(r, data.outputRowMeta.size());
+  get(Fields.Out, nameField).setValue(outputRow, firstName + <span class="hljs-string">&quot; &quot;</span> + lastName);
+
+  <span class="hljs-comment">// Send the row to the ordinary output hops.</span>
+  <span class="hljs-comment">//</span>
+  putRow(data.outputRowMeta, outputRow);
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
 }</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_class_and_code_fragments"><a class="link" href="#_class_and_code_fragments">Class and code fragments</a></h3>
+<h3 id="classes-and-snippets"><a class="link" href="#classes-and-snippets">Classes and code snippets</a></h3>
 <div class="paragraph">
-<p>You can navigate through your defined classes along with related code snippets and fields through the Classes and Code Fragments panel.
-You can right-click on any item in this tree to either Delete, Rename, or Show Sample.</p>
+<p>The left-hand tree has three kinds of entry.</p>
 </div>
-<div class="paragraph">
-<p><strong>Classes</strong></p>
-</div>
-<div class="paragraph">
-<p>The Classes folder indicates what classes have corresponding code block tabs in the Class Code panel.</p>
-</div>
-<div class="paragraph">
-<p><strong>Code Snippets</strong></p>
-</div>
-<div class="paragraph">
-<p>The Code Snippets folder contains ready to use fragments for the most common User Defined Java Class operations, grouped by category.
-Click a snippet to insert it at the cursor position in the active class tab, or right-click it and pick Show Sample to open it in a read-only tab for reference.</p>
-</div>
-<div class="paragraph">
-<p><strong>Input Fields</strong></p>
-</div>
-<div class="paragraph">
-<p>The Input fields folder contains any input fields you define in your code.
-While working with your defined code, you will be handling input and output fields.
-Many ways exist for handling input fields.
-For example, to start, examine the following description of an input row.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-type">IRowMeta</span> <span class="hljs-variable">inputRowMeta</span> <span class="hljs-operator">=</span> getInputRowMeta();</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The inputRowMeta object contains the metadata of the input row.
-It includes all the fields, their data types, lengths, names, format masks, and more.
-You can use this object to look up input fields.
-For example, if you want to look for a field called customer, you would use the following code.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-type">IValueMeta</span> <span class="hljs-variable">customer</span> <span class="hljs-operator">=</span> inputRowMeta.searchValueMeta(<span class="hljs-string">&quot;year&quot;</span>);</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Because looking up field names can be slow if you need to do it for every row that passes through a pipeline, you could look up field names in advance in a first block of code, as shown in the following example:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">if</span> (first) {
- yearIndex = getInputRowMeta().indexOfValue(getParameter(<span class="hljs-string">&quot;YEAR&quot;</span>));
- <span class="hljs-keyword">if</span> (yearIndex&lt;<span class="hljs-number">0</span>) {
-   <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HopException</span>(<span class="hljs-string">&quot;Year field not found in the input row, check parameter &#x27;YEAR&#x27;\!&quot;</span>);
- }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>To get the Integer value contained in the year field, you can then use the following construct.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-type">Object</span>[] <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> getRow();
-...
-<span class="hljs-type">Long</span> <span class="hljs-variable">year</span> <span class="hljs-operator">=</span> inputRowMeta().getInteger(r, yearIndex);</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>To make this process easier, you can use a shortcut in the following form.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-type">Long</span> <span class="hljs-variable">year</span> <span class="hljs-operator">=</span> get(Fields.In, <span class="hljs-string">&quot;year&quot;</span>).getInteger(r);</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This method also takes into account the index-based optimization mentioned above.</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><strong>Classes</strong></dt>
+<dd>
+<p>One entry per class tab.
+Double-click a name to show that tab.
+Right-click a tab for <strong>Add new</strong>, <strong>Add copy</strong>, <strong>Set as transform Class</strong>, and <strong>Remove class type</strong>.
+Right-click a class in the tree to rename or delete it.</p>
+</dd>
+<dt class="hdlist1"><strong>Code Snippets</strong></dt>
+<dd>
+<p>Fragments for the methods this class can call, grouped into <strong>Common use</strong>, <strong>Row manipulation</strong>, <strong>transform logging</strong>, <strong>transform status</strong>, <strong>transform/Row listeners</strong>, and <strong>Uncommon use</strong>.
+Double-click a snippet to insert it, or right-click it and choose <strong>Show Sample</strong> to open the sample in a read-only tab.</p>
+</dd>
+<dt class="hdlist1"><strong>Input fields</strong>, <strong>Info fields</strong>, and <strong>Output fields</strong></dt>
+<dd>
+<p>The fields reaching this transform, the fields on its info hops, and the fields it produces.
+Double-click a field to insert a <code>get(Fields.In, &#8230;&#8203;)</code> or <code>get(Fields.Out, &#8230;&#8203;)</code> call, or open the field and insert the getter for its data type or a <code>setValue</code> call.</p>
+</dd>
+</dl>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_blocking_specific_code"><a class="link" href="#_blocking_specific_code">Blocking specific code</a></h2>
+<h2 id="fields"><a class="link" href="#fields">Reading and writing fields</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>As a simple security measure you can block the execution of code containing specific strings.
-This can be done by adding exclusions to the <code>codeExclusions.xml</code> file located at &lt;Hop Installation&gt;/plugins/transforms/janino</p>
+<p>A row is an <code>Object[]</code>.
+The matching <code>IRowMeta</code> describes the field names, types, and order.</p>
 </div>
 <div class="paragraph">
-<p>Example:</p>
+<p><code>getRow()</code> returns the next main-input row and, on the first call, refreshes <code>data.inputRowMeta</code>.
+<code>data.outputRowMeta</code> is that layout plus the fields from the <strong>Fields</strong> tab, or only those fields when <strong>Clear the result fields?</strong> is checked.
+<code>getInputRowMeta()</code> returns the same input layout, but only once <code>getRow()</code> has returned a row; before that it is <code>null</code>.</p>
+</div>
+<div class="paragraph">
+<p>The usual way to read and write a field is <code>get(Fields.In, name)</code>, <code>get(Fields.Out, name)</code>, or <code>get(Fields.Info, name)</code>.
+Each returns a helper that remembers the field index, so the name is not searched again on every row.
+Pass the input row to an <code>In</code> getter and the output row to an <code>Out</code> setter.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Method</th>
+<th class="tableblock halign-left valign-top">Java type</th>
+<th class="tableblock halign-left valign-top">Hop type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>getString</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>getLong</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Long</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>getDouble</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Double</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>getBigDecimal</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BigDecimal</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BigNumber</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>getBoolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>getDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.util.Date</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>getTimestamp</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.sql.Timestamp</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timestamp</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>getBinary</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>byte[]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Binary</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>getInetAddress</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.net.InetAddress</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Internet Address</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>getObject</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">any, including Serializable</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code>setValue(row, value)</code> writes into that row at the field&#8217;s index.</p>
+</div>
+<div class="paragraph">
+<p>The same lookup by index, which is what the helper caches for you, looks like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>xml</div><pre class="highlightjs highlight is-highlighted"><code class="language-xml hljs" data-lang="xml">    <span class="hljs-tag">&lt;<span class="hljs-name">exclusions</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">exclusion</span>&gt;</span>System.<span class="hljs-tag">&lt;/<span class="hljs-name">exclusion</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">exclusion</span>&gt;</span>HopVfs.<span class="hljs-tag">&lt;/<span class="hljs-name">exclusion</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">exclusions</span>&gt;</span></code></pre>
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-type">Object</span>[] <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> getRow();
+<span class="hljs-keyword">if</span> (r == <span class="hljs-literal">null</span>) {
+  setOutputDone();
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+}
+<span class="hljs-comment">// The input layout is only known after getRow() has returned a row.</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-type">IRowMeta</span> <span class="hljs-variable">inputRowMeta</span> <span class="hljs-operator">=</span> getInputRowMeta();
+<span class="hljs-type">int</span> <span class="hljs-variable">yearIndex</span> <span class="hljs-operator">=</span> inputRowMeta.indexOfValue(getParameter(<span class="hljs-string">&quot;YEAR&quot;</span>));
+<span class="hljs-keyword">if</span> (yearIndex &lt; <span class="hljs-number">0</span>) {
+  <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HopException</span>(<span class="hljs-string">&quot;Year field not found in the input row, check parameter &#x27;YEAR&#x27;!&quot;</span>);
+}
+<span class="hljs-type">Long</span> <span class="hljs-variable">year</span> <span class="hljs-operator">=</span> inputRowMeta.getInteger(r, yearIndex);</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p><code>get(Fields.In, "year").getLong(r)</code> is the same read.
+<code>get(Fields.Info, name)</code> uses the field layout of the first info hop Hop finds on this transform, not every info hop.
+For any other info hop, take the layout from that row set, as in <a href="#info-and-target">Info transforms and target transforms</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="info-and-target"><a class="link" href="#info-and-target">Info transforms and target transforms</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_why_info_and_not_source_or_input"><a class="link" href="#_why_info_and_not_source_or_input">Why "info" and not "source" or "input"</a></h3>
+<div class="paragraph">
+<p>An info transform is not another name for the main input, and renaming the tab to <strong>Source transforms</strong> or <strong>Input transforms</strong> would hide that.</p>
+</div>
+<div class="paragraph">
+<p>Hop already calls this kind of hop an <strong>info</strong> stream.
+Stream Lookup uses the same idea: one hop is the stream of rows to process, and another hop only supplies data that helps process those rows.
+In this transform the split is:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Hops that are <strong>not</strong> listed on <strong>Info transforms</strong> are the main input. <code>getRow()</code> reads them, and also reads an info hop that has not been drained yet (see below).</p>
+</li>
+<li>
+<p>Hops that <strong>are</strong> listed there are info hops. The canvas draws an info icon on the hop. Read them with <code>findInfoRowSet(tag)</code> and <code>getRowFrom(rowSet)</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>"Input" is already the main hop.
+"Source" would not say which of the two upstream hops it is.</p>
+</div>
+<div class="paragraph">
+<p>A target transform is the same idea on the way out.
+<code>putRow(data.outputRowMeta, row)</code> writes to the ordinary output hops, copied or distributed according to the transform&#8217;s hop settings.
+A hop listed on <strong>Target transforms</strong> is a specific destination. The canvas marks it with a target icon, and the class selects it with <code>findTargetRowSet(tag)</code> and <code>putRowTo</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_both_lists_can_have_several_rows"><a class="link" href="#_both_lists_can_have_several_rows">Both lists can have several rows</a></h3>
+<div class="paragraph">
+<p>Each row is one transform, and both tables accept as many rows as you need.
+Give every row its own tag.
+The class then picks the hop by that tag:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">processRow</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> HopException {
+  <span class="hljs-keyword">if</span> (first) {
+    first = <span class="hljs-literal">false</span>;
+
+    <span class="hljs-comment">// Drain every info hop before getRow(). Layouts differ, and getRow()</span>
+    <span class="hljs-comment">// would otherwise mix these rows into the main input.</span>
+    <span class="hljs-comment">//</span>
+    <span class="hljs-type">IRowSet</span> <span class="hljs-variable">lookup</span> <span class="hljs-operator">=</span> findInfoRowSet(<span class="hljs-string">&quot;lookup&quot;</span>);
+    Object[] infoRow;
+    <span class="hljs-keyword">while</span> ((infoRow = getRowFrom(lookup)) != <span class="hljs-literal">null</span>) {
+      <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> lookup.getRowMeta().getString(infoRow, <span class="hljs-string">&quot;key&quot;</span>, <span class="hljs-literal">null</span>);
+      <span class="hljs-comment">// keep what the main rows need from this info hop</span>
+    }
+  }
+
+  <span class="hljs-type">Object</span>[] <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> getRow();
+  <span class="hljs-keyword">if</span> (r == <span class="hljs-literal">null</span>) {
+    setOutputDone();
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
+  <span class="hljs-type">boolean</span> <span class="hljs-variable">accepted</span> <span class="hljs-operator">=</span> Boolean.TRUE.equals(get(Fields.In, <span class="hljs-string">&quot;flag&quot;</span>).getBoolean(r));
+  r = createOutputRow(r, data.outputRowMeta.size());
+
+  <span class="hljs-type">IRowSet</span> <span class="hljs-variable">target</span> <span class="hljs-operator">=</span> findTargetRowSet(accepted ? <span class="hljs-string">&quot;accepted&quot;</span> : <span class="hljs-string">&quot;rejected&quot;</span>);
+  putRowTo(data.outputRowMeta, r, target);
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>getRowFrom</code> removes an info row set from the main input once that hop is exhausted, which is why the loop above has to run first.
+<code>findInfoRowSet</code> and <code>findTargetRowSet</code> throw when the tag is missing or the hop is not connected.</p>
+</div>
+<div class="paragraph">
+<p>The transform named in an info or target row has to run as a single copy.
+<code>findInfoRowSet</code> also accepts an info transform that is partitioned in the same way as this transform.
+A main input and an info hop that share an upstream transform can stall a local pipeline; see <a href="../../how-to-guides/avoiding-deadlocks.html" class="xref page">Avoiding deadlocks</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_what_the_tag_is"><a class="link" href="#_what_the_tag_is">What the tag is</a></h3>
+<div class="paragraph">
+<p>The tag is a name you choose.
+It is the only identifier the class should use.</p>
+</div>
+<div class="paragraph">
+<p>The <strong>Transform</strong> column is the transform&#8217;s name on the canvas.
+The <strong>Tag</strong> column is a stable alias for that hop, so renaming the transform means editing the table instead of the code.
+<code>findInfoRowSet("lookup")</code> resolves the tag <code>lookup</code> to the transform name stored on that row, then finds the row set coming from that transform.
+<code>findTargetRowSet("accepted")</code> does the same for an output row set.
+The description is only a label, shown on the hop; the class never reads it.</p>
+</div>
+<div class="paragraph">
+<p>A tag on the <strong>Parameters</strong> tab is a different map.
+It does not name a transform.
+See <a href="#parameters">Parameters</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_why_list_a_transform_that_is_already_on_the_canvas"><a class="link" href="#_why_list_a_transform_that_is_already_on_the_canvas">Why list a transform that is already on the canvas</a></h3>
+<div class="paragraph">
+<p>The hop and the table do different jobs.
+Drawing the hop creates the pipe.
+The table tells Hop what kind of pipe it is, and the name the class uses for it.</p>
+</div>
+<div class="paragraph">
+<p>The <strong>Transform</strong> drop-down only offers transforms that are already connected: upstream transforms on the info tab, downstream transforms on the target tab.
+After you pick one, Hop treats that existing hop as an info hop or a target hop.
+Leave the table empty and every incoming hop stays main input (<code>getRow()</code>) and every outgoing hop stays an ordinary output (<code>putRow()</code>).
+The table does not replace the hops, and the hops do not record the tag.</p>
+</div>
+<div class="paragraph">
+<p>Target hops stay in the output list.
+A row passed to <code>putRow</code> is therefore copied or distributed to them as well as to any ordinary output.
+Call <code>putRowTo</code> when that row should go to one target and not to every output.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="parameters"><a class="link" href="#parameters">Parameters</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>getParameter("TAG")</code> returns the <strong>Value</strong> of the parameter with that tag, with variables resolved, or <code>null</code> when the tag is not in the table.
+A value of <code>${YEAR_FIELD}</code> is resolved in the pipeline before the class sees it.</p>
+</div>
+<div class="paragraph">
+<p><code>getVariable("NAME")</code> and <code>getVariable("NAME", "default")</code> read pipeline variables.
+<code>setVariable("NAME", "value")</code> sets one.
+Those are not the parameter table.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="test-class"><a class="link" href="#test-class">Test class</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Test class</strong> does not run the pipeline on the canvas, and it does not open a dialog that asks you to type rows.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>It checks that a tab is marked as the transform class.</p>
+</li>
+<li>
+<p>It compiles every class tab the way a real run would.
+A compile error is shown and the test stops.
+The message names the forbidden text when a <a href="#blocking-code">code exclusion</a> matched.</p>
+</li>
+<li>
+<p>It looks up this transform in the pipeline the dialog was opened from.
+If the transform is not there, the test stops and reports that the fields from the previous transforms could not be read.</p>
+</li>
+<li>
+<p>It builds a throwaway pipeline named after this transform with <code> - PREVIEW</code> appended:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A Generate Rows transform named <code><mark> TEST DATA </mark></code> feeds the main input.
+It produces 10 rows.
+The fields are the main input fields of this transform, not the fields of the info transforms.
+The sample value depends on the type: <code>test value test value</code> for a String, zero for an Integer, Number, or BigNumber, <code>Y</code> or <code>true</code> for a Boolean, the current date and time for a Date, and the bytes of <code>ABCDEFGHIJ</code> for Binary.</p>
+</li>
+<li>
+<p>Each info transform is replaced by a Generate Rows transform of the same name, using that transform&#8217;s fields, hopped into the class.</p>
+</li>
+<li>
+<p>Each target transform is replaced by a Dummy transform of the same name, hopped out of the class.
+Nothing is written to the real downstream transforms.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>It runs that pipeline and previews up to 10 rows written by this class with <code>putRow</code>.
+Rows sent only with <code>putRowTo</code> go to the dummy target and are not part of that preview.
+When the run reports errors, the test shows the log as well.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="error-handling"><a class="link" href="#error-handling">Error handling</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The transform supports the standard error hop.
+Right-click it on the canvas and choose <strong>Error Handling</strong>, then pick the transform that receives rejected rows and the fields that will carry the error count, description, field name, and code.
+That hop is not an info transform and not a target transform.
+<code>putError</code> fails when this has not been set.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">try</span> {
+  <span class="hljs-type">Long</span> <span class="hljs-variable">amount</span> <span class="hljs-operator">=</span> get(Fields.In, <span class="hljs-string">&quot;amount&quot;</span>).getLong(r);
+  get(Fields.Out, <span class="hljs-string">&quot;doubled&quot;</span>).setValue(outputRow, amount * <span class="hljs-number">2</span>);
+  putRow(data.outputRowMeta, outputRow);
+} <span class="hljs-keyword">catch</span> (Exception ex) {
+  <span class="hljs-comment">// nr errors, description, field name, error code</span>
+  putError(data.outputRowMeta, outputRow, <span class="hljs-number">1</span>, ex.getMessage(), <span class="hljs-string">&quot;amount&quot;</span>, <span class="hljs-string">&quot;UDJC001&quot;</span>);
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_logging"><a class="link" href="#_logging">Logging</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Logging is explicit.
+<code>logBasic</code>, <code>logMinimal</code>, <code>logDetailed</code>, <code>logDebug</code>, <code>logRowlevel</code>, and <code>logError</code> write to this transform&#8217;s log channel.
+<code>checkFeedback(getLinesOutput())</code> is true every time the feedback line interval is reached, which keeps a long run from logging every row:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java">putRow(data.outputRowMeta, outputRow);
+
+<span class="hljs-keyword">if</span> (checkFeedback(getLinesOutput())) {
+  logBasic(<span class="hljs-string">&quot;Wrote &quot;</span> + getLinesOutput() + <span class="hljs-string">&quot; rows&quot;</span>);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>getLinesInput</code>, <code>getLinesRead</code>, <code>getLinesWritten</code>, <code>getLinesUpdated</code>, <code>getLinesSkipped</code>, <code>getLinesRejected</code>, and <code>getErrors</code> return the counters.
+<code>setErrors(1)</code> and <code>stopAll()</code> fail the pipeline from inside the class.
+<code>addResultFile(resultFile)</code> adds a file to the pipeline result.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="blocking-code"><a class="link" href="#blocking-code">Blocking specific code</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Code is checked, before it is compiled, against a list of forbidden substrings.
+A match is rejected with the text that matched.</p>
+</div>
+<div class="paragraph">
+<p>Hop reads <code>codeExclusions.xml</code> in the Janino plugin folder (<code>plugins/transforms/janino</code>).
+The file installed there is empty, so everything is allowed.
+Add an <code>exclusion</code> element for each piece of text to block:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>xml</div><pre class="highlightjs highlight is-highlighted"><code class="language-xml hljs" data-lang="xml"><span class="hljs-tag">&lt;<span class="hljs-name">exclusions</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">exclusion</span>&gt;</span>System.<span class="hljs-tag">&lt;/<span class="hljs-name">exclusion</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">exclusion</span>&gt;</span>HopVfs.<span class="hljs-tag">&lt;/<span class="hljs-name">exclusion</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">exclusions</span>&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The check is a substring search of the class source, not a Java parser.
+<code>System.</code> also matches that text inside a comment or a string.</p>
 </div>
 </div>
 </div>
@@ -3215,7 +3719,7 @@ This can be done by adding exclusions to the <code>codeExclusions.xml</code> fil
 </nav>
   </main>
 
-<aside class="doc-toc" data-pagefind-ignore aria-label="On this page">
+<aside class="doc-toc" data-pagefind-ignore aria-label="On this page" data-levels="2">
   <p class="doc-toc__title">On this page</p>
   <div class="doc-toc__body"></div>
 </aside>

@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Workflows | Apache Hop</title>
-<meta name="description" content="Workflows are one of the core building blocks in Apache Hop. Where pipelines do the heavy data lifting, workflows take care of the orchestration work: prepare the environment, fetch remote files, perform error handling and executing child workflows and pipelines.">
+<meta name="description" content="Workflows are the orchestrators in Apache Hop: managing execution order, verifying environments, coordinating child pipelines, handling errors, and routing tasks sequentially with smart decision backtracking.">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/workflow/workflows.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
 <meta property="og:title" content="Workflows">
-<meta property="og:description" content="Workflows are one of the core building blocks in Apache Hop. Where pipelines do the heavy data lifting, workflows take care of the orchestration work: prepare the environment, fetch remote files, perform error handling and executing child workflows and pipelines.">
+<meta property="og:description" content="Workflows are the orchestrators in Apache Hop: managing execution order, verifying environments, coordinating child pipelines, handling errors, and routing tasks sequentially with smart decision backtracking.">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/workflow/workflows.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -184,6 +184,10 @@
     <a href="../../../manual/next/installation-configuration.html">Installation and Configuration</a>
     
   </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/sizing.html">Sizing guide</a>
+    
+  </li>
   <li class="doc-nav__item is-parent">
     <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop in Docker section">
       <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -346,6 +350,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/beam/flink-k8s-operator-running-hop-pipeline.html">Running a Hop pipeline using the Flink Kubernetes Operator</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/beam/developing-beam-transforms.html">Developing a Beam transform</a>
     
   </li>
 </ul>
@@ -536,6 +544,38 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamdebeziuminput.html">Beam Debezium input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamelasticsearchinput.html">Beam Elasticsearch input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamelasticsearchoutput.html">Beam Elasticsearch output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beammqttinput.html">Beam MQTT input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beammqttoutput.html">Beam MQTT output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamsnowflakeinput.html">Beam Snowflake input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamsnowflakeoutput.html">Beam Snowflake output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beamsplunkoutput.html">Beam Splunk output</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/beamfileinput.html">Beam file input</a>
     
   </li>
@@ -569,6 +609,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/beamkinesisproduce.html">Beam Kinesis produce</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/beampartition.html">Beam partition</a>
     
   </li>
   <li class="doc-nav__item">
@@ -653,6 +697,14 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/csvinput.html">CSV file input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/cypher-builder.html">Cypher builder</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/cypher-output.html">Cypher output</a>
     
   </li>
   <li class="doc-nav__item">
@@ -788,6 +840,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/extractgraph.html">Extract graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/fake.html">Fake data</a>
     
   </li>
@@ -820,6 +876,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/generate-graph-csvs.html">Generate graph CSVs</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/generaterandomvalue.html">Generate Random Value</a>
     
   </li>
@@ -833,6 +893,14 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/getfilesrowcount.html">Get files rowcount</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/get-graph-logging-info.html">Get graph logging info</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/get-graph-schema.html">Get graph schema</a>
     
   </li>
   <li class="doc-nav__item">
@@ -873,6 +941,18 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/google-sheets-output.html">Google Sheets output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/graph-output.html">Graph output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/graph-query.html">Graph query</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/graph-vector-search.html">Graph vector search</a>
     
   </li>
   <li class="doc-nav__item">
@@ -952,6 +1032,14 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/spark-lake-table-input.html">Lake table input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/spark-lake-table-output.html">Lake table output</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/languagemodelchat.html">Language model chat</a>
     
   </li>
@@ -977,6 +1065,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/mapping-output.html">Mapping output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/maskfields.html">Mask fields</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1040,35 +1132,7 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-cypher.html">Neo4j Cypher</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-cypher-builder.html">Neo4j Cypher builder</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-gencsv.html">Neo4j generate CSVs</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-getloginfo.html">Neo4j Get Logging Info</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-graphoutput.html">Neo4j graph output</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/neo4j-import.html">Neo4j import</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-output.html">Neo4j output</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/neo4j-split-graph.html">Neo4j split graph</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1288,19 +1352,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/spark-lake-table-input.html">Spark lake table input</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/spark-lake-table-maintenance.html">Spark lake table maintenance</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/spark-lake-table-merge.html">Spark lake table merge</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/pipeline/transforms/spark-lake-table-output.html">Spark lake table output</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1313,6 +1369,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/splitfieldtorows.html">Split fields to rows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/split-graph.html">Split graph</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1433,6 +1493,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/transforms/verticabulkloader.html">Vertica Bulk Loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/transforms/watchfiles.html">Watch Files</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1571,15 +1635,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/check-graph-database-connections.html">Check graph database connections</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/folderisempty.html">Check if a folder is empty</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/xmlwellformed.html">Check if XML file is well-formed</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/workflow/actions/neo4j-checkconnections.html">Check Neo4j connections</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1615,6 +1679,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/create-property-graph.html">Create property graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/databricks-job-run.html">Databricks job run</a>
     
   </li>
@@ -1632,6 +1700,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/deletefile.html">Delete file</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/deleteexecutioninfo.html">Delete execution information</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1695,6 +1767,18 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/graph-constraint.html">Graph constraint</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/graph-index.html">Graph index</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/graph-script.html">Graph script</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/http.html">HTTP</a>
     
   </li>
@@ -1723,18 +1807,6 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/workflow/actions/neo4j-constraint.html">Neo4j constraint</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/workflow/actions/neo4j-cypherscript.html">Neo4j Cypher script</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/workflow/actions/neo4j-index.html">Neo4j index</a>
-    
-  </li>
-  <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/ping.html">Ping a host</a>
     
   </li>
@@ -1756,6 +1828,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/repeat.html">Repeat</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/runlinter.html">Run Linter</a>
     
   </li>
   <li class="doc-nav__item">
@@ -1912,11 +1988,19 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/vfs/git-vfs.html">Git</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/vfs/hdfs-vfs.html">HDFS</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/vfs/minio-vfs.html">MinIO</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/vfs/smb-vfs.html">SMB</a>
     
   </li>
 </ul>
@@ -2206,7 +2290,7 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/metadata-types/neo4j/neo4j-location-type.html">Neo4j location</a>
+    <a href="../../../manual/next/metadata-types/graphs/graph-database-location.html">Graph database location</a>
     
   </li>
 </ul>
@@ -2221,7 +2305,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/git-vfs-connection.html">Git repository</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/google-storage-authentication.html">Google Storage Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/graphs/graph-database-connection.html">Graph Database Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2233,7 +2325,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/spark-catalog.html">Lakehouse catalog</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/mail-server-connection.html">Mail Server Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/masking-pattern.html">Masking Pattern</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2245,11 +2345,11 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/metadata-types/neo4j/neo4j-connection.html">Neo4j Connection</a>
+    <a href="../../../manual/next/metadata-types/graphs/neo4j-connection.html">Neo4j Connection</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../manual/next/metadata-types/neo4j/neo4j-graphmodel.html">Neo4j Graph Model</a>
+    <a href="../../../manual/next/metadata-types/graphs/graph-model.html">Graph Model</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2293,15 +2393,15 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/smb-connection.html">SMB Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/splunk-connection.html">Splunk Connection</a>
     
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/jms-connection.html">JMS connection</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/metadata-types/spark-catalog.html">Spark Catalog</a>
     
   </li>
   <li class="doc-nav__item is-parent">
@@ -2396,6 +2496,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/technology/age/index.html">Apache AGE</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/technology/calcite/index.html">Apache Calcite</a>
     
   </li>
@@ -2405,6 +2509,18 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/technology/cassandra/index.html">Cassandra</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/technology/falkordb/index.html">FalkorDB</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/technology/graph-databases/index.html">Graph databases</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/technology/gremlin/index.html">Gremlin</a>
     
   </li>
   <li class="doc-nav__item">
@@ -2616,6 +2732,14 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/how-to-guides/graphrag.html">GraphRAG: answer questions from a knowledge graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/how-to-guides/high-volume-scd2.html">High-volume SCD2 loads</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/how-to-guides/logging-pipeline-log.html">Logging pipeline data with pipeline log</a>
     
   </li>
@@ -2776,83 +2900,542 @@
     <article class="doc">
       <h1>Workflows</h1>
       <div class="sect1">
-<h2 id="_workflow_overview"><a class="link" href="#_workflow_overview">Workflow overview</a></h2>
+<h2 id="_what_workflows_actually_do"><a class="link" href="#_what_workflows_actually_do">What Workflows Actually Do</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Workflows are one of the core building blocks in Apache Hop. Where pipelines do the heavy data lifting, workflows take care of the orchestration work: prepare the environment, fetch remote files, perform error handling and executing child workflows and pipelines.</p>
+<p>Workflows are the <strong>orchestrators</strong> of Apache Hop.
+Where <a href="../pipeline/pipelines.html" class="xref page">pipelines</a> are the streaming workers that process rows of data, workflows are the managers that coordinate jobs: they ensure prerequisites are met, fetch required files, trigger child pipelines and workflows in the proper order, react to errors, and send notifications.</p>
 </div>
 <div class="paragraph">
-<p>Workflows consist of a series of <a href="actions.html" class="xref page">actions</a>, connected by hops. Just like a <a href="../pipeline/transforms.html" class="xref page">transform</a> in a <a href="../pipeline/pipelines.html" class="xref page">pipeline</a>, each action is a small piece of functionality. The combination of a number of actions allows Hop developers to build powerful data orchestration solutions.</p>
-</div>
-<div class="paragraph">
-<p>Even though there is some visual resemblance, workflows and pipelines operate very differently.</p>
+<p>Workflows manage the operational lifecycle of your data platform:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Workflows perform orchestration tasks. Actions in a workflow usually do not operate on the data directly (even though you <em>can</em> change data e.g. through <a href="actions/sql.html" class="xref page">SQL</a>).</p>
+<p><strong>Environment Preparation &amp; Health Checks</strong>: Verify that target databases are reachable, ping remote servers, check whether webservices are online, and verify disk space before launching heavy data jobs.</p>
 </li>
 <li>
-<p>Workflows have one (and only one) mandatory starting point (a <a href="actions/start.html" class="xref page">Start</a> action), but can have multiple end actions.</p>
+<p><strong>File &amp; Storage Lifecycle</strong>: Download files via SFTP or cloud storage (S3, GCS, Azure Blob), decompress zip archives, verify file existence, decrypt sensitive files with PGP, move processed files to archive folders, and purge temporary data.</p>
 </li>
 <li>
-<p>Workflows can</p>
+<p><strong>Coordinating Child Pipelines &amp; Workflows</strong>: Launch pipelines using the <a href="actions/pipeline.html" class="xref page">Pipeline</a> action, pass parameters and variables down to child tasks, and collect execution status and summary rows.</p>
 </li>
 <li>
-<p>Workflows work sequentially by default. Each action in a workflow has a position in the workflow sequence, and needs to wait before the previous actions have completed before it starts.</p>
+<p><strong>Resilient Error Handling &amp; Recovery</strong>: If a pipeline or action fails, a workflow can follow an alternate error route: retry the failed action, run a cleanup script, roll back transactions, and send alerts.</p>
 </li>
 <li>
-<p>Workflow actions do not pass data over hops. Each workflow action has a <code>success</code> or <code>failure</code> exit status. This exit status is used to choose the routing through the workflow.</p>
-</li>
-<li>
-<p>Hops between actions in a workflow have a status: depending on the exit status of the previous action, a workflow hop can follow the success (green), failure (orange) or unconditional (black) hop. An unconditional hop ignores the exit status of the previous action and is followed whether the previous action failed or succeeded.</p>
+<p><strong>Alerting &amp; Auditing</strong>: Send email notifications, dispatch Slack messages, post Nagios or SNMP traps, and log audit information to tracking tables.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_example_workflow_walk_through"><a class="link" href="#_example_workflow_walk_through">Example workflow walk-through</a></h2>
+<h2 id="_under_the_hood_how_a_workflow_executes"><a class="link" href="#_under_the_hood_how_a_workflow_executes">Under the Hood: How a Workflow Executes</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Like all workflows, the example workflow shown below starts with the <code>start</code> action.</p>
+<p>Workflows operate very differently from pipelines.
+While a pipeline is an active network of parallel streaming transforms, a workflow is a <strong>deterministic state machine</strong> that executes step by step.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 310" width="880" height="310">
+  <defs>
+    <style>
+      .wf-bg { fill: #f8fafc; }
+      .wf-card { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; rx: 8px; }
+      .wf-card-start { fill: #ffffff; stroke: #0e3a5a; stroke-width: 2.5; rx: 8px; }
+      .wf-card-success { fill: #ffffff; stroke: #10b981; stroke-width: 2.5; rx: 8px; }
+      .wf-card-fail { fill: #ffffff; stroke: #ef4444; stroke-width: 2.5; rx: 8px; }
+
+      .wf-text-title { font-family: system-ui, -apple-system, sans-serif; font-size: 14.5px; font-weight: 700; fill: #0e3a5a; }
+      .wf-text-subtitle { font-family: system-ui, -apple-system, sans-serif; font-size: 12px; fill: #64748b; }
+      .wf-text-tag { font-family: system-ui, -apple-system, sans-serif; font-size: 10.5px; font-weight: 700; text-transform: uppercase; }
+
+      .wf-hop-uncond { stroke: #0e3a5a; stroke-width: 2.5; fill: none; }
+      .wf-hop-success { stroke: #10b981; stroke-width: 2.5; fill: none; }
+      .wf-hop-failure { stroke: #ef4444; stroke-width: 2.5; stroke-dasharray: 6 3; fill: none; }
+
+      .wf-hop-label { font-family: system-ui, -apple-system, sans-serif; font-size: 10.5px; font-weight: 700; }
+      .wf-ribbon { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1; rx: 6px; }
+      .wf-ribbon-text { font-family: system-ui, -apple-system, sans-serif; font-size: 12px; font-weight: 600; fill: #334155; }
+
+      /* Step token animation along success branch */
+      .wf-token-seq {
+        animation: wf-seqFollow 6s infinite ease-in-out;
+      }
+
+      @keyframes wf-seqFollow {
+        0% { transform: translate(65px, 150px); opacity: 0; }
+        5% { opacity: 1; }
+        25% { transform: translate(220px, 150px); }
+        35% { transform: translate(220px, 150px); }
+        55% { transform: translate(450px, 105px); }
+        65% { transform: translate(450px, 105px); }
+        85% { transform: translate(670px, 105px); opacity: 1; }
+        95% { transform: translate(805px, 105px); opacity: 1; }
+        100% { transform: translate(805px, 105px); opacity: 0; }
+      }
+      .wf-ink-muted { fill: #475569; }
+      .wf-ink-strong { fill: #0e3a5a; }
+
+      /* Dark mode. The OS preference is the default, but the Hop site also has
+         its own light/dark toggle which sets data-theme on the page root, so
+         both have to be honoured -- and an explicit light choice has to win
+         over a dark OS. */
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) .wf-bg { fill: #0f172a; }
+        :root:not([data-theme="light"]) .wf-card { fill: #1e293b; stroke: #334155; }
+        :root:not([data-theme="light"]) .wf-card-start { fill: #1e293b; stroke: #60a5fa; }
+        :root:not([data-theme="light"]) .wf-card-success { fill: #1e293b; stroke: #10b981; }
+        :root:not([data-theme="light"]) .wf-card-fail { fill: #1e293b; stroke: #ef4444; }
+        :root:not([data-theme="light"]) .wf-text-title { fill: #f1f5f9; }
+        :root:not([data-theme="light"]) .wf-text-subtitle { fill: #94a3b8; }
+        :root:not([data-theme="light"]) .wf-hop-uncond { stroke: #94a3b8; }
+        :root:not([data-theme="light"]) .wf-ribbon { fill: #1e293b; stroke: #334155; }
+        :root:not([data-theme="light"]) .wf-ribbon-text { fill: #cbd5e1; }
+        :root:not([data-theme="light"]) .wf-ink-muted { fill: #94a3b8; }
+        :root:not([data-theme="light"]) .wf-ink-strong { fill: #f1f5f9; }
+      }
+
+      :root[data-theme="dark"] .wf-bg { fill: #0f172a; }
+      :root[data-theme="dark"] .wf-card { fill: #1e293b; stroke: #334155; }
+      :root[data-theme="dark"] .wf-card-start { fill: #1e293b; stroke: #60a5fa; }
+      :root[data-theme="dark"] .wf-card-success { fill: #1e293b; stroke: #10b981; }
+      :root[data-theme="dark"] .wf-card-fail { fill: #1e293b; stroke: #ef4444; }
+      :root[data-theme="dark"] .wf-text-title { fill: #f1f5f9; }
+      :root[data-theme="dark"] .wf-text-subtitle { fill: #94a3b8; }
+      :root[data-theme="dark"] .wf-hop-uncond { stroke: #94a3b8; }
+      :root[data-theme="dark"] .wf-ribbon { fill: #1e293b; stroke: #334155; }
+      :root[data-theme="dark"] .wf-ribbon-text { fill: #cbd5e1; }
+      :root[data-theme="dark"] .wf-ink-muted { fill: #94a3b8; }
+      :root[data-theme="dark"] .wf-ink-strong { fill: #f1f5f9; }
+    </style>
+
+    <marker id="arrow-uncond" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#0e3a5a" />
+    </marker>
+    <marker id="arrow-succ" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#10b981" />
+    </marker>
+    <marker id="arrow-fail" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#ef4444" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="880" height="310" rx="10" class="wf-bg" />
+
+  <!-- Top Title Banner -->
+  <g transform="translate(25, 16)">
+    <rect width="830" height="36" rx="6" fill="#0e3a5a" />
+    <circle cx="20" cy="18" r="6" fill="#10b981" />
+    <text x="36" y="23" font-family="system-ui, -apple-system, sans-serif" font-size="14.5" font-weight="700" fill="#ffffff">
+      Workflow Orchestration &amp; Backtracking Model
+    </text>
+    <text x="392" y="23" font-family="system-ui, -apple-system, sans-serif" font-size="12.5" fill="#94a3b8">
+      — One action at a time; hops route on success or failure
+    </text>
+  </g>
+
+  <!-- CONNECTIONS / HOPS -->
+
+  <!-- Hop 1: Start -> Check Files (Unconditional) -->
+  <line x1="105" y1="150" x2="165" y2="150" class="wf-hop-uncond" marker-end="url(#arrow-uncond)" />
+  <rect x="110" y="131" width="52" height="18" rx="3" fill="#e2e8f0" />
+  <text x="136" y="144" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="700" class="wf-ink-strong">ALWAYS</text>
+
+  <!-- Hop 2 (Success Path): Check Files -> Run Pipeline -->
+  <path d="M 325 150 C 355 150, 360 105, 395 105" class="wf-hop-success" marker-end="url(#arrow-succ)" />
+  <rect x="338" y="93" width="60" height="18" rx="3" fill="#d1fae5" />
+  <text x="368" y="106" text-anchor="middle" class="wf-hop-label" fill="#059669">SUCCESS</text>
+
+  <!-- Hop 3: Run Pipeline -> Archive Files -->
+  <line x1="555" y1="105" x2="615" y2="105" class="wf-hop-success" marker-end="url(#arrow-succ)" />
+  <rect x="565" y="90" width="42" height="17" rx="3" fill="#d1fae5" />
+  <text x="586" y="103" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="700" fill="#059669">TRUE</text>
+
+  <!-- Hop 4: Archive Files -> Success Action -->
+  <line x1="765" y1="105" x2="805" y2="105" class="wf-hop-success" marker-end="url(#arrow-succ)" />
+
+  <!-- Hop 5 (Failure Path): Check Files -> Send Alert -->
+  <path d="M 325 150 C 355 150, 360 205, 395 205" class="wf-hop-failure" marker-end="url(#arrow-fail)" />
+  <rect x="338" y="186" width="60" height="18" rx="3" fill="#fee2e2" />
+  <text x="368" y="199" text-anchor="middle" class="wf-hop-label" fill="#dc2626">FAILURE</text>
+
+  <!-- Hop 6: Send Alert -> Abort -->
+  <line x1="555" y1="205" x2="615" y2="205" class="wf-hop-failure" marker-end="url(#arrow-fail)" />
+  <rect x="565" y="190" width="42" height="17" rx="3" fill="#fee2e2" />
+  <text x="586" y="203" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="700" fill="#dc2626">FALSE</text>
+
+  <!-- ACTION 0: START -->
+  <g transform="translate(25, 105)">
+    <rect width="80" height="90" class="wf-card-start" />
+    <circle cx="40" cy="34" r="14" fill="#0e3a5a" />
+    <polygon points="36,27 48,34 36,41" fill="#ffffff" />
+    <text x="40" y="64" text-anchor="middle" class="wf-text-title" font-size="13">Start</text>
+    <text x="40" y="78" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" fill="#64748b">Origin</text>
+  </g>
+
+  <!-- ACTION 1: CHECK SOURCE FILES -->
+  <g transform="translate(165, 105)">
+    <rect width="160" height="90" class="wf-card" />
+    <rect x="12" y="10" width="64" height="18" rx="3" fill="#f1f5f9" />
+    <text x="44" y="23" text-anchor="middle" class="wf-text-tag wf-ink-muted">Action 1</text>
+    <text x="14" y="50" class="wf-text-title">Check Files</text>
+    <text x="14" y="68" class="wf-text-subtitle">Prerequisites check</text>
+    <text x="14" y="83" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" class="wf-ink-strong">Exit: True / False</text>
+  </g>
+
+  <!-- ACTION 2: RUN INGESTION PIPELINE (SUCCESS BRANCH) -->
+  <g transform="translate(395, 60)">
+    <rect width="160" height="90" class="wf-card-success" />
+    <rect x="12" y="10" width="64" height="18" rx="3" fill="#d1fae5" />
+    <text x="44" y="23" text-anchor="middle" class="wf-text-tag" fill="#059669">Action 2</text>
+    <text x="14" y="50" class="wf-text-title">Run Pipeline</text>
+    <text x="14" y="68" class="wf-text-subtitle">Fires data worker</text>
+    <text x="14" y="83" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#059669">Streams records</text>
+  </g>
+
+  <!-- ACTION 3: ARCHIVE FILES (SUCCESS BRANCH) -->
+  <g transform="translate(615, 60)">
+    <rect width="150" height="90" class="wf-card" />
+    <rect x="12" y="10" width="64" height="18" rx="3" fill="#f1f5f9" />
+    <text x="44" y="23" text-anchor="middle" class="wf-text-tag wf-ink-muted">Action 3</text>
+    <text x="14" y="50" class="wf-text-title">Archive Files</text>
+    <text x="14" y="68" class="wf-text-subtitle">Moves input to S3</text>
+    <text x="14" y="83" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#64748b">Cleans temp dir</text>
+  </g>
+
+  <!-- SUCCESS END ACTION -->
+  <g transform="translate(805, 85)">
+    <circle cx="20" cy="20" r="18" fill="#10b981" />
+    <polyline points="13,20 18,25 28,15" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="20" y="50" text-anchor="middle" class="wf-text-title" font-size="12" fill="#059669">Success</text>
+  </g>
+
+  <!-- ACTION 4: SEND ALERT EMAIL (FAILURE BRANCH) -->
+  <g transform="translate(395, 160)">
+    <rect width="160" height="90" class="wf-card-fail" />
+    <rect x="12" y="10" width="66" height="18" rx="3" fill="#fee2e2" />
+    <text x="45" y="23" text-anchor="middle" class="wf-text-tag" fill="#dc2626">Fallback</text>
+    <text x="14" y="50" class="wf-text-title">Send Alert</text>
+    <text x="14" y="68" class="wf-text-subtitle">Emails on-call team</text>
+    <text x="14" y="83" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#dc2626">Logs error details</text>
+  </g>
+
+  <!-- ACTION 5: ABORT WORKFLOW -->
+  <g transform="translate(615, 160)">
+    <rect width="150" height="90" class="wf-card-fail" />
+    <rect x="12" y="10" width="54" height="18" rx="3" fill="#fee2e2" />
+    <text x="39" y="23" text-anchor="middle" class="wf-text-tag" fill="#dc2626">Abort</text>
+    <text x="14" y="50" class="wf-text-title">Abort Workflow</text>
+    <text x="14" y="68" class="wf-text-subtitle">Flags job as failed</text>
+    <text x="14" y="83" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#dc2626">Stops execution</text>
+  </g>
+
+  <!-- Sequential Step Execution Tracker (Pulsing Token) -->
+  <circle cx="0" cy="0" r="6" fill="#00a3a6" stroke="#ffffff" stroke-width="2" class="wf-token-seq" />
+
+  <!-- Bottom Explanatory Ribbon -->
+  <g transform="translate(25, 260)">
+    <rect width="830" height="36" class="wf-ribbon" />
+    <circle cx="20" cy="18" r="4.5" fill="#10b981" />
+    <text x="34" y="22" class="wf-ribbon-text">
+      Backtracking: Hop follows one branch to its end, then returns to the last fork and takes any branch it has not run yet.
+    </text>
+  </g>
+</svg>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_1_the_sequential_nature"><a class="link" href="#_1_the_sequential_nature">1. The Sequential Nature</a></h3>
 <div class="paragraph">
-<p>The Start action is just a placeholder that can&#8217;t really fail, so the hop out of a start action is unconditional.</p>
-</div>
-<div class="paragraph">
-<p>The workflow then continues with a <a href="actions/pipeline.html" class="xref page">pipeline</a> action, "first-pipeline". As the name implies, this action executes a pipeline.</p>
-</div>
-<div class="paragraph">
-<p>If "first-pipeline" runs successfully, the workflow continues to "second-pipeline". If "first-pipeline" fails, the failure hop to "handle-errors" is followed.</p>
-</div>
-<div class="paragraph">
-<p>In this hypothetical example, we don&#8217;t care about the result of "Second pipeline", and want to continue to "delete-tmp-files", where any temporary files are removed.</p>
-</div>
-<div class="paragraph">
-<p>If the temporary files are removed successfully, we move on to the "success" action. Similar to the Start action, success is a visual indicator of successful completion of this part of the workflow. It&#8217;s not mandatory and doesn&#8217;t add any functionality, but it often is a good visual indicator of an end point of your workflow&#8217;s main stream.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="../_images/hop-gui/workflow/basic-workflow.png" alt="Workflows - basic workflows" width="65%"></span></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_next_steps"><a class="link" href="#_next_steps">Next steps</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The following pages take you deeper into the process of building and running workflows:</p>
+<p>Workflows run <strong>one action at a time in sequence</strong> by default:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="create-workflow.html" class="xref page">Create a Workflow</a></p>
+<p>Execution begins at a single mandatory starting point: the <a href="actions/start.html" class="xref page">Start</a> action.</p>
 </li>
 <li>
-<p><a href="run-debug-workflow.html" class="xref page">Run and Debug a Workflow</a></p>
+<p>An action executes its complete task (e.g. checking a file or running a pipeline) and waits until it finishes.</p>
 </li>
 <li>
-<p><a href="workflow-run-configurations/workflow-run-configurations.html" class="xref page">Workflow Run Configurations</a></p>
+<p>Upon completion, the action generates an <strong>exit status</strong> indicating whether it succeeded or failed.</p>
+</li>
+<li>
+<p>The workflow engine inspects the exit status and uses it to choose which outgoing hops to follow next.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_conditional_hops_decision_routing"><a class="link" href="#_2_conditional_hops_decision_routing">2. Conditional Hops &amp; Decision Routing</a></h3>
+<div class="paragraph">
+<p>Unlike pipeline hops (which continuously stream data rows), hops between actions in a workflow act as <strong>conditional decision gateways</strong>:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Hop Type</th>
+<th class="tableblock halign-left valign-top">Visual Indicator</th>
+<th class="tableblock halign-left valign-top">When the Next Action Runs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Unconditional Hop</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Solid Black</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Always</strong>, regardless of whether the previous action succeeded or failed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Success Hop</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Solid Green</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Only when the previous action succeeded</strong> (returned true / zero errors).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Failure Hop</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dashed Red / Orange</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Only when the previous action failed</strong> (returned false or encountered an error).</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>By combining success and failure hops, you can build self-healing data workflows that automatically recover from network glitches, missing files, or data quality exceptions.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_the_backtracking_path_exploration_algorithm"><a class="link" href="#_3_the_backtracking_path_exploration_algorithm">3. The Backtracking Path Exploration Algorithm</a></h3>
+<div class="paragraph">
+<p>What happens when an action connects to multiple outgoing hops, or when a workflow branches into different paths?</p>
+</div>
+<div class="paragraph">
+<p>Hop uses a <strong>depth-first backtracking algorithm</strong> to traverse the workflow graph:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Branch Evaluation</strong>: When an action completes, Hop evaluates all outgoing hops that match its exit status.</p>
+</li>
+<li>
+<p><strong>Depth-First Traversal</strong>: Hop selects the first valid path and follows it sequentially to its final terminus.</p>
+</li>
+<li>
+<p><strong>Backtracking</strong>: When that branch reaches an end point (or encounters a blocked condition), the workflow engine <strong>backtracks</strong> to the last decision fork and begins traversing any other valid branches that have not yet run.</p>
+</li>
+<li>
+<p><strong>Result Aggregation</strong>: Once all valid branches have finished, Hop combines the results, error counts, and logs from every explored branch into the overall workflow result.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_variables_parameters_and_data_passing"><a class="link" href="#_4_variables_parameters_and_data_passing">4. Variables, Parameters, and Data Passing</a></h3>
+<div class="paragraph">
+<p>While workflows do not stream individual rows over hops, they provide powerful tools for passing context:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Setting Dynamic Variables</strong>: Use the <a href="actions/setvariables.html" class="xref page">Set Variables</a> action to read configuration files, extract runtime parameters, and make variables available to all downstream child pipelines and workflows.</p>
+</li>
+<li>
+<p><strong>Passing Parameters</strong>: Pass parameters down to child pipelines and child workflows explicitly, keeping your jobs modular and reusable (<code><a href="../variables/parameter-passing.html" class="xref page">Passing parameters to a child</a></code>).</p>
+</li>
+<li>
+<p><strong>Result Rows &amp; Files</strong>: When a pipeline produces a small summary list of rows (via <code>Copy rows to result</code>), a workflow can capture those rows and loop over them using child workflows (<code><a href="../how-to-guides/loops-in-apache-hop.html" class="xref page">Loops in Apache Hop</a></code>).</p>
+</li>
+<li>
+<p><strong>Parallel Action Branches</strong>: When an action must trigger multiple independent tasks simultaneously, you can enable parallel execution on that action (<code><a href="../how-to-guides/workflows-parallel-execution.html" class="xref page">Parallel execution in workflows</a></code>), and optionally re-synchronize them using the <a href="actions/join.html" class="xref page">Join action</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_workflow_execution_engines"><a class="link" href="#_workflow_execution_engines">Workflow Execution Engines</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Like pipelines, workflows are pure metadata (<code>.hwf</code>) and are decoupled from where they execute through a <a href="workflow-run-configurations/workflow-run-configurations.html" class="xref page">Workflow Run Configuration</a>.</p>
+</div>
+<div class="paragraph">
+<p>Hop provides three workflow execution engines:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 35%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Engine</th>
+<th class="tableblock halign-left valign-top">Best For</th>
+<th class="tableblock halign-left valign-top">How It Operates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="workflow-run-configurations/native-local-workflow-engine.html" class="xref page">Native Local</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Workstations, local testing, and standard production servers.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Executes actions sequentially on the local computer or server within the local Hop JVM.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="workflow-run-configurations/native-remote-workflow-engine.html" class="xref page">Native Remote</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Offloading orchestration to dedicated servers.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dispatches the workflow to execute on a remote <a href="../hop-server/index.html" class="xref page">Hop Server</a> via HTTP, streaming execution progress and logs back to the caller.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="workflow-run-configurations/native-load-balancing-workflow-engine.html" class="xref page">Native Load-balancing</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spreading separate workflow runs over a group of servers.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Assigns each workflow to one server from a configured group, using an even-load or pack algorithm, and retries on another server when the chosen one is at capacity.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_popular_real_world_scenarios"><a class="link" href="#_popular_real_world_scenarios">Popular Real-World Scenarios</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Here is how workflows are commonly applied across enterprise data platforms:</p>
+</div>
+<div class="sect2">
+<h3 id="_1_production_nightly_batch_orchestration"><a class="link" href="#_1_production_nightly_batch_orchestration">1. Production Nightly Batch Orchestration</a></h3>
+<div class="paragraph">
+<p>A master workflow executes every night to run your organization&#8217;s core ELT batch:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Connects to database servers and validates connectivity (<code>Check Db connections</code>).</p>
+</li>
+<li>
+<p>Checks whether new source data files have landed in cloud storage (<code>Checks if files exists</code>).</p>
+</li>
+<li>
+<p>Executes a series of ingestion pipelines in order, passing the current processing batch date as a parameter.</p>
+</li>
+<li>
+<p>If ingestion succeeds, runs the dimensional modeling or Data Vault pipelines.</p>
+</li>
+<li>
+<p>Archives processed input files to long-term S3 / Azure cold storage (<code>Move files</code>).</p>
+</li>
+<li>
+<p>If any step fails, follows the failure hop to notify the on-call data engineering team via email or Slack (<code>Mail</code>).</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_containerized_workflows_on_kubernetes_docker"><a class="link" href="#_2_containerized_workflows_on_kubernetes_docker">2. Containerized Workflows on Kubernetes &amp; Docker</a></h3>
+<div class="paragraph">
+<p>Workflows are frequently packaged into Docker containers and scheduled as Kubernetes CronJobs or cloud container tasks.
+The container starts headlessly using the <code>hop-run</code> CLI command (<code>hop-run -j MyProject -e production -f /path/to/workflow.hwf</code>), executes the workflow, logs output to stdout, and exits with a standard status code (0 for success, non-zero for failure).
+See <a href="../docker-container.html" class="xref page">Hop in Docker</a> and <a href="../hop-run/index.html" class="xref page">hop-run</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_external_orchestration_with_apache_airflow"><a class="link" href="#_3_external_orchestration_with_apache_airflow">3. External Orchestration with Apache Airflow</a></h3>
+<div class="paragraph">
+<p>Many organizations use Apache Airflow as an enterprise scheduler while using Apache Hop for data processing.
+Airflow DAGs trigger Hop workflows using the BashOperator, DockerOperator, or KubernetesPodOperator.
+The Hop workflow manages its internal conditional branching and pipeline execution, reporting overall status back to Airflow.
+See <a href="../how-to-guides/run-hop-in-apache-airflow.html" class="xref page">Run Hop in Apache Airflow</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_automated_regression_testing_in_cicd"><a class="link" href="#_4_automated_regression_testing_in_cicd">4. Automated Regression Testing in CI/CD</a></h3>
+<div class="paragraph">
+<p>Workflows can automate your project&#8217;s testing strategy before any code is promoted to production.
+Using the <a href="actions/runpipelinetests.html" class="xref page">Run pipeline unit tests</a> action, a workflow discovers and executes every unit test in your Hop project.
+If any pipeline transformation produces unexpected test results, the action fails, halting the CI/CD pipeline and preventing bad code from being deployed.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_5_python_driven_workflow_execution_with_pyhop"><a class="link" href="#_5_python_driven_workflow_execution_with_pyhop">5. Python-Driven Workflow Execution with PyHop</a></h3>
+<div class="paragraph">
+<p>Data applications written in Python can load, configure, and execute Hop workflows programmatically using <a href="../hop-tools/hop-python/hop-python.html" class="xref page">PyHop</a>.
+The Python application can pass dynamic runtime parameters, start workflow execution, monitor real-time progress, and evaluate the final result.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_example_workflow_walk_through"><a class="link" href="#_example_workflow_walk_through">Example Workflow Walk-Through</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The example below shows a typical real-world workflow design:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/hop-gui/workflow/basic-workflow.png" alt="Workflows - basic workflow" width="75%"></span></p>
+</div>
+<div class="paragraph">
+<p>When this workflow executes:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Execution starts at the <strong>Start</strong> action, which can never fail, and follows the unconditional hop.</p>
+</li>
+<li>
+<p>The <code>first-pipeline</code> action runs its designated pipeline.</p>
+</li>
+<li>
+<p>If <code>first-pipeline</code> succeeds, the workflow follows the green success hop to <code>second-pipeline</code>.</p>
+</li>
+<li>
+<p>If <code>first-pipeline</code> fails, the workflow follows the orange/red failure hop to <code>handle-errors</code>, skipping <code>second-pipeline</code>.</p>
+</li>
+<li>
+<p>After <code>second-pipeline</code> runs, the workflow moves along an unconditional hop to <code>delete-tmp-files</code> to ensure temporary files are removed regardless of outcome.</p>
+</li>
+<li>
+<p>If cleanup succeeds, execution arrives at the <code>success</code> action, marking the entire workflow as successfully completed.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_steps"><a class="link" href="#_next_steps">Next Steps</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To dive deeper into building and managing workflows, explore:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="create-workflow.html" class="xref page">Create a Workflow</a> — Step-by-step instructions for creating, configuring, and saving workflows.</p>
+</li>
+<li>
+<p><a href="run-debug-workflow.html" class="xref page">Run and Debug a Workflow</a> — How to execute workflows in Hop GUI, view logs, and inspect action metrics.</p>
+</li>
+<li>
+<p><a href="actions.html" class="xref page">Workflow Actions Catalog</a> — Browse the complete catalog of over 80 workflow actions.</p>
+</li>
+<li>
+<p><a href="workflow-run-configurations/workflow-run-configurations.html" class="xref page">Workflow Run Configurations</a> — Configure local, remote, and clustered workflow execution.</p>
+</li>
+<li>
+<p><a href="../how-to-guides/scheduling-workflows-and-pipelines.html" class="xref page">Scheduling Workflows and Pipelines</a> — Built-in repeating schedules and external scheduling options.</p>
+</li>
+<li>
+<p><a href="../how-to-guides/workflows-parallel-execution.html" class="xref page">Parallel Execution in Workflows</a> — How and when to fork parallel action branches.</p>
+</li>
+<li>
+<p><a href="../how-to-guides/loops-in-apache-hop.html" class="xref page">Loops in Apache Hop</a> — Techniques for looping over files, records, or dates in workflows.</p>
+</li>
+<li>
+<p><a href="../how-to-guides/avoiding-deadlocks.html" class="xref page">Avoiding Deadlocks</a> — Best practices for designing reliable, deadlock-free orchestration graphs.</p>
 </li>
 </ul>
 </div>
@@ -2865,7 +3448,7 @@
 </nav>
   </main>
 
-<aside class="doc-toc" data-pagefind-ignore aria-label="On this page">
+<aside class="doc-toc" data-pagefind-ignore aria-label="On this page" data-levels="2">
   <p class="doc-toc__title">On this page</p>
   <div class="doc-toc__body"></div>
 </aside>

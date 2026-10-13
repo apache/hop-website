@@ -273,6 +273,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/annotation-derived-widgets.html">Annotation derived widgets</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../dev-manual/next/engine-compatibility.html">Engine compatibility</a>
     
   </li>
@@ -335,13 +339,102 @@
     <span>Embedding and interfaces</span>
     <ul class="doc-nav__list">
   <li class="doc-nav__item is-parent">
-    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle SDK section">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle The Hop SDK section">
       <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
-    <a href="../../../dev-manual/next/sdk/index.html">SDK</a>
+    <a href="../../../dev-manual/next/sdk/index.html">The Hop SDK</a>
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
-    <a href="../../../dev-manual/next/sdk/hop-sdk.html">The Hop SDK</a>
+    <a href="../../../dev-manual/next/sdk/pipelines.html">Pipelines API</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/workflows.html">Workflows API</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/metadata.html">Metadata and Providers</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/vfs.html">File Handling with HopVFS</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/logging.html">Logging Subsystem</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Plugin Development Guide section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/sdk/plugins/index.html">Plugin Development Guide</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/transforms.html">Transforms</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/actions.html">Actions</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/metadata.html">Metadata Elements</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/databases.html">Database Dialects</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/gui.html">GUI Plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/file-types.html">Hop File Types</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/variable-resolvers.html">Variable Resolvers</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/extension-points.html">Extension Points</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/commands.html">Hop Commands</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/configuration.html">Configuration Plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/perspectives.html">Perspectives</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/vfs.html">VFS Plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/value-types.html">Value Types</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/servlets.html">Hop Server Servlets</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/execution-info.html">Execution Information Locations</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/hop-sdk.html">Legacy SDK Guide</a>
     
   </li>
 </ul>
@@ -579,7 +672,8 @@ With over two hundred of them in the codebase, this is the most-used GUI plugin 
 </dd>
 <dt class="hdlist1"><code>@GuiWidgetElement</code></dt>
 <dd>
-<p>a widget on a settings page or metadata editor.
+<p>a widget on a metadata editor, a transform dialog, an action dialog, or a settings page.
+<a href="../annotation-derived-widgets.html" class="xref page">Annotation derived widgets</a> is the guide for building those screens with <code>GuiCompositeWidgets</code>.
 For a metadata combo without a compile dependency on that plugin, set <code>metadataKey</code> (for example <code>ai-provider</code>) instead of <code>metadata</code>.
 When the plugin is not installed the widget is omitted.</p>
 </dd>
@@ -632,13 +726,58 @@ Return the incoming verdict unchanged for ids you do not own, or you will hide e
 </tr>
 </table>
 </div>
+<div class="sect2">
+<h3 id="_data_grids"><a class="link" href="#_data_grids">Data grids</a></h3>
+<div class="paragraph">
+<p><code>@GuiWidgetElement(type = TABLE)</code> on a <code>List</code> field draws a data grid.
+The columns are <code>@GuiTableColumn</code> fields on the row class: <code>TEXT</code> (a <code>String</code>), <code>COMBO</code> (an enum, or a <code>String</code> whose items come from <code>comboValuesMethod</code> on the parent object), or <code>CHECKBOX</code> (a <code>boolean</code>, stored in the grid as <code>Y</code> / <code>N</code>).
+<code>@GuiTableColumn</code> is only a GUI annotation.
+<code>@HopMetadataProperty</code> still stores the list.
+Enum cells use <code>Enum.name()</code>, not <code>toString()</code>.
+<code>tableRows</code> (default 5) is the grid height in rows.
+The last grid in a tab or box keeps that height when the dialog opens and grows when the dialog is resized.</p>
+</div>
+<div class="paragraph">
+<p>A button that fills the list, such as Get Fields, is an ordinary <code>@GuiWidgetElement</code> of type <code>BUTTON</code>.
+After the method returns, the grid is refilled from the list.
+A <code>String</code> column with <code>comboValuesMethod</code> reads that method again each time the grid is filled, so the items can change after the dialog has opened.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-meta">@GuiWidgetElement(
+    id = &quot;vars&quot;,
+    order = &quot;1000&quot;,
+    type = GuiElementType.TABLE,
+    label = &quot;i18n::ActionDbt.Vars.Label&quot;,
+    parentId = GUI_PLUGIN_ELEMENT_PARENT_ID,
+    group = &quot;Variables&quot;,
+    groupOrder = &quot;40&quot;,
+    groupType = GuiWidgetGroupType.TABS,
+    tableRows = 5)</span>
+<span class="hljs-meta">@HopMetadataProperty(groupKey = &quot;vars&quot;, key = &quot;var&quot;)</span>
+<span class="hljs-keyword">private</span> List&lt;DbtNameValue&gt; vars;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-meta">@GuiTableColumn(
+    order = &quot;10&quot;,
+    type = GuiTableColumnType.TEXT,
+    label = &quot;i18n::ActionDbt.Column.Name&quot;,
+    variables = false)</span>
+<span class="hljs-meta">@HopMetadataProperty</span>
+<span class="hljs-keyword">private</span> String name;</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_perspective"><a class="link" href="#_perspective">Perspective</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A perspective is a full screen in the Hop GUI, selected from the icons in the left sidebar: the Data Orchestration, Metadata, Explorer and Execution Information perspectives are all plugins.</p>
+<p>A perspective is a full screen in the Hop GUI, selected from the icons in the left sidebar, which are sorted by plugin id.
+The built-in perspectives, such as File Explorer, Execution Information, Configuration, Database, Metadata and Plugin explorer, are all plugins.</p>
 </div>
 <div class="dlist">
 <dl>
@@ -660,7 +799,7 @@ Return the incoming verdict unchanged for ids you do not own, or you will hide e
 </dd>
 <dt class="hdlist1">Related</dt>
 <dd>
-<p><a href="../../../manual/latest/hop-gui/perspective-plugin.html" class="xref page">the user manual page on perspectives</a></p>
+<p><a href="../../../manual/next/hop-gui/perspective-plugin.html" class="xref page">the user manual page on perspectives</a></p>
 </dd>
 </dl>
 </div>
@@ -832,7 +971,7 @@ The GUI discovers every exporter that supports the active editor&#8217;s <code>g
 </nav>
   </main>
 
-<aside class="doc-toc" data-pagefind-ignore aria-label="On this page">
+<aside class="doc-toc" data-pagefind-ignore aria-label="On this page" data-levels="2">
   <p class="doc-toc__title">On this page</p>
   <div class="doc-toc__body"></div>
 </aside>

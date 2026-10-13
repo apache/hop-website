@@ -553,6 +553,8 @@
 .doc-toc a:hover { color: var(--ink); border-left-color: var(--rule-2); }
 .doc-toc a.is-active { color: var(--accent); font-weight: 600; border-left-color: var(--accent); }
 .doc-toc .toc-h3 { padding-left: 24px; }
+.doc-toc .toc-h4 { padding-left: 40px; }
+.doc-toc .toc-h5 { padding-left: 56px; }
 
 @media (max-width: 1400px) {
   .doc-shell { grid-template-columns: 268px minmax(0, 800px) minmax(180px, 220px); gap: 40px; padding: 0 24px; }
