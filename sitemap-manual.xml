@@ -232,6 +232,12 @@
 <loc>https://hop.apache.org/manual/next/hop-gui/perspective-file-explorer.html</loc>
 </url>
 <url>
+<loc>https://hop.apache.org/manual/next/hop-gui/perspective-git-commit.html</loc>
+</url>
+<url>
+<loc>https://hop.apache.org/manual/next/hop-gui/perspective-git.html</loc>
+</url>
+<url>
 <loc>https://hop.apache.org/manual/next/hop-gui/perspective-graph-logging.html</loc>
 </url>
 <url>
@@ -1226,6 +1232,9 @@
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/pipeline/transforms/odata-input.html</loc>
+</url>
+<url>
+<loc>https://hop.apache.org/manual/next/pipeline/transforms/openformula.html</loc>
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/pipeline/transforms/orabulkloader.html</loc>
