@@ -3267,7 +3267,7 @@ They are the JSON equivalent of the <code>hop/getExecInfo</code> and <code>hop/r
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>GET</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>location/{location}/executions/{id}/parent</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Find the parent execution ID.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Find the parent execution ID. This is the workflow or pipeline that owns the execution. Before Hop 2.20 it was the action or transform that started it.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>GET</code></p></td>

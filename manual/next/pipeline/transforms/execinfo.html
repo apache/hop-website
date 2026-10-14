@@ -3096,7 +3096,7 @@ First use Generate rows to create your fields and values to use (children: Boole
 <td class="tableblock halign-left valign-top"><p class="tableblock">Execution parent ID</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">One output row per child execution, with execution and state columns</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One output row per child execution, with execution and state columns. The id may be the owning workflow or pipeline, or the action or transform that started the child.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Find last execution</p></td>
@@ -3132,7 +3132,7 @@ First use Generate rows to create your fields and values to use (children: Boole
 <td class="tableblock halign-left valign-top"><p class="tableblock">Execution ID</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code> of the workflow or pipeline that owns the execution. Before Hop 2.20 this was the action or transform that started it. That id is now <code>launchedById</code> on the execution.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Get execution data</p></td>
@@ -3161,7 +3161,10 @@ First use Generate rows to create your fields and values to use (children: Boole
 <p>Find last execution / Find previous successful execution / Get execution and state add:</p>
 </div>
 <div class="paragraph">
-<p><code>executionId</code>, <code>parentId</code>, <code>name</code>, <code>executionType</code>, <code>filename</code>, <code>executorXml</code>, <code>metadataJson</code>, <code>registrationDate</code>, <code>executionStartDate</code>, <code>runConfigurationName</code>, <code>logLevel</code>, <code>updateTime</code>, <code>loggingText</code>, <code>failed</code>, <code>statusDescription</code>, <code>executionEndDate</code>.</p>
+<p><code>executionId</code>, <code>parentId</code>, <code>name</code>, <code>executionType</code>, <code>filename</code>, <code>executorXml</code>, <code>metadataJson</code>, <code>registrationDate</code>, <code>executionStartDate</code>, <code>runConfigurationName</code>, <code>logLevel</code>, <code>updateTime</code>, <code>loggingText</code>, <code>failed</code>, <code>statusDescription</code>, <code>executionEndDate</code>, <code>launchedById</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>launchedById</code> is the action or transform that started the execution. It is empty when nothing did, and it is the last column so a pipeline that reads these fields by position keeps the columns it already uses.</p>
 </div>
 <div class="paragraph">
 <p>If no execution matches, the transform writes no output row for that input.</p>

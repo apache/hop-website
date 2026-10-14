@@ -624,7 +624,8 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>Documentation lives in the Hop repository next to the code it describes, in <code>docs/</code>.
-Changing it is an ordinary pull request, which makes it one of the easiest ways to make a first contribution.</p>
+Changing it is an ordinary pull request, which makes it one of the easiest ways to make a first contribution.
+The <a href="https://hop.apache.org/community/contribution-guides/documentation-contribution-guide/">Documentation Contribution Guide</a> on the website walks through forking the repository and opening that pull request.</p>
 </div>
 </div>
 </div>
@@ -703,6 +704,52 @@ The pull request build rejects cross-manual xrefs without a version.</p>
 <div class="paragraph">
 <p>Anything a plugin developer needs — rather than a user — belongs in this manual instead.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_previewing_the_documentation_locally"><a class="link" href="#_previewing_the_documentation_locally">Previewing the documentation locally</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The manuals are published by the Antora playbooks in the <a href="https://github.com/apache/hop-website" rel="noopener" target="_blank">apache/hop-website</a> repository, not this one.
+Its <code>run-website-local.sh</code> script builds the website with the documentation from your Hop checkout and serves it.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Install Node.js 22, the version the pull request build uses.</p>
+</li>
+<li>
+<p>Check out apache/hop-website next to your Hop checkout.
+The build reads <code>../hop</code>, so the Hop checkout has to be in a folder named <code>hop</code>:</p>
+<div class="listingblock">
+<div class="content">
+<pre>work/
+├── hop/            your Hop checkout, on the branch you want to preview
+└── hop-website/    a checkout of apache/hop-website, on main</pre>
+</div>
+</div>
+</li>
+<li>
+<p>In <code>hop-website</code>, run the script:</p>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./run-website-local.sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It reads the working tree of <code>../hop</code>, so uncommitted edits are included.
+When the server is up, the manuals are at <code>http://localhost:4000/manual/latest/</code> and <code>http://localhost:4000/dev-manual/latest/</code>.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>After the first build, <code>./run-website-local.sh --fast</code> re-renders only the manuals, which takes seconds.
+Run a full build again when you delete or rename a page: <code>--fast</code> does not remove the pages it built before.</p>
+</div>
+<div class="paragraph">
+<p>The pages are under <code>latest</code>, not <code>next</code> as on the website: the build only contains the version on your branch, so Antora publishes it as the latest one.</p>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -715,9 +762,6 @@ The pull request build rejects cross-manual xrefs without a version.</p>
 </div>
 <div class="ulist">
 <ul>
-<li>
-<p>Building the documentation locally to preview it. The Antora playbook lives in the Hop website repository, not this one; the exact steps need writing down.</p>
-</li>
 <li>
 <p>The AsciiDoc conventions this project actually follows: one sentence per line, admonition usage, image sizing, how snippets under <code>pages/snippets</code> are included.</p>
 </li>
