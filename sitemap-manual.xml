@@ -154,9 +154,6 @@
 <loc>https://hop.apache.org/manual/next/docker-container.html</loc>
 </url>
 <url>
-<loc>https://hop.apache.org/manual/next/faq/faq.html</loc>
-</url>
-<url>
 <loc>https://hop.apache.org/manual/next/fields-parameters-variables.html</loc>
 </url>
 <url>
@@ -257,9 +254,6 @@
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/hop-run/index.html</loc>
-</url>
-<url>
-<loc>https://hop.apache.org/manual/next/hop-search/index.html</loc>
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/hop-server/async-web-service.html</loc>
