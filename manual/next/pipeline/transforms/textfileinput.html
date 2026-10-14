@@ -3189,7 +3189,7 @@ Special characters (e.g. CHAR ASCII HEX01) can be set with the format $[value], 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Escape</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Specify a character or characters that are used to identify characters that should appear as-is in the field value when they might be interpreted as a control or formatting character.
-For example, if you have \ as an escape character, the text 'Not the nine o'clock news' (where ' is the the enclosure character) gets parsed as Not the nine o&#8217;clock news instead of splitting the field value.
+For example, if you have \ as an escape character, the text 'Not the nine o'clock news' (where ' is the enclosure character) gets parsed as Not the nine o&#8217;clock news instead of splitting the field value.
 Special characters (e.g. CHAR HEX01) can be set with the format $[value], e.g. $[01] or $[6F,FF,00,1F].
 The Escape character may be left empty, or set to the same character as the Enclosure. In both cases a doubled enclosure inside an enclosed field (for example "" when " is the enclosure) is treated as a single, literal enclosure character and is de-duplicated in the resulting value, following the common CSV convention (so "she said ""hi""" is read as she said "hi"). This also works when "Allow breaks in enclosed fields?" is enabled.</p></td>
 </tr>
