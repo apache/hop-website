@@ -3000,6 +3000,18 @@
 <div class="paragraph">
 <p>Get Data From XML can read data from 3 kind of sources (files, stream and url) in 2 modes (static or dynamic).</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+A document with a DOCTYPE declaration is only read when the <a href="../../variables.html" class="xref page">variable</a> <code>XML_ALLOW_DOCTYPE_DECL</code> is <code>Y</code> and <strong>Validate XML?</strong> is off. External DTDs and external entities are never loaded, and the entities of a document may expand to at most 50,000,000 characters.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>See also:</p>
 </div>

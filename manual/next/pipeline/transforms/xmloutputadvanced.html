@@ -3088,7 +3088,7 @@ See <a href="../formatting-values.html" class="xref page">Formatting numbers and
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Do not create file if no rows</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Delete the output file at the end of the run if no rows were ever written.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete the output file at the end of the run if no rows were ever written. Without this option, a run without rows writes a document with only the root element: its attributes, its own value and the elements outside the loop, with every mapped field empty. When the loop is the root element, there is no such document and the file (or its zip entry) stays empty. With <strong>Do not open new file at start</strong>, a run without rows creates no file at all.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Add filename to result</p></td>
@@ -3245,7 +3245,7 @@ See <a href="../formatting-values.html" class="xref page">Formatting numbers and
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Loop</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Marks this element as the row-loop element. Exactly one element must carry the flag.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Marks this element as the row-loop element. Exactly one element must carry the flag. A loop on the root element holds a single row per document, because an XML document has one root element: set <strong>Split every N rows</strong> to <code>1</code>, or put the loop on a child element. Otherwise <strong>Verify</strong> shows a warning and the second row fails.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Group-by</p></td>
