@@ -2939,18 +2939,71 @@
     marketplace or use <code>hop marketplace install hop-tech-pgvector</code>.
   </p>
 </aside>
+<ul class="engines" data-pagefind-ignore>
+  <li class="engine engine--supported" data-engine="hop-engine">
+    <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+      
+      <path d="M2 6.4 4.6 9 10 3.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      
+      
+    </svg>
+    Hop Engine
+    <span class="visually-hidden">supported</span>
+  </li>
+  <li class="engine engine--supported" data-engine="single-threaded">
+    <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+      
+      <path d="M2 6.4 4.6 9 10 3.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      
+      
+    </svg>
+    Single Threaded
+    <span class="visually-hidden">supported</span>
+  </li>
+  <li class="engine engine--unknown" data-engine="native-spark">
+    <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+      
+      
+      
+      <path d="M4.1 4.3a1.9 1.9 0 1 1 2.6 1.8c-.5.2-.7.6-.7 1.1v.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="6" cy="9.3" r=".85" fill="currentColor"/>
+    </svg>
+    Native Spark
+    <span class="visually-hidden">support unknown</span>
+  </li>
+  <li class="engine engine--unknown" data-engine="beam-spark">
+    <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+      
+      
+      
+      <path d="M4.1 4.3a1.9 1.9 0 1 1 2.6 1.8c-.5.2-.7.6-.7 1.1v.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="6" cy="9.3" r=".85" fill="currentColor"/>
+    </svg>
+    Beam Spark
+    <span class="visually-hidden">support unknown</span>
+  </li>
+  <li class="engine engine--unknown" data-engine="beam-flink">
+    <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+      
+      
+      
+      <path d="M4.1 4.3a1.9 1.9 0 1 1 2.6 1.8c-.5.2-.7.6-.7 1.1v.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="6" cy="9.3" r=".85" fill="currentColor"/>
+    </svg>
+    Beam Flink
+    <span class="visually-hidden">support unknown</span>
+  </li>
+  <li class="engine engine--unknown" data-engine="beam-dataflow">
+    <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+      
+      
+      
+      <path d="M4.1 4.3a1.9 1.9 0 1 1 2.6 1.8c-.5.2-.7.6-.7 1.1v.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="6" cy="9.3" r=".85" fill="currentColor"/>
+    </svg>
+    Beam Dataflow
+    <span class="visually-hidden">support unknown</span>
+  </li>
+</ul>
     <article class="doc">
       <h1><span class="image image-doc-icon"><img src="../../_images/transforms/icons/vector-store.svg" alt="pgvector upsert transform Icon"></span> pgvector upsert</h1>
-      <div id="preamble">
-<div class="sectionbody">
-<table class="tableblock frame-all grid-all stretch table-no-borders">
-<colgroup>
-<col style="width: 75%;">
-<col style="width: 25%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="sect1">
+      <div class="sect1">
 <h2 id="_description"><a class="link" href="#_description">Description</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -2962,60 +3015,6 @@
 <div class="paragraph">
 <p>The transform can create the extension, the table and an HNSW index on first run, so an empty database is enough to get started.</p>
 </div>
-</div>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="sect1">
-<h2 id="_supported_engines"><a class="link" href="#_supported_engines">Supported Engines</a></h2>
-<div class="sectionbody">
-<table class="tableblock frame-none grid-all stretch table-supported-engines">
-<colgroup>
-<col style="width: 66.6666%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Hop Engine</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><span class="image"><img src="../../_images/check_mark.svg" alt="Supported" width="24"></span></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Single Threaded</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><span class="image"><img src="../../_images/check_mark.svg" alt="Supported" width="24"></span></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Native Spark</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><span class="image"><img src="../../_images/question_mark.svg" alt="Maybe Supported" width="24"></span></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Beam Spark</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><span class="image"><img src="../../_images/question_mark.svg" alt="Maybe Supported" width="24"></span></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Beam Flink</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><span class="image"><img src="../../_images/question_mark.svg" alt="Maybe Supported" width="24"></span></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Beam Dataflow</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><span class="image"><img src="../../_images/question_mark.svg" alt="Maybe Supported" width="24"></span></p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div></div></td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 <div class="sect1">
