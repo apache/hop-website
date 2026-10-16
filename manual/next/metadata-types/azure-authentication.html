@@ -2972,6 +2972,16 @@ Using an Azure connection to connect to a blob store requires you to specify the
 <td class="tableblock halign-left valign-top"><p class="tableblock">Storage Endpoint</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Leave empty for default Azure endpoints or fill in when using a compatible service</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cache TTL (seconds)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How long folder listings are cached, in seconds. Leave empty for 5.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read block size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How many bytes one download request fetches when a file is read, for example 8MB or 16MB. Leave empty for 8MB.
+Larger blocks make fewer requests per file and take more memory.
+Transforms that fetch ahead, such as Text File Input, download blocks of this size, several at a time, each with one request.</p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">

@@ -3052,6 +3052,30 @@ You can use the Tools/Edit config variables menu in Hop GUI or you can use the h
 </div>
 </div>
 <div class="sect1">
+<h2 id="_read_block_size"><a class="link" href="#_read_block_size">Read block size</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Transforms that read a file in blocks, such as Text File Input fetching ahead, download it in blocks of the <strong>Read block size</strong> of the S3 connection, 8MB when it&#8217;s left empty.
+Every block is downloaded with one request for exactly its bytes, several at a time, so one file uses several connections.
+A request read to its end hands its connection back to the client, so the connections are reused.</p>
+</div>
+<div class="paragraph">
+<p>Larger blocks make fewer requests per file and take more memory; smaller blocks start the first rows sooner.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_maximum_connections"><a class="link" href="#_maximum_connections">Maximum connections</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <strong>Maximum connections</strong> of an S3 connection is how many HTTP connections to S3 can be open at the same time, 50 when it&#8217;s left empty.
+One connection to S3 is often limited to a few MB/s, so reading many blocks at the same time is how a large file is read fast, and every block in flight needs a connection of its own.
+Text File Input running in parallel keeps up to copies × read-ahead blocks requests in flight: 20 copies with 4 blocks each need 80 connections.
+With fewer connections allowed than that, the other requests wait for a free one.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_usage_and_testing"><a class="link" href="#_usage_and_testing">Usage and testing</a></h2>
 <div class="sectionbody">
 <div class="paragraph">

@@ -4141,6 +4141,11 @@ Check the <a href="https://hop.apache.org/community/contribution-guides/translat
 <td class="tableblock halign-left valign-top"><p class="tableblock">How long to cache folder listing results (in seconds, default 5). If not set, falls back to 10 seconds. Accepts variables.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>5</code></p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read block size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How many bytes one download request fetches when a file is read, like 8MB. Leave empty for 8MB. Transforms that fetch ahead, such as Text File Input, download blocks of this size, several at a time, each with one request. Accepts variables.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
 </tbody>
 </table>
 </div>

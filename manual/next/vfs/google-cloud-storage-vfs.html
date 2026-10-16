@@ -3078,8 +3078,22 @@ The first use of <code>gs://</code> fails instead, with an error that says why, 
 <td class="tableblock halign-left valign-top"><p class="tableblock">How long to cache folder listing results (in seconds, default 5). If not set, falls back to 10 seconds. Accepts variables.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>5</code></p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read block size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How many bytes one download request fetches when a file is read, like 8MB. Leave empty for 8MB. Transforms that fetch ahead, such as Text File Input, download blocks of this size, several at a time, each with one request. Accepts variables.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_read_block_size"><a class="link" href="#_read_block_size">Read block size</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Files are downloaded in pieces of the <strong>Read block size</strong> option, 8MB when it&#8217;s left empty, instead of the 2MB the Google Cloud client uses on its own.
+Transforms that read a file in blocks, such as Text File Input fetching ahead, download several blocks at a time, each with one request for exactly its bytes.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
