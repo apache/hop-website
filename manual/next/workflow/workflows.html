@@ -1587,6 +1587,10 @@
     <a href="../../../manual/next/workflow/run-debug-workflow.html">Run and Debug a Workflow</a>
     
   </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/action-results.html">Action results</a>
+    
+  </li>
   <li class="doc-nav__item is-parent">
     <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Workflow Run Configurations section">
       <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -3277,7 +3281,7 @@ While a pipeline is an active network of parallel streaming transforms, a workfl
 <p><strong>Passing Parameters</strong>: Pass parameters down to child pipelines and child workflows explicitly, keeping your jobs modular and reusable (<code><a href="../variables/parameter-passing.html" class="xref page">Passing parameters to a child</a></code>).</p>
 </li>
 <li>
-<p><strong>Result Rows &amp; Files</strong>: When a pipeline produces a small summary list of rows (via <code>Copy rows to result</code>), a workflow can capture those rows and loop over them using child workflows (<code><a href="../how-to-guides/loops-in-apache-hop.html" class="xref page">Loops in Apache Hop</a></code>).</p>
+<p><strong>Result Rows &amp; Files</strong>: When a pipeline produces a small summary list of rows (via <code>Copy rows to result</code>), a workflow can capture those rows and loop over them using child workflows (<code><a href="../how-to-guides/loops-in-apache-hop.html" class="xref page">Loops in Apache Hop</a></code>). See <a href="action-results.html" class="xref page">Action results</a> for what an action passes on to the next one.</p>
 </li>
 <li>
 <p><strong>Parallel Action Branches</strong>: When an action must trigger multiple independent tasks simultaneously, you can enable parallel execution on that action (<code><a href="../how-to-guides/workflows-parallel-execution.html" class="xref page">Parallel execution in workflows</a></code>), and optionally re-synchronize them using the <a href="actions/join.html" class="xref page">Join action</a>.</p>
