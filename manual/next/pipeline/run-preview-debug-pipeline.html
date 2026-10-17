@@ -3221,14 +3221,17 @@ To change the pipeline run configuration, click <strong>Configure</strong>.</p>
 <div class="paragraph">
 <p>Preview windows (and other table grids in Hop Gui) can contain a large number of columns.
 A <strong>table view</strong> is a named subset of those columns, in the order you want to see them.
-The underlying rows are not changed: hidden columns stay in the data and are still exported, copied or saved.</p>
+Hidden columns stay in the data and are still exported, copied or saved.
+A view can also carry filters on its columns: rows that do not match are hidden while the view is applied, and come back with <strong>Show all columns</strong>.
+Row filters are offered when browsing data, such as <strong>Show rows</strong>.
+A grid that edits configuration leaves <strong>Add filter</strong> and <strong>Remove filter</strong> disabled and does not hide rows for a saved filter, so confirming the dialog still keeps every row.</p>
 </div>
 <div class="paragraph">
 <p>Open the <strong>Table views</strong> dialog from the table toolbar <span class="image"><img src="../_images/getting-started/icons/view.svg" alt="Table views" width="25px"></span> icon, from the row context menu, or from the column header context menu.</p>
 </div>
 <div class="imageblock text-left">
 <div class="content">
-<img src="../_images/hop-gui/pipeline/table-views-dialog.png" alt="Table views dialog on a wide preview" width="75%">
+<img src="../_images/hop-gui/pipeline/table-views-dialog.png" alt="Table views dialog with an applied column filter" width="75%">
 </div>
 </div>
 <div class="paragraph">
@@ -3237,16 +3240,25 @@ The underlying rows are not changed: hidden columns stay in the data and are sti
 <div class="ulist">
 <ul>
 <li>
-<p>Create, rename or delete a view. <strong>Use current layout</strong> fills the view from the columns that are visible now.</p>
+<p>The dialog opens with every column in <strong>Columns in view</strong> (columns on screen first, then the rest) and with any filters already applied from the column header. <strong>Use current layout</strong> copies the columns that are visible now.</p>
 </li>
 <li>
-<p>Move fields between <strong>Available columns</strong> and <strong>Columns in view</strong>, and use <strong>Move up</strong> / <strong>Move down</strong> to set the display order.</p>
+<p>Move fields between <strong>Available columns</strong> and <strong>Columns in view</strong>, and use the <strong>arrow up</strong> and <strong>arrow down</strong> buttons in the middle to set the display order.</p>
 </li>
 <li>
-<p><strong>Apply</strong> shows only the selected columns, in that order. <strong>Show all columns</strong> restores the full table.</p>
+<p><strong>Add filter</strong> picks a column and then shows the unique sorted values of that column, where you select the values to keep. An <code>&lt;null&gt;</code> entry covers empty values. The filter shows up as <code>Column-Name : value1,value2,value3</code> in the <strong>Applied filters</strong> list, and <strong>Remove filter</strong> takes the selected filters out again.</p>
 </li>
 <li>
-<p><strong>Save</strong> stores the view so you can reuse it later.</p>
+<p>A column with more than 500 unique values asks for confirmation before the values are listed.</p>
+</li>
+<li>
+<p><strong>Apply</strong> shows only the selected columns, in that order, and hides the rows that do not match the applied filters. Filtered columns get a filter icon in their header.</p>
+</li>
+<li>
+<p><strong>Show all columns</strong> restores the full table: every column and every row comes back.</p>
+</li>
+<li>
+<p><strong>Save</strong> stores the view, including its filters, so you can reuse it later.</p>
 </li>
 </ul>
 </div>
@@ -3255,7 +3267,34 @@ The underlying rows are not changed: hidden columns stay in the data and are sti
 A view such as <code>customer-bk-fields</code> can be applied to any table that has those field names, not only the preview where you created it.</p>
 </div>
 <div class="paragraph">
-<p>You can also hide a single column from the column header context menu, or drag headers to reorder them (desktop Hop Gui).
+<p>The column header context menu can hide that column, add a filter on it, or remove the filter it already has.
+<strong>Remove filter</strong> stays disabled until that column has a filter.</p>
+</div>
+<div class="imageblock text-left">
+<div class="content">
+<img src="../_images/hop-gui/pipeline/column-header-filter-menu.png" alt="Column header menu with Add filter" width="40%">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Add filter</strong> lists the unique sorted values of that column, the same way the dialog does.
+Select the values to keep and press <strong>OK</strong>.</p>
+</div>
+<div class="imageblock text-left">
+<div class="content">
+<img src="../_images/hop-gui/pipeline/column-filter-values.png" alt="Filter values for the table-name column" width="75%">
+</div>
+</div>
+<div class="paragraph">
+<p>The filter is applied straight away.
+The column header shows a filter icon, and only the matching rows stay visible.</p>
+</div>
+<div class="imageblock text-left">
+<div class="content">
+<img src="../_images/hop-gui/pipeline/column-filter-applied.png" alt="Rows filtered to one table name" width="75%">
+</div>
+</div>
+<div class="paragraph">
+<p>You can also drag headers to reorder them (desktop Hop Gui).
 Those one-off changes can be captured with <strong>Use current layout</strong> and then saved as a named view.</p>
 </div>
 <div class="paragraph">
