@@ -699,6 +699,15 @@
 At worst the two versions differ and behaviour depends on which classloader asked.
 <code>tools/find_duplicate_jars.sh</code> finds these.</p>
 </dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><code>tools/check-assembly-jar-versions.py</code> reads the client assembly zip and reports a library that landed in more than one version.
+Two versions in <code>lib/core</code> share a classloader, so which one loads depends on classpath order.
+A plugin that ships a different version loads that copy for itself, because the plugin classloader looks at its own jars first, while the rest of Hop still sees <code>lib/core</code>.</p>
+</div>
+<div class="dlist">
+<dl>
 <dt class="hdlist1">Plugins that must see each other&#8217;s classes share a <code>classLoaderGroup</code></dt>
 <dd>
 <p>A database dialect and its bulk loader, a VFS provider and its metadata type, an SFTP connection and the actions using it.
