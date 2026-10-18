@@ -3042,8 +3042,8 @@ For example, you can execute a workflow for each file found in a directory.</p><
 <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Wait for the remote workflow to finish?</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enable to block until the workflow on the Hop Server has finished</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wait for remote workflow to complete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Blocks the workflow until the child workflow has finished, so this action returns the result of the child workflow.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 <tr>
@@ -3085,7 +3085,7 @@ If, however, you want all your log information kept in one place, you must set u
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specify logfile?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specify logfile</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enable to specify a separate logging file for the execution of this workflow</p></td>
 </tr>
 <tr>
@@ -3179,6 +3179,51 @@ You can do this by:</p>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The child workflow ended with a true result.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The workflow could not be loaded or started, the log file of <strong>Specify logfile</strong> could not be created, the child workflow ended with a false result, or <strong>Stop after (milliseconds)</strong> was reached. With <strong>Execute for every result row</strong>, the first run that fails ends the loop: the remaining rows are not processed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The result files of the child workflow are added to the files the action received, plus the log file with <strong>Specify logfile</strong>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The child workflow starts with the rows the action received. When it returns at least one row, those rows replace the rows the action received; when it returns none, the received rows are passed on. A child that doesn&#8217;t change the rows returns them as it received them. With <strong>Execute for every result row</strong>, every run receives only its own row, and the action passes on what the last run left: the rows the last child returned, or else the last row the action received.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Metrics</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The line counts and the number of errors of the child workflow. With <strong>Execute for every result row</strong>, those of the last run.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Without <strong>Wait for remote workflow to complete</strong>, the result is true as soon as the child workflow starts, and its files, rows and metrics are not passed on.</p>
 </div>
 </div>
 </div>

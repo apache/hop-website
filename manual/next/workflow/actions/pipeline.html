@@ -3035,16 +3035,12 @@ Select the desired run configuration to control where and how the pipeline is ex
 <td class="tableblock halign-left valign-top"><p class="tableblock">Makes sure the results files are cleared before the pipeline starts.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Wait for remote pipeline to finish</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If you selected Server as your environment type, choose this option to block the workflow until the pipeline runs on the server.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wait for the pipeline to complete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Blocks the workflow until the pipeline has finished, so this action returns the result of the pipeline. Enabled by default.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Stop after (milliseconds)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Maximum time to wait for the pipeline to complete. Empty or 0 means wait indefinitely. When the time is reached the pipeline is stopped and this action fails. Only used when wait-to-finish is enabled. The value may contain a variable.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Follow local abort to remote pipeline</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If you selected Server as your environment type, choose this option to send the local abort signal remotely.</p></td>
 </tr>
 </tbody>
 </table>
@@ -3128,8 +3124,8 @@ A value you fill in here overrides the sub-pipeline&#8217;s own default for this
 </div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 25%;">
+<col style="width: 75%;">
 </colgroup>
 <thead>
 <tr>
@@ -3167,6 +3163,51 @@ A value you fill in here overrides the sub-pipeline&#8217;s own default for this
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The pipeline ran without errors. With <strong>Execute for every result row</strong>, every run did.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The pipeline could not be loaded or started, the log file of <strong>Specify logfile</strong> could not be created, one of its transforms had an error, or <strong>Stop after (milliseconds)</strong> was reached. The number of errors comes from the pipeline. With <strong>Execute for every result row</strong>, the first run that fails ends the loop: the remaining rows are not processed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The files the pipeline added to the result are added to the files the action received, plus the log file with <strong>Specify logfile</strong>. <strong>Clear results files before execution</strong> empties the list before every run, so with <strong>Execute for every result row</strong> only the files of the last run are kept.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When the pipeline contains a <a href="../../pipeline/transforms/copyrowstoresult.html" class="xref page">Copy rows to result</a> transform, its rows replace the rows the action received, even when it copies none. Otherwise the rows are passed on unchanged. <strong>Clear results rows before execution</strong> empties the list first. With <strong>Execute for every result row</strong>, every run receives only its own row, and the action passes on what the last run left: the rows it copied, or else the last row the action received.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Metrics</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The line counts and the number of errors of the pipeline. With <strong>Execute for every result row</strong>, those of the last run.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Without <strong>Wait for the pipeline to complete</strong>, the result is true as soon as the pipeline starts, and the files, rows and metrics of the pipeline are not passed on.</p>
 </div>
 </div>
 </div>

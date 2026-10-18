@@ -3178,7 +3178,7 @@ Note: The support of this flag is depending on the mail server.</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Attach files to message?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Attach file(s) to message</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enable to attach a file to your email message</p></td>
 </tr>
 <tr>
@@ -3233,6 +3233,56 @@ Note: This works only when Use HTML format is defined in the EMail Message tab.<
 <td class="tableblock halign-left valign-top"><p class="tableblock">The image content ID (used when embedding multiple images) Click Edit to edit the content ID; click Delete to delete the Content ID</p></td>
 </tr>
 </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The message was sent and no error was counted.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The message could not be sent, for example because no server is set, the connection or the login failed, or an address is invalid. It is also false when an error was counted while preparing the attachments, even though the message is sent: with <strong>Zip files to single archive</strong>, a zip that can&#8217;t be created is left out and the message goes out without it. The number of errors is 1.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged. With <strong>Attach file(s) to message</strong>, the result files of the selected types are attached to the message. A result file that no longer exists is skipped without an error, unless <strong>Zip files to single archive</strong> is enabled.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When the selected <a href="../../metadata-types/mail-server-connection.html" class="xref page">Mail server connection</a> doesn&#8217;t exist, the action doesn&#8217;t return false: the workflow stops with an error, and no hop is followed.
+</td>
+</tr>
 </table>
 </div>
 </div>

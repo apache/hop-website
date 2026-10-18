@@ -3142,6 +3142,48 @@ A.*[ENG:0-9].txt  : files tarting with A, ending with a number and .txt</code></
 </div>
 </div>
 <div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The files were retrieved without errors. This includes when no file matched, and when <strong>Copy previous results to args</strong> is enabled and there are no result rows.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The connection, the login or the change of remote directory failed, the target directory doesn&#8217;t exist and <strong>Create target folder</strong> is not enabled, a file could not be retrieved, or <strong>Remove files after retrieval</strong> failed. In that last case the file was already downloaded and added to the result files. The number of errors is 1.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With <strong>Add filenames to result</strong>, every file the action downloaded is added, in the target directory, also when the action fails afterwards.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged. With <strong>Copy previous results to args</strong>, the action retrieves the files whose name is exactly the first field of a result row, and the wildcard is not used.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Metrics</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Files retrieved: the number of files the action downloaded. It is only set when the action succeeds: files downloaded before a failure are not counted.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
 <h2 id="negotiation_error"><a class="link" href="#negotiation_error">Algorithm Negotiation Fail Error</a></h2>
 <div class="sectionbody">
 <div class="paragraph">

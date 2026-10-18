@@ -3080,6 +3080,44 @@ If you choose an option other than &lt;Static&gt; in the Destination Environment
 </table>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every source and destination pair was processed. A file that can&#8217;t be copied inside a folder is only logged: the action is still true, with 0 errors.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">At least one pair failed, for example because the source doesn&#8217;t exist or the destination folder can&#8217;t be found. The number of errors is the number of pairs that failed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With <strong>Add files to result files name</strong>, the files copied to a file (<strong>Destination is a file</strong>) and the files copied from a folder are added. A single file copied into a folder is not added, and neither are folders. The files the action received are passed on.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged. With <strong>Copy previous results to arguments</strong>, the action takes its pairs from the result rows instead of the Files tab: the source in the first field, the destination in the second and the wildcard in the third.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/workflow/actions/dostounix.html"><span>Previous</span><strong>Convert file between Windows and Unix</strong></a>
