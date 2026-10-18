@@ -1979,6 +1979,10 @@
     <a href="../../../manual/next/variables.html">Variables</a>
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
+    <a href="../../../manual/next/variables/parameters.html">Working with parameters</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/variables/parameter-passing.html">Passing parameters to a child</a>
     
   </li>
@@ -3213,104 +3217,162 @@ The same behaviour can be enabled with the <code>${HOP_CONFIG_IN_MEMORY}</code> 
 <div class="paragraph">
 <p>In addition to the Hop Gui and configuration files, all aspects of and operations on projects and environments can be managed through the Hop Conf command line tool.</p>
 </div>
-<div class="sect2">
-<h3 id="_configuration_on_the_command_line"><a class="link" href="#_configuration_on_the_command_line">Configuration on the command line</a></h3>
 <div class="paragraph">
-<p>The <code><code>hop-conf</code></code> script offers many options to edit environment definitions.</p>
+<p>The examples use <code>hop-conf.sh</code> on Linux and macOS.
+On Windows, run <code>hop-conf.bat</code> with the same options, and put a command on a single line or end its lines with <code>^</code> instead of <code>\</code>.</p>
+</div>
+<div class="sect2">
+<h3 id="_projects"><a class="link" href="#_projects">Projects</a></h3>
+<div class="paragraph">
+<p>A project is registered in <code>hop-config.json</code> with its name and its home folder.
+Its settings and variables are stored in <code>project-config.json</code>, in the home folder.</p>
 </div>
 <div class="sect3">
-<h4 id="_creating_an_environment"><a class="link" href="#_creating_an_environment">Creating an environment</a></h4>
-<div id="_tabs_1" class="openblock tabs is-loading">
+<h4 id="_create_a_project"><a class="link" href="#_create_a_project">Create a project</a></h4>
+<div class="paragraph">
+<p>The home folder has to exist: when it doesn&#8217;t, hop-conf stops with an error that the home folder does not exist.</p>
+</div>
+<div class="listingblock">
 <div class="content">
-<div class="ulist tablist">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash"><span class="hljs-built_in">mkdir</span> -p /data/projects/sales
+./hop-conf.sh --project-create --project=sales --project-home=/data/projects/sales</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">Creating project &#x27;sales&#x27;
+Project &#x27;sales&#x27; was created for home folder : /data/projects/sales
+Configuration file for project &#x27;sales&#x27; was saved to : file:/data/projects/sales/project-config.json</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can set more at the same time, for example a parent project to inherit metadata and variables from (<code>--project-parent</code>), a description (<code>--project-description</code>) or variables (<code>--project-variables</code>, see <a href="#hop-conf-project-variables">Project variables</a>).</p>
+</div>
+<div class="paragraph">
+<p>When the home folder already has a <code>project-config.json</code>, <code>--project-create</code> updates it with the options you pass and keeps its variables.
+Add <code>--project-keep-config-file</code> to leave the file as it is.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_modify_list_and_delete_projects"><a class="link" href="#_modify_list_and_delete_projects">Modify, list and delete projects</a></h4>
+<div class="ulist">
 <ul>
-<li id="_tabs_1_windows" class="tab">
-<p>Windows</p>
+<li>
+<p><code>--project-modify</code> changes the options you pass, for example <code>./hop-conf.sh --project-modify --project=sales --project-description="Sales data warehouse"</code>.</p>
 </li>
-<li id="_tabs_1_linux_macos" class="tab">
-<p>Linux, macOS</p>
+<li>
+<p><code>--projects-list</code> lists the projects with their home folder and configuration file.</p>
+</li>
+<li>
+<p><code>--project-delete</code> removes a project from <code>hop-config.json</code>, for example <code>./hop-conf.sh --project-delete --project=sales</code>. The home folder and its files are not deleted.</p>
 </li>
 </ul>
 </div>
-<div id="_tabs_1_windows--panel" class="tabpanel" aria-labelledby="_tabs_1_windows">
+</div>
+<div class="sect3">
+<h4 id="hop-conf-project-variables"><a class="link" href="#hop-conf-project-variables">Project variables</a></h4>
+<div class="paragraph">
+<p><code>--project-variables</code> adds variables to the project, or changes the value of a variable that already exists.
+Variables with other names are kept.</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">hop-conf.bat --environment-create \
-             --environment hop2 \
-             --environment-project hop2
-             --environment-purpose=Development \
-             --environment-config-files=<span class="hljs-string">&quot;C:\&lt;YOUR_ENV_FILE_PATH&gt;\env-variables.json&quot;</span></code></pre>
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./hop-conf.sh --project-modify --project=sales --project-variables=INPUT_FOLDER=/data/in,OUTPUT_FOLDER=/data/out</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Expected output:</p>
+<p>Separate variables with commas.
+To use spaces or commas in a value, wrap the value in double quotes and keep them from the shell:</p>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 60%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option, as typed in a shell</th>
+<th class="tableblock halign-left valign-top">Variables</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-variables=key1=value1,key2=value2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>key1</code> = <code>value1</code>, <code>key2</code> = <code>value2</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-variables=key1="This value contains spaces",key2=value2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>key1</code> = <code>This value contains spaces</code>, <code>key2</code> = <code>value2</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-variables='key1="value1,value2"'</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>key1</code> = <code>value1,value2</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-variables=key1=\"value1,value2\"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>key1</code> = <code>value1,value2</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-variables=key1="\"\"String with spaces\"\""</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>key1</code> = <code>"String with spaces"</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_environments"><a class="link" href="#_environments">Environments</a></h3>
+<div class="paragraph">
+<p>An environment belongs to one project.
+It adds configuration files with variables to that project, usually one environment for every stage of its lifecycle: development, testing, production.
+The project holds the code, and the environment the configuration, such as server names and folders.
+See <a href="projects-environments.html" class="xref page">Projects and Environments</a> for how they work together.</p>
+</div>
+<div class="sect3">
+<h4 id="_create_an_environment"><a class="link" href="#_create_an_environment">Create an environment</a></h4>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">C:\&lt;YOUR_PATH&gt;\hop&gt;echo off
-===[Environment Settings - hop-conf.bat]===================================
-Java identified as &quot;C:\Program Files\Microsoft\jdk-11.0.17.8-hotspot\\bin\java&quot;
-HOP_OPTIONS=-Xmx2048m -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Conf
--DHOP_AUTO_CREATE_CONFIG=Y
-Command to start Hop will be:
-&quot;C:\Program Files\Microsoft\jdk-11.0.17.8-hotspot\\bin\java&quot; -classpath lib\core\*;lib\beam\*;lib\swt\win64\*
--Djava.library.path=lib\core;lib\beam -Xmx2048m -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows
--DHOP_PLATFORM_RUNTIME=Conf -DHOP_AUTO_CREATE_CONFIG=Y org.apache.hop.config.HopConfig  --environment-create
---environment hop2 --environment-project hop2 --environment-purpose Development
---environment-config-files &quot;C:\&lt;YOUR_ENV_FILE_PATH\env-variables.json&quot;
-===[Starting HopConfig]=========================================================
-Creating environment &#x27;hop2&#x27;
-Environment &#x27;hop2&#x27; was created in Hop configuration file C:\&lt;YOUR_PATH&gt;\hop\config\hop-config.json
-Warning: referenced project &#x27;hop2&#x27; doesn\&#x27;t exist
-Found existing environment configuration file: C:\&lt;YOUR_ENV_FILE_PATH&gt;\variables.json
-Purpose: Development
-Project name: hop2
-Config file: C:\&lt;YOUR_ENV_FILE_PATH&gt;\env-variables.json</code></pre>
-</div>
-</div>
-</div>
-<div id="_tabs_1_linux_macos--panel" class="tabpanel" aria-labelledby="_tabs_1_linux_macos">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">$ sh hop-conf.sh \
-     --environment-create \
-     --environment hop2 \
-     --environment-project hop2 \
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./hop-conf.sh --environment-create \
+     --environment=sales-dev \
+     --environment-project=sales \
      --environment-purpose=Development \
-     --environment-config-files=&lt;YOUR_ENV_FILE_PATH&gt;/env-variables.json</code></pre>
+     --environment-config-files=/data/environments/sales-dev/variables.json</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Expected output:</p>
+<p>Output, shortened:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">Creating environment &#x27;hop2&#x27;
-Environment &#x27;hop2&#x27; was created in Hop configuration file &lt;YOUR_PATH&gt;/hop/config/hop-config.json
-Warning: referenced project &#x27;hop2&#x27; doesn&#x27;t exist
-Found existing environment configuration file: &lt;YOUR_ENV_FILE_PATH&gt;/env-variables.json
-  hop2
+<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">Creating environment &#x27;sales-dev&#x27;
+Environment &#x27;sales-dev&#x27; was created in Hop configuration file /opt/hop/config/hop-config.json
+Created empty environment configuration file : /data/environments/sales-dev/variables.json
+  sales-dev
     Purpose: Development
-    Project name: hop2
-      Config file: &lt;YOUR_ENV_FILE_PATH&gt;/env-variables.json</code></pre>
-</div>
-</div>
-</div>
+    Project name: sales
+      Config file: /data/environments/sales-dev/variables.json</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>As you can see from the log, an empty file was created to set variables in:</p>
+<p>A configuration file that doesn&#8217;t exist yet is created, empty.
+Before creating it, hop-conf logs an error that the file doesn&#8217;t exist to read variables from.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>json</div><pre class="highlightjs highlight is-highlighted"><code class="language-json hljs" data-lang="json"><span class="hljs-punctuation">{</span> <span class="hljs-punctuation">}</span></code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Add variables to it as described in <a href="#hop-conf-configuration-files">Configuration files</a>.</p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_adding_configuration_files_from_a_directory"><a class="link" href="#_adding_configuration_files_from_a_directory">Adding configuration files from a directory</a></h4>
+<h4 id="_add_configuration_files_from_a_directory"><a class="link" href="#_add_configuration_files_from_a_directory">Add configuration files from a directory</a></h4>
 <div class="paragraph">
-<p><code>--environment-config-files</code> still lists files one by one.
+<p><code>--environment-config-files</code> lists files one by one.
 To add every matching file in a folder, pass the folder and a regular expression.
 The expression is matched against the file name, the same way as in the JSON Input and Get File Names transforms.
 <code><strong>.json</code> is not a valid expression; use <code>.</strong>\.json</code>.</p>
@@ -3323,12 +3385,11 @@ When either option is set, that selection replaces the environment&#8217;s confi
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">$ sh hop-conf.sh \
-     --environment-create \
-     --environment test-file \
-     --environment-project test-file \
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./hop-conf.sh --environment-create \
+     --environment=sales-test \
+     --environment-project=sales \
      --environment-purpose=Testing \
-     --environment-config-file-directory=<span class="hljs-string">&quot;&lt;YOUR_ENV_CONFIG_PATH&gt;/config&quot;</span> \
+     --environment-config-file-directory=<span class="hljs-string">&quot;/data/environments/sales-test&quot;</span> \
      --environment-config-file-wildcard=<span class="hljs-string">&quot;.*\.json&quot;</span> \
      --environment-config-file-exclude-wildcard=<span class="hljs-string">&quot;.*secret.*&quot;</span> \
      --environment-config-include-subfolders</code></pre>
@@ -3336,154 +3397,72 @@ When either option is set, that selection replaces the environment&#8217;s confi
 </div>
 </div>
 <div class="sect3">
-<h4 id="_setting_variables_in_an_environment"><a class="link" href="#_setting_variables_in_an_environment">Setting variables in an environment</a></h4>
-<div class="paragraph">
-<p>This command adds a variable to the environment configuration file:</p>
-</div>
-<div class="paragraph">
-<p>&nbsp;<br></p>
-</div>
-<div id="_tabs_2" class="openblock tabs is-loading">
-<div class="content">
-<div class="ulist tablist">
+<h4 id="_modify_list_and_delete_environments"><a class="link" href="#_modify_list_and_delete_environments">Modify, list and delete environments</a></h4>
+<div class="ulist">
 <ul>
-<li id="_tabs_2_windows" class="tab">
-<p>Windows</p>
+<li>
+<p><code>--environment-modify</code> changes the options you pass, for example <code>./hop-conf.sh --environment-modify --environment=sales-dev --environment-purpose=Testing</code>.</p>
 </li>
-<li id="_tabs_2_linux_macos" class="tab">
-<p>Linux, macOS</p>
+<li>
+<p><code>--environments-list</code> lists the environments with their purpose, project and configuration files.</p>
+</li>
+<li>
+<p><code>--environment-delete</code> removes an environment from <code>hop-config.json</code>, for example <code>./hop-conf.sh --environment-delete --environment=sales-dev</code>. Its configuration files are not deleted.</p>
 </li>
 </ul>
-</div>
-<div id="_tabs_2_windows--panel" class="tabpanel" aria-labelledby="_tabs_2_windows">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">hop-conf.bat --config-file &quot;C:\&lt;YOUR_ENV_FILE_PATH&gt;\env-variables.json&quot; --config-file-set-variables &quot;DB_HOSTNAME=localhost,DB_PASSWORD=abcd&quot;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Expected output:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">C:\&lt;YOUR_PATH\hop&gt;echo off
-===[Environment Settings - hop-conf.bat]===================================
-Java identified as &quot;C:\Program Files\Microsoft\jdk-11.0.17.8-hotspot\\bin\java&quot;
-HOP_OPTIONS=-Xmx2048m -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Conf -DHOP_AUTO_CREATE_CONFIG=Y
-Command to start Hop will be:
-&quot;C:\Program Files\Microsoft\jdk-11.0.17.8-hotspot\\bin\java&quot; -classpath lib\core\*;lib\beam\*;lib\swt\win64\*
--Djava.library.path=lib\core;lib\beam -Xmx2048m -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows
--DHOP_PLATFORM_RUNTIME=Conf -DHOP_AUTO_CREATE_CONFIG=Y org.apache.hop.config.HopConfig
---config-file &quot;C:\&lt;YOUR_ENV_FILE_PATH&gt;\env-variables.json&quot;
---config-file-set-variables &quot;DB_HOSTNAME=localhost,DB_PASSWORD=abcd&quot;
-===[Starting HopConfig]=========================================================
-Configuration file &#x27;C:\&lt;YOUR_ENV_FILE_PATH&gt;/env-variables.json&#x27; was modified.</code></pre>
-</div>
-</div>
-</div>
-<div id="_tabs_2_linux_macos--panel" class="tabpanel" aria-labelledby="_tabs_2_linux_macos">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./hop-conf.sh --config-file &lt;YOUR_ENV_FILE_PATH&gt;/env-variables.json --config-file-set-variables DB_HOSTNAME=localhost,DB_PASSWORD=abcd</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Expected output:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">Configuration file &#x27;&lt;YOUR_ENV_FILE_PATH&gt;/env-variables.json&#x27; was modified.</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>If you look at the file <code>env-variables.json</code>, you&#8217;ll see that the variables were added:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>json</div><pre class="highlightjs highlight is-highlighted"><code class="language-json hljs" data-lang="json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">&quot;variables&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span> <span class="hljs-punctuation">{</span>
-    <span class="hljs-attr">&quot;name&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;DB_HOSTNAME&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;value&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;localhost&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;description&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span>
-  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span> <span class="hljs-punctuation">{</span>
-    <span class="hljs-attr">&quot;name&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;DB_PASSWORD&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;value&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;abcd&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;description&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span>
-  <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">]</span>
-<span class="hljs-punctuation">}</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Please note that you can add descriptions for the variables as well with the <code>--describe-variable</code> option.
-Please run hop-conf without options to see all the possibilities.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_deleting_an_environment"><a class="link" href="#_deleting_an_environment">Deleting an environment</a></h4>
-<div class="paragraph">
-<p>The following example deletes an environment from the Hop configuration file:</p>
-</div>
-<div class="paragraph">
-<p>&nbsp;<br></p>
-</div>
-<div id="_tabs_3" class="openblock tabs is-loading">
-<div class="content">
-<div class="ulist tablist">
-<ul>
-<li id="_tabs_3_windows" class="tab">
-<p>Windows</p>
-</li>
-<li id="_tabs_3_linux_macos" class="tab">
-<p>Linux, macOS</p>
-</li>
-</ul>
-</div>
-<div id="_tabs_3_windows--panel" class="tabpanel" aria-labelledby="_tabs_3_windows">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">hop-conf.bat -ed --environment hop2</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Expected output:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">C:\&lt;YOUR_PATH&gt;\hop&gt;echo off
-===[Environment Settings - hop-conf.bat]===================================
-Java identified as &quot;C:\Program Files\Microsoft\jdk-11.0.17.8-hotspot\\bin\java&quot;
-HOP_OPTIONS=-Xmx2048m -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Conf -DHOP_AUTO_CREATE_CONFIG=Y
-Command to start Hop will be:
-&quot;C:\Program Files\Microsoft\jdk-11.0.17.8-hotspot\\bin\java&quot; -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam -Xmx2048m -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Conf -DHOP_AUTO_CREATE_CONFIG=Y org.apache.hop.config.HopConfig  -ed --environment hop2
-===[Starting HopConfig]=========================================================
-Lifecycle environment &#x27;hop2&#x27; was deleted from Hop configuration file C:\&lt;YOUR_PATH&gt;\hop\config\hop-config.json</code></pre>
-</div>
-</div>
-</div>
-<div id="_tabs_3_linux_macos--panel" class="tabpanel" aria-labelledby="_tabs_3_linux_macos">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">./hop-conf.sh -ed --environment hop2</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Expected output:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">Lifecycle environment &#x27;hop2&#x27; was deleted from Hop configuration file &lt;YOUR_PATH&gt;/hop/config/hop-config.json</code></pre>
-</div>
-</div>
-</div>
-</div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_projects_plugin_configuration"><a class="link" href="#_projects_plugin_configuration">Projects Plugin configuration</a></h3>
+<h3 id="hop-conf-configuration-files"><a class="link" href="#hop-conf-configuration-files">Configuration files</a></h3>
+<div class="paragraph">
+<p>The configuration files of an environment hold its variables.
+<code>--config-file</code> selects the file, <code>--config-file-set-variables</code> sets the value of variables, and <code>--config-file-describe-variables</code> their description:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./hop-conf.sh --config-file=/data/environments/sales-dev/variables.json \
+     --config-file-set-variables=DB_HOSTNAME=localhost,DB_PASSWORD=abcd
+./hop-conf.sh --config-file=/data/environments/sales-dev/variables.json \
+     --config-file-describe-variables=<span class="hljs-string">&quot;DB_HOSTNAME=The database server&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The file then contains:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>json</div><pre class="highlightjs highlight is-highlighted"><code class="language-json hljs" data-lang="json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;variables&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;name&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;DB_HOSTNAME&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;value&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;localhost&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;description&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;The database server&quot;</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;name&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;DB_PASSWORD&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;value&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;abcd&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;description&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The variables of <code>hop-config.json</code> itself, listed as <strong>System variables</strong> in the configuration perspective of Hop Gui, are set with <code>--set-variable</code> and described with <code>--describe-variable</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./hop-conf.sh --set-variable=COMPANY_NAME=Acme
+./hop-conf.sh --describe-variable=<span class="hljs-string">&quot;COMPANY_NAME=The company name used in reports&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>--set-variable=MY_VARIABLE=</code> sets a variable to an empty value. The variable stays in the list.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_projects_plugin_configuration"><a class="link" href="#_projects_plugin_configuration">Projects plugin configuration</a></h3>
 <div class="paragraph">
 <p>There are various options to configure the behavior of the <code><code>Projects</code></code> plugin itself.
 In Hop configuration file <code><code>hop-config.json</code></code> we can find the following options:</p>

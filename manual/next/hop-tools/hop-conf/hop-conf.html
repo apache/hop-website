@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Hop Conf - The Hop command line configuration tool | Apache Hop</title>
-<meta name="description" content="Hop Conf is a command line tool to manage your Hop client installation">
+<meta name="description" content="Hop Conf is a command line tool to manage your Hop configuration: projects, environments, configuration files and the settings in hop-config.json.">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/hop-tools/hop-conf/hop-conf.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
 <meta property="og:title" content="Hop Conf - The Hop command line configuration tool">
-<meta property="og:description" content="Hop Conf is a command line tool to manage your Hop client installation">
+<meta property="og:description" content="Hop Conf is a command line tool to manage your Hop configuration: projects, environments, configuration files and the settings in hop-config.json.">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/hop-tools/hop-conf/hop-conf.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -1979,6 +1979,10 @@
     <a href="../../../../manual/next/variables.html">Variables</a>
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/variables/parameters.html">Working with parameters</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/variables/parameter-passing.html">Passing parameters to a child</a>
     
   </li>
@@ -2936,667 +2940,181 @@
 </nav>
     <article class="doc">
       <h1>Hop Conf - The Hop command line configuration tool</h1>
-      <div class="sect1">
-<h2 id="_usage"><a class="link" href="#_usage">Usage</a></h2>
+      <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Hop Conf is a command line tool to manage environments.
-The <strong>hop-conf.sh</strong> script can be run with the <strong>-h</strong> flag (<code>./hop-conf.sh -h</code>) to display available options.</p>
+<p>Hop Conf changes the Hop configuration from the command line, so you can script what you otherwise do in Hop Gui: create projects and environments, set variables and change settings.</p>
 </div>
 <div class="paragraph">
-<p>&nbsp;<br></p>
-</div>
-<details>
-<summary class="title">Usage</summary>
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">Usage: &lt;main class&gt; [-h] [-ec] [-ed] [-el] [-em] [-ey] [-pc] [-pd] [-pl] [-pm]
-                    [-pn] [-py] [-aza=&lt;account&gt;] [-azi=&lt;blockIncrement&gt;]
-                    [-azk=&lt;key&gt;] [-cfg=&lt;configFile&gt;]
-                    [-dc=&lt;defaultProjectConfigFile&gt;] [-de=&lt;defaultEnvironment&gt;]
-                    [-dp=&lt;defaultProject&gt;] [-dv=&lt;describeVariable&gt;]
-                    [-e=&lt;environmentName&gt;] [-ep=&lt;environmentProject&gt;]
-                    [-eu=&lt;environmentPurpose&gt;] [-fj=&lt;fatJarFilename&gt;]
-                    [-gck=&lt;serviceAccountKeyFile&gt;] [-gdc=&lt;credentialsFile&gt;]
-                    [-gdt=&lt;tokensFolder&gt;] [-p=&lt;projectName&gt;]
-                    [-pa=&lt;projectMetadataBaseFolder&gt;]
-                    [-pb=&lt;projectDataSetsCsvFolder&gt;] [-pf=&lt;projectConfigFile&gt;]
-                    [-ph=&lt;projectHome&gt;] [-pp=&lt;projectCompany&gt;]
-                    [-<span class="hljs-built_in">pr</span>=&lt;projectParent&gt;] [-ps=&lt;projectDescription&gt;]
-                    [-pt=&lt;projectDepartment&gt;] [-pu=&lt;projectUnitTestsBasePath&gt;]
-                    [-px=&lt;projectEnforceExecutionInHome&gt;]
-                    [-sj=&lt;standardProjectsFolder&gt;]
-                    [-sp=&lt;standardParentProject&gt;] [-sv=&lt;setVariable&gt;]
-                    [-xm=&lt;metadataJsonFilename&gt;] [-cfd=&lt;configDescribeVariables&gt;
-                    [,&lt;configDescribeVariables&gt;...]]...
-                    [-cfv=&lt;configSetVariables&gt;[,&lt;configSetVariables&gt;...]]...
-                    [-eg=&lt;environmentConfigFiles&gt;[,
-                    &lt;environmentConfigFiles&gt;...]]... [-pv=&lt;projectVariables&gt;[,
-                    &lt;projectVariables&gt;...]]...
-      -aza, --azure-account=&lt;account&gt;
-                            The account to use <span class="hljs-keyword">for</span> the Azure VFS
-      -azi, --azure-block-increment=&lt;blockIncrement&gt;
-                            The block increment size <span class="hljs-keyword">for</span> new files on Azure,
-                              multiples of 512 only.
-      -azk, --azure-key=&lt;key&gt;
-                            The key to use <span class="hljs-keyword">for</span> the Azure VFS
-      -cfd, --config-file-describe-variables=&lt;configDescribeVariables&gt;[,
-        &lt;configDescribeVariables&gt;...]
-                            A list of variable=description combinations separated by
-                              a comma
-      -cfg, --config-file=&lt;configFile&gt;
-                            Specify the configuration JSON file to manage
-      -cfv, --config-file-set-variables=&lt;configSetVariables&gt;[,
-        &lt;configSetVariables&gt;...]
-                            A list of variable=value combinations separated by a
-                              comma
-      -dc, --default-projects-folder=&lt;defaultProjectConfigFile&gt;
-                            The standard project configuration filename proposed
-                              when creating projects
-      -de, --default-environment=&lt;defaultEnvironment&gt;
-                            The name of the default environment to use when none is
-                              specified
-      -dp, --default-project=&lt;defaultProject&gt;
-                            The name of the default project to use when none is
-                              specified
-      -dv, --describe-variable=&lt;describeVariable&gt;
-                            Describe a variable, use format VARIABLE=Description
-  -e, --environment=&lt;environmentName&gt;
-                            The name of the lifecycle environment to manage
-      -ec, --environment-create
-                            Create a new project lifecycle environment. Also specify
-                              its name, purpose, the project name and the
-                              configuration files.
-      -ed, --environment-delete
-                            Delete a lifecycle environment
-      -eg, --environment-config-files=&lt;environmentConfigFiles&gt;[,
-        &lt;environmentConfigFiles&gt;...]
-                            A list of configuration files <span class="hljs-keyword">for</span> this lifecycle
-                              environment, comma separated
-          --environment-config-file-directory=&lt;environmentConfigFileDirectory&gt;
-                            Folder of configuration files <span class="hljs-keyword">for</span> this lifecycle
-                              environment. Matching files replace the configuration
-                              file list, together with --environment-config-files
-                              when that option is also <span class="hljs-built_in">set</span>.
-          --environment-config-file-exclude-wildcard=&lt;environmentConfigFileExcludeWildcard&gt;
-                            Regular expression <span class="hljs-keyword">for</span> file names to ignore <span class="hljs-keyword">in</span>
-                              --environment-config-file-directory. Example:
-                              .*secret.*
-          --environment-config-file-wildcard=&lt;environmentConfigFileWildcard&gt;
-                            Regular expression matched against file names <span class="hljs-keyword">in</span>
-                              --environment-config-file-directory. Example:
-                              .*\.json
-          --environment-config-include-subfolders
-                            Also include matching files from subfolders of
-                              --environment-config-file-directory
-      -el, --environments-list
-                            List the defined lifecycle environments
-      -em, --environment-modify
-                            Modify a lifecycle environment
-      -ep, --environment-project=&lt;environmentProject&gt;
-                            The project <span class="hljs-keyword">for</span> the environment
-      -eu, --environment-purpose=&lt;environmentPurpose&gt;
-                            The purpose of the environment: Development, Testing,
-                              Production, CI, ...
-      -ey, --environment-mandatory
-                            Make it mandatory to reference an environment
-      -fj, --generate-fat-jar=&lt;fatJarFilename&gt;
-                            Specify the filename of the fat jar to generate from
-                              your current software installation
-      -gck, --google-cloud-service-account-key-file=&lt;serviceAccountKeyFile&gt;
-                            Configure the path to a Google Cloud service account
-                              JSON key file
-      -gdc, --google-drive-credentials-file=&lt;credentialsFile&gt;
-                            Configure the path to a Google Drive credentials JSON
-                              file
-      -gdt, --google-drive-tokens-folder=&lt;tokensFolder&gt;
-                            Configure the path to a Google Drive tokens folder
-  -h, --<span class="hljs-built_in">help</span>                Displays this <span class="hljs-built_in">help</span> message and quits.
-  -p, --project=&lt;projectName&gt;
-                            The name of the project to manage
-      -pa, --project-metadata-base=&lt;projectMetadataBaseFolder&gt;
-                            The metadata base folder (relative to home)
-      -pb, --project-datasets-base=&lt;projectDataSetsCsvFolder&gt;
-                            The data sets CSV folder (relative to home)
-      -pc, --project-create Create a new project. Also specify the name and its home
-      -pd, --project-delete Delete a project
-      -pf, --project-config-file=&lt;projectConfigFile&gt;
-                            The configuration file relative to the home folder. The
-                              default value is project-config.json
-      -ph, --project-home=&lt;projectHome&gt;
-                            The home directory of the project
-      -pl, --projects-list   List the defined projects
-      -pla, --list-action-types-in-project
-                             List action types used <span class="hljs-keyword">in</span> this project
-      -plm, --list-metadata-types-in-project
-                             List metadata types used <span class="hljs-keyword">in</span> this project
-      -plt, --list-transform-types-in-project
-                             List transform types used <span class="hljs-keyword">in</span> this project
-      -pm, --project-modify Modify a project
-      -pn, --projects-enabled
-                            Enable or <span class="hljs-built_in">disable</span> the projects plugin
-      -pp, --project-company=&lt;projectCompany&gt;
-                            The company
-      -<span class="hljs-built_in">pr</span>, --project-parent=&lt;projectParent&gt;
-                            The name of the parent project to inherit metadata and
-                              variables from
-      -ps, --project-description=&lt;projectDescription&gt;
-                            The description of the project
-      -pt, --project-department=&lt;projectDepartment&gt;
-                            The department
-      -pu, --project-unit-tests-base=&lt;projectUnitTestsBasePath&gt;
-                            The unit tests base folder (relative to home)
-      -pv, --project-variables=&lt;projectVariables&gt;[,&lt;projectVariables&gt;...]
-                            A list of variable=value combinations separated by a
-                              comma
-      -px, --project-enforce-execution=&lt;projectEnforceExecutionInHome&gt;
-                            Validate before execution that a workflow or pipeline is
-                              located <span class="hljs-keyword">in</span> the project home folder or a sub-folder
-                              (<span class="hljs-literal">true</span>/false).
-      -py, --project-mandatory
-                            Make it mandatory to reference a project
-      -sj, --standard-projects-folder=&lt;standardProjectsFolder&gt;
-                            GUI: The standard projects folder proposed when creating
-                              projects
-      -sp, --standard-parent-project=&lt;standardParentProject&gt;
-                            The name of the standard project to use as a parent when
-                              creating new projects
-      -sv, --set-variable=&lt;setVariable&gt;
-                            Set a variable, use format VAR=Value
-      -xm, --export-metadata=&lt;metadataJsonFilename&gt;
-                            Export project metadata to a single JSON file <span class="hljs-built_in">which</span> you
-                              can specify with this option. Also specify the -p
-                              option.
-      -v,  --version        Print version information and <span class="hljs-built_in">exit</span></code></pre>
-</div>
+<p>It writes to <code>hop-config.json</code>, in the folder of the <code>HOP_CONFIG_FOLDER</code> variable or by default in the <code>config</code> folder of your Hop installation, and to the configuration files of projects and environments.
+Run it as <code>hop-conf.sh</code>, as <code>hop-conf.bat</code> on Windows, or as <code>hop conf</code> with the <a href="../hop.html" class="xref page">hop</a> command.</p>
 </div>
 <div class="paragraph">
-<p>The available options are listed below:</p>
-</div>
-<table id="hop-conf" class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. Hop-conf Options</caption>
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 40%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Short Option</th>
-<th class="tableblock halign-left valign-top">Extended Option</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-h</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--help</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Displays this help message and quits</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-v</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--version</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Print version information and exit</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-ec</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--environment-create</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Create an environment
-Also specify the name and its home</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-ed</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--environment-delete</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Delete an environment</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-el</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--environment-list</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">List the defined environments</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-em</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--environment-modify</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Modify an environment</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-pc</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--project-create</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Create a new project.
-Also specify the name and its home</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-pd</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--prject-delete</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Delete a project</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-pl</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--projects-list</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">List the defined projects</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-pla</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--list-action-types-in-project</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">List action types used in this project</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-plm</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--list-metadata-types-in-project</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">List metadata types used in this project</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-plt</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--list-transform-types-in-project</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">List transform types used in this project</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-pm</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--project-modify</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Modify a project</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-dv</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--describe-variable=&lt;describeVariable&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Describe a variable</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-e</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-environment=&lt;environmentName&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the environment to manage</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-ep</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--environment-project=&lt;environmentProject&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The project for the environment</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-eu</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--environment-purpose=&lt;environmentPurpose&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The purpose of the environment: Development, Testing, Production, CI, &#8230;&#8203;</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-fj</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--generate-fat-jar=&lt;fatJarFilename&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specify the filename of the fat jar to generate from your current software installation</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-xm</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--export-metadata=&lt;metadataJsonFilename&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Export project metadata to a single JSON file which you can specify with this option.
-Also specify the -p option to know which metadata to export.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-p</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--project=&lt;projectName&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The project name</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-pa</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--project-metadata-base=&lt;projectMetadataBaseFolder&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The metadata base folder (relative to home)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-pb</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--project-datasets-base-base=&lt;projectDataSetsCsvFolder&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The data sets CSV folder (relative to home)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-pf</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--project-config-file=&lt;projectConfigFile&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The configuration file relative to the home folder.
-The default value is project-config.json</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-ph</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--project-home=&lt;projectHome&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The home directory of the project</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-pp</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--project-company=&lt;projectCompany&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The company</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-ps</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--project-description=&lt;projectDescription&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The description of the project</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-pt</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--project-department=&lt;projectDepartment&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The department</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-pu</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--project-unit-tests-base=&lt;projectUnitTestsBasePath&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The unit tests base folder (relative to home)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-px</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--project-enforce-execution=&lt;projectEnforceExecutionInHome&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Validate before execution that a workflow or pipeline islocated in the project home folder or a sub-folder (true/false)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-sv</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--set-variable=&lt;setVariable&gt;</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Set a variable, use format VAR=Value</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<code>-sv</code> can be used to unset a variable by specifying a variable without a value, e.g. <code>-sv=myvar=</code>
-</td>
-</tr>
-</table>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-cfg</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--config-file=&lt;configFile&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specify the configuration JSON file to manage</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-cfd</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--config-file-describe-variables=&lt;configDescribeVariables&gt;[,&lt;configDescribeVariables&gt;&#8230;&#8203;]</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A list of variable=description combinations separated by a comma</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-cfv</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--config-file-set-variables=&lt;configSetVariables&gt; ,&lt;configSetVariables&gt;&#8230;&#8203;]</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A list of variable=value combinations separated by a comma</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-eg</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--environment-config-files=&lt;environmentConfigFiles&gt;[, &lt;environmentConfigFiles&gt;&#8230;&#8203;]</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A list of configuration files for this lifecycle environment, comma separated</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--environment-config-file-directory=&lt;environmentConfigFileDirectory&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Folder of configuration files. Matching files replace the configuration file list, together with --environment-config-files when that option is also set. The wildcard is a regular expression, for example <code>.*\.json</code>, not a shell glob</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--environment-config-file-wildcard=&lt;environmentConfigFileWildcard&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Regular expression matched against file names in --environment-config-file-directory</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--environment-config-file-exclude-wildcard=&lt;environmentConfigFileExcludeWildcard&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Regular expression for file names to ignore in that folder</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--environment-config-include-subfolders</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Also include matching files from subfolders of --environment-config-file-directory</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-pv</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--project-variables=&lt;projectVariables&gt;[,&lt;projectVariables&gt;&#8230;&#8203;]</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A list of variable=value combinations separated by a comma</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--graph-connection-test=&lt;name&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Test the graph database connection or Neo4j connection with the given name. See <a href="#_graph_database_connections">Graph database connections</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--graph-connection-info=&lt;name&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Print the graph database type and capabilities of a graph database connection or Neo4j connection as JSON</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">--graph-database-types</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Print the installed graph database types and their capabilities as JSON</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</details>
-<div class="paragraph">
-<p>&nbsp;<br></p>
-</div>
-<div class="sect2">
-<h3 id="_project_variables_examples"><a class="link" href="#_project_variables_examples">project variables Examples</a></h3>
-<div class="paragraph">
-<p>This is a list of examples on how the parameters on this command are parsed</p>
-</div>
-<div class="sect3">
-<h4 id="_normal_usage"><a class="link" href="#_normal_usage">Normal Usage</a></h4>
-<div class="listingblock">
-<div class="content">
-<pre>--project-variables=key1=value1,key2=value2</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Result:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Key</th>
-<th class="tableblock halign-left valign-top">value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">key1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">value1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">key2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">value2</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_spaces_in_value_usage"><a class="link" href="#_spaces_in_value_usage">Spaces in value Usage</a></h4>
-<div class="listingblock">
-<div class="content">
-<pre>--project-variables=key1="This value contains spaces",key2=value2</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Result:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Key</th>
-<th class="tableblock halign-left valign-top">value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">key1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">This value contains spaces</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">key2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">value2</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_commas_in_value_usage"><a class="link" href="#_commas_in_value_usage">Commas in value Usage</a></h4>
-<div class="listingblock">
-<div class="content">
-<pre>--project-variables=key1=\"value1,value2\"</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Result:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Key</th>
-<th class="tableblock halign-left valign-top">value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">key1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">value1,value2</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="_forcing_quotes_in_value"><a class="link" href="#_forcing_quotes_in_value">Forcing quotes in value</a></h4>
-<div class="listingblock">
-<div class="content">
-<pre>--project-variables=key1="\"\"String with spaces\"\""</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Result:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Key</th>
-<th class="tableblock halign-left valign-top">value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">key1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"String with spaces"</p></td>
-</tr>
-</tbody>
-</table>
-</div>
+<p><code>hop-conf.sh -h</code> lists all the options of your installation.
+Plugins add their own, for example for search, the File Explorer, linting, the AI Assistant or cloud storage.
+The options described on this page are listed in <a href="#_options">Options</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_project_usage_and_configuration"><a class="link" href="#_project_usage_and_configuration">Project Usage and Configuration</a></h2>
+<h2 id="_projects_and_environments"><a class="link" href="#_projects_and_environments">Projects and environments</a></h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_configuration_on_the_command_line"><a class="link" href="#_configuration_on_the_command_line">Configuration on the command line</a></h3>
 <div class="paragraph">
-<p>The <code><code>hop-conf</code></code> script offers many options to edit environment definitions.</p>
+<p>The examples use <code>hop-conf.sh</code> on Linux and macOS.
+On Windows, run <code>hop-conf.bat</code> with the same options, and put a command on a single line or end its lines with <code>^</code> instead of <code>\</code>.</p>
+</div>
+<div class="sect2">
+<h3 id="_projects"><a class="link" href="#_projects">Projects</a></h3>
+<div class="paragraph">
+<p>A project is registered in <code>hop-config.json</code> with its name and its home folder.
+Its settings and variables are stored in <code>project-config.json</code>, in the home folder.</p>
 </div>
 <div class="sect3">
-<h4 id="_creating_an_environment"><a class="link" href="#_creating_an_environment">Creating an environment</a></h4>
-<div id="_tabs_1" class="openblock tabs is-loading">
+<h4 id="_create_a_project"><a class="link" href="#_create_a_project">Create a project</a></h4>
+<div class="paragraph">
+<p>The home folder has to exist: when it doesn&#8217;t, hop-conf stops with an error that the home folder does not exist.</p>
+</div>
+<div class="listingblock">
 <div class="content">
-<div class="ulist tablist">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash"><span class="hljs-built_in">mkdir</span> -p /data/projects/sales
+./hop-conf.sh --project-create --project=sales --project-home=/data/projects/sales</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">Creating project &#x27;sales&#x27;
+Project &#x27;sales&#x27; was created for home folder : /data/projects/sales
+Configuration file for project &#x27;sales&#x27; was saved to : file:/data/projects/sales/project-config.json</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can set more at the same time, for example a parent project to inherit metadata and variables from (<code>--project-parent</code>), a description (<code>--project-description</code>) or variables (<code>--project-variables</code>, see <a href="#hop-conf-project-variables">Project variables</a>).</p>
+</div>
+<div class="paragraph">
+<p>When the home folder already has a <code>project-config.json</code>, <code>--project-create</code> updates it with the options you pass and keeps its variables.
+Add <code>--project-keep-config-file</code> to leave the file as it is.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_modify_list_and_delete_projects"><a class="link" href="#_modify_list_and_delete_projects">Modify, list and delete projects</a></h4>
+<div class="ulist">
 <ul>
-<li id="_tabs_1_windows" class="tab">
-<p>Windows</p>
+<li>
+<p><code>--project-modify</code> changes the options you pass, for example <code>./hop-conf.sh --project-modify --project=sales --project-description="Sales data warehouse"</code>.</p>
 </li>
-<li id="_tabs_1_linux_macos" class="tab">
-<p>Linux, macOS</p>
+<li>
+<p><code>--projects-list</code> lists the projects with their home folder and configuration file.</p>
+</li>
+<li>
+<p><code>--project-delete</code> removes a project from <code>hop-config.json</code>, for example <code>./hop-conf.sh --project-delete --project=sales</code>. The home folder and its files are not deleted.</p>
 </li>
 </ul>
 </div>
-<div id="_tabs_1_windows--panel" class="tabpanel" aria-labelledby="_tabs_1_windows">
+</div>
+<div class="sect3">
+<h4 id="hop-conf-project-variables"><a class="link" href="#hop-conf-project-variables">Project variables</a></h4>
+<div class="paragraph">
+<p><code>--project-variables</code> adds variables to the project, or changes the value of a variable that already exists.
+Variables with other names are kept.</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">hop-conf.bat --environment-create \
-             --environment hop2 \
-             --environment-project hop2
-             --environment-purpose=Development \
-             --environment-config-files=<span class="hljs-string">&quot;C:\&lt;YOUR_ENV_FILE_PATH&gt;\env-variables.json&quot;</span></code></pre>
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./hop-conf.sh --project-modify --project=sales --project-variables=INPUT_FOLDER=/data/in,OUTPUT_FOLDER=/data/out</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Expected output:</p>
+<p>Separate variables with commas.
+To use spaces or commas in a value, wrap the value in double quotes and keep them from the shell:</p>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 60%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option, as typed in a shell</th>
+<th class="tableblock halign-left valign-top">Variables</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-variables=key1=value1,key2=value2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>key1</code> = <code>value1</code>, <code>key2</code> = <code>value2</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-variables=key1="This value contains spaces",key2=value2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>key1</code> = <code>This value contains spaces</code>, <code>key2</code> = <code>value2</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-variables='key1="value1,value2"'</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>key1</code> = <code>value1,value2</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-variables=key1=\"value1,value2\"</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>key1</code> = <code>value1,value2</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-variables=key1="\"\"String with spaces\"\""</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>key1</code> = <code>"String with spaces"</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_environments"><a class="link" href="#_environments">Environments</a></h3>
+<div class="paragraph">
+<p>An environment belongs to one project.
+It adds configuration files with variables to that project, usually one environment for every stage of its lifecycle: development, testing, production.
+The project holds the code, and the environment the configuration, such as server names and folders.
+See <a href="../../projects/projects-environments.html" class="xref page">Projects and Environments</a> for how they work together.</p>
+</div>
+<div class="sect3">
+<h4 id="_create_an_environment"><a class="link" href="#_create_an_environment">Create an environment</a></h4>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">C:\&lt;YOUR_PATH&gt;\hop&gt;echo off
-===[Environment Settings - hop-conf.bat]===================================
-Java identified as &quot;C:\Program Files\Microsoft\jdk-11.0.17.8-hotspot\\bin\java&quot;
-HOP_OPTIONS=-Xmx2048m -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Conf
--DHOP_AUTO_CREATE_CONFIG=Y
-Command to start Hop will be:
-&quot;C:\Program Files\Microsoft\jdk-11.0.17.8-hotspot\\bin\java&quot; -classpath lib\core\*;lib\beam\*;lib\swt\win64\*
--Djava.library.path=lib\core;lib\beam -Xmx2048m -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows
--DHOP_PLATFORM_RUNTIME=Conf -DHOP_AUTO_CREATE_CONFIG=Y org.apache.hop.config.HopConfig  --environment-create
---environment hop2 --environment-project hop2 --environment-purpose Development
---environment-config-files &quot;C:\&lt;YOUR_ENV_FILE_PATH\env-variables.json&quot;
-===[Starting HopConfig]=========================================================
-Creating environment &#x27;hop2&#x27;
-Environment &#x27;hop2&#x27; was created in Hop configuration file C:\&lt;YOUR_PATH&gt;\hop\config\hop-config.json
-Warning: referenced project &#x27;hop2&#x27; doesn\&#x27;t exist
-Found existing environment configuration file: C:\&lt;YOUR_ENV_FILE_PATH&gt;\variables.json
-Purpose: Development
-Project name: hop2
-Config file: C:\&lt;YOUR_ENV_FILE_PATH&gt;\env-variables.json</code></pre>
-</div>
-</div>
-</div>
-<div id="_tabs_1_linux_macos--panel" class="tabpanel" aria-labelledby="_tabs_1_linux_macos">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">$ sh hop-conf.sh \
-     --environment-create \
-     --environment hop2 \
-     --environment-project hop2 \
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./hop-conf.sh --environment-create \
+     --environment=sales-dev \
+     --environment-project=sales \
      --environment-purpose=Development \
-     --environment-config-files=&lt;YOUR_ENV_FILE_PATH&gt;/env-variables.json</code></pre>
+     --environment-config-files=/data/environments/sales-dev/variables.json</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Expected output:</p>
+<p>Output, shortened:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">Creating environment &#x27;hop2&#x27;
-Environment &#x27;hop2&#x27; was created in Hop configuration file &lt;YOUR_PATH&gt;/hop/config/hop-config.json
-Warning: referenced project &#x27;hop2&#x27; doesn&#x27;t exist
-Found existing environment configuration file: &lt;YOUR_ENV_FILE_PATH&gt;/env-variables.json
-  hop2
+<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">Creating environment &#x27;sales-dev&#x27;
+Environment &#x27;sales-dev&#x27; was created in Hop configuration file /opt/hop/config/hop-config.json
+Created empty environment configuration file : /data/environments/sales-dev/variables.json
+  sales-dev
     Purpose: Development
-    Project name: hop2
-      Config file: &lt;YOUR_ENV_FILE_PATH&gt;/env-variables.json</code></pre>
-</div>
-</div>
-</div>
+    Project name: sales
+      Config file: /data/environments/sales-dev/variables.json</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>As you can see from the log, an empty file was created to set variables in:</p>
+<p>A configuration file that doesn&#8217;t exist yet is created, empty.
+Before creating it, hop-conf logs an error that the file doesn&#8217;t exist to read variables from.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>json</div><pre class="highlightjs highlight is-highlighted"><code class="language-json hljs" data-lang="json"><span class="hljs-punctuation">{</span> <span class="hljs-punctuation">}</span></code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Add variables to it as described in <a href="#hop-conf-configuration-files">Configuration files</a>.</p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_adding_configuration_files_from_a_directory"><a class="link" href="#_adding_configuration_files_from_a_directory">Adding configuration files from a directory</a></h4>
+<h4 id="_add_configuration_files_from_a_directory"><a class="link" href="#_add_configuration_files_from_a_directory">Add configuration files from a directory</a></h4>
 <div class="paragraph">
-<p><code>--environment-config-files</code> still lists files one by one.
+<p><code>--environment-config-files</code> lists files one by one.
 To add every matching file in a folder, pass the folder and a regular expression.
 The expression is matched against the file name, the same way as in the JSON Input and Get File Names transforms.
 <code><strong>.json</code> is not a valid expression; use <code>.</strong>\.json</code>.</p>
@@ -3609,12 +3127,11 @@ When either option is set, that selection replaces the environment&#8217;s confi
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">$ sh hop-conf.sh \
-     --environment-create \
-     --environment test-file \
-     --environment-project test-file \
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./hop-conf.sh --environment-create \
+     --environment=sales-test \
+     --environment-project=sales \
      --environment-purpose=Testing \
-     --environment-config-file-directory=<span class="hljs-string">&quot;&lt;YOUR_ENV_CONFIG_PATH&gt;/config&quot;</span> \
+     --environment-config-file-directory=<span class="hljs-string">&quot;/data/environments/sales-test&quot;</span> \
      --environment-config-file-wildcard=<span class="hljs-string">&quot;.*\.json&quot;</span> \
      --environment-config-file-exclude-wildcard=<span class="hljs-string">&quot;.*secret.*&quot;</span> \
      --environment-config-include-subfolders</code></pre>
@@ -3622,154 +3139,72 @@ When either option is set, that selection replaces the environment&#8217;s confi
 </div>
 </div>
 <div class="sect3">
-<h4 id="_setting_variables_in_an_environment"><a class="link" href="#_setting_variables_in_an_environment">Setting variables in an environment</a></h4>
-<div class="paragraph">
-<p>This command adds a variable to the environment configuration file:</p>
-</div>
-<div class="paragraph">
-<p>&nbsp;<br></p>
-</div>
-<div id="_tabs_2" class="openblock tabs is-loading">
-<div class="content">
-<div class="ulist tablist">
+<h4 id="_modify_list_and_delete_environments"><a class="link" href="#_modify_list_and_delete_environments">Modify, list and delete environments</a></h4>
+<div class="ulist">
 <ul>
-<li id="_tabs_2_windows" class="tab">
-<p>Windows</p>
+<li>
+<p><code>--environment-modify</code> changes the options you pass, for example <code>./hop-conf.sh --environment-modify --environment=sales-dev --environment-purpose=Testing</code>.</p>
 </li>
-<li id="_tabs_2_linux_macos" class="tab">
-<p>Linux, macOS</p>
+<li>
+<p><code>--environments-list</code> lists the environments with their purpose, project and configuration files.</p>
+</li>
+<li>
+<p><code>--environment-delete</code> removes an environment from <code>hop-config.json</code>, for example <code>./hop-conf.sh --environment-delete --environment=sales-dev</code>. Its configuration files are not deleted.</p>
 </li>
 </ul>
-</div>
-<div id="_tabs_2_windows--panel" class="tabpanel" aria-labelledby="_tabs_2_windows">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">hop-conf.bat --config-file &quot;C:\&lt;YOUR_ENV_FILE_PATH&gt;\env-variables.json&quot; --config-file-set-variables &quot;DB_HOSTNAME=localhost,DB_PASSWORD=abcd&quot;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Expected output:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">C:\&lt;YOUR_PATH\hop&gt;echo off
-===[Environment Settings - hop-conf.bat]===================================
-Java identified as &quot;C:\Program Files\Microsoft\jdk-11.0.17.8-hotspot\\bin\java&quot;
-HOP_OPTIONS=-Xmx2048m -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Conf -DHOP_AUTO_CREATE_CONFIG=Y
-Command to start Hop will be:
-&quot;C:\Program Files\Microsoft\jdk-11.0.17.8-hotspot\\bin\java&quot; -classpath lib\core\*;lib\beam\*;lib\swt\win64\*
--Djava.library.path=lib\core;lib\beam -Xmx2048m -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows
--DHOP_PLATFORM_RUNTIME=Conf -DHOP_AUTO_CREATE_CONFIG=Y org.apache.hop.config.HopConfig
---config-file &quot;C:\&lt;YOUR_ENV_FILE_PATH&gt;\env-variables.json&quot;
---config-file-set-variables &quot;DB_HOSTNAME=localhost,DB_PASSWORD=abcd&quot;
-===[Starting HopConfig]=========================================================
-Configuration file &#x27;C:\&lt;YOUR_ENV_FILE_PATH&gt;/env-variables.json&#x27; was modified.</code></pre>
-</div>
-</div>
-</div>
-<div id="_tabs_2_linux_macos--panel" class="tabpanel" aria-labelledby="_tabs_2_linux_macos">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./hop-conf.sh --config-file &lt;YOUR_ENV_FILE_PATH&gt;/env-variables.json --config-file-set-variables DB_HOSTNAME=localhost,DB_PASSWORD=abcd</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Expected output:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">Configuration file &#x27;&lt;YOUR_ENV_FILE_PATH&gt;/env-variables.json&#x27; was modified.</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>If you look at the file <code>env-variables.json</code>, you&#8217;ll see that the variables were added:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>json</div><pre class="highlightjs highlight is-highlighted"><code class="language-json hljs" data-lang="json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">&quot;variables&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span> <span class="hljs-punctuation">{</span>
-    <span class="hljs-attr">&quot;name&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;DB_HOSTNAME&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;value&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;localhost&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;description&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span>
-  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span> <span class="hljs-punctuation">{</span>
-    <span class="hljs-attr">&quot;name&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;DB_PASSWORD&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;value&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;abcd&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;description&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span>
-  <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">]</span>
-<span class="hljs-punctuation">}</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Please note that you can add descriptions for the variables as well with the <code>--describe-variable</code> option.
-Please run hop-conf without options to see all the possibilities.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_deleting_an_environment"><a class="link" href="#_deleting_an_environment">Deleting an environment</a></h4>
-<div class="paragraph">
-<p>The following example deletes an environment from the Hop configuration file:</p>
-</div>
-<div class="paragraph">
-<p>&nbsp;<br></p>
-</div>
-<div id="_tabs_3" class="openblock tabs is-loading">
-<div class="content">
-<div class="ulist tablist">
-<ul>
-<li id="_tabs_3_windows" class="tab">
-<p>Windows</p>
-</li>
-<li id="_tabs_3_linux_macos" class="tab">
-<p>Linux, macOS</p>
-</li>
-</ul>
-</div>
-<div id="_tabs_3_windows--panel" class="tabpanel" aria-labelledby="_tabs_3_windows">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">hop-conf.bat -ed --environment hop2</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Expected output:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">C:\&lt;YOUR_PATH&gt;\hop&gt;echo off
-===[Environment Settings - hop-conf.bat]===================================
-Java identified as &quot;C:\Program Files\Microsoft\jdk-11.0.17.8-hotspot\\bin\java&quot;
-HOP_OPTIONS=-Xmx2048m -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Conf -DHOP_AUTO_CREATE_CONFIG=Y
-Command to start Hop will be:
-&quot;C:\Program Files\Microsoft\jdk-11.0.17.8-hotspot\\bin\java&quot; -classpath lib\core\*;lib\beam\*;lib\swt\win64\* -Djava.library.path=lib\core;lib\beam -Xmx2048m -DHOP_AUDIT_FOLDER=.\audit -DHOP_PLATFORM_OS=Windows -DHOP_PLATFORM_RUNTIME=Conf -DHOP_AUTO_CREATE_CONFIG=Y org.apache.hop.config.HopConfig  -ed --environment hop2
-===[Starting HopConfig]=========================================================
-Lifecycle environment &#x27;hop2&#x27; was deleted from Hop configuration file C:\&lt;YOUR_PATH&gt;\hop\config\hop-config.json</code></pre>
-</div>
-</div>
-</div>
-<div id="_tabs_3_linux_macos--panel" class="tabpanel" aria-labelledby="_tabs_3_linux_macos">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">./hop-conf.sh -ed --environment hop2</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Expected output:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">Lifecycle environment &#x27;hop2&#x27; was deleted from Hop configuration file &lt;YOUR_PATH&gt;/hop/config/hop-config.json</code></pre>
-</div>
-</div>
-</div>
-</div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_projects_plugin_configuration"><a class="link" href="#_projects_plugin_configuration">Projects Plugin configuration</a></h3>
+<h3 id="hop-conf-configuration-files"><a class="link" href="#hop-conf-configuration-files">Configuration files</a></h3>
+<div class="paragraph">
+<p>The configuration files of an environment hold its variables.
+<code>--config-file</code> selects the file, <code>--config-file-set-variables</code> sets the value of variables, and <code>--config-file-describe-variables</code> their description:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./hop-conf.sh --config-file=/data/environments/sales-dev/variables.json \
+     --config-file-set-variables=DB_HOSTNAME=localhost,DB_PASSWORD=abcd
+./hop-conf.sh --config-file=/data/environments/sales-dev/variables.json \
+     --config-file-describe-variables=<span class="hljs-string">&quot;DB_HOSTNAME=The database server&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The file then contains:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>json</div><pre class="highlightjs highlight is-highlighted"><code class="language-json hljs" data-lang="json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;variables&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;name&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;DB_HOSTNAME&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;value&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;localhost&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;description&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;The database server&quot;</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;name&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;DB_PASSWORD&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;value&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;abcd&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;description&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The variables of <code>hop-config.json</code> itself, listed as <strong>System variables</strong> in the configuration perspective of Hop Gui, are set with <code>--set-variable</code> and described with <code>--describe-variable</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./hop-conf.sh --set-variable=COMPANY_NAME=Acme
+./hop-conf.sh --describe-variable=<span class="hljs-string">&quot;COMPANY_NAME=The company name used in reports&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>--set-variable=MY_VARIABLE=</code> sets a variable to an empty value. The variable stays in the list.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_projects_plugin_configuration"><a class="link" href="#_projects_plugin_configuration">Projects plugin configuration</a></h3>
 <div class="paragraph">
 <p>There are various options to configure the behavior of the <code><code>Projects</code></code> plugin itself.
 In Hop configuration file <code><code>hop-config.json</code></code> we can find the following options:</p>
@@ -3929,19 +3364,19 @@ By doing so you are automatically configuring metadata, variables without too mu
 <div class="paragraph">
 <p>&nbsp;<br></p>
 </div>
-<div id="_tabs_4" class="openblock tabs is-loading">
+<div id="_tabs_1" class="openblock tabs is-loading">
 <div class="content">
 <div class="ulist tablist">
 <ul>
-<li id="_tabs_4_windows" class="tab">
+<li id="_tabs_1_windows" class="tab">
 <p>Windows</p>
 </li>
-<li id="_tabs_4_linux_macos" class="tab">
+<li id="_tabs_1_linux_macos" class="tab">
 <p>Linux, macOS</p>
 </li>
 </ul>
 </div>
-<div id="_tabs_4_windows--panel" class="tabpanel" aria-labelledby="_tabs_4_windows">
+<div id="_tabs_1_windows--panel" class="tabpanel" aria-labelledby="_tabs_1_windows">
 <div class="listingblock">
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">hop-run.bat --project samples --file &#x27;beam/pipelines/complex.hpl&#x27; --runconfig Direct</code></pre>
@@ -3995,7 +3430,7 @@ Command to start HopRun will be:
 </div>
 </div>
 </div>
-<div id="_tabs_4_linux_macos--panel" class="tabpanel" aria-labelledby="_tabs_4_linux_macos">
+<div id="_tabs_1_linux_macos--panel" class="tabpanel" aria-labelledby="_tabs_1_linux_macos">
 <div class="listingblock">
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./sh hop-run.sh --project samples --file <span class="hljs-string">&#x27;beam/pipelines/complex.hpl&#x27;</span> --runconfig Direct</code></pre>
@@ -4082,15 +3517,16 @@ The only difference is that you&#8217;ll have a number of extra environment vari
 <div class="sect2">
 <h3 id="_azure"><a class="link" href="#_azure">Azure</a></h3>
 <div class="paragraph">
-<p>Set the account, block increment size for new files and your Azure key</p>
+<p>Set the account and key of your Azure storage account, or the URL of an Azure emulator (Azurite)</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell script hljs" data-lang="shell script">      -aza, --azure-account=&lt;account&gt;
                             The account to use for the Azure VFS
-      -azi, --azure-block-increment=&lt;blockIncrement&gt;
-                            The block increment size for new files on Azure,
-                              multiples of 512 only.
+      -aze, --azure-emulator=&lt;emulatorUrl&gt;
+                            The URL of an Azure emulator (Azurite) to be used
+                              for test and development goals instead of
+                              official Azure services
       -azk, --azure-key=&lt;key&gt;
                             The key to use for the Azure VFS</code></pre>
 </div>
@@ -4101,12 +3537,15 @@ The only difference is that you&#8217;ll have a number of extra environment vari
 <div class="sect3">
 <h4 id="_google_cloud_storage"><a class="link" href="#_google_cloud_storage">Google Cloud Storage</a></h4>
 <div class="paragraph">
-<p>Set the path to your Google Cloud service account JSON key file</p>
+<p>Set the path to your Google Cloud service account JSON key file, and the block size to read files with</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell script hljs" data-lang="shell script">      -gck, --google-cloud-service-account-key-file=&lt;serviceAccountKeyFile&gt;
-                            Configure the path to a Google Cloud service account JSON key file</code></pre>
+                            Configure the path to a Google Cloud service account JSON key file
+      -gcrbs, --google-cloud-read-block-size=&lt;readBlockSize&gt;
+                            Configure the bytes per request when reading a file
+                              in blocks, like 8MB</code></pre>
 </div>
 </div>
 </div>
@@ -4126,6 +3565,327 @@ The only difference is that you&#8217;ll have a number of extra environment vari
 </div>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_options"><a class="link" href="#_options">Options</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The options described on this page.
+Run <code>hop-conf.sh -h</code> for the complete list of your installation.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Short option</th>
+<th class="tableblock halign-left valign-top">Long option</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock"><strong>General</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-h</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--help</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Displays the help message and quits.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-v</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--version</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Prints version information and exits.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-l</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--level=&lt;level&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The log level: NOTHING, ERROR, MINIMAL, BASIC, DETAILED, DEBUG or ROWLEVEL.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock"><strong>Projects</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-p</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project=&lt;projectName&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the project to manage.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-pc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-create</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create a project. Also specify its name and home folder.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-pm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-modify</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Modify a project.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-pd</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-delete</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remove a project from <code>hop-config.json</code>. Its files are not deleted.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-pl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--projects-list</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List the projects.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-ph</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-home=&lt;projectHome&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The home folder of the project.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-pf</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-config-file=&lt;projectConfigFile&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The configuration file, relative to the home folder. The default is <code>project-config.json</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-pkf</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-keep-config-file</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keep the configuration file of the project if it already exists.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-pr</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-parent=&lt;projectParent&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The parent project to inherit metadata and variables from.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-ps</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-description=&lt;projectDescription&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The description of the project.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-pp</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-company=&lt;projectCompany&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The company.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-pt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-department=&lt;projectDepartment&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The department.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-pv</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-variables=&lt;projectVariables&gt;[,&#8230;&#8203;]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Variables of the project, as <code>variable=value</code> separated by commas.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-pa</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-metadata-base=&lt;projectMetadataBaseFolder&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The metadata folder, relative to the home folder.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-pb</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-datasets-base=&lt;projectDataSetsCsvFolder&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The data sets CSV folder, relative to the home folder.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-pu</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-unit-tests-base=&lt;projectUnitTestsBasePath&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unit tests folder, relative to the home folder.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-px</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-enforce-execution=&lt;projectEnforceExecutionInHome&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code> or <code>false</code>: check before execution that a workflow or pipeline is in the home folder of the project or a subfolder.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-pla</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-list-action-types</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List the action types used in the project.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-plm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-list-metadata-types</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List the metadata types used in the project.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-plt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-list-transform-types</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List the transform types used in the project.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-plmi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-list-metadata-item-usages=&lt;item&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List the files of the project that use a given metadata item.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-xm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--export-metadata=&lt;metadataJsonFilename&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Export the metadata of the project given with <code>-p</code> to a single JSON file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock"><strong>Environments</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-e</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--environment=&lt;environmentName&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the environment to manage.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-ec</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--environment-create</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create an environment. Also specify its name, purpose, project and configuration files.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-em</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--environment-modify</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Modify an environment.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-ed</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--environment-delete</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remove an environment from <code>hop-config.json</code>. Its configuration files are not deleted.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-el</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--environments-list</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List the environments.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-ep</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--environment-project=&lt;environmentProject&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The project of the environment.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-eu</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--environment-purpose=&lt;environmentPurpose&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The purpose of the environment: Development, Testing, Production, CI, &#8230;&#8203;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-eg</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--environment-config-files=&lt;file&gt;[,&#8230;&#8203;]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The configuration files of the environment, separated by commas.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--environment-config-file-directory=&lt;folder&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A folder of configuration files. Matching files replace the configuration file list, together with <code>--environment-config-files</code> when that option is also set.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--environment-config-file-wildcard=&lt;regex&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Regular expression matched against the file names in that folder, for example <code>.*\.json</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--environment-config-file-exclude-wildcard=&lt;regex&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Regular expression for file names to ignore in that folder, for example <code>.<strong>secret.</strong></code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--environment-config-include-subfolders</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Also include matching files from subfolders of that folder.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock"><strong>Configuration files and variables</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-cfg</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--config-file=&lt;configFile&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The configuration file to manage.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-cfv</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--config-file-set-variables=&lt;variable=value&gt;[,&#8230;&#8203;]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set variables in that file, separated by commas.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-cfd</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--config-file-describe-variables=&lt;variable=description&gt;[,&#8230;&#8203;]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Describe variables in that file, separated by commas.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-sv</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--set-variable=&lt;variable=value&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set a variable in <code>hop-config.json</code>. Without a value, the variable gets an empty value.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-dv</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--describe-variable=&lt;variable=description&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Describe a variable in <code>hop-config.json</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock"><strong>Projects plugin</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-pn</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--projects-enabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable or disable the projects plugin.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-py</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--project-mandatory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Make it mandatory to reference a project.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-ey</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--environment-mandatory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Make it mandatory to reference an environment.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-dp</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--default-project=&lt;defaultProject&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The default project to use when none is specified.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-de</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--default-environment=&lt;defaultEnvironment&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The default environment to use when none is specified.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-sp</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--standard-parent-project=&lt;standardParentProject&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The parent project proposed when creating a project.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-sj</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--standard-projects-folder=&lt;standardProjectsFolder&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The folder proposed when creating a project.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-dc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--default-projects-folder=&lt;defaultProjectConfigFile&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The configuration filename for new projects.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock"><strong>Beam and Spark</strong>, when the Beam plugin is installed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-fj</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--generate-fat-jar=&lt;fatJarFilename&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generate a fat jar with the given filename from your current Hop installation, for the Beam and Spark engines.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-scv</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--spark-client-version=&lt;sparkClientVersion&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Spark client pack to embed in the fat jar: a version (folder <code>lib/spark-clients/&lt;version&gt;</code>), <code>native</code> or <code>native-provided</code>. When omitted, <code>HOP_SPARK_CLIENT_VERSION</code> or the default pack in <code>lib/spark-client</code> is used.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock"><strong>Graph database connections</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--graph-connection-test=&lt;name&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Test the graph database connection or Neo4j connection with the given name. See <a href="#_graph_database_connections">Graph database connections</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--graph-connection-info=&lt;name&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Print the graph database type and capabilities of a connection as JSON.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--graph-database-types</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Print the installed graph database types and their capabilities as JSON.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
     </article>
