@@ -374,6 +374,10 @@
     <a href="../../../../manual/next/pipeline/spark/getting-started-with-native-spark.html">Getting started with the native Spark engine</a>
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/spark/local-standalone-cluster.html">Local standalone cluster</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/spark/paths-and-filesystems.html">Paths and file systems</a>
     
   </li>
@@ -3052,6 +3056,10 @@
 (<code>hop-conf -j … --export-spark-project=…</code>) and pass <code>--HopProjectPackage=…</code> to <code>MainSpark</code>.</p>
 </div>
 <div class="paragraph">
+<p>To run pipelines from Hop GUI or <code>hop-run</code> on a Spark standalone cluster on your own machine:
+<a href="local-standalone-cluster.html" class="xref page">Local standalone cluster</a>.</p>
+</div>
+<div class="paragraph">
 <p>Hands-on multi-node demo (Docker Compose + sample project <code>spark-demo</code> — Simple Mapping and Workflow Executor):
 <a href="cluster-mapping-walkthrough.html" class="xref page">Cluster demo walk-through</a>.</p>
 </div>
@@ -3248,7 +3256,10 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Apache Hop <strong>2.19+</strong> with the <strong>engines-spark</strong> plugin (standard Hop client / assembly includes it).</p>
+<p>Apache Hop <strong>2.19+</strong> with the <code>hop-engines-spark</code> plugin. It is not part of the default client download: install it with <code>./hop marketplace install hop-engines-spark</code> (see <a href="../../hop-tools/hop-marketplace.html" class="xref page">Hop Marketplace</a>) and restart Hop.</p>
+</li>
+<li>
+<p>For cluster runs, also the <code>hop-engines-beam</code> plugin: the fat jar builder ships with it.</p>
 </li>
 <li>
 <p><strong>Java 21</strong>.</p>
@@ -3458,12 +3469,15 @@ For Iceberg <strong>TABLE</strong> mode, create a <a href="../../metadata-types/
 <div class="paragraph">
 <p>Use the special fat-jar token <strong><code>native-provided</code></strong>: Hop and plugins go into the jar; <strong>Spark stays out</strong>.</p>
 </div>
+<div class="paragraph">
+<p>The fat jar builder ships with the Apache Beam engine plugin. Without <code>hop-engines-beam</code> installed, <code>hop-conf.sh</code> reports <code>Unknown options: '--generate-fat-jar=&#8230;&#8203;'</code>.</p>
+</div>
 <div class="sect3">
 <h4 id="_from_hop_gui"><a class="link" href="#_from_hop_gui">From Hop GUI</a></h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Tools</strong> → <strong>Generate a Hop fat jar</strong> (when prompted for Spark client version for native submit, use the <strong>native-provided</strong> style packaging for cluster submit — or use the CLI below for an explicit flag).</p>
+<p>Start Hop GUI with the environment variable <code>HOP_SPARK_CLIENT_VERSION=native-provided</code>. <strong>Tools</strong> → <strong>Generate a Hop fat jar</strong> does not ask for the packaging; without that variable it builds a jar for the Beam Spark runner, not for the native engine.</p>
 </li>
 <li>
 <p>Save the jar <strong>outside</strong> the project (or gitignore it). Fat jars are large.</p>
@@ -3583,6 +3597,18 @@ For Iceberg <strong>TABLE</strong> mode, create a <a href="../../metadata-types/
   YourNativeSparkRunConfig \
   /path/to/cluster-env-config.json</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Start <code>spark-submit</code> from a folder that does not contain a Hop <code>plugins</code> folder, not from the Hop installation folder. Otherwise Hop loads the Spark engine twice, from the fat jar and from that folder, and the run fails with <code>Run configuration '&#8230;&#8203;' is not a native Spark pipeline engine configuration</code>. See <a href="local-standalone-cluster.html#troubleshooting" class="xref page">Troubleshooting</a>.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><strong>Main class:</strong> <code>org.apache.hop.spark.run.MainSpark</code></p>
@@ -3835,7 +3861,7 @@ For Iceberg <strong>TABLE</strong> mode, create a <a href="../../metadata-types/
 </ul>
 </div>
 <div class="paragraph">
-<p>Connector JARs <strong>ship in the default Hop assembly</strong> under <code>plugins/engines/spark/lib/{delta,iceberg}</code> (and ride a <strong>native-provided</strong> fat jar for cluster submit). Full session conf, PATH vs TABLE, and samples: <a href="lakehouse.html" class="xref page">Lakehouse tables on the native Spark engine</a>.</p>
+<p>Connector JARs <strong>ship with the <code>hop-engines-spark</code> plugin</strong> under <code>plugins/engines/spark/lib/{delta,iceberg}</code> (and ride a <strong>native-provided</strong> fat jar for cluster submit). Full session conf, PATH vs TABLE, and samples: <a href="lakehouse.html" class="xref page">Lakehouse tables on the native Spark engine</a>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -4349,7 +4375,7 @@ Examples: sorted <strong>Group By</strong> (use <strong>Memory Group By</strong>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/pipeline/beam/developing-beam-transforms.html"><span>Previous</span><strong>Developing a Beam transform</strong></a>
-  <a class="pagination__next" href="../../../../manual/next/pipeline/spark/paths-and-filesystems.html"><span>Next</span><strong>Paths and file systems</strong></a>
+  <a class="pagination__next" href="../../../../manual/next/pipeline/spark/local-standalone-cluster.html"><span>Next</span><strong>Local standalone cluster</strong></a>
 </nav>
   </main>
 

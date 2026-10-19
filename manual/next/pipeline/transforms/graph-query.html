@@ -374,6 +374,10 @@
     <a href="../../../../manual/next/pipeline/spark/getting-started-with-native-spark.html">Getting started with the native Spark engine</a>
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/spark/local-standalone-cluster.html">Local standalone cluster</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/spark/paths-and-filesystems.html">Paths and file systems</a>
     
   </li>
@@ -3095,6 +3099,32 @@ On Gremlin servers a traversal returns a row per result: maps, from <code>projec
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_transactions"><a class="link" href="#_transactions">Transactions</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The statements of a batch of input rows, or the UNWIND statement of a batch, run in one transaction.</p>
+</div>
+<div class="paragraph">
+<p>On Neo4j, a statement with <code>CALL { &#8230;&#8203; } IN TRANSACTIONS</code> (or <code>USING PERIODIC COMMIT</code> on Neo4j 4) runs on its own in an auto-commit transaction: Neo4j commits its batches of rows itself.
+This is the alternative to <code>apoc.periodic.iterate</code>.
+With UNWIND, the transform passes a batch of input rows and Neo4j commits them in smaller batches:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>cypher</div><pre class="highlightjs highlight"><code class="language-cypher hljs" data-lang="cypher">UNWIND $rows AS row
+CALL (row) {
+  MERGE (c:Customer { id : row.id })
+  SET c.name = row.name
+} IN TRANSACTIONS OF 1000 ROWS</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When such a statement fails, the batches Neo4j committed before the error stay committed.
+With retries configured, a retry runs the whole statement again and applies those batches a second time: use MERGE rather than CREATE to make the statement safe to repeat, or don&#8217;t configure retries.</p>
+</div>
 </div>
 </div>
     </article>

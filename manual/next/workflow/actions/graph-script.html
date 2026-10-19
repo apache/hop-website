@@ -374,6 +374,10 @@
     <a href="../../../../manual/next/pipeline/spark/getting-started-with-native-spark.html">Getting started with the native Spark engine</a>
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/spark/local-standalone-cluster.html">Local standalone cluster</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/spark/paths-and-filesystems.html">Paths and file systems</a>
     
   </li>
@@ -2970,6 +2974,21 @@ The result of this action is a <code>true</code> or <code>false</code> exit code
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong>To allow you to enter semi-colons (;) in commands, strings and so on we require you to separate commands with a semi-colon on a new line</strong></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_transactions"><a class="link" href="#_transactions">Transactions</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>On a database with transactions the script runs in one transaction: when a statement fails, none of the statements are kept.</p>
+</div>
+<div class="paragraph">
+<p>On Neo4j, a statement with <code>CALL { &#8230;&#8203; } IN TRANSACTIONS</code> (or <code>USING PERIODIC COMMIT</code> on Neo4j 4) runs on its own in an auto-commit transaction, and the statements before and after it run in a transaction each.
+The script then no longer runs in a single transaction: when a statement fails, the statements before it stay committed.</p>
+</div>
+<div class="paragraph">
+<p>On Memgraph every statement runs on its own in an auto-commit transaction.</p>
 </div>
 </div>
 </div>

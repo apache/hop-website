@@ -374,6 +374,10 @@
     <a href="../../../../manual/next/pipeline/spark/getting-started-with-native-spark.html">Getting started with the native Spark engine</a>
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/spark/local-standalone-cluster.html">Local standalone cluster</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/spark/paths-and-filesystems.html">Paths and file systems</a>
     
   </li>
@@ -3005,7 +3009,7 @@ It builds a Spark SQL Dataset graph from the pipeline and runs transforms via na
 <p><strong>Local (capped cores)</strong> — <code>local[4]</code></p>
 </li>
 <li>
-<p><strong>Spark standalone server</strong> — <code>spark://host:7077</code> (replace host), sample driver/executor memory</p>
+<p><strong>Spark standalone server</strong> — <code>spark://host:7077</code> (replace host), sample driver/executor memory. Also set <strong>Fat jar file location</strong> to a <code>native-provided</code> fat jar; the template leaves it empty. See <a href="../spark/local-standalone-cluster.html" class="xref page">Local standalone cluster</a>.</p>
 </li>
 <li>
 <p><strong>spark-submit (cluster)</strong> — master <strong>empty</strong> so <code>spark-submit --master</code> wins; use a <code>native-provided</code> fat jar</p>
