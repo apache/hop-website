@@ -3060,6 +3060,15 @@ Must be a valid Cloud Storage URL, beginning with gs://.
 This is a different option from the general <code>Temp location</code> below.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GCS upload buffer size (MB)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The size, in megabytes, of the chunks in which files are uploaded to Cloud Storage, from 1 to 1024.
+Each chunk is a separate request, so a larger size makes staging the fat jar faster, especially on high-latency connections.
+128 MB is a good value for staging.
+When left empty, Apache Beam&#8217;s default is used, which stages in chunks of 1 MB and so limits staging to about 1 MB per request round trip.
+The size is passed to the workers as well: every file they write to Cloud Storage, for example file output or BigQuery file loads, holds one buffer of this size in memory.
+Keep it moderate when a pipeline writes many files at the same time.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Initial number of workers</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The initial number of Google Compute Engine instances to use when executing your pipeline.
 This option determines how many workers the Dataflow service starts up when your job begins.</p></td>
