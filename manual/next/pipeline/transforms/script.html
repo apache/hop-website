@@ -378,6 +378,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/spark/yarn.html">YARN</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/spark/paths-and-filesystems.html">Paths and file systems</a>
     
   </li>
@@ -3191,15 +3195,16 @@ The field is filled with the product, even though the script never assigned a va
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>transform</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">This is a reference to the parent transform class <a href="https://github.com/apache/hop/blob/master/plugins/transforms/abort/src/main/java/org/apache/hop/pipeline/transforms/script/Script.java" rel="noopener" target="_blank">Script</a>.  You can use this to log certain important events or write extra output rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This is a reference to the parent transform class <a href="https://github.com/apache/hop/blob/main/plugins/transforms/script/src/main/java/org/apache/hop/pipeline/transforms/script/Script.java" rel="noopener" target="_blank">Script</a>.  You can use this to resolve variables, log certain important events or write extra output rows. See <a href="#common-methods">Commonly used methods</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>pipeline_status</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">This special variable can be set to any of the following values:</p>
 <p class="tableblock"><code>CONTINUE_PIPELINE</code>: Process the current row and generate output (the default value)
 <code>SKIP_PIPELINE</code> : Do not write an output row
-<code>STOP_PIPELINE</code> : Cause the pipeline to stop processing rows
-<code>ERROR_PIPELINE</code>: Cause the pipeline to abort with an error</p></td>
+<code>ABORT_PIPELINE</code> : Stop the pipeline, without an error
+<code>ERROR_PIPELINE</code>: Stop the pipeline with an error</p>
+<p class="tableblock">Hop only checks <code>pipeline_status</code> when the script sets it for the first row. To skip or stop on a later row, set it on every row, for example to <code>CONTINUE_PIPELINE</code> at the start of the script.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>rowNumber</code></p></td>
@@ -3226,8 +3231,94 @@ The field is filled with the product, even though the script never assigned a va
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>pipelineName</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of the pipeline</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>outputRowMeta</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The output row metadata, to use with <code>transform.putRow()</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RowDataUtil</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>org.apache.hop.core.row.RowDataUtil</code> class, for example to allocate an output row with <code>RowDataUtil.allocateRowData()</code>. It works in Groovy and Python. In ECMAScript, declare it first with <code>var RowDataUtil = Packages.org.apache.hop.core.row.RowDataUtil;</code>, as in the example below.</p></td>
+</tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="common-methods"><a class="link" href="#common-methods">Commonly used methods</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>transform</code> variable gives access to the methods of the transform. The ones used most often:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Method</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>transform.resolve(text)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Replaces the variables in a text with their values, for example <code>transform.resolve('${INPUT_FOLDER}/data.csv')</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>transform.getVariable(name)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of a variable, for example <code>transform.getVariable('INPUT_FOLDER')</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>transform.logBasic(message)</code>, <code>transform.logDetailed(message)</code>, <code>transform.logError(message)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Write a message to the log at that level. <code>logError</code> only writes the message: the transform doesn&#8217;t fail.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>transform.getCopy()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of this copy of the transform, starting from 0, when it runs in several copies.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>transform.putRow(outputRowMeta, row)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Write an extra output row. See <a href="#_generating_rows">Generating rows</a>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The same calls in the three languages:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>javascript</div><pre class="highlightjs highlight is-highlighted"><code class="language-javascript hljs" data-lang="javascript"><span class="hljs-comment">// ECMAScript</span>
+out = transform.<span class="hljs-title function_">resolve</span>(<span class="hljs-string">&quot;${INPUT_FOLDER}&quot;</span>) + <span class="hljs-string">&quot; copy &quot;</span> + transform.<span class="hljs-title function_">getCopy</span>();
+transform.<span class="hljs-title function_">logBasic</span>(<span class="hljs-string">&quot;Row &quot;</span> + rowNumber + <span class="hljs-string">&quot; of &quot;</span> + transformName);</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>groovy</div><pre class="highlightjs highlight is-highlighted"><code class="language-groovy hljs" data-lang="groovy"><span class="hljs-comment">// Groovy: single quotes, see the tip below</span>
+out = transform.resolve(<span class="hljs-string">&#x27;${INPUT_FOLDER}&#x27;</span>) + <span class="hljs-string">&quot; copy &quot;</span> + transform.getCopy()
+transform.logBasic(<span class="hljs-string">&quot;Row &quot;</span> + rowNumber + <span class="hljs-string">&quot; of &quot;</span> + transformName)</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>python</div><pre class="highlightjs highlight is-highlighted"><code class="language-python hljs" data-lang="python"><span class="hljs-comment"># Python</span>
+out = transform.resolve(<span class="hljs-string">&quot;${INPUT_FOLDER}&quot;</span>) + <span class="hljs-string">&quot; copy &quot;</span> + <span class="hljs-built_in">str</span>(transform.getCopy())
+transform.logBasic(<span class="hljs-string">&quot;Row &quot;</span> + <span class="hljs-built_in">str</span>(rowNumber) + <span class="hljs-string">&quot; of &quot;</span> + transformName)</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+In Groovy, a text between double quotes is a GString: Groovy replaces <code>${...}</code> itself before Hop sees it, and fails with "No such property". Write Hop variables between single quotes, as in <code>transform.resolve('${INPUT_FOLDER}')</code>.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">

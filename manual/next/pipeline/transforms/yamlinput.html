@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title> YAML Input | Apache Hop</title>
-<meta name="description" content="The YAML Input transform reads data from YAML structures, files or incoming fields.">
+<meta name="description" content="The YAML Input transform reads data from YAML files or from a field of the incoming rows.">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/pipeline/transforms/yamlinput.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
 <meta property="og:title" content=" YAML Input">
-<meta property="og:description" content="The YAML Input transform reads data from YAML structures, files or incoming fields.">
+<meta property="og:description" content="The YAML Input transform reads data from YAML files or from a field of the incoming rows.">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/pipeline/transforms/yamlinput.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -375,6 +375,10 @@
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/spark/local-standalone-cluster.html">Local standalone cluster</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/spark/yarn.html">YARN</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3011,7 +3015,232 @@
 <h2 id="_description"><a class="link" href="#_description">Description</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The YAML Input transform reads data from YAML structures, files or incoming fields.</p>
+<p>The YAML Input transform reads data from YAML files, or from a field of the incoming rows.
+Each output field gets its value from a path in the YAML, so values can be read from any level of nesting.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how_rows_are_formed"><a class="link" href="#_how_rows_are_formed">How rows are formed</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A file or field can hold several YAML documents, separated by <code>---</code>.
+Each document is read in turn and gives its own rows.</p>
+</div>
+<div class="sect2">
+<h3 id="_a_map_at_the_top_level"><a class="link" href="#_a_map_at_the_top_level">A map at the top level</a></h3>
+<div class="paragraph">
+<p>When a document starts with keys, every field reads its path from the document:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A path that finds one value gives one value.</p>
+</li>
+<li>
+<p>A path that finds a list of values, such as <code>$.items[*].id</code>, gives one value per element.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The document gives as many rows as the longest list.
+A single value is repeated on every row, and a shorter list leaves its field empty (null) on the remaining rows.</p>
+</div>
+<div class="paragraph">
+<p>For example, this document:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>yaml</div><pre class="highlightjs highlight is-highlighted"><code class="language-yaml hljs" data-lang="yaml"><span class="hljs-attr">table:</span> <span class="hljs-string">customers</span>
+<span class="hljs-attr">owner:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">Sales</span>
+  <span class="hljs-attr">contact:</span>
+    <span class="hljs-attr">email:</span> <span class="hljs-string">sales@example.com</span>
+<span class="hljs-attr">items:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">id:</span> <span class="hljs-number">10</span>
+    <span class="hljs-attr">city:</span> <span class="hljs-string">Brussels</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">id:</span> <span class="hljs-number">20</span>
+    <span class="hljs-attr">city:</span> <span class="hljs-string">Ghent</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">id:</span> <span class="hljs-number">30</span>
+    <span class="hljs-attr">city:</span> <span class="hljs-string">Leuven</span>
+<span class="hljs-attr">tags:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">a</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">b</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with these fields:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">table</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>$.table</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">email</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>$.owner.contact.email</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">item_id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>$.items[*].id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">city</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>$.items[*].city</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tag</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>$.tags[*]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>gives 3 rows, one for every element of <code>items</code>:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">table</th>
+<th class="tableblock halign-left valign-top">email</th>
+<th class="tableblock halign-left valign-top">item_id</th>
+<th class="tableblock halign-left valign-top">city</th>
+<th class="tableblock halign-left valign-top">tag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">customers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="mailto:sales@example.com">sales@example.com</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Brussels</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">customers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="mailto:sales@example.com">sales@example.com</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">20</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ghent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">b</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">customers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="mailto:sales@example.com">sales@example.com</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">30</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Leuven</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_a_list_at_the_top_level"><a class="link" href="#_a_list_at_the_top_level">A list at the top level</a></h3>
+<div class="paragraph">
+<p>When a document is a list of plain values, such as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>yaml</div><pre class="highlightjs highlight is-highlighted"><code class="language-yaml hljs" data-lang="yaml"><span class="hljs-bullet">-</span> <span class="hljs-string">Spark</span>
+<span class="hljs-bullet">-</span> <span class="hljs-string">Flink</span>
+<span class="hljs-bullet">-</span> <span class="hljs-string">Beam</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>every element gives one row, here 3 rows, with the value in the first field.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When a document is a list of maps (<code>- id: 1</code> followed by <code>name: Anna</code> and so on), only the first element is read.
+To read every element, put the list under a key (<code>users:</code>) and use paths such as <code>$.users[*].id</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_values_that_are_maps_or_lists"><a class="link" href="#_values_that_are_maps_or_lists">Values that are maps or lists</a></h3>
+<div class="paragraph">
+<p>A path that points to a map gives the whole map as text in a String field, for example <code>$.owner</code> gives <code>{name:  Sales,contact:  {email:  <a href="mailto:sales@example.com">sales@example.com</a>}}</code>.
+A path that points to a list, such as <code>$.items</code>, gives one row per element, like <code>$.items[*]</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_paths"><a class="link" href="#_paths">Paths</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <strong>Path</strong> column of the Fields tab holds a <a href="https://github.com/json-path/JsonPath" rel="noopener" target="_blank">JsonPath</a> expression, for example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>$.table</code> for a key at the top level.</p>
+</li>
+<li>
+<p><code>$.owner.contact.email</code> for a nested key.</p>
+</li>
+<li>
+<p><code>$.items[0].city</code> for the first element of a list.</p>
+</li>
+<li>
+<p><code>$.items[*].city</code> for every element of a list.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A path without <code>$</code> is read from the top of the document: <code>table</code> is the same as <code>$.table</code>, and <code>owner.name</code> the same as <code>$.owner.name</code>.</p>
+</div>
+<div class="paragraph">
+<p>Paths and field names can contain variables.</p>
+</div>
+<div class="paragraph">
+<p><strong>Get fields</strong> reads the first file in the <strong>Selected files</strong> list and adds a field for every value it finds, with its path and a type based on the value.</p>
+</div>
+<div class="sect2">
+<h3 id="_when_a_path_or_type_doesnt_match_the_yaml"><a class="link" href="#_when_a_path_or_type_doesnt_match_the_yaml">When a path or type doesn&#8217;t match the YAML</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>When a path finds nothing in a document, the transform fails with a <code>NullPointerException</code>.</p>
+</li>
+<li>
+<p>When a value doesn&#8217;t fit the type of the field, for example <code>abc</code> in an Integer field, the transform fails with a <code>NumberFormatException</code>. The same happens for <code>1,5</code> in a Number field: the Decimal, Group and Format columns are not used to read the value.</p>
+</li>
+<li>
+<p>Values for Date and Boolean fields are not converted. A YAML date such as <code>2024-01-15</code> and a YAML boolean such as <code>true</code> or <code>yes</code> work. Text such as <code>15/01/2024</code> or <code>abc</code> is passed as text, and the next transform that uses the field fails with a data type error.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -3019,7 +3248,7 @@
 <h2 id="_options"><a class="link" href="#_options">Options</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_file_tab"><a class="link" href="#_file_tab">File Tab</a></h3>
+<h3 id="_file_tab"><a class="link" href="#_file_tab">File tab</a></h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -3037,54 +3266,65 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the transform.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Source is defined in a field?</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not the source is in a field from a previous transform.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Source is defined in a field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read the YAML from a field of the incoming rows instead of from the files in the <strong>Selected files</strong> list.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Source is a filename</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not the source is a filename, else a directory.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;Source is a filename</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only when <strong>Source is defined in a field</strong> is selected.
+When selected, the field holds the name of a YAML file to read.
+When not selected, the field holds the YAML text itself.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">get source from a field</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The field containing the filename or directory.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;Get source from a field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only when <strong>Source is defined in a field</strong> is selected.
+The incoming field that holds the YAML text or file name.
+Variables in its value are not resolved.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">File or directory</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The file or directory path.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Add</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Adds the file or directory to the Selected files list.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Browse</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Browses the local filesystem for a file or directory.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A file, or a folder with a regular expression, to add to the <strong>Selected files</strong> list.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Regular Expression</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/regex/Pattern.html" rel="noopener" target="_blank">Java regular expression</a> for the names of the files to read from the folder in <strong>File or directory</strong>, for example <code>.*\.yaml</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds the file or folder to the <strong>Selected files</strong> list.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Browse</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Browses for a file or folder.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Selected files</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The selected files or directories.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The files and folders to read, with these columns:</p>
+<p class="tableblock">* <strong>File/Directory</strong>: the file or folder.
+* <strong>Wildcard (RegExp)</strong>: the regular expression for the names of the files in the folder.
+* <strong>Required</strong>: when <code>Y</code>, the transform fails when the file doesn&#8217;t exist, or, for a folder with a regular expression, when the folder doesn&#8217;t exist or no file matches. When <code>N</code>, such a line is skipped.
+* <strong>Include subfolders</strong>: also read matching files in subfolders of the folder.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Delete</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes selected lines from the list.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes the selected lines from the list.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Edit</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Moved the selected line for editing.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Moves the selected line back to <strong>File or directory</strong> and <strong>Regular Expression</strong> for editing.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Show filename(s)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Previews the filename.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shows the files that match the list.</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>When <strong>Source is defined in a field</strong> is selected, every incoming row is read in turn, and its fields are kept in front of the YAML fields.</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_content_tab"><a class="link" href="#_content_tab">Content Tab</a></h3>
+<h3 id="_content_tab"><a class="link" href="#_content_tab">Content tab</a></h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -3099,41 +3339,61 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Ignore empty file</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not to ignore empty files.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Skips files of 0 bytes and logs a line for each.
+Empty files give no rows with or without this option, but with this option the transform fails when every file is empty.
+Only used for the files in the <strong>Selected files</strong> list.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Do not raise an error if no files</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not the raise an error if no files are available.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no file is found, the transform ends without rows instead of failing.
+A line of the <strong>Selected files</strong> list with <strong>Required</strong> set to <code>Y</code> still makes it fail.
+Only used for the files in the <strong>Selected files</strong> list.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Limit</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sets a limit to be read.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The maximum number of rows to output, counted over all the files together. <code>0</code> means no limit.
+Not available when the source is defined in a field.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Include filename in output?</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Adds the filename to the output rows.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Include filename in output</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a String field with the full path of the file each row was read from.
+Not available when the source is defined in a field.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Filename fieldname</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The field containing the filename.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;Filename fieldname</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of that output field.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Rownum in output?</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Adds the row number to the output rows.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rownum in output</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds an Integer field with the row number, starting at 1 and counted over all the files together.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Rownum fieldname</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The field containing the row number.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#160;&#160;&#160;&#160;Rownum fieldname</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of that output field.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Add files to result filesname</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds the files that were read to the result files of the pipeline, for example for a later action in the workflow.
+Not available when the source is defined in a field.</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><strong>Get source from a field</strong> (File tab) and <strong>Filename fieldname</strong> (Content tab) are different:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Get source from a field</strong> is an incoming field the transform reads the YAML, or the file name, from.</p>
+</li>
+<li>
+<p><strong>Filename fieldname</strong> is a new output field the transform writes the file name to.</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_fields_tab"><a class="link" href="#_fields_tab">Fields Tab</a></h3>
+<h3 id="_fields_tab"><a class="link" href="#_fields_tab">Fields tab</a></h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -3151,45 +3411,45 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of the output field.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Key</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The key to the element.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The path of the value in the YAML. See <a href="#_paths">Paths</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The data type to convert to.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The data type of the output field. See <a href="#_when_a_path_or_type_doesnt_match_the_yaml">When a path or type doesn&#8217;t match the YAML</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Format</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The format or conversion mask to use in the data type conversion.
+<td class="tableblock halign-left valign-top"><p class="tableblock">The format of the output field, used when it is later converted, for example to text. Not used to read the value.
 See <a href="../formatting-values.html" class="xref page">Formatting numbers and dates</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Length</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The length of the output data type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The length of the output field.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Precision</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The precision of the output data type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The precision of the output field.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Currency</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The currency symbol to use during data type conversion.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The currency symbol of the output field.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Decimal</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The numeric decimal symbol to use during data type conversion.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The decimal symbol of the output field.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Group</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The numeric grouping symbol to use during data type conversion.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The grouping symbol of the output field.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Trim type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The type of trimming to use during data type conversion.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only for String fields: <code>none</code>, <code>left</code>, <code>right</code> or <code>both</code>, to remove whitespace at the start, the end, or both.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Get fields</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Approximates fields from the input.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Replaces the list with the fields found in the first file. See <a href="#_paths">Paths</a>.</p></td>
 </tr>
 </tbody>
 </table>

@@ -378,6 +378,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/spark/yarn.html">YARN</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/spark/paths-and-filesystems.html">Paths and file systems</a>
     
   </li>
@@ -2989,7 +2993,7 @@
 <p>This page sets up such a cluster on one machine and runs a pipeline on it from Hop GUI or <code>hop-run</code>. Hop is the Spark <strong>driver</strong>: you design and start the pipeline in Hop as usual, and the work runs on the workers.</p>
 </div>
 <div class="paragraph">
-<p>Do this after your first <code>local[*]</code> run (see <a href="getting-started-with-native-spark.html" class="xref page">Getting started with the native Spark engine</a>). To submit with <code>spark-submit</code> inside Docker containers instead, see the <a href="cluster-mapping-walkthrough.html" class="xref page">cluster demo walk-through</a>.</p>
+<p>Do this after your first <code>local[*]</code> run (see <a href="getting-started-with-native-spark.html" class="xref page">Getting started with the native Spark engine</a>). To submit with <code>spark-submit</code> inside Docker containers instead, see the <a href="cluster-mapping-walkthrough.html" class="xref page">cluster demo walk-through</a>. To run on a Hadoop YARN cluster, see <a href="yarn.html" class="xref page">Run native Spark pipelines on YARN</a>.</p>
 </div>
 </div>
 </div>
@@ -3346,7 +3350,7 @@ Use <code>start-master.sh</code> and <code>start-worker.sh</code> as above, not 
 <p>From Hop GUI, the first run starts the application and Hop GUI keeps it running, with all its cores, until you close Hop GUI. Later runs from Hop GUI reuse it. Close Hop GUI before you run on the cluster with <code>hop-run</code> or through Hop Server (step 7), or those runs wait for cores.</p>
 </div>
 <div class="paragraph">
-<p>The Spark application UI (jobs, stages and tasks, normally on port 4040) is not available: Hop turns it off for the Spark sessions it starts.</p>
+<p>The Spark application UI (jobs, stages and tasks) is off by default. Add <code>spark.ui.enabled=true</code> to <strong>Spark config</strong> to see it at <a href="http://localhost:4040" class="bare" rel="noopener" target="_blank">http://localhost:4040</a> while the application runs.</p>
 </div>
 <div class="paragraph">
 <p>The log shows the session connecting to the cluster:</p>
@@ -3413,7 +3417,7 @@ Spark pipeline finished, result row count=0</code></pre>
 <p><strong>Run Configuration</strong>: <code>local</code></p>
 </li>
 <li>
-<p><strong>Export linked resources to server</strong>: on. The workflow and pipeline are then sent as files. With it off, the samples project&#8217;s Workflow Log fails every workflow you send to Hop Server (see <a href="#troubleshooting">Troubleshooting</a>).</p>
+<p><strong>Export linked resources to server</strong>: on. The workflow and pipeline are then sent as files. With it off, the samples project&#8217;s Workflow Log fails every workflow you send to Hop Server (see <a href="#troubleshooting">Troubleshooting</a>). Export works here because Hop Server and the Spark workers share one machine: Hop Server runs the pipeline from a zip file in its temporary folder. With workers on other machines, turn export off and enable the project on Hop Server, as described for <a href="yarn.html" class="xref page">YARN</a>.</p>
 </li>
 </ul>
 </div>
@@ -3513,7 +3517,7 @@ Spark pipeline finished, result row count=0</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The path must exist on the machine where each executor runs. Check the variables the path uses.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The log shows <code>Prepared native Spark pipeline engine</code> with the master you expect, then <code>Reusing active SparkSession</code> or <code>Reusing default SparkSession</code>, and the run uses a different master or an older application</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The log shows <code>WARNING: run configuration '&#8230;&#8203;' asks for Spark master '&#8230;&#8203;', but this process already has a Spark session on '&#8230;&#8203;'</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">An earlier native Spark run in the same Hop GUI, Hop Server or workflow left its Spark session running, and this run reuses it with that run&#8217;s master, fat jar and Spark config. Restart Hop GUI or Hop Server after switching between native Spark run configurations.</p></td>
 </tr>
 <tr>
@@ -3529,8 +3533,8 @@ Spark pipeline finished, result row count=0</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The project has a <strong>Workflow Log</strong> that lists specific workflows (the samples project does), and the workflow was sent without its file. Turn on <strong>Export linked resources to server</strong> in the remote workflow run configuration, or disable the Workflow Log.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spark-submit</code> fails with <code>Run configuration '&#8230;&#8203;' is not a native Spark pipeline engine configuration (found org.apache.hop.spark.engines.SparkPipelineRunConfiguration)</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spark-submit</code> was started from a folder that contains a Hop <code>plugins</code> folder, such as the Hop installation folder. Hop then loads the Spark engine twice: from the fat jar and from that folder. Start <code>spark-submit</code> from another folder.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The log shows <code>WARNING: run configuration '&#8230;&#8203;' has no Spark master and this pipeline does not run under spark-submit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An empty <strong>Spark master</strong> means <code>local[<strong>]</code> inside the Hop process (Hop GUI, <code>hop-run</code> or Hop Server). Set the master, for example <code>spark://localhost:7077</code>. The *spark-submit (cluster)</strong> template leaves it empty on purpose, for <code>spark-submit</code>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -3554,6 +3558,9 @@ Spark pipeline finished, result row count=0</code></pre>
 <p><a href="cluster-mapping-walkthrough.html" class="xref page">Cluster demo walk-through</a> (Docker, <code>spark-submit</code>)</p>
 </li>
 <li>
+<p><a href="yarn.html" class="xref page">Run native Spark pipelines on YARN</a></p>
+</li>
+<li>
 <p><a href="../../hop-tools/hop-marketplace.html" class="xref page">Hop Marketplace</a></p>
 </li>
 <li>
@@ -3566,7 +3573,7 @@ Spark pipeline finished, result row count=0</code></pre>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/pipeline/spark/getting-started-with-native-spark.html"><span>Previous</span><strong>Getting started with the native Spark engine</strong></a>
-  <a class="pagination__next" href="../../../../manual/next/pipeline/spark/paths-and-filesystems.html"><span>Next</span><strong>Paths and file systems</strong></a>
+  <a class="pagination__next" href="../../../../manual/next/pipeline/spark/yarn.html"><span>Next</span><strong>YARN</strong></a>
 </nav>
   </main>
 

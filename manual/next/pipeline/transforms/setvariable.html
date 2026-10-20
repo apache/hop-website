@@ -378,6 +378,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/spark/yarn.html">YARN</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/spark/paths-and-filesystems.html">Paths and file systems</a>
     
   </li>
@@ -3040,7 +3044,7 @@ See <a href="../../fields-parameters-variables.html" class="xref page">Fields, p
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-This transform accepts one (and only one) row of data to set the value of a variable. If you want to set a variable from a pipeline that processes multiple lines of data, make sure you isolate a single row before setting a variable.
+This transform accepts one (and only one) row of data to set the value of a variable. With more than one row the transform fails with the error "Only 1 input row was expected to set the variables and at least 2 were received". If you want to set a variable from a pipeline that processes multiple lines of data, make sure you isolate a single row before setting a variable.
 </td>
 </tr>
 </table>
@@ -3115,7 +3119,7 @@ Otherwise no formatting is done.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Default value</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Value that will be set for empty rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value that is set when the transform receives no row. A field that is empty sets an empty value, not the default value.</p></td>
 </tr>
 </tbody>
 </table>

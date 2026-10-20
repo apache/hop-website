@@ -378,6 +378,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../manual/next/pipeline/spark/yarn.html">YARN</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../manual/next/pipeline/spark/paths-and-filesystems.html">Paths and file systems</a>
     
   </li>
@@ -3272,13 +3276,16 @@ The exact rules that decide which value a parameter ends up with when one pipeli
 <div class="sect2">
 <h3 id="_system_properties"><a class="link" href="#_system_properties">System properties</a></h3>
 <div class="paragraph">
-<p>All system properties are variables that are available in all of your currently running Apache Hop instance. System properties are available as variables as well as all Java system properties.</p>
+<p>All Java system properties are available as variables in your running Apache Hop instance, for example <code>${java.io.tmpdir}</code> or <code>${user.home}</code>.
+You can set your own with <code>-D</code> options in <code>HOP_OPTIONS</code>, or with the <code>-s</code> option of <a href="hop-run/index.html" class="xref page">hop-run</a>.</p>
 </div>
 <div class="paragraph">
 <p>System properties get set in the Java Virtual Machine that runs your Apache Hop instance. This means that you should limit yourself to only those variables which are really system specific.</p>
 </div>
 <div class="paragraph">
-<p>You can add your own system variables to the ones that come with Apache Hop by default in the <code>System Variables</code> tab in the configuration perspective.</p>
+<p>You can also add your own system variables in the <code>System variables</code> tab of the configuration perspective.
+They are available as variables in every pipeline and workflow, and Hop also sets them as Java system properties when it starts, unless a property with the same name was already set with <code>-D</code>.
+Inside pipelines and workflows, <code>${MY_SYSTEM_VARIABLE}</code> still resolves to the value from this tab.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -3286,7 +3293,7 @@ The exact rules that decide which value a parameter ends up with when one pipeli
 </div>
 </div>
 <div class="paragraph">
-<p>These variables will be written to the <code>hop-config.json</code> file in your hop installation&#8217;s <code>config</code> folder or in your <code>${HOP_CONFIG_FOLDER}</code> location.</p>
+<p>These variables are written to the <code>hop-config.json</code> file in your hop installation&#8217;s <code>config</code> folder or in your <code>${HOP_CONFIG_FOLDER}</code> location.</p>
 </div>
 <div class="admonitionblock caution">
 <table>
@@ -3303,18 +3310,21 @@ even though you <em>can</em> manually change the <code>hop-config.json</code> or
 <div class="listingblock">
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>json</div><pre class="highlightjs highlight is-highlighted"><code class="language-json hljs" data-lang="json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">&quot;systemProperties&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-    <span class="hljs-attr">&quot;MY_SYSTEM_PROPERTY&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;SomeValue&quot;</span>
-  <span class="hljs-punctuation">}</span>
+  <span class="hljs-attr">&quot;variables&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;name&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;MY_SYSTEM_VARIABLE&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;value&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;SomeValue&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;description&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;What this variable is for&quot;</span>
+  <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You can also use the hop-config command line tool to define system properties:</p>
+<p>You can also set and describe them with the <a href="hop-tools/hop-conf/hop-conf.html" class="xref page">hop-conf</a> command line tool:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">sh hop-conf.sh -s MY_SYSTEM_PROPERTY=SomeValue</code></pre>
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">sh hop-conf.sh --set-variable=MY_SYSTEM_VARIABLE=SomeValue
+sh hop-conf.sh --describe-variable=<span class="hljs-string">&quot;MY_SYSTEM_VARIABLE=What this variable is for&quot;</span></code></pre>
 </div>
 </div>
 </div>

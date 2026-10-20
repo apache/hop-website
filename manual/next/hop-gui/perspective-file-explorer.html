@@ -378,6 +378,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/spark/yarn.html">YARN</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/spark/paths-and-filesystems.html">Paths and file systems</a>
     
   </li>
@@ -3020,7 +3024,7 @@ Expect these to evolve in the next Hop releases, or check the <a href="http://ho
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../_images/hop-gui/perspective-explorer-toolbar-items.png" alt="File explorer toolbar items">
+<img src="../_images/hop-gui/perspective-explorer-toolbar-items.png" alt="File explorer toolbar items" width="438">
 </div>
 </div>
 <div class="ulist">
@@ -3032,13 +3036,13 @@ Expect these to evolve in the next Hop releases, or check the <a href="http://ho
 <p>Create folder: Add a new folder. This works on a single selected folder.</p>
 </li>
 <li>
-<p>Expand all folders: Display all nested folders in the directory tree.</p>
+<p>Expand All: Display all nested folders in the directory tree.</p>
 </li>
 <li>
-<p>Collapse all folders: Hide all nested folders in the directory tree.</p>
+<p>Collapse All: Hide all nested folders in the directory tree.</p>
 </li>
 <li>
-<p>Delete: Remove a selected file or folder. Only one file or folder at a time.</p>
+<p>Delete: Remove the selected files and folders.</p>
 </li>
 <li>
 <p>Rename: Rename a file or folder. Only one file or folder at a time.</p>
@@ -3055,7 +3059,78 @@ Expect these to evolve in the next Hop releases, or check the <a href="http://ho
 </ul>
 </div>
 <div class="paragraph">
-<p>New pipelines, workflows and files are created from the file explorer&#8217;s right-click menu rather than the toolbar; see the "Right-click menu options" section below.</p>
+<p>New pipelines, workflows and files are created from the right-click menu rather than the toolbar.</p>
+</div>
+<div class="sect2">
+<h3 id="right-click-menu"><a class="link" href="#right-click-menu">Right-click menu</a></h3>
+<div class="paragraph">
+<p>Right-click a file or folder in the tree to open this menu.
+Options that don&#8217;t apply to the selection are greyed out.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create pipeline&#8230;&#8203;, Create workflow&#8230;&#8203;, Create file&#8230;&#8203;: Create a new, empty pipeline, workflow or file inside the selected folder and open it. For a file you choose its name and file type. Only available when one folder is selected.</p>
+</li>
+<li>
+<p>Create folder: Create a new folder inside the selected folder. Only available when one folder is selected.</p>
+</li>
+<li>
+<p>Expand All, Collapse All: Show or hide all nested folders in the tree.</p>
+</li>
+<li>
+<p>Refresh folder: Read the selected folder, or the folder of the selected file, again from disk.</p>
+</li>
+<li>
+<p>Open: Open the selected files. A file opens in a new tab in the editor area; pipelines and workflows open in their graph editor.</p>
+</li>
+<li>
+<p>Open as text: Open the selected file as plain text, whatever its type. Only available for a single file.</p>
+</li>
+<li>
+<p>Open in explorer: Show the selected file or folder in the file manager of your operating system. Only available for local files.</p>
+</li>
+<li>
+<p>Open in VFS File Explorer: Open the location of the selection in the <a href="vfs-file-explorer.html" class="xref page">VFS File Explorer</a>.</p>
+</li>
+<li>
+<p>Rename: Change the name of the selected file or folder. Only one at a time.</p>
+</li>
+<li>
+<p>Copy name, Copy path: Copy the name or the full path of the selection to the clipboard, one line per selected item.</p>
+</li>
+<li>
+<p>Find references: Search the project for the files that use the selected pipeline or workflow. The results are listed in a tab at the bottom, where a double-click opens them. Only available for a single pipeline or workflow.</p>
+</li>
+<li>
+<p>Git Info, Git Add, Git Revert, Git Clean, Git Commit: The Git operations described in <a href="#git-right-click-menu">Git options in the right-click menu</a>.</p>
+</li>
+<li>
+<p>Delete: Remove the selected files and folders. Make sure to use this carefully, as it permanently deletes them from your directory.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Plugins add their own options to this menu:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Edit as Hop install spec, with the <a href="../hop-tools/hop-marketplace.html" class="xref page">Marketplace</a> plugin: Open a YAML or JSON file in the Hop install spec editor. It does nothing for other files.</p>
+</li>
+<li>
+<p>Lint This File, Lint This Folder, with the <a href="../hop-tools/hop-lint.html" class="xref page">Lint</a> plugin: Check the selected file or folder against the lint rules.</p>
+</li>
+<li>
+<p>Exclude From Linting&#8230;&#8203;, with the Lint plugin: Ask for a reason and exclude the selection from linting in the project&#8217;s lint policy. When the selection is already excluded, it is included again.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/hop-gui/hop-gui-file-explorer-right-menu.png" alt="Right-click menu in the File Explorer perspective" width="245">
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -3175,42 +3250,12 @@ The tooltip on the File Explorer button will indicate when you can toggle the pa
 </div>
 </div>
 <div class="sect2">
-<h3 id="_right_click_menu_options"><a class="link" href="#_right_click_menu_options">Right-click menu options</a></h3>
+<h3 id="git-right-click-menu"><a class="link" href="#git-right-click-menu">Git options in the right-click menu</a></h3>
 <div class="paragraph">
-<p>The right-click menu in Apache Hop Git integration offers several useful options to help manage your files and Git operations directly from the interface. Here’s a breakdown of each option:</p>
+<p>When the project is in a Git repository, the <a href="#right-click-menu">right-click menu</a> also has these options:</p>
 </div>
 <div class="ulist">
 <ul>
-<li>
-<p>Create pipeline: Create a new, empty pipeline inside the selected folder and open it. Only available when a folder is selected.</p>
-</li>
-<li>
-<p>Create workflow: Create a new, empty workflow inside the selected folder and open it. Only available when a folder is selected.</p>
-</li>
-<li>
-<p>Create file: Create a new, empty file inside the selected folder, choosing its name and file type, and open it. Only available when a folder is selected.</p>
-</li>
-<li>
-<p>Create folder: Create a new folder within the selected directory. This is useful for organizing workflows, pipelines, and other project resources. Only available when a folder is selected.</p>
-</li>
-<li>
-<p>Expand all folders: Reveals all nested folders in the project directory tree. Useful for getting a full overview of your project structure without opening folders one by one.</p>
-</li>
-<li>
-<p>Collapse all folders: Closes all expanded folders, showing only the top-level directory. Helps reset the view or reduce visual clutter.</p>
-</li>
-<li>
-<p>Open: Opens the selected file or folder. The file opens in a new tab in the editor area; workflows and pipelines open in their graph editor.</p>
-</li>
-<li>
-<p>Rename: Allows you to change the name of the selected file or folder, helping you keep your project files organized and clearly labeled.</p>
-</li>
-<li>
-<p>Copy name: Copies the name of the selected file or folder to your clipboard, making it easy to paste and reference elsewhere.</p>
-</li>
-<li>
-<p>Copy path: Copies the full path of the selected file or folder to your clipboard, useful for quick navigation or sharing the location with others.</p>
-</li>
 <li>
 <p>Git Info: Displays detailed information about the Git status of the selected file, including any recent changes.</p>
 </li>
@@ -3226,18 +3271,11 @@ The tooltip on the File Explorer button will indicate when you can toggle the pa
 <li>
 <p>Git Commit: Opens the <a href="perspective-git-commit.html" class="xref page">Git commit perspective</a>, where you review your changes and commit them with a message. In Hop Web it opens a commit dialog instead.</p>
 </li>
-<li>
-<p>Delete: Removes the selected file or folder from your project. Make sure to use this carefully, as it permanently deletes the item from your directory.</p>
-</li>
 </ul>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="../_images/hop-gui/hop-gui-file-explorer-right-menu.png" alt="git right-click menu options in the explorer perspective">
 </div>
-</div>
-<div class="sect3">
-<h4 id="_git_operations"><a class="link" href="#_git_operations">Git operations</a></h4>
+<div class="sect2">
+<h3 id="_git_operations"><a class="link" href="#_git_operations">Git operations</a></h3>
 <div class="paragraph">
 <p>Here are the basic git operations that are supported:</p>
 </div>
@@ -3268,8 +3306,7 @@ The tooltip on the File Explorer button will indicate when you can toggle the pa
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../_images/hop-gui/perspective-explorer-git-toolbar-operations.png" alt="git toolbar items in the explorer perspective">
-</div>
+<img src="../_images/hop-gui/perspective-explorer-git-toolbar-operations.png" alt="git toolbar items in the explorer perspective" width="437">
 </div>
 </div>
 </div>

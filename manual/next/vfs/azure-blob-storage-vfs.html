@@ -378,6 +378,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/pipeline/spark/yarn.html">YARN</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/pipeline/spark/paths-and-filesystems.html">Paths and file systems</a>
     
   </li>
@@ -2990,23 +2994,20 @@ We only support hierarchical namespaces, make sure the storage container is conf
 <div class="paragraph">
 <p>You can find both in the Storage Accounts section of your Azure portal.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>A file block size : This needs to be a multiple of 512 bytes.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>For tests and development you can use an Azure emulator such as Azurite instead, by setting its URL.</p>
 </div>
 <div class="paragraph">
-<p>All 3 options can be set in either the Hop GUI options dialog (Menu: Tools / Options) or using the following Hop Conf (<code>hop-conf.sh</code> or <code>hop-conf.bat</code>) command line options:</p>
+<p>These options can be set in the <strong>Plugins</strong> section of the <a href="../hop-gui/perspective-configuration.html" class="xref page">configuration perspective</a> or with the following Hop Conf (<code>hop-conf.sh</code> or <code>hop-conf.bat</code>) command line options:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell script hljs" data-lang="shell script">      -aza, --azure-account=&lt;account&gt;
                             The account to use for the Azure VFS
-      -azi, --azure-block-increment=&lt;blockIncrement&gt;
-                            The block increment size for new files on Azure,
-                              multiples of 512 only.
+      -aze, --azure-emulator=&lt;emulatorUrl&gt;
+                            The URL of an Azure emulator (Azurite) to be used
+                              for test and development goals instead of
+                              official Azure services
       -azk, --azure-key=&lt;key&gt;
                             The key to use for the Azure VFS</code></pre>
 </div>
@@ -3019,8 +3020,7 @@ We only support hierarchical namespaces, make sure the storage container is conf
 <div class="code-lang" data-pagefind-ignore>json</div><pre class="highlightjs highlight is-highlighted"><code class="language-json hljs" data-lang="json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;azure&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;account&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;storage-account-name&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;key&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;a/key-comprised-of-a-long-set-of-characters-and-numbers==&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;blockIncrement&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1024&quot;</span>
+    <span class="hljs-attr">&quot;key&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;a/key-comprised-of-a-long-set-of-characters-and-numbers==&quot;</span>
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span></code></pre>
 </div>

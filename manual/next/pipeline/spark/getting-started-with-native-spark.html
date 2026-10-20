@@ -378,6 +378,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/spark/yarn.html">YARN</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/spark/paths-and-filesystems.html">Paths and file systems</a>
     
   </li>
@@ -3060,6 +3064,10 @@
 <a href="local-standalone-cluster.html" class="xref page">Local standalone cluster</a>.</p>
 </div>
 <div class="paragraph">
+<p>To run pipelines on a Hadoop YARN cluster from Hop GUI, <code>hop-run</code> or Hop Server:
+<a href="yarn.html" class="xref page">Run native Spark pipelines on YARN</a>.</p>
+</div>
+<div class="paragraph">
 <p>Hands-on multi-node demo (Docker Compose + sample project <code>spark-demo</code> — Simple Mapping and Workflow Executor):
 <a href="cluster-mapping-walkthrough.html" class="xref page">Cluster demo walk-through</a>.</p>
 </div>
@@ -3183,7 +3191,10 @@
 </div>
 </li>
 <li>
-<p>File outputs and other Spark <strong>actions</strong> materialise the graph (read → transform → write).</p>
+<p>Spark File and Lake table outputs write while the graph is built. At the end the engine runs an action on every transform without a successor, so every branch runs, including branches that end in a wrapped output such as Text File Output or Table Output.</p>
+</li>
+<li>
+<p>The output of a transform that several transforms read, such as the true and false targets of Filter Rows or the cases of Switch / Case, is cached: that transform runs once, not once per branch.</p>
 </li>
 </ol>
 </div>
@@ -3570,7 +3581,7 @@ For Iceberg <strong>TABLE</strong> mode, create a <a href="../../metadata-types/
 <p>Engine = <strong>Native Spark pipeline engine</strong> (not Beam Spark)</p>
 </li>
 <li>
-<p><strong>Master</strong> blank (so <code>spark-submit --master</code> wins) <strong>or</strong> set to <code>spark://host:7077</code></p>
+<p><strong>Master</strong> blank (so <code>spark-submit --master</code> wins) <strong>or</strong> set to <code>spark://host:7077</code>. For YARN, submit with <code>--master yarn</code> from a machine where <code>HADOOP_CONF_DIR</code> points at the cluster&#8217;s configuration; <code>spark-submit</code> reads it from there.</p>
 </li>
 <li>
 <p><strong>Fat jar</strong> field empty (the submit jar already carries Hop)</p>
@@ -3597,18 +3608,6 @@ For Iceberg <strong>TABLE</strong> mode, create a <a href="../../metadata-types/
   YourNativeSparkRunConfig \
   /path/to/cluster-env-config.json</code></pre>
 </div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Start <code>spark-submit</code> from a folder that does not contain a Hop <code>plugins</code> folder, not from the Hop installation folder. Otherwise Hop loads the Spark engine twice, from the fat jar and from that folder, and the run fails with <code>Run configuration '&#8230;&#8203;' is not a native Spark pipeline engine configuration</code>. See <a href="local-standalone-cluster.html#troubleshooting" class="xref page">Troubleshooting</a>.
-</td>
-</tr>
-</table>
 </div>
 <div class="paragraph">
 <p><strong>Main class:</strong> <code>org.apache.hop.spark.run.MainSpark</code></p>
