@@ -2975,10 +2975,9 @@
 <div class="sect2">
 <h3 id="_return_status"><a class="link" href="#_return_status">Return status</a></h3>
 <div class="paragraph">
-<p>The return status is provided by the operating system call.</p>
-</div>
-<div class="paragraph">
-<p>For example, in batch scripting a return value of 1 indicates that the script was successful; a return value of 0 (zero) indicates that it was unsuccessful.</p>
+<p>The return status is the exit code of the script or executable.
+An exit code of 0 means success; any other exit code makes the action fail.
+See <a href="#_result">Result</a>.</p>
 </div>
 <div class="paragraph">
 <p>You can pass command line arguments and set up logging for the Shell workflow action.</p>
@@ -3041,7 +3040,7 @@ When the field is left empty or the working directory is invalid ${user.dir} wil
 <td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">Logging settings</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specify log file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specify logfile</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enable to specify a separate logging file for the execution of this workflow.</p></td>
 </tr>
 <tr>
@@ -3087,7 +3086,7 @@ See also the logging window in .14 Logging</p></td>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Copy previous results to arguments?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Copy previous results to args</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The results from a previous pipeline can be sent to the shell script using the "Copy rows to result" transform. (as arguments)</p></td>
 </tr>
 <tr>
@@ -3114,6 +3113,51 @@ The values of the corresponding result row can then be found on command line arg
 <div class="paragraph">
 <p>This tab contains your batch or shell script if the <code>Insert script</code> option is checked.</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The command ended with exit code 0. With <strong>Execute for every result row</strong>, every run did.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The command ended with another exit code, or could not be started, for example because the script file doesn&#8217;t exist on Linux or macOS. On Windows, <code>cmd.exe</code> starts anyway and returns a non-zero exit code. The number of errors is 1. With <strong>Execute for every result row</strong>, the first run that fails ends the loop: the remaining rows are not processed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged, plus the log file with <strong>Specify logfile</strong>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged. With <strong>Copy previous results to args</strong>, the fields of the result rows are passed as arguments: the fields of every row in a single run, or with <strong>Execute for every result row</strong> the fields of the current row in each run.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Metrics</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exit status: the exit code of the command; with <strong>Execute for every result row</strong>, of the last run. It is not set when the command could not be started.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>With <strong>Execute for every result row</strong> and no result rows, the command doesn&#8217;t run, and the result of the previous action is passed on, without an exit status.</p>
 </div>
 </div>
 </div>

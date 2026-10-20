@@ -3140,6 +3140,56 @@ This is what will be taken from the rows.</p>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The zip file was created or updated. It is also true when the zip exists and <strong>If zip file exists</strong> is <strong>Do Nothing</strong>, which leaves it unchanged, and when no file matches the wildcard with <strong>Include sub-folders</strong> off, which creates an empty zip. With <strong>Include sub-folders</strong> on, no match makes the action false and creates no zip.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The source doesn&#8217;t exist, the zip exists and <strong>If zip file exists</strong> is <strong>Fail</strong>, the zip can&#8217;t be written, or a source file can&#8217;t be deleted with <strong>After zipping</strong>; the zip is already created then. With <strong>After zipping</strong> set to <strong>Move files</strong>, it is also false when the folder to move to doesn&#8217;t exist and <strong>Create folder</strong> is off. The number of errors is 1.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With <strong>Add Zip file to result</strong>, the zip file is added, also an existing zip left unchanged by <strong>Do Nothing</strong>. A zip whose creation fails is not added, but a zip that was created stays in the result files even when the action ends up false.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged. With <strong>Get arguments from previous</strong>, every result row gives the source (first field), the include wildcard (second), the exclude wildcard (third) and the zip file name (fourth). A row with an empty source or zip file name is skipped. The first row that fails ends the action, which is then false; the zips of the earlier rows stay, and are in the result files. When every row is zipped, the result of the previous action is passed on, true or false.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+With an empty <strong>Source directory/file</strong>, or with <strong>Get arguments from previous</strong> and no result rows, nothing is zipped and the result of the previous action is passed on. A source file that can&#8217;t be moved with <strong>After zipping</strong> set to <strong>Move files</strong> is only logged: the action is still true, and the zip is in the result files.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/workflow/actions/xslt.html"><span>Previous</span><strong>XSL pipeline</strong></a>

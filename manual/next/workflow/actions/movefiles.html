@@ -3013,7 +3013,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Copy previous results to args</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Use the result files from the previous workflow action (actions) as files and/or folders to move.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Take the files and folders to move from the result rows of a previous action: the source in the first field, the destination in the second and the wildcard in the third. See <a href="#_result">Result</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Files / Folders</p></td>
@@ -3193,10 +3193,60 @@ The default is yyyyMMdd'_'HHmmss</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The number of files moved or the number of errors, depending on the success option above</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Result files name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add files to result files name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Add the target file names to the list of result files of this workflow action for use in the next workflow actions.</p></td>
 </tr>
 </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <strong>Success condition</strong> is met: no errors with <strong>Success when all works fine</strong>, at least <strong>Nr errors lesser than</strong> files moved with <strong>Success when at least x files moved</strong>, or fewer errors than <strong>Nr errors lesser than</strong> with <strong>Success when number of errors lesser than</strong> (see the note below).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The success condition is not met, for example because a source doesn&#8217;t exist, a file can&#8217;t be moved, or the destination file exists and <strong>If destination file exists</strong> is <strong>Fail</strong>. With <strong>Success when all works fine</strong> or <strong>Success when number of errors lesser than</strong>, the action stops once the condition is broken: the remaining files are not moved. The number of errors counts the files and entries that failed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With <strong>Add files to result files name</strong>, every moved file is added, with its destination path. A file left in place by <strong>Do nothing</strong> is not added. With <strong>Simulate</strong>, nothing is moved but the destination paths are still added.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged. With <strong>Copy previous results to args</strong>, the source, destination and wildcard come from the first three fields of each result row.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+With <strong>Success when number of errors lesser than</strong>, the action stops and is false as soon as the number of errors reaches <strong>Nr errors lesser than</strong>, but when the last file brings it to that number, the action is still true. With <strong>If destination file exists</strong> set to <strong>Fail</strong>, a file that already exists counts as two errors.
+</td>
+</tr>
 </table>
 </div>
 </div>
