@@ -2977,8 +2977,8 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of the workflow action.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Settings</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Copy previous results to args: Enable this option if the folders you want to delete come from the result files of the previous action in the workflow.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Copy previous results to args</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Take the folders to delete from the first field of the result rows of the previous action instead of from the list. See <a href="#_result">Result</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Success on</p></td>
@@ -2994,7 +2994,7 @@
 <p>When at least x folders processed : specify x in the Limit field below</p>
 </li>
 <li>
-<p>When the number of errors less than : specify the max nr of errors in the limit field below</p>
+<p>When number of errors less than : specify the max nr of errors in the limit field below</p>
 </li>
 </ul>
 </div></div></td>
@@ -3011,6 +3011,60 @@
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <strong>Success condition</strong> is met: no errors with <strong>When no error reported</strong>, at least <strong>Limit</strong> folders processed with <strong>When at least x folders processed</strong>, or fewer errors than <strong>Limit</strong> with <strong>When number of errors less than</strong> (see the note below). A folder that doesn&#8217;t exist counts as processed. An empty line in the list is skipped.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The success condition is not met, for example because a path is a file or a folder could not be deleted. With <strong>When no error reported</strong> or <strong>When number of errors less than</strong>, the action stops once the condition is broken: the remaining folders are not deleted. The number of errors is the number of folders that failed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged. With <strong>Copy previous results to args</strong>, the folder comes from the first field of each result row, and the list in the dialog is not used, also when there are no result rows.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lines deleted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of folders processed: deleted, or already missing.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+With <strong>When number of errors less than</strong>, the action stops and is false as soon as the number of errors reaches <strong>Limit</strong>, but when the last folder brings it to that number, the action is still true.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
     </article>

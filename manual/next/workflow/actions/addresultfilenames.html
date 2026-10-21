@@ -2980,21 +2980,21 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of the workflow action.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Include subfolders</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Include Subfolders</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Include subfolders of the selected folders</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Copy previous results to args?</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Passes the results of the previous action to the arguments of this action.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Take the files or folders and wildcards from the result rows of the previous action instead of from the list. See <a href="#_result">Result</a>.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Clear result filenames?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clear result filenames</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">This option clears the list of result files (from previous workflow actions) before creating a new list.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">File/Folder</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Specify the list of files or folders with wildcards (regular expressions) in this grid.<br>
-You can add a different source/destination on each line.</p></td>
+You can add a different file or folder and wildcard on each line.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Wildcard (RegExp)</p></td>
@@ -3004,6 +3004,56 @@ You can add a different source/destination on each line.</p></td>
 </table>
 <div class="paragraph">
 <p>After specifying a folder and wildcard (regular expression), use the <code>Add</code> button to add your file/folder selection to the table. Use the <code>Delete</code> or <code>Edit</code> buttons to remove or edit selected lines in the table.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every file and folder in the list exists. A folder without matching files adds nothing and is still true.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A file or folder in the list doesn&#8217;t exist. The number of errors is the number of entries that don&#8217;t exist. The files of the other entries are still added.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Each file in the list is added. For a folder, the files in it whose whole file name, without the folder, matches <strong>Wildcard (RegExp)</strong> are added, or all its files when the wildcard is empty, and with <strong>Include Subfolders</strong> also the matching files in its subfolders. With <strong>Clear result filenames</strong>, the result files of the previous action are removed first; otherwise they are kept.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged. With <strong>Copy previous results to args?</strong>, the file or folder comes from the first field and the wildcard from the second field of each result row, and the list in the dialog is not used, also when there are no result rows. A result row with only one field stops the workflow with an error, and no hop is followed.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+An invalid regular expression in <strong>Wildcard (RegExp)</strong> adds nothing, and the action is still true.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

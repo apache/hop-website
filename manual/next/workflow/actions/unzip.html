@@ -2983,26 +2983,15 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Get args from previous</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">check this option if you want to use the list of result files (from a previous workflow action) as the list of files to unzip.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Take the zip files or folders, and their source wildcards, from the result rows of the previous action instead of from <strong>Zip File name</strong>. See <a href="#_result">Result</a>.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Zip file name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zip File name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">the name of the zip file or a folder if you want to use a wildcard.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Source wildcard</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>If the previous option is a folder, you can enter a regular expression. wildcard here.</p>
-</div>
-<div class="paragraph">
-<p>For example: to match <code>/folder/test.zip</code> a regex of <code>te.\.zip</code> will come up empty.</p>
-</div>
-<div class="paragraph">
-<p>Use <code>.*te.\.zip</code> instead to account for the folders ahead of it.</p>
-</div>
-<div class="paragraph">
-<p>For Windows file paths, the direction of the slashes will be reversed in the match, so use <code>\/</code> instead of <code>\\</code>.</p>
-</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Source Wildcard (RegExp)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When <strong>Zip File name</strong> is a folder, a regular expression for the zip files to unzip from it, for example <code>.*\.zip</code>. It is matched against the file name, and also against the full path.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">Unzipped files</p></td>
@@ -3012,7 +3001,7 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">check this if you want to create a separate directory for each zip filename (same name as file)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Target directory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Target Directory</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The target directory to unzip in</p></td>
 </tr>
 <tr>
@@ -3020,12 +3009,12 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Check this if you want to create the target folder</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Include wildcard</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Include Wildcard (RegExp)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Use this regular expression to select the files in the zip archives to extract</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Exclude wildcard</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Use this regular expression to select the files in the zip archives to extract</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exclude Wildcard (RegExp)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use this regular expression to leave files in the zip archives out of the extraction</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Include date in filename</p></td>
@@ -3036,11 +3025,11 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Include the time (format HHmmss)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specify the date time format yourself</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specify Date time format</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Allows you to specify the date time format yourself (default is: yyyyMMdd'_'HHmmss)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If files exists</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If file exists</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Select the action to take if the target (unzipped) file exists: skip, overwrite, etc.</p></td>
 </tr>
 <tr>
@@ -3063,7 +3052,7 @@
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Move files to</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Move Files To</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If the previous option is "Move files", you can select the target directory here.</p></td>
 </tr>
 </tbody>
@@ -3117,6 +3106,60 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">The number of files unzipped or number of errors, depending on the option chosen for <code>Success on</code> above.</p></td>
 </tr>
 </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <strong>Success condition</strong> is met: no errors with <strong>All works fine</strong>, at least <strong>Limit files</strong> zip files unzipped with <strong>At least we successfully unzipped x files</strong>, or no more errors than <strong>Limit files</strong> with <strong>Nr errors less than</strong> (see the note below).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The success condition is not met, or the action could not start. It can&#8217;t start when the zip file or <strong>Target Directory</strong> is not set or doesn&#8217;t exist (and <strong>Create folder</strong> is not selected), when the folder for <strong>Move files</strong> doesn&#8217;t exist and its <strong>Create folder</strong> is not selected, or when <strong>Get args from previous</strong> is selected and there are no result rows: the number of errors is then 1. A zip file that can&#8217;t be read, or a file that already exists with <strong>If file exists</strong> set to <strong>Fail</strong>, counts as an error. With <strong>All works fine</strong>, the action stops at the first error, and with <strong>Nr errors less than</strong> once the number of errors reaches <strong>Limit files</strong>: the remaining files are not unzipped.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With <strong>Add extracted file to result</strong>, every extracted file is added, with its path in the target folder. A file skipped by <strong>If file exists</strong> is not added. The result files of the previous action are kept.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged. With <strong>Get args from previous</strong>, the zip file or folder comes from the first field and the <strong>Source Wildcard (RegExp)</strong> from the second field of each result row. A row with only one field counts as one error and stops the action: the zip files of that row and the rows after it are not unzipped.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lines written</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of zip files unzipped. When the action can&#8217;t start, or stops on the success condition before the last result row, the value of the previous action is passed on.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+With <strong>Nr errors less than</strong>, the action stops and is false as soon as the number of errors reaches <strong>Limit files</strong> while result rows are left to process, but when the last row brings it to that number, the action is still true. For the files of a single zip file or folder, it is still true when the number of errors equals <strong>Limit files</strong>, and false only when it is higher. A zip file that can&#8217;t be read, or that can&#8217;t be deleted after extraction with <strong>Delete files</strong>, counts as two errors and is not counted as unzipped; files already extracted from it stay in the target folder and in the result files. With <strong>If file exists</strong> set to <strong>Fail</strong>, a file that already exists in the target folder also counts as an error when <strong>Include Wildcard (RegExp)</strong> or <strong>Exclude Wildcard (RegExp)</strong> leaves it out.
+</td>
+</tr>
 </table>
 </div>
 </div>
