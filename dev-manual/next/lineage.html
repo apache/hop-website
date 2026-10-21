@@ -779,7 +779,7 @@ what Hop emits — worth knowing before investigating a dataset that looks empty
 <p><strong>Timestamp</strong> — Milliseconds since epoch.</p>
 </li>
 <li>
-<p><strong><code>LineageEventKind</code></strong> — One of <code>RUN_LIFECYCLE</code>, <code>TRANSFORM_SCHEMA</code>, <code>FILE_IO</code>, <code>RELATIONAL_IO</code>, <code>HTTP_IO</code>.</p>
+<p><strong><code>LineageEventKind</code></strong> — One of <code>RUN_LIFECYCLE</code>, <code>TRANSFORM_SCHEMA</code>, <code>FILE_IO</code>, <code>RELATIONAL_IO</code>, <code>HTTP_IO</code>, <code>PIPELINE_GRAPH</code>. New kinds are only ever appended: a sink must skip a kind it does not handle rather than fail the batch.</p>
 </li>
 <li>
 <p><strong><code>LineageContext</code></strong> — Who/what produced the observation (see above).</p>
@@ -805,6 +805,9 @@ what Hop emits — worth knowing before investigating a dataset that looks empty
 </li>
 <li>
 <p><strong><code>RunLifecycleLineagePayload</code></strong> — <code>STARTED</code> / <code>FINISHED</code> plus optional detail text.</p>
+</li>
+<li>
+<p><strong><code>PipelineGraphLineagePayload</code></strong> — The pipeline&#8217;s hop graph as a list of <code>from</code> → <code>to</code> transform-name transitions: enabled hops with both ends named, in pipeline order. Informational hops are included. A sink uses it to attribute datasets to the transform that touched them and to propagate them along the graph, instead of pairing all of a pipeline&#8217;s inputs with all of its outputs.</p>
 </li>
 <li>
 <p><strong><code>TransformSchemaLineagePayload</code></strong> — <code>INPUT</code> or <code>OUTPUT</code> plus a list of field names, Hop type names, length, and precision (boundary schema; emitted when a transform finishes). Fields usually come from runtime row metadata on the transform or row sets. If input was never observed (e.g. <em>Abort</em> when <code>getRow()</code> immediately returns null), input is derived via <code>PipelineMeta#getPrevTransformFields</code>. If output was never written (e.g. <em>Detect empty stream</em> with a non-empty stream), output is derived via <code>PipelineMeta#getTransformFields</code>. Graph-derived events set context attribute <code>transformSchemaSource</code> to <code>DESIGN_GRAPH</code>.</p>
@@ -864,7 +867,7 @@ what Hop emits — worth knowing before investigating a dataset that looks empty
 <div class="ulist">
 <ul>
 <li>
-<p><strong><code>PipelineStart</code></strong> — <code>LineageHubPipelineStartXp</code> — phase <code>STARTED</code></p>
+<p><strong><code>PipelineStart</code></strong> — <code>LineageHubPipelineStartXp</code> — phase <code>STARTED</code>, followed by one <code>PIPELINE_GRAPH</code> event with the same context when the pipeline has enabled hops. <code>PipelineStart</code> fires after the transform threads have started, so the run&#8217;s transform <code>STARTED</code> events, and early I/O such as a Table Input read, can arrive before the graph, possibly in an earlier batch. A sink that uses the graph collects a run&#8217;s events by the pipeline&#8217;s log channel id (transform events carry it in the <code>pipelineLogChannelId</code> attribute) and resolves them at <code>FINISHED</code> or <code>FAILED</code>.</p>
 </li>
 <li>
 <p><strong><code>PipelineFinish</code></strong> — <code>LineageHubPipelineFinishXp</code> — phase <code>FINISHING</code> (transforms stopped, cleanup)</p>
