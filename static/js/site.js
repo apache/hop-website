@@ -102,6 +102,25 @@
     if (currentItem && currentItem.classList && currentItem.classList.contains('doc-nav')) break
   }
 
+  /* Bring the current page into view inside the sidebar. Not scrollIntoView:
+     that also scrolls the page itself. The scrolling box is the inner nav on a
+     wide screen and the whole off-canvas panel below 1000px, so take whichever
+     one actually overflows. */
+  var revealCurrent = function () {
+    var link = document.querySelector('.doc-nav__item.is-current > a')
+    if (!link) return
+    var box = link.parentNode
+    while (box && !(box.scrollHeight > box.clientHeight && /auto|scroll/.test(getComputedStyle(box).overflowY))) {
+      if (box.id === 'doc-nav') { box = null; break }
+      box = box.parentNode
+    }
+    if (!box) return
+    var offset = link.getBoundingClientRect().top - box.getBoundingClientRect().top
+    if (offset >= 0 && offset + link.offsetHeight <= box.clientHeight) return
+    box.scrollTop += offset - (box.clientHeight - link.offsetHeight) / 2
+  }
+  revealCurrent()
+
   /* ----- documentation sidebar, off-canvas below 1000px ----- */
   var docNav = document.getElementById('doc-nav')
   var docOpen = document.querySelector('.doc-nav__open')
@@ -113,6 +132,9 @@
     document.documentElement.style.overflow = open ? 'hidden' : ''
     if (open && docClose) docClose.focus()
     else if (!open && docOpen) docOpen.focus()
+    // after the focus: the close button sits at the top of the same scrolling
+    // panel, and focusing it scrolls the panel back up
+    if (open) revealCurrent()
   }
   if (docOpen) docOpen.addEventListener('click', function () { setDocNav(true) })
   if (docClose) docClose.addEventListener('click', function () { setDocNav(false) })
