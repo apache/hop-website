@@ -3103,6 +3103,12 @@ Scope such a rule with <code>appliesTo</code>, naming the metadata key — the f
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><code>conditionValue</code> is used as written: variables are not resolved in it.
+A value the condition cannot use, such as <code>abc</code> or <code>3,0</code> for <code>MAX_VALUE</code>, or <code>[a-</code> for <code>MATCHES_PATTERN</code>, would make the rule report nothing at all.
+The rule editor refuses it, and a rule loaded from <code>hop-lint.yml</code> or a rule pack gets a warning in the log that names the rule and the problem.
+The same goes for a condition that does not fit one of the fields the linter provides, such as <code>NOT_NULL</code> on <code>transformCount</code>.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -3503,8 +3509,27 @@ The rule manager lists each rule&#8217;s tags in its <strong>Tags</strong> colum
 <td class="tableblock halign-left valign-top"><p class="tableblock">WARNING</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Every remark from Hop&#8217;s own transform and action checks</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SYSTEM-001</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ERROR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pipeline, workflow or metadata file that could not be loaded, so nothing was checked against it</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SYSTEM-002</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ERROR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A lint run that stopped before it finished</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SYSTEM-003</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ERROR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A metadata file, such as a connection, that could not be read</p></td>
+</tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>The <code>SYSTEM</code> rules are of <code>type: system</code>: like a native rule they check nothing, and say how the linter reports a file it could not read or a run it could not finish.
+A project can change their severity, or switch one off, in its <code>hop-lint.yml</code> like any other rule.</p>
+</div>
 <div class="paragraph">
 <p><code>TRANS-002</code> and <code>WORKFLOW-002</code> report on the transform or action itself, so the finding names it and the canvas can point at it.
 The only element in a file is not an orphan — there is nothing for it to be disconnected from — and neither is one whose hops are all disabled: it has hops, and whether a disabled hop is a problem is what <code>STRUCT-003</code> asks.</p>

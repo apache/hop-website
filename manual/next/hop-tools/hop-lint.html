@@ -2989,6 +2989,9 @@ hop lint --list-rules                 <span class="hljs-comment"># show the effe
 hop lint --<span class="hljs-built_in">help</span>                       <span class="hljs-comment"># full option list</span></code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Relative paths, for the target and for options such as <code>--output</code>, <code>--config</code> and <code>--baseline</code>, are relative to the folder the command is run from.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -3036,7 +3039,8 @@ A project chosen with <code>-j</code> or <code>-e</code> applies whatever is lin
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>--fail-on &lt;severity&gt;</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Exit with 1 when a finding reaches this severity. Default <code>ERROR</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exit with 1 when a finding reaches this severity: <code>ERROR</code> (the default), <code>WARNING</code>, <code>INFO</code> or <code>NONE</code>.
+Any other value is refused.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>--max-warnings &lt;n&gt;</code></p></td>
@@ -3180,6 +3184,8 @@ Counts are kept, so a second orphaned transform in a file that already had one i
 <div class="paragraph">
 <p>This writes a <code>pre-commit</code> hook into the current repository&#8217;s <code>.git/hooks</code>.
 The hook lints the staged Hop files and blocks the commit when they fail.
+It lints the staged version of each file, which is what the commit holds, not the one on disk, and it includes files renamed with <code>git mv</code>.
+Set <code>HOP_LINT_FAIL_ON</code> to change the threshold the hook fails on, for example <code>HOP_LINT_FAIL_ON=WARNING</code>.
 It is a copy, so run <code>hop lint --install-hook</code> again after upgrading Hop to pick up changes to it.</p>
 </div>
 <div class="paragraph">
