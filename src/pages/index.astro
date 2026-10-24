@@ -2,9 +2,16 @@
 import Base from '../layouts/Base.astro'
 import Section from '../components/Section.astro'
 import GuiShot from '../components/GuiShot.astro'
+import EventList from '../components/EventList.astro'
 import { site } from '../site.config.mjs'
 import { current } from '../data/releases.mjs'
+import { upcomingEvents } from '../data/events.mjs'
 import { getCollection } from 'astro:content'
+
+// The widest window the dropdown offers. The narrower ones, and anything that
+// has passed since the build, are filtered in the browser.
+const EVENT_WINDOWS = [30, 60, 90]
+const soon = upcomingEvents(Math.max(...EVENT_WINDOWS))
 
 const posts = (await getCollection('blog'))
   .sort((a, b) => (b.data.publishDate?.getTime() ?? 0) - (a.data.publishDate?.getTime() ?? 0))
@@ -127,6 +134,27 @@ const fmtDate = (d) =>
       </ul>
     </Section>
 
+    <Section title="Upcoming events">
+      <div class="soon" id="soon">
+        <div class="soon__controls" hidden>
+          <span class="soon__window">
+            <label for="soon-window">Show</label>
+            <select id="soon-window">
+              {EVENT_WINDOWS.map((d) => (
+                <option value={d} selected={d === Math.max(...EVENT_WINDOWS)}>next {d} days</option>
+              ))}
+            </select>
+          </span>
+          <button type="button" class="soon__compact" id="soon-compact" role="switch" aria-checked="true">
+            Compact view
+            <span class="soon__track" aria-hidden="true"><span class="soon__thumb"></span></span>
+          </button>
+        </div>
+        <EventList events={soon} empty="No events planned." compact />
+        <p class="soon__more" hidden={soon.length === 0}><a href="/community/events/">All events &rarr;</a></p>
+      </div>
+    </Section>
+
     {posts.length > 0 && (
       <Section title="Latest from the blog">
         <ul class="posts">
@@ -159,6 +187,58 @@ const fmtDate = (d) =>
       </div>
     </section>
   </main>
+  <script is:inline>
+    // Progressive: with JS off, the build's 90-day list is shown and the
+    // controls stay hidden. With it, the list is filtered against the
+    // reader's own date, so an event that has passed since the last build
+    // drops off. If nothing is due in the widest window, only the heading and
+    // the empty message are left, without controls to filter nothing.
+    (function () {
+      var root = document.getElementById('soon')
+      if (!root) return
+      var list = root.querySelector('.events')
+      if (!list) return
+      var items = [].slice.call(list.children)
+      var empty = root.querySelector('.empty')
+      var more = root.querySelector('.soon__more')
+      var controls = root.querySelector('.soon__controls')
+      var select = document.getElementById('soon-window')
+      var compact = document.getElementById('soon-compact')
+      var widest = Math.max.apply(null, [].map.call(select.options, function (o) { return +o.value }))
+      var iso = function (d) {
+        return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0')
+      }
+      var countWithin = function (days, apply) {
+        var now = new Date(), until = new Date()
+        until.setDate(now.getDate() + days)
+        var from = iso(now), to = iso(until), shown = 0
+        items.forEach(function (li) {
+          var d = li.getAttribute('data-date')
+          var match = d >= from && d <= to
+          if (apply) li.hidden = !match
+          if (match) shown++
+        })
+        return shown
+      }
+      var update = function () {
+        var shown = countWithin(+select.value, true)
+        empty.hidden = shown > 0
+        list.hidden = shown === 0
+      }
+      if (countWithin(widest, false) === 0) {
+        if (more) more.hidden = true
+      } else {
+        controls.hidden = false
+        select.addEventListener('change', update)
+        compact.addEventListener('click', function () {
+          var on = compact.getAttribute('aria-checked') !== 'true'
+          compact.setAttribute('aria-checked', String(on))
+          list.classList.toggle('events--compact', on)
+        })
+      }
+      update()
+    })()
+  </script>
 </Base>
 
 <style>
@@ -247,6 +327,37 @@ const fmtDate = (d) =>
     font-size: 13.5px; color: var(--ink-2); background: var(--surface-2);
     border: 1px solid var(--rule); border-radius: 5px; padding: 5px 11px;
   }
+
+  /* ---- upcoming events ---- */
+  .soon__controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 0 0 8px; }
+  .soon__controls[hidden] { display: none; }
+  .soon__window { display: inline-flex; align-items: center; gap: 8px; font-size: 14.5px; color: var(--ink-2); }
+  .soon__window select {
+    font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+    padding: 7px 12px; border-radius: 999px;
+    border: 1px solid var(--control-border); background: var(--surface); color: var(--ink-2);
+  }
+  .soon__window select:hover { color: var(--ink); }
+  /* A switch rather than a pressed/unpressed button: the state is on or off,
+     and the track says which without having to compare two button styles. */
+  .soon__compact {
+    display: inline-flex; align-items: center; gap: 10px; cursor: pointer;
+    font: inherit; font-size: 14.5px; color: var(--ink-2);
+    background: none; border: 0; padding: 4px 0;
+  }
+  .soon__compact:hover { color: var(--ink); }
+  .soon__track {
+    position: relative; flex: none; width: 36px; height: 20px; border-radius: 999px;
+    border: 1px solid var(--control-border); background: var(--surface);
+    transition: background .15s, border-color .15s;
+  }
+  .soon__thumb {
+    position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%;
+    background: var(--control-border); transition: transform .15s, background .15s;
+  }
+  .soon__compact[aria-checked="true"] .soon__track { background: var(--accent); border-color: var(--accent); }
+  .soon__compact[aria-checked="true"] .soon__thumb { transform: translateX(16px); background: var(--on-accent); }
+  .soon__more { margin: 22px 0 0; font-size: 15px; }
 
   /* ---- posts ---- */
   .posts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(258px,1fr)); gap: 18px; }

@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro'
 import Breadcrumbs from '../../components/Breadcrumbs.astro'
 import Section from '../../components/Section.astro'
 import EventList from '../../components/EventList.astro'
-import { events, userGroups } from '../../data/events.mjs'
+import { upcomingEvents, pastEvents, userGroups } from '../../data/events.mjs'
 import { getCollection } from 'astro:content'
 
 const known = new Set((await getCollection('pages')).map((p) => `/${p.id}/`))
@@ -11,9 +11,8 @@ const known = new Set((await getCollection('pages')).map((p) => `/${p.id}/`))
 /* Upcoming and past are derived, not hand-maintained. The previous page kept
    them as two separate tables and its single "upcoming" entry had been in the
    past for five months. */
-const today = new Date().toISOString().slice(0, 10)
-const upcoming = events.filter((e) => e.date >= today).sort((a, b) => a.date.localeCompare(b.date))
-const past = events.filter((e) => e.date < today).sort((a, b) => b.date.localeCompare(a.date))
+const upcoming = upcomingEvents()
+const past = pastEvents()
 
 const announce = 'mailto:users@hop.apache.org?subject=' +
   encodeURIComponent('Apache Hop event announcement') + '&body=' +
