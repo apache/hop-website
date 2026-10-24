@@ -3036,8 +3036,9 @@ It is a leaf: the write is executed as a Spark action when the engine materialis
 </div>
 <div class="paragraph">
 <p>The path is a Spark/Hadoop <code>FileSystem</code> URI that must be writable from every executor, <strong>not</strong> a Hop VFS path: a local directory on <code>local[<strong>]</code>, <code>hdfs://…</code> or <code>s3a://…</code> on a cluster.
+On Windows, a <code>local[</strong>]</code> path does not require <code>HADOOP_HOME</code> or <code>winutils.exe</code>. See <a href="../spark/paths-and-filesystems.html#windows-local-paths" class="xref page">Windows and local mode</a>.
 Spark always writes a <strong>directory</strong> of part files at that location, never a single file with that name; see <a href="#single-file">Getting a single file</a> below.
-See <a href="../spark/paths-and-filesystems.html" class="xref page">Paths and file systems</a> for the scheme mapping and for the *Path scheme map</strong> on the run configuration.</p>
+See <a href="../spark/paths-and-filesystems.html" class="xref page">Paths and file systems</a> for the scheme mapping and for the <strong>Path scheme map</strong> on the run configuration.</p>
 </div>
 </div>
 </div>

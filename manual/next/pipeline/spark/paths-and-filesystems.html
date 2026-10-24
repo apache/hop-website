@@ -3068,6 +3068,23 @@ Spark never calls <code>HopVfs</code> for Dataset <code>load</code> / <code>save
 </div>
 </div>
 <div class="sect1">
+<h2 id="windows-local-paths"><a class="link" href="#windows-local-paths">Windows and local mode</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>On Windows, Hadoop&#8217;s local file system sets POSIX permissions by running <code>winutils.exe</code> from <code>HADOOP_HOME</code> (or the <code>hadoop.home.dir</code> system property). Spark file output hits that call when the commit creates the output directory. With neither variable set, the write fails with <code>HADOOP_HOME and hadoop.home.dir are unset</code>.</p>
+</div>
+<div class="paragraph">
+<p>When Hop creates the Spark session on Windows and <code>winutils.exe</code> is not installed, local <code><a href="file:///" class="bare">file:///</a></code> reads and writes skip those permission changes. The files keep the permissions of the Hop process. You do not need a Hadoop installation for <code>local[*]</code>.</p>
+</div>
+<div class="paragraph">
+<p>If <code>HADOOP_HOME</code> points at a directory that contains <code>bin/winutils.exe</code>, Hop keeps Hadoop&#8217;s own local file system and permissions are applied. To choose a file system yourself, set <code>spark.hadoop.fs.file.impl</code> in the run configuration. That entry wins.</p>
+</div>
+<div class="paragraph">
+<p><code>hdfs://</code> and <code>s3a://</code> paths are unchanged. They do not use winutils.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_scheme_collision_matrix"><a class="link" href="#_scheme_collision_matrix">Scheme collision matrix</a></h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
