@@ -2968,7 +2968,7 @@ This is where <a href="../pipeline/pipelines.html" class="xref page">pipelines</
 <p>The project tree on the left shows the files in your project.
 Files you open appear as tabs in the editor area next to the tree.
 This perspective contains handlers for the most common file types known to Hop.
-These are obviously hwf (workflows) and hpl (pipelines), but also JSON, CSV, TXT, XML, Markdown, SVG, Log and SAS 7 BDAT files.
+These are obviously hwf (workflows) and hpl (pipelines), but also many text and document formats, listed in <a href="#file-types">File types</a>.
 The File Explorer perspective is also where you&#8217;ll manage version control for your projects through <a href="hop-gui-git.html" class="xref page">Git integration</a>.</p>
 </div>
 <div class="admonitionblock note">
@@ -3013,6 +3013,171 @@ Expect these to evolve in the next Hop releases, or check the <a href="http://ho
 </div>
 <div class="paragraph">
 <p>For more information on how to get started with workflows, see the <a href="../getting-started/hop-gui-workflows.html" class="xref page">Workflows getting started guide</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="file-types"><a class="link" href="#file-types">File types</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Besides pipelines (hpl) and workflows (hwf), the File Explorer has handlers for these file types:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;">
+<col style="width: 22.2222%;">
+<col style="width: 55.5556%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Files</th>
+<th class="tableblock halign-left valign-top">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*.json</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Has a <a href="#pretty-print-json">Pretty-print JSON</a> button.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CSV</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*.csv</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*.txt</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Text files without an extension</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>config</code>, <code>.gitignore</code>, <code>.profile</code>, <code>.bashrc</code>, <code>.gitconfig</code>, <code>Dockerfile</code>, <code>Jenkinsfile</code>, <code>README</code>, <code>READ.me</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Matched by file name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XML</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*.xml</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">YAML</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>.yml</code>, <code></strong>.yaml</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SQL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*.sql</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Markdown</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*.md</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Has a <a href="#markdown-preview">preview</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shell script</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*.sh</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Windows batch and command files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>.bat</code>, <code></strong>.cmd</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Python</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*.py</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTML</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>.html</code>, <code></strong>.htm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shown rendered, not as text.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PDF</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*.pdf</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shown rendered, not as text.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SVG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*.svg</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Log</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*.log</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SAS 7 BDAT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*.sas7bdat</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Excel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>.xls</code>, <code></strong>.xlsx</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parquet</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>.parquet</code>, <code></strong>.parq</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Archive</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>.zip</code>, <code></strong>.7z</code>, <code><strong>.gz</code>, <code></strong>.rar</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>To see any other file, or one of these as plain text, use <strong>Open as text</strong> in the <a href="#right-click-menu">right-click menu</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="text-editor"><a class="link" href="#text-editor">Editing text files</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The editor of the text based file types has the usual editing options, including undo and redo, cut, copy and paste, and select all.</p>
+</div>
+<div class="sect2">
+<h3 id="_find_and_replace"><a class="link" href="#_find_and_replace">Find and replace</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Find, <code>Ctrl+F</code> (<code>Cmd+F</code> on macOS): Search for text in the file.</p>
+</li>
+<li>
+<p>Find/Replace, <code>Ctrl+H</code> (<code>Cmd+H</code> on macOS): Search for text and replace it.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Both are in the right-click menu of the editor.
+They are also in the text editor toolbar, which is shown when the option <strong>Show text editor toolbar</strong> is enabled in the <a href="perspective-configuration.html" class="xref page">Configuration perspective</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="pretty-print-json"><a class="link" href="#pretty-print-json">Pretty-print JSON</a></h3>
+<div class="paragraph">
+<p>The toolbar of a JSON file has a <strong>Pretty-print JSON</strong> button.
+It formats the text of the editor.
+When the text is not valid JSON, it shows the error <strong>JSON format error</strong> instead and leaves the text as it is.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="markdown-preview"><a class="link" href="#markdown-preview">Markdown preview</a></h3>
+<div class="paragraph">
+<p>The toolbar of a Markdown file has a button <strong>Show the rendered version of this Markdown file in a preview tab</strong>.
+It opens a tab called <code>&lt;file&gt; (preview)</code> with the rendered file.
+Pressing the button again refreshes that tab and selects it.
+While the preview tab is open, it also follows the editor: it is rendered again a moment after you stop typing.
+The preview tab closes together with the tab of the Markdown file.</p>
+</div>
 </div>
 </div>
 </div>

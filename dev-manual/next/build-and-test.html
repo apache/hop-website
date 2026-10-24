@@ -738,6 +738,79 @@
 </div>
 </div>
 <div class="sect1">
+<h2 id="_building_behind_a_firewall"><a class="link" href="#_building_behind_a_firewall">Building behind a firewall</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Maven dependencies and plugins go through the <code>&lt;mirror&gt;</code> in your <code>settings.xml</code>.
+Besides Maven Central, a few modules declare their own repositories (Clojars, Confluent, Splunk, JetBrains), so your repository manager has to proxy those too.</p>
+</div>
+<div class="paragraph">
+<p>Four files are not Maven artifacts and are downloaded directly, ignoring <code>&lt;mirror&gt;</code>:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>swtbot.plugins.url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>https://download.eclipse.org/technology/swtbot/releases/${swtbot.version}/plugins</code> (two jars)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tm4e.core.download.url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>https://download.eclipse.org/tm4e/releases/${tm4e.core.version}/plugins/${tm4e.core.download.file}</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>monaco.download.url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>https://registry.npmjs.org/monaco-editor/-/monaco-editor-${monaco.version}.tgz</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>To fetch them from a repository manager, set these properties in a profile in your <code>settings.xml</code>.
+<code>download.auth.serverId</code> names the <code>&lt;server&gt;</code> whose credentials are used for all four downloads.
+Keep the <code>${&#8230;&#8203;}</code> placeholders: Maven fills them in, so the profile keeps working when Hop updates these versions.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>xml</div><pre class="highlightjs highlight is-highlighted"><code class="language-xml hljs" data-lang="xml"><span class="hljs-tag">&lt;<span class="hljs-name">settings</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">servers</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">server</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>artifactory<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">username</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">username</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">password</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">password</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">server</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">servers</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">profiles</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">profile</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>hop-downloads<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">properties</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">download.auth.serverId</span>&gt;</span>artifactory<span class="hljs-tag">&lt;/<span class="hljs-name">download.auth.serverId</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">swtbot.plugins.url</span>&gt;</span>https://artifactory.example.com/eclipse/technology/swtbot/releases/${swtbot.version}/plugins<span class="hljs-tag">&lt;/<span class="hljs-name">swtbot.plugins.url</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">tm4e.core.download.url</span>&gt;</span>https://artifactory.example.com/eclipse/tm4e/releases/${tm4e.core.version}/plugins/${tm4e.core.download.file}<span class="hljs-tag">&lt;/<span class="hljs-name">tm4e.core.download.url</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">monaco.download.url</span>&gt;</span>https://artifactory.example.com/api/npm/npm/monaco-editor/-/monaco-editor-${monaco.version}.tgz<span class="hljs-tag">&lt;/<span class="hljs-name">monaco.download.url</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">properties</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">profile</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">profiles</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">activeProfiles</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">activeProfile</span>&gt;</span>hop-downloads<span class="hljs-tag">&lt;/<span class="hljs-name">activeProfile</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">activeProfiles</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">settings</span>&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The same properties also work as <code>-D</code> options on the command line.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_checks_that_must_pass"><a class="link" href="#_checks_that_must_pass">Checks that must pass</a></h2>
 <div class="sectionbody">
 <div class="dlist">
