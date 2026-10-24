@@ -5,7 +5,7 @@
  * unreadable; here the description is prose under the heading and the date,
  * language and link are metadata beside it.
  */
-const { events = [], empty = 'Nothing scheduled right now.' } = Astro.props
+const { events = [], empty = 'Nothing scheduled right now.', compact = false } = Astro.props
 
 const LANGS = { EN: 'English', DE: 'German', PT: 'Portuguese', ES: 'Spanish', 'JP-EN': 'Japanese / English' }
 const fmt = (iso) => {
@@ -13,19 +13,20 @@ const fmt = (iso) => {
   return isNaN(d) ? iso : d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
 }
 ---
-{events.length === 0 ? (
-  <p class="empty">{empty}</p>
-) : (
-  <ol class="events">
+{/* The empty message is always rendered, hidden while there are events, so a
+    page that filters the list in the browser can show it. */}
+<p class="empty" hidden={events.length > 0}>{empty}</p>
+{events.length > 0 && (
+  <ol class:list={['events', { 'events--compact': compact }]}>
     {events.map((e) => (
-      <li class="event">
+      <li class="event" data-date={e.date}>
         <div class="event__when">
           <time datetime={e.date}>{fmt(e.date)}</time>
           {e.lang && <span class="event__lang" title={LANGS[e.lang] ?? e.lang}>{e.lang}</span>}
         </div>
         <div class="event__body">
           <h3>{e.name}</h3>
-          {e.description && e.description !== '-' && <p>{e.description}</p>}
+          {e.description && e.description !== '-' && <p class="event__desc">{e.description}</p>}
           {e.link && e.link.href && (
             <p class="event__link"><a href={e.link.href}>{e.link.label || 'More'} &rarr;</a></p>
           )}
@@ -41,7 +42,14 @@ const fmt = (iso) => {
     display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 20px;
     padding: 20px 0; border-bottom: 1px solid var(--rule);
   }
-  .event:last-child { border-bottom: 0; }
+  /* The last visible event, not :last-child - a filtered list hides its tail. */
+  .event:not(:has(~ .event:not([hidden]))) { border-bottom: 0; }
+  /* `display: grid` beats the `hidden` attribute's user-agent display: none. */
+  .event[hidden] { display: none; }
+  /* Compact: date, language, title and link only. */
+  .events--compact .event { padding: 12px 0; }
+  .events--compact .event__desc { display: none; }
+  .events--compact .event__link { margin-top: 4px !important; }
   .event__when { display: flex; flex-direction: column; gap: 7px; align-items: flex-start; }
   .event__when time {
     font-family: var(--mono); font-size: 13px; color: var(--ink-3);

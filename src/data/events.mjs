@@ -60,3 +60,22 @@ export const events = [
   { date: "2021-04-15", name: "3H5", lang: "EN", description: "Get Started With Hop - Concepts and First Pipelines", link: { label: "youtube", href: "https://youtu.be/gKVb_r4v_Oc" } },
   { date: "2021-04-01", name: "3H4", lang: "EN", description: "The Road to Hop 1.0", link: { label: "youtube", href: "https://www.youtube.com/watch?v=EhO_DYszu_Y&t=2s" } },
 ]
+
+/* Both are relative to the build date, which is what the events page and the
+   home page used to compute separately. `withinDays` caps upcoming events at
+   that many days from today; without it, every future event is returned. */
+const isoDay = (d) => d.toISOString().slice(0, 10)
+
+export const upcomingEvents = (withinDays) => {
+  const now = new Date()
+  const today = isoDay(now)
+  const until = withinDays == null ? null : isoDay(new Date(now.getTime() + withinDays * 86400000))
+  return events
+    .filter((e) => e.date >= today && (until == null || e.date <= until))
+    .sort((a, b) => a.date.localeCompare(b.date))
+}
+
+export const pastEvents = () => {
+  const today = isoDay(new Date())
+  return events.filter((e) => e.date < today).sort((a, b) => b.date.localeCompare(a.date))
+}
