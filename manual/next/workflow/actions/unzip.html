@@ -3157,7 +3157,7 @@
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-With <strong>Nr errors less than</strong>, the action stops and is false as soon as the number of errors reaches <strong>Limit files</strong> while result rows are left to process, but when the last row brings it to that number, the action is still true. For the files of a single zip file or folder, it is still true when the number of errors equals <strong>Limit files</strong>, and false only when it is higher. A zip file that can&#8217;t be read, or that can&#8217;t be deleted after extraction with <strong>Delete files</strong>, counts as two errors and is not counted as unzipped; files already extracted from it stay in the target folder and in the result files. With <strong>If file exists</strong> set to <strong>Fail</strong>, a file that already exists in the target folder also counts as an error when <strong>Include Wildcard (RegExp)</strong> or <strong>Exclude Wildcard (RegExp)</strong> leaves it out.
+With <strong>Nr errors less than</strong>, the action stops and is false as soon as the number of errors reaches <strong>Limit files</strong> while result rows are left to process, but when the last row brings it to that number, the action is still true. For the files of a single zip file or folder, it is still true when the number of errors equals <strong>Limit files</strong>, and false only when it is higher. A zip file that can&#8217;t be read, or that can&#8217;t be deleted after extraction with <strong>Delete files</strong>, counts as one error and is not counted as unzipped; files already extracted from it stay in the target folder and in the result files.
 </td>
 </tr>
 </table>
