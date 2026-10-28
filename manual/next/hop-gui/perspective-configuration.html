@@ -2980,6 +2980,9 @@
 <p><strong>Look &amp; Feel</strong>: how Hop GUI is drawn on your desktop or in your browser.</p>
 </li>
 <li>
+<p><strong>Regional settings</strong>: the interface language and, separately, the number, currency and date formats used by Hop GUI, <code>hop-run</code> and <code>hop-server</code>.</p>
+</li>
+<li>
 <p><strong>Plugins</strong>: one entry per plugin that contributes options, including <a href="perspective-search.html" class="xref page">Search</a>, the Explorer perspective and <a href="perspective-ai-advisor.html" class="xref page">AI Assistant</a>. Every option is listed in <a href="#_plugin_options_reference">Plugin options reference</a> below.</p>
 </li>
 <li>
@@ -3225,25 +3228,6 @@ set the environment variable <code>HOP_CONFIG_FOLDER</code> to change this locat
 </tr>
 </thead>
 <tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Preferred language</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>The language Hop GUI is shown in.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Check the <a href="https://hop.apache.org/community/contribution-guides/translation-contribution-guide/">Translation Contribution Guide</a> to translate Apache Hop into your own language.
-</td>
-</tr>
-</table>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">English (US)</p></td>
-</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Hide the menu bar</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Hide the menu bar. With it hidden, the menu is reachable from the Apache Hop icon in the upper left corner of Hop GUI.</p></td>
@@ -3626,6 +3610,156 @@ Check the <a href="https://hop.apache.org/community/contribution-guides/translat
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_regional_settings"><a class="link" href="#_regional_settings">Regional settings</a></h3>
+<div class="paragraph">
+<p>The <code>Regional settings</code> configuration tab controls two things that used to be tied together: the language of the Hop GUI interface, and the number, currency and date formats used throughout Hop.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 62.5%;">
+<col style="width: 12.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Language</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>the language used for the Hop GUI interface. This does not affect number, currency or date formats; those are controlled separately below.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Check the <a href="https://hop.apache.org/community/contribution-guides/translation-contribution-guide/">Translation Contribution Guide</a> to translate Apache Hop to your native language.
+</td>
+</tr>
+</table>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">English (US)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use operating system regional settings</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>use the number, currency and date formats of the operating system Hop is running on, regardless of the preferred language. This is the default.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Override regional settings</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>use an explicitly chosen locale for number, currency and date formats, regardless of the preferred language. The dropdown lists every locale available on the platform, not only the languages Hop is translated into, and is only enabled when this option is ticked.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code>Use operating system regional settings</code> and <code>Override regional settings</code> are mutually exclusive: ticking one disables the other. <code>Use operating system regional settings</code> is ticked on a fresh installation, so number, currency and date formats come from the machine Hop runs on unless you say otherwise. Unticking both makes the regional settings follow the preferred language, which is the way to have the interface language and the formats move together.</p>
+</div>
+<div class="paragraph">
+<p>Two preview panels below the options show sample dates, times, numbers and currency for the current selection, updated live as options change, before anything is saved.</p>
+</div>
+<div class="paragraph">
+<p>Whichever source is in effect, operating system or an explicit override, applies both to Hop GUI and to headless runs: <code>hop-run</code> and <code>hop-server</code> read the same <code>hop-config.json</code> and honor it the same way the GUI does.</p>
+</div>
+<div class="paragraph">
+<p>At start, hop-gui, <code>hop-run</code> and <code>hop-server</code> log the effective settings, for example <code>Regional settings: language=en_US format=it_IT timezone=Europe/Rome source=installation:CUSTOM</code>. Use that line to confirm the process you are looking at is formatting the way you think it is.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Because this setting applies to the whole running process, in Hop Web it belongs to the installation rather than to each connected user. This is already true of the preferred language today, so it is not a new limitation introduced by this feature. Saving this tab applies the preferred language to the whole running process as well, so in Hop Web it affects every connected session until the server restarts.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_how_regional_settings_are_resolved"><a class="link" href="#_how_regional_settings_are_resolved">How regional settings are resolved</a></h4>
+<div class="paragraph">
+<p>The preferred language and the regional settings are two independent settings, and keeping them apart is the point of this tab. The preferred language governs the interface: menus, dialogs, button captions and messages. The regional settings govern the formats data is rendered with: the decimal separator, the grouping separator, the currency symbol, and the date and time patterns. An English interface with Italian numbers is a valid and supported combination, and so is the reverse.</p>
+</div>
+<div class="paragraph">
+<p>The table below shows which locale ends up driving the formats, for each source and for each side of Hop.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Source</th>
+<th class="tableblock halign-left valign-top">Hop GUI</th>
+<th class="tableblock halign-left valign-top"><code>hop-run</code> and <code>hop-server</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Use operating system regional settings</code> (the default)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">operating system</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">operating system</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Override regional settings</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the chosen locale</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the chosen locale</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Neither option ticked</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">preferred language</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">preferred language</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Previously the resolution was not consistent. In Hop GUI the preferred language decided the formats, except on fields carrying explicit decimal, grouping or currency symbols, which followed the operating system; <code>hop-run</code> and <code>hop-server</code> always used the operating system, so the editor and production could disagree on the same pipeline. The formats now come from the operating system everywhere unless an explicit choice is made, and the preferred language never affects them.</p>
+</div>
+<div class="paragraph">
+<p>On an existing installation whose configuration is left untouched, nothing changes for <code>hop-run</code> and <code>hop-server</code>. In Hop GUI, fields that carry explicit decimal, grouping or currency symbols are unchanged as well; fields left blank, and dates with no explicit mask, now follow the operating system where they previously followed the preferred language.</p>
+</div>
+<div class="paragraph">
+<p>The reason to untick both options is reproducibility against the preferred language: it makes Hop GUI, <code>hop-run</code> and <code>hop-server</code> agree on that language, so a number converted to a string reads the same in the editor and in production, and any hash computed over such a string stays stable between them.</p>
+</div>
+<div class="paragraph">
+<p>Resolution order, most specific first:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Field-level decimal, grouping, currency, date locale and date timezone on a transform field. These always win.</p>
+</li>
+<li>
+<p>This installation tab (operating system, an explicit override, or the preferred language).</p>
+</li>
+<li>
+<p>The JVM / operating system default.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The default source is the operating system. Hop GUI, <code>hop-run</code> and <code>hop-server</code> then agree <strong>on the same machine</strong>, but a laptop on <code>nl_BE</code> and a hop-server on <code>en_US</code> still format blank fields differently. <strong>Override regional settings</strong> (and copying that <code>hop-config.json</code>) is the way to pin a locale for an installation. Transform field symbols remain the way to handle a file that does not match that locale.</p>
+</div>
+<div class="paragraph">
+<p>Distributed Beam and Spark workers never load <code>hop-config.json</code>. They format with their own JVM locale and timezone unless the pipeline sets field-level symbols.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
