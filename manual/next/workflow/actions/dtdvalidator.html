@@ -2992,6 +2992,56 @@
 </table>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The XML file is valid against the DTD.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The XML file does not follow the DTD: the number of errors is the number of validation errors. The file or the DTD does not exist, <strong>DTD Intern</strong> is selected and the file has no DOCTYPE, or the file is not well formed: the number of errors is 0.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The action reads the DOCTYPE of the file, which Hop refuses by default: the variable <code>XML_ALLOW_DOCTYPE_DECL</code> is <code>N</code>. Set it to <code>Y</code> (see <a href="../../variables.html" class="xref page">Variables</a>), otherwise every file fails with "DOCTYPE is disallowed", whether the DTD is internal or external.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/workflow/actions/deletefolders.html"><span>Previous</span><strong>Delete folders</strong></a>

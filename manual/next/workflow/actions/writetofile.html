@@ -2953,7 +2953,7 @@
 <h2 id="_description"><a class="link" href="#_description">Description</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <code>Write to file</code> action writes custom text from a field to a file.</p>
+<p>The <code>Write to file</code> action writes the text you enter in the action to a file. Variables in the text are resolved.</p>
 </div>
 </div>
 </div>
@@ -3005,6 +3005,44 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Text</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The text to write to the file.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The text was written to the file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No file name is set, the parent folder does not exist and <strong>Create parent folder</strong> is not selected, the file cannot be written (for example in a read-only folder), or the encoding is not known. The number of errors is 1.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged. The written file is not added.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
 </tr>
 </tbody>
 </table>

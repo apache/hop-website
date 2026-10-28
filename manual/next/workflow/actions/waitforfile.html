@@ -3011,20 +3011,55 @@ A check cycle time of 30 or 60 seconds seems to be a good trade-off between the 
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Success on timeout</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">This option determines what to do when the "Maximum timeout" has been reached and the file has not been found.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This option determines what to do when the "Maximum timeout" has been reached and the file has not been found: when it is selected, the action is true and the success hop is followed; otherwise the action is false.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">File size check</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">When this is switched on, once the workflow action detects the specified file, and will only continue if the file size hasn&#8217;t changed the last check "cycle time seconds".
 This is useful in cases where a file is created in the final place, and another process is still writing to the file.
-(As a best practice, files should be written to a temporary location, and then moved when completed)
-This is the number seconds after which the flow will continue even if the file was not created.
-When the timeout is reached the "Success on timeout" option will determine whether the outgoing success or failure hop will be followed.
-If enabled, the workflow action will evaluate successfully, and the outgoing success hop will be followed.</p></td>
+(As a best practice, files should be written to a temporary location, and then moved when completed)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Add filename to result</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Add the filename to the result fields for this workflow action.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add the file to the result files of this action. See <a href="#_result">Result</a>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The file or folder exists, or appears before <strong>Maximum timeout</strong>. With <strong>Success on timeout</strong>, the action is also true when the timeout is reached without it. With <strong>File size check</strong>, the action first waits until the size stays the same between two checks. A <strong>Maximum timeout</strong> of 0 waits until the file appears or the workflow is stopped.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timeout is reached without the file and <strong>Success on timeout</strong> is not selected, no file name is set, the path cannot be read (for example a <code>zip:</code> path into a file that is not a zip), or the workflow is stopped while waiting. The number of errors is always 0.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With <strong>Add filename to result</strong>, the file is added when it is found. A folder is not added, and nothing is added when the action ends on the timeout. The result files of the previous action are kept.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
 </tr>
 </tbody>
 </table>

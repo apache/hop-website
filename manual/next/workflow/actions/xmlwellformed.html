@@ -2979,12 +2979,12 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of the workflow action.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Include Subfolders</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Option to move the content of sub-folders.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Include subfolders</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Also check the matching files in the subfolders of a folder.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Copy previous results to args</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Check this to pass the results of the previous action into the arguments of this action.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Take the files or folders and wildcards from the result rows of the previous action instead of from the list. See <a href="#_result">Result</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">File/Folder source</p></td>
@@ -2992,13 +2992,13 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Wildcard (RegExp)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A regular expression wildcard for the filename pattern</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A regular expression matched against the whole path of each file in the folder, for example <code>.*\.xml</code> (see <a href="#_result">Result</a>).</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Files/Folders</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Specify the list of files or folders with wildcards (regular expressions) in this grid.
-You can add a different source/destination on each line.</p>
+You can add a different file or folder and wildcard on each line.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -3018,9 +3018,6 @@ You can use the Add button to add a line to the Files/Folders list.
 </div>
 <div class="sect2">
 <h3 id="_advanced_tab"><a class="link" href="#_advanced_tab">Advanced tab</a></h3>
-<div class="paragraph">
-<p>In this tab you can specify the files and/or folders to move.</p>
-</div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -3067,6 +3064,64 @@ You can use the Add button to add a line to the Files/Folders list.
 </div></div></td>
 </tr>
 </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <strong>Success condition</strong> is met: every file well formed with <strong>Success if all files are well formed</strong>, at least <strong>Nr files</strong> well formed files with <strong>Success if at least x files are well formed</strong>, or fewer bad formed files than <strong>Nr files</strong> with <strong>Success when number of bad formed files lesser than</strong>. The number of errors is then 0.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The success condition is not met. A bad formed file counts as an error and does not stop the action. A path that does not exist counts as an error; with <strong>Success if all files are well formed</strong>, it stops the action, and the remaining entries are not checked.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Add all filenames</strong> (the default) adds every file checked, <strong>Add only well formed filenames</strong> only the well formed ones, and <strong>Add only bad formed filenames</strong> only the bad formed ones. The result files of the previous action are kept.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged. With <strong>Copy previous results to args</strong>, the file or folder and the wildcard come from the first two fields of each result row.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lines written</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of well formed files.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lines rejected</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of bad formed files.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+A result row with fewer than two fields stops the workflow with an error, and no hop is followed. The wildcard is matched against the whole path of each file (for example <code><a href="file:///data/in/orders.xml" class="bare">file:///data/in/orders.xml</a></code>), not its name: <code>.*\.xml</code> matches, <code>orders\.xml</code> matches nothing, and the action is still true.
+</td>
+</tr>
 </table>
 </div>
 </div>

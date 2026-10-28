@@ -3006,15 +3006,15 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">File Result field</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With <strong>Previous result row</strong>: the name of the result row field that holds the file or folder.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Wildcard result field</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With <strong>Previous result row</strong>: the name of the field that holds the wildcard. Optional.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Include subfolders result field</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With <strong>Previous result row</strong>: the name of the field that says whether to include subfolders (<code>Y</code> or <code>N</code>). Optional.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Evaluate</p></td>
@@ -3027,7 +3027,7 @@
 <p>Total files size</p>
 </li>
 <li>
-<p>Total file count</p>
+<p>Total files count</p>
 </li>
 </ul>
 </div></div></td>
@@ -3111,7 +3111,7 @@
 <p>If value is equal to</p>
 </li>
 <li>
-<p>If value is equal to</p>
+<p>If value is different from</p>
 </li>
 <li>
 <p>If value is small than</p>
@@ -3129,10 +3129,10 @@
 <p>If value is between</p>
 </li>
 <li>
-<p>If value in list</p>
+<p>if value in list</p>
 </li>
 <li>
-<p>If value not in list</p>
+<p>if value not in list</p>
 </li>
 </ul>
 </div></div></td>
@@ -3142,6 +3142,56 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">The value to compare.</p></td>
 </tr>
 </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The total size (in the selected <strong>Scale</strong>) or the number of files meets the <strong>Success when</strong> condition. Errors don&#8217;t change this: a path that does not exist counts as an error, but with a total of 0 the condition can still be met, and the action is then true with errors.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The condition is not met. The action also stops and is false, with 1 error, when the Files/Folders list is empty, or with <strong>Previous result row</strong> when the field set in <strong>File Result field</strong> is not in the result rows.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged. With <strong>Filenames result</strong>, the files evaluated are the result files of the previous action whose whole name matches <strong>Wildcard</strong>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged. With <strong>Previous result row</strong>, the file or folder, the wildcard and the include subfolders flag come from the result row fields named in <strong>File Result field</strong>, <strong>Wildcard result field</strong> and <strong>Include subfolders result field</strong>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+With <strong>Filenames result</strong>, an invalid regular expression in <strong>Wildcard</strong> stops the workflow with an error, and no hop is followed.
+</td>
+</tr>
 </table>
 </div>
 </div>

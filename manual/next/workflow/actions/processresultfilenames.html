@@ -2953,7 +2953,7 @@
 <h2 id="_description"><a class="link" href="#_description">Description</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <code>Process result filenames</code> action allows you to copy, move or delete a number of files and/or folders to alternate locations on your file system.</p>
+<p>The <code>Process result filenames</code> action copies, moves or deletes the result files of the previous actions in the workflow, for example the files a pipeline wrote or a transfer action downloaded.</p>
 </div>
 </div>
 </div>
@@ -2973,7 +2973,7 @@
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Workflow action name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Action name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of the workflow action.</p></td>
 </tr>
 <tr>
@@ -3012,7 +3012,7 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">use this option to remove the processed filenames from the list of result filenames</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Add destination filenames to result</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add destination filename to result</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">use this option to add the processed target filenames to the list of result filenames</p></td>
 </tr>
 <tr>
@@ -3043,7 +3043,7 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">The regular expression wildcard to use to include files</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Exclude Wildcard (RegExp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Exclude wildcard (RegExp)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The regular expression wildcard to use to exclude files</p></td>
 </tr>
 <tr>
@@ -3060,7 +3060,7 @@
 <p>Success when all works fine</p>
 </li>
 <li>
-<p>Success when at least x files moved (specify x in the limit field below)</p>
+<p>Success when at least x files processed (specify x in the limit field below)</p>
 </li>
 <li>
 <p>Success when number of errors lesser than (specify the max number of errors in the limit field below)</p>
@@ -3074,6 +3074,60 @@
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <strong>Success condition</strong> is met: no errors with <strong>Success when all works fine</strong>, at least <strong>Nr errors lesser than</strong> files processed with <strong>Success when at least x files processed</strong>, or no more errors than <strong>Nr errors lesser than</strong> with <strong>Success when number of errors lesser than</strong> (see the note below).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The success condition is not met: a result file no longer exists on disk, or could not be copied, moved or deleted. When the destination folder does not exist and <strong>Create destination folder</strong> is not selected, the action stops before processing any file, with 1 error. With <strong>Success when all works fine</strong>, the action stops at the first error.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The action works on the result files of the previous actions, limited by <strong>Limit action to</strong> and its wildcards. For each file copied or moved, <strong>Remove source filenames from result</strong> removes the source and <strong>Add destination filename to result</strong> adds the destination; both are selected by default. <strong>Delete</strong> removes the deleted files from the result files. A file whose destination already exists is skipped when <strong>Replace existing file</strong> is not selected: it stays in the result files and does not count as an error.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lines written</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of files copied, moved or deleted. When the action stops because the destination folder does not exist, the value of the previous action is passed on.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+With <strong>Success when number of errors lesser than</strong>, the action is still true when the number of errors equals <strong>Nr errors lesser than</strong>. An invalid regular expression in <strong>Wildcard (RegExp)</strong> or <strong>Exclude wildcard (RegExp)</strong> stops the workflow with an error, and no hop is followed, also when <strong>Limit action to</strong> is not selected.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
     </article>
