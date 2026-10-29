@@ -3501,6 +3501,11 @@ Set a positive number of milliseconds to change the interval.
 A negative value, for example -1, disables the interval flush.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HOP_FORMAT_LOCALE</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The FORMAT locale in effect for number, currency and date conversion (for example <code>en_US</code>). Set automatically when a lifecycle environment with a format locale is enabled. See <a href="projects/projects-environments.html" class="xref page">Projects and Environments</a>.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HOP_GLOBAL_LOG_VARIABLES_CLEAR_ON_EXPORT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Set this variable to N to preserve global log variables defined in pipeline / workflow Properties &#8594; Log panel.
@@ -3681,6 +3686,11 @@ Hostname lookup is performed by Hop so that it is capable of logging the server 
 <td class="tableblock halign-left valign-top"><p class="tableblock">HOP_TEXT_TAB_SIZE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Number of spaces Tab inserts and Shift+Tab removes on the selected lines of a multi-line text field. A line that already starts with a tab gains another tab. Set the value to 0 to insert a tab on every selected line. Useful when writing JavaScript, JSON, XML, and similar files that benefit from proper indentation to recognize file or code structures. Resolved from the Hop configuration, then the environment variable, then a Java system property. See <a href="hop-gui/shortcuts.html" class="xref page">Hop Shortcuts</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HOP_TIMEZONE</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The default timezone in effect for date and timestamp conversion (IANA id, for example <code>Europe/Brussels</code>). Set automatically when a lifecycle environment with a timezone is enabled. See <a href="projects/projects-environments.html" class="xref page">Projects and Environments</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HOP_TRANSFORM_PERFORMANCE_SNAPSHOT_LIMIT</p></td>

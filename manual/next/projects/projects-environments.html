@@ -3261,7 +3261,7 @@ Click it to open the environment menu, then choose <strong>Add environment&#8230
 </div>
 <div class="paragraph">
 <p>This opens the environment properties dialog.
-The fields are grouped on tabs: <strong>General</strong>, <strong>Configuration files</strong>, and when the matching plugins are installed <strong>Marketplace plugins</strong> and <strong>System resources</strong>.</p>
+The fields are grouped on tabs: <strong>General</strong>, <strong>Regional</strong>, <strong>Configuration files</strong>, and when the matching plugins are installed <strong>Marketplace plugins</strong> and <strong>System resources</strong>.</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="../_images/hop-gui/environment/environment-dialog-general-tab.png" alt="Environment Properties General tab" width="90%"></span></p>
@@ -3343,10 +3343,64 @@ The fields are grouped on tabs: <strong>General</strong>, <strong>Configuration 
 </tbody>
 </table>
 <div class="paragraph">
+<p><span class="image"><img src="../_images/hop-gui/environment/environment-dialog-regional-tab.png" alt="Environment Properties Regional tab" width="90%"></span></p>
+</div>
+<table id="tab-env-props-regional" class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 7. Environment Properties&#8201;&#8212;&#8201;Regional</caption>
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 45%;">
+<col style="width: 5%;">
+<col style="width: 5%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Variables Supported</th>
+<th class="tableblock halign-left valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Format locale</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Locale used for decimal separator, grouping separator, currency and date formats when this environment is enabled in Hop GUI, <code>hop-run</code> and <code>hop-server</code>. Independent of the Hop GUI language.</p>
+</div>
+<div class="paragraph">
+<p>Leave <strong>Inherit installation / OS</strong> to use the <a href="../hop-gui/perspective-configuration.html#_regional_settings" class="xref page">Configuration perspective Regional settings</a>. Field-level decimal, grouping and date locale options still override this default. The effective value is published as <code>'{openvar}HOP_FORMAT_LOCALE{closevar}'</code>.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inherit installation / OS</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timezone</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>IANA timezone used as the default for date and timestamp conversion (for example <code>Europe/Brussels</code>).</p>
+</div>
+<div class="paragraph">
+<p>Leave <strong>Inherit installation / OS</strong> to keep the JVM default. Field-level date timezones still override this default. The effective value is published as <code>'{openvar}HOP_TIMEZONE{closevar}'</code>.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inherit installation / OS</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A preview under the two combos shows a sample number, a long date and the selected timezone, updated as you change the values.</p>
+</div>
+<div class="paragraph">
+<p>Pinning locale and timezone on the environment is how a pipeline that omits field-level decimal and grouping symbols produces the same result on a laptop and on a hop-server. Without it, those defaults follow the machine, which is the classic "it works on my machine" failure.</p>
+</div>
+<div class="paragraph">
 <p><span class="image"><img src="../_images/hop-gui/environment/environment-dialog-configuration-files-tab.png" alt="Environment Properties Configuration files tab" width="90%"></span></p>
 </div>
 <table id="tab-env-props-files" class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 7. Environment Properties&#8201;&#8212;&#8201;Configuration files</caption>
+<caption class="title">Table 8. Environment Properties&#8201;&#8212;&#8201;Configuration files</caption>
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 45%;">
@@ -3564,7 +3618,7 @@ Open the environment properties dialog and select the <strong>System resources</
 <p>Leave a field empty to skip that check.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 8. On enable policy</caption>
+<caption class="title">Table 9. On enable policy</caption>
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 80%;">

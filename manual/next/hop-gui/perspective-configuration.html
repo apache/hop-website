@@ -3747,6 +3747,9 @@ Because this setting applies to the whole running process, in Hop Web it belongs
 <p>Field-level decimal, grouping, currency, date locale and date timezone on a transform field. These always win.</p>
 </li>
 <li>
+<p>The active <a href="../projects/projects-environments.html" class="xref page">lifecycle environment</a> format locale and timezone, when set.</p>
+</li>
+<li>
 <p>This installation tab (operating system, an explicit override, or the preferred language).</p>
 </li>
 <li>
@@ -3755,10 +3758,16 @@ Because this setting applies to the whole running process, in Hop Web it belongs
 </ol>
 </div>
 <div class="paragraph">
-<p>The default source is the operating system. Hop GUI, <code>hop-run</code> and <code>hop-server</code> then agree <strong>on the same machine</strong>, but a laptop on <code>nl_BE</code> and a hop-server on <code>en_US</code> still format blank fields differently. <strong>Override regional settings</strong> (and copying that <code>hop-config.json</code>) is the way to pin a locale for an installation. Transform field symbols remain the way to handle a file that does not match that locale.</p>
+<p>The default source on this tab is the operating system. Hop GUI, <code>hop-run</code> and <code>hop-server</code> then agree <strong>on the same machine</strong>, but a laptop on <code>nl_BE</code> and a hop-server on <code>en_US</code> still format blank fields differently unless the lifecycle environment pins a locale (or you use <strong>Override regional settings</strong> and copy that <code>hop-config.json</code>). Transform field symbols remain the way to handle a file that does not match that locale.</p>
 </div>
 <div class="paragraph">
-<p>Distributed Beam and Spark workers never load <code>hop-config.json</code>. They format with their own JVM locale and timezone unless the pipeline sets field-level symbols.</p>
+<p>When an environment is enabled, Hop publishes the effective values as <code>${HOP_FORMAT_LOCALE}</code> and <code>${HOP_TIMEZONE}</code> and the start log line&#8217;s <code>source=</code> shows <code>environment:name</code> instead of <code>installation:…</code>.</p>
+</div>
+<div class="paragraph">
+<p>Distributed Beam and Spark workers never load <code>hop-config.json</code> or the lifecycle environment. They format with their own JVM locale and timezone unless the pipeline sets field-level symbols.</p>
+</div>
+<div class="paragraph">
+<p>A hop-server JVM is expected to run one default environment for these conversion defaults. Mixing environments with different FORMAT locales in one process is not supported: <code>Locale.setDefault</code> and <code>TimeZone.setDefault</code> are process-wide. Field-level overrides still work per pipeline.</p>
 </div>
 </div>
 </div>
