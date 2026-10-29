@@ -3712,6 +3712,50 @@ All open files will be restored, including their zoom level and other UI setting
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_run_a_workflow_from_another_project"><a class="link" href="#_run_a_workflow_from_another_project">Run a workflow from another project</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>hop-run -e</code> takes the project from the environment, and the variables from the configuration files of that environment.
+When <code>-e</code> is set, <code>-j</code> is ignored.</p>
+</div>
+<div class="paragraph">
+<p>A <a href="../workflow/actions/workflow.html" class="xref page">Workflow</a> or <a href="../workflow/actions/pipeline.html" class="xref page">Pipeline</a> action that runs a file from another project runs it in the project and environment of the calling workflow.
+It does not switch to an environment of the other project, so variables that are only defined in the configuration files of its environments are not set.</p>
+</div>
+<div class="paragraph">
+<p>To set them, add the configuration file of the other project to the environment of the calling project.
+In Hop Gui, choose <strong>Edit environment&#8230;&#8203;</strong> and add the file on the <strong>Configuration files</strong> tab with <strong>Select&#8230;&#8203;</strong>.
+With hop-conf, for example when environment <code>sales-dev</code> of project <code>sales</code> runs a workflow of project <code>crm</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./hop-conf.sh --environment-modify --environment=sales-dev \
+     --environment-config-files=/data/environments/sales-dev/variables.json,/data/environments/crm-dev/variables.json</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>--environment-config-files</code> replaces the whole list, so keep the files the environment already has: <code>./hop-conf.sh --environments-list</code> shows them.
+The files are applied in the order of the list, so when two files set the same variable, the last one wins.
+To add a file for a single run without changing the environment, pass it to hop-run with <code>--environment-conf-files</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This brings the variables of the other project, not its metadata, such as database connections and run configurations.
+When the workflow needs those as well, set the other project as <strong>Parent project to inherit from</strong> on the <strong>Parent project</strong> tab of the calling project, or run <code>./hop-conf.sh --project-modify --project=sales --project-parent=crm</code>.
+The calling project then reads the metadata of both projects and the project variables of the parent, but not the configuration files of the parent&#8217;s environments.
+A project has one parent, and also inherits from the parent&#8217;s own parent.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../manual/next/projects/index.html"><span>Previous</span><strong>Projects</strong></a>
