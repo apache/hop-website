@@ -3003,7 +3003,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>A <code>DOCTYPE</code> declaration or an external entity in the XML being validated is refused and the action fails.</p>
+<p>A <code>DOCTYPE</code> declaration that points to an external DTD, or an external entity, in the XML being validated is refused and the action fails. A <code>DOCTYPE</code> with only internal declarations is accepted.</p>
 </li>
 <li>
 <p>XSD sources <strong>none (default)</strong> and <strong>is defined inside XML</strong> do not work: the <code>xsi:schemaLocation</code> / <code>xsi:noNamespaceSchemaLocation</code> reference is not resolved, not even when it points at a local file. Both options need the checkbox.</p>
@@ -3043,6 +3043,44 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">XSD File name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of the XSD file</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The XML file is valid against the schema, with 0 errors.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The XML file is not valid, the XML file or the XSD file doesn&#8217;t exist, or the action refuses the file because <strong>Enable external entity for XSD validation</strong> is unchecked (see the option above). The number of errors is 1.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
 </tr>
 </tbody>
 </table>

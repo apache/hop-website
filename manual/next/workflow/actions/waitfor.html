@@ -2973,16 +2973,50 @@
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">action name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Action name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of the workflow action.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Wait for</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The delay to wait</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum timeout</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The time to wait, in the unit selected in the list below it: Seconds, Minutes or Hours.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The time is up. A <strong>Maximum timeout</strong> that is not a number counts as 0: the action doesn&#8217;t wait. The number of errors of the previous action is kept: this action doesn&#8217;t reset it. As the last action after an action with errors (for example a failed action on a failure hop), the workflow still ends as failed, although this action is true: add a <a href="success.html" class="xref page">Success</a> action after it to end the workflow successfully.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Unit time</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specify the unit time (second, minute and hour)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only when the workflow is stopped while the action waits, for example by an Abort in a parallel branch. No hop from the action is followed then.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
 </tr>
 </tbody>
 </table>

@@ -2973,25 +2973,25 @@
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Workflow action name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Action name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of the workflow action.
 This name has to be unique in a single workflow.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Include Subfolders</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Also compare the content of sub-folders.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Include subfolders</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Also compare the content of subfolders.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Compare</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specify what to compare: All, Only files, Only folders, or Let me specify&#8230;&#8203;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specify what to compare: All, Only Files, Only Folders, or Let me specify&#8230;&#8203;</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Wildcard</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If you chose Let me specify in the previous option, you can specify the regular expression of files to compare.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wildcard (RegExp)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If you chose Let me specify&#8230;&#8203; in the previous option, you can specify the regular expression of files to compare. Variables are not resolved in it.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Compare file size</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Check this to compare file size, in opposed to just comparing folder names.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check this to also compare the size of files with the same name, not only their names.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Compare file content</p></td>
@@ -3008,6 +3008,68 @@ Note: this may cause slower processing speeds.</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For two files: their contents are identical. For two folders: both hold the same number of entries of the kind set in <strong>Compare</strong>, every name found in the first folder is also in the second, with the same type, and with <strong>Compare file size</strong> or <strong>Compare file content</strong> the files have the same size or content. Without these two options, files with the same name count as equal.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The folders differ, or one path is a file and the other a folder: the number of errors is 0. A file or folder does not exist: the number of errors is 1.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Entries are matched by their name only, not by their subfolder. With <strong>Include subfolders</strong>, a folder with <code>s1/x.txt</code> and <code>s2/x.txt</code> and a folder with <code>s1/x.txt</code> and <code>s2/y.txt</code> are reported as identical.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<strong>Wildcard (RegExp)</strong> is used as typed: variables in it are not resolved. An invalid regular expression, which includes one with <code>${...}</code> in it, leaves out every entry, and the folders are reported as identical. This also happens with <strong>Compare</strong> set to <strong>All</strong> when an invalid wildcard is still stored from an earlier choice.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
     </article>

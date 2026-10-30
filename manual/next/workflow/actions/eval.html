@@ -3297,9 +3297,59 @@ firstRow.<span class="hljs-title function_">getString</span>(<span class="hljs-s
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>This script will follow the green workflow hop is the expression evaluates to true.  This happens if field "name" contains String "Foo".</pre>
+<pre>This script will follow the green workflow hop if the expression evaluates to true.  This happens if field "name" contains String "Foo".</pre>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The script ends with a true value, with 0 errors. A value that is not a boolean is converted the JavaScript way: <code>0</code> is false, a text that is not empty is true.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The script ends with a false value: the number of errors is 0. When the script can&#8217;t be run (a syntax error, or an error while it runs), the number of errors is 1.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>errors</code> variable in the script still holds the number of errors of the previous action: this action doesn&#8217;t reset it before the script runs.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

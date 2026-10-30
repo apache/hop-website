@@ -2981,7 +2981,7 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the database connection on which the tables reside.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Previous results to args?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Previous results to args</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Check this option if you want to get in a dynamic way tables to truncate from results of previous workflow action.</p></td>
 </tr>
 <tr>
@@ -2993,10 +2993,64 @@ Tables name will be automatically added to "Selected tables" grid.</p></td>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Selected tables grid</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Specify here the tables to truncate (insert it manually or use the previous button).
-If the table is in a different schema that the default one, please specify the schema name.</p></td>
+If the table is in a different schema than the default one, please specify the schema name.</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every table was truncated, with 0 errors. Also true when there is nothing to truncate: an empty list, or <strong>Previous results to args</strong> checked while there are no previous result rows (the tables in the grid are not truncated then).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A table doesn&#8217;t exist, or the connection is unknown or can&#8217;t be opened. The number of errors is 1: the action stops at the first table that fails, and the tables after it are not truncated.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lines deleted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of tables truncated, not the number of rows.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+With <strong>Previous results to args</strong>, the first field of each result row is the table name and the second field the schema name. A row with an empty table name is skipped: it is logged as an error, but doesn&#8217;t count as one.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
     </article>

@@ -3002,14 +3002,14 @@ At this time XML File name is the first field in the result set, XSL File name t
 <td class="tableblock halign-left valign-top"><p class="tableblock">The full name of the XSL file</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Output File name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output Filename</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The full name of the created document (result of XSL transformation)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">Settings</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Transformer Factory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transformer factory</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">You can select JAXP or SAXON as the transformer factory.</p></td>
 </tr>
 <tr>
@@ -3020,19 +3020,19 @@ At this time XML File name is the first field in the result set, XSL File name t
 <div class="ulist">
 <ul>
 <li>
-<p>Create new with unique name : a new output file will be created</p>
+<p>Create new with unique name: meant to write a new output file, with the date and time added to its name. See the NOTE under <a href="#_result">Result</a>.</p>
 </li>
 <li>
-<p>Do nothing : nothing will be done</p>
+<p>Do Nothing: the existing file is left as it is, and the action is true</p>
 </li>
 <li>
-<p>Fail : the workflow will fail</p>
+<p>Fail: the action is false, with 1 error</p>
 </li>
 </ul>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Add files to result files name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add output filename to result</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Add the target file names to the list of result files of this workflow action for use in the next workflow actions.</p></td>
 </tr>
 </tbody>
@@ -3094,6 +3094,72 @@ At this time XML File name is the first field in the result set, XSL File name t
 <td class="tableblock halign-left valign-top"><p class="tableblock">a list of parameter names and values to pass to the XSL pipeline</p></td>
 </tr>
 </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every file was transformed, with 0 errors. An output file that exists while <strong>If file exists</strong> is <strong>Do Nothing</strong> also counts as done: the file is left as it is.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The XML file or the XSL file doesn&#8217;t exist, the XSL file can&#8217;t be used, or the output file exists while <strong>If file exists</strong> is <strong>Fail</strong>. The number of errors is 1.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lines written</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of files that were transformed (or left as they are with <strong>Do Nothing</strong>).</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In this version, only <strong>XML File name</strong>, <strong>XSL File name</strong>, <strong>Output Filename</strong> and <strong>If file exists</strong> are stored in the workflow file. <strong>Get filenames from previous result</strong>, <strong>Transformer factory</strong>, <strong>Add output filename to result</strong> and the <strong>Advanced</strong> tab are not saved: once the workflow is saved and opened again, or run with hop-run, they have no effect. No output file is added to the result files, and the file names are never read from the previous result.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In this version, <strong>Create new with unique name</strong> overwrites the existing output file instead of writing a new one.
+</td>
+</tr>
 </table>
 </div>
 </div>

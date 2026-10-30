@@ -2981,20 +2981,24 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">The database connection.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Target schema</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The target schema.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Source schema</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The schema of the table to export.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Source table</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The table to export.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Target File name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The target file.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The file to write, on the database server.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">High Priority</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The priority to load the file with.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds <code>HIGH_PRIORITY</code> to the query. Checked by default: see the NOTE under <a href="#_result">Result</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OUTFILE, DUMPFILE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OUTFILE (default) writes the rows with the separators below. DUMPFILE writes a single row without any formatting: more than one row makes the action fail.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Field separator</p></td>
@@ -3028,13 +3032,13 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Create new with unique name</p>
+<p>Create new with unique name: the file gets the date and time added to its name</p>
 </li>
 <li>
-<p>Do Nothing</p>
+<p>Do Nothing: nothing is exported, and the action is true</p>
 </li>
 <li>
-<p>Fail (default)</p>
+<p>Fail (default): the action is false, with 1 error</p>
 </li>
 </ul>
 </div></div></td>
@@ -3045,6 +3049,92 @@
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The file was written, with 0 errors. Also true when the file already exists and <strong>If file exists</strong> is <strong>Do Nothing</strong>: then nothing is exported, and the action doesn&#8217;t connect to the database.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The file exists and <strong>If file exists</strong> is <strong>Fail</strong>, the table doesn&#8217;t exist, <strong>Target File name</strong> is empty, the connection can&#8217;t be opened, or MySQL refuses the query (for example a path outside the folder allowed by the server&#8217;s <code>secure_file_priv</code> setting, or <strong>DUMPFILE</strong> on more than one row). The number of errors is 1.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The target file is added when <strong>Add file to result filenames</strong> is checked and the file was written. Otherwise passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<strong>High Priority</strong> is checked by default, and on MySQL 8.4 it makes the action fail with "Table &#8230;&#8203; appears in multiple locking clauses": the action always adds <code>LOCK IN SHARE MODE</code> to the query, and MySQL doesn&#8217;t accept both. Uncheck <strong>High Priority</strong> to export.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+A <strong>Connection</strong> that doesn&#8217;t exist in the project is not a false result: the workflow stops with an error and no hop from the action is followed.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When the table doesn&#8217;t exist, the reason is only logged at the Detailed log level: at the Basic level, the log shows a false action without an error message.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The MySQL server writes the file (<code>SELECT &#8230;&#8203; INTO OUTFILE</code>), so <strong>Target File name</strong> is a path on the database server. <strong>If file exists</strong> is checked on the machine where Hop runs.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
     </article>

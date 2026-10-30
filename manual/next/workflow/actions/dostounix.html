@@ -2986,10 +2986,10 @@
 <td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
 <ul>
 <li>
-<p>Include Subfolders: also process sub-folders</p>
+<p>Include subfolders: also process subfolders</p>
 </li>
 <li>
-<p>Copy previous results to args : use the list of result files from the previous workflow action (actions) in stead of the static file list below.</p>
+<p>Copy previous results to args: take the file or folder, the wildcard and the conversion from the result rows of the previous action instead of from the list below. See <a href="#_result">Result</a>.</p>
 </li>
 </ul>
 </div></div></td>
@@ -2998,7 +2998,7 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Files / Folders</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>You can specify the list of files or folders with wildcards in this grid.
-You can add a different source/destination on each line.</p>
+Each line has its own conversion: Windows to Unix, Unix to Windows, or Guess, which converts a file to the other format. For a folder, the wildcard is a regular expression matched against the whole path of each file (see <a href="#_result">Result</a>).</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -3022,7 +3022,7 @@ You can add a different source/destination on each line.</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Success Condition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success condition</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>This action will follow the success path if the selected condition is true.
 Current options are:</p>
@@ -3042,13 +3042,13 @@ Current options are:</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Nr Files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nr files</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">specifies the number of files that have to meet the selected condition from above</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Add Filenames</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add filenames</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Adds the filenames that meet the selected condition to the workflow output stream.
+<p>Adds the files to the result files of the action.
 Conditions are:</p>
 </div>
 <div class="ulist">
@@ -3069,6 +3069,64 @@ Conditions are:</p>
 </div></div></td>
 </tr>
 </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <strong>Success condition</strong> is met: every file converted with <strong>Success if all files are processed</strong>, at least <strong>Nr files</strong> files converted with <strong>Success if at least x files are processed</strong>, or fewer files that could not be converted than <strong>Nr files</strong> with <strong>Success when number of error files lesser than</strong>. The number of errors is then 0, also when some files failed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The success condition is not met. A file that cannot be rewritten, for example in a read-only folder, counts as an error file. A path that does not exist, or that is not set, counts as an error, which only makes the action false with <strong>Success if all files are processed</strong>. With <strong>Success if all files are processed</strong>, a path error stops the action, and the remaining entries are not processed; an error file does not stop it. The number of errors is the number of path errors plus error files, and 1 when a path error stops the action.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Add all filenames</strong> (the default) adds the converted files and the ones that could not be converted, <strong>Add only processed filenames</strong> only the converted ones, <strong>Add only error filenames</strong> only the failed ones, and <strong>Do not add filenames</strong> none. The result files of the previous action are kept.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged. With <strong>Copy previous results to args</strong>, the file or folder, the wildcard and the conversion (<code>guess</code>, <code>dostounix</code> or <code>unixtodos</code>) come from the first three fields of each result row, and the list in the dialog is not used, also when there are no result rows.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lines written</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of files converted.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lines rejected</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of files that could not be converted.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+A result row with fewer than three fields stops the workflow with an error, and no hop is followed. The wildcard is matched against the whole path of each file (for example <code><a href="file:///data/in/sales.txt" class="bare">file:///data/in/sales.txt</a></code>), not its name: <code>.*\.txt</code> or <code>.*/sales\.txt</code> match, <code>sales\.txt</code> matches nothing, and the action is still true.
+</td>
+</tr>
 </table>
 </div>
 </div>

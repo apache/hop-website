@@ -2976,7 +2976,7 @@
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Workflow action name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Action name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of the workflow action.</p></td>
 </tr>
 <tr>
@@ -2992,7 +2992,7 @@
 <ul>
 <li>
 <p>Classic ping: This calls the ping as a command line of the operating system.
-The result is true when no packets (defined in the "Nr. packets to send" option) are lost.</p>
+The result is true when the ping command ends without error (exit code 0). On Linux and macOS, that is the case when at least one of the packets (defined in the <strong>Nr packets to send</strong> option) gets a reply.</p>
 </li>
 <li>
 <p>System ping: This option uses the Java implemented methods.
@@ -3009,8 +3009,46 @@ The result is true when the host name can be resolved and the host is reachable 
 <td class="tableblock halign-left valign-top"><p class="tableblock">The timeout in ms when the system ping option is used.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Nr. packets to send</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nr packets to send</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The number of packets to send (by default 2, only used by the Classic ping option).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The host answered, with 0 errors.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The host can&#8217;t be pinged (for example, its name can&#8217;t be resolved), or <strong>Host name/IP</strong> is empty. The number of errors is 1.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
 </tr>
 </tbody>
 </table>

@@ -3039,7 +3039,7 @@
 <p>Greater than (default)</p>
 </li>
 <li>
-<p>Greater than or equal to</p>
+<p>Greater or equal to</p>
 </li>
 </ul>
 </div></div></td>
@@ -3060,7 +3060,7 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Variables in the SQL statements will be substituted.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Clear list of result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clear list of result rows before execution</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Clears the internal list of result rows before executing.</p></td>
 </tr>
 <tr>
@@ -3074,6 +3074,60 @@ This list of result rows can then be used in subsequent workflow actions to loop
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of rows meets the <strong>Success when rows count</strong> condition, with 0 errors.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The condition is not met: the number of errors is 0. When the table doesn&#8217;t exist, <strong>Target table name</strong> is empty (without <strong>Custom SQL</strong>), <strong>SQL Script</strong> is empty (with <strong>Custom SQL</strong>), the query fails, or the connection is empty, unknown or can&#8217;t be opened, the number of errors is 1.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Without <strong>Custom SQL</strong>: passed on unchanged. With <strong>Custom SQL</strong>: <strong>Clear list of result rows before execution</strong> removes the previous result rows, also when <strong>Add rows to result</strong> is unchecked. <strong>Add rows to result</strong> adds the rows the query returns, also when the condition is not met.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lines read</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of rows counted.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+With <strong>Custom SQL</strong>, the action counts the rows the query returns, not a value in them. <code>SELECT count(*) FROM my_table</code> returns 1 row, so the number of rows is 1 whatever the table holds. Write a query that returns one row per item to count, such as <code>SELECT * FROM my_table WHERE &#8230;&#8203;</code>.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
     </article>

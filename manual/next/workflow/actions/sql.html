@@ -2986,7 +2986,7 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of the workflow action.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Database Connection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connection</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The database connection to use.</p></td>
 </tr>
 <tr>
@@ -3002,21 +3002,71 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Character encoding of the SQL file (e.g. UTF-8, windows-1252). Leave empty to use the system default. Useful when the file is UTF-8 but the system uses another encoding (e.g. Windows-1252).</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Send SQL as single statement?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Send SQL as single statement</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enable this option to not separate the statement by semicolons.
 This is often useful when a script is given or multiple statements should be processed and committed as one single statement.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Use variable substitution?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use variable substitution</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enables variables to be used in the SQL Script.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">SQL script</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SQL Script</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The SQL script to execute.
 Multiple statements can be separated by semicolons.</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every statement ran, with 0 errors. An empty SQL script is also true.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A statement fails, the SQL file doesn&#8217;t exist, or the connection is unknown or can&#8217;t be opened. The number of errors is 1.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Without <strong>Send SQL as single statement</strong>, the statements run one after the other. When one fails, the changes of the statements before it are kept, and the statements after it are not run. With <strong>Send SQL as single statement</strong>, the script goes to the database in one piece, and what is kept after an error depends on the database: on PostgreSQL, none of the changes are kept.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
     </article>

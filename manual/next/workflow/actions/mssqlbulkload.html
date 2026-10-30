@@ -3001,7 +3001,7 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not to truncate the table before starting the bulk load.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">Data file</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">Data File</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Source File name</p></td>
@@ -3016,7 +3016,7 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">The field separation character.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Rows terminated by</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Row terminated by</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The row termination character.</p></td>
 </tr>
 </tbody>
@@ -3038,11 +3038,11 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Codepage</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OEM, ACP, RAW, specific</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ACP, OEM (default), RAW or Specific. See the NOTE under <a href="#_result">Result</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Specific codepage</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Code page to use when specific is selected.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code page to use when Specific is selected.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Format file</p></td>
@@ -3113,6 +3113,93 @@
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The file was loaded, with 0 errors.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The file doesn&#8217;t exist, the table doesn&#8217;t exist, <strong>Source File name</strong> is empty, the connection is unknown or can&#8217;t be opened, or SQL Server refuses the load (for example a value that doesn&#8217;t fit its column). The number of errors is 1.</p>
+<p class="tableblock">The action is also false, but with 0 errors, when the connection is not a Microsoft SQL Server connection, when <strong>Fields terminated by</strong> is empty while <strong>Data file type</strong> is char or widechar, and when <strong>Error file</strong> exists while <strong>Add date time</strong> is unchecked. The reason is logged as an error.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The source file is added when <strong>Add file to result filenames</strong> is checked and the load succeeded. Otherwise passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+SQL Server reads the file, so <strong>Source File name</strong> must be a path that the database server can read. The action also checks that the file exists on the machine where Hop runs, before it loads.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When the load fails on a row, the rows before it can stay in the table: with the default options, a value that doesn&#8217;t fit its column on row 2 left row 1 loaded.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+SQL Server on Linux only accepts the RAW <strong>Codepage</strong>: the default, OEM, makes the load fail there. In this version, <strong>Specific</strong> sends the word <code>Specific</code> to SQL Server instead of the value of <strong>Specific codepage</strong>, so the load fails.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When both <strong>Start at line</strong> and <strong>End at line</strong> are set, only <strong>End at line</strong> is used: the load starts at the first line.
+</td>
+</tr>
 </table>
 </div>
 </div>
