@@ -2979,14 +2979,14 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of the workflow action.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">General tab</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">Server settings</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">FTP connection</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">An optional <a href="../../metadata-types/ftp-connection.html" class="xref page">FTP Connection</a> from the metadata. Pick one and the server, credentials, transfer mode, timeouts and proxy settings below come from that connection; leave it empty to configure the server on this action.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">FTP server name/IP address</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FTP server name / IP address</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of the server or the IP address.</p></td>
 </tr>
 <tr>
@@ -3030,15 +3030,15 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Timeout</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The FTP server timeout in seconds.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timeout in milliseconds, for example 30000 for 30 seconds. 0 (the default): no timeout.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Use Active FTP connection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use active FTP connection</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enable if you are connecting to the FTP server using Active mode; you must set your firewall to accept connections to the port that your FTP client will open.
 The default is Passive mode.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Control Encoding</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Control encoding</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Select the character encoding to use for determining special characters in file names.
 For Western Europe and the USA, ISO-8859-1 usually suffices.
 Select encoding that is valid for your server.</p></td>
@@ -3076,12 +3076,12 @@ Select encoding that is valid for your server.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If you are uploading multiple files, specify a regular expression that defines the set of files you want to upload.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Remove files after transferal?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remove files after transferal</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enable to remove files from the local directory after they&#8217;ve been uploaded.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Don&#8217;t overwrite files</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enable to skip files that already exist in the remote directory.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable to skip files that already exist in the remote directory. See the WARNING under <a href="#_result">Result</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Remote directory</p></td>
@@ -3125,6 +3125,56 @@ Select encoding that is valid for your server.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The password associated with the Socks proxy server account.</p></td>
 </tr>
 </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every matching file was uploaded, with 0 errors. No file matching the wildcard is also true.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A file can&#8217;t be uploaded, the server can&#8217;t be reached or refuses the login, the remote directory doesn&#8217;t exist, <strong>Local directory</strong> is empty or doesn&#8217;t exist, or the wildcard is not a valid regular expression. The number of errors is the number of files that failed, or 1 when the action fails before the upload.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged: the uploaded files are not added.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+With <strong>Don&#8217;t overwrite files</strong> and <strong>Remove files after transferal</strong> both checked, a local file that already exists on the server is not uploaded, but it is still removed from the local directory.
+</td>
+</tr>
 </table>
 </div>
 </div>

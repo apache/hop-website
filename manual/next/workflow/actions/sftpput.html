@@ -2990,10 +2990,8 @@ If you run into a <code>Algorithm Negotiation Fail</code> error when connecting 
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Workflow action name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the workflow action.
-<strong>Note</strong>: This name has to be unique in a single workflow.
-A workflow action can be placed several times on the canvas, however it will be the same workflow action.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Action name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the workflow action.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">SFTP connection</p></td>
@@ -3002,11 +3000,11 @@ When one is selected, the server, credentials, compression and proxy settings be
 Leave it empty to configure the server in this action.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">SFTP-server name (IP)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SFTP server name / IP</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of the SFTP server or the IP address.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">SFTP port</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Port</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The TCP port to use.
 This is usually 22.</p></td>
 </tr>
@@ -3124,7 +3122,7 @@ A.*[ENG:0-9].txt  : files starting with A, ending with a number and .txt</code><
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Success when no file</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Check this option if the workflow action has to succeed when there are no files to process, otherwise the workflow will fail.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check this option if the action has to succeed when there are no files to send. Otherwise the action is false, with 1 error.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">After SFTP Put</p></td>
@@ -3196,6 +3194,60 @@ Use the <code>Test folder</code> button to connect to the remote server and vali
 </div>
 <div class="paragraph">
 <p><code>-Djsch.client_pubkey=ssh-rsa,ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512,rsa-sha2-256 -Djsch.server_host_key=ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512,rsa-sha2-256,ssh-rsa</code></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every file was sent, with 0 errors. When no file matches, the action is true only if <strong>Success when no file</strong> is checked. <strong>Copy previous results to args</strong> or <strong>Copy previous result files to args</strong> without anything in the previous result is also true.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No file to send (with <strong>Success when no file</strong> unchecked), the server can&#8217;t be reached or refuses the login, the remote directory doesn&#8217;t exist and <strong>Create folder</strong> is unchecked, the local directory doesn&#8217;t exist, a file can&#8217;t be sent, or <strong>Move file to</strong> is selected while <strong>Destination folder</strong> is empty, or doesn&#8217;t exist and <strong>Create destination folder</strong> is unchecked. The number of errors is 1.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The sent files are added when <strong>Add filename to result</strong> is checked and <strong>After SFTP Put</strong> is <strong>Do nothing</strong>. The previous result files are kept.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Files retrieved</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of files sent.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+With <strong>Copy previous results to args</strong>, a file in the previous result rows that doesn&#8217;t exist is logged as an error, but it doesn&#8217;t count as one and the other files are still sent. When none of them exists, there is no file to send.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

@@ -3004,25 +3004,25 @@ Existing workflows keep working and log a warning; new ones should use Delete fi
 <p>FTP</p>
 </li>
 <li>
-<p>SFTP (deprecated, see the note below)</p>
+<p>SFTP (deprecated)</p>
 </li>
 </ul>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">FTP connection</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An optional <a href="../../metadata-types/ftp-connection.html" class="xref page">FTP Connection</a> from the metadata. Pick one and the server, credentials, transfer mode, timeouts and proxy settings below come from that connection; leave it empty to configure the server on this action.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An optional <a href="../../metadata-types/ftp-connection.html" class="xref page">FTP Connection</a> from the metadata. Pick one and the server, credentials, transfer mode, timeouts and proxy settings below come from that connection; leave it empty to configure the server on this action. To connect with FTPS, use an FTP connection and its <strong>Security</strong> option.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">SFTP connection</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">An optional <a href="../../metadata-types/sftp-connection.html" class="xref page">SFTP Connection</a> from the metadata, used when the protocol is SFTP.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">FTP server name/IP address</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FTP server name / IP address</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of the server or the IP address.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Server Port</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Server port</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Port number of the FTP server.</p></td>
 </tr>
 <tr>
@@ -3032,37 +3032,6 @@ Existing workflows keep working and log a warning; new ones should use Delete fi
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Password</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The password associated the FTP server account.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Connection type</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>FTPS connection type.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>FTP</p>
-</li>
-<li>
-<p>Implicit SSL</p>
-</li>
-<li>
-<p>Authentication SSL</p>
-</li>
-<li>
-<p>Implicit SSL with encrypted FTP connection</p>
-</li>
-<li>
-<p>Authentication TLS</p>
-</li>
-<li>
-<p>Implicit TLS</p>
-</li>
-<li>
-<p>Implicit TLS with encrypted FTP connection</p>
-</li>
-</ul>
-</div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Use proxy</p></td>
@@ -3126,7 +3095,7 @@ Existing workflows keep working and log a warning; new ones should use Delete fi
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Timeout</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The timeout period.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timeout in milliseconds, for example 30000 for 30 seconds. 0 (the default): no timeout.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Use active FTP connection</p></td>
@@ -3137,16 +3106,20 @@ The default is Passive mode.</p></td>
 <td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">Remote</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Copy previous results to args?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Copy previous results to args</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes the files named in the first field of the previous result rows, instead of the files matching <strong>Wildcard</strong>.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Remote directory</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The directory on the remote FTP server.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Check folder</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check folder</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Checks if the directory exists.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Wildcard (regular expression)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The regular expression the file names must match. Required unless <strong>Copy previous results to args</strong> is checked.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">Success condition</p></td>
@@ -3208,6 +3181,75 @@ The default is Passive mode.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Password associated with the Socks Proxy account.</p></td>
 </tr>
 </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Depends on <strong>Success on</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>All works fine (default): no file failed. No file matching the wildcard is also true, and so is <strong>Copy previous results to args</strong> without previous result rows.</p>
+</li>
+<li>
+<p>At least we delete x files: at least <strong>Limit files</strong> files were deleted.</p>
+</li>
+<li>
+<p>Nr errors less than: the number of errors is at most <strong>Limit files</strong>. A failure before deleting counts as 1 error, so the cases listed under False give true with 1 error when <strong>Limit files</strong> is 1 or more.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The success condition is not met, for example because the server can&#8217;t be reached or refuses the login, the remote directory doesn&#8217;t exist, the wildcard is not a valid regular expression, or <strong>Wildcard</strong> is empty while <strong>Copy previous results to args</strong> is unchecked. The number of errors is the number of files that failed, or 1 when the action fails before deleting. With <strong>Nr errors less than</strong>, these failures count as 1 error, so the action is true when <strong>Limit files</strong> is 1 or more.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Files retrieved</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of files deleted. When the remote directory has no files, or <strong>Copy previous results to args</strong> is checked without previous result rows, the value of the previous action is passed on unchanged.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+With <strong>Copy previous results to args</strong>, the first field of each previous result row is the name of a file to delete in the remote directory, and <strong>Wildcard</strong> is not used.
+</td>
+</tr>
 </table>
 </div>
 </div>

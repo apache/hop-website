@@ -2995,11 +2995,11 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">An optional <a href="../../metadata-types/ftp-connection.html" class="xref page">FTP Connection</a> from the metadata. Pick one and the server, credentials, transfer mode, timeouts and proxy settings below come from that connection; leave it empty to configure the server on this action.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">FTP server name/IP address</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FTP server name / IP address</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of the server or the IP address.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Server Port</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Server port</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Port number of the FTP server.</p></td>
 </tr>
 <tr>
@@ -3035,10 +3035,10 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Timeout</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The FTP server timeout in seconds.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timeout in milliseconds, for example 30000 for 30 seconds. 0 (the default): no timeout.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Use Active FTP connection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use active FTP connection</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enable if you are connecting to the FTP server using Active mode; you must set your firewall to accept connections to the port that your FTP client will open.
 The default is Passive mode.</p></td>
 </tr>
@@ -3079,25 +3079,25 @@ For example: .txt$ : get all text files A.ENG:0-9.txt : files starting with A, e
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Remove files after retrieval</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Remove the files on the FTP server, but only after all selected files have been successfully transferred.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Removes each file from the FTP server right after it is downloaded. See the NOTE under <a href="#_result">Result</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Move files after retrieval</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Move the files on the FTP server to the folder specified below, but only after all selected files have been successfully transferred.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Moves each file on the FTP server to the folder below, right after it is downloaded. See the NOTE under <a href="#_result">Result</a>.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Move to Folder</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Moves files to specified folder on the server.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Move to folder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The folder on the server to move the files to.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Create Folder</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Creates folder that will contain files.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create folder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Creates the move-to folder when it doesn&#8217;t exist.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">Local</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Target Directory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Target directory</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The directory where you want to place the retrieved files.</p></td>
 </tr>
 <tr>
@@ -3109,8 +3109,8 @@ For example: .txt$ : get all text files A.ENG:0-9.txt : files starting with A, e
 <td class="tableblock halign-left valign-top"><p class="tableblock">Adds the system time to the filename (_235959).</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specify date time format</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enable to provide your own date/time format; the default is yyyyMMdd'_'HHmmss</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specify Date time format</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable to provide your own date/time format in <strong>Date time format</strong>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Date time format</p></td>
@@ -3126,11 +3126,11 @@ For example: .txt$ : get all text files A.ENG:0-9.txt : files starting with A, e
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If file exists</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Action to take if a file with an identical name already exists in the target directory.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used with <strong>Don&#8217;t overwrite files</strong>: Skip (default) leaves the local file and doesn&#8217;t download the remote one, Give unique name to local file adds the date and time to the new file&#8217;s name, Fail counts the file as an error.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Add filenames to result</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enable to add the file name(s) read to the result of this workflow.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add filename to result</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds the downloaded files to the result files (checked by default).</p></td>
 </tr>
 </tbody>
 </table>
@@ -3206,6 +3206,79 @@ For example: .txt$ : get all text files A.ENG:0-9.txt : files starting with A, e
 <td class="tableblock halign-left valign-top"><p class="tableblock">Password associated with the Socks Proxy account.</p></td>
 </tr>
 </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Depends on <strong>Success on</strong> (Advanced tab):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>All works fine (default): no file failed. No file matching the wildcard is also true.</p>
+</li>
+<li>
+<p>At least we got x files: at least <strong>Limit files</strong> files were downloaded, whatever the number of errors.</p>
+</li>
+<li>
+<p>Nr errors less than: the number of errors is at most <strong>Limit files</strong>. The download stops as soon as the number of errors reaches <strong>Limit files</strong>, and the action is still true then. Some failures before the download also count as 1 error: see False.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The success condition is not met. Without <strong>Nr errors less than</strong>, the download stops at the first file that fails. The action is also false, before any download, when the server can&#8217;t be reached or refuses the login, the remote directory doesn&#8217;t exist, the wildcard is not a valid regular expression, or <strong>Move files after retrieval</strong> is checked while the move-to folder is empty, or doesn&#8217;t exist and <strong>Create folder</strong> is unchecked. With <strong>Nr errors less than</strong>, an unreachable server, a refused login and an invalid wildcard count as 1 error, so the action is true when <strong>Limit files</strong> is 1 or more. A missing remote directory and the move-to folder checks give false whatever the condition.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Errors</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of files that failed, or 1 when the action fails before the download.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The downloaded files are added when <strong>Add filename to result</strong> is checked (the default). The previous result files are kept.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Files retrieved</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of files downloaded.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<strong>Remove files after retrieval</strong> and <strong>Move files after retrieval</strong> act on each file right after it is downloaded, not after all files are: when a later file fails, the files before it are already removed or moved on the server.
+</td>
+</tr>
 </table>
 </div>
 </div>
