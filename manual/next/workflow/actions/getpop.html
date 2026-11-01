@@ -2978,14 +2978,14 @@
 <td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock"><strong>Mail Server Connection</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Mail Connection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mail Server Connection</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If a mail server connection is selected here, the rest of this tab is ignored. The server configuration will be taken from the <a href="../../metadata-types/mail-server-connection.html" class="xref page">Mail Server Connection</a> metadata item.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">Server Settings</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Workflow action name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Action name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of the workflow action.</p></td>
 </tr>
 <tr>
@@ -3002,7 +3002,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Port</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The port to run the SSL POP3 or IMAP connection over.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The port of the POP3 or IMAP server, with or without SSL.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Username</p></td>
@@ -3133,10 +3133,6 @@
 <td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">IMAP settings</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Option</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">IMAP folder</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">the folder on the IMAP server to retrieve messages from</p></td>
 </tr>
@@ -3257,19 +3253,11 @@
 <td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">Content</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Option</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Body</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">messages will be filtered on the specified text in the email body</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">Received date</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Option</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Condition</p></td>
@@ -3296,6 +3284,10 @@
 </ul>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date 1, Date 2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The dates for the condition, in the format <code>yyyy-MM-dd HH:mm:ss</code>.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -3313,6 +3305,87 @@
 <p>Workflows saved in Hop 2.13 still load: date conditions such as <code>ignore</code> and IMAP list codes such as <code>imaplistunread</code> are accepted, not only integer indexes.</p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The action connected and processed the selected messages, with 0 errors. No message to process, for example an empty mailbox, is also true.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of errors is 1. <strong>Target directory</strong> is empty, or doesn&#8217;t exist and <strong>Create folder</strong> is unchecked, <strong>Different folder for attachment</strong> is checked and <strong>Attachment files folder</strong> is empty, or doesn&#8217;t exist and <strong>Create folder</strong> is unchecked, the server can&#8217;t be reached or refuses the login, the <strong>Mail Server Connection</strong> doesn&#8217;t exist, the <strong>IMAP folder</strong> doesn&#8217;t exist, <strong>Move to folder</strong> is empty or doesn&#8217;t exist and <strong>Create folder</strong> is unchecked, or a <strong>Received date</strong> condition is selected without <strong>Date 1</strong>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged: the saved messages and attachments are not added.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lines written</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of messages saved with <strong>Save message content</strong>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Files retrieved</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of attachments saved.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lines deleted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of messages deleted, by the <strong>Delete messages</strong> action, <strong>Delete emails after retrieval</strong> or <strong>Delete message</strong> after retrieval. A message moved on its own also counts here: with <strong>Move message to folder</strong> after retrieval, or with the <strong>Move messages to folder</strong> action and <strong>Retrieve the first&#8230;&#8203;emails</strong>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lines updated</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of messages moved to another IMAP folder.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>When the action is false, these metrics keep the values of the previous action.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code><mark>IdFile</mark></code> number in <strong>Target filename pattern</strong> starts again in each folder: with <strong>Include subfolders</strong>, a message of a subfolder can overwrite the file of a message of the first folder.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<strong>Retrieve the first&#8230;&#8203;emails</strong> also applies to the <strong>Delete messages</strong> and <strong>Move messages to folder</strong> actions: only that number of messages is deleted or moved.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

@@ -2990,8 +2990,8 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not to use ASCII mode when encrypting.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Include subfolders</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not to include subfolders.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Include Subfolders</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Also processes the files in the subfolders of a source folder.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Copy previous results to args</p></td>
@@ -3055,7 +3055,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Do not keep folder structure</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not to keep the folder structure. If unchecked, the folder structure is flattened.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Writes the files of subfolders directly in the destination folder. When unchecked, the subfolders of the source are kept in the destination.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Add date to filename</p></td>
@@ -3079,13 +3079,16 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If destination file exists</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>What to do when the destination file already exists. See the WARNING under <a href="#_result">Result</a>.</p>
+</div>
+<div class="ulist">
 <ul>
 <li>
-<p>Do nothing</p>
+<p>Do nothing (default)</p>
 </li>
 <li>
-<p>Overwrite the destination file</p>
+<p>Overwrite destination file</p>
 </li>
 <li>
 <p>Create file with unique name</p>
@@ -3131,22 +3134,19 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If file exists in destination folder</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Used with <strong>Move source file to folder</strong>, when the file already exists in <strong>Destination folder</strong>:</p>
+</div>
+<div class="ulist">
 <ul>
 <li>
-<p>Do nothing</p>
+<p>Do nothing (default)</p>
 </li>
 <li>
-<p>Overwrite the destination file</p>
+<p>Overwrite file</p>
 </li>
 <li>
-<p>Create file with unique name</p>
-</li>
-<li>
-<p>Delete source file</p>
-</li>
-<li>
-<p>Move source file to folder</p>
+<p>Unique name</p>
 </li>
 <li>
 <p>Fail</p>
@@ -3158,7 +3158,7 @@
 </table>
 </div>
 <div class="sect2">
-<h3 id="_advanced_tab"><a class="link" href="#_advanced_tab">Advanced Tab</a></h3>
+<h3 id="_advanced_tab"><a class="link" href="#_advanced_tab">Advanced tab</a></h3>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -3182,7 +3182,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Success when all works</p>
+<p>Success when all works fine (default)</p>
 </li>
 <li>
 <p>Success when at least x files decrypted</p>
@@ -3194,17 +3194,126 @@
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Nr error lesser than</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Success if errors lesser than.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nr errors lesser than</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The limit used by the success condition: the number of errors, or the number of files for <strong>Success when at least x files decrypted</strong> (default 10).</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">Result files name</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Add files to result files name</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds the encrypted or signed files to the result files. See <a href="#_result">Result</a>.</p></td>
 </tr>
 </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Depends on <strong>Success condition</strong> (Advanced tab):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Success when all works fine (default): no file failed. An empty Files/Folders list, no file matching the wildcard, or <strong>Copy previous results to args</strong> without previous result rows is also true.</p>
+</li>
+<li>
+<p>Success when at least x files decrypted: at least <strong>Nr errors lesser than</strong> files were encrypted or signed, whatever the number of errors.</p>
+</li>
+<li>
+<p>Success when number of errors lesser than: the number of errors is at most <strong>Nr errors lesser than</strong>. When an entry of the list brings the errors to that number and entries are left, the action stops and is false; when the last entry does, the action is still true.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The success condition is not met. A file or an entry of the list fails, and counts as an error, when its source doesn&#8217;t exist, the destination folder doesn&#8217;t exist and <strong>Create destination folder</strong> is unchecked, GnuPG fails (an unknown or empty <strong>User ID</strong>, a signing key that needs a passphrase), the destination file exists and <strong>If destination file exists</strong> is <strong>Fail</strong>, or a folder is the source while <strong>Destination is a file</strong> is checked. It is also false, before any file and whatever the success condition, when <strong>If destination file exists</strong> is <strong>Move source file to folder</strong> while <strong>Destination folder</strong> is empty, or doesn&#8217;t exist and <strong>Create folder</strong> is unchecked. With <strong>Success when all works fine</strong> or <strong>Success when number of errors lesser than</strong>, the action stops once the condition is broken: the remaining files are not processed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Errors</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of files and entries that failed. Inside a folder, when files are left after the one that breaks the success condition, that failure counts as two errors. A <strong>GPG location</strong> that is empty or not found counts as 1 error, before any file: the action is false with <strong>Success when all works fine</strong> and <strong>Success when at least x files decrypted</strong>, and true with <strong>Success when number of errors lesser than</strong>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With <strong>Add files to result files name</strong>, an encrypted file that didn&#8217;t exist yet in the destination is added unless <strong>If destination file exists</strong> is <strong>Do nothing</strong> (the default) or <strong>Fail</strong>: with the default, no file is added. When the destination file already exists, a file is added only with <strong>Overwrite destination file</strong> or <strong>Create file with unique name</strong>, and with <strong>Move source file to folder</strong> the moved source file is added. The result files of the previous action are kept.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lines written</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of files encrypted or signed. A file left in place by <strong>Do nothing</strong>, deleted or moved is not counted. When the check of <strong>Destination folder</strong> (Move to folder) fails, or the action stops on the success condition between two entries of the list, the value of the previous action is passed on.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The encrypted or signed file keeps the name of the source file: <code>a.txt</code> becomes <code>a.txt</code> in the destination folder, no extension is added.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<strong>If destination file exists</strong> doesn&#8217;t always do what its name says. <strong>Create file with unique name</strong> builds a new name (the date and time added after the file name, for example <code>a.txt30102026_140920035</code>) but writes to the existing file, which is overwritten; the new name, which doesn&#8217;t exist, is added to the result files. <strong>Delete source file</strong> deletes the existing destination file, not the source, and encrypts nothing. <strong>Move source file to folder</strong> moves the source file to <strong>Destination folder</strong> without encrypting it. With <strong>Do nothing</strong>, the existing file is kept and the source is not encrypted.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The action has no passphrase option: for <strong>Sign</strong> and <strong>Sign and encrypt</strong>, GnuPG must be able to use the signing key without asking for one, for example a key without passphrase or a passphrase already held by <code>gpg-agent</code>. Otherwise the file fails.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+With <strong>Include Subfolders</strong> and <strong>Do not keep folder structure</strong> unchecked, a file in a subfolder is written to the same subfolder in the destination. GnuPG doesn&#8217;t create that subfolder, so the file fails when it doesn&#8217;t exist.
+</td>
+</tr>
 </table>
 </div>
 </div>
