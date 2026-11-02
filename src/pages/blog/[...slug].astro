@@ -204,4 +204,16 @@ const authors = (post.data.authors ?? '').split(',').map((a) => a.trim()).filter
   }
   .post__body pre { font-size: 13.5px; }
   .post__body .listingblock { margin: 1.6em 0; }
+  /* Collapsible blocks for long reference lists, such as a release's full
+     change list. See tools/satteri-directives.mjs for the :::details syntax. */
+  .post__body .details {
+    margin: 1em 0; border: 1px solid var(--rule);
+    border-radius: var(--radius); background: var(--surface);
+  }
+  .post__body .details > summary {
+    padding: 10px 16px; cursor: pointer; font-weight: 600;
+  }
+  .post__body .details > summary:hover { color: var(--accent); }
+  .post__body .details[open] > summary { border-bottom: 1px solid var(--rule); }
+  .post__body .details > :not(summary) { margin: 12px 16px 14px; }
 </style>
