@@ -2975,7 +2975,7 @@
 </div>
 <div class="paragraph">
 <p>As with all actions, the goal is not to retrieve data but to execute various statements like creating or dropping indexes, calling APOC procedures, add or delete some static data and so on.<br>
-The result of this action is a <code>true</code> or <code>false</code> exit code that determines if a success or failure hop to the next action in the workflow is chosen.</p>
+The result of this action is a <code>true</code> or <code>false</code> exit code that determines if a success or failure hop to the next action in the workflow is chosen, except when the connection can&#8217;t be used: see <a href="#_result">Result</a>.</p>
 </div>
 </div>
 </div>
@@ -3018,16 +3018,16 @@ The script then no longer runs in a single transaction: when a statement fails, 
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Connection name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Graph database connection</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of the connection on which you want to execute the cypher statements.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Script</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cypher Script</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The script with cypher commands separated by a semi-colon (;) on a new line.
 For examples see below.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Replace variables</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Replace variables in script?</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Check this option if you want to replace variables in the format <code>${VARIABLE_NAME}</code> in the script prior to execution.</p></td>
 </tr>
 </tbody>
@@ -3039,11 +3039,61 @@ For examples see below.</p></td>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-CREATE INDEX idx_person_name on :Person(name) hljs" data-lang="CREATE INDEX idx_person_name on :Person(name)">CREATE INDEX idx_company_id on :Company(id)
+<div class="code-lang" data-pagefind-ignore>cypher</div><pre class="highlightjs highlight"><code class="language-cypher hljs" data-lang="cypher">CREATE INDEX idx_person_name IF NOT EXISTS FOR (n:Person) ON (n.name)
 ;
-CREATE INDEX idx_company_id on :Company(id)
+CREATE INDEX idx_company_id IF NOT EXISTS FOR (n:Company) ON (n.id)
 ;</code></pre>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All the statements ran, with 0 errors. An empty script is also true. A query that returns rows is true too: the rows are not passed on.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of errors is 1. A statement fails, for example invalid Cypher, a semicolon at the end of a line instead of on a new line (Neo4j then gets two statements as one), or on Neo4j index or constraint changes and data changes in the same script, in either order (<code>Tried to execute Write query after executing Schema modification</code>, or the other way around). See <a href="#_transactions">Transactions</a> for the statements that are kept.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+A <strong>Graph database connection</strong> that is empty, doesn&#8217;t exist, can&#8217;t be reached or refuses the login doesn&#8217;t make the action false: the workflow stops with an error, and no hop from the action is followed.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

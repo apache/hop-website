@@ -2991,7 +2991,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Server port</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The server port.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The server port (default 162). A value that is not a number is replaced by 162; a number that is not a valid port (for example 70000) makes the action false.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">OID</p></td>
@@ -3006,11 +3006,11 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Target type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Type of target: Community or User.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type of target: Community (SNMP V1) or User (SNMP V3). See the WARNING under <a href="#_result">Result</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Community string</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A user id or password that allows access to a router&#8217;s or other device&#8217;s statistics.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A user id or password that allows access to a router&#8217;s or other device&#8217;s statistics (default <code>public</code>).</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">User</p></td>
@@ -3022,7 +3022,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Engine ID</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The context engine ID of the SNMP V3 trap (optional).</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Retry</p></td>
@@ -3041,6 +3041,56 @@
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The trap was sent, with 0 errors. The action doesn&#8217;t wait for an answer, so it is also true when nothing listens on <strong>Server port</strong>. An empty <strong>Server name / IP address</strong> sends the trap to the local machine, and an empty <strong>OID</strong> or <strong>Message</strong> is sent as it is.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of errors is 1. <strong>Server name / IP address</strong> can&#8217;t be resolved, <strong>Server port</strong> is a number that is not a valid port (for example 70000), or <strong>OID</strong> is not a valid object identifier (for example <code>abc</code>).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<strong>User (SNMP V3)</strong> is not kept. When the workflow is loaded from its file, the target type is read back as <strong>Community (SNMP V1)</strong>, so the action sends an SNMP V1 trap with <strong>Community string</strong>, and <strong>User</strong>, <strong>Passphrase</strong> and <strong>Engine ID</strong> are not used.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
     </article>

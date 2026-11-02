@@ -2998,12 +2998,12 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of the workflow action.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Host Name/IP Address</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Host name/IP address</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Nagios server name / IP Address</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Server port</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Nagios server port (often 5667).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nagios server port (default 5667). A value that is not a number is replaced by 5667; a number that is not a valid port (for example 70000) makes the action false.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Password</p></td>
@@ -3011,7 +3011,7 @@
 This field can be set empty when connections without password are allowed.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Connection Timeout</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connection timeout</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Fail after the specified connection timeout in milliseconds (default 5000).</p></td>
 </tr>
 <tr>
@@ -3022,12 +3022,12 @@ This field can be set empty when connections without password are allowed.</p></
 <td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">Sender</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Host Name/IP Address</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Define your sender host name / IP Address.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name/ IP host</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Define your sender host name / IP Address. When it is empty, the name of the machine that runs the workflow is sent.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Service Name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Define the service name used to log the events.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Service name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Define the service name used to log the events. When it is empty, <code>UNDEFINED</code> is sent.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Encryption mode</p></td>
@@ -3076,6 +3076,56 @@ This field can be set empty when connections without password are allowed.</p></
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The passive check was sent to the NSCA server, with 0 errors. The action sends the check and closes the connection without waiting for an answer.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of errors is 1. <strong>Host name/IP address</strong> or <strong>Message</strong> is empty, the host name can&#8217;t be resolved, <strong>Server port</strong> is a number that is not a valid port, the server refuses the connection or doesn&#8217;t answer it within <strong>Connection timeout</strong>, or the server doesn&#8217;t send its first packet within <strong>Response timeout</strong>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Since Hop 2.18 the action can&#8217;t send a check: the library it uses (jsendnsca) needs <code>commons-lang</code> 2, which Hop no longer ships. The workflow stops with <code>NoClassDefFoundError: org/apache/commons/lang/Validate</code>, and no hop from the action is followed. Only an empty <strong>Host name/IP address</strong> or <strong>Message</strong> still makes the action false. The table above describes the action with that library available (tested with <code>commons-lang-2.6.jar</code> added to the lib folder of the plugin).
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
     </article>

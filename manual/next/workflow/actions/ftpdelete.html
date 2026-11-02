@@ -3144,7 +3144,7 @@ The default is Passive mode.</p></td>
 <p>At least we delete x files</p>
 </li>
 <li>
-<p>Nr errors less than</p>
+<p>Nr errors at most</p>
 </li>
 </ul>
 </div></div></td>
@@ -3223,14 +3223,14 @@ The default is Passive mode.</p></td>
 <p>At least we delete x files: at least <strong>Limit files</strong> files were deleted.</p>
 </li>
 <li>
-<p>Nr errors less than: the number of errors is at most <strong>Limit files</strong>. A failure before deleting counts as 1 error, so the cases listed under False give true with 1 error when <strong>Limit files</strong> is 1 or more.</p>
+<p>Nr errors at most: after the action is ready to delete files, the number of errors is at most <strong>Limit files</strong>. The delete stops as soon as the number of errors reaches <strong>Limit files</strong>, and the action is still true then.</p>
 </li>
 </ul>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The success condition is not met, for example because the server can&#8217;t be reached or refuses the login, the remote directory doesn&#8217;t exist, the wildcard is not a valid regular expression, or <strong>Wildcard</strong> is empty while <strong>Copy previous results to args</strong> is unchecked. The number of errors is the number of files that failed, or 1 when the action fails before deleting. With <strong>Nr errors less than</strong>, these failures count as 1 error, so the action is true when <strong>Limit files</strong> is 1 or more.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The success condition is not met. With <strong>All works fine</strong>, the delete stops at the first file that fails. With <strong>At least we delete x files</strong>, the delete runs to the end of the list and checks the deleted count at the end. The action is also false, whatever the success condition, when it fails before deleting: the server can&#8217;t be reached or refuses the login, the remote directory doesn&#8217;t exist, the wildcard is not a valid regular expression, or <strong>Wildcard</strong> is empty while <strong>Copy previous results to args</strong> is unchecked. The number of errors is the number of files that failed, or 1 when the action fails before deleting.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>

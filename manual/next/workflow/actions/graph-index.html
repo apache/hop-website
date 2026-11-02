@@ -3003,7 +3003,7 @@
 <p>Object name: the label of the node or relationship you want to update an index for</p>
 </li>
 <li>
-<p>Properties: the comma separated list of node or relationship properties to index</p>
+<p>Properties (, separated): the comma separated list of node or relationship properties to index</p>
 </li>
 <li>
 <p>Index type: RANGE for a regular property index (the default), VECTOR for a vector index</p>
@@ -3129,6 +3129,68 @@ shows the exact <code>CREATE INDEX</code> or <code>DROP INDEX</code> statements 
 </div>
 <div class="paragraph">
 <p>The preview is read-only and helps you verify the index operations that will be performed.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All the index updates ran, with 0 errors. The drops run first, then the creates. An empty list is also true. An empty <strong>Index name</strong> is only fine where the database doesn&#8217;t use names: to create a RANGE index on Neo4j, which then names the index, for range indexes on Memgraph, and for every index on FalkorDB. In the other cases it stops the workflow, see the WARNING.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The action is never false: see the WARNING.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+When an index update can&#8217;t be done, the workflow stops with an error and no hop from the action is followed: the <strong>Graph database connection</strong> is empty, doesn&#8217;t exist or can&#8217;t be reached, an update has no <strong>Update type</strong>, an index is created without <strong>Object name</strong> or <strong>Properties</strong> (on Memgraph and FalkorDB, which identify an index by them, also when it is dropped, except a Memgraph vector index), a VECTOR index is created with <strong>Vector dimensions</strong> that are empty, not a number or not positive (a drop doesn&#8217;t need them), <strong>Index name</strong> is empty where the database needs one (to drop an index or create a vector index on Neo4j, for a vector index on Memgraph, for any index on Apache AGE), or the database refuses the statement. The updates before it stay done, the ones after it are not run.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+On Neo4j and Apache AGE the action creates with <code>IF NOT EXISTS</code> and drops with <code>IF EXISTS</code>. Creating an index that already exists, or dropping one that doesn&#8217;t, does nothing and the action is still true. On Neo4j this is also the case when an index with the same name exists on another label or property, or an equivalent one exists with another name: nothing is created.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

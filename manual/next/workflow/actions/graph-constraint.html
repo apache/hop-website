@@ -2994,7 +2994,7 @@
 <p>Update type : CREATE or DROP</p>
 </li>
 <li>
-<p>Type of object to index on: NODE or RELATIONSHIP</p>
+<p>Type of object to put constraint on: NODE or RELATIONSHIP</p>
 </li>
 <li>
 <p>Type of constraint: UNIQUE, NOT_NULL, or NODE_KEY</p>
@@ -3006,7 +3006,7 @@
 <p>Object name: the label of the node or relationship you want to update a constraint for</p>
 </li>
 <li>
-<p>Property: the property to put the constraint on (for NODE_KEY, use comma-separated properties like "id,name")</p>
+<p>Object property: the property to put the constraint on (for NODE_KEY, use comma-separated properties like "id,name")</p>
 </li>
 </ul>
 </div>
@@ -3044,6 +3044,68 @@ shows the exact <code>CREATE CONSTRAINT</code> or <code>DROP CONSTRAINT</code> s
 <div class="paragraph">
 <p>The preview is read-only and helps you verify the constraint operations that will be performed,
 including the correct syntax for UNIQUE, NOT_NULL, and NODE_KEY constraints.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All the constraint updates ran, with 0 errors. The drops run first, then the creates. An empty list is also true.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The action is never false: see the WARNING.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+When a constraint update can&#8217;t be done, the workflow stops with an error and no hop from the action is followed: the <strong>Graph database connection</strong> is empty, doesn&#8217;t exist or can&#8217;t be reached, an update has no <strong>Update type</strong> (a blank type comes back as CREATE when the workflow is loaded from its file), on Neo4j <strong>Constraint name</strong> is empty or a create has no <strong>Object property</strong> (a drop only uses the name), on Memgraph, which identifies a constraint by label and property, <strong>Object name</strong> or <strong>Object property</strong> is empty, or the database refuses the statement, for example NOT_NULL or NODE_KEY on Neo4j Community Edition, or a UNIQUE constraint on data that already has duplicate values. The updates before it stay done, the ones after it are not run.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+On Neo4j the action creates with <code>IF NOT EXISTS</code> and drops with <code>IF EXISTS</code>. Creating a constraint that already exists, or dropping one that doesn&#8217;t, does nothing and the action is still true. This is also the case when a constraint with the same name exists on another label or property, or an equivalent one exists with another name: nothing is created.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

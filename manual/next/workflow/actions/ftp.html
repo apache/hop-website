@@ -3169,7 +3169,7 @@ For example: .txt$ : get all text files A.ENG:0-9.txt : files starting with A, e
 <p>At least we got x files</p>
 </li>
 <li>
-<p>Nr errors less than</p>
+<p>Nr errors at most</p>
 </li>
 </ul>
 </div></div></td>
@@ -3248,14 +3248,14 @@ For example: .txt$ : get all text files A.ENG:0-9.txt : files starting with A, e
 <p>At least we got x files: at least <strong>Limit files</strong> files were downloaded, whatever the number of errors.</p>
 </li>
 <li>
-<p>Nr errors less than: the number of errors is at most <strong>Limit files</strong>. The download stops as soon as the number of errors reaches <strong>Limit files</strong>, and the action is still true then. Some failures before the download also count as 1 error: see False.</p>
+<p>Nr errors at most: after the action is ready to download files, the number of errors is at most <strong>Limit files</strong>. The download stops as soon as the number of errors reaches <strong>Limit files</strong>, and the action is still true then.</p>
 </li>
 </ul>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The success condition is not met. Without <strong>Nr errors less than</strong>, the download stops at the first file that fails. The action is also false, before any download, when the server can&#8217;t be reached or refuses the login, the remote directory doesn&#8217;t exist, the wildcard is not a valid regular expression, or <strong>Move files after retrieval</strong> is checked while the move-to folder is empty, or doesn&#8217;t exist and <strong>Create folder</strong> is unchecked. With <strong>Nr errors less than</strong>, an unreachable server, a refused login and an invalid wildcard count as 1 error, so the action is true when <strong>Limit files</strong> is 1 or more. A missing remote directory and the move-to folder checks give false whatever the condition.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The success condition is not met. With <strong>All works fine</strong>, the download stops at the first file that fails. With <strong>At least we got x files</strong>, the download walks the whole list and checks the downloaded count at the end. The action is also false, whatever the success condition, when it fails before any download: the server can&#8217;t be reached or refuses the login, the remote directory doesn&#8217;t exist, the wildcard is not a valid regular expression, or <strong>Move files after retrieval</strong> is checked while the move-to folder is empty, or doesn&#8217;t exist and <strong>Create folder</strong> is unchecked.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Errors</p></td>
