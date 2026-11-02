@@ -2981,13 +2981,13 @@
 <div class="ulist">
 <ul>
 <li>
-<p>The target folder in which you want your project documentation to end up in.</p>
+<p>The target folder: the folder in which you want your project documentation to end up in.</p>
 </li>
 <li>
-<p>Include notes?</p>
+<p>Include notes text?</p>
 </li>
 <li>
-<p>Include parameters?</p>
+<p>List parameters?</p>
 </li>
 <li>
 <p>Include metadata?</p>
@@ -2996,7 +2996,7 @@
 <p>Generate HTML?</p>
 </li>
 <li>
-<p>Remove MarkDown after HTML is generated?</p>
+<p>Remove MarkDown files?: only when <strong>Generate HTML?</strong> is checked, removes the MarkDown files after the HTML is generated.</p>
 </li>
 </ul>
 </div>
@@ -3006,13 +3006,69 @@
 <h2 id="_generating_html_from_markdown"><a class="link" href="#_generating_html_from_markdown">Generating HTML from MarkDown</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The links from the index are currently set to the .md.html files.
-I ran the following command in the target folder to generate the HTML files:</p>
+<p>With <strong>Generate HTML?</strong> the action writes an HTML file next to each MarkDown file, and the HTML index links to the HTML files. With <strong>Remove MarkDown files?</strong> the MarkDown files are removed and the HTML files, the images and the styles stay.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> $(find . -name <span class="hljs-string">&#x27;*.md&#x27;</span>) ; <span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span> &amp;&amp; pandoc -s <span class="hljs-variable">$i</span> -c assets/styles.css -o <span class="hljs-variable">$i</span>.html ; <span class="hljs-keyword">done</span></code></pre>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The documentation of the project folder was written to the target folder. The action doesn&#8217;t set its own result: it passes on the result of the previous action, see the WARNING.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of errors is 1. The target folder is empty, is a file, or can&#8217;t be written, or a file of the project can&#8217;t be read (for example a pipeline file that is not valid XML). The files written before the error stay: the documentation is left incomplete.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged: the documentation files are not added.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+When the documentation is written, the action keeps the result of the previous action. After a false action on an unconditional or failure hop, it is false although the documentation was written.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Files that are already in the target folder stay.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

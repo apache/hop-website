@@ -3186,6 +3186,14 @@ AVRO_TYPE_ENUM = 7</p>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_beam"><a class="link" href="#_beam">Beam</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Binary file output writes one Avro file with <code>AvroIO</code>. The filename, including the date and time, is resolved when the pipeline is submitted. A transform copy number or a partition number in the filename is refused. Nested Avro paths and enum fields are refused. Binary-field and JSON-field output still run as an ordinary Beam transform and add a column to the row.</p>
+</div>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/pipeline/transforms/avro-file-input.html"><span>Previous</span><strong>Avro file input</strong></a>

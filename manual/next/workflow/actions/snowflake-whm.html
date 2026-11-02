@@ -2999,19 +2999,19 @@
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Replace?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Replace</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If the warehouse already exists, replace the existing warehouse with your new settings.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fail if warehouse exists?</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If the warehouse already exists the action will fail.  If not checked and Replace? is not checked the action will perform no action if the warehouse already exists.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fail if warehouse exists</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the warehouse already exists the action will fail.  If not checked and Replace is not checked the action will perform no action if the warehouse already exists.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Warehouse Size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warehouse size</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">(X-Small, Small, Medium, Large, X-Large, 2X-Large, 3X-Large) The size of the warehouse to create.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Warehouse Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warehouse type</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">(Standard, Enterprise) The type of warehouse to create.  Enterprise warehouses have more memory available than Standard warehouses.</p></td>
 </tr>
 <tr>
@@ -3023,15 +3023,15 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">The minimum cluster size for clustered warehouses.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Auto suspend</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Auto suspend (minutes)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The number of minutes of inactivity after which the warehouse will automatically suspend.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Auto resume?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Auto resume</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Should the warehouse automatically resume when queries are run against it?</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Initially suspended?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Initially suspended</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Should the warehouse be created in a suspended state.</p></td>
 </tr>
 <tr>
@@ -3063,7 +3063,7 @@
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fail if warehouse does not exist?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fail if warehouse does not exist</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If the warehouse does not exist, the action will fail.</p></td>
 </tr>
 </tbody>
@@ -3139,11 +3139,11 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">If the warehouse does not exist, the action will fail.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Warehouse Size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warehouse size</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">(X-Small, Small, Medium, Large, X-Large, 2X-Large, 3X-Large) The size of the warehouse to create.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Warehouse Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Warehouse type</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">(Standard, Enterprise) The type of warehouse to create.  Enterprise warehouses have more memory available than Standard warehouses.</p></td>
 </tr>
 <tr>
@@ -3155,11 +3155,11 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">The minimum cluster size for clustered warehouses.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Auto suspend</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Auto suspend (minutes)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The number of minutes of inactivity after which the warehouse will automatically suspend.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Auto resume?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Auto resume</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Should the warehouse automatically resume when queries are run against it?</p></td>
 </tr>
 <tr>
@@ -3171,6 +3171,56 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">A comment to be included about the warehouse.</p></td>
 </tr>
 </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The statement ran, with 0 errors.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The action doesn&#8217;t count errors: the number of errors stays 0. <strong>Connection</strong> is empty, no <strong>Action</strong> is selected, for <strong>Create warehouse</strong> <strong>Max cluster size</strong> is not a positive number or <strong>Min cluster size</strong> or <strong>Auto suspend (minutes)</strong> is negative or not a number, the connection doesn&#8217;t exist or can&#8217;t connect, or Snowflake refuses the statement, for example when the warehouse exists and <strong>Fail if warehouse exists</strong> is checked, or doesn&#8217;t exist and <strong>Fail if warehouse does not exist</strong> is checked.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<strong>Create warehouse</strong> and <strong>Alter warehouse</strong> use <strong>Warehouse name</strong> as it is typed: variables in the name are not resolved, unlike for <strong>Drop warehouse</strong>, <strong>Resume warehouse</strong> and <strong>Suspend warehouse</strong>.
+</td>
+</tr>
 </table>
 </div>
 </div>

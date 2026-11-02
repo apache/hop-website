@@ -3094,6 +3094,14 @@ Note: This name has to be unique in a single pipeline.</p></td>
 </table>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_beam"><a class="link" href="#_beam">Beam</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>On a Beam runner each file is read by one worker, and the records are appended to the row that named the file. A positive row limit is the most records that worker emits across the files it reads. A null or empty filename is skipped. The native Spark engine stays excluded.</p>
+</div>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/pipeline/transforms/avro-encode.html"><span>Previous</span><strong>Avro encode</strong></a>

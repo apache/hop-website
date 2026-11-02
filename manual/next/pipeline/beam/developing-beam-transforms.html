@@ -2987,18 +2987,34 @@
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>An entry in the converter&#8217;s handler map, keyed by the transform plugin id. This is an explicitly registered handler class.</p>
+<p>An entry in the converter&#8217;s handler map, keyed by the transform plugin id. <code>addDefaultTransformHandlers()</code> installs these. The same ids are listed in <code>EXPLICIT_HANDLER_PLUGIN_IDS</code>, which is what <code>BeamPipelineEngine.supports()</code> reads at design time. Add Sequence is this form: <code>BeamAddSequenceTransformHandler</code> is registered for the <code>Sequence</code> plugin id, and the meta class itself does not implement the handler interface.</p>
 </li>
 <li>
-<p>The metadata object itself, when it implements <code>IBeamPipelineTransformHandler</code>. MQTT, Debezium, Elasticsearch, Splunk output, and Snowflake input and output use this form.</p>
+<p>The metadata object itself, when it implements <code>IBeamPipelineTransformHandler</code>. BigQuery input, MQTT, Debezium, Elasticsearch, Splunk output, and Snowflake input and output use this form. <code>supports()</code> reports the transform supported because the meta class implements the interface.</p>
 </li>
 <li>
-<p>For anything else, <code>handleGenericTransform()</code> tries to run the ordinary Hop transform inside a Beam <code>DoFn</code>.</p>
+<p>For anything else, <code>handleGenericTransform()</code> tries to run the ordinary Hop transform inside a Beam <code>DoFn</code> (<code>BeamGenericTransformHandler</code>). <code>supports()</code> reports that case as unknown.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
 <p>The generic fallback is not a compatibility promise. It gives every worker its own copy of the transform. A transform that opens one file, one sequence, or one database session will do that once per worker. Sources that read a filename from an incoming field also fail there, because the generic path has no real input row.</p>
+</div>
+<div class="paragraph">
+<p>To add a handler, pick the first form that fits:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Implement <code>IBeamPipelineTransformHandler</code> on the meta class when the transform exists only for Beam, and build the <code>PTransform</code> in <code>handleTransform</code>. See <code>BeamBQInputMeta</code>.</p>
+</li>
+<li>
+<p>Implement <code>IBeamPipelineTransformHandler</code> on a standalone class in the Beam engine, register it in <code>addDefaultTransformHandlers()</code>, and add the plugin id to <code>EXPLICIT_HANDLER_PLUGIN_IDS</code>. See <code>BeamAddSequenceTransformHandler</code>. Keep those two lists the same. This is the form for a transform whose meta class lives in another plugin.</p>
+</li>
+<li>
+<p>Do nothing, and accept the generic <code>DoFn</code>, until a file, a counter, or a connection shows that each worker is doing the work on its own.</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -3014,21 +3030,24 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_metadata_dialog_and_worker_code"><a class="link" href="#_metadata_dialog_and_worker_code">Metadata, dialog, and worker code</a></h2>
+<h2 id="_metadata_dialog_data_and_worker_code"><a class="link" href="#_metadata_dialog_data_and_worker_code">Metadata, dialog, data, and worker code</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Keep the four roles separate:</p>
+<p>A Hop transform is four classes. Beam uses the same four. Only the meta class and the worker function participate in the Beam graph.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The <code>*Meta</code> class holds <code>@HopMetadataProperty</code> fields and, for a self-handling transform, implements <code>IBeamPipelineTransformHandler</code>. User-visible fields also use <code>@GuiWidgetElement</code> inside a group, so the dialog is a <code>GuiCompositeWidgets</code> container rather than a hand-built form.</p>
+<p>The <code>*Meta</code> class extends <code>BaseTransformMeta&lt;Transform, TransformData&gt;</code>. It holds <code>@HopMetadataProperty</code> fields and, for a self-handling transform, implements <code>IBeamPipelineTransformHandler</code>. User-visible fields also use <code>@GuiWidgetElement</code> inside a group, so the dialog is a <code>GuiCompositeWidgets</code> container rather than a hand-built form.</p>
 </li>
 <li>
 <p>The dialog reads and writes that metadata. On OK it calls <code>getWidgetsContents</code>. It does not copy fields by hand.</p>
 </li>
 <li>
-<p>The runtime <code>*Transform</code> class extends <code>BaseTransform</code> and refuses <code>processRow()</code> outside a Beam pipeline. Beam execution does not call it.</p>
+<p>The <code>*Data</code> class is per-copy state for the local engine: an open file, a counter, a database connection. Beam does not call <code>init()</code> on that object and then reuse it across elements. A worker that needs state keeps it on the <code>DoFn</code>, and it must assume a new copy per worker and per bundle.</p>
+</li>
+<li>
+<p>The runtime <code>*Transform</code> class extends <code>BaseTransform</code> and refuses <code>processRow()</code> outside a Beam pipeline. Beam execution does not call it. The local engine still does.</p>
 </li>
 <li>
 <p>Worker functions, such as a <code>DoFn</code> or a Snowflake mapper, call <code>BeamHop.init()</code> before they touch Hop metadata. Row metadata travels as XML from <code>IRowMeta.getMetaXml()</code>, including storage type and string encoding. Do not rebuild a row meta from a type name alone.</p>
@@ -3044,7 +3063,46 @@
 <h2 id="_metrics"><a class="link" href="#_metrics">Metrics</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>BeamPipelineEngine</code> copies Beam counters onto the Hop transform by counter name. <code>READ</code> becomes lines read, <code>WRITTEN</code> becomes lines written, <code>INPUT</code> becomes lines input, and <code>OUTPUT</code> becomes lines output. Increment <code>WRITTEN</code> only after a confirmed write. The current IO transforms increment <code>READ</code> and <code>OUTPUT</code> when a row is converted and handed to Beam. That is not an acknowledgement from the remote system, and lines written stays empty.</p>
+<p>Create counters with <code>Metrics.counter(namespace, transformName)</code>. The namespace is a <code>Pipeline</code> constant and the counter name is the transform name. <code>BeamPipelineEngine</code> copies a counter onto that transform when the namespace matches, ignoring case:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Pipeline.METRIC_NAME_READ</code> (<code>read</code>) becomes lines read.</p>
+</li>
+<li>
+<p><code>Pipeline.METRIC_NAME_WRITTEN</code> (<code>written</code>) becomes lines written.</p>
+</li>
+<li>
+<p><code>Pipeline.METRIC_NAME_INPUT</code> (<code>input</code>) becomes lines input.</p>
+</li>
+<li>
+<p><code>Pipeline.METRIC_NAME_OUTPUT</code> (<code>output</code>) becomes lines output.</p>
+</li>
+<li>
+<p><code>Pipeline.METRIC_NAME_INIT</code> (<code>init</code>) is stored as the init metric.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>Pipeline.METRIC_NAME_ERROR</code> is incremented by the current IO functions. The engine copy loop does not map that namespace onto the transform error count. Increment <code>METRIC_NAME_WRITTEN</code> only after a confirmed write. The current IO transforms increment <code>METRIC_NAME_READ</code> and <code>METRIC_NAME_OUTPUT</code> when a row is converted and handed to Beam. That is not an acknowledgement from the remote system, and lines written stays empty.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_transforms_beam_refuses"><a class="link" href="#_transforms_beam_refuses">Transforms Beam refuses</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>HopPipelineMetaToBeamPipelineConverter</code> keeps two refusal lists, and <code>BeamPipelineEngine.supports()</code> reads both before it looks for a handler.</p>
+</div>
+<div class="paragraph">
+<p><code>HARD_BANNED_META_TYPES</code> maps a meta class to the sentence Hop shows the user. Group By, Unique Rows, Sort Rows, Unique Rows By Hashset, and Join Rows are on it. The class is loaded when the converter class is initialized, so the meta class has to be on the Beam plugin class loader. <code>dependencies.xml</code> is what puts those plugin folders on that loader.</p>
+</div>
+<div class="paragraph">
+<p><code>HARD_BANNED_PLUGIN_IDS</code> is the same kind of refusal for a transform that is not on that loader. Mask fields is banned by plugin id for that reason. A class literal for its meta class would fail to initialize the converter.</p>
+</div>
+<div class="paragraph">
+<p>A banned transform does not fall through to the generic <code>DoFn</code>. <code>validateTransformBeamUsage()</code> throws that sentence while the graph is built, and <code>BeamPipelineEngine.supports()</code> returns the same sentence at design time.</p>
 </div>
 </div>
 </div>

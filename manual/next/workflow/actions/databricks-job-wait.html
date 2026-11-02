@@ -3023,16 +3023,16 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Numeric run id; default <code>${DatabricksRunId}</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Timeout (seconds)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum wait; <code>0</code> = no timeout</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timeout (seconds, 0=none)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum wait; <code>0</code> = no timeout. A value that is not a number is replaced by 3600.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Poll interval (seconds)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Delay between status checks (default 15)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delay between status checks (default 15, at least 1)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Cancel run if workflow is stopped</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If checked, calls <code>jobs/runs/cancel</code> when the parent workflow stops</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cancel Databricks run if workflow is stopped</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If checked, calls <code>jobs/runs/cancel</code> when the parent workflow stops, and also when the timeout is reached</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Result variables</p></td>
@@ -3057,6 +3057,56 @@
 <p><a href="../../metadata-types/databricks-connection.html" class="xref page">Databricks Connection</a></p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The run ended with life cycle state <code>TERMINATED</code> and result state <code>SUCCESS</code>, with 0 errors.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of errors is 1. <strong>Databricks connection</strong> is empty or doesn&#8217;t exist, <strong>Run ID</strong> is empty or not a number, a call to the Jobs API fails, the run ends with another result state (for example <code>FAILED</code> or <code>CANCELED</code>) or with life cycle state <code>SKIPPED</code> or <code>INTERNAL_ERROR</code>, the timeout is reached, or the workflow is stopped while the action waits.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+After every status check the action sets the result variables for the Job ID, the Run ID, the status (the result state, like <code>SUCCESS</code> or <code>FAILED</code>, once the run is <code>TERMINATED</code>, the life cycle state before that) and the run page URL (the Job ID and the URL only when Databricks returns them), in its workflow and in every parent workflow. The error variable is emptied when the action starts and holds the error message when the action is false, except for a canceled run: then it stays empty.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

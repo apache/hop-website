@@ -3024,8 +3024,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">JSON</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The JSON instructions to execute.
-Multiple statements can be separated by comma.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The JSON instructions to execute: one JSON document, or several in a JSON array (<code>[ {&#8230;&#8203;}, {&#8230;&#8203;} ]</code>).</p></td>
 </tr>
 </tbody>
 </table>
@@ -3052,6 +3051,68 @@ Multiple statements can be separated by comma.</p></td>
     <span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;drop&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;hop_collection&quot;</span> <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">]</span></code></pre>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result"><a class="link" href="#_result">Result</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What this action passes on to the next action. See <a href="../action-results.html" class="xref page">Action results</a> for how results travel through a workflow.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every instruction ran, with 0 errors. An instruction that returns documents, like <code>find</code>, is true too: the documents are not passed on.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of errors is 1. <strong>MongoDB Connection</strong> is empty or doesn&#8217;t exist, the server can&#8217;t be reached or refuses the login, <strong>Use external file</strong> is checked while <strong>Filename</strong> is empty or the file can&#8217;t be read, the JSON is empty or not valid, or MongoDB refuses an instruction (for example an unknown command). The instructions of an array run one after the other: the ones before the failing instruction stay done, the ones after it are not run.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Several instructions must be in a JSON array. Instructions separated by commas without the brackets are not an error, but only the first one runs.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Write errors that MongoDB reports in its answer don&#8217;t make the action false. For example an <code>insert</code> with a duplicate <code>_id</code> is true, although the duplicate document is not inserted.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
