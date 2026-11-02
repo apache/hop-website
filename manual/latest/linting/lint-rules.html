@@ -1,0 +1,3861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lint rules | Apache Hop</title>
+<meta name="description" content="How Hop lint rules are written, which rules ship with Hop, and how a project switches them on, retunes them or adds its own.">
+
+<link rel="canonical" href="https://hop.apache.org/manual/latest/linting/lint-rules.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Apache Hop">
+<meta property="og:title" content="Lint rules">
+<meta property="og:description" content="How Hop lint rules are written, which rules ship with Hop, and how a project switches them on, retunes them or adds its own.">
+<meta property="og:url" content="https://hop.apache.org/manual/latest/linting/lint-rules.html">
+<meta property="og:image" content="https://hop.apache.org/img/social-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hop.apache.org/img/social-card.png">
+
+<link rel="icon" href="../../../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="196x196" href="../../../favicon-196x196.png">
+<link rel="manifest" href="../../../site.webmanifest">
+<link rel="stylesheet" href="../../../_/css/site.css">
+
+<script>(function(){try{var t=localStorage.getItem('hop-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+</head>
+<body class="doc-page" data-pagefind-body>
+<a class="skip-link" href="#main" data-pagefind-ignore>Skip to main content</a>
+<header class="site-header" data-pagefind-ignore>
+  <div class="site-header__inner">
+    <a class="brand" href="../../../" aria-label="Apache Hop home">
+      <img src="../../../img/hop-logo.svg" alt="" width="34" height="34" aria-hidden="true">
+      <span class="brand__name">Apache Hop</span>
+    </a>
+
+    <nav class="mainnav" id="mainnav" aria-label="Main">
+      <ul class="mainnav__list">
+        <li><a href="../../../blog/">Blog</a></li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-docs">
+            Documentation <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-docs">
+            <li><a href="../../../manual/latest/getting-started/">Getting started</a></li>
+            <li><a href="../../../manual/latest/">User manual</a></li>
+            <li><a href="../../../dev-manual/latest/">Developer documentation</a></li>
+            <li><a href="../../../docs/architecture/">Architecture</a></li>
+            <li><a href="../../../docs/roadmap/">Roadmap</a></li>
+          </ul>
+        </li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-community">
+            Community <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-community">
+            <li><a href="../../../community/contributing/">Contributing</a></li>
+            <li><a href="../../../community/mailing-list/">Mailing lists</a></li>
+            <li><a href="../../../community/tools/">Tools & chat</a></li>
+            <li><a href="../../../community/events/">Events & user groups</a></li>
+            <li><a href="../../../community/team/">Team</a></li>
+            <li><a href="../../../community/support/">Support</a></li>
+            <li><a href="../../../community/commercial/">Commercial support</a></li>
+            <li><a href="../../../community/ethos/">Ethos</a></li>
+            <li><a href="../../../security/">Security advisories</a></li>
+          </ul>
+        </li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-asf">
+            Apache <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-asf">
+            <li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li>
+            <li><a href="https://www.apache.org/events/current-event" rel="noopener" target="_blank">Events</a></li>
+            <li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li>
+            <li><a href="https://www.apache.org/security/" rel="noopener" target="_blank">Security</a></li>
+            <li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li>
+            <li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li>
+            <li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-tools">
+      <div class="search" role="search">
+        <label class="visually-hidden" for="search-input">Search Apache Hop</label>
+        <input id="search-input" type="search" placeholder="Search" autocomplete="off">
+      </div>
+      <span class="socials">
+        <a class="icon-btn" href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+        <a class="icon-btn" href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"/></svg></a>
+        <a class="icon-btn" href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"/></svg></a>
+        <a class="icon-btn" href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg></a>
+      </span>
+      <a class="mainnav__cta" href="../../../download/">Download</a>
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Switch theme" title="Switch theme">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+      </button>
+      <button type="button" id="nav-burger" class="icon-btn burger" aria-expanded="false" aria-controls="mainnav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="doc-shell">
+<div class="doc-nav" id="doc-nav" data-pagefind-ignore>
+  <button type="button" class="doc-nav__close icon-btn" aria-label="Close navigation">&times;</button>
+  <nav aria-label="Documentation">
+    <div class="doc-nav__group">
+      
+      <ul class="doc-nav__list">
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Getting Started section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/getting-started/index.html">Getting Started</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/getting-started/hop-what-is-hop.html">What is Hop</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/getting-started/hop-download-install.html">Download &amp; Install</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/getting-started/hop-concepts.html">Hop Concepts</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/getting-started/hop-gui.html">Hop Gui Overview</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/getting-started/hop-gui-pipelines.html">Your first pipeline</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/getting-started/hop-gui-workflows.html">Your first workflow</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/getting-started/hop-projects.html">Projects and environments</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/getting-started/hop-tools.html">The Hop toolbox</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/getting-started/hop-next-steps.html">Next Steps</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Kettle/PDI and Hop section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/hop-vs-kettle/index.html">Kettle/PDI and Hop</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-vs-kettle/hop-vs-kettle.html">Hop vs Kettle</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-vs-kettle/if-you-know-kettle.html">If you know Kettle</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-vs-kettle/import-kettle-projects.html">Upgrade Kettle to Hop</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/concepts.html">Concepts</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/installation-configuration.html">Installation and Configuration</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/sizing.html">Sizing guide</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop in Docker section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/docker-container.html">Hop in Docker</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-web-docker.html">Hop Web in Docker</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/cloud.html">Hop in the Cloud</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/supported-jvms.html">Supported Java Versions</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop Gui section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/hop-gui/index.html">Hop Gui</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-gui/disable-ui-elements.html">Customize the UI</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-gui/file-dialog.html">File Dialog</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-gui/vfs-file-explorer.html">VFS File Explorer</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-gui/hop-gui-popup-dialog.html">Popup Dialog</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-gui/notes.html">Notes on pipelines and workflows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-gui/perspectives.html">Perspectives</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-gui/perspective-ai-advisor.html">AI Assistant</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-gui/perspective-database.html">Database perspective</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-gui/perspective-search.html">Search</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-gui/perspective-git-commit.html">Git commit perspective</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-gui/perspective-git.html">Git perspective</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-gui/hop-gui-git.html">Working with git</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-gui/shortcuts.html">Keyboard Shortcuts</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-gui/canvas-mouse.html">Canvas Mouse Gestures</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-gui/hop-web.html">Hop Web</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-gui/notifications.html">Notifications</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Projects section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/projects/index.html">Projects</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/projects/projects-environments.html">Projects &amp; Environments</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/projects/metadata.html">Metadata</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/projects/advanced.html">Advanced Configuration</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Pipelines section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/pipeline/pipelines.html">Pipelines</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/hop-pipeline-editor.html">Pipeline Editor</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/create-pipeline.html">Create a Pipeline</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/run-preview-debug-pipeline.html">Run, Preview and Debug a Pipeline</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/errorhandling.html">Error Handling</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Getting started with Apache Beam section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/pipeline/beam/getting-started-with-beam.html">Getting started with Apache Beam</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Running the Beam samples section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/pipeline/beam/running-the-beam-samples.html">Running the Beam samples</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/beam/beam-samples-direct-runner.html">Direct Runner</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/beam/beam-samples-flink.html">Apache Flink</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/beam/beam-samples-spark.html">Apache Spark</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/beam/beam-samples-dataflow.html">Google Cloud Dataflow</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/beam/flink-k8s-operator-running-hop-pipeline.html">Running a Hop pipeline using the Flink Kubernetes Operator</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/beam/developing-beam-transforms.html">Developing a Beam transform</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Getting started with the native Spark engine section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/pipeline/spark/getting-started-with-native-spark.html">Getting started with the native Spark engine</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/spark/local-standalone-cluster.html">Local standalone cluster</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/spark/yarn.html">YARN</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/spark/paths-and-filesystems.html">Paths and file systems</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/spark/cluster-mapping-walkthrough.html">Cluster mapping walk-through</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/spark/lakehouse.html">Lakehouse tables (Delta / Iceberg)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/spark/databricks.html">Native Spark on Databricks</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/pipeline-metrics.html">Pipeline Metrics</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Pipeline Run Configurations section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/pipeline/pipeline-run-configurations/pipeline-run-configurations.html">Pipeline Run Configurations</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/pipeline-run-configurations/beam-dataflow-pipeline-engine.html">Beam Google DataFlow</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/pipeline-run-configurations/beam-direct-pipeline-engine.html">Beam Direct</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/pipeline-run-configurations/beam-flink-pipeline-engine.html">Beam Flink</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/pipeline-run-configurations/beam-spark-pipeline-engine.html">Beam Spark</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/pipeline-run-configurations/native-local-pipeline-engine.html">Native Local</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/pipeline-run-configurations/native-remote-pipeline-engine.html">Native Remote</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/pipeline-run-configurations/native-load-balancing-pipeline-engine.html">Native Load-balancing</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/pipeline-run-configurations/native-spark-pipeline-engine.html">Native Spark</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/pipeline-unit-testing.html">Pipeline Unit Tests</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/metadata-injection.html">Metadata Injection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/specify-copies.html">Specify copies</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/partitioning.html">Partitioning</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/formatting-values.html">Formatting numbers and dates</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/pipeline-sources.html">Pipeline sources</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Transforms section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/pipeline/transforms.html">Transforms</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/abort.html">Abort</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/addchecksum.html">Add a checksum</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/addconstant.html">Add Constants</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/addsequence.html">Add Sequence</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/addfieldschangesequence.html">Add value fields changing sequence</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/addxml.html">Add XML</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/analyticquery.html">Analytic Query</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/append.html">Append Streams</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/apache-tika.html">Apache Tika</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/avro-decode.html">Avro decode</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/avro-encode.html">Avro encode</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/avro-file-input.html">Avro file input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/avro-file-output.html">Avro file output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/aws-sns-notify.html">AWS SNS notify</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/aws-sqs-reader.html">AWS SQS reader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/azure-event-hubs-listener.html">Azure Event Hubs listener</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/azure-event-hubs-writer.html">Azure Event Hubs writer</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beambigtableinput.html">Beam Bigtable input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beambigtableoutput.html">Beam Bigtable output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beambigqueryinput.html">Beam BigQuery Input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beambigqueryoutput.html">Beam BigQuery Output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beamdebeziuminput.html">Beam Debezium input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beamelasticsearchinput.html">Beam Elasticsearch input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beamelasticsearchoutput.html">Beam Elasticsearch output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beammqttinput.html">Beam MQTT input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beammqttoutput.html">Beam MQTT output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beamsnowflakeinput.html">Beam Snowflake input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beamsnowflakeoutput.html">Beam Snowflake output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beamsplunkoutput.html">Beam Splunk output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beamfileinput.html">Beam file input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beamfileoutput.html">Beam file output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beamgcppublisher.html">Beam GCP Pub/Sub: publish</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beamgcpsubscriber.html">Beam GCP Pub/Sub: subscribe</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beamhivecataloginput.html">Beam Hive catalog input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beamkafkaconsume.html">Beam Kafka consume</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beamkafkaproduce.html">Beam Kafka produce</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/binaryfileoutput.html">Binary File Output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beamkinesisconsume.html">Beam Kinesis consume</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beamkinesisproduce.html">Beam Kinesis produce</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beampartition.html">Beam partition</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beamtimestamp.html">Beam timestamp</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/beamwindow.html">Beam window</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/blockingtransform.html">Blocking transform</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/blockuntiltransformsfinish.html">Blocking until transforms finish</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/calculator.html">Calculator</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/cassandra-input.html">Cassandra Input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/cassandra-output.html">Cassandra Output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/sstable-output.html">Cassandra SSTable Output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/calldbproc.html">Call DB procedure</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/changefileencoding.html">Change file encoding</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/checkfilelocked.html">Check if file is locked</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/checkwebserviceavailable.html">Check if webservice is available</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/clonerow.html">Clone row</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/closure.html">Closure</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/coalesce.html">Coalesce</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/columnexists.html">Column exists</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/combinationlookup.html">Combination lookup/update</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/concatfields.html">Concat fields</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/copyrowstoresult.html">Copy rows to result</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/cratedb-bulkloader.html">CrateDB Bulk Loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/creditcardvalidator.html">Credit card validator</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/csvinput.html">CSV file input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/cypher-builder.html">Cypher builder</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/cypher-output.html">Cypher output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/data-stream-input.html">Data stream input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/data-stream-output.html">Data stream output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/databasejoin.html">Database Join</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/databaselookup.html">Database Lookup</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/databasevaluevalidation.html">Database value validation</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/datagrid.html">Data Grid</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/datasetinput.html">Data set input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/datasetoutput.html">Data set output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/dbimpactinput.html">Database impact input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/ddl.html">DDL Generator</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/validator.html">Data Validator</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/delay.html">Delay row</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/delete.html">Delete</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/serialize-de-from-file.html">De-Serialize From File</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/detectemptystream.html">Detect Empty Stream</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/detectlanguage.html">Detect language</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/dimensionlookup.html">Dimension lookup/update</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/dorisbulkloader.html">Doris Bulk Loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/rulesaccumulator.html">Drools Rule Accumulator</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/rulesexecutor.html">Drools Rule Executor</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/dummy.html">Dummy (do nothing)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/dynamicsqlrow.html">Dynamic SQL row</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/edi2xml.html">Edi to XML</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/emailinput.html">Email Messages Input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/embedtext.html">Embed text</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/enhancedjsonoutput.html">Enhanced JSON output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/excelinput.html">Excel input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/excelwriter.html">Excel writer</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/execprocess.html">Execute a process</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/execsqlrow.html">Execute row SQL script</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/execsql.html">Execute SQL script</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/exectests.html">Execute unit tests</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/execinfo.html">Execution information</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/extractgraph.html">Extract graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/fake.html">Fake data</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/fileexists.html">File exists</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/filemetadata.html">File metadata</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/filesfromresult.html">Files from result</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/filestoresult.html">Files to result</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/filterrows.html">Filter Rows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/formula.html">Formula</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/openformula.html">OpenFormula</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/fuzzymatch.html">Fuzzy match</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/generate-graph-csvs.html">Generate graph CSVs</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/generaterandomvalue.html">Generate Random Value</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/getdatafromxml.html">Get Data From XML</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/getfilenames.html">Get filenames</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/getfilesrowcount.html">Get files rowcount</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/get-graph-logging-info.html">Get graph logging info</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/get-graph-schema.html">Get graph schema</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/getrecordsfromstream.html">Get records from stream</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/getrowsfromresult.html">Get Rows from Result</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/getsubfolders.html">Get SubFolder names</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/getsystemdata.html">Get System Info</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/gettablenames.html">Get table names</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/getvariable.html">Get variables</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/gitinput.html">Git Input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/google-analytics.html">Google Analytics Input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/google-sheets-input.html">Google Sheets input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/google-sheets-output.html">Google Sheets output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/graph-output.html">Graph output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/graph-query.html">Graph query</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/graph-vector-search.html">Graph vector search</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/groupby.html">Group By</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/html2text.html">HTML 2 Text</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/http.html">HTTP client</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/httppost.html">HTTP Post</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/identifylastrow.html">Identify last row in a stream</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/ifnull.html">If null</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/injector.html">Injector</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/insertupdate.html">Insert / Update</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/javafilter.html">Java Filter</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/javascript.html">JavaScript</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/jdbcmetadata.html">JDBC Metadata</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/joinrows.html">Join Rows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/jms-consumer.html">JMS consumer</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/jms-producer.html">JMS producer</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/jsoninput.html">JSON Input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/jsonnormalizeinput.html">JSON Normalize Input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/jsonoutput.html">JSON Output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/kafkaconsumer.html">Kafka consumer</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/kafkaproducer.html">Kafka producer</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/spark-lake-table-input.html">Lake table input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/spark-lake-table-output.html">Lake table output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/languagemodelchat.html">Language model chat</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/ldapinput.html">LDAP Input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/ldapoutput.html">LDAP Output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/loadfileinput.html">Load file content in memory</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/mail.html">Mail</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/mapping-input.html">Mapping input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/mapping-output.html">Mapping output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/maskfields.html">Mask fields</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/memgroupby.html">Memory Group By</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/mergejoin.html">Merge Join</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/mergerows.html">Merge rows (diff)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/metainject.html">Metadata Injection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/metadata-input.html">Metadata input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/metastructure.html">Metadata structure of stream</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/accessoutput.html">Microsoft Access Output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/monetdbbulkloader.html">MonetDB Bulk Loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/mongodbdelete.html">MongoDB delete</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/mongodbinput.html">MongoDB Input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/mongodboutput.html">MongoDB Output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/mssqlbulkloader.html">MS SQL Server Bulk Loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/multi-mapping.html">Multi Mapping</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/multimerge.html">Multiway Merge Join</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/mysqlbulkloader.html">MySQL bulk loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/neo4j-import.html">Neo4j import</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/nullif.html">Null If</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/numberrange.html">Number range</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/odata-input.html">OData input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/orabulkloader.html">Oracle Bulk Loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/outputtransformmetrics.html">Output transform metrics</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/parquet-file-input.html">Parquet file input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/parquet-file-output.html">Parquet file output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/pipeline-data-probe.html">Pipeline Data Probe</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/pipeline-logging.html">Pipeline logging</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/pgvector-search.html">pgvector search</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/pgvector-upsert.html">pgvector upsert</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/pgpdecryptstream.html">PGP decrypt stream</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/pgpencryptstream.html">PGP encrypt stream</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/pipeline-executor.html">Pipeline Executor</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/plugincatalog.html">Plugin Catalog</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/postgresbulkloader.html">PostgreSQL bulk loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/processfiles.html">Process files</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/propertyinput.html">Properties file Input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/propertyoutput.html">Properties file Output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/redshift-bulkloader.html">Redshift Bulk Loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/redis-input.html">Redis Input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/redis-output.html">Redis Output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/regexeval.html">Regex Evaluation</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/repeatfields.html">Repeat fields</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/replacestring.html">Replace in String</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/reservoirsampling.html">Reservoir Sampling</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/rest.html">REST Client</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/rowdenormaliser.html">Row Denormaliser</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/rowflattener.html">Row Flattener</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/rowgenerator.html">Row Generator</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/rownormaliser.html">Row Normaliser</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/runssh.html">Run SSH commands</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/salesforcedelete.html">Salesforce Delete</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/salesforceinput.html">Salesforce Input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/salesforceinsert.html">Salesforce Insert</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/salesforceupdate.html">Salesforce Update</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/salesforceupsert.html">Salesforce Upsert</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/samplerows.html">Sample Rows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/sasinput.html">SAS input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/script.html">Script</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/selectvalues.html">Select Values</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/serialize-to-file.html">Serialize To File</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/serverstatus.html">Server Status</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/setvalueconstant.html">Set field value to a constant</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/setvaluefield.html">Set field Value to a field</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/setvariable.html">Set Variables</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/sftpput.html">SFTP Put</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/simple-mapping.html">Simple Mapping</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/snowflakebulkloader.html">Snowflake bulk loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/snowflakeid.html">Snowflake ID Generator</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/sort.html">Sort Rows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/sortedmerge.html">Sorted Merge</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/sortedschemamerge.html">Sorted schema merge</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/spark-file-input.html">Spark file input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/spark-file-output.html">Spark file output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/spark-lake-table-maintenance.html">Spark lake table maintenance</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/spark-lake-table-merge.html">Spark lake table merge</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/spark-sql.html">Spark SQL</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/splitfields.html">Split Fields</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/splitfieldtorows.html">Split fields to rows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/split-graph.html">Split graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/splunkinput.html">Splunk input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/sqlfileoutput.html">SQL File Output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/standardizephonenumber.html">Standardize Phone Number</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/stanfordnlp.html">Stanford NLP</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/schemamapping.html">Static Schema Mapping</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/streamlookup.html">Stream Lookup</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/streamschemamerge.html">Stream schema merge</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/stringcut.html">String cut</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/stringoperations.html">String operations</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/structuredextract.html">Structured extract</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/switchcase.html">Switch / Case</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/synchronizeaftermerge.html">Synchronize after merge</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/tablecompare.html">Table Compare</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/tableexists.html">Table Exists</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/tableinput.html">Table Input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/tableoutput.html">Table Output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/terafast.html">Teradata Bulk Loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/textchunker.html">Text chunker</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/textfileinput.html">Text File Input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/textfileoutput.html">Text File Output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/tokenreplacement.html">Token replacement</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/uniquerows.html">Unique Rows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/uniquerowsbyhashset.html">Unique Rows (HashSet)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/update.html">Update</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/userdefinedjavaclass.html">User Defined Java Class</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/userdefinedjavaexpression.html">User Defined Java Expression</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/valuemapper.html">Value Mapper</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/vcardinput.html">vCard Input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/vcardoutput.html">vCard Output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/verticabulkloader.html">Vertica Bulk Loader</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/watchfiles.html">Watch Files</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/webservices.html">Web services lookup</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/workflow-executor.html">Workflow Executor</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/workflow-logging.html">Workflow logging</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/writetolog.html">Write to log</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/xmlinputstream.html">XML Input Stream (StAX)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/xmljoin.html">XML Join</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/xmloutput.html">XML Output</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/xmloutputadvanced.html">XML output (Advanced)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/xsdvalidator.html">XSD Validator</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/xslt.html">XSL transformation</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/yamlinput.html">Yaml Input</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/pipeline/transforms/zipfile.html">Zip file</a>
+    
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Workflows section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/workflow/workflows.html">Workflows</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/create-workflow.html">Create a Workflow</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/run-debug-workflow.html">Run and Debug a Workflow</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/action-results.html">Action results</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Workflow Run Configurations section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/workflow/workflow-run-configurations/workflow-run-configurations.html">Workflow Run Configurations</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/workflow-run-configurations/native-local-workflow-engine.html">Native Local</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/workflow-run-configurations/native-remote-workflow-engine.html">Native Remote</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/workflow-run-configurations/native-load-balancing-workflow-engine.html">Native Load-balancing</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Actions section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/workflow/actions.html">Actions</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/abort.html">Abort workflow</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/addresultfilenames.html">Add filenames to result</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/as400command.html">AS/400 command</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/documentation.html">Build documentation</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/mysqlbulkfile.html">Bulk load from MySQL into file</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/mssqlbulkload.html">Bulk load into MSSQL</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/mysqlbulkload.html">Bulk load into MySQL</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/cassandra-exec-cql.html">Cassandra Exec Cql</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/checkdbconnection.html">Check Db connections</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/checkfilelocked.html">Check files locked</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/check-graph-database-connections.html">Check graph database connections</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/folderisempty.html">Check if a folder is empty</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/xmlwellformed.html">Check if XML file is well-formed</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/webserviceavailable.html">Check webservice availability</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/filesexist.html">Checks if files exists</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/columnsexist.html">Columns exist in a table</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/comparefolders.html">Compare folders</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/dostounix.html">Convert file between Windows and Unix</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/copyfiles.html">Copy Files</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/createfolder.html">Create a folder</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/createfile.html">Create file</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/create-property-graph.html">Create property graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/databricks-job-run.html">Databricks job run</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/databricks-job-wait.html">Databricks job wait</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/dbt.html">dbt</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/pgpdecryptfiles.html">Decrypt files with PGP</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/deletefile.html">Delete file</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/deleteexecutioninfo.html">Delete execution information</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/deleteresultfilenames.html">Delete filenames from result</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/deletefiles.html">Delete files</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/deletefolders.html">Delete folders</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/dtdvalidator.html">DTD validator</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/dummy.html">Dummy</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/pgpencryptfiles.html">Encrypt files with PGP</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/repeat-end.html">End repeat</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/evalfilesmetrics.html">Evaluate files metrics</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/evaluatetablecontent.html">Evaluate rows number in a table</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/filecompare.html">File compare</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/fileexists.html">File exists</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/ftpdelete.html">FTP delete</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/ftp.html">Get a file with FTP</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/sftp.html">Get a file with SFTP</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/getpop.html">Get mails (POP3/IMAP)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/graph-constraint.html">Graph constraint</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/graph-index.html">Graph index</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/graph-script.html">Graph script</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/http.html">HTTP</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/eval.html">JavaScript</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/join.html">Join</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/mail.html">Mail</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/mailvalidator.html">Mail validator</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/movefiles.html">Move files</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/mql.html">MongoDB QL</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/ping.html">Ping a host</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/pipeline.html">Pipeline</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/processresultfilenames.html">Process result filenames</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/ftpput.html">Put a file with FTP</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/sftpput.html">Put a file with SFTP</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/repeat.html">Repeat</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/runlinter.html">Run Linter</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/runpipelinetests.html">Run pipeline unit tests</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/sendnagiospassivecheck.html">Send Nagios passive check</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/snmptrap.html">Send SNMP trap</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/setpasswordencoder.html">Set password encoder</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/setvariables.html">Set variables</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/shell.html">Shell</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/simpleeval.html">Simple evaluation</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/snowflake-whm.html">Snowflake warehouse manager</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/sql.html">SQL</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/start.html">Start</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/success.html">Success</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/tableexists.html">Table exists</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/telnet.html">Telnet a host</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/truncatetables.html">Truncate tables</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/unzip.html">Unzip file</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/pgpverify.html">Verify file signature with PGP</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/waitfor.html">Wait for</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/waitforfile.html">Wait for file</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/waitforsql.html">Wait for SQL</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/workflow.html">Workflow</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/writetofile.html">Write to file</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/writetolog.html">Write to Log</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/xsdvalidator.html">XSD validator</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/xslt.html">XSL pipeline</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/workflow/actions/zipfile.html">Zip File</a>
+    
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/fields-parameters-variables.html">Fields, parameters, and variables</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Variables section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/variables.html">Variables</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/variables/parameters.html">Working with parameters</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/variables/parameter-passing.html">Passing parameters to a child</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Virtual File System section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/vfs.html">Virtual File System</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/vfs/aws-s3-vfs.html">Amazon Web Services S3</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/vfs/azure-blob-storage-vfs.html">Microsoft Azure Storage</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/vfs/databricks-vfs.html">Databricks Volumes / Workspace</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/vfs/dropbox-vfs.html">Dropbox</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/vfs/google-cloud-storage-vfs.html">Google Cloud Storage</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/vfs/google-drive-vfs.html">Google Drive</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/vfs/git-vfs.html">Git</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/vfs/hdfs-vfs.html">HDFS</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/vfs/minio-vfs.html">MinIO</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/vfs/smb-vfs.html">SMB</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Relational Database Connections section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/database/databases.html">Relational Database Connections</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/derby.html">Apache Derby</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/duckdb.html">DuckDB</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/apache-hive.html">Apache Hive</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/as400.html">AS400</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/clickhouse.html">ClickHouse</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/cratedb.html">CrateDB</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/databricks.html">Databricks</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/db2.html">DB2</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/doris.html">Apache Doris</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/exasol.html">Exasol</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/firebird.html">Firebird</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/googlebigquery.html">Google BigQuery</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/greenplum.html">Greenplum</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/sqlbase.html">Gupta SQLBase</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/h2.html">H2</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/hypersonic.html">Hypersonic</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/universe.html">IBM Universe</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/cloudera-impala.html">Cloudera Impala</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/infobright.html">Infobright DB</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/informix.html">Informix</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/ingres.html">Ingres</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/interbase.html">Interbase</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/cache.html">InterSystems Cache</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/iris.html">InterSystems Iris</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/kingbasees.html">Kingbase ES</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/mariadb.html">Mariadb</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/sapdb.html">MaxDB (SAP DB)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/singlestore.html">SingleStore (MemSQL)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/access.html">Microsoft Access</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/monetdb.html">MonetDB</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/mssql.html">MS SqlServer</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/mssqlnative.html">MS SqlServer (Native)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/mysql.html">MySql</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/netezza.html">Netezza</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/oracle.html">Oracle</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/oraclerdb.html">Oracle RDB</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/postgresql.html">PostgreSQL</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/redshift.html">Redshift</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/snowflake.html">Snowflake</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/sqlite.html">SqLite</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/sybase.html">Sybase</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/sybaseiq.html">Sybase IQ</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/teradata.html">Teradata</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/vectorwise.html">Vectorwise</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/database/databases/vertica.html">Vertica</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Logging basics section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/logging/logging-basics.html">Logging basics</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/logging/logging-reflection.html">Logging reflection</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Metadata Types section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/metadata-types/index.html">Metadata Types</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/ai-provider.html">AI Provider</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/async-web-service.html">Asynchronous Web Service</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/azure-authentication.html">Azure Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/beam-file-definition.html">Beam File Definition</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/cassandra/cassandra-connection.html">Cassandra Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/databricks-connection.html">Databricks Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/databricks-vfs-connection.html">Databricks VFS Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/data-set.html">Data Set</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Data Stream section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/metadata-types/data-stream/data-stream.html">Data Stream</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/data-stream/arrow-file-stream.html">Apache Arrow File Stream</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/data-stream/arrow-flight.html">Apache Arrow Flight Stream</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/data-stream/arrow-random-access-file.html">Apache Arrow Random Access File</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/dbt-project.html">dbt Project</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/execution-data-profile.html">Execution Data Profile</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Execution Information Location section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/metadata-types/execution-information-location.html">Execution Information Location</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/elastic-location-type.html">Elastic location</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/opensearch-location-type.html">OpenSearch location</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/graphs/graph-database-location.html">Graph database location</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/ftp-connection.html">FTP Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/git-connection.html">Git Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/git-vfs-connection.html">Git repository</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/google-storage-authentication.html">Google Storage Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/graphs/graph-database-connection.html">Graph Database Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/hdfs-connection.html">HDFS Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/hop-server.html">Hop Server</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/spark-catalog.html">Lakehouse catalog</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/mail-server-connection.html">Mail Server Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/masking-pattern.html">Masking Pattern</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/minio-connection.html">Minio (S3) Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/mongodb-connection.html">MongoDB Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/graphs/neo4j-connection.html">Neo4j Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/graphs/graph-model.html">Graph Model</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/partition-schema.html">Partition Schema</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/pipeline-log.html">Pipeline Log</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/pipeline-probe.html">Pipeline Probe</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/pipeline-run-config.html">Pipeline Run Configuration</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/pipeline-unit-test.html">Pipeline Unit Test</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/rdbms-connection.html">Relational Database Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/redis/redis-connection.html">Redis Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/rest-connection.html">REST Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/salesforce-connection.html">Salesforce Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/sftp-connection.html">SFTP Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/smb-connection.html">SMB Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/splunk-connection.html">Splunk Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/jms-connection.html">JMS connection</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Variable Resolver section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/metadata-types/variable-resolver/index.html">Variable Resolver</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/variable-resolver/aws-secrets-manager-variable-resolver.html">AWS Secrets Manager variable resolver</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/variable-resolver/azure-key-vault-variable-resolver.html">Azure Key Vault variable resolver</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/variable-resolver/google-secret-manager-variable-resolver.html">Google Secret Manager variable resolver</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/variable-resolver/hashicorp-vault-variable-resolver.html">Hashicorp Vault variable resolver</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/variable-resolver/hop-password-variable-resolver.html">Hop Password variable resolver</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/variable-resolver/openbao-variable-resolver.html">OpenBAO variable resolver</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/variable-resolver/pipeline-variable-resolver.html">Pipeline variable resolver</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/static-schema-definition.html">Static Schema Definition</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/naming-scheme.html">Naming Scheme</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-server/web-service.html">Web Service</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/webdav-connection.html">WebDAV Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/workflow-log.html">Workflow Log</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/metadata-types/workflow-run-config.html">Workflow Run Configuration</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Passwords section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/password/passwords.html">Passwords</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/password/passwords/aespasswords.html">AES Two way password encoder</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/samples/samples.html">Samples</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Technology section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/technology/technology.html">Technology</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/technology/ai/index.html">AI</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/technology/age/index.html">Apache AGE</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/technology/arrow/apache-arrow.html">Apache Arrow</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/technology/calcite/index.html">Apache Calcite</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/technology/avro/index.html">Avro</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/technology/azure/index.html">Azure</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/technology/cassandra/index.html">Cassandra</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/technology/falkordb/index.html">FalkorDB</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/technology/graph-databases/index.html">Graph databases</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/technology/gremlin/index.html">Gremlin</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/technology/memgraph/index.html">Memgraph</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Neo4j section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/technology/neo4j/index.html">Neo4j</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/technology/neo4j/working-with-neo4j-data.html">Working with Neo4j data</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/technology/neo4j/neo4j-logging-schema.html">Neo4j Logging Schema</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/technology/redis/index.html">Redis</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/technology/google/index.html">Google</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle OpenLineage section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/technology/openlineage/index.html">OpenLineage</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/technology/openlineage/dataset-identity.html">Dataset identity</a>
+    
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop Server section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/hop-server/index.html">Hop Server</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Deploying Hop Server section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/hop-server/deploying.html">Deploying Hop Server</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-server/deploy-project-image.html">Project in a Docker image</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-server/deploy-export-resources.html">Remote run with export resources</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-server/deploy-git-checkout.html">Git checkout on the server</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-server/rest-api.html">REST api</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-server/json-api.html">JSON API</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-server/web-service.html">Web Service</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-server/async-web-service.html">Async Web Service</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop Tools section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/hop-tools/index.html">Hop Tools</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-tools/hop-lint.html">hop lint</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-tools/hop-marketplace.html">hop marketplace</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-tools/hop-setup.html">hop setup</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-tools/hop-conf/hop-conf.html">hop-conf</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-tools/hop-encrypt.html">hop-encrypt</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-tools/hop-gui.html">hop-gui</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-doc/index.html">hop doc (Generate documentation)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-run/index.html">hop-run</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-tools/hop-search.html">hop-search</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-tools/hop-import.html">hop-import</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-server/index.html">hop-server</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/best-practices/index.html">Best Practices</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Linting section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/linting/index.html">Linting</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item is-current">
+    <a href="../../../manual/latest/linting/lint-rules.html">Lint rules</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/linting/lint-rule-packs.html">Lint rule packs</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/protips/index.html">Pro Tips</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/hop-usps.html">Unique Selling Propositions</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle How-to guides section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/how-to-guides/index.html">How-to guides</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/how-to-guides/apache-hop-web-services-docker.html">Hop web services in Docker</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Change Data Capture section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../manual/latest/how-to-guides/change-data-capture.html">Change Data Capture</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/how-to-guides/cdc-log-sniffing.html">CDC: log sniffing</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/how-to-guides/cdc-filtered-selection.html">CDC: filtered selection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/how-to-guides/cdc-snapshot-comparison.html">CDC: comparing snapshots</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/how-to-guides/joins-lookups.html">Joins and lookups</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/how-to-guides/graphrag.html">GraphRAG: answer questions from a knowledge graph</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/how-to-guides/high-volume-scd2.html">High-volume SCD2 loads</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/how-to-guides/logging-pipeline-log.html">Logging pipeline data with pipeline log</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/how-to-guides/logging-workflow-log.html">Logging workflow data with workflow log</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/how-to-guides/loops-in-apache-hop.html">Loops in Apache Hop</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/how-to-guides/workflows-parallel-execution.html">Parallel execution in workflows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/how-to-guides/hdfs-parquet-openshift.html">Write Parquet to Cloudera HDFS from OpenShift</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/how-to-guides/scheduling-workflows-and-pipelines.html">Scheduling workflows and pipelines</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/how-to-guides/run-hop-in-apache-airflow.html">Run Hop workflows and pipelines in Apache Airflow</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/how-to-guides/avoiding-deadlocks.html">Avoiding deadlocks</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/latest/community-blogs/index.html">Community Posts</a>
+    
+  </li>
+</ul>
+
+    </div>
+  </nav>
+<div class="nav-foot">
+  <details class="explore">
+    <summary>
+      <span class="explore__now">
+        <span class="explore__component">User manual</span>
+        <span class="explore__version">2.20.0</span>
+      </span>
+      <svg class="explore__chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </summary>
+    <div class="explore__body">
+      <div class="explore__group">
+  <p class="explore__title"></p>
+  <ul>
+    <li>
+      <a href="../../../manual/next/linting/lint-rules.html">2.21.0 (pre-release)</a>
+    </li>
+    <li class="is-current">
+      <a href="../../../manual/latest/linting/lint-rules.html">2.20.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../manual/2.19.0/index.html" title="This page does not exist in 2.19.0; opens the start page">2.19.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../manual/2.18.1/index.html" title="This page does not exist in 2.18.1; opens the start page">2.18.1</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../manual/2.18.0/index.html" title="This page does not exist in 2.18.0; opens the start page">2.18.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../manual/2.17.0/index.html" title="This page does not exist in 2.17.0; opens the start page">2.17.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../manual/2.16.0/index.html" title="This page does not exist in 2.16.0; opens the start page">2.16.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../manual/2.15.0/index.html" title="This page does not exist in 2.15.0; opens the start page">2.15.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../manual/2.14.0/index.html" title="This page does not exist in 2.14.0; opens the start page">2.14.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../manual/2.13.0/index.html" title="This page does not exist in 2.13.0; opens the start page">2.13.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../manual/2.12.0/index.html" title="This page does not exist in 2.12.0; opens the start page">2.12.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../manual/2.11.0/index.html" title="This page does not exist in 2.11.0; opens the start page">2.11.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../manual/2.10.0/index.html" title="This page does not exist in 2.10.0; opens the start page">2.10.0</a>
+    </li>
+  </ul>
+</div>
+
+        <div class="explore__group">
+  <p class="explore__title">Development Documentation</p>
+  <ul>
+    <li>
+      <a href="../../../dev-manual/next/index.html">2.21.0</a>
+    </li>
+    <li>
+      <a href="../../../dev-manual/latest/index.html">2.20.0</a>
+    </li>
+    <li>
+      <a href="../../../dev-manual/2.19.0/index.html">2.19.0</a>
+    </li>
+    <li>
+      <a href="../../../dev-manual/2.18.1/index.html">2.18.1</a>
+    </li>
+    <li>
+      <a href="../../../dev-manual/2.18.0/index.html">2.18.0</a>
+    </li>
+    <li>
+      <a href="../../../dev-manual/2.17.0/index.html">2.17.0</a>
+    </li>
+    <li>
+      <a href="../../../dev-manual/2.16.0/index.html">2.16.0</a>
+    </li>
+    <li>
+      <a href="../../../dev-manual/2.15.0/index.html">2.15.0</a>
+    </li>
+    <li>
+      <a href="../../../dev-manual/2.14.0/index.html">2.14.0</a>
+    </li>
+    <li>
+      <a href="../../../dev-manual/2.13.0/index.html">2.13.0</a>
+    </li>
+    <li>
+      <a href="../../../dev-manual/2.12.0/index.html">2.12.0</a>
+    </li>
+    <li>
+      <a href="../../../dev-manual/2.11.0/index.html">2.11.0</a>
+    </li>
+    <li>
+      <a href="../../../dev-manual/2.10.0/index.html">2.10.0</a>
+    </li>
+  </ul>
+</div>
+
+        
+    </div>
+  </details>
+
+  <a class="nav-foot__edit" href="https://github.com/apache/hop/edit/release/2.20.0/docs/hop-user-manual/modules/ROOT/pages/linting/lint-rules.adoc" rel="noopener" target="_blank">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758zm1.414 1.06a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354zM11.189 6.25 9.75 4.81l-6.286 6.287a.25.25 0 0 0-.064.108l-.558 1.953 1.953-.558a.25.25 0 0 0 .108-.064z"/></svg>
+    Edit this page
+  </a>
+</div>
+</div>
+  <main class="doc-main" id="main">
+    <button type="button" class="doc-nav__open" aria-expanded="false" aria-controls="doc-nav" data-pagefind-ignore>
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      Documentation menu
+    </button>
+<nav class="breadcrumbs" data-pagefind-ignore aria-label="Breadcrumb">
+  <ol>
+    <li><a href="../../../">Home</a></li>
+    <li><a href="../../../manual/latest/linting/index.html">Linting</a></li>
+    <li><a href="../../../manual/latest/linting/lint-rules.html">Lint rules</a></li>
+  </ol>
+</nav>
+<aside class="marketplace" aria-labelledby="marketplace-note">
+  <p class="marketplace__label" id="marketplace-note">
+    <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+      <path d="M1.6 4.2h8.8l-.7 5.2a1 1 0 0 1-1 .85H3.3a1 1 0 0 1-1-.85zM4.2 4.2a1.8 1.8 0 0 1 3.6 0" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Marketplace plugin
+  </p>
+  <p class="marketplace__body">
+    This is not part of the standard Apache Hop client. Install it via the
+    marketplace or use <code>hop marketplace install hop-misc-lint</code>.
+  </p>
+</aside>
+    <article class="doc">
+      <h1>Lint rules</h1>
+      <div class="sect1">
+<h2 id="_anatomy_of_a_rule"><a class="link" href="#_anatomy_of_a_rule">Anatomy of a rule</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A rule names a <strong>target</strong>, a <strong>field</strong> on that target, and a <strong>condition</strong> the field has to satisfy.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>yaml</div><pre class="highlightjs highlight is-highlighted"><code class="language-yaml hljs" data-lang="yaml"><span class="hljs-attr">rules:</span>
+  <span class="hljs-attr">DB-001:</span>
+    <span class="hljs-attr">type:</span> <span class="hljs-string">custom</span>
+    <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">severity:</span> <span class="hljs-string">ERROR</span>
+    <span class="hljs-attr">target:</span> <span class="hljs-string">DATABASE_CONNECTION</span>
+    <span class="hljs-attr">targetField:</span> <span class="hljs-string">password</span>
+    <span class="hljs-attr">condition:</span> <span class="hljs-string">NO_HARDCODED</span>
+    <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;Hardcoded Database Password&quot;</span>
+    <span class="hljs-attr">description:</span> <span class="hljs-string">&quot;Database connections must take the password from a variable&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The key (<code>DB-001</code>) is the rule id. Ids share one namespace across every installed rule pack, so a pack that is not Hop&#8217;s own should prefix its ids.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_targets"><a class="link" href="#_targets">Targets</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Target</th>
+<th class="tableblock halign-left valign-top">Applies to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PIPELINE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The pipeline as a whole</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WORKFLOW</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The workflow as a whole</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TRANSFORM</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every transform in a pipeline</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ACTION</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every action in a workflow</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HOP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every hop between transforms or actions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DATABASE_CONNECTION</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Relational database connections</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>METADATA</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Any registered metadata type</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code>METADATA</code> reaches run configurations, servers, REST connections, variable resolvers and anything a plugin registers, because types are resolved through the plugin registry rather than a fixed list.
+Scope such a rule with <code>appliesTo</code>, naming the metadata key — the folder name under <code>metadata/</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>yaml</div><pre class="highlightjs highlight is-highlighted"><code class="language-yaml hljs" data-lang="yaml">  <span class="hljs-attr">ACME-SRV-001:</span>
+    <span class="hljs-attr">target:</span> <span class="hljs-string">METADATA</span>
+    <span class="hljs-attr">appliesTo:</span> [<span class="hljs-string">server</span>]
+    <span class="hljs-attr">targetField:</span> <span class="hljs-string">password</span>
+    <span class="hljs-attr">condition:</span> <span class="hljs-string">NO_HARDCODED</span>
+    <span class="hljs-attr">severity:</span> <span class="hljs-string">ERROR</span>
+    <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;Hop Server Password Not From a Variable&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>hop lint --list-metadata-types</code> prints the keys this installation has registered.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conditions"><a class="link" href="#_conditions">Conditions</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Condition</th>
+<th class="tableblock halign-left valign-top">Passes when the field</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NOT_EMPTY</code>, <code>NOT_NULL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">has a value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IS_EMPTY</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">has no value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NOT_EMPTY_COLLECTION</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">is a collection with at least one entry</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NO_HARDCODED</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">is empty, or takes its value from a variable (<code>${NAME}</code>, <code>%%NAME%%</code>) or a variable resolver (<code>#{vault:path:key}</code>) rather than holding a literal value. An <code>Encrypted</code> value is a literal value: Hop obfuscates it, and anyone with Hop and the same encoder key can read it back</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MAX_VALUE</code>, <code>MIN_VALUE</code>, <code>EXACT_VALUE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">compares as required against <code>conditionValue</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MAX_COLLECTION_SIZE</code>, <code>MIN_COLLECTION_SIZE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">is a collection of an acceptable size</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MATCHES_PATTERN</code>, <code>NOT_MATCHES_PATTERN</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">does or does not match the regular expression in <code>conditionValue</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CONTAINS</code>, <code>NOT_CONTAINS</code>, <code>STARTS_WITH</code>, <code>ENDS_WITH</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">does or does not contain the text in <code>conditionValue</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MUST_BE_TRUE</code>, <code>MUST_BE_FALSE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">is a boolean with the required value</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code>conditionValue</code> is used as written: variables are not resolved in it.
+A value the condition cannot use, such as <code>abc</code> or <code>3,0</code> for <code>MAX_VALUE</code>, or <code>[a-</code> for <code>MATCHES_PATTERN</code>, would make the rule report nothing at all.
+The rule editor refuses it, and a rule loaded from <code>hop-lint.yml</code> or a rule pack gets a warning in the log that names the rule and the problem.
+The same goes for a condition that does not fit one of the fields the linter provides, such as <code>NOT_NULL</code> on <code>transformCount</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_fields"><a class="link" href="#_fields">Fields</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>targetField</code> is the name of a property on the target. Besides the properties Hop exposes, the linter computes a few of its own:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>transformCount</code>, <code>actionCount</code>, <code>hopCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How many of each the file contains</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hasDisabledHops</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The file has at least one disabled hop</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hasOrphanedTransforms</code>, <code>hasOrphanedActions</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Something on the canvas is not connected to anything</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>noteCount</code>, <code>hasNotes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How many notes the canvas carries, and whether it carries any</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>isReferenced</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether any other file in the project calls this pipeline or workflow. Only a project lint can answer this, see <a href="#project-rules">Rules which need the whole project</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hasDefaultName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The transform or action still carries the name Hop Gui gave it: the plugin&#8217;s name, such as <code>Table input</code>, followed by a number when that name was taken, as in <code>Dummy (do nothing) 2</code>. The plugin name is the one of the language Hop runs in. A workflow&#8217;s Start action never counts</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>isDummy</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The transform is a Dummy</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>isBlockingTransform</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The transform blocks until all rows have arrived</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>errorHandling</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A transform sends its error rows to another transform; an action has a hop that is followed on failure</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>targetTransforms</code>, <code>targetActions</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The names of the transforms or actions that the enabled hops lead to</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>databaseType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The type of a database connection, as its plugin id, for example <code>POSTGRESQL</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>attributes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The attributes of a database connection, including its extra options. A finding lists the attribute names, not their values</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A database connection rule that names a field the connection does not have is reported as an error against the rule.</p>
+</div>
+<div class="paragraph">
+<p>Nested properties are reached with a dotted path:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>yaml</div><pre class="highlightjs highlight is-highlighted"><code class="language-yaml hljs" data-lang="yaml">    <span class="hljs-attr">targetField:</span> <span class="hljs-string">fileSettings.fileName</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Field names are resolved against the name Hop stores the property under, which is the name you see
+in the <code>.hpl</code> or <code>.hwf</code> file and in the metadata JSON.
+Rather than guessing, ask:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">hop lint --list-fields TableInput</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>which prints every name a rule can use for that transform or action, with its type.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_checking_more_than_one_thing"><a class="link" href="#_checking_more_than_one_thing">Checking more than one thing</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A rule which names a single <code>targetField</code> and <code>condition</code> reports whenever that one thing is wrong.
+Some problems are only worth reporting when several things are wrong together, and for those a rule takes an <code>allOf:</code> or an <code>anyOf:</code> block instead:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>yaml</div><pre class="highlightjs highlight is-highlighted"><code class="language-yaml hljs" data-lang="yaml">  <span class="hljs-attr">SQL-002:</span>
+    <span class="hljs-attr">type:</span> <span class="hljs-string">custom</span>
+    <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">severity:</span> <span class="hljs-string">WARNING</span>
+    <span class="hljs-attr">target:</span> <span class="hljs-string">TRANSFORM</span>
+    <span class="hljs-attr">appliesTo:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">TableInput</span>
+    <span class="hljs-attr">allOf:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">targetField:</span> <span class="hljs-string">sql</span>
+        <span class="hljs-attr">condition:</span> <span class="hljs-string">NOT_MATCHES_PATTERN</span>
+        <span class="hljs-attr">conditionValue:</span> <span class="hljs-string">&quot;(?is).*\\bselect\\s+\\*.*&quot;</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">targetField:</span> <span class="hljs-string">rowLimit</span>
+        <span class="hljs-attr">condition:</span> <span class="hljs-string">NOT_MATCHES_PATTERN</span>
+        <span class="hljs-attr">conditionValue:</span> <span class="hljs-string">&quot;^\\s*([+-]?0*|-\\d+)\\s*$&quot;</span>
+    <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;Unbounded SELECT *&quot;</span>
+    <span class="hljs-attr">description:</span> <span class="hljs-string">&quot;A Table Input that selects every column and sets no row limit&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As everywhere else, each condition says what is <strong>required</strong>, and the rule reports when that is not met.
+<code>allOf</code> reports only when <strong>every</strong> condition is not met, <code>anyOf</code> when <strong>at least one</strong> is not.
+The rule above reports a Table Input whose SQL selects every column <strong>and</strong> whose row limit is unset, <code>0</code> or negative, which Hop reads as no limit.</p>
+</div>
+<div class="paragraph">
+<p>To report something that is set, require it to be empty: a plain <code>http://</code> URL with a login is <code>url</code> <code>MATCHES_PATTERN</code> <code>^https://.*</code> (not met for <code>http://</code>) together with <code>httpLogin</code> <code>IS_EMPTY</code> (not met when a login is set), under <code>allOf</code>.</p>
+</div>
+<div class="paragraph">
+<p>A rule with <code>allOf</code> or <code>anyOf</code> and a <code>target</code> is a rule definition even without <code>type: custom</code>.
+Each clause names its own field, condition and value, and the finding says which clauses were broken and what the values actually were.</p>
+</div>
+<div class="paragraph">
+<p>A rule with neither block behaves exactly as before, so nothing that was written against the single-condition form needs changing.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The rule editor in Hop Gui lists a composed rule&#8217;s clauses and edits them one at a time; <strong>Add clause</strong> and <strong>Remove clause</strong> change the list.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_narrowing_a_rule_to_one_kind_of_transform"><a class="link" href="#_narrowing_a_rule_to_one_kind_of_transform">Narrowing a rule to one kind of transform</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A rule aimed at <code>TRANSFORM</code> runs against every transform in the pipeline.
+<code>appliesTo</code> restricts it to the plugin ids where the field means anything:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>yaml</div><pre class="highlightjs highlight is-highlighted"><code class="language-yaml hljs" data-lang="yaml">  <span class="hljs-attr">SQL-001:</span>
+    <span class="hljs-attr">type:</span> <span class="hljs-string">custom</span>
+    <span class="hljs-attr">target:</span> <span class="hljs-string">TRANSFORM</span>
+    <span class="hljs-attr">appliesTo:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">TableInput</span>
+    <span class="hljs-attr">targetField:</span> <span class="hljs-string">sql</span>
+    <span class="hljs-attr">condition:</span> <span class="hljs-string">NOT_MATCHES_PATTERN</span>
+    <span class="hljs-attr">conditionValue:</span> <span class="hljs-string">&quot;(?is).*\\bselect\\s+\\*.*&quot;</span>
+    <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;SELECT * in Table Input&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A scoped rule naming a field the transform does not have is reported as a configuration error rather than passing quietly, so that a typo in a field name is visible instead of looking like a clean result.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_parameters"><a class="link" href="#_parameters">Parameters</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A few rules read extra settings from a <code>parameters:</code> block:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Read by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>fieldPatterns</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A <code>NO_HARDCODED</code> rule on <code>TRANSFORM</code> or <code>ACTION</code> whose <code>targetField</code> is <code>password</code>, <code>secret</code> or <code>credential</code>. The list of field name endings that hold a secret, replacing the default list</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>blockingTransforms</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>isBlockingTransform</code>. The transform plugin ids that count as blocking, replacing the default list</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>yaml</div><pre class="highlightjs highlight is-highlighted"><code class="language-yaml hljs" data-lang="yaml">  <span class="hljs-attr">SEC-002:</span>
+    <span class="hljs-attr">parameters:</span>
+      <span class="hljs-attr">fieldPatterns:</span>
+        <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;password&quot;</span>
+        <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;apiKey&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Any other parameter is ignored, and a warning in the log names it, in a rule pack and in <code>hop-lint.yml</code> alike.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_hops_own_verify_remarks"><a class="link" href="#_hops_own_verify_remarks">Hop&#8217;s own verify remarks</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Every transform and action has a <code>check()</code> method of its own, the one behind the <strong>Verify</strong> button, and the linter reports what those find alongside its own rules.
+They are not the same kind of claim.
+Verify is a question somebody asked, and reads the answers to in context; the linter asks it on every save and every build, and a remark it repeats is a remark it stands behind.
+<code>check()</code> also works from the row stream Hop infers at design time, which is right for a plain pipeline and wrong wherever fields arrive at runtime — through metadata injection, a mapping, or a transform filled in by a parameter.</p>
+</div>
+<div class="paragraph">
+<p>A <code>native</code> rule says how those remarks are reported. It checks nothing itself:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>yaml</div><pre class="highlightjs highlight is-highlighted"><code class="language-yaml hljs" data-lang="yaml"><span class="hljs-attr">rules:</span>
+  <span class="hljs-attr">HOP-CHECK:</span>
+    <span class="hljs-attr">type:</span> <span class="hljs-string">native</span>
+    <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">severity:</span> <span class="hljs-string">WARNING</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>severity</code> on a rule that covers every remark is a cap: a remark above it is lowered to it, and one below it keeps the severity the transform gave it, so a comment is never reported as a warning. On a rule narrowed with <code>appliesTo</code> or <code>messageKey</code>, <code>severity</code> is what the linter reports those remarks as, higher or lower than the transform gave them. <code>enabled: false</code> drops the remarks the rule covers.
+Two optional keys narrow a rule to less than every remark:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>appliesTo</code> — the plugin ids of the transforms or actions it covers, as for any other rule.</p>
+</li>
+<li>
+<p><code>messageKey</code> — one single check, named as <code>&lt;i18n package&gt;:&lt;key&gt;</code> for the message it prints, the same form Hop&#8217;s plugin annotations use. The key is resolved through the plugin&#8217;s own message bundle, so the rule keeps matching in every language rather than depending on the English wording. For a check that fills values into its message, such as a connection or field name, the rule matches whatever values the check filled in. A key that no longer resolves matches nothing rather than everything.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The most specific rule wins — one naming the check beats one naming only the plugin, which beats the blanket rule — so a pack can hold a general policy and an exception to it, and the order of the file does not decide which applies.</p>
+</div>
+<div class="paragraph">
+<p>To have the linter treat Hop&#8217;s remarks exactly as the transform meant them, put the severity back in your project&#8217;s <code>hop-lint.yml</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>yaml</div><pre class="highlightjs highlight is-highlighted"><code class="language-yaml hljs" data-lang="yaml"><span class="hljs-attr">rules:</span>
+  <span class="hljs-attr">HOP-CHECK:</span>
+    <span class="hljs-attr">severity:</span> <span class="hljs-string">ERROR</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Findings from a native rule carry that rule&#8217;s id, so they suppress by id like any other.
+A check that sets an error code of its own, such as <code>CONNECTION_DOES_NOT_EXIST</code>, is reported under that code instead, unless a rule naming its plugin or its message matched it.
+A suppression or baseline entry can name either the code or the native rule that classified the finding, and one naming the code keeps working when a rule naming that check is added later:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>yaml</div><pre class="highlightjs highlight is-highlighted"><code class="language-yaml hljs" data-lang="yaml"><span class="hljs-attr">suppress:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">rule:</span> <span class="hljs-string">HOP-CHECK</span>
+    <span class="hljs-attr">path:</span> <span class="hljs-string">&quot;templates/**&quot;</span>
+    <span class="hljs-attr">reason:</span> <span class="hljs-string">&quot;Fields in these templates arrive through metadata injection&quot;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="tags"><a class="link" href="#tags">Tags and help links</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A rule can carry <code>tags</code>: labels a team or vendor attaches to it, such as a category, the team that owns it or the policy it enforces.
+Each value is a string or a list of strings.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>yaml</div><pre class="highlightjs highlight is-highlighted"><code class="language-yaml hljs" data-lang="yaml"><span class="hljs-attr">rules:</span>
+  <span class="hljs-attr">ACME-002:</span>
+    <span class="hljs-attr">type:</span> <span class="hljs-string">custom</span>
+    <span class="hljs-comment"># ...the rule as before...</span>
+    <span class="hljs-attr">helpUri:</span> <span class="hljs-string">https://wiki.example.com/lint/ACME-002</span>
+    <span class="hljs-attr">tags:</span>
+      <span class="hljs-attr">category:</span> <span class="hljs-string">secrets</span>
+      <span class="hljs-attr">owner:</span> <span class="hljs-string">platform-team</span>
+      <span class="hljs-attr">policy:</span> [<span class="hljs-string">&quot;SEC-POL-4&quot;</span>, <span class="hljs-string">&quot;SEC-POL-7&quot;</span>]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The linter never evaluates tags, so changing them cannot change what a rule finds.
+They are written to the reports, on every finding the rule produces:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sarif</code>: on the rule, <code>properties.tags</code> holds one <code>key:value</code> string per value (<code>category:secrets</code>, <code>policy:SEC-POL-4</code>, <code>policy:SEC-POL-7</code>), the form GitHub code scanning and Azure DevOps read, and <code>properties.hopTags</code> holds the same tags as a map. The rule&#8217;s <code>description</code> is written as <code>fullDescription</code>, and <code>helpUri</code> as <code>helpUri</code>.</p>
+</li>
+<li>
+<p><code>json</code>: each finding has a <code>tags</code> object. Every value is written as a list, also a single one.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Tags work the same on a native rule.</p>
+</div>
+<div class="paragraph">
+<p>A project sets tags on any rule, a pack&#8217;s included, in its own <code>hop-lint.yml</code>.
+Each key replaces the pack&#8217;s values for that key and leaves the pack&#8217;s other tags as they are; a key with no values removes the pack&#8217;s tag:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>yaml</div><pre class="highlightjs highlight is-highlighted"><code class="language-yaml hljs" data-lang="yaml"><span class="hljs-attr">rules:</span>
+  <span class="hljs-attr">DB-001:</span>
+    <span class="hljs-attr">tags:</span>
+      <span class="hljs-attr">owner:</span> <span class="hljs-string">data-team</span>    <span class="hljs-comment"># replaces the pack&#x27;s owner, if it has one</span>
+      <span class="hljs-attr">policy:</span> []          <span class="hljs-comment"># removes the pack&#x27;s policy tag</span>
+    <span class="hljs-attr">helpUri:</span> <span class="hljs-string">https://wiki.example.com/lint/DB-001</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In Hop Gui, the rule editor has a <strong>Help URL</strong> field and a <strong>Tags</strong> table with one row per key and value; repeat a key to give it several values.
+Saving a pack rule there writes only the changed keys to <code>hop-lint.yml</code>, as above.
+The rule manager lists each rule&#8217;s tags in its <strong>Tags</strong> column.</p>
+</div>
+<div class="paragraph">
+<p>A key the linter does not know, such as <code>tag:</code> for <code>tags:</code>, is logged as a warning and ignored.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_rules_hop_ships"><a class="link" href="#_the_rules_hop_ships">The rules Hop ships</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hop&#8217;s core rule pack is deliberately small. A rule is enabled by default only when a violation is defensible as a defect in any project, whatever the house style.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Rule</th>
+<th class="tableblock halign-left valign-top">Severity</th>
+<th class="tableblock halign-left valign-top">Reports</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DB-001</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ERROR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A database connection with a hardcoded password</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SEC-002</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ERROR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A hardcoded secret on a transform</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SEC-003</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ERROR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A hardcoded secret on an action</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TRANS-002</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WARNING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A transform nothing is connected to</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WORKFLOW-002</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WARNING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An action nothing is connected to</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NAMING-004</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WARNING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A transform still carrying the name Hop Gui gave it, such as <code>Table input</code> or <code>Table input 2</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HOP-CHECK</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WARNING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every remark from Hop&#8217;s own transform and action checks</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SYSTEM-001</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ERROR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pipeline, workflow or metadata file that could not be loaded, so nothing was checked against it</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SYSTEM-002</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ERROR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A lint run that stopped before it finished</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SYSTEM-003</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ERROR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A metadata file, such as a connection, that could not be read</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The <code>SYSTEM</code> rules are of <code>type: system</code>: like a native rule they check nothing, and say how the linter reports a file it could not read or a run it could not finish.
+A project can change their severity, or switch one off, in its <code>hop-lint.yml</code> like any other rule.</p>
+</div>
+<div class="paragraph">
+<p><code>TRANS-002</code> and <code>WORKFLOW-002</code> report on the transform or action itself, so the finding names it and the canvas can point at it.
+The only element in a file is not an orphan — there is nothing for it to be disconnected from — and neither is one whose hops are all disabled: it has hops, and whether a disabled hop is a problem is what <code>STRUCT-003</code> asks.</p>
+</div>
+<div class="paragraph">
+<p>An orphaned action never runs, because nothing leads to it from Start.
+An orphaned transform does run: Hop starts every transform in a pipeline, connected or not.
+<code>TRANS-002</code> warns that it runs as a stream of its own, which is rarely what was meant.
+A pipeline that deliberately runs two independent streams can accept the finding on that transform, see <a href="#accept-on-transform">Accepting findings on a single transform or action</a>.</p>
+</div>
+<div class="paragraph">
+<p><code>SEC-002</code> and <code>SEC-003</code> look at every text field of the transform or action whose name ends in one of the rule&#8217;s <code>fieldPatterns</code>, such as <code>password</code>, <code>token</code> or <code>passphrase</code>.
+They also look inside the settings the transform or action stores in the file, such as the list of files PGP Decrypt Files decrypts, each with its own passphrase.
+<code>DB-001</code>, <code>SEC-002</code> and <code>SEC-003</code> count an <code>Encrypted</code> value as hardcoded.</p>
+</div>
+<div class="paragraph">
+<p>Hop ships no narrowed <code>native</code> rule of its own.
+A check that is simply wrong is fixed in the transform rather than silenced from a rule pack, which would leave it firing for everyone who presses <strong>Verify</strong>.
+<code>appliesTo</code> and <code>messageKey</code> are there for a project that disagrees with a check the platform is right to ship.</p>
+</div>
+<div class="paragraph">
+<p>A further set ships <strong>disabled</strong>, as worked examples of the format. Switch one on by id in your project&#8217;s <code>hop-lint.yml</code>.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Rule</th>
+<th class="tableblock halign-left valign-top">Reports</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DOC-001</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pipeline without a description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DOC-002</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A workflow without a description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DOC-003</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pipeline with no notes on the canvas</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DOC-004</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A workflow with no notes on the canvas</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>STRUCT-001</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pipeline with more transforms than the configured ceiling</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>STRUCT-002</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A workflow with more actions than the configured ceiling</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>STRUCT-003</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A file containing disabled hops</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BEST-003</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A Dummy transform left in a pipeline</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NAMING-001</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pipeline whose file name breaks the configured naming convention</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NAMING-002</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A workflow whose file name breaks the configured naming convention</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PERF-003</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A transform running more copies than the configured ceiling</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SQL-002</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A Table Input that selects every column and sets no row limit. The worked example of a multi-clause rule</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>STRUCT-004</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pipeline nothing in the project calls</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>STRUCT-005</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A workflow nothing in the project calls</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="project-rules"><a class="link" href="#project-rules">Rules which need the whole project</a></h3>
+<div class="paragraph">
+<p>Most rules read one file. A few — those using <code>isReferenced</code> — answer a question the file cannot answer about itself: whether anything else in the project calls it.</p>
+</div>
+<div class="paragraph">
+<p>These are evaluated only when the linter is given a folder, because only then is there a project to look at.
+<code>hop lint &lt;one file&gt;</code> and the editor&#8217;s lint-on-save skip them rather than guess; a rule that reported "nothing calls this" from a single file would be wrong every time.</p>
+</div>
+<div class="paragraph">
+<p>References are followed through the same mechanism Hop itself uses to export a project&#8217;s resources, so a pipeline called from a third-party transform or action is seen without the linter knowing anything about that plugin.
+Where a reference is written through a variable the linter cannot resolve, the file name alone is matched.
+That can miss a dead file which happens to share a name with a live one, which is the safer way to be wrong: a linter that calls live code dead is one people switch off.</p>
+</div>
+<div class="paragraph">
+<p><code>hop lint --list-rules</code> prints the effective set, with the pack each rule came from.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuring_a_project"><a class="link" href="#_configuring_a_project">Configuring a project</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Put a <code>hop-lint.yml</code> in the project root. It holds overrides and project-local rules only, not a copy of the rule packs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>yaml</div><pre class="highlightjs highlight is-highlighted"><code class="language-yaml hljs" data-lang="yaml"><span class="hljs-attr">rules:</span>
+  <span class="hljs-comment"># Switch on a rule the core pack ships disabled</span>
+  <span class="hljs-attr">DOC-001:</span>
+    <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">severity:</span> <span class="hljs-string">ERROR</span>
+
+  <span class="hljs-comment"># Retune a threshold</span>
+  <span class="hljs-attr">STRUCT-001:</span>
+    <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">conditionValue:</span> <span class="hljs-string">&quot;30&quot;</span>
+
+  <span class="hljs-comment"># Use your own wording for a pack rule</span>
+  <span class="hljs-attr">DOC-002:</span>
+    <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;Workflows need a description&quot;</span>
+    <span class="hljs-attr">description:</span> <span class="hljs-string">&quot;Say what the workflow does and who to ask about it&quot;</span>
+
+  <span class="hljs-comment"># A rule that exists only in this project</span>
+  <span class="hljs-attr">LOCAL-001:</span>
+    <span class="hljs-attr">type:</span> <span class="hljs-string">custom</span>
+    <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">severity:</span> <span class="hljs-string">ERROR</span>
+    <span class="hljs-attr">target:</span> <span class="hljs-string">PIPELINE</span>
+    <span class="hljs-attr">targetField:</span> <span class="hljs-string">description</span>
+    <span class="hljs-attr">condition:</span> <span class="hljs-string">NOT_EMPTY</span>
+    <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;Pipeline Description Required&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Tools &#8594; Lint &#8594; Manage Custom Rules</strong> writes this file for you.
+It changes only the entry of the rule you added, edited, switched or deleted: the other rules, the <code>exclude</code> and <code>suppress</code> sections and your comments stay as you wrote them.</p>
+</div>
+<div class="paragraph">
+<p>A rule you add there gets its id in the <strong>Rule ID</strong> field, suggested as <code>PROJECT-001</code>, <code>PROJECT-002</code> and so on.
+Findings, SARIF reports, <code>hop lint --list-rules</code> and <code>hop-lint.yml</code> all name the rule by this id, so pick one that says what the rule is about.
+An id holds letters, digits, hyphens, underscores and dots, and no two rules can share one, whatever the case.
+A project rule&#8217;s id can be changed later; a <code>suppress</code> entry naming the old id does not follow it.
+A pack rule keeps the pack&#8217;s id.</p>
+</div>
+<div class="paragraph">
+<p>A parse error in <code>hop-lint.yml</code> is reported rather than ignored, so that a typo cannot leave you linting with the defaults while believing otherwise.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_excluding_files_and_accepting_findings"><a class="link" href="#_excluding_files_and_accepting_findings">Excluding files, and accepting findings</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The same file decides what is out of scope.
+<code>exclude</code> keeps files out of the run entirely. <code>suppress</code> accepts a specific finding on the record, which is preferable to switching a rule off everywhere, because the decision stays visible and reviewable:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>yaml</div><pre class="highlightjs highlight is-highlighted"><code class="language-yaml hljs" data-lang="yaml"><span class="hljs-attr">exclude:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;generated/**&quot;</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;tests/**&quot;</span>
+
+<span class="hljs-attr">suppress:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">rule:</span> <span class="hljs-string">ACME-ENV-001</span>
+    <span class="hljs-attr">path:</span> <span class="hljs-string">&quot;legacy/**&quot;</span>
+    <span class="hljs-attr">reason:</span> <span class="hljs-string">&quot;Legacy connections are pinned until the 2026 migration&quot;</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">rule:</span> <span class="hljs-string">TRANS-002</span>
+    <span class="hljs-attr">source:</span> <span class="hljs-string">&quot;Reserved for phase 2&quot;</span>
+    <span class="hljs-attr">reason:</span> <span class="hljs-string">&quot;Placeholder kept deliberately, agreed with the data team&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>path</code> and <code>source</code> narrow a suppression; leaving one out matches anything.
+A suppression has to name a rule and give a reason: without a rule it would silence everything, and without a reason nobody can review the decision later.
+Entries missing either are refused and logged rather than applied.</p>
+</div>
+<div class="paragraph">
+<p>Exclusions and suppressions apply in Hop Gui as well as on the command line.</p>
+</div>
+<div class="paragraph">
+<p><strong>Explorer &#8594; right-click a file or folder &#8594; Exclude From Linting</strong> writes an <code>exclude</code> entry for you, keeping the rest of the file, comments included, exactly as you wrote it, and your reason as a comment above the entry.
+On something already excluded the same item reads <strong>Include In Linting Again</strong> and takes the entry back out, comment and all.
+Both are in <strong>Tools &#8594; Lint</strong> as well.</p>
+</div>
+<div class="paragraph">
+<p>A file covered by a broader pattern, <code>templates/**</code> rather than its own name, is left alone: which entry to change is a decision for you rather than a guess by the menu.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="accept-on-transform"><a class="link" href="#accept-on-transform">Accepting findings on a single transform or action</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An exclusion covers a whole file, which is right for a template that is dynamic from end to end and too much for one that is only partly dynamic.
+The usual example is a metadata injection template: its query and its fields arrive at runtime, so design-time checks report the transforms that are deliberately empty, on every open, while the rest of the pipeline is worth checking as normal.</p>
+</div>
+<div class="paragraph">
+<p>Right-click the transform or action and choose <strong>Ignore lint findings&#8230;&#8203;</strong>.
+You are asked whether to accept everything reported there or only the rules reported right now, and for a reason, which is required.
+<strong>Check this transform again</strong> on the same menu takes the entries back out.
+Neither is offered on a file that is excluded from linting altogether: there is nothing to accept when nothing is checked.</p>
+</div>
+<div class="paragraph">
+<p>Both write to the project&#8217;s <code>hop-lint.yml</code>, never to the pipeline or workflow: those files are opened by people who do not run the linter, and bookkeeping for a plugin they do not have installed has no business in them.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>yaml</div><pre class="highlightjs highlight is-highlighted"><code class="language-yaml hljs" data-lang="yaml"><span class="hljs-attr">suppress:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">rule:</span> <span class="hljs-string">&quot;*&quot;</span>
+    <span class="hljs-attr">path:</span> <span class="hljs-string">&quot;templates/load-customers.hpl&quot;</span>
+    <span class="hljs-attr">source:</span> <span class="hljs-string">&quot;Fonte Sql&quot;</span>
+    <span class="hljs-attr">reason:</span> <span class="hljs-string">&quot;Connection and SQL are injected at runtime&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>rule: "*"</code> accepts whatever is reported on that element, including a rule that starts reporting on it later, which is what a transform filled in at runtime needs.
+It is only accepted together with a <code>path</code> or a <code>source</code>: on its own it would be the linter switched off under another name, and it is refused the same way an entry without a rule is.</p>
+</div>
+<div class="paragraph">
+<p>An element whose findings are accepted is drawn with a dashed outline and a small greyed-out info badge on the canvas rather than nothing at all, so the absence of a warning reads as somebody&#8217;s decision rather than as a check that never ran.
+Turn that off with <strong>Mark Ignored Transforms and Actions</strong> in the linter options.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how_the_effective_rule_set_is_built"><a class="link" href="#_how_the_effective_rule_set_is_built">How the effective rule set is built</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Rules are resolved by merging every installed rule pack in priority order, and then applying the project&#8217;s <code>hop-lint.yml</code> on top.
+<code>hop lint --list-rules</code> prints the result.</p>
+</div>
+</div>
+</div>
+    </article>
+<nav class="pagination" data-pagefind-ignore aria-label="Page">
+  <a class="pagination__prev" href="../../../manual/latest/linting/index.html"><span>Previous</span><strong>Linting</strong></a>
+  <a class="pagination__next" href="../../../manual/latest/linting/lint-rule-packs.html"><span>Next</span><strong>Lint rule packs</strong></a>
+</nav>
+  </main>
+
+<aside class="doc-toc" data-pagefind-ignore aria-label="On this page" data-levels="2">
+  <p class="doc-toc__title">On this page</p>
+  <div class="doc-toc__body"></div>
+</aside>
+</div>
+<footer class="site-footer" data-pagefind-ignore>
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <img src="../../../img/hop-logo.svg" alt="" width="30" height="30" aria-hidden="true">
+      <div>
+        <p>The Hop Orchestration Platform &mdash; visual data and metadata orchestration, designed once and run anywhere.</p>
+        <ul class="site-footer__socials">
+        <li><a href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"/></svg></a></li>
+        <li><a href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"/></svg></a></li>
+        <li><a href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg></a></li>
+        </ul>
+      </div>
+    </div>
+    <nav class="site-footer__nav" aria-label="Footer">
+      <div>
+        <h2>Documentation</h2>
+        <ul>
+          <li><a href="../../../manual/latest/getting-started/">Getting started</a></li>
+          <li><a href="../../../manual/latest/">User manual</a></li>
+          <li><a href="../../../dev-manual/latest/">Developer docs</a></li>
+          <li><a href="../../../download/">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Community</h2>
+        <ul>
+          <li><a href="../../../community/contributing/">Contributing</a></li>
+          <li><a href="../../../community/mailing-list/">Mailing lists</a></li>
+          <li><a href="../../../community/events/">Events</a></li>
+          <li><a href="../../../community/support/">Support</a></li>
+          <li><a href="../../../community/commercial/">Commercial support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Apache</h2>
+        <ul>
+          <li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li>
+          <li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li>
+          <li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li>
+          <li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li>
+          <li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="site-footer__legal">
+    <p>
+      Copyright &copy; 2019&ndash;2026 <a href="https://www.apache.org/" rel="noopener" target="_blank">The Apache Software Foundation</a>,
+      licensed under the <a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">Apache License, Version 2.0</a>.
+    </p>
+    <p>
+      Apache, Apache Hop, Hop, and the Apache feather logo are either registered trademarks or
+      trademarks of the Apache Software Foundation in the United States and/or other countries.
+    </p>
+  </div>
+</footer>
+
+<script src="../../../js/site.js"></script>
+<script src="../../../js/matomo.js"></script>
+<script src="../../../_/js/tabs.js"></script>
+</body>
+</html>

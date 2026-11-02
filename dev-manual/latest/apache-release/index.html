@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Release process | Apache Hop</title>
-
+<meta name="description" content="How an Apache Hop release is made: creating a release and checking one.">
 
 <link rel="canonical" href="https://hop.apache.org/dev-manual/latest/apache-release/index.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
 <meta property="og:title" content="Release process">
-
+<meta property="og:description" content="How an Apache Hop release is made: creating a release and checking one.">
 <meta property="og:url" content="https://hop.apache.org/dev-manual/latest/apache-release/index.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -110,28 +110,14 @@
     <div class="doc-nav__group">
       
       <ul class="doc-nav__list">
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Getting started section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Getting started</span>
+    <ul class="doc-nav__list">
   <li class="doc-nav__item">
-    <a href="../../../dev-manual/latest/getting-started.html">Getting started</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../dev-manual/latest/upgrading-to-20.html">Plugins Upgrades to 2.x</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../dev-manual/latest/porting-kettle-plugins.html">Porting Kettle plugins</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../dev-manual/latest/metadata-plugins.html">Metadata plugins</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../dev-manual/latest/metadata-serialization.html">Metadata Serialization</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../dev-manual/latest/metadata-injection.html">Metadata Injection</a>
+    <a href="../../../dev-manual/latest/getting-started.html">The Hop codebase</a>
     
   </li>
   <li class="doc-nav__item">
@@ -139,23 +125,159 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../dev-manual/latest/docker-build.html">Docker Build Script</a>
+    <a href="../../../dev-manual/latest/build-and-test.html">Building and testing</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../dev-manual/latest/integration-testing.html">Integration testing</a>
+    <a href="../../../dev-manual/latest/contributing.html">Contributing changes</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../dev-manual/latest/internationalisation.html">Internationalisation (i18n)</a>
+    <a href="../../../dev-manual/latest/writing-documentation.html">Writing documentation</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Architecture section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Architecture</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/architecture/execution-model.html">How a pipeline and a workflow run</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../dev-manual/latest/plugin-development.html">Plugins Development</a>
+    <a href="../../../dev-manual/latest/architecture/variables-and-metadata.html">Variables, parameters and metadata</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../dev-manual/latest/marketplace-publish-plugin.html">Publishing a plugin to Nexus (marketplace)</a>
+    <a href="../../../dev-manual/latest/architecture/dependencies-and-classloading.html">Dependencies and classloading</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/architecture/logging-and-debugging.html">Logging and debugging</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/architecture/performance.html">Performance on the row hot path</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/architecture/security.html">Security for developers</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Plugin development section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Plugin development</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/plugin-development.html">How plugins work</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Plugin types section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/latest/plugin-types/index.html">Plugin types</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/plugin-types/pipeline-workflow.html">Pipelines and workflows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/plugin-types/data-connectivity.html">Data and connectivity</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/plugin-types/metadata-configuration.html">Metadata and configuration</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/plugin-types/execution-observability.html">Execution and observability</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/plugin-types/gui.html">GUI</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/plugin-types/diagram-exporters.html">Diagram exporters</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/ai-advisor-plugins.html">AI advisor plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/metadata-plugins.html">Metadata plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/metadata-serialization.html">Metadata serialization</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/metadata-injection.html">Metadata injection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/value-types.html">Value types</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Database plugins section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/latest/database/index.html">Database plugins</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/database/creating-a-dialect.html">Creating a dialect</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/database/column-types.html">Column types and type rules</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/database/value-bindings.html">Moving values across JDBC</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/database/extending-another-dialect.html">Extending a dialect you don&#8217;t own</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/database/testing.html">Testing a database plugin</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/database/migrating-from-variants.html">Migrating from isXVariant()</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/gui-plugins-toolbars.html">GUI plugins and toolbars</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/plugin-types/canvas-overlays.html">Canvas overlays</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/annotation-derived-widgets.html">Annotation derived widgets</a>
     
   </li>
   <li class="doc-nav__item">
@@ -167,15 +289,189 @@
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../dev-manual/latest/plugin-samples.html">Plugins Samples</a>
+    <a href="../../../dev-manual/latest/internationalisation.html">Internationalisation (i18n)</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../dev-manual/latest/svg-files.html">SVG Files</a>
+    <a href="../../../dev-manual/latest/svg-files.html">SVG files</a>
     
   </li>
   <li class="doc-nav__item">
-    <a href="../../../dev-manual/latest/start-your-own-plugin.html">Creating your own plugin</a>
+    <a href="../../../dev-manual/latest/plugin-samples.html">Plugin samples</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/start-your-own-plugin.html">Creating a plugin outside the Hop repository</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/marketplace-publish-plugin.html">Publishing a plugin to Nexus (marketplace)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/porting-kettle-plugins.html">Porting Kettle plugins</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Testing section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Testing</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/testing/unit-testing.html">Unit tests</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/integration-testing.html">Integration tests</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/testing/ui-testing.html">UI tests with SWTBot</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Embedding and interfaces section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Embedding and interfaces</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle The Hop SDK section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/latest/sdk/index.html">The Hop SDK</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/sdk/pipelines.html">Pipelines API</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/sdk/workflows.html">Workflows API</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/sdk/metadata.html">Metadata and Providers</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/sdk/vfs.html">File Handling with HopVFS</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/sdk/logging.html">Logging Subsystem</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Plugin Development Guide section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/latest/sdk/plugins/index.html">Plugin Development Guide</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/sdk/plugins/transforms.html">Transforms</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/sdk/plugins/actions.html">Actions</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/sdk/plugins/metadata.html">Metadata Elements</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/sdk/plugins/databases.html">Database Dialects</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/sdk/plugins/gui.html">GUI Plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/sdk/plugins/file-types.html">Hop File Types</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/sdk/plugins/variable-resolvers.html">Variable Resolvers</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/sdk/plugins/extension-points.html">Extension Points</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/sdk/plugins/commands.html">Hop Commands</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/sdk/plugins/configuration.html">Configuration Plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/sdk/plugins/perspectives.html">Perspectives</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/sdk/plugins/vfs.html">VFS Plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/sdk/plugins/value-types.html">Value Types</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/sdk/plugins/servlets.html">Hop Server Servlets</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/sdk/plugins/execution-info.html">Execution Information Locations</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/sdk/hop-sdk.html">Legacy SDK Guide</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop Web section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/latest/hopweb/index.html">Hop Web</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/hopweb/developer-guide.html">Hop Web Developer Guide</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/hopweb/hopweb-antipatterns.html">Hop Web Antipatterns</a>
+    
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Distribution and release section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Distribution and release</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/latest/docker-build.html">Docker Build Script</a>
     
   </li>
   <li class="doc-nav__item is-parent is-current">
@@ -199,33 +495,6 @@
 </ul>
 
   </li>
-  <li class="doc-nav__item is-parent">
-    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop Web section">
-      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <a href="../../../dev-manual/latest/hopweb/index.html">Hop Web</a>
-    <ul class="doc-nav__list">
-  <li class="doc-nav__item">
-    <a href="../../../dev-manual/latest/hopweb/developer-guide.html">Hop Web Developer Guide</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../dev-manual/latest/hopweb/hopweb-antipatterns.html">Hop Web Antipatterns</a>
-    
-  </li>
-</ul>
-
-  </li>
-  <li class="doc-nav__item is-parent">
-    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle SDK section">
-      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <a href="../../../dev-manual/latest/sdk/index.html">SDK</a>
-    <ul class="doc-nav__list">
-  <li class="doc-nav__item">
-    <a href="../../../dev-manual/latest/sdk/hop-sdk.html">The Hop SDK</a>
-    
-  </li>
 </ul>
 
   </li>
@@ -238,7 +507,7 @@
     <summary>
       <span class="explore__now">
         <span class="explore__component">Development Documentation</span>
-        <span class="explore__version">2.19.0</span>
+        <span class="explore__version">2.20.0</span>
       </span>
       <svg class="explore__chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </summary>
@@ -250,7 +519,10 @@
       <a href="../../../dev-manual/next/apache-release/index.html">2.21.0</a>
     </li>
     <li class="is-current">
-      <a href="../../../dev-manual/latest/apache-release/index.html">2.19.0</a>
+      <a href="../../../dev-manual/latest/apache-release/index.html">2.20.0</a>
+    </li>
+    <li>
+      <a href="../../../dev-manual/2.19.0/apache-release/index.html">2.19.0</a>
     </li>
     <li>
       <a href="../../../dev-manual/2.18.1/apache-release/index.html">2.18.1</a>
@@ -293,7 +565,10 @@
       <a href="../../../manual/next/index.html">2.21.0 (pre-release)</a>
     </li>
     <li>
-      <a href="../../../manual/latest/index.html">2.19.0</a>
+      <a href="../../../manual/latest/index.html">2.20.0</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.19.0/index.html">2.19.0</a>
     </li>
     <li>
       <a href="../../../manual/2.18.1/index.html">2.18.1</a>
@@ -331,7 +606,7 @@
     </div>
   </details>
 
-  <a class="nav-foot__edit" href="https://github.com/apache/hop/edit/release/2.19.0/docs/hop-dev-manual/modules/ROOT/pages/apache-release/index.adoc" rel="noopener" target="_blank">
+  <a class="nav-foot__edit" href="https://github.com/apache/hop/edit/release/2.20.0/docs/hop-dev-manual/modules/ROOT/pages/apache-release/index.adoc" rel="noopener" target="_blank">
     <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758zm1.414 1.06a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354zM11.189 6.25 9.75 4.81l-6.286 6.287a.25.25 0 0 0-.064.108l-.558 1.953 1.953-.558a.25.25 0 0 0 .108-.064z"/></svg>
     Edit this page
   </a>
@@ -345,6 +620,7 @@
 <nav class="breadcrumbs" data-pagefind-ignore aria-label="Breadcrumb">
   <ol>
     <li><a href="../../../">Home</a></li>
+    <li><span aria-current="page">Distribution and release</span></li>
     <li><a href="../../../dev-manual/latest/apache-release/index.html">Apache Release Process</a></li>
   </ol>
 </nav>
@@ -362,7 +638,7 @@
 </div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
-  <a class="pagination__prev" href="../../../dev-manual/latest/start-your-own-plugin.html"><span>Previous</span><strong>Creating your own plugin</strong></a>
+  <a class="pagination__prev" href="../../../dev-manual/latest/docker-build.html"><span>Previous</span><strong>Docker Build Script</strong></a>
   <a class="pagination__next" href="../../../dev-manual/latest/apache-release/creating-a-release.html"><span>Next</span><strong>Creating a Release</strong></a>
 </nav>
   </main>
