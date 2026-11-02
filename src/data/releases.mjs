@@ -42,6 +42,7 @@ const artifacts = (version) => ({
 })
 
 export const releases = [
+  { version: '2.20.0', date: '2026-11-02', announcement: '/blog/2026/11/hop-2.20.0/', ...{ files: artifacts('2.20.0') } },
   { version: '2.19.0', date: '2026-08-17', announcement: '/blog/2026/08/hop-2.19.0/', ...{ files: artifacts('2.19.0') } },
   { version: '2.18.1', date: '2026-06-18', announcement: '/blog/2026/06/hop-2.18.1/', ...{ files: artifacts('2.18.1') } },
   { version: '2.18.0', date: '2026-06-01', announcement: '/blog/2026/06/hop-2.18.0/', ...{ files: artifacts('2.18.0') } },

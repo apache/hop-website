@@ -2,9 +2,9 @@
 RewriteEngine on
 RewriteBase "/"
 
-# Redirect /manual/2.19.0 to latest
+# Redirect /manual/2.20.0 to latest
 
-RewriteRule "^manual/2.19.0(/.*)$" "/manual/latest$1" [R=permanent,L]
+RewriteRule "^manual/2.20.0(/.*)$" "/manual/latest$1" [R=permanent,L]
 
 # The technical documentation was folded into the user and developer manuals.
 # Redirect its pages, in any published version, to their new homes.

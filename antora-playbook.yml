@@ -65,6 +65,7 @@ content:
         - release/2.18.0
         - release/2.18.1
         - release/2.19.0
+        - release/2.20.0
 
     - url: https://github.com/apache/hop.git
       start_path: /docs/hop-dev-manual/
