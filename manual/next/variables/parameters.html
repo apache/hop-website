@@ -3058,26 +3058,15 @@ Wrap a value that contains a comma in double quotes, and the whole option in sin
 </div>
 </div>
 <div class="paragraph">
-<p><code>hop-run</code> gives every parameter the first value it finds:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>The value passed with <code>-p</code>.</p>
-</li>
-<li>
-<p>The value of a variable with the same name, for example a project or environment variable, or a system property passed with <code>-s</code>.</p>
-</li>
-<li>
-<p>The default value.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>An empty value, like <code>-p INPUT_FILE=</code>, gives the parameter its default value, even when a variable with the same name exists.</p>
+<p>A parameter gets the value passed with <code>-p</code>, or else its default value, like in Hop Gui.
+An empty value, like <code>-p INPUT_FILE=</code>, also gives it its default value.
+A project or environment variable, or a system property passed with <code>-s</code>, with the same name as the parameter is not used.</p>
 </div>
 <div class="paragraph">
 <p>A name passed with <code>-p</code> that the pipeline or workflow doesn&#8217;t declare is set as a variable.</p>
+</div>
+<div class="paragraph">
+<p>If a value should come from the project or the environment, don&#8217;t declare it as a parameter: use the variable as <code>${NAME}</code> directly.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -3086,7 +3075,9 @@ Wrap a value that contains a comma in double quotes, and the whole option in sin
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Unlike Hop Gui, <code>hop-run</code> uses a project or environment variable with the same name before the default value.
+Before Hop 2.21, <code>hop-run</code> gave a parameter without a <code>-p</code> value the value of a project or environment variable with the same name, before its default value.
+A pipeline or workflow that relied on this gets the default value now.
+Pass the value with <code>-p</code>, or remove the parameter so the variable is used.
 </td>
 </tr>
 </table>
