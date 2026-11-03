@@ -3421,11 +3421,6 @@ See also the variable HOP_AGGREGATION_ALL_NULLS_ARE_ZERO.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Set this variable to Y to start a pipeline that has main hops into transforms that do not consume input (for example existing files whose upstream produces no rows). Default N fails init and stops on leftover input. Verify still reports an error. See <a href="pipeline/pipeline-sources.html" class="xref page">Pipeline sources</a>.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">HOP_BATCHING_ROWSET</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Set this variable to 'Y' if you want to test a more efficient batching row set.</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HOP_DATABASE_CONNECTION_TIMEOUT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">30</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Default login/connection timeout in <strong>seconds</strong> applied when opening a JDBC database connection (maps to <code>DriverManager.setLoginTimeout</code>).

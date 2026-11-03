@@ -3241,6 +3241,134 @@ To change the pipeline run configuration, click <strong>Configure</strong>.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_debug_a_pipeline"><a class="link" href="#_debug_a_pipeline">Debug a pipeline</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Debug</strong> starts a local session and parks every transform before the first row.
+A <strong>Debug mode</strong> badge stays in the top left of the canvas.
+Each hop shows <code>cursor at stored</code>: how far the next transform has read, and how many rows are kept on that hop.
+A green border means that transform is running.
+A blue border means it is parked.
+Several transforms can run at the same time.
+Click <strong>Debug</strong> again, or <strong>Exit debug</strong>, to leave the session and return to the editor.</p>
+</div>
+<div class="imageblock text-left">
+<div class="content">
+<img src="../_images/hop-gui/pipeline/debug-session-started.jpg" alt="A started debugging session" width="75%">
+</div>
+</div>
+<div class="paragraph">
+<p>The <strong>Debugger</strong> tab in the execution results has the transforms, the hops, and the rows on the selected hop.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Process 1</strong> runs the selected transform copies for one row. <strong>Process N</strong> uses the number in the <strong>N</strong> field. A copy only takes a row when one is waiting. A request for more rows than the hop holds does not take rows that arrive later.</p>
+</li>
+<li>
+<p><strong>Try</strong> runs the selected copies and then puts the input cursors back. It does not undo the transform&#8217;s own state or side effects. Sort rows, Group by, Unique rows, Add sequence, Table output, and similar transforms will see the row again if you process it for real afterwards. The button asks before it runs.</p>
+</li>
+<li>
+<p><strong>Run selected</strong> lets those copies run until they finish. <strong>Run to here</strong> runs upstream until a row reaches the selection.</p>
+</li>
+<li>
+<p><strong>Continue</strong> and <strong>Pause</strong> run or park the whole pipeline.</p>
+</li>
+<li>
+<p><strong>Save</strong>, <strong>Open</strong>, and <strong>Delete</strong> keep a session in the debug sessions folder from the configuration perspective. <strong>Open</strong> loads the rows into a new local session. <strong>Import</strong> on the hop toolbar appends a tab-separated file to the selected hop.</p>
+</li>
+<li>
+<p><strong>Follow output</strong>, when it is on, selects the first output hop of the transform you click.</p>
+</li>
+<li>
+<p>The hop toolbar rewinds a hop to the first stored row, or clears the rows on the selected hops. Clear keeps the producer&#8217;s finished flag, so a reader whose producer has already finished does not wait forever. Rewind is refused once that reader has finished.</p>
+</li>
+<li>
+<p><strong>Rows</strong> shows one page of the stored rows. The <strong><mark></strong> column is the row&#8217;s place in the hop, starting at 1. The arrows move a page, and <strong>Rows</strong> sets how many rows a page holds, up to 5,000. New rows are added to the current page instead of rebuilding it. <strong></mark></strong> with the target button jumps to that row. <strong>Find</strong> and <strong>Find next</strong> search the stored rows without loading the whole hop.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Keyboard shortcuts, when the pipeline graph has focus:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Process 1 is F10, or F6 on macOS.</p>
+</li>
+<li>
+<p>Continue is F11, or F9 on macOS.</p>
+</li>
+<li>
+<p>Pause is Shift+F11, or Shift+F9 on macOS.</p>
+</li>
+<li>
+<p>Exit debug is Ctrl+F2, or Command+F2 on macOS.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Debug</strong> does not stop a pipeline that is already running. Stop that run first. Leaving the session with <strong>Exit debug</strong>, closing the graph, or starting a normal run removes the hop buffers and the spill files. A normal run does not keep the yellow step marker.</p>
+</div>
+<div class="sect2">
+<h3 id="_run_part_of_the_pipeline"><a class="link" href="#_run_part_of_the_pipeline">Run part of the pipeline</a></h3>
+<div class="paragraph">
+<p><strong>Run selected</strong> or <strong>Continue</strong> leaves the chosen transforms running and the others parked.
+The hop labels keep up with the rows that have been written and read.</p>
+</div>
+<div class="imageblock text-left">
+<div class="content">
+<img src="../_images/hop-gui/pipeline/debug-partial-run.jpg" alt="A partially running pipeline in debug mode" width="75%">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_one_row"><a class="link" href="#_step_one_row">Step one row</a></h3>
+<div class="paragraph">
+<p>With a transform selected, <strong>Process 1</strong> lets that copy handle a single row and then parks it again.
+The rows on its output hop show what that step produced.</p>
+</div>
+<div class="imageblock text-left">
+<div class="content">
+<img src="../_images/hop-gui/pipeline/debug-single-step.jpg" alt="Single stepping a transform" width="75%">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pause_when_a_row_matches"><a class="link" href="#_pause_when_a_row_matches">Pause when a row matches</a></h3>
+<div class="paragraph">
+<p>The filter button on the hop toolbar opens <strong>Pause when a row enters this hop</strong>.
+The condition uses the fields on that hop, which are the output of the transform that writes it.
+<strong>Pause</strong> chooses what stops when a matching row arrives:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>This transform</strong> parks the transform that wrote the row.</p>
+</li>
+<li>
+<p><strong>The whole pipeline</strong> parks every transform.</p>
+</li>
+<li>
+<p><strong>Downstream transforms</strong> parks the transform that reads the hop, and everything after it.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The matching row is already stored on the hop.
+The next row is what waits.
+A hop with a condition shows <code>pause</code> on its label.
+The clear button on the hop toolbar removes the condition.</p>
+</div>
+<div class="imageblock text-left">
+<div class="content">
+<img src="../_images/hop-gui/pipeline/debug-pause-condition.jpg" alt="Conditional pause dialog" width="60%">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="table-views"><a class="link" href="#table-views">Table views</a></h2>
 <div class="sectionbody">
 <div class="paragraph">

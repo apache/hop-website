@@ -3469,6 +3469,14 @@ The nanoseconds beyond the microsecond are dropped.</p></td>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_beam"><a class="link" href="#_beam">Beam</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>On a Beam runner the transform writes one Parquet file with <code>ParquetIO</code>. The filename, including the date and time, is resolved when the pipeline is submitted. The copy number and the split number are not extra files. Partitioned output, and a field that sets its own Parquet type, are refused. A JSON field and a UUID field are refused as well: on the local engine they become a JSON column and a UUID column, and on Beam <code>ParquetIO</code> would write both as plain strings. Dictionary page size and the Parquet writer version stay on the local engine.</p>
+</div>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/pipeline/transforms/parquet-file-input.html"><span>Previous</span><strong>Parquet file input</strong></a>

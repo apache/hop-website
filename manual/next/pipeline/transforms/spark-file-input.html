@@ -3040,8 +3040,8 @@ It is the bulk input of the native Spark engine: Spark reads the files in parall
 <p>This transform is <strong>not</strong> available on the local Hop engine or on the Beam engines.</p>
 </div>
 <div class="paragraph">
-<p>The path is a Spark/Hadoop <code>FileSystem</code> URI that must be visible to every executor, <strong>not</strong> a Hop VFS path: a local path on <code>local[<strong>]</code>, <code>hdfs://…</code> or <code>s3a://…</code> on a cluster.
-Hop-only schemes such as <code>s3://</code>, <code>azure://</code> or a named MinIO connection do not work here; see <a href="../spark/paths-and-filesystems.html" class="xref page">Paths and file systems</a> for the mapping and for the *Path scheme map</strong> on the run configuration.</p>
+<p>The path is a Spark/Hadoop <code>FileSystem</code> URI that must be visible to every executor, <strong>not</strong> a Hop VFS path: a local path on <code>local[*]</code>, <code>hdfs://…</code> or <code>s3a://…</code> on a cluster.
+Hop-only schemes such as <code>s3://</code>, <code>azure://</code> or a named MinIO connection do not work here; see <a href="../spark/paths-and-filesystems.html" class="xref page">Paths and file systems</a> for the mapping and for the <strong>Path scheme map</strong> on the run configuration.</p>
 </div>
 </div>
 </div>

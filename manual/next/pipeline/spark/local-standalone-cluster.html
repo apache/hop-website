@@ -2993,7 +2993,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>local[<strong>]</code> runs Spark inside the Hop process. A *standalone cluster</strong> runs a Spark master and one or more workers as separate processes, the way a real cluster does: your pipeline is split into tasks, shipped to executors, and the Hop code those tasks need travels in a fat jar.</p>
+<p><code>local[*]</code> runs Spark inside the Hop process. A <strong>standalone cluster</strong> runs a Spark master and one or more workers as separate processes, the way a real cluster does: your pipeline is split into tasks, shipped to executors, and the Hop code those tasks need travels in a fat jar.</p>
 </div>
 <div class="paragraph">
 <p>This page sets up such a cluster on one machine and runs a pipeline on it from Hop GUI or <code>hop-run</code>. Hop is the Spark <strong>driver</strong>: you design and start the pipeline in Hop as usual, and the work runs on the workers.</p>
@@ -3540,7 +3540,7 @@ Spark pipeline finished, result row count=0</code></pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The log shows <code>WARNING: run configuration '&#8230;&#8203;' has no Spark master and this pipeline does not run under spark-submit</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An empty <strong>Spark master</strong> means <code>local[<strong>]</code> inside the Hop process (Hop GUI, <code>hop-run</code> or Hop Server). Set the master, for example <code>spark://localhost:7077</code>. The *spark-submit (cluster)</strong> template leaves it empty on purpose, for <code>spark-submit</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An empty <strong>Spark master</strong> means <code>local[*]</code> inside the Hop process (Hop GUI, <code>hop-run</code> or Hop Server). Set the master, for example <code>spark://localhost:7077</code>. The <strong>spark-submit (cluster)</strong> template leaves it empty on purpose, for <code>spark-submit</code>.</p></td>
 </tr>
 </tbody>
 </table>

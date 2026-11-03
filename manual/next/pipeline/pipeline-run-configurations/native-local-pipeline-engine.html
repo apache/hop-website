@@ -3034,6 +3034,19 @@ Also be aware that while you <strong>can</strong> commit and rollback across mul
 This is not a two-phase-commit system.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lock-free row sets (experimental)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An experimental performance option.
+Rows are passed between transforms through lock-free buffers instead of lock-based ones.
+The transform that reads a buffer is woken once a batch of rows is ready, instead of for every row.
+A transform with several inputs waits on all of them at once and is woken by whichever input has rows.
+A transform that has had no rows for a while waits longer between checks, up to 20 ms, and is then woken by the next row, so idle transforms in long-running pipelines use little CPU.
+This lowers the cost per row, which matters most in pipelines of fast transforms.
+A buffer holds at most the configured <strong>Row set size</strong>, as the lock-based buffers do, and the row counts of the transforms are exact.
+With this option the <strong>Wait time buffer check (ms)</strong> setting is not used: transforms no longer poll their inputs.
+Hops that spill to disk to avoid a buffer deadlock keep their spilling buffer.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+</tr>
 </tbody>
 </table>
 </div>

@@ -3024,6 +3024,9 @@
                           The name of the Run Configuration to use
   -s, --system-properties=&lt;systemProperties&gt;[,&lt;systemProperties&gt;...]
                           A comma separated list of KEY=VALUE pairs
+  -swt, --shutdown-timeout=&lt;shutdownTimeout&gt;
+                          The maximum number of seconds to <span class="hljs-built_in">wait</span> <span class="hljs-keyword">for</span> the pipeline or workflow to stop
+                          when hop-run receives a termination signal (default 5)
   -v, --version           Print version information and <span class="hljs-built_in">exit</span></code></pre>
 </div>
 </div>
@@ -3130,6 +3133,11 @@ Check the <a href="../pipeline/pipeline-run-configurations/pipeline-run-configur
 <td class="tableblock halign-left valign-top"><p class="tableblock">A comma separated list of KEY=VALUE pairs</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>-swt</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>--shutdown-timeout</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The maximum number of seconds to wait for the pipeline or workflow to stop when Hop Run receives a termination signal. The default is 5 seconds. Can also be set with the <code>HOP_RUN_SHUTDOWN_TIMEOUT</code> environment variable. See <a href="#_stopping_hop_run">Stopping Hop Run</a>.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>-ime</code></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>--in-memory</code></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Keep Hop configuration in memory. Changes are not written to <code>hop-config.json</code>. Implied by <code>--project-locations</code> and <code>--environments</code>.</p></td>
@@ -3201,8 +3209,38 @@ Check the <a href="../pipeline/pipeline-run-configurations/pipeline-run-configur
 <td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">There was an error parsing the provided parameter information. Hop Run shows the syntax summary and exists.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">143</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hop Run received SIGTERM and stopped the run, see <a href="#_stopping_hop_run">Stopping Hop Run</a>. A process that receives SIGINT (Ctrl-C) or SIGHUP ends with 130 or 129.</p></td>
+</tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_stopping_hop_run"><a class="link" href="#_stopping_hop_run">Stopping Hop Run</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When Hop Run receives a termination signal (<code>SIGTERM</code>, <code>SIGINT</code> or <code>SIGHUP</code>) it stops the running pipeline or workflow the same way the Stop button in Hop GUI does, and waits for the run to end before the process exits.
+This happens when you press Ctrl-C, run <code>docker stop</code>, or when Kubernetes or OpenShift evicts a pod, for example while it drains a node.
+Transforms and actions stop and release their resources (database connections, open files, &#8230;&#8203;), and the log shows that the run was stopped.</p>
+</div>
+<div class="paragraph">
+<p>Hop Run waits at most the number of seconds set with <code>--shutdown-timeout</code> (or the <code>HOP_RUN_SHUTDOWN_TIMEOUT</code> environment variable), 5 seconds by default, and then exits anyway.
+When <a href="../technology/openlineage/index.html" class="xref page">lineage</a> is enabled, Hop Run then delivers the lineage events of the run, including its end, before it exits.</p>
+</div>
+<div class="paragraph">
+<p>Keep the timeout below the time the platform gives a process before it kills it: 30 seconds by default in Kubernetes (<code>terminationGracePeriodSeconds</code>) and 10 seconds for <code>docker stop</code> (<code>docker stop --time</code>). Leave room for the lineage delivery as well.
+To give a run more time to stop, raise both: for example <code>HOP_RUN_SHUTDOWN_TIMEOUT=60</code> with <code>docker run --stop-timeout 90</code> (<code>stop_grace_period</code> in Docker Compose) or <code>terminationGracePeriodSeconds: 90</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>SIGKILL</code> (<code>kill -9</code>, or the platform giving up) cannot be handled: the process ends at once, in the middle of whatever it was doing.</p>
+</div>
+<div class="paragraph">
+<p>Stopping a run does not undo the work it did so far.
+Design pipelines and workflows that may be stopped so that they can be restarted.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -3300,6 +3338,75 @@ Check the <a href="../pipeline/pipeline-run-configurations/pipeline-run-configur
 </div>
 <div class="paragraph">
 <p>See <a href="../projects/advanced.html#_use_a_project_without_hop_config_json" class="xref page">Use a project without hop-config.json</a> for the location and environment formats.</p>
+</div>
+<div class="sect2">
+<h3 id="_running_a_pipeline_with_a_parameter"><a class="link" href="#_running_a_pipeline_with_a_parameter">Running a pipeline with a parameter</a></h3>
+<div class="paragraph">
+<p>The <code>pipelines/pipeline-with-parameter.hpl</code> pipeline in the samples project has a parameter <code>PRM_EXAMPLE</code> without a default value.
+It writes the value it received to the log, followed by the value of the variable <code>ENV_VARIABLE</code>.</p>
+</div>
+<div class="paragraph">
+<p>Give the parameter a value with <code>-p</code> (<code>--parameters</code>).
+The single quotes keep the shell from replacing <code>${PROJECT_HOME}</code>, so Hop gets it as it is.
+On Windows, use <code>hop-run.bat</code> instead of <code>./hop-run.sh</code> and leave out the single quotes: CMD doesn&#8217;t remove them.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>./hop-run.sh -j samples -r local -f '${PROJECT_HOME}/pipelines/pipeline-with-parameter.hpl' -p PRM_EXAMPLE=Hello</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The log includes these lines, with the value of the parameter:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>2026/11/02 12:57:45 - HopRun - Enabling project 'samples'
+2026/11/02 12:57:45 - HopRun - Starting pipeline: config/projects/samples/pipelines/pipeline-with-parameter.hpl
+2026/11/02 12:57:45 - pipeline-with-parameter - Executing this pipeline using the Local Pipeline Engine with run configuration 'local'
+2026/11/02 12:57:45 - pipeline-with-parameter - Execution started for pipeline [pipeline-with-parameter]
+2026/11/02 12:57:45 - get ${PRM_EXAMPLE}.0 - Finished processing (I=0, O=0, R=1, W=1, U=0, E=0)
+2026/11/02 12:57:45 - write parameter to log.0 -
+2026/11/02 12:57:45 - write parameter to log.0 - ------------&gt; Linenr 1------------------------------
+2026/11/02 12:57:45 - write parameter to log.0 - we received 'Hello' as the value for this pipeline's parameter.
+2026/11/02 12:57:45 - write parameter to log.0 -
+2026/11/02 12:57:45 - write parameter to log.0 - example = Hello
+2026/11/02 12:57:45 - write parameter to log.0 -
+2026/11/02 12:57:45 - write parameter to log.0 - ====================
+2026/11/02 12:57:45 - write env_variable to log.0 -
+2026/11/02 12:57:45 - write env_variable to log.0 - ------------&gt; Linenr 1------------------------------
+2026/11/02 12:57:45 - write env_variable to log.0 - the value for variable ENV_VARIABLE is ${ENV_VARIABLE}
+2026/11/02 12:57:45 - write env_variable to log.0 -
+2026/11/02 12:57:45 - write env_variable to log.0 - env_variable = ${ENV_VARIABLE}
+2026/11/02 12:57:45 - write env_variable to log.0 -
+2026/11/02 12:57:45 - write env_variable to log.0 - ====================
+2026/11/02 12:57:45 - write parameter to log.0 - Finished processing (I=0, O=0, R=1, W=1, U=0, E=0)
+2026/11/02 12:57:45 - get ${ENV_VARIABLE}.0 - Finished processing (I=0, O=0, R=1, W=1, U=0, E=0)
+2026/11/02 12:57:45 - write env_variable to log.0 - Finished processing (I=0, O=0, R=1, W=1, U=0, E=0)
+2026/11/02 12:57:45 - pipeline-with-parameter - Pipeline duration : 0.039 seconds [  0.039" ]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Without <code>-p</code>, the parameter gets its default value, which is empty here: the log shows <code>we received '' as the value for this pipeline&#8217;s parameter.</code></p>
+</div>
+<div class="paragraph">
+<p><code>ENV_VARIABLE</code> isn&#8217;t set in the samples project, so the log shows <code>${ENV_VARIABLE}</code> as it is.
+Set it, for example, as a system property with <code>-s</code>, or in an <a href="../projects/projects-environments.html" class="xref page">environment</a>.
+A value with spaces goes between quotes (double quotes on Windows):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>./hop-run.sh -j samples -r local -f '${PROJECT_HOME}/pipelines/pipeline-with-parameter.hpl' -p 'PRM_EXAMPLE=Hello Hop' -s ENV_VARIABLE=dev</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>... - write parameter to log.0 - we received 'Hello Hop' as the value for this pipeline's parameter.
+... - write env_variable to log.0 - the value for variable ENV_VARIABLE is dev</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See <a href="../variables/parameters.html" class="xref page">Working with parameters</a> for more on parameters.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_parameter_examples"><a class="link" href="#_parameter_examples">Parameter Examples</a></h3>

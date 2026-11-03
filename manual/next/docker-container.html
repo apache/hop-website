@@ -3244,6 +3244,11 @@ You can specify them as a comma separated list, e.g. <code><code>PARAM_1=aaa,PAR
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">You can specify a metadata export file here which will contain all required metadata elements.  See also the metadata export option in the Hop Conf tool.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>HOP_RUN_SHUTDOWN_TIMEOUT</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The maximum number of seconds to wait for the pipeline or workflow to stop when the container is stopped (<code>docker stop</code>, a Kubernetes pod eviction, &#8230;&#8203;). The default is 5 seconds. Keep it below the grace period of the platform, see <a href="hop-run/index.html#_stopping_hop_run" class="xref page">Stopping Hop Run</a>.</p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">

@@ -3029,7 +3029,7 @@ If the table is in a different schema than the default one, please specify the s
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A table doesn&#8217;t exist, or the connection is unknown or can&#8217;t be opened. The number of errors is 1: the action stops at the first table that fails, and the tables after it are not truncated.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">At least one error occurred. A table that doesn&#8217;t exist, or a connection that is unknown or can&#8217;t be opened, counts as an error and stops the action: the tables after it are not truncated. An empty table name (in the selected tables grid or in a previous result row) also counts as an error, but later tables are still truncated.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
@@ -3052,7 +3052,7 @@ If the table is in a different schema than the default one, please specify the s
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-With <strong>Previous results to args</strong>, the first field of each result row is the table name and the second field the schema name. A row with an empty table name is skipped: it is logged as an error, but doesn&#8217;t count as one.
+With <strong>Previous results to args</strong>, the first field of each result row is the table name and the second field the schema name. A row with an empty table name is logged as an error and counts as one: later rows are still processed.
 </td>
 </tr>
 </table>
