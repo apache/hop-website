@@ -2998,7 +2998,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Wildcard (RegExp)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A regular expression matched against the whole path of each file in the folder, for example <code>.*\.xml</code> (see <a href="#_result">Result</a>).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A regular expression matched against the file name (basename) of each file in the folder, for example <code>.*\.xml</code> or <code>orders\.xml</code> (see <a href="#_result">Result</a>).</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Files/Folders</p></td>
@@ -3125,7 +3125,7 @@ You can use the Add button to add a line to the Files/Folders list.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-A result row with fewer than two fields stops the workflow with an error, and no hop is followed. The wildcard is matched against the whole path of each file (for example <code><a href="file:///data/in/orders.xml" class="bare">file:///data/in/orders.xml</a></code>), not its name: <code>.*\.xml</code> matches, <code>orders\.xml</code> matches nothing, and the action is still true.
+With <strong>Copy previous results to args</strong>, a result row with only one field uses an empty wildcard (the whole file or folder is checked). The wildcard is matched against the file name (basename), not the full path: <code>orders\.xml</code> and <code>.*\.xml</code> both match <code>orders.xml</code>.
 </td>
 </tr>
 </table>

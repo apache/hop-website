@@ -3039,7 +3039,7 @@ For example to delete all files ending in .dat, the regular expression would be 
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged. With <strong>Copy previous results to args</strong>, the action takes the path from the first field and the wildcard from the second field of each result row, and ignores the list in the dialog, also when there are no result rows. A row with fewer than two fields stops the action: the remaining rows are not processed, and the action is still true.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passed on unchanged. With <strong>Copy previous results to args</strong>, the action takes the path from the first field and the wildcard from the second field of each result row, and ignores the list in the dialog, also when there are no result rows. A row with fewer than two fields stops the action before anything is deleted: nothing is deleted, and the action is false.</p></td>
 </tr>
 </tbody>
 </table>
@@ -3050,7 +3050,7 @@ For example to delete all files ending in .dat, the regular expression would be 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-An invalid regular expression in <strong>Wildcard</strong> deletes nothing, and the action is still true.
+An invalid regular expression in <strong>Wildcard</strong> deletes nothing, and the action is false.
 </td>
 </tr>
 </table>

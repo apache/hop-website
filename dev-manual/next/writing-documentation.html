@@ -717,6 +717,65 @@ The pull request build rejects cross-manual xrefs without a version.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_version_attributes"><a class="link" href="#_version_attributes">Version attributes</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The versions of Java, Apache Beam, Spark and Flink that Hop uses are attributes in the <code>antora.yml</code> of the manual, so a page doesn&#8217;t repeat the number:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Attribute</th>
+<th class="tableblock halign-left valign-top">Manual</th>
+<th class="tableblock halign-left valign-top">Comes from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>{java-version}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user and dev manual</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>target.jdk.version</code> in the root <code>pom.xml</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>{beam-version}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user manual</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apache-beam.version</code> in the root <code>pom.xml</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>{beam-spark-version}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user manual</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spark.version</code> in <code>plugins/engines/beam/pom.xml</code> (the Spark of the Beam Spark runner)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>{spark-version}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user manual</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spark.version</code> in <code>plugins/engines/spark/pom.xml</code> (the native Spark engine)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>{flink-version}</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user manual</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the <code>beam-runners-flink-&lt;version&gt;</code> dependency in <code>plugins/engines/beam/pom.xml</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Use an attribute where the text means the version Hop uses now: <code>Hop requires Java {java-version}</code>.
+Keep the number where it shouldn&#8217;t change with an upgrade: a past version (<code>since 2.15.0</code>), a measurement or a log example, a table with a row per release, or the behaviour of one specific version of a library.
+A code block only replaces attributes when it has <code>subs="attributes+"</code>: <code>[source,bash,subs="attributes+"]</code>.</p>
+</div>
+<div class="paragraph">
+<p>When a pull request changes one of these versions in a pom, it also updates the attribute in the <code>antora.yml</code> files listed above, so the <code>next</code> documentation shows the new version.
+A comment next to each of them in the poms says so.
+A new Java version also changes the JRE that <code>docker/Dockerfile</code> installs, which <a href="docker-build.html" class="xref page">Building the Docker images</a> and the Docker container page of the user manual describe with <code>{java-version}</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_previewing_the_documentation_locally"><a class="link" href="#_previewing_the_documentation_locally">Previewing the documentation locally</a></h2>
 <div class="sectionbody">
 <div class="paragraph">

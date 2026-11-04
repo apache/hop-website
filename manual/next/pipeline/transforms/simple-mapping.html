@@ -3083,10 +3083,14 @@ It is always executed with a standard local Hop pipeline run configuration since
 </li>
 <li>
 <p>Input tab: specify which fields to pass to the <a href="mapping-input.html" class="xref page">Mapping input</a> transform in the mapping.
-You can map (hence the name) field names.</p>
+You can map (hence the name) field names.
+Enable <strong>There is no input for this mapping.</strong> when the mapping sub-pipeline acts as a data source and does not require a Mapping Input transform.
+Remove any incoming hop before enabling the option.</p>
 </li>
 <li>
-<p>Output tab: specify how to rename output fields retrieved from the <a href="mapping-output.html" class="xref page">Mapping output</a> transform.</p>
+<p>Output tab: specify how to rename output fields retrieved from the <a href="mapping-output.html" class="xref page">Mapping output</a> transform.
+Enable <strong>There is no output for this mapping.</strong> when the mapping sub-pipeline acts as a data target and does not require a Mapping Output transform.
+Remove any outgoing hop before enabling the option.</p>
 </li>
 </ul>
 </div>
@@ -3101,7 +3105,7 @@ You can map (hence the name) field names.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Top-level: <code>filename</code>, <code>runConfiguration</code>, <code>INPUT_SOURCE_TRANSFORM</code>, <code>INPUT_TARGET_TRANSFORM</code>, <code>INPUT_DESCRIPTION</code>, <code>INPUT_MAIN_PATH</code>, <code>INPUT_RENAME_ON_OUTPUT</code>, and the matching <code>OUTPUT_*</code> keys, plus <code>PARAMETERS_INHERIT_ALL_VARIABLES</code></p>
+<p>Top-level: <code>filename</code>, <code>runConfiguration</code>, <code>NO_INPUT</code>, <code>NO_OUTPUT</code>, <code>INPUT_SOURCE_TRANSFORM</code>, <code>INPUT_TARGET_TRANSFORM</code>, <code>INPUT_DESCRIPTION</code>, <code>INPUT_MAIN_PATH</code>, <code>INPUT_RENAME_ON_OUTPUT</code>, and the matching <code>OUTPUT_*</code> keys, plus <code>PARAMETERS_INHERIT_ALL_VARIABLES</code></p>
 </li>
 <li>
 <p>Group <code>INPUT_FIELDS</code>: <code>INPUT_SOURCE_FIELD</code>, <code>INPUT_TARGET_FIELD</code></p>

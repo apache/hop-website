@@ -3068,26 +3068,48 @@ Hover your mouse over the red error triangle to take a quick peek at the error m
 <img src="../_images/hop-gui/pipeline/failed-pipeline.png" alt="Failed pipeline" width="75%">
 </div>
 </div>
-<div class="paragraph">
+<div id="execution-results" class="paragraph">
 <p>After each run the execution results are displayed in the panel on the bottom of your window.
-The Execution Results contains two tabs:</p>
+The panel has these tabs:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Transform Metrics</p>
+<p><strong>Logging</strong>: the log of the pipeline.</p>
 </li>
 <li>
-<p>Logging</p>
+<p><strong>Metrics</strong>: the metrics of each transform.</p>
+</li>
+<li>
+<p><strong>Problems</strong>: the results of the checks of the pipeline and of the linter.</p>
+</li>
+<li>
+<p><strong>Revisions</strong>: the git history of the pipeline file, when Git is enabled.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The Transform Metrics tab displays metrics per transform.</p>
+<p>The same tabs are shown for a workflow, see <a href="../workflow/run-debug-workflow.html" class="xref page">Run and Debug a Workflow</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="_logging"><a class="link" href="#_logging">Logging</a></h3>
+<div class="paragraph">
+<p>The Logging tab displays the log of the pipeline according to the log level chosen on execution.</p>
 </div>
 <div class="imageblock text-left">
 <div class="content">
-<img src="../_images/hop-gui/pipeline/transform-metrics-pipeline.png" alt="Transform Metrics pipeline" width="75%">
+<img src="../_images/hop-gui/pipeline/logging-pipeline.png" alt="Logging pipeline" width="75%">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_metrics"><a class="link" href="#_metrics">Metrics</a></h3>
+<div class="paragraph">
+<p>The Metrics tab displays metrics per transform.</p>
+</div>
+<div class="imageblock text-left">
+<div class="content">
+<img src="../_images/hop-gui/pipeline/transform-metrics-pipeline.png" alt="Metrics pipeline" width="75%">
 </div>
 </div>
 <div class="paragraph">
@@ -3184,12 +3206,31 @@ The <a href="pipeline-run-configurations/native-local-pipeline-engine.html" clas
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sect2">
+<h3 id="_problems"><a class="link" href="#_problems">Problems</a></h3>
 <div class="paragraph">
-<p>The logging tab displays the log of the pipeline according to the log level chosen on execution.</p>
+<p>When the <a href="../linting/index.html" class="xref page">linter</a> is installed and switched on, the Problems tab lists its findings for the file as soon as the file has been linted: when you open it, when you save it, and shortly after you stop editing.
+<strong>Verify this pipeline</strong> on the toolbar adds the remarks of Hop&#8217;s own checks next to them.
+Double-click a remark to open the transform it is about.
+The toolbar of the tab can collapse and expand all remarks, and <strong>Force refresh</strong> clears the database cache and checks the pipeline again.</p>
 </div>
 <div class="imageblock text-left">
 <div class="content">
-<img src="../_images/hop-gui/pipeline/logging-pipeline.png" alt="Logging pipeline" width="75%">
+<img src="../_images/hop-gui/pipeline/problems-pipeline.png" alt="Problems pipeline" width="75%">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_revisions"><a class="link" href="#_revisions">Revisions</a></h3>
+<div class="paragraph">
+<p>The Revisions tab lists the commits of the pipeline file, with the columns <strong>Message</strong>, <strong>Author</strong>, <strong>Date</strong> and <strong>Commit</strong>.
+It is shown when <strong>Enable the git plugin</strong> is on (see <a href="../hop-gui/hop-gui-git.html#_git_configuration_options" class="xref page">Git Configuration options</a>) and Hop has found a git repository for the project, see <a href="../hop-gui/hop-gui-git.html" class="xref page">Working with git</a>.
+For a file that isn&#8217;t saved yet, that is outside the git repository, or that has no commit yet, the tab shows a message instead of the list.</p>
+</div>
+<div class="paragraph">
+<p>Select a commit and use <strong>Show text diff</strong> or <strong>Show visual diff</strong> on the toolbar of the tab to compare that version with the file as it is saved now; double-clicking a commit also shows the text diff.
+When the pipeline has changes that aren&#8217;t saved yet, Hop warns that the comparison is made with the last saved version.</p>
 </div>
 </div>
 </div>

@@ -3057,7 +3057,7 @@ This is useful in cases where a file is created in the final place, and another 
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The timeout is reached without the file and <strong>Success on timeout</strong> is not selected, no file name is set, the path cannot be read (for example a <code>zip:</code> path into a file that is not a zip), or the workflow is stopped while waiting. The number of errors is always 0.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The timeout is reached without the file and <strong>Success on timeout</strong> is not selected, no file name is set, the path cannot be read (for example a <code>zip:</code> path into a file that is not a zip), or the workflow is stopped while waiting. When the path cannot be read, the action is false with 1 error.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>

@@ -704,7 +704,7 @@ This should get you started to make modifications or create your own version ent
 <p>We&#8217;ll use Apache Tomcat in this example. If you use another application server, the process should be similar.</p>
 </div>
 <div class="paragraph">
-<p>Hop 2.x is built with Java 21, so you&#8217;ll need to <a href="https://tomcat.apache.org/download-10.cgi" rel="noopener" target="_blank">download the latest Tomcat 10</a> (or use the official Tomcat 10 Docker image).</p>
+<p>This version of Hop is built with Java 21, so you&#8217;ll need to <a href="https://tomcat.apache.org/download-10.cgi" rel="noopener" target="_blank">download the latest Tomcat 10</a> (or use the official Tomcat 10 Docker image).</p>
 </div>
 <div class="paragraph">
 <p>Copy or extract the following files from your Hop build, where <code>$CATALINA_HOME</code> is your Tomcat installation folder.</p>
@@ -926,7 +926,7 @@ Open <a href="http://localhost:8080/ui" class="bare" rel="noopener" target="_bla
 <p><strong>Check Tomcat logs</strong>: <code>$CATALINA_HOME/logs/catalina.out</code> for errors</p>
 </li>
 <li>
-<p><strong>Verify Java 21</strong>: Run <code>java -version</code> (should show version 17)</p>
+<p><strong>Verify Java 21</strong>: Run <code>java -version</code> (should show version 21)</p>
 </li>
 <li>
 <p><strong>Check port availability</strong>: <code>lsof -i :8080</code> (Linux/Mac) - port 8080 must be free</p>
