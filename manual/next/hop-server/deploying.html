@@ -1603,6 +1603,10 @@
     <a href="../../../manual/next/workflow/action-results.html">Action results</a>
     
   </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/replay-gate.html">Replay Gates and Workflow Replay</a>
+    
+  </li>
   <li class="doc-nav__item is-parent">
     <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Workflow Run Configurations section">
       <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1619,6 +1623,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/workflow-run-configurations/native-load-balancing-workflow-engine.html">Native Load-balancing</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/workflow-run-configurations/replay-workflow-engine.html">Replay</a>
     
   </li>
 </ul>
@@ -3154,8 +3162,12 @@ On a read-only root filesystem, point <code>HOP_SHARED_JDBC_FOLDERS</code> and <
 <div class="sect2">
 <h3 id="_the_project_you_mount"><a class="link" href="#_the_project_you_mount">The project you mount</a></h3>
 <div class="paragraph">
-<p>Set <code>HOP_PROJECT_FOLDER</code> to a real directory.
-Hop resolves that home before it loads named VFS connections, and the Git scheme exists only after the connection has been read from a folder Hop can already open.</p>
+<p>Set <code>HOP_PROJECT_FOLDER</code> to a real directory when the Git connection is stored in that project.
+Hop resolves the project home before it loads that project&#8217;s metadata, so the Git scheme has to come from a folder Hop can already open.</p>
+</div>
+<div class="paragraph">
+<p>Import the connection as shared metadata and the project home can be the connection root, with no volume for the project.
+See <a href="../docker-container.html#ProjectHomeOnGit" class="xref page">Project home on a Git repository</a>.</p>
 </div>
 <div class="paragraph">
 <p>Mount a small project that holds the connection and the metadata the run needs.

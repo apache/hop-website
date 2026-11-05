@@ -1603,6 +1603,10 @@
     <a href="../../../../manual/next/workflow/action-results.html">Action results</a>
     
   </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/replay-gate.html">Replay Gates and Workflow Replay</a>
+    
+  </li>
   <li class="doc-nav__item is-parent is-current">
     <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Workflow Run Configurations section">
       <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1619,6 +1623,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/workflow-run-configurations/native-load-balancing-workflow-engine.html">Native Load-balancing</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/workflow-run-configurations/replay-workflow-engine.html">Replay</a>
     
   </li>
 </ul>
@@ -3018,13 +3026,16 @@ All run configurations have a name, description and an engine type, each engine 
 <div class="ulist">
 <ul>
 <li>
-<p><a href="native-local-workflow-engine.html" class="xref page">Local workflow engine</a>: this configuration runs pipelines on your machine</p>
+<p><a href="native-local-workflow-engine.html" class="xref page">Local workflow engine</a>: this configuration runs workflows on your machine</p>
 </li>
 <li>
 <p><a href="native-remote-workflow-engine.html" class="xref page">Remote workflow engine</a>: this configuration runs workflows on a Hop Server using a defined Run Configuration.</p>
 </li>
 <li>
 <p><a href="native-load-balancing-workflow-engine.html" class="xref page">Load-balancing workflow engine</a>: this configuration assigns each workflow execution to one Hop Server from a group.</p>
+</li>
+<li>
+<p><a href="replay-workflow-engine.html" class="xref page">Replay workflow engine</a>: this configuration skips actions whose sealed Replay Gates still match the source execution.</p>
 </li>
 </ul>
 </div></div></td>
@@ -3035,7 +3046,7 @@ All run configurations have a name, description and an engine type, each engine 
 </div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
-  <a class="pagination__prev" href="../../../../manual/next/workflow/action-results.html"><span>Previous</span><strong>Action results</strong></a>
+  <a class="pagination__prev" href="../../../../manual/next/workflow/replay-gate.html"><span>Previous</span><strong>Replay Gates and Workflow Replay</strong></a>
   <a class="pagination__next" href="../../../../manual/next/workflow/workflow-run-configurations/native-local-workflow-engine.html"><span>Next</span><strong>Native Local</strong></a>
 </nav>
   </main>

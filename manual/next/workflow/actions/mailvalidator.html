@@ -1603,6 +1603,10 @@
     <a href="../../../../manual/next/workflow/action-results.html">Action results</a>
     
   </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/replay-gate.html">Replay Gates and Workflow Replay</a>
+    
+  </li>
   <li class="doc-nav__item is-parent">
     <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Workflow Run Configurations section">
       <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1619,6 +1623,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/workflow-run-configurations/native-load-balancing-workflow-engine.html">Native Load-balancing</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/workflow-run-configurations/replay-workflow-engine.html">Replay</a>
     
   </li>
 </ul>
@@ -3046,7 +3054,7 @@ Hop will need sender email address to query SMTP host.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The number of errors is 1. <strong>Email address</strong> is empty, an address is not a valid email address, <strong>SMTP check</strong> is selected while <strong>Email sender</strong> is empty, or with <strong>SMTP check</strong> the mail server refuses <strong>Email sender</strong> or an address, the domain doesn&#8217;t exist or has no MX record, or the server can&#8217;t be reached. The addresses are checked one after the other, and the first one that is not valid ends the check.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of errors is 1. <strong>Email address</strong> is empty, an address is not a valid email address, <strong>SMTP check</strong> is selected while <strong>Email sender</strong> is empty, or with <strong>SMTP check</strong> the mail server refuses <strong>Email sender</strong> or an address, the domain doesn&#8217;t exist or has no MX or A record, or the server can&#8217;t be reached. The addresses are checked one after the other, and the first one that is not valid ends the check.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
@@ -3077,7 +3085,7 @@ The addresses must be separated by exactly one space: two spaces, or a comma, ma
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<strong>SMTP check</strong> connects to port 25 of the mail servers of the domain (its MX records), or of <strong>Default SMTP server</strong> when it is set, and asks whether it accepts <strong>Email sender</strong> and the address. Without <strong>Default SMTP server</strong>, an address of a domain that has no MX record always fails, even when the domain has an A record: the check fails with "Error getting machines : Index 1 out of bounds for length 1".
+<strong>SMTP check</strong> connects to port 25 of the mail servers of the domain (its MX records, or its A record when it has no MX record), or of <strong>Default SMTP server</strong> when it is set, and asks whether it accepts <strong>Email sender</strong> and the address.
 </td>
 </tr>
 </table>

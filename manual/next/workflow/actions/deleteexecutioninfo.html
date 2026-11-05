@@ -1603,6 +1603,10 @@
     <a href="../../../../manual/next/workflow/action-results.html">Action results</a>
     
   </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/replay-gate.html">Replay Gates and Workflow Replay</a>
+    
+  </li>
   <li class="doc-nav__item is-parent">
     <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Workflow Run Configurations section">
       <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1619,6 +1623,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/workflow-run-configurations/native-load-balancing-workflow-engine.html">Native Load-balancing</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/workflow-run-configurations/replay-workflow-engine.html">Replay</a>
     
   </li>
 </ul>
@@ -3028,11 +3036,11 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The executions were deleted, with 0 errors. No execution to delete, or a root folder that doesn&#8217;t exist yet, is also true. The result is not used for hops: see the WARNING.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The executions were deleted, with 0 errors. No execution to delete, or a root folder that doesn&#8217;t exist yet, is also true. A success hop is followed.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The number of errors is 1. <strong>Execution information location</strong> is empty or doesn&#8217;t exist, <strong>Older than</strong> is empty, 0, negative or not a number while <strong>Delete all executions in this location</strong> is unchecked, or an execution can&#8217;t be deleted (for example a read-only folder).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of errors is 1. <strong>Execution information location</strong> is empty or doesn&#8217;t exist, <strong>Older than</strong> is empty, 0, negative or not a number while <strong>Delete all executions in this location</strong> is unchecked, or an execution can&#8217;t be deleted (for example a read-only folder). A failure hop is followed.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
@@ -3048,18 +3056,6 @@
 </tr>
 </tbody>
 </table>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-A success or failure hop from this action is never followed, whatever the result: only an unconditional hop is. The result and the metrics are still passed on to the next action.
-</td>
-</tr>
-</table>
-</div>
 <div class="admonitionblock note">
 <table>
 <tr>

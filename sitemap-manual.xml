@@ -2110,6 +2110,9 @@
 <loc>https://hop.apache.org/manual/next/workflow/create-workflow.html</loc>
 </url>
 <url>
+<loc>https://hop.apache.org/manual/next/workflow/replay-gate.html</loc>
+</url>
+<url>
 <loc>https://hop.apache.org/manual/next/workflow/run-debug-workflow.html</loc>
 </url>
 <url>
@@ -2120,6 +2123,9 @@
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/workflow/workflow-run-configurations/native-remote-workflow-engine.html</loc>
+</url>
+<url>
+<loc>https://hop.apache.org/manual/next/workflow/workflow-run-configurations/replay-workflow-engine.html</loc>
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/workflow/workflow-run-configurations/workflow-run-configurations.html</loc>

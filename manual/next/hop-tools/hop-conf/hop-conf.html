@@ -1603,6 +1603,10 @@
     <a href="../../../../manual/next/workflow/action-results.html">Action results</a>
     
   </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/replay-gate.html">Replay Gates and Workflow Replay</a>
+    
+  </li>
   <li class="doc-nav__item is-parent">
     <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Workflow Run Configurations section">
       <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1619,6 +1623,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/workflow-run-configurations/native-load-balancing-workflow-engine.html">Native Load-balancing</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/workflow-run-configurations/replay-workflow-engine.html">Replay</a>
     
   </li>
 </ul>
@@ -2968,6 +2976,45 @@ Run it as <code>hop-conf.sh</code>, as <code>hop-conf.bat</code> on Windows, or 
 Plugins add their own, for example for search, the File Explorer, linting, the AI Assistant or cloud storage.
 The options described on this page are listed in <a href="#_options">Options</a>.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_shared_metadata"><a class="link" href="#_shared_metadata">Shared metadata</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Metadata shared by the whole Hop configuration is stored in a local folder named in <code>hop-config.json</code> (<code>sharedMetadataFolder</code>).
+It is loaded before any project. See <a href="../../projects/metadata.html#SharedMetadata" class="xref page">Shared metadata</a>.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--shared-metadata-folder=&lt;path&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the shared metadata folder. The path is stored as given, so <code>'${HOP_CONFIG_FOLDER}/metadata'</code> stays unresolved until Hop starts. It has to resolve to a local path or a <code>file://</code> URL. A named VFS scheme is rejected and is not saved. An empty value (<code>--shared-metadata-folder=</code>) clears it. A value that is already stored and is not local is skipped at startup, so Hop still starts and this option can clear it.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--shared-metadata-import-json=&lt;json&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Import a metadata export by passing the JSON document itself. This is the same document <code>--export-shared-metadata</code> and <code>hop-conf --export-metadata</code> write. No file is read, so the document can come from an environment variable. An object of the same name is replaced. Other objects in the folder stay. When no folder is configured yet, Hop uses <code>'${HOP_CONFIG_FOLDER}/metadata'</code> and saves that.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--shared-metadata-import-file=&lt;file&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Import that same document from a file. Use this when the export is already on disk. Set only one of <code>--shared-metadata-import-json</code> and <code>--shared-metadata-import-file</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-xsm</code> / <code>--export-shared-metadata=&lt;file&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Export the shared metadata folder to one JSON file. The file is the document the two import options read. The shared folder has to be set already. Hop does not create a default folder just to export it.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">

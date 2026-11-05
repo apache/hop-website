@@ -1603,6 +1603,10 @@
     <a href="../../manual/next/workflow/action-results.html">Action results</a>
     
   </li>
+  <li class="doc-nav__item">
+    <a href="../../manual/next/workflow/replay-gate.html">Replay Gates and Workflow Replay</a>
+    
+  </li>
   <li class="doc-nav__item is-parent">
     <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Workflow Run Configurations section">
       <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1619,6 +1623,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../manual/next/workflow/workflow-run-configurations/native-load-balancing-workflow-engine.html">Native Load-balancing</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../manual/next/workflow/workflow-run-configurations/replay-workflow-engine.html">Replay</a>
     
   </li>
 </ul>
@@ -3421,6 +3429,14 @@ See also the variable HOP_AGGREGATION_ALL_NULLS_ARE_ZERO.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Set this variable to Y to start a pipeline that has main hops into transforms that do not consume input (for example existing files whose upstream produces no rows). Default N fails init and stops on leftover input. Verify still reports an error. See <a href="pipeline/pipeline-sources.html" class="xref page">Pipeline sources</a>.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HOP_BINARY_FIELDS_AVOID_HEX_PREVIEW</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set this variable to true to show the content of binary fields as text, for example for CLOB database fields, in preview windows, in the results of the <a href="hop-gui/perspective-database.html" class="xref page">Database perspective</a> and in the preview of a Parquet file.
+By default a binary value is shown as its hexadecimal representation.
+Hop only reads this variable from the configuration perspective.
+Restart Hop GUI after changing it: the preview windows read it once.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HOP_DATABASE_CONNECTION_TIMEOUT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">30</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Default login/connection timeout in <strong>seconds</strong> applied when opening a JDBC database connection (maps to <code>DriverManager.setLoginTimeout</code>).
@@ -3516,6 +3532,13 @@ Changing it to true will clear it when export pipeline / workflow.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HOP_GRAPH_LOGGING_CONNECTION</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Set this variable to the name of a Neo4j connection or a graph database connection of a Cypher database to enable execution logging to that database.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HOP_IMPORT_ENVIRONMENT_VARIABLES</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set this variable to Y to make the operating system environment variables available as Hop variables, so that <code>${NAME}</code> resolves an exported environment variable.
+Environment variables have the lowest precedence: a variable with the same name set with <code>-D</code> or in the configuration perspective keeps its value.
+You can set this variable in the configuration perspective, with <code>-D</code> in <code>HOP_OPTIONS</code>, or as an environment variable itself, for example in a container.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HOP_JSON_INPUT_INCLUDE_NULLS</p></td>
@@ -3672,6 +3695,19 @@ The default value is 1440 (one day).</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A variable to configure refresh for Hop server workflow/pipeline status page</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HOP_SERVER_RETRIES</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of times Hop retries a failed request for the status of a pipeline running on a Hop Server, for example while it monitors a pipeline it runs remotely.
+With 0 (default), the first failure is reported.
+Other requests to the server are not retried.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HOP_SERVER_RETRY_BACKOFF_INCREMENTS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The base wait in milliseconds between the retries set with HOP_SERVER_RETRIES.
+The wait grows with each retry (1, 1, 2, 3, 5&#8230;&#8203; times this value), plus a random extra of up to a quarter.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HOP_SPLIT_FIELDS_REMOVE_ENCLOSURE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Set this variable to N to preserve enclosure symbol after splitting the string in the Split fields transform.
@@ -3682,6 +3718,13 @@ Changing it to true will remove first and last enclosure symbol from the resulti
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">You can use this variable to speed up hostname lookup.
 Hostname lookup is performed by Hop so that it is capable of logging the server on which a workflow or pipeline is executed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HOP_TABLE_VIEW_EXTRA_COLUMN_MARGIN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Extra width in pixels added to each column when Hop GUI sizes the columns of a table to their content.
+Use it when the columns are a bit too narrow.
+Hop only reads this variable from the configuration perspective, and only once: restart Hop GUI after changing it.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HOP_TEXT_TAB_SIZE</p></td>
@@ -3834,6 +3877,13 @@ The <code>./plugins</code> will point to the plugins in the base installation fo
 <td class="tableblock halign-left valign-top"><p class="tableblock">HOP_AUTO_CREATE_CONFIG</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Set this variable to 'Y' to automatically create config file when it&#8217;s missing.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HOP_CONSOLE_COLORS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">auto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether log lines written to the console use ANSI colors: <code>true</code> (always), <code>false</code> (never) or <code>auto</code> (only when the output goes to a terminal, not to a file or a pipe).
+Only error lines are colored, in red.
+Set it as an environment variable or with <code>-D</code> in <code>HOP_OPTIONS</code>: a value set in the configuration perspective has no effect.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HOP_CONFIG_IN_MEMORY</p></td>

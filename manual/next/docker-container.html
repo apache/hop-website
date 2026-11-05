@@ -1603,6 +1603,10 @@
     <a href="../../manual/next/workflow/action-results.html">Action results</a>
     
   </li>
+  <li class="doc-nav__item">
+    <a href="../../manual/next/workflow/replay-gate.html">Replay Gates and Workflow Replay</a>
+    
+  </li>
   <li class="doc-nav__item is-parent">
     <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Workflow Run Configurations section">
       <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1619,6 +1623,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../manual/next/workflow/workflow-run-configurations/native-load-balancing-workflow-engine.html">Native Load-balancing</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../manual/next/workflow/workflow-run-configurations/replay-workflow-engine.html">Replay</a>
     
   </li>
 </ul>
@@ -2965,6 +2973,7 @@
 <ul class="sectlevel2">
 <li><a href="#_running_the_short_lived_container">Running the short-lived container</a></li>
 <li><a href="#_projects_with_a_parent">Projects with a parent</a></li>
+<li><a href="#ProjectHomeOnGit">Project home on a Git repository</a></li>
 <li><a href="#_running_the_long_lived_container_server">Running the long-lived container (server)</a></li>
 <li><a href="#_running_a_hop_command">Running a Hop command</a></li>
 </ul>
@@ -3137,6 +3146,25 @@ When using an environment a project has to be created too</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>HOP_ENVIRONMENT_CONFIG_FILE_NAME_PATHS</code></code></p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">This is a comma separated list of paths to environment config files (including filename and file extension).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>HOP_SHARED_METADATA_IMPORT_JSON</code></code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The metadata export JSON document itself, the same document <code>hop-conf --export-shared-metadata</code> or <code>hop-conf --export-metadata</code> writes.
+The entrypoint passes it to <code>hop-conf --shared-metadata-import-json</code> before a project is registered.
+No file and no volume: set the variable to the document, which is what you want when a Kubernetes secret or config map should not be mounted.
+A HashiCorp Vault variable resolver and a Git repository named <code>git-project</code> in that document let the project home be <code>git-project:///</code>.
+A worked example is <a href="#ProjectHomeOnGit">Project home on a Git repository</a>.
+The shared folder stays a local path, by default <code>'${HOP_CONFIG_FOLDER}/metadata'</code>.
+Leave the variable empty to skip the import.
+Set only one of <code>HOP_SHARED_METADATA_IMPORT_JSON</code> and <code>HOP_SHARED_METADATA_IMPORT_FILE</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>HOP_SHARED_METADATA_IMPORT_FILE</code></code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Path of that same metadata export when the file is already in the container.
+The entrypoint passes it to <code>hop-conf --shared-metadata-import-file</code>.
+Use the JSON variable instead when you do not want to mount a file.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>HOP_OPTIONS</code></code></p></td>
@@ -3441,6 +3469,104 @@ The entrypoint registers the parent first, then the main project with <code>--pr
 <div class="paragraph">
 <p>The value of <code>HOP_PARENT_PROJECT_NAME</code> should match <code>parentProjectName</code> in the child project&#8217;s <code>project-config.json</code>.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="ProjectHomeOnGit"><a class="link" href="#ProjectHomeOnGit">Project home on a Git repository</a></h3>
+<div class="paragraph">
+<p>The entrypoint imports shared metadata before it registers a project.
+Put a <a href="metadata-types/git-vfs-connection.html" class="xref page">Git repository</a> connection in <code>HOP_SHARED_METADATA_IMPORT_JSON</code>, install <code>hop-tech-git-vfs</code>, and set <code>HOP_PROJECT_FOLDER</code> to that connection&#8217;s root.
+The name of the connection is the scheme, so a connection named <code>git</code> is opened as <code>git://</code>.
+No project folder is mounted.</p>
+</div>
+<div class="paragraph">
+<p>The repository in this example is fictional.
+It has to contain <code>project-config.json</code> and the pipeline named by <code>HOP_FILE_PATH</code>.
+The entrypoint passes <code>--project-keep-config-file</code>, and the connection is read-only, so that config file has to be in the repository already.
+<code>HOP_RUN_CONFIG=local</code> uses the <code>local</code> run configuration shipped in the image.</p>
+</div>
+<div class="paragraph">
+<p>The entrypoint warns that <code>git://</code> is not a directory in the container.
+That check is a shell test for a real folder.
+Hop still opens the project through the Git connection.</p>
+</div>
+<div class="paragraph">
+<p>A locally built image is tagged <code>hop:Development</code>.
+The published snapshot image is <code>apache/hop:Development</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash"><span class="hljs-built_in">export</span> SHARED_METADATA=<span class="hljs-string">&#x27;{ &quot;git-vfs-connection&quot;: [ { &quot;description&quot;: &quot;Example repository&quot;, &quot;readOnly&quot;: true, &quot;cacheMinutes&quot;: &quot;2&quot;, &quot;userName&quot;: null, &quot;repositoryUrl&quot;: &quot;https://github.com/example/hop-project.git&quot;, &quot;revision&quot;: &quot;main&quot;, &quot;password&quot;: null, &quot;virtualPath&quot;: &quot;&quot;, &quot;acceptUnknownHosts&quot;: false, &quot;privateKeyPassphrase&quot;: null, &quot;basePath&quot;: null, &quot;privateKeyFile&quot;: null, &quot;alwaysFetch&quot;: false, &quot;name&quot;: &quot;git&quot;, &quot;sshUser&quot;: null, &quot;timeoutSeconds&quot;: null, &quot;authType&quot;: &quot;NONE&quot;, &quot;cacheFolder&quot;: null, &quot;knownHostsFile&quot;: null } ]}&#x27;</span>
+
+docker run --<span class="hljs-built_in">rm</span> \
+        -e HOP_PLUGINS_DOWNLOAD=<span class="hljs-string">&#x27;hop-tech-git-vfs&#x27;</span> \
+        -e HOP_SHARED_METADATA_IMPORT_JSON=<span class="hljs-string">&quot;<span class="hljs-variable">${SHARED_METADATA}</span>&quot;</span> \
+        -e HOP_PROJECT_FOLDER=<span class="hljs-string">&#x27;git://&#x27;</span> \
+        -e HOP_PROJECT_NAME=<span class="hljs-string">&#x27;git-test&#x27;</span> \
+        -e HOP_OPTIONS=<span class="hljs-string">&#x27;-Xmx4g&#x27;</span> \
+        -e HOP_FILE_PATH=<span class="hljs-string">&#x27;generate-rows.hpl&#x27;</span> \
+        -e HOP_RUN_PARAMETERS=<span class="hljs-string">&#x27;NR_ROWS=30m&#x27;</span> \
+        -e HOP_RUN_CONFIG=<span class="hljs-string">&#x27;local&#x27;</span> \
+        hop:Development</code></pre>
+</div>
+</div>
+<details>
+<summary class="title">Container log</summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight is-highlighted"><code class="language-text hljs" data-lang="text">2026/11/04 19:22:40 - Running the entrypoint script with PID 8
+2026/11/04 19:22:40 - Installing marketplace plugins: hop-tech-git-vfs
+2026/11/04 19:22:41 - General - Regional settings: language=en_US format=en_US timezone=GMT source=installation:OPERATING_SYSTEM
+Resolved hop-tech-git-vfs → org.apache.hop:hop-tech-git-vfs:2.21.0-SNAPSHOT
+2026/11/04 19:22:42 - Marketplace - Downloading org.apache.hop:hop-tech-git-vfs:2.21.0-SNAPSHOT from https://repository.apache.org/content/groups/public/org/apache/hop/hop-tech-git-vfs/2.21.0-SNAPSHOT/hop-tech-git-vfs-2.21.0-20261104.104429-1.zip
+Downloading: org.apache.hop:hop-tech-git-vfs:2.21.0-SNAPSHOT (5.5MB)
+2026/11/04 19:22:42 - Marketplace - Downloaded /opt/hop/plugins/.staging/.download/hop-tech-git-vfs-2.21.0-SNAPSHOT.zip (5807456 bytes)
+  Unpacking...
+  Installing files...
+2026/11/04 19:22:42 - Marketplace - Installed org.apache.hop:hop-tech-git-vfs:2.21.0-SNAPSHOT. Restart Hop to load the plugin.
+Plugin org.apache.hop:hop-tech-git-vfs:2.21.0-SNAPSHOT installed under /opt/hop from repo &#x27;asf&#x27;. Restart Hop to load it.
+2026/11/04 19:22:43 - Importing shared metadata from the JSON in HOP_SHARED_METADATA_IMPORT_JSON
+2026/11/04 19:22:44 - General - Regional settings: language=en_US format=en_US timezone=GMT source=installation:OPERATING_SYSTEM
+Search: include project text files set to &#x27;true&#x27;
+Search: search as you type set to &#x27;true&#x27;
+Validate database connections on save is now enabled
+Shared metadata folder set to &#x27;${HOP_CONFIG_FOLDER}/metadata&#x27;
+Imported 1 shared metadata object(s) into &#x27;/opt/hop/config/metadata&#x27;
+2026/11/04 19:22:44 - The project folder for git-test is set to: git://
+2026/11/04 19:22:44 - Warning: the folder specified in variable HOP_PROJECT_FOLDER does not exist in the container: git://
+2026/11/04 19:22:46 - Registering project git-test in the Hop container configuration (home=git://)
+2026/11/04 19:22:46 - /opt/hop/hop-conf.sh --project=git-test --project-create --project-home=git:// --project-config-file=project-config.json --project-keep-config-file
+2026/11/04 19:22:47 - General - Regional settings: language=en_US format=en_US timezone=GMT source=installation:OPERATING_SYSTEM
+2026/11/04 19:22:48 - General - Shared metadata loaded from &#x27;/opt/hop/config/metadata&#x27;
+Creating project &#x27;git-test&#x27;
+Project &#x27;git-test&#x27; was created for home folder : git://
+Configuration file for project &#x27;git-test&#x27; was saved to : git:///project-config.json
+Search: include project text files set to &#x27;true&#x27;
+Search: search as you type set to &#x27;true&#x27;
+Validate database connections on save is now enabled
+2026/11/04 19:22:52 - Not creating an environment in the container
+2026/11/04 19:22:52 - Running a single hop workflow / pipeline (generate-rows.hpl)
+2026/11/04 19:22:53 - General - Regional settings: language=en_US format=en_US timezone=GMT source=installation:OPERATING_SYSTEM
+2026/11/04 19:22:53 - HopRun - Enabling project &#x27;git-test&#x27;
+2026/11/04 19:22:53 - HopRun - Regional settings: language=en_US format=en_US timezone=GMT source=installation:OPERATING_SYSTEM
+2026/11/04 19:22:53 - HopRun - Two-way password encoder initialized with plugin ID &#x27;Hop&#x27; for project &#x27;git-test&#x27;
+2026/11/04 19:22:53 - HopRun - Project &#x27;git-test&#x27; metadata folder: git:///metadata
+2026/11/04 19:22:53 - HopRun - Relative path filename specified: git:///generate-rows.hpl
+2026/11/04 19:22:53 - HopRun - Starting pipeline: git:///generate-rows.hpl
+2026/11/04 19:22:53 - General - VFS namespace of pipeline generate-rows : named connections registered []
+2026/11/04 19:22:53 - General - Created a VFS namespace for pipeline generate-rows, holding the named VFS connections of Multi Metadata Provider with 1 providers: JSON metadata in folder git:///metadata
+2026/11/04 19:22:53 - generate-rows - Executing this pipeline using the Local Pipeline Engine with run configuration &#x27;local&#x27;
+2026/11/04 19:22:53 - generate-rows - Execution started for pipeline [generate-rows]
+2026/11/04 19:23:08 - 10m.0 - Finished processing (I=0, O=0, R=0, W=30000000, U=0, E=0)
+2026/11/04 19:23:08 - id.0 - Finished processing (I=0, O=0, R=30000000, W=30000000, U=0, E=0)
+2026/11/04 19:23:08 - Dummy (do nothing).0 - Finished processing (I=0, O=0, R=30000000, W=30000000, U=0, E=0)
+2026/11/04 19:23:08 - generate-rows - Pipeline duration : 14.709 seconds [ 14.709&quot; ]
+2026/11/04 19:23:08 - generate-rows - Execution finished on a local pipeline engine with run configuration &#x27;local&#x27;
+HopRun exit.</code></pre>
+</div>
+</div>
+</div>
+</details>
 </div>
 <div class="sect2">
 <h3 id="_running_the_long_lived_container_server"><a class="link" href="#_running_the_long_lived_container_server">Running the long-lived container (server)</a></h3>
