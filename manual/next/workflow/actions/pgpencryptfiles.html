@@ -3009,7 +3009,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Copy previous results to args</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Take the rows below from the result of the previous action instead of from the grid. The fields are read by position: action, file/folder source, wildcard, user ID, file/folder destination, and optionally signing key as a sixth field.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Take the rows below from the result of the previous action instead of from the grid. The fields are read by position: action, file/folder source, wildcard, user ID, file/folder destination, and optionally signing key as a sixth field and passphrase as a seventh.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Action</p></td>
@@ -3034,6 +3034,10 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Signing key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">User ID of the key to sign with, passed to GnuPG as <code>-u</code>. Used by Sign and Sign and Encrypt; leave it empty to sign with the default key from the GnuPG configuration.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passphrase</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passphrase of the signing key. Sent to GnuPG on standard input, never on the command line. Leave it empty when the key has no passphrase. Ignored by Encrypt.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Files/Folders</p></td>
@@ -3094,7 +3098,7 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If destination file exists</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>What to do when the destination file already exists. See the WARNING under <a href="#_result">Result</a>.</p>
+<p>What to do when the destination file already exists. <strong>Delete source file</strong> deletes the source and leaves the destination unchanged. <strong>Move source file to folder</strong> leaves the destination unchanged and moves the source into <strong>Destination folder</strong>. <strong>Create file with unique name</strong> writes a new file and leaves the existing one in place. <strong>Do nothing</strong> leaves an existing file unchanged.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -3262,15 +3266,15 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The success condition is not met. A file or an entry of the list fails, and counts as an error, when its source doesn&#8217;t exist, the destination folder doesn&#8217;t exist and <strong>Create destination folder</strong> is unchecked, GnuPG fails (an unknown or empty <strong>User ID</strong>, a signing key that needs a passphrase), the destination file exists and <strong>If destination file exists</strong> is <strong>Fail</strong>, or a folder is the source while <strong>Destination is a file</strong> is checked. It is also false, before any file and whatever the success condition, when <strong>If destination file exists</strong> is <strong>Move source file to folder</strong> while <strong>Destination folder</strong> is empty, or doesn&#8217;t exist and <strong>Create folder</strong> is unchecked. With <strong>Success when all works fine</strong> or <strong>Success when number of errors lesser than</strong>, the action stops once the condition is broken: the remaining files are not processed.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The success condition is not met. A file or an entry of the list fails, and counts as an error, when its source doesn&#8217;t exist, the destination folder doesn&#8217;t exist and <strong>Create destination folder</strong> is unchecked, GnuPG fails (an unknown or empty <strong>User ID</strong>, a missing or wrong passphrase for a signing key that needs one), the destination file exists and <strong>If destination file exists</strong> is <strong>Fail</strong>, or a folder is the source while <strong>Destination is a file</strong> is checked. It is also false, before any file and whatever the success condition, when <strong>If destination file exists</strong> is <strong>Move source file to folder</strong> while <strong>Destination folder</strong> is empty, or doesn&#8217;t exist and <strong>Create folder</strong> is unchecked. With <strong>Success when all works fine</strong> or <strong>Success when number of errors lesser than</strong>, the action stops once the condition is broken: the remaining files are not processed.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Errors</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The number of files and entries that failed. Inside a folder, when files are left after the one that breaks the success condition, that failure counts as two errors. A <strong>GPG location</strong> that is empty or not found counts as 1 error, before any file: the action is false with <strong>Success when all works fine</strong> and <strong>Success when at least x files decrypted</strong>, and true with <strong>Success when number of errors lesser than</strong>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of files and entries that failed. Inside a folder, the action stops once the success condition is broken, and that failure counts as one error. A <strong>GPG location</strong> that is empty or not found counts as 1 error, before any file: the action is false with <strong>Success when all works fine</strong> and <strong>Success when at least x files decrypted</strong>, and true with <strong>Success when number of errors lesser than</strong>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">With <strong>Add files to result files name</strong>, an encrypted file that didn&#8217;t exist yet in the destination is added unless <strong>If destination file exists</strong> is <strong>Do nothing</strong> (the default) or <strong>Fail</strong>: with the default, no file is added. When the destination file already exists, a file is added only with <strong>Overwrite destination file</strong> or <strong>Create file with unique name</strong>, and with <strong>Move source file to folder</strong> the moved source file is added. The result files of the previous action are kept.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With <strong>Add files to result files name</strong>, the encrypted or signed file is added. That includes a file that did not exist yet, whatever <strong>If destination file exists</strong> says, because that option only applies when the destination already exists. When it does, the written file is added for <strong>Overwrite destination file</strong> and <strong>Create file with unique name</strong> (the new file). <strong>Move source file to folder</strong> adds the moved source, not the existing destination. <strong>Delete source file</strong>, <strong>Do nothing</strong> and <strong>Fail</strong> add nothing. The result files of the previous action are kept.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Result rows</p></td>
@@ -3278,7 +3282,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Lines written</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The number of files encrypted or signed. A file left in place by <strong>Do nothing</strong>, deleted or moved is not counted. When the check of <strong>Destination folder</strong> (Move to folder) fails, or the action stops on the success condition between two entries of the list, the value of the previous action is passed on.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of files encrypted or signed. <strong>Delete source file</strong> counts the deleted source and does not write the destination. A source moved to a new name is not counted; overwriting or giving a unique name to a file that already exists in <strong>Destination folder</strong> counts that file. A file left in place by <strong>Do nothing</strong>, and a file rejected by <strong>Fail</strong> or by <strong>If file exists in destination folder</strong> set to <strong>Fail</strong>, is not counted. When the check of <strong>Destination folder</strong> (Move to folder) fails, or the action stops on the success condition between two entries of the list, the value of the previous action is passed on.</p></td>
 </tr>
 </tbody>
 </table>
@@ -3294,14 +3298,14 @@ The encrypted or signed file keeps the name of the source file: <code>a.txt</cod
 </tr>
 </table>
 </div>
-<div class="admonitionblock warning">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<strong>If destination file exists</strong> doesn&#8217;t always do what its name says. <strong>Create file with unique name</strong> builds a new name (the date and time added after the file name, for example <code>a.txt30102026_140920035</code>) but writes to the existing file, which is overwritten; the new name, which doesn&#8217;t exist, is added to the result files. <strong>Delete source file</strong> deletes the existing destination file, not the source, and encrypts nothing. <strong>Move source file to folder</strong> moves the source file to <strong>Destination folder</strong> without encrypting it. With <strong>Do nothing</strong>, the existing file is kept and the source is not encrypted.
+<strong>Create file with unique name</strong> adds the date and time after the file name (for example <code>a.txt30102026_140920035</code>) and writes the encrypted or signed data there. The existing file is left as it is.
 </td>
 </tr>
 </table>
@@ -3313,7 +3317,7 @@ The encrypted or signed file keeps the name of the source file: <code>a.txt</cod
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The action has no passphrase option: for <strong>Sign</strong> and <strong>Sign and encrypt</strong>, GnuPG must be able to use the signing key without asking for one, for example a key without passphrase or a passphrase already held by <code>gpg-agent</code>. Otherwise the file fails.
+For <strong>Sign</strong> and <strong>Sign and encrypt</strong>, put the signing key&#8217;s passphrase in <strong>Passphrase</strong> when the key has one. It is handed to GnuPG on standard input together with <code>--pinentry-mode loopback</code>. An empty passphrase asks GnuPG to sign without one.
 </td>
 </tr>
 </table>

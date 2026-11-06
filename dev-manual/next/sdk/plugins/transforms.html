@@ -850,6 +850,56 @@ The <code>open()</code> recipe is <a href="../../annotation-derived-widgets.html
 </div>
 </div>
 <div class="sect1">
+<h2 id="_parsing_text_into_a_field"><a class="link" href="#_parsing_text_into_a_field">Parsing text into a field</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A transform that turns text into a typed value parses it with String metadata built from the target field.
+Examples are a value read from a file, a constant, a default value or a lookup key.
+Build that metadata with <code>ValueMetaFactory.createParseMeta</code> for one field or <code>ValueMetaFactory.createParseRowMeta</code> for a whole row.
+Build it once, for example on the first row, and keep it in the data class.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java"><span class="hljs-keyword">if</span> (first) {
+  first = <span class="hljs-literal">false</span>;
+  data.outputRowMeta = getInputRowMeta().clone();
+  meta.getFields(data.outputRowMeta, getTransformName(), <span class="hljs-literal">null</span>, <span class="hljs-literal">null</span>, <span class="hljs-built_in">this</span>, metadataProvider);
+  data.convertRowMeta = ValueMetaFactory.createParseRowMeta(data.outputRowMeta);
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; data.outputRowMeta.size(); i++) {
+  <span class="hljs-type">IValueMeta</span> <span class="hljs-variable">valueMeta</span> <span class="hljs-operator">=</span> data.outputRowMeta.getValueMeta(i);
+  <span class="hljs-type">IValueMeta</span> <span class="hljs-variable">convertMeta</span> <span class="hljs-operator">=</span> data.convertRowMeta.getValueMeta(i);
+  outputRow[i] = valueMeta.convertDataFromString(texts[i], convertMeta, <span class="hljs-literal">null</span>, <span class="hljs-literal">null</span>, <span class="hljs-number">0</span>);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The parse metadata keeps everything that decides how text is parsed: the conversion mask, the decimal, grouping and currency symbols, the trim type, the string encoding, the date format locale, time zone and leniency.
+It always has normal storage, because the text to parse is a plain <code>String</code>, also when the target field is lazy (binary string).
+Pass it as the source metadata, to <code>convertDataFromString(text, parseMeta, nullIf, ifNull, trimType)</code> or <code>convertData(parseMeta, text)</code>.</p>
+</div>
+<div class="paragraph">
+<p>Don&#8217;t build the parse metadata in any of these ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>rowMeta.cloneToType(IValueMeta.TYPE_STRING)</code> or <code>ValueMetaFactory.cloneValueMeta(valueMeta, IValueMeta.TYPE_STRING)</code>: drops the currency symbol and keeps the storage type of a lazy field.
+With a <code>¤</code> mask the field then can&#8217;t read back the text it writes, and a lazy field fails with a <code>ClassCastException</code>.
+<code>IRowMeta.cloneToType</code> is deprecated for this reason.</p>
+</li>
+<li>
+<p><code>new ValueMetaString(name)</code>: has none of the target&#8217;s mask or symbols, so every value is parsed with the defaults of the machine.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>plugins/transforms/datagrid</code> (<code>DataGrid</code>) is a short example of this pattern.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_concrete_codebase_examples"><a class="link" href="#_concrete_codebase_examples">Concrete Codebase Examples</a></h2>
 <div class="sectionbody">
 <div class="ulist">
