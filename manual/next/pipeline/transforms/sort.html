@@ -1448,6 +1448,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/surefirereport.html">Surefire report output</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/switchcase.html">Switch / Case</a>
     
   </li>
@@ -3128,7 +3132,14 @@ See <a href="../beam/getting-started-with-beam.html#_unsupported_transforms" cla
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Compress TMP Files</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Compresses temporary files when they are needed to complete the sort.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Compresses temporary files when they are needed to complete the sort.
+You can also give a variable: when it is set, its value (Y or N) decides whether the files are compressed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Compression level</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How hard to compress the temporary files: 1 - Fastest, 2 - Very fast, 3 - Fast, 4 - Balanced, faster, 5 - Balanced, 6 - Standard (the Java default), 7 - Smaller files, 8 - Very small files, 9 - Smallest files.
+Temporary files are read back only once, so a low level is usually best.
+A new transform uses 1 - Fastest. A transform saved before this option existed keeps 6 - Standard, the level it always used.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Only pass unique rows?</p></td>

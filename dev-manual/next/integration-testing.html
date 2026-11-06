@@ -787,7 +787,9 @@ mvn clean install</pre>
 <li>
 <p>Surefire Reports</p>
 <div class="paragraph">
-<p>We generate xml reports that can be used by Jenkins to generate reports. these result reports can be found in the <code>integration-tests/surefire-reports</code> folder.</p>
+<p>We generate xml reports that can be used by Jenkins to generate reports. these result reports can be found in the <code>integration-tests/surefire-reports</code> folder.
+By default, <code>run-tests.sh</code> runs each project with <code>integration-tests/scripts/run-project-tests.hpl</code>, and its <a href="../../manual/next/pipeline/transforms/surefirereport.html" class="xref page">Surefire report output</a> transform writes the report.
+The script writes the report itself when it runs each workflow in a JVM of its own (<code>HOP_IT_PER_TEST_JVM=true</code> or <code>TEST_FILTER</code>), and when the suite doesn&#8217;t start or runs out of time.</p>
 </div>
 </li>
 </ol>

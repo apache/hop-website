@@ -1448,6 +1448,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/surefirereport.html">Surefire report output</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/switchcase.html">Switch / Case</a>
     
   </li>
@@ -3106,7 +3110,14 @@ Use the Blocking transform for triggering plugins, stored procedures, Java scrip
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Compress spool files?</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Compresses temporary files when they are needed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Compresses temporary files when they are needed.
+You can also give a variable: when it is set, its value (Y or N) decides whether the files are compressed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Compression level</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How hard to compress the spool files: 1 - Fastest, 2 - Very fast, 3 - Fast, 4 - Balanced, faster, 5 - Balanced, 6 - Standard (the Java default), 7 - Smaller files, 8 - Very small files, 9 - Smallest files.
+Spool files are read back only once, so a low level is usually best.
+A new transform uses 1 - Fastest. A transform saved before this option existed keeps 6 - Standard, the level it always used.</p></td>
 </tr>
 </tbody>
 </table>
