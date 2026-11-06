@@ -66,4 +66,5 @@ export const committers = [
   { name: "Sergio De Lorenzis", id: "xdelox", orgs: [{ name: "Serasoft Italy" }] },
   { name: "Tom Barber", id: "magicaltrout", twitter: "magicaltrout" },
   { name: "Yannick Mols", id: "yannickmols", twitter: "yannickmols" },
+  { name: "Lance Lee", id: "leehaut", twitter: "leehaut"}
 ]
