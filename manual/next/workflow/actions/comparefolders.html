@@ -3001,7 +3001,7 @@ This name has to be unique in a single workflow.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Wildcard (RegExp)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If you chose Let me specify&#8230;&#8203; in the previous option, you can specify the regular expression of files to compare. Variables are not resolved in it.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If you chose Let me specify&#8230;&#8203; in the previous option, you can specify the regular expression of files to compare, for example <code>.*\.csv</code>. Variables are resolved. Only used with <strong>Let me specify&#8230;&#8203;</strong>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Compare file size</p></td>
@@ -3044,11 +3044,11 @@ Note: this may cause slower processing speeds.</p></td>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">For two files: their contents are identical. For two folders: both hold the same number of entries of the kind set in <strong>Compare</strong>, every name found in the first folder is also in the second, with the same type, and with <strong>Compare file size</strong> or <strong>Compare file content</strong> the files have the same size or content. Without these two options, files with the same name count as equal.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For two files: their contents are identical. For two folders: both hold the same number of entries of the kind set in <strong>Compare</strong>, every entry found in the first folder is also in the second at the same path (the same subfolder and name), with the same type, and with <strong>Compare file size</strong> or <strong>Compare file content</strong> the files have the same size or content. Without these two options, files with the same name count as equal.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The folders differ, or one path is a file and the other a folder: the number of errors is 0. A file or folder does not exist: the number of errors is 1.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The folders differ, or one path is a file and the other a folder: the number of errors is 0. A file or folder does not exist, or <strong>Wildcard (RegExp)</strong> is not a valid regular expression: the number of errors is 1.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
@@ -3060,30 +3060,6 @@ Note: this may cause slower processing speeds.</p></td>
 </tr>
 </tbody>
 </table>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Entries are matched by their name only, not by their subfolder. With <strong>Include subfolders</strong>, a folder with <code>s1/x.txt</code> and <code>s2/x.txt</code> and a folder with <code>s1/x.txt</code> and <code>s2/y.txt</code> are reported as identical.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<strong>Wildcard (RegExp)</strong> is used as typed: variables in it are not resolved. An invalid regular expression, which includes one with <code>${...}</code> in it, leaves out every entry, and the folders are reported as identical. This also happens with <strong>Compare</strong> set to <strong>All</strong> when an invalid wildcard is still stored from an earlier choice.
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
     </article>

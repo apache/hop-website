@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Notes on pipelines and workflows | Apache Hop</title>
-<meta name="description" content="Notes on pipeline and workflow canvases, including Markdown formatting, note types, links, and images.">
+<meta name="description" content="Notes on pipeline and workflow canvases, including Markdown formatting, note types, links, images, and annotations attached to a transform or action.">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/hop-gui/notes.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
 <meta property="og:title" content="Notes on pipelines and workflows">
-<meta property="og:description" content="Notes on pipeline and workflow canvases, including Markdown formatting, note types, links, and images.">
+<meta property="og:description" content="Notes on pipeline and workflow canvases, including Markdown formatting, note types, links, images, and annotations attached to a transform or action.">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/hop-gui/notes.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -2966,6 +2966,41 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>Notes are free-floating annotations on the pipeline and workflow canvas. They do not participate in execution; they document design intent for anyone opening the file.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_annotations_on_a_transform_or_action"><a class="link" href="#_annotations_on_a_transform_or_action">Annotations on a transform or action</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An annotation is a short callout attached to one transform or one workflow action. It stays next to that icon, and it is not executed.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Open the context dialog on a transform or action and choose <strong>Annotate</strong>.</p>
+</li>
+<li>
+<p>Choose where it sits relative to the icon: top, top right, right, bottom right, bottom, bottom left, left, or top left. The default is above the icon. Moving, copying, or renaming the transform or action keeps the callout with it.</p>
+</li>
+<li>
+<p>The text is plain. Hop picks the fill, border, and text colors so the callout stays readable in light and dark mode.</p>
+</li>
+<li>
+<p><strong>Dashed line</strong> draws a dashed line from the callout to the icon. New annotations start with the line on. Turn it off to leave the callout unconnected.</p>
+</li>
+<li>
+<p>Click the callout to edit it. <strong>Remove annotation</strong> clears it.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../_images/hop-gui/annotation-callout.png" alt="An annotation with a dashed line to its transform" width="80%">
+</div>
+</div>
+<div class="paragraph">
+<p>A note floats on the canvas. An annotation belongs to one icon.</p>
 </div>
 </div>
 </div>
