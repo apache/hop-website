@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hop Doc | Apache Hop</title>
-<meta name="description" content="Hop Doc generates project documentation">
+<title>hop doc | Apache Hop</title>
+<meta name="description" content="hop doc writes documentation for a Hop project in Markdown, and optionally HTML: a page per pipeline and workflow with its diagram, an index, and an overview of the metadata.">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/hop-tools/hop-doc.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
-<meta property="og:title" content="Hop Doc">
-<meta property="og:description" content="Hop Doc generates project documentation">
+<meta property="og:title" content="hop doc">
+<meta property="og:description" content="hop doc writes documentation for a Hop project in Markdown, and optionally HTML: a page per pipeline and workflow with its diagram, an index, and an overview of the metadata.">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/hop-tools/hop-doc.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -2677,6 +2677,42 @@
     <a href="../../../manual/next/hop-tools/index.html">Hop Tools</a>
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop.html">hop</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-arrow-command.html">hop arrow</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-conf/hop-conf.html">hop conf</a>
+    
+  </li>
+  <li class="doc-nav__item is-current">
+    <a href="../../../manual/next/hop-tools/hop-doc.html">hop doc</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-driver.html">hop driver</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-encrypt.html">hop encrypt</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-export.html">hop export</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-gui.html">hop gui</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-import.html">hop import</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/hop-tools/hop-lint.html">hop lint</a>
     
   </li>
@@ -2685,39 +2721,23 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-python/hop-python.html">hop python</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-run/index.html">hop run</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-search.html">hop search</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-server/index.html">hop server</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/hop-tools/hop-setup.html">hop setup</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-tools/hop-conf/hop-conf.html">hop-conf</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-tools/hop-encrypt.html">hop-encrypt</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-tools/hop-gui.html">hop-gui</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-doc/index.html">hop doc (Generate documentation)</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-run/index.html">hop-run</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-tools/hop-search.html">hop-search</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-tools/hop-import.html">hop-import</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-server/index.html">hop-server</a>
     
   </li>
 </ul>
@@ -2956,35 +2976,76 @@
 <nav class="breadcrumbs" data-pagefind-ignore aria-label="Breadcrumb">
   <ol>
     <li><a href="../../../">Home</a></li>
-    <li><a href="../../../manual/next/hop-tools/hop-doc.html">Hop Doc</a></li>
+    <li><a href="../../../manual/next/hop-tools/index.html">Hop Tools</a></li>
+    <li><a href="../../../manual/next/hop-tools/hop-doc.html">hop doc</a></li>
   </ol>
 </nav>
+<aside class="marketplace" aria-labelledby="marketplace-note">
+  <p class="marketplace__label" id="marketplace-note">
+    <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+      <path d="M1.6 4.2h8.8l-.7 5.2a1 1 0 0 1-1 .85H3.3a1 1 0 0 1-1-.85zM4.2 4.2a1.8 1.8 0 0 1 3.6 0" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Marketplace plugin
+  </p>
+  <p class="marketplace__body">
+    This is not part of the standard Apache Hop client. Install it via the
+    marketplace or use <code>hop marketplace install hop-misc-documentation</code>.
+  </p>
+</aside>
     <article class="doc">
-      <h1>Hop Doc</h1>
+      <h1>hop doc</h1>
       <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Hop Doc generates documentation for Hop projects in Markdown format with optional HTML output.</p>
+<p><code>hop doc</code> writes documentation for a Hop project in <a href="https://www.markdownguide.org/basic-syntax/" rel="noopener" target="_blank">Markdown</a> format.
+It writes a page per pipeline and workflow with its diagram, and an index that links them.
+You can publish the Markdown with a tool such as <a href="https://www.mkdocs.org/" rel="noopener" target="_blank">MkDocs</a>, or let <code>hop doc</code> write HTML as well.</p>
+</div>
+<div class="paragraph">
+<p><code>hop doc</code> is part of the <strong>Documentation</strong> plugin, which is not in the standard Hop client.
+Install it from the <a href="hop-marketplace.html" class="xref page">marketplace</a>, where it is listed under Miscellaneous, or from the command line:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">hop marketplace install hop-misc-documentation</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The same plugin has the <a href="../workflow/actions/documentation.html" class="xref page">Build documentation</a> action, which does the same from a workflow.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_usage"><a class="link" href="#_usage">Usage</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Generate documentation for a Hop project:</p>
+<div id="_tabs_1" class="openblock tabs is-loading">
+<div class="content">
+<div class="ulist tablist">
+<ul>
+<li id="_tabs_1_windows" class="tab">
+<p>Windows</p>
+</li>
+<li id="_tabs_1_linux_macos" class="tab">
+<p>Linux, macOS</p>
+</li>
+</ul>
 </div>
+<div id="_tabs_1_windows--panel" class="tabpanel" aria-labelledby="_tabs_1_windows">
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>command</div><pre class="highlightjs highlight"><code class="language-command hljs" data-lang="command">./hop.bat doc -s /path/to/project -t /path/to/docs [--generate-html] [--remove-markdown]</code></pre>
+<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">hop.bat doc -j my-project -t C:\docs\my-project
+hop.bat doc -j my-project -t C:\docs\my-project -ip -in -im --generate-html</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Or using Hop project variables:</p>
 </div>
+<div id="_tabs_1_linux_macos--panel" class="tabpanel" aria-labelledby="_tabs_1_linux_macos">
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>command</div><pre class="highlightjs highlight"><code class="language-command hljs" data-lang="command">./hop.bat run -j my-project doc -t /path/to/docs --generate-html</code></pre>
+<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">./hop doc -j my-project -t /tmp/docs/my-project
+./hop doc -j my-project -t /tmp/docs/my-project -ip -in -im --generate-html</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -2994,250 +3055,119 @@
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 25%;">
+<col style="width: 75%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Option</th>
 <th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">Default</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-s, --source-folder</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Source project folder to document</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Required (or use project)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-j</code>, <code>--project &lt;name&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The project to document. See <a href="#_which_folder_is_documented">Which folder is documented</a>.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-t, --target-folder</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Target documentation folder</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-e</code>, <code>--environment &lt;name&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable an environment, and document its project.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-ip, --include-parameters</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Include pipeline/workflow parameters</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-t</code>, <code>--target-folder &lt;folder&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The folder to write the documentation to. Required. It is created when it doesn&#8217;t exist.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-in, --include-notes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Include notes text</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-s</code>, <code>--source-folder &lt;folder&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The folder to document, when no project is enabled.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-im, --include-metadata</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Include metadata overview</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-n</code>, <code>--project-name &lt;name&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name in the title of the index, when no project is enabled. The default is <code>Hop</code>.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-n, --project-name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Project name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">"Hop" (or HOP_PROJECT_NAME)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-ip</code>, <code>--include-parameters</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List the parameters of each pipeline and workflow.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-gh, --generate-html</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Generate HTML versions of all docs</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-in</code>, <code>--include-notes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List the text of the notes of each pipeline and workflow.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-rmmd, --remove-markdown</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Remove .md files after HTML generation</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-im</code>, <code>--include-metadata</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Add an overview of the metadata elements of the project, such as connections and run configurations.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-gh</code>, <code>--generate-html</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Also write an HTML file next to each Markdown file. The HTML index links to the HTML pages.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-rmmd</code>, <code>--remove-markdown</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With <code>--generate-html</code>, remove the Markdown files once the HTML is written. Without <code>--generate-html</code> it does nothing.</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_examples"><a class="link" href="#_examples">Examples</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_basic_documentation"><a class="link" href="#_basic_documentation">Basic Documentation</a></h3>
 <div class="paragraph">
-<p>Generate Markdown documentation only:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Windows</dt>
-<dd>
-<div class="openblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">./hop.bat doc -s &quot;C:\Projects\my-hop-project&quot; -t &quot;C:\yourLocation\docs&quot;</code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Linux/macOS</dt>
-</dl>
-</div>
-</div>
-</div>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">./hop doc -s ~/projects/my-hop-project -t ~/docs</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_html_documentation"><a class="link" href="#_html_documentation">HTML Documentation</a></h3>
-<div class="paragraph">
-<p>Generate HTML + remove Markdown source:</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Windows</dt>
-<dd>
-<div class="openblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">./hop.bat doc -s &quot;C:\Projects\my-hop-project&quot; -t &quot;C:\yourLocation\docs&quot; --generate-html --remove-markdown</code></pre>
-</div>
+<p>All the <code>-ip</code>, <code>-in</code>, <code>-im</code>, <code>-gh</code> and <code>-rmmd</code> options are off unless you give them.</p>
 </div>
 <div class="paragraph">
-<p>Generates:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">C:\docs\
-├── index.html (project TOC)
-├── pipelines\
-│   └── my-pipeline.html
-├── workflows\
-│   └── my-workflow.html
-└── assets\
-    ├── styles.css
-    └── images\</code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Linux/macOS</dt>
-</dl>
-</div>
-</div>
-</div>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">./hop doc -s ~/projects/my-hop-project -t ~/docs --generate-html --remove-markdown</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_using_hop_project_context"><a class="link" href="#_using_hop_project_context">Using Hop Project Context</a></h3>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">./hop.bat run -j IT-mongo doc -t &quot;C:\yourLocation\docs&quot; --generate-html</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Uses <code>HOP_PROJECT_HOME</code> and <code>HOP_PROJECT_NAME</code> automatically.</p>
-</div>
+<p>Run <code>hop doc --help</code> for the full list, which also has <code>-pl</code>, <code>--environments</code> and the other options of the <a href="hop.html" class="xref page">hop</a> command.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_workflow_action_usage"><a class="link" href="#_workflow_action_usage">Workflow Action Usage</a></h2>
+<h2 id="_which_folder_is_documented"><a class="link" href="#_which_folder_is_documented">Which folder is documented</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Add "Documentation" action to any Hop workflow:</p>
+<p>When a project is enabled, <code>hop doc</code> documents the home folder of that project, and uses the project&#8217;s name in the index.
+<code>-s</code> and <code>-n</code> are then not used.</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Drag <strong>Documentation</strong> action from Utility category</p>
-</li>
-<li>
-<p>Set <strong>Target folder</strong> (<code>C:\yourLocation\docs</code>)</p>
-</li>
-<li>
-<p>Optional: Check <strong>Generate HTML</strong></p>
-</li>
-<li>
-<p>Optional: Check <strong>Remove markdown</strong> (only when Generate HTML enabled)</p>
-</li>
-<li>
-<p>Configure content options:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>☑ <strong>Include parameters</strong> (optional)</p>
-</li>
-<li>
-<p>☑ <strong>Include metadata</strong> (optional)</p>
-</li>
-<li>
-<p>☐ <strong>Include notes</strong> (optional)</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>A project is enabled with <code>-j</code> or <code>-e</code>, and otherwise the default project of your Hop configuration is used.
+The standard configuration has the <code>default</code> project as its default project, so name the project you want with <code>-j</code>.</p>
 </div>
-</li>
-</ol>
+<div class="paragraph">
+<p><code>-s</code> and <code>-n</code> are only used when no project is enabled, for example when the Hop configuration has no default project.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_generated_structure"><a class="link" href="#_generated_structure">Generated Structure</a></h2>
+<h2 id="_what_is_written"><a class="link" href="#_what_is_written">What is written</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>docs/
-├── index.html (Table of Contents)
-├── pipelines/ (all .hpl files)
-│ ├── pipeline1.html
-│ └── subfolder/
-│ └── pipeline2.html
-├── workflows/ (all .hwf files)
-│ └── workflow1.html
-├── metadata/ (metadata overview)
+<p>The target folder gets the same subfolders as the project.
+For each pipeline and workflow, <code>hop doc</code> writes a page next to where the file is in the project: <code>pipelines/load-orders.hpl</code> becomes <code>pipelines/load-orders-pipeline.md</code>, and <code>main.hwf</code> becomes <code>main-workflow.md</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">docs/
+├── index.md                          table of contents, linking every page
+├── pipelines/
+│   └── load-orders-pipeline.md
+├── main-workflow.md
+├── metadata/                         with --include-metadata
 └── assets/
-├── styles.css
-└── images/</p>
+    ├── styles.css
+    └── images/                       an SVG diagram per pipeline and workflow</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Each page has the file name, the date the file was last changed and the diagram, plus the notes and the parameters when you ask for them.</p>
 </div>
-<div class="sect1">
-<h2 id="_notes"><a class="link" href="#_notes">Notes</a></h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><code>--remove-markdown</code> is <strong>automatically disabled</strong> if <code>--generate-html</code> is false</p>
-</li>
-<li>
-<p>HTML output includes custom CSS styling and responsive images</p>
-</li>
-<li>
-<p>All links in <code>index.html</code> automatically point to <code>.html</code> files</p>
-</li>
-<li>
-<p>Supports nested folders and metadata documentation</p>
-</li>
-<li>
-<p>Uses CommonMark for Markdown → HTML conversion</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>With <code>--generate-html</code>, each <code>.md</code> file gets an <code>.html</code> file next to it, including <code>index.html</code>.
+With <code>--remove-markdown</code> as well, only the HTML files, the images and the styles remain.</p>
+</div>
+<div class="paragraph">
+<p>Files that are already in the target folder stay, so remove the old documentation first when files were renamed or deleted in the project.</p>
 </div>
 </div>
 </div>
     </article>
+<nav class="pagination" data-pagefind-ignore aria-label="Page">
+  <a class="pagination__prev" href="../../../manual/next/hop-tools/hop-conf/hop-conf.html"><span>Previous</span><strong>hop conf</strong></a>
+  <a class="pagination__next" href="../../../manual/next/hop-tools/hop-driver.html"><span>Next</span><strong>hop driver</strong></a>
+</nav>
   </main>
 
 <aside class="doc-toc" data-pagefind-ignore aria-label="On this page" data-levels="2">

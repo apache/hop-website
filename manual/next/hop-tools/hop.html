@@ -2676,6 +2676,42 @@
     </button>
     <a href="../../../manual/next/hop-tools/index.html">Hop Tools</a>
     <ul class="doc-nav__list">
+  <li class="doc-nav__item is-current">
+    <a href="../../../manual/next/hop-tools/hop.html">hop</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-arrow-command.html">hop arrow</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-conf/hop-conf.html">hop conf</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-doc.html">hop doc</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-driver.html">hop driver</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-encrypt.html">hop encrypt</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-export.html">hop export</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-gui.html">hop gui</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-import.html">hop import</a>
+    
+  </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/hop-tools/hop-lint.html">hop lint</a>
     
@@ -2685,39 +2721,23 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-python/hop-python.html">hop python</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-run/index.html">hop run</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-search.html">hop search</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-server/index.html">hop server</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/hop-tools/hop-setup.html">hop setup</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-tools/hop-conf/hop-conf.html">hop-conf</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-tools/hop-encrypt.html">hop-encrypt</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-tools/hop-gui.html">hop-gui</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-doc/index.html">hop doc (Generate documentation)</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-run/index.html">hop-run</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-tools/hop-search.html">hop-search</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-tools/hop-import.html">hop-import</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-server/index.html">hop-server</a>
     
   </li>
 </ul>
@@ -2956,7 +2976,8 @@
 <nav class="breadcrumbs" data-pagefind-ignore aria-label="Breadcrumb">
   <ol>
     <li><a href="../../../">Home</a></li>
-    <li><a href="../../../manual/next/hop-tools/hop.html">Hop</a></li>
+    <li><a href="../../../manual/next/hop-tools/index.html">Hop Tools</a></li>
+    <li><a href="../../../manual/next/hop-tools/hop.html">hop</a></li>
   </ol>
 </nav>
     <article class="doc">
@@ -2975,7 +2996,7 @@ The main goal is to have a single wrapper script to make maintenance easier for 
 </div>
 <div class="paragraph">
 <p>To see the usage of the <code>hop</code> tool, you can simply use the <code>help</code> command to see which commands are available.
-The command list depends on the plugins in your installation; the sample below shows the common options and a typical set of commands.</p>
+The command list depends on the plugins in your installation; the sample below is the standard Hop client, without optional plugins.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2987,33 +3008,157 @@ Usage: hop [-hV] [--dev-debug] [--dev-debug-wait] [-ime]
            &lt;environments&gt;...]]... [-pl=&lt;projectLocations&gt;[,
            &lt;projectLocations&gt;...]]... [-s=&lt;systemProperties&gt;[,
            &lt;systemProperties&gt;...]]... [COMMAND]
+      --dev-debug         Allow a Hop developer to debug remotely
+      --dev-debug-wait    Allow a Hop developer to debug remotely. The script
+                            will <span class="hljs-built_in">wait</span> <span class="hljs-keyword">until</span> a debugging session is <span class="hljs-built_in">set</span> up.
   -e, --environment=&lt;environmentOption&gt;
-                         The name of the lifecycle environment to use
-  -h, --<span class="hljs-built_in">help</span>             Show this <span class="hljs-built_in">help</span> message and <span class="hljs-built_in">exit</span>.
-      -ime, --in-memory  Keep configuration <span class="hljs-keyword">in</span> memory without persisting to
-                           hop-config.json
+                          The name of the lifecycle environment to use
+      --environment-conf-files,
+        --environment-config-files=&lt;environmentConfigFiles&gt;[,
+        &lt;environmentConfigFiles&gt;...]
+                          Comma-separated list of configuration files to apply
+                            to the project or environment
+      --environments=&lt;environments&gt;[,&lt;environments&gt;...]
+                          Comma-separated list of environment definitions (name=
+                            [project:]configFile1;configFile2)
+  -h, --<span class="hljs-built_in">help</span>              Show this <span class="hljs-built_in">help</span> message and <span class="hljs-built_in">exit</span>.
+      -ime, --in-memory   Keep configuration <span class="hljs-keyword">in</span> memory without persisting to
+                            hop-config.json
   -j, --project=&lt;projectOption&gt;
-                         The name of the project to use
+                          The name of the project to use
       -pl, --project-locations=&lt;projectLocations&gt;[,&lt;projectLocations&gt;...]
-                         Comma-separated list of project locations
-                           (name=location or archive files)
+                          Comma-separated list of project locations
+                            (name=location or archive files)
   -s, --system-properties=&lt;systemProperties&gt;[,&lt;systemProperties&gt;...]
-                         A comma separated list of KEY=VALUE pairs
-  -V, --version          Print version information and <span class="hljs-built_in">exit</span>.
+                          A comma separated list of KEY=VALUE pairs
+  -V, --version           Print version information and <span class="hljs-built_in">exit</span>.
 Commands:
-  <span class="hljs-built_in">help</span>     Display <span class="hljs-built_in">help</span> information about the specified <span class="hljs-built_in">command</span>.
-  conf     Configure Hop
-  encrypt  Encrypt secrets
-  gui      The Hop GUI
-  import   Import metadata
-  run      Run a pipeline or workflow
-  search   Search <span class="hljs-keyword">in</span> Hop metadata
-  server   Run a Hop server
-  setup    Configure Hop environment variables</code></pre>
+  <span class="hljs-built_in">help</span>          Display <span class="hljs-built_in">help</span> information about the specified <span class="hljs-built_in">command</span>.
+  conf          Configure Hop
+  driver        Manage JDBC drivers (list, install)
+  encrypt       Encrypt secrets
+  <span class="hljs-built_in">export</span>        Export pipeline, workflow, or model diagrams to various formats
+                  (SVG, Mermaid, etc.)
+  gui           The Hop GUI
+  import        Import metadata
+  marketplace   Install and manage optional Hop plugins from a Maven repository
+  naming-check  Validate names against project Naming Schemes
+  run           Run a pipeline or workflow
+  search        Search <span class="hljs-keyword">in</span> Hop metadata
+  server        Run a Hop server
+  setup         Configure Hop launcher environment variables
+                  (HOP_CONFIG_FOLDER, HOP_AUDIT_FOLDER, HOP_JAVA_HOME,
+                  HOP_OPTIONS, HOP_SHARED_JDBC_FOLDERS). Distinct from hop
+                  conf, <span class="hljs-built_in">which</span> edits hop-config.json.</code></pre>
 </div>
 </div>
 </div>
 </details>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_commands"><a class="link" href="#_commands">Commands</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command</th>
+<th class="tableblock halign-left valign-top">Plugin</th>
+<th class="tableblock halign-left valign-top">Page</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>arrow</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apache Arrow (optional)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="hop-arrow-command.html" class="xref page">hop arrow</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>conf</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="hop-conf/hop-conf.html" class="xref page">hop conf</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>doc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Documentation (optional)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="hop-doc.html" class="xref page">hop doc</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>driver</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="hop-driver.html" class="xref page">hop driver</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>encrypt</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="hop-encrypt.html" class="xref page">hop encrypt</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>export</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="hop-export.html" class="xref page">hop export</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gui</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="hop-gui.html" class="xref page">hop gui</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>import</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="hop-import.html" class="xref page">hop import</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>lint</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lint (optional)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="hop-lint.html" class="xref page">hop lint</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>marketplace</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="hop-marketplace.html" class="xref page">hop marketplace</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>naming-check</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../metadata-types/naming-scheme.html#_checking_names_in_ci" class="xref page">Naming scheme: checking names in CI</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>python</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PyHop (optional)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="hop-python/hop-python.html" class="xref page">hop python</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>run</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-run/index.html" class="xref page">hop run</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>search</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="hop-search.html" class="xref page">hop search</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>server</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-server/index.html" class="xref page">hop server</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>setup</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="hop-setup.html" class="xref page">hop setup</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The commands marked optional only exist once their plugin is installed from the <a href="hop-marketplace.html" class="xref page">marketplace</a>.
+<code>hop help</code> then lists them as well.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -3033,6 +3178,16 @@ Commands:
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--dev-debug</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For Hop developers: let a Java debugger connect on port 5010.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--dev-debug-wait</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">As <code>--dev-debug</code>, but Hop waits until the debugger is connected before it starts.</p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-e</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>--environment</code></p></td>
@@ -3100,6 +3255,10 @@ hop --project-locations my-project=/data/my-project gui -j my-project -f pipelin
 </div>
 </div>
     </article>
+<nav class="pagination" data-pagefind-ignore aria-label="Page">
+  <a class="pagination__prev" href="../../../manual/next/hop-tools/index.html"><span>Previous</span><strong>Hop Tools</strong></a>
+  <a class="pagination__next" href="../../../manual/next/hop-tools/hop-arrow-command.html"><span>Next</span><strong>hop arrow</strong></a>
+</nav>
   </main>
 
 <aside class="doc-toc" data-pagefind-ignore aria-label="On this page" data-levels="2">

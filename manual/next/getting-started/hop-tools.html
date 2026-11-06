@@ -2677,6 +2677,42 @@
     <a href="../../../manual/next/hop-tools/index.html">Hop Tools</a>
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop.html">hop</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-arrow-command.html">hop arrow</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-conf/hop-conf.html">hop conf</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-doc.html">hop doc</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-driver.html">hop driver</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-encrypt.html">hop encrypt</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-export.html">hop export</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-gui.html">hop gui</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-import.html">hop import</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/hop-tools/hop-lint.html">hop lint</a>
     
   </li>
@@ -2685,39 +2721,23 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-python/hop-python.html">hop python</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-run/index.html">hop run</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-tools/hop-search.html">hop search</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/hop-server/index.html">hop server</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/hop-tools/hop-setup.html">hop setup</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-tools/hop-conf/hop-conf.html">hop-conf</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-tools/hop-encrypt.html">hop-encrypt</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-tools/hop-gui.html">hop-gui</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-doc/index.html">hop doc (Generate documentation)</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-run/index.html">hop-run</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-tools/hop-search.html">hop-search</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-tools/hop-import.html">hop-import</a>
-    
-  </li>
-  <li class="doc-nav__item">
-    <a href="../../../manual/next/hop-server/index.html">hop-server</a>
     
   </li>
 </ul>
@@ -3014,15 +3034,23 @@ It replaces the individual <code>hop-run</code>, <code>hop-conf</code>, <code>ho
 <div class="listingblock">
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">Commands:
-  help     Display help information about the specified command.
-  conf     Configure Hop
-  encrypt  Encrypt secrets
-  gui      The Hop GUI
-  import   Import metadata
-  run      Run a pipeline or workflow
-  search   Search in Hop metadata
-  server   Run a Hop server
-  setup    Configure Hop environment variables</code></pre>
+  help          Display help information about the specified command.
+  conf          Configure Hop
+  driver        Manage JDBC drivers (list, install)
+  encrypt       Encrypt secrets
+  export        Export pipeline, workflow, or model diagrams to various formats
+                  (SVG, Mermaid, etc.)
+  gui           The Hop GUI
+  import        Import metadata
+  marketplace   Install and manage optional Hop plugins from a Maven repository
+  naming-check  Validate names against project Naming Schemes
+  run           Run a pipeline or workflow
+  search        Search in Hop metadata
+  server        Run a Hop server
+  setup         Configure Hop launcher environment variables
+                  (HOP_CONFIG_FOLDER, HOP_AUDIT_FOLDER, HOP_JAVA_HOME,
+                  HOP_OPTIONS, HOP_SHARED_JDBC_FOLDERS). Distinct from hop
+                  conf, which edits hop-config.json.</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3130,14 +3158,25 @@ the older <code>hop-run.sh</code>, <code>hop-conf.sh</code> and friends still sh
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-vs-kettle/import-kettle-projects.html" class="xref page">Import Kettle projects</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop doc</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Generate documentation for your own Hop project, in Markdown or HTML.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-tools/hop-doc.html" class="xref page">Hop Doc</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop driver</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List the JDBC drivers Hop can download, and install them.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-tools/hop-driver.html" class="xref page">Hop Driver</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop export</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Export pipeline and workflow diagrams to SVG or Mermaid, for one file or a whole folder.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-tools/hop-export.html" class="xref page">Hop Export</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop marketplace</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Install optional plugins into a Hop client from a Maven repository.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-tools/hop-marketplace.html" class="xref page">Hop Marketplace</a></p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>Some tools are optional plugins rather than part of the standard client:</p>
+<p>Some tools are optional plugins rather than part of the standard client.
+Install them with <code>hop marketplace</code>:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -3154,14 +3193,14 @@ the older <code>hop-run.sh</code>, <code>hop-conf.sh</code> and friends still sh
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Marketplace</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Install optional plugins into a running Hop client from a Maven repository.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-tools/hop-marketplace.html" class="xref page">Hop Marketplace</a></p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop lint</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Static analysis over a project: check pipelines, workflows and metadata without running them. Useful as a build step.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-tools/hop-lint.html" class="xref page">Hop Lint</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop doc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generate documentation for your own Hop project, in Markdown or HTML.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../hop-tools/hop-doc.html" class="xref page">Hop Doc</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PyHop</p></td>

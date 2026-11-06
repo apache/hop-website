@@ -187,9 +187,6 @@
 <loc>https://hop.apache.org/manual/next/getting-started/index.html</loc>
 </url>
 <url>
-<loc>https://hop.apache.org/manual/next/hop-doc/index.html</loc>
-</url>
-<url>
 <loc>https://hop.apache.org/manual/next/hop-gui/canvas-mouse.html</loc>
 </url>
 <url>
@@ -298,7 +295,13 @@
 <loc>https://hop.apache.org/manual/next/hop-tools/hop-doc.html</loc>
 </url>
 <url>
+<loc>https://hop.apache.org/manual/next/hop-tools/hop-driver.html</loc>
+</url>
+<url>
 <loc>https://hop.apache.org/manual/next/hop-tools/hop-encrypt.html</loc>
+</url>
+<url>
+<loc>https://hop.apache.org/manual/next/hop-tools/hop-export.html</loc>
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/hop-tools/hop-gui.html</loc>
