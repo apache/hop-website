@@ -3134,6 +3134,17 @@ With fewer connections allowed than that, the other requests wait for a free one
 </div>
 </div>
 <div class="sect1">
+<h2 id="_appending_to_a_file"><a class="link" href="#_appending_to_a_file">Appending to a file</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Options such as <strong>Append</strong> in the Text file output transform add to an existing object.
+S3 has no append operation, so Hop rebuilds the object with a multipart upload: the existing content is copied on the server, and only the new bytes are uploaded.
+An object smaller than 5 MiB is read back and uploaded again with the new bytes.
+The existing content is only copied or read when the object hasn&#8217;t changed since Hop opened it for the append, otherwise the append fails.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_usage_and_testing"><a class="link" href="#_usage_and_testing">Usage and testing</a></h2>
 <div class="sectionbody">
 <div class="paragraph">

@@ -3199,6 +3199,17 @@ A write is never ended.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_appending_to_a_file"><a class="link" href="#_appending_to_a_file">Appending to a file</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Options such as <strong>Append</strong> in the Text file output transform add to an existing object.
+Google Cloud Storage objects can&#8217;t be changed, so Hop writes the new bytes to a temporary object, joins it to the end of the existing object with a compose when the file is closed, and deletes the temporary object.
+If the object changes while the append runs, the append fails instead of losing data.
+A composed object has no MD5 hash, only a CRC32C checksum.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_usage_and_testing"><a class="link" href="#_usage_and_testing">Usage and testing</a></h2>
 <div class="sectionbody">
 <div class="paragraph">

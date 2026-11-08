@@ -3201,6 +3201,17 @@ rotate for you.
 </div>
 </div>
 <div class="sect1">
+<h2 id="_appending_to_a_file"><a class="link" href="#_appending_to_a_file">Appending to a file</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Options such as <strong>Append</strong> in the Text file output transform add to an existing file.
+Hop adds the new bytes as extra blocks of the blob and commits them after the existing ones, so the existing content is not uploaded again.
+A blob that was uploaded in a single request has no blocks yet, so its content is uploaded again with the new bytes the first time.
+If the file changes while the append runs, the append fails instead of losing data.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_usage_and_testing"><a class="link" href="#_usage_and_testing">Usage and testing</a></h2>
 <div class="sectionbody">
 <div class="paragraph">

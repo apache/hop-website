@@ -3036,7 +3036,7 @@ You can add a different file or folder and wildcard on each line.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Wildcard (RegExp)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A regular expression wildcard to include file patterns in the list of file names.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A regular expression matched against the file name (basename) of each file in a folder. Ignored for file entries.</p></td>
 </tr>
 </tbody>
 </table>
@@ -3065,11 +3065,11 @@ You can add a different file or folder and wildcard on each line.</p></td>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Every file and folder in the list exists. A folder without matching files adds nothing and is still true.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every file and folder in the list exists, and the <strong>Wildcard (RegExp)</strong> of every folder is a valid regular expression. A folder without matching files adds nothing and is still true.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A file or folder in the list doesn&#8217;t exist. The number of errors is the number of entries that don&#8217;t exist. The files of the other entries are still added.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A file or folder in the list doesn&#8217;t exist, or the <strong>Wildcard (RegExp)</strong> of a folder is an invalid regular expression. The number of errors is the number of entries that failed. The files of the other entries are still added.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
@@ -3088,7 +3088,7 @@ You can add a different file or folder and wildcard on each line.</p></td>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-An invalid regular expression in <strong>Wildcard (RegExp)</strong> adds nothing, and the action is still true.
+An invalid regular expression in <strong>Wildcard (RegExp)</strong> of a folder makes that entry fail (the action is false), and no files from that folder are added. A file entry ignores the wildcard.
 </td>
 </tr>
 </table>
