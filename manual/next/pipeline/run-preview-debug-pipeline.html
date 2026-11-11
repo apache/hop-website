@@ -3442,6 +3442,60 @@ The clear button on the hop toolbar removes the condition.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="table-toolbar"><a class="link" href="#table-toolbar">Finding and exporting table data</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The toolbar above preview windows and other table grids in Hop Gui can find a value or a column, and export the rows.</p>
+</div>
+<div class="paragraph">
+<p>The <strong>Find</strong> (search) icon opens a menu with two items:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Find value</strong>, also <code>Ctrl+F</code> (<code>Cmd+F</code> on macOS) in the table, searches the cells for text.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Tick <strong>Case sensitive</strong> to match upper and lower case exactly, or <strong>Regular expression</strong> to search with a pattern.</p>
+</li>
+<li>
+<p>Only the checked columns are searched. All columns, hidden ones included, are checked when the dialog opens; <strong>All</strong> and <strong>None</strong> change that.</p>
+</li>
+<li>
+<p><strong>Find first</strong> starts at the top of the table. <strong>Find next</strong> starts at the selected cell, and after a match continues after it.</p>
+</li>
+<li>
+<p>The search goes row by row, from left to right, and doesn&#8217;t start over at the top: after the last match it shows <strong>No more matches</strong>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Find column</strong> lists the columns. Pick one and the table scrolls to it. A hidden column is shown again.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The two export icons write the rows of the table to a file:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Export this data to a CSV file</strong>: comma-separated, with every value in double quotes, in UTF-8.</p>
+</li>
+<li>
+<p><strong>Export this data to a new Excel spreadsheet</strong>: an <code>.xlsx</code> file with a bold header row.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Both ask which columns to export, with all of them selected, and also write the <code>#</code> row number column first.
+In Hop Gui the file is written to the temporary folder and opened with the program that handles the file type. Hop Web asks where to save it.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="table-views"><a class="link" href="#table-views">Table views</a></h2>
 <div class="sectionbody">
 <div class="paragraph">

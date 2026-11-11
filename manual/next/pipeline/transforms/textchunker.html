@@ -3080,7 +3080,7 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Character</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Split on a fixed character count, backing off to the nearest word boundary so words are not cut in half. Overlap carries the tail of each chunk into the next, which keeps a sentence that straddles a boundary retrievable from both sides.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Split on a fixed character count, backing off to the nearest word boundary so words are not cut in half. Only a word longer than the chunk size is cut, and never inside a surrogate pair such as an emoji. Overlap carries the last whole words of each chunk into the next, which keeps a sentence that straddles a boundary retrievable from both sides.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paragraph</p></td>
@@ -3198,7 +3198,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Chunk overlap</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Characters carried from the end of one chunk into the start of the next. Character strategy only.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum number of characters carried from the end of one chunk into the start of the next. The overlap starts at a word boundary, so it holds whole words and can be shorter than this value, or empty when no word starts in that span. Paragraph and Structure only apply it inside a paragraph or section that is split with the character fallback.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Include metadata</p></td>
@@ -3228,10 +3228,13 @@
 <h2 id="_notes"><a class="link" href="#_notes">Notes</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Chunk overlap applies to the Character strategy. The Paragraph and Structure strategies split on natural boundaries, where an overlap would duplicate whole paragraphs or sections between neighbouring chunks.</p>
+<p>Chunk overlap never crosses a paragraph or section boundary. The Paragraph and Structure strategies split on natural boundaries, where an overlap would duplicate whole paragraphs or sections between neighbouring chunks. They only apply it between the pieces of a paragraph or section that is longer than the chunk size. Every chunk adds text the previous chunk did not hold: when an overlap would only repeat the previous chunk, the next chunk starts where the previous one ended.</p>
 </div>
 <div class="paragraph">
-<p>The Structure strategy drops chunks that contain only whitespace. The chunk index and total chunk count cover only the chunks that are emitted. Text that yields no chunks produces a single row with an empty chunk and a total of 0, the same as empty text.</p>
+<p>The chunk start position is the character offset in the input text. For a section of the Structure strategy, the first chunk starts at the section heading and the chunks a long section is split into start where their own text is.</p>
+</div>
+<div class="paragraph">
+<p>All strategies drop chunks that contain only whitespace. The chunk index and total chunk count cover only the chunks that are emitted. Text that yields no chunks produces a single row with an empty chunk and a total of 0, the same as empty text.</p>
 </div>
 <div class="paragraph">
 <p>Keep <strong>Include metadata</strong> enabled when the chunks are going into a vector store: the document ID and chunk index are what let a later search merge neighbouring chunks back into a passage, and re-index a single document without touching the rest.</p>

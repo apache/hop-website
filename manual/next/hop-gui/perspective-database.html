@@ -3039,7 +3039,7 @@
 <p><strong>Open SQL editor</strong> — new SQL tab for the selected connection (<code>SELECT * FROM table</code> when a table is selected)</p>
 </li>
 <li>
-<p><strong>Generate DDL</strong> — <code>CREATE TABLE</code> for the selected table, opened in a SQL tab</p>
+<p><strong>Generate DDL</strong> — <code>CREATE TABLE</code> for the selected table, with the schema and quoted names where the database needs them, opened in a SQL tab</p>
 </li>
 <li>
 <p><strong>Preview table</strong> — run <code>SELECT</code> with a dialect-aware row limit (the <strong>Query row limit</strong> in Configuration → Plugins → Database Perspective, default 1000)</p>
@@ -3084,10 +3084,10 @@
 <p><strong>Select the executed SQL in the editor</strong> (Configuration perspective, <strong>Plugins → Database Perspective</strong>, on by default) highlights only the statement(s) that were sent.</p>
 </li>
 <li>
-<p>Results appear in a sash under the editor (one tab per query, plus a messages tab). Close hides the results panel; the next run shows it again. <strong>Open in separate window</strong> (left of Close) opens the selected result table in a separate window.</p>
+<p>Results appear in a sash under the editor (one tab per query, plus a messages tab). Statements that return rows without being a <code>SELECT</code> (<code>PRAGMA table_info(t)</code>, <code>CALL proc()</code>, <code>INSERT &#8230;&#8203; RETURNING id</code>) get a result tab too. For <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code> and <code>MERGE</code> the messages tab shows the number of rows affected. Close hides the results panel; the next run shows it again. <strong>Open in separate window</strong> (left of Close) opens the selected result table in a separate window.</p>
 </li>
 <li>
-<p>Queries are capped at the <strong>Query row limit</strong> (Configuration perspective, <strong>Plugins → Database Perspective</strong>, default 1000). That cap is sent to the driver (<code>setMaxRows</code>) as well as applied when reading rows, so a <code>SELECT *</code> or a SQL <code>LIMIT</code> above the option still does not pull the whole table. When the cap is hit, the Messages tab says so. Statement timeout (<code>'${HOP_QUERY_PREVIEW_TIMEOUT}'</code>, seconds; <code>0</code> is the driver default) applies to both queries and DDL/DML.</p>
+<p>Queries are capped at the <strong>Query row limit</strong> (Configuration perspective, <strong>Plugins → Database Perspective</strong>, default 1000). That cap is sent to the driver (<code>setMaxRows</code>) as well as applied when reading rows, so a <code>SELECT *</code> or a SQL <code>LIMIT</code> above the option still does not pull the whole table. When a result has more rows than the cap, the Messages tab says so. Statement timeout (<code>'${HOP_QUERY_PREVIEW_TIMEOUT}'</code>, seconds; <code>0</code> is the driver default) applies to both queries and DDL/DML.</p>
 </li>
 </ul>
 </div>
@@ -3097,7 +3097,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Long-running work (connect, listing, SQL, DDL, table info) is shown as a one-line status at the bottom of the right-hand side (<code>description - connection - Done/Failed - 23 ms</code>). <strong>Stop</strong> cancels the current operation (<code>Statement.cancel</code>). <strong>Expand</strong> opens the operations list; <strong>Minimize</strong> on that list returns to the status line.</p>
+<p>Long-running work (connect, listing, SQL, DDL, table info) is shown as a one-line status at the bottom of the right-hand side (<code>description - connection - Done/Failed - 23 ms</code>). <strong>Stop</strong> cancels the current operation (<code>Statement.cancel</code>), queries as well as DDL and DML. A driver that cannot interrupt a statement lets it finish; the operation then shows <strong>Done</strong>, because the statement ran and was committed. <strong>Expand</strong> opens the operations list; <strong>Minimize</strong> on that list returns to the status line.</p>
 </div>
 <div class="paragraph">
 <p>Open and save <code>.sql</code> files with the normal File menu. Explorer <code>.sql</code> files stay in the File explorer; use the database icon on the content-editor toolbar to open the buffer in this perspective (you pick the connection).</p>
