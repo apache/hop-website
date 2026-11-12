@@ -2572,6 +2572,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/datahub/index.html">DataHub</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/technology/falkordb/index.html">FalkorDB</a>
     
   </li>
@@ -3111,7 +3115,7 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Auto</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Infer from the content type field, or from the text itself.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Infer from the content type field, or from the text itself: a pipeline or workflow when the XML root element is <code>pipeline</code> or <code>workflow</code>, metadata when the text is a JSON object, AsciiDoc when it starts with a <code>= Title</code> document title, otherwise Markdown or AsciiDoc by which has more headings, and on a tie by the first heading.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Plain</p></td>
@@ -3119,11 +3123,11 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Markdown</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>#</code> heading levels.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><mark></code> heading levels. Lines in a fenced code block are not headings. A skipped level nests under the nearest heading above it, and the closing <code></mark></code> sequence is not part of the title.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">AsciiDoc</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>=</code> heading levels.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>=</code> heading levels and two-line titles (a title underlined with <code>=</code>, <code>-</code>, <code>~</code>, <code>^</code> or <code>+</code>). Lines in a delimited block (<code>====</code>, <code>----</code>, <code>////</code>, &#8230;&#8203;) are not headings.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Pipeline</p></td>
@@ -3235,6 +3239,12 @@
 </div>
 <div class="paragraph">
 <p>All strategies drop chunks that contain only whitespace. The chunk index and total chunk count cover only the chunks that are emitted. Text that yields no chunks produces a single row with an empty chunk and a total of 0, the same as empty text.</p>
+</div>
+<div class="paragraph">
+<p>Chunk size must be a whole number greater than 0. Chunk overlap must be a whole number of 0 or more; leave it empty for no overlap. A value that is not a number, for example <code>abc</code>, or a negative overlap is reported in the pipeline checks and stops the transform when the pipeline starts.</p>
+</div>
+<div class="paragraph">
+<p>When the input already has a field with the same name as an output field (names are matched without regard to case), the transform writes its values into that field instead of adding a new one. The field keeps its name and position but takes the transform&#8217;s type, storage and format. If the types differ, for example a String <code>chunk_index</code> in the input, the pipeline checks report a warning. Rename the output field to keep the input field as it is.</p>
 </div>
 <div class="paragraph">
 <p>Keep <strong>Include metadata</strong> enabled when the chunks are going into a vector store: the document ID and chunk index are what let a later search merge neighbouring chunks back into a passage, and re-index a single document without touching the rest.</p>

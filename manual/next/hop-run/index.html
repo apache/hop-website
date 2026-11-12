@@ -2572,6 +2572,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/technology/datahub/index.html">DataHub</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/technology/falkordb/index.html">FalkorDB</a>
     
   </li>
@@ -3054,6 +3058,10 @@
                           A character to be used as separator <span class="hljs-keyword">for</span> our list of PARAMETER=VALUE pairs (default is <span class="hljs-string">&quot;,&quot;</span>).
   -r, --runconfig=&lt;runConfigurationName&gt;
                           The name of the Run Configuration to use
+  -rj, --result-json=&lt;resultJsonFile&gt;
+                          The file <span class="hljs-built_in">where</span> hop-run writes the outcome of the run as JSON when it
+                          ends: whether it succeeded, its counters and, when it failed, why.
+                          Experimental.
   -s, --system-properties=&lt;systemProperties&gt;[,&lt;systemProperties&gt;...]
                           A comma separated list of KEY=VALUE pairs
   -swt, --shutdown-timeout=&lt;shutdownTimeout&gt;
@@ -3160,6 +3168,11 @@ To use a workflow of another project, see <a href="../projects/projects-environm
 Check the <a href="../pipeline/pipeline-run-configurations/pipeline-run-configurations.html" class="xref page">documentation on run configurations</a> for more details.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>-rj</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>--result-json</code></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The file where Hop Run writes the outcome of the run as JSON when it ends. See <a href="#_result_file">Result file</a>. Experimental.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>-s</code></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><code>--system-properties</code></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A comma separated list of KEY=VALUE pairs</p></td>
@@ -3248,6 +3261,81 @@ Check the <a href="../pipeline/pipeline-run-configurations/pipeline-run-configur
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_result_file"><a class="link" href="#_result_file">Result file</a></h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Experimental in 2.21: the fields can still change.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>With <code>--result-json &lt;file&gt;</code>, Hop Run writes a JSON file when it ends, so a scheduler or a script can tell why a run failed without reading the log.
+The file is written for a run that succeeded, a run that failed, and when Hop Run could not start the run at all.
+Variables in the filename are resolved; any location Hop can write to works.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>json</div><pre class="highlightjs highlight is-highlighted"><code class="language-json hljs" data-lang="json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;schemaVersion&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;type&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;PIPELINE&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;filename&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/projects/sales/load-orders.hpl&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;name&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;load-orders&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;executionId&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2c1f…&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;success&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;counters&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;errors&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;read&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;written&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span> … <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;failure&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;phase&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;RUN&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;category&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CONNECTIVITY&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;causedBy&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;component&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;kind&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;TRANSFORM&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;name&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Read orders&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;pluginId&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;TableInput&quot;</span><span class="hljs-punctuation">,</span> … <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;cause&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;message&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;…&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;rootCauseClass&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;java.net.ConnectException&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;sqlState&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;08001&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;redacted&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span> … <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      …
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    …
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;failures&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span> … <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;error&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span>
+<span class="hljs-punctuation">}</span></code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>success</code></dt>
+<dd>
+<p>what decides the exit code.</p>
+</dd>
+<dt class="hdlist1"><code>failure</code></dt>
+<dd>
+<p>why the run failed, <code>null</code> when it did not. It points at the transform or action where the failure started through <code>causedBy</code>; a workflow&#8217;s failure leads down through its actions to the pipeline and transform. An Abort on the failure hop of an action points at that action. Only the local engines report failures: with a remote, Beam or Spark run configuration <code>failure</code> stays <code>null</code>, and <code>success</code> and <code>counters</code> tell how the run ended.</p>
+</dd>
+<dt class="hdlist1"><code>category</code></dt>
+<dd>
+<p>one of <code>CONNECTIVITY</code>, <code>AUTHENTICATION</code>, <code>SCHEMA_MISMATCH</code>, <code>DATA_CONVERSION</code>, <code>CONSTRAINT_VIOLATION</code>, <code>MISSING_INPUT</code>, <code>RESOURCE</code>, <code>CONFIGURATION</code> or <code>UNKNOWN</code>, decided by fixed rules on the exception types and SQL states. <code>CHILD_FAILURE</code> is reserved for children that run remotely.</p>
+</dd>
+<dt class="hdlist1"><code>failures</code></dt>
+<dd>
+<p>the failures of all the transforms, or of the last 100 actions, that failed.</p>
+</dd>
+<dt class="hdlist1"><code>error</code></dt>
+<dd>
+<p>why Hop Run itself failed when there was no run to report on, for example when the file does not exist.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Messages and stack traces in the file have credentials masked: passwords in URLs and connection strings, encrypted passwords, and the values of variables and parameters whose name contains password, pwd, token, secret or credential, or ends in API key, access key or private key (<code>DB_PASSWORD</code>, <code>MY_API_KEY</code>), when the value is at least 4 characters long.
+Other names are not masked: the value of <code>ENCRYPTION_KEY</code> shows as it is.</p>
+</div>
 </div>
 </div>
 <div class="sect1">

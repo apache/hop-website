@@ -2572,6 +2572,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/technology/datahub/index.html">DataHub</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/technology/falkordb/index.html">FalkorDB</a>
     
   </li>
@@ -3038,7 +3042,7 @@ hop <span class="hljs-built_in">export</span> --list-exporters</code></pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>--format &lt;format&gt;</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>svg</code> or <code>mermaid</code>, in upper or lower case. Without it, an <code>-o</code> file that ends in <code>.mmd</code> is written as Mermaid, and one that ends in <code>.svg</code> as SVG. Without <code>--format</code> and <code>-o</code>, the format is SVG.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>svg</code> or <code>mermaid</code>, in upper or lower case, or another format that an exporter in your installation writes (see <code>--list-exporters</code>). Without it, the extension of the <code>-o</code> file picks the exporter that writes that extension: <code>.mmd</code> is written as Mermaid, and <code>.svg</code> as SVG. Without <code>--format</code> and <code>-o</code>, or with an <code>-o</code> file without an extension, the format is SVG. When no exporter in your installation writes the format, for example <code>pdf</code> or an <code>-o</code> file that ends in <code>.pdf</code> or <code>.png</code>, <code>hop export</code> fails with the formats it does have and writes nothing.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-s</code>, <code>--source-folder &lt;folder&gt;</code></p></td>
@@ -3137,12 +3141,15 @@ Each diagram is written under <code>-t</code> with the same relative path, for e
 <p>The export stops at the first file it can&#8217;t export, for example a diagram whose folder is missing under <code>-t</code>, or a file that is not valid XML. The diagrams written before it stay.</p>
 </li>
 <li>
+<p>A file that no exporter for the format supports is skipped and logged, for example a workflow when only pipelines have an exporter for that format. The other files are still exported.</p>
+</li>
+<li>
 <p>A pipeline and a workflow with the same name in the same folder are written to the same file, so only the last one is kept.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>At the end, the command logs how many diagrams it exported.</p>
+<p>At the end, the command logs how many diagrams it exported and how many it skipped.</p>
 </div>
 </div>
 </div>
@@ -3150,7 +3157,7 @@ Each diagram is written under <code>-t</code> with the same relative path, for e
 <h2 id="_exit_codes"><a class="link" href="#_exit_codes">Exit codes</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>hop export</code> ends with <code>0</code> when the export is done, and with <code>1</code> when it fails, for example when the source folder doesn&#8217;t exist or a diagram can&#8217;t be written.</p>
+<p><code>hop export</code> ends with <code>0</code> when the export is done, and with <code>1</code> when it fails, for example when the source folder doesn&#8217;t exist, no exporter writes the format, or a diagram can&#8217;t be written.</p>
 </div>
 <div class="paragraph">
 <p>The <code>hop-export.sh</code> and <code>hop-export.bat</code> scripts end with other codes:</p>

@@ -789,7 +789,7 @@ what Hop emits — worth knowing before investigating a dataset that looks empty
 <p><strong>Timestamp</strong> — Milliseconds since epoch.</p>
 </li>
 <li>
-<p><strong><code>LineageEventKind</code></strong> — One of <code>RUN_LIFECYCLE</code>, <code>TRANSFORM_SCHEMA</code>, <code>FILE_IO</code>, <code>RELATIONAL_IO</code>, <code>HTTP_IO</code>, <code>PIPELINE_GRAPH</code>. New kinds are only ever appended: a sink must skip a kind it does not handle rather than fail the batch.</p>
+<p><strong><code>LineageEventKind</code></strong> — One of <code>RUN_LIFECYCLE</code>, <code>TRANSFORM_SCHEMA</code>, <code>FILE_IO</code>, <code>RELATIONAL_IO</code>, <code>HTTP_IO</code>, <code>PIPELINE_GRAPH</code>, <code>WORKFLOW_GRAPH</code>. New kinds are only ever appended: a sink must skip a kind it does not handle rather than fail the batch.</p>
 </li>
 <li>
 <p><strong><code>LineageContext</code></strong> — Who/what produced the observation (see above).</p>
@@ -817,7 +817,7 @@ what Hop emits — worth knowing before investigating a dataset that looks empty
 <p><strong><code>RunLifecycleLineagePayload</code></strong> — <code>STARTED</code> / <code>FINISHED</code> plus optional detail text.</p>
 </li>
 <li>
-<p><strong><code>PipelineGraphLineagePayload</code></strong> — The pipeline&#8217;s hop graph as a list of <code>from</code> → <code>to</code> transform-name transitions: enabled hops with both ends named, in pipeline order. Informational hops are included. A sink uses it to attribute datasets to the transform that touched them and to propagate them along the graph, instead of pairing all of a pipeline&#8217;s inputs with all of its outputs.</p>
+<p><strong><code>PipelineGraphLineagePayload</code></strong> — The pipeline&#8217;s hop graph as a list of <code>from</code> → <code>to</code> transform-name transitions: enabled hops with both ends named, in pipeline order. Informational hops are included. A sink uses it to attribute datasets to the transform that touched them and to propagate them along the graph, instead of pairing all of a pipeline&#8217;s inputs with all of its outputs. A pipeline without hops gets an empty list. The same payload carries a workflow&#8217;s hop graph (<code>WORKFLOW_GRAPH</code>), its transitions naming actions: every enabled hop, whatever its condition.</p>
 </li>
 <li>
 <p><strong><code>TransformSchemaLineagePayload</code></strong> — <code>INPUT</code> or <code>OUTPUT</code> plus a list of field names, Hop type names, length, and precision (boundary schema; emitted when a transform finishes). Fields usually come from runtime row metadata on the transform or row sets. If input was never observed (e.g. <em>Abort</em> when <code>getRow()</code> immediately returns null), input is derived via <code>PipelineMeta#getPrevTransformFields</code>. If output was never written (e.g. <em>Detect empty stream</em> with a non-empty stream), output is derived via <code>PipelineMeta#getTransformFields</code>. Graph-derived events set context attribute <code>transformSchemaSource</code> to <code>DESIGN_GRAPH</code>.</p>
@@ -855,10 +855,10 @@ what Hop emits — worth knowing before investigating a dataset that looks empty
 </ol>
 </div>
 <div class="paragraph">
-<p><strong><code>flush()</code></strong> blocks until queued events (and coalesced flush markers) have been processed. <strong><code>flushQuietly()</code></strong> catches and logs errors.</p>
+<p><strong><code>flush()</code></strong> blocks until queued events (and coalesced flush markers) have been processed. <strong><code>flushQuietly()</code></strong> catches and logs errors. <strong><code>flushIfBacklogged()</code></strong> flushes only once the queue is at least half full: a nested run calls it, so that a run per row does not drain the hub after every row, but still waits for the sinks before the queue overflows and events are dropped.</p>
 </div>
 <div class="paragraph">
-<p><strong><code>shutdown()</code></strong> stops the worker and calls <code>shutdown()</code> on sinks. It is invoked from <code>HopEnvironment.shutdown()</code> and <code>HopEnvironment.reset()</code>.</p>
+<p><strong><code>shutdown()</code></strong> stops the worker and calls <code>shutdown()</code> on sinks. It is invoked from <code>HopEnvironment.shutdown()</code> and <code>HopEnvironment.reset()</code>, and from a JVM exit hook that the hub registers when it starts its worker. That hook waits for a hop-run that is still stopping on a termination signal (<code>holdShutdownOnExit</code>), so the end of the run is delivered too.</p>
 </div>
 <div class="paragraph">
 <p>After <code>PluginRegistry.init()</code>, <code>HopEnvironment</code> calls <code>LineageHub.getInstance().environmentReady()</code> so sink lists can be rebuilt when the environment is re-initialized.</p>
@@ -877,19 +877,19 @@ what Hop emits — worth knowing before investigating a dataset that looks empty
 <div class="ulist">
 <ul>
 <li>
-<p><strong><code>PipelineStart</code></strong> — <code>LineageHubPipelineStartXp</code> — phase <code>STARTED</code>, followed by one <code>PIPELINE_GRAPH</code> event with the same context when the pipeline has enabled hops. <code>PipelineStart</code> fires after the transform threads have started, so the run&#8217;s transform <code>STARTED</code> events, and early I/O such as a Table Input read, can arrive before the graph, possibly in an earlier batch. A sink that uses the graph collects a run&#8217;s events by the pipeline&#8217;s log channel id (transform events carry it in the <code>pipelineLogChannelId</code> attribute) and resolves them at <code>FINISHED</code> or <code>FAILED</code>.</p>
+<p><strong><code>PipelineStart</code></strong> — <code>LineageHubPipelineStartXp</code> — phase <code>STARTED</code>, followed by one <code>PIPELINE_GRAPH</code> event with the same context, with no transitions when the pipeline has no enabled hops. <code>PipelineStart</code> fires after the transform threads have started, so the run&#8217;s transform <code>STARTED</code> events, and early I/O such as a Table Input read, can arrive before the graph, possibly in an earlier batch. A sink that uses the graph collects a run&#8217;s events by the pipeline&#8217;s log channel id (transform events carry it in the <code>pipelineLogChannelId</code> attribute) and resolves them at <code>FINISHED</code> or <code>FAILED</code>.</p>
 </li>
 <li>
 <p><strong><code>PipelineFinish</code></strong> — <code>LineageHubPipelineFinishXp</code> — phase <code>FINISHING</code> (transforms stopped, cleanup)</p>
 </li>
 <li>
-<p><strong><code>PipelineCompleted</code></strong> — <code>LineageHubPipelineCompletedXp</code> — phase <code>FINISHED</code> or <code>FAILED</code> (from pipeline error count), then <code>flushQuietly()</code></p>
+<p><strong><code>PipelineCompleted</code></strong> — <code>LineageHubPipelineCompletedXp</code> — phase <code>FINISHED</code> or <code>FAILED</code> (from pipeline error count), then <code>flushQuietly()</code> for a top-level run and <code>flushIfBacklogged()</code> for a nested one</p>
 </li>
 <li>
-<p><strong><code>WorkflowStart</code></strong> — <code>LineageHubWorkflowStartXp</code> — phase <code>STARTED</code></p>
+<p><strong><code>WorkflowStart</code></strong> — <code>LineageHubWorkflowStartXp</code> — phase <code>STARTED</code>, followed by one <code>WORKFLOW_GRAPH</code> event with the same context (empty when the workflow has no enabled hops)</p>
 </li>
 <li>
-<p><strong><code>WorkflowFinish</code></strong> — <code>LineageHubWorkflowFinishXp</code> — phase <code>FINISHED</code> or <code>FAILED</code> (from workflow/result errors), then <code>flushQuietly()</code></p>
+<p><strong><code>WorkflowFinish</code></strong> — <code>LineageHubWorkflowFinishXp</code> — first action <code>FAILED</code> for every action run that started but never ended (its <code>execute()</code> threw), then the workflow&#8217;s phase <code>FINISHED</code> or <code>FAILED</code> (from workflow/result errors), then <code>flushQuietly()</code> for a top-level run and <code>flushIfBacklogged()</code> for a nested one</p>
 </li>
 <li>
 <p><strong><code>HopServerShutdown</code></strong> — <code>LineageHubServerShutdownFlushXp</code> — flush only</p>
@@ -901,10 +901,10 @@ what Hop emits — worth knowing before investigating a dataset that looks empty
 <p><strong><code>TransformFinished</code></strong> — <code>LineageHubTransformFinishXp</code> — transform <code>FINISHED</code> or <code>FAILED</code> from transform error count, then <code>TRANSFORM_SCHEMA</code> events for observed input/output row shapes when non-empty</p>
 </li>
 <li>
-<p><strong><code>WorkflowBeforeActionExecution</code></strong> — <code>LineageHubWorkflowActionBeforeXp</code> — action <code>STARTED</code> (workflow log channel + action name; template action log channel id as attribute when present)</p>
+<p><strong>Action start</strong> — <code>LineageActionStartListener</code>, an <code>IActionListener</code> that <code>LineageHubWorkflowStartXp</code> adds to each workflow — action <code>STARTED</code> from <code>beforeExecution</code>, once the workflow has cloned the action, so the event carries the executing action&#8217;s log channel id. <code>WorkflowBeforeActionExecution</code> fires before that clone exists. An error while emitting is logged and does not fail the action.</p>
 </li>
 <li>
-<p><strong><code>WorkflowAfterActionExecution</code></strong> — <code>LineageHubWorkflowActionAfterXp</code> — action <code>FINISHED</code> or <code>FAILED</code> from the action <code>Result</code>; uses the executed action’s log channel id when available (<code>WorkflowExecutionExtension.actionLogChannelId</code> / <code>actionExecutionResult</code>)</p>
+<p><strong><code>WorkflowAfterActionExecution</code></strong> — <code>LineageHubWorkflowActionAfterXp</code> — action <code>FINISHED</code> or <code>FAILED</code> from the action <code>Result</code>, under the executed action&#8217;s log channel id (<code>WorkflowExecutionExtension.actionLogChannelId</code>). An action the workflow skipped has no run of its own and emits nothing. The workflow does not reach this extension point when the action&#8217;s <code>execute()</code> throws; <code>WorkflowFinish</code> ends that run instead.</p>
 </li>
 </ul>
 </div>

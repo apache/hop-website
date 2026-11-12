@@ -2572,6 +2572,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/datahub/index.html">DataHub</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/technology/falkordb/index.html">FalkorDB</a>
     
   </li>
@@ -3080,7 +3084,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Specific codepage</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Code page to use when Specific is selected.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code page to use when Specific is selected: a code page number such as 65001, or ACP, OEM or RAW.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Format file</p></td>
@@ -3179,8 +3183,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The file doesn&#8217;t exist, the table doesn&#8217;t exist, <strong>Source File name</strong> is empty, the connection is unknown or can&#8217;t be opened, or SQL Server refuses the load (for example a value that doesn&#8217;t fit its column). The number of errors is 1.</p>
-<p class="tableblock">The action is also false, but with 0 errors, when the connection is not a Microsoft SQL Server connection, when <strong>Fields terminated by</strong> is empty while <strong>Data file type</strong> is char or widechar, and when <strong>Error file</strong> exists while <strong>Add date time</strong> is unchecked. The reason is logged as an error.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The file doesn&#8217;t exist, the table doesn&#8217;t exist, <strong>Source File name</strong> is empty, the connection is unknown or can&#8217;t be opened, the connection is not a Microsoft SQL Server connection, <strong>Fields terminated by</strong> is empty while <strong>Data file type</strong> is char or widechar, <strong>Codepage</strong> is Specific while <strong>Specific codepage</strong> is empty or not a code page number, ACP, OEM or RAW, <strong>Error file</strong> exists while <strong>Add date time</strong> is unchecked, or SQL Server refuses the load (for example a value that doesn&#8217;t fit its column). The number of errors is 1.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
@@ -3223,19 +3226,7 @@ When the load fails on a row, the rows before it can stay in the table: with the
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-SQL Server on Linux only accepts the RAW <strong>Codepage</strong>: the default, OEM, makes the load fail there. In this version, <strong>Specific</strong> sends the word <code>Specific</code> to SQL Server instead of the value of <strong>Specific codepage</strong>, so the load fails.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-When both <strong>Start at line</strong> and <strong>End at line</strong> are set, only <strong>End at line</strong> is used: the load starts at the first line.
+SQL Server on Linux only accepts the RAW <strong>Codepage</strong>: the default, OEM, makes the load fail there.
 </td>
 </tr>
 </table>

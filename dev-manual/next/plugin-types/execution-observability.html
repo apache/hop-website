@@ -717,6 +717,99 @@ The failure only shows up on the engine you were not testing on.</p>
 <p>Extension points run inline, on the thread that fired them.
 Anything slow belongs on a queue, not in <code>callExtensionPoint</code>.</p>
 </div>
+<div class="sect2">
+<h3 id="_failures"><a class="link" href="#_failures">Failures</a></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Experimental in 2.21: the shape of the failure object can still change.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>When a transform, action, pipeline or workflow fails, Hop announces it as an <code>ExecutionFailure</code> (<code>org.apache.hop.core.failure</code>): what failed, in which phase, why, and in which category.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Extension point</th>
+<th class="tableblock halign-left valign-top">Fired when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TransformFailed</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A transform threw an exception in <code>init()</code> or <code>processRow()</code>, its <code>init()</code> returned false, or it finished with errors without throwing.
+Once per transform copy.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PipelineFailed</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The pipeline failed as a whole: after its finished listeners, before <code>PipelineCompleted</code>.
+Also when it failed to initialize or to prepare.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ActionFailed</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An action threw an exception, its error count went up, a child pipeline or workflow it ran failed, or it returned false after logging an error.
+An action on a failure hop that only passes on the errors it was given, like Write to log, did not fail.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WorkflowFailed</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The workflow ended with a false result, the rule <code>hop-run</code> uses for its exit code.
+Not when someone stopped it and nothing went wrong.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A transform or action failure names the component (name, plugin id, copy) and carries the cause: the exception class and message, the root cause, the first SQL state, and a stack trace cut off at 16,000 characters.
+When the transform or action only logged an error, the cause is that last error line, and <code>cause.fromLog</code> is true.
+A pipeline or workflow failure points at the failure that brought it down through <code>causedBy</code>, and so does an action whose child pipeline or workflow failed: <code>getRootCause()</code> follows the chain from a workflow down to the transform where it started.
+An action that fails on a failure path, like an Abort after the failure hop of a SQL action, points at the failure that led there too.
+That failure is passed on until an action recovers from it: one that ends with a true result and no errors.</p>
+</div>
+<div class="paragraph">
+<p><code>category</code> comes from fixed rules on exception class names and SQL states (<code>FailureClassifier</code>), tried from the root cause outwards.
+The wording of a message only counts for "No space left on device", which is <code>RESOURCE</code>.
+<code>CHILD_FAILURE</code> is reserved for children that run remotely; nothing produces it yet.
+Every failure in a chain carries the category of its root cause, so a rule like "retry on `CONNECTIVITY`" can look at the top of the chain.</p>
+</div>
+<div class="paragraph">
+<p>Only the local pipeline and workflow engines report failures: with a remote, Beam or Spark run configuration there is none.
+The local engines also offer the failures without a plugin: <code>Pipeline.addExecutionFailureListener()</code> and <code>Workflow.addExecutionFailureListener()</code>, and <code>getFailures()</code> / <code>getRunFailure()</code> once the run is done.</p>
+</div>
+<div class="paragraph">
+<p>Where the failure ends up:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Execution information:</strong> <code>ExecutionState.failure</code>, on the state of the pipeline or workflow and on the state of a failed transform, at every execution information location.
+A pipeline that fails to prepare or to initialize is registered at its location as well, with that failure.
+Elastic and OpenSearch store <code>executionState.failure</code> without indexing it: new indexes get that mapping, <strong>Create index</strong> adds it to an existing index, and so does the location before its first write to an index.
+Adding a mapping needs more rights than writing documents: when it is refused, the failure is mapped field by field, which can add a few hundred fields against the field limit of the index.
+Neo4j stores it as a JSON string in the <code>failure</code> property of the <code>Execution</code> node.</p>
+</li>
+<li>
+<p><strong>Hop Server:</strong> the pipeline and workflow status fill <code>errorDescription</code> with one line, for example <code>Transform 'Read orders' (TableInput) failed [CONNECTIVITY]: Connection refused</code>, and the JSON form adds the <code>failure</code> object.</p>
+</li>
+<li>
+<p><strong>Hop Run:</strong> the file of <code>--result-json</code>, see the user manual.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The message, the root cause message and the stack trace of a cause are redacted when the failure is built, before any extension point or listener sees it: <code>CredentialRedactor.redact(text, secrets)</code> masks credentials in URLs, <code>name=value</code> and JSON pairs, encrypted passwords, and the values of the variables whose name says they are a credential.
+<code>cause.redacted</code> is true when that happened.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">

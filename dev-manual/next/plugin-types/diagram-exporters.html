@@ -696,7 +696,9 @@ A plugin can export any other object: the active editor&#8217;s <code>IHopFileTy
 <dd>
 <p>The target representation.
 <code>DiagramExportFormat</code> knows <code>SVG</code>, <code>MERMAID</code>, <code>PDF</code>, <code>PLANTUML</code> and <code>DRAWIO</code>.
-<code>DiagramExportFormat.parse("PLANTUML")</code> (or <code>of(&#8230;&#8203;)</code>) is enough for a format the enum does not list.</p>
+An exporter can also use a format it has no constant for, such as <code>format = "BPMN"</code>: <code>DiagramExportFormat.parse(&#8230;&#8203;)</code> creates it from the id.
+The file extension still comes from <code>fileExtension</code> in the annotation.
+To give the format its own name and MIME type, set <code>format</code> to <code>DiagramExportFormat.of(&#8230;&#8203;)</code> in the exporter&#8217;s constructor.</p>
 </dd>
 <dt class="hdlist1">Context</dt>
 <dd>
@@ -971,21 +973,27 @@ The CLI walks VFS folders, so <code>supportsFile</code> must accept a <code>file
 The dialog lists unique format <strong>names</strong> from that list.</p>
 </div>
 <div class="paragraph">
-<p><code>findExporter(subject, formatId)</code> matches, in order:</p>
+<p><code>findExporter(subject, formatId)</code> returns the first of those exporters that matches, in upper or lower case, any of:</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
 <p><code>exporter.getFormat().getId()</code> (for example <code>MERMAID</code>)</p>
 </li>
 <li>
 <p><code>exporter.getFileExtension()</code> (for example <code>mmd</code>)</p>
 </li>
-</ol>
+<li>
+<p><code>exporter.getId()</code> (for example <code>pipeline-mermaid</code>)</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>So <code>--format mermaid</code>, <code>--format MERMAID</code> and an output file ending in <code>.mmd</code> all select the same plugin.
-If nothing matches, the service falls back to the first exporter that supports the subject.</p>
+<p>The static <code>findExporterForFormat(exporters, format)</code> does the same matching on any list of exporters.
+So <code>--format mermaid</code>, <code>--format MERMAID</code> and an output file ending in <code>.mmd</code> all select the same plugin.
+For an exporter without a <code>DiagramExportFormat</code>, the dialog lists the exporter&#8217;s name and passes its id as the format.
+<code>export(&#8230;&#8203;)</code> uses the first exporter that supports the subject only when the options have no format.
+When a format is given and nothing matches, it throws a <code>HopException</code> that lists the formats that do support the subject; it never writes another format instead.</p>
 </div>
 <div class="paragraph">
 <p><code>registerStaticExporter(&#8230;&#8203;)</code> exists for tests and for code that is not a plugin.
@@ -998,7 +1006,7 @@ Production exporters should be <code>@DiagramExporter</code> classes so Jandex f
 <div class="sectionbody">
 <div class="paragraph">
 <p>The command is a <code>@HopCommand(id = "export")</code> (<code>DiagramExportCommand</code> in <code>engine</code>).
-It also has wrapper scripts <code>hop-export</code> / <code>hop-export.bat</code> in the assembly.</p>
+It also has wrapper scripts <code>hop-export.sh</code> / <code>hop-export.bat</code> in the assembly.</p>
 </div>
 <div class="listingblock">
 <div class="content">

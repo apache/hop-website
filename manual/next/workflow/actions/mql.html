@@ -2572,6 +2572,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/datahub/index.html">DataHub</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/technology/falkordb/index.html">FalkorDB</a>
     
   </li>
@@ -3055,8 +3059,12 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enables variables to be used in the Script.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fail on write errors</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Make the action false when MongoDB reports write errors in its answer (<code>writeErrors</code>, <code>writeConcernError</code> or, for <code>bulkWrite</code>, <code>nErrors</code>), for example an <code>insert</code> with a duplicate <code>_id</code>. Leave it unchecked to accept a partial write, for example an unordered insert (<code>"ordered": false</code>) that skips duplicate keys: the write errors are then written to the log. Unchecked by default.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">JSON</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The JSON instructions to execute: one JSON document, or several in a JSON array (<code>[ {&#8230;&#8203;}, {&#8230;&#8203;} ]</code>).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The JSON instructions to execute: one JSON document, or several in a JSON array (<code>[ {&#8230;&#8203;}, {&#8230;&#8203;} ]</code>). Semicolons at the end are allowed. Any other text after the document or the array is an error.</p></td>
 </tr>
 </tbody>
 </table>
@@ -3110,7 +3118,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The number of errors is 1. <strong>MongoDB Connection</strong> is empty or doesn&#8217;t exist, the server can&#8217;t be reached or refuses the login, <strong>Use external file</strong> is checked while <strong>Filename</strong> is empty or the file can&#8217;t be read, the JSON is empty or not valid, or MongoDB refuses an instruction (for example an unknown command). The instructions of an array run one after the other: the ones before the failing instruction stay done, the ones after it are not run.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of errors is 1. <strong>MongoDB Connection</strong> is empty or doesn&#8217;t exist, the server can&#8217;t be reached or refuses the login, <strong>Use external file</strong> is checked while <strong>Filename</strong> is empty or the file can&#8217;t be read, the JSON is empty or not valid, MongoDB refuses an instruction (for example an unknown command), or <strong>Fail on write errors</strong> is checked and MongoDB reports write errors or a write concern error in its answer (for example an <code>insert</code> with a duplicate <code>_id</code>). The instructions of an array run one after the other: the ones before the failing instruction stay done, the ones after it are not run.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
@@ -3129,7 +3137,7 @@
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Several instructions must be in a JSON array. Instructions separated by commas without the brackets are not an error, but only the first one runs.
+When an instruction has write errors, MongoDB still writes the documents before the failing one (and, for an unordered write, the documents after it). With <strong>Fail on write errors</strong> checked, the action is false and the instructions after it are not run.
 </td>
 </tr>
 </table>
@@ -3141,7 +3149,7 @@ Several instructions must be in a JSON array. Instructions separated by commas w
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Write errors that MongoDB reports in its answer don&#8217;t make the action false. For example an <code>insert</code> with a duplicate <code>_id</code> is true, although the duplicate document is not inserted.
+Up to Hop 2.20, text after the first JSON document or array was ignored: in <code>{"drop": "a"}, {"drop": "b"}</code> only the first instruction ran. Since Hop 2.21 that text makes the action false, and none of the instructions run. Put several instructions in a JSON array.
 </td>
 </tr>
 </table>

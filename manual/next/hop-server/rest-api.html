@@ -2572,6 +2572,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/technology/datahub/index.html">DataHub</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/technology/falkordb/index.html">FalkorDB</a>
     
   </li>
@@ -3321,6 +3325,10 @@ This endpoint is no longer used by the remote workflow engine and will be remove
 </dd>
 </dl>
 </div>
+<div class="paragraph">
+<p>When the pipeline failed, the xml and json output give the reason in one line in the error description (<code>error_desc</code> in xml, <code>errorDescription</code> in json), for example <code>Transform 'Read orders' (TableInput) failed [CONNECTIVITY]: Connection refused</code>.
+The json output also has a <code>failure</code> object with the details, the same one as in the <a href="../hop-run/index.html#_result_file" class="xref page">result file of hop-run</a>.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -3465,6 +3473,9 @@ This endpoint is no longer used by the remote workflow engine and will be remove
 <p>an HTML response with the execution status, action details and canvas preview for this workflow</p>
 </dd>
 </dl>
+</div>
+<div class="paragraph">
+<p>When the workflow failed, the xml and json output give the reason in one line in the error description (<code>error_desc</code> in xml, <code>errorDescription</code> in json), and the json output has a <code>failure</code> object with the details, as for <a href="#_getpipelinestatus">getPipelineStatus</a>.</p>
 </div>
 </div>
 </div>

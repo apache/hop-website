@@ -2572,6 +2572,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/datahub/index.html">DataHub</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/technology/falkordb/index.html">FalkorDB</a>
     
   </li>
@@ -3103,7 +3107,7 @@ including the correct syntax for UNIQUE, NOT_NULL, and NODE_KEY constraints.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The action is never false: see the WARNING.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of errors is 1. A constraint update can&#8217;t be done: the <strong>Graph database connection</strong> is empty, doesn&#8217;t exist, can&#8217;t be reached or refuses the login, an update has no <strong>Update type</strong> (a blank type comes back as CREATE when the workflow is loaded from its file), on Neo4j <strong>Constraint name</strong> is empty or a create has no <strong>Object property</strong> (a drop only uses the name), on Memgraph, which identifies a constraint by label and property, <strong>Object name</strong> or <strong>Object property</strong> is empty, or the database refuses the statement, for example NOT_NULL or NODE_KEY on Neo4j Community Edition, or a UNIQUE constraint on data that already has duplicate values. The error is in the log.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
@@ -3115,14 +3119,14 @@ including the correct syntax for UNIQUE, NOT_NULL, and NODE_KEY constraints.</p>
 </tr>
 </tbody>
 </table>
-<div class="admonitionblock warning">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-When a constraint update can&#8217;t be done, the workflow stops with an error and no hop from the action is followed: the <strong>Graph database connection</strong> is empty, doesn&#8217;t exist or can&#8217;t be reached, an update has no <strong>Update type</strong> (a blank type comes back as CREATE when the workflow is loaded from its file), on Neo4j <strong>Constraint name</strong> is empty or a create has no <strong>Object property</strong> (a drop only uses the name), on Memgraph, which identifies a constraint by label and property, <strong>Object name</strong> or <strong>Object property</strong> is empty, or the database refuses the statement, for example NOT_NULL or NODE_KEY on Neo4j Community Edition, or a UNIQUE constraint on data that already has duplicate values. The updates before it stay done, the ones after it are not run.
+The updates run one by one. When one fails, the updates before it stay done and the ones after it are not run. An update without <strong>Update type</strong> is found before any update runs.
 </td>
 </tr>
 </table>

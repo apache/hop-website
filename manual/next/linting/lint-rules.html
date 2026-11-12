@@ -2572,6 +2572,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/technology/datahub/index.html">DataHub</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/technology/falkordb/index.html">FalkorDB</a>
     
   </li>
@@ -3685,7 +3689,17 @@ That can miss a dead file which happens to share a name with a live one, which i
 <h2 id="_configuring_a_project"><a class="link" href="#_configuring_a_project">Configuring a project</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Put a <code>hop-lint.yml</code> in the project root. It holds overrides and project-local rules only, not a copy of the rule packs:</p>
+<p>Put a <code>hop-lint.yml</code> in the project root. It holds overrides and project-local rules only, not a copy of the rule packs.</p>
+</div>
+<div class="paragraph">
+<p>A file is linted with the nearest <code>hop-lint.yml</code> in its own folder or a folder above it, up to the project root.
+That is the same in Hop Gui, <code>hop lint</code> and the Run Linter action, so a <code>hop-lint.yml</code> in a subfolder of the project open in Hop Gui applies to the files below it there too.
+The project root is the folder that holds <code>project-config.json</code> or <code>hop-project.config</code>, or the project&#8217;s home folder (<code>PROJECT_HOME</code>) when a project is in use, for example the one open in Hop Gui or chosen with <code>-j</code>.
+The folder Hop was started from is not a project root.
+A <code>hop-lint.yml</code> above the project root, in a home or workspace folder for example, is not used for the project&#8217;s files, and Hop logs once that it is ignored.
+To share one <code>hop-lint.yml</code> between several projects, at the root of a monorepo for example, pass it with <code>--config</code> or in the <strong>Config file</strong> field of the Run Linter action.
+Paths in <code>exclude</code> and <code>suppress</code> are relative to the folder of the project&#8217;s <code>hop-lint.yml</code>, or of the shared one when it is passed that way.
+A file that is in no project uses the nearest <code>hop-lint.yml</code> above it.</p>
 </div>
 <div class="listingblock">
 <div class="content">

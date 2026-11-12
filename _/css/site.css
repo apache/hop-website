@@ -35,6 +35,12 @@
 .doc h5 a.link, .doc h6 a.link { color: inherit; text-decoration: none; }
 .doc h2 a.link:hover, .doc h3 a.link:hover, .doc h4 a.link:hover { color: var(--accent); }
 
+/* ---------- title icons ----------
+   Transform and action pages put the plugin icon in the title with
+   role="image-doc-icon". The SVG files declare anything from 24px to 2500px,
+   or no size at all, so the icon gets the size most of them already have. */
+.doc h1 .image-doc-icon img { width: 42px; height: auto; vertical-align: middle; }
+
 /* ---------- marketplace note ----------
    Above the engine tags, because whether a thing can be installed at all comes
    before which engines it runs on. Deliberately quieter than an admonition:

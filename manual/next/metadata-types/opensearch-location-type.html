@@ -2572,6 +2572,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/technology/datahub/index.html">DataHub</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/technology/falkordb/index.html">FalkorDB</a>
     
   </li>
@@ -3064,12 +3068,22 @@ The request is a <code>PUT</code> of the index name with a mapping that:</p>
 <p>disables indexing of <code>childExecutions</code>, <code>childExecutionStates</code> and <code>childExecutionData</code> (they are stored but not searched)</p>
 </li>
 <li>
+<p>stores <code>executionState.failure</code>, why a run failed, without indexing it</p>
+</li>
+<li>
 <p>raises <code>index.mapping.total_fields.limit</code> to <code>500</code></p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The dialog that opens afterwards shows the status code and response body so you can see whether the index was created or already existed.</p>
+<p>The dialog that opens afterwards shows the status code and response body so you can see whether the index was created or already existed.
+When the index already exists, the button still adds the <code>executionState.failure</code> mapping to it.</p>
+</div>
+<div class="paragraph">
+<p>The location also adds that mapping itself, before its first write to an index, so an index created by an older Hop version gets it too, without clicking the button again.
+Changing a mapping needs more rights than writing documents: a user that can only write documents is refused.
+It is also refused when the index already holds failures that were mapped field by field.
+Hop then logs the refusal once and writes anyway: the failure is mapped field by field, which can add a few hundred fields against the field limit of the index.</p>
 </div>
 </div>
 </div>

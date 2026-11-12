@@ -2572,6 +2572,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/datahub/index.html">DataHub</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/technology/falkordb/index.html">FalkorDB</a>
     
   </li>
@@ -3446,7 +3450,22 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">API Key/AccessToken</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Unique access value used to authenticate and authorise access to the endpoint service. The value
 is masked in the dialog and stored encrypted in the pipeline, unless it is a variable such as
-<code>'${OPENAI_API_KEY}'</code>, which is stored as it stands so it can be resolved at run time.</p></td>
+<code>'${OPENAI_API_KEY}'</code>, which is stored as it stands so it can be resolved at run time.
+The field defaults to the provider&#8217;s own variable: <code>'${OPENAI_API_KEY}'</code>, <code>'${ANTHROPIC_API_KEY}'</code>,
+<code>'${MISTRAL_API_KEY}'</code> or <code>'${HF_ACCESS_TOKEN}'</code>. That variable is read from the Hop variables,
+and from the operating system environment variable of the same name when no Hop variable defines
+it. Pipelines saved by older versions hold the bare name, such as <code>OPENAI_API_KEY</code>, which is read
+the same way.
+The operating system environment variable is only sent over https to the provider&#8217;s own endpoint:
+<code>openai.com</code>, <code>anthropic.com</code>, <code>mistral.ai</code>, or <code>huggingface.co</code> and <code>huggingface.cloud</code>. When the
+base URL or the Hugging Face endpoint URL points anywhere else, such as an OpenAI-compatible server,
+no key is sent and the log says so. To send a key there, put it in the field or define the variable
+as a Hop variable, for example in an environment configuration file. A Hop variable is resolved
+whatever the endpoint is.
+For OpenAI, any other variable that is not set sends no key, and so does an empty
+field, which suits a local OpenAI-compatible server. Anthropic, Mistral and Hugging Face need a key:
+without one every call fails, and each row gets <code>ERROR</code> in its <code>finish_reason</code> field and the error
+in its <code>output</code> field.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Model Name</p></td>

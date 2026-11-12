@@ -2572,6 +2572,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/datahub/index.html">DataHub</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/technology/falkordb/index.html">FalkorDB</a>
     
   </li>
@@ -3184,11 +3188,11 @@ shows the exact <code>CREATE INDEX</code> or <code>DROP INDEX</code> statements 
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">True</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All the index updates ran, with 0 errors. The drops run first, then the creates. An empty list is also true. An empty <strong>Index name</strong> is only fine where the database doesn&#8217;t use names: to create a RANGE index on Neo4j, which then names the index, for range indexes on Memgraph, and for every index on FalkorDB. In the other cases it stops the workflow, see the WARNING.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All the index updates ran, with 0 errors. The drops run first, then the creates. An empty list is also true. An empty <strong>Index name</strong> is only fine where the database doesn&#8217;t use names: to create a RANGE index on Neo4j, which then names the index, for range indexes on Memgraph, and for every index on FalkorDB. In the other cases the action is false.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">False</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The action is never false: see the WARNING.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of errors is 1. An index update can&#8217;t be done: the <strong>Graph database connection</strong> is empty, doesn&#8217;t exist, can&#8217;t be reached or refuses the login, an update has no <strong>Update type</strong>, an index is created without <strong>Object name</strong> or <strong>Properties</strong> (on Memgraph and FalkorDB, which identify an index by them, also when it is dropped, except a Memgraph vector index), a VECTOR index is created with <strong>Vector dimensions</strong> that are empty, not a number or not positive (a drop doesn&#8217;t need them), <strong>Index name</strong> is empty where the database needs one (to drop an index or create a vector index on Neo4j, for a vector index on Memgraph, for any index on Apache AGE), or the database refuses the statement. The error is in the log.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Result files</p></td>
@@ -3200,14 +3204,14 @@ shows the exact <code>CREATE INDEX</code> or <code>DROP INDEX</code> statements 
 </tr>
 </tbody>
 </table>
-<div class="admonitionblock warning">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-When an index update can&#8217;t be done, the workflow stops with an error and no hop from the action is followed: the <strong>Graph database connection</strong> is empty, doesn&#8217;t exist or can&#8217;t be reached, an update has no <strong>Update type</strong>, an index is created without <strong>Object name</strong> or <strong>Properties</strong> (on Memgraph and FalkorDB, which identify an index by them, also when it is dropped, except a Memgraph vector index), a VECTOR index is created with <strong>Vector dimensions</strong> that are empty, not a number or not positive (a drop doesn&#8217;t need them), <strong>Index name</strong> is empty where the database needs one (to drop an index or create a vector index on Neo4j, for a vector index on Memgraph, for any index on Apache AGE), or the database refuses the statement. The updates before it stay done, the ones after it are not run.
+The updates run one by one. When one fails, the updates before it stay done and the ones after it are not run. An update without <strong>Update type</strong> is found before any update runs.
 </td>
 </tr>
 </table>

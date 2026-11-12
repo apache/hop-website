@@ -2572,6 +2572,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/technology/datahub/index.html">DataHub</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/technology/falkordb/index.html">FalkorDB</a>
     
   </li>
@@ -3094,7 +3098,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Target filename pattern</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The filename pattern (start of filename). The default pattern is <code>name_{SYS|hhmmss_MMddyyyy|}_#IdFile#.mail</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The filename pattern (start of filename). The default pattern is <code>name_{SYS|hhmmss_MMddyyyy|}_#IdFile#.mail</code>. <code><mark>IdFile</mark></code> is replaced with the number of the saved message, starting at 1 and counting over all folders, so with <strong>Include subfolders</strong> every message gets its own file.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Save message content</p></td>
@@ -3176,7 +3180,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Include subfolders</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">check to select messages for subfolders from the selected IMAP folder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">check to select messages for subfolders from the selected IMAP folder. Folders are handled in alphabetical order. When messages are moved, the folder they are moved into is skipped, so a moved message isn&#8217;t read, saved or moved a second time.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Retrieve</p></td>
@@ -3390,11 +3394,11 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Lines deleted</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The number of messages deleted, by the <strong>Delete messages</strong> action, <strong>Delete emails after retrieval</strong> or <strong>Delete message</strong> after retrieval. A message moved on its own also counts here: with <strong>Move message to folder</strong> after retrieval, or with the <strong>Move messages to folder</strong> action and <strong>Retrieve the first&#8230;&#8203;emails</strong>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of messages deleted, by the <strong>Delete messages</strong> action, <strong>Delete emails after retrieval</strong> or <strong>Delete message</strong> after retrieval.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Lines updated</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The number of messages moved to another IMAP folder.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of messages moved to another IMAP folder. A moved message only counts here, not in <strong>Lines deleted</strong>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -3408,7 +3412,7 @@
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The <code><mark>IdFile</mark></code> number in <strong>Target filename pattern</strong> starts again in each folder: with <strong>Include subfolders</strong>, a message of a subfolder can overwrite the file of a message of the first folder.
+Up to Hop 2.20, a message moved on its own (with <strong>Move message to folder</strong> after retrieval, or with the <strong>Move messages to folder</strong> action and <strong>Retrieve the first&#8230;&#8203;emails</strong>) also counted in <strong>Lines deleted</strong>. From 2.21 it only counts in <strong>Lines updated</strong>, like a message moved together with the others. A workflow that checks <strong>Lines deleted</strong> after a move needs to check <strong>Lines updated</strong> instead.
 </td>
 </tr>
 </table>
