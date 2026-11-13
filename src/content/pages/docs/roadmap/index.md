@@ -5,18 +5,10 @@ The Apache Hop team aims to create a new release every 2 to 3 months.
 
 Here are a few directions that we want to explore for the future of our software:
 
-* Authentication and authorization plugins for various security providers
-* VFS: 
-  * Integration with authentication for the VFS plugins, allow VFS configurations per project (instead of the current global Apache Hop configurations)
-  * S3 compatible object store support through updated AWS libs
-* Integrate with graph databases as a plugin type similar to the existing database plugins
-* Creation of a 'hop' command with sub-commands
-* Set up a software marketplace where 3rd party plugins can be found
-* Finish conversion of all plugins to generic XML serialization to allow for JSON/YAML/... metadata serialization of pipelines and workflows
-* Pluggable field expressions in transforms and actions
-* Integration with Apache Airflow both in Airflow and as a new Workflow engine plugin
-* Infrastructure and project environment validation
-* MongoDB: API update to support Atlas
-* Improved monitoring and logging, integrations with the leading logging and monitoring platforms
-* A new docker/k8s pipeline/workflow engine
+* Extended and new LLM, AI integrations, including an MCP server
+* Continued performance improvements
+* Lakehouse: Delta Lake, improved Iceberg support and support for open catalogs.
+* A new docker/k8s pipeline/workflow engine, and smaller container image
+* JSON, YAML serialization for pipeline and workflow, alongside XML
+* Restartable runs: rerun a failed pipeline or workflow from where it failed 
 * ...
