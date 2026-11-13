@@ -442,6 +442,9 @@
 <loc>https://hop.apache.org/manual/next/metadata-types/cassandra/cassandra-connection.html</loc>
 </url>
 <url>
+<loc>https://hop.apache.org/manual/next/metadata-types/data-catalog.html</loc>
+</url>
+<url>
 <loc>https://hop.apache.org/manual/next/metadata-types/data-set.html</loc>
 </url>
 <url>
@@ -1874,6 +1877,9 @@
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/workflow/actions/check-graph-database-connections.html</loc>
+</url>
+<url>
+<loc>https://hop.apache.org/manual/next/workflow/actions/checkdatacatalog.html</loc>
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/workflow/actions/checkdbconnection.html</loc>

@@ -1675,6 +1675,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/checkdatacatalog.html">Check data catalog</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/checkdbconnection.html">Check Db connections</a>
     
   </li>
@@ -2292,6 +2296,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/databricks-vfs-connection.html">Databricks VFS Connection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/data-catalog.html">Data Catalog</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3280,6 +3288,23 @@ pipeline wrote shows the tasks and datasets upstream of it.</p>
 <div class="content">
 <pre>DataHub lineage sink initialized: gms=http://localhost:8080, env=PROD, dataset schemas=missing, lifecycle=off, spool=off</pre>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_reading_from_datahub"><a class="link" href="#_reading_from_datahub">Reading from DataHub</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The plugin also adds DataHub as a type of <a href="../../metadata-types/data-catalog.html" class="xref page">Data Catalog</a>, so
+workflows can read what DataHub knows about a dataset. The
+<a href="../../workflow/actions/checkdatacatalog.html" class="xref page">Check data catalog</a> action uses it to check, before a
+workflow goes on, that datasets exist in DataHub, aren&#8217;t deprecated, changed recently enough and
+passed their assertions.</p>
+</div>
+<div class="paragraph">
+<p>A Data Catalog has its own URL and token: it doesn&#8217;t use the <code>HOP_LINEAGE_DATAHUB_*</code> variables. Give
+it the same environment as <code>HOP_LINEAGE_DATAHUB_ENV</code>, so a table resolves to the dataset the sink
+writes for it. Its token only needs the privilege to view the datasets and their assertions.</p>
 </div>
 </div>
 </div>

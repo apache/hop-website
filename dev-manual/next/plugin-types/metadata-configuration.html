@@ -780,6 +780,51 @@ The full pattern — location ids, the open-session request, inclusions, proposa
 </div>
 </div>
 <div class="sect1">
+<h2 id="_data_catalog"><a class="link" href="#_data_catalog">Data catalog</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A data catalog plugin is one kind of catalog behind the <strong>Data Catalog</strong> metadata type (<code>data-catalog</code>): DataHub, and later others.
+Hop reads dataset metadata from it; writing to a catalog stays with the lineage sinks.
+The API is experimental.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Annotation</dt>
+<dd>
+<p><code>@DataCatalogPlugin</code>, together with <code>@GuiPlugin</code> for the options</p>
+</dd>
+<dt class="hdlist1">Implement</dt>
+<dd>
+<p><code>IDataCatalog</code>, plus the <code>ICatalogCapability</code> interfaces for what the catalog can answer: <code>IDeprecationCapability</code>, <code>IFreshnessCapability</code>, <code>IAssertionCapability</code></p>
+</dd>
+<dt class="hdlist1">Plugin type</dt>
+<dd>
+<p><code>DataCatalogPluginType</code>, id <code>DATA_CATALOGS</code></p>
+</dd>
+<dt class="hdlist1">Examples</dt>
+<dd>
+<p><code>plugins/tech/datahub</code> (<code>DataHubDataCatalog</code>)</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The plugin class holds the configuration as <code>@HopMetadataProperty</code> fields, with <code>@GuiWidgetElement(parentId = DataCatalog.GUI_PLUGIN_ELEMENT_PARENT_ID)</code> for the editor.
+<code>DataCatalog.connect(variables, metadataProvider)</code> returns an initialized copy; close it when done.
+The editor&#8217;s <strong>Test</strong> button calls <code>ping()</code>, so a plugin doesn&#8217;t add a test button of its own.</p>
+</div>
+<div class="paragraph">
+<p>Every question returns a <code>CatalogAnswer</code>: <code>Known</code>, <code>NotFound</code>, or <code>Unknown</code> with a reason (unreachable, unauthorized, timeout, not supported, &#8230;&#8203;).
+A catalog that can&#8217;t answer is a normal outcome, not an exception; the caller decides what it means.
+<code>capability(Class)</code> finds a capability; by default that is the plugin class itself when it implements the interface.</p>
+</div>
+<div class="paragraph">
+<p>A dataset is a <code>DatasetRef</code>.
+Build it with <code>DatasetRef.ofTable(&#8230;&#8203;)</code> or <code>ofFile(&#8230;&#8203;)</code>: those give a table or a file the OpenLineage namespace and name that lineage gives it, so <code>resolve()</code> finds the dataset lineage wrote.
+<code>ofCatalogId(&#8230;&#8203;)</code> names a dataset by the catalog&#8217;s own id.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_configuration_options"><a class="link" href="#_configuration_options">Configuration options</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
