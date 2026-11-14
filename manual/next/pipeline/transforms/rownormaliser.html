@@ -3079,6 +3079,17 @@
 </div>
 </div>
 <div class="sect1">
+<h2 id="_normalising_every_input_field"><a class="link" href="#_normalising_every_input_field">Normalising every input field</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When the <strong>Fields table</strong> is empty, the transform normalises every field it receives. Each input field is a type of its own, named after the field, and its value goes into the <strong>Value field</strong>. This works when the input fields are only known when the pipeline runs, for example in a pipeline that profiles any file or table it is given.</p>
+</div>
+<div class="paragraph">
+<p>Every input field is normalised this way, so no field is passed on unchanged: the output has only the type field and the value field. When the input fields have different data types the value field is a String, as described below. The value field keeps a length or precision only when all input fields have the same one. While you design a pipeline whose input fields are not known yet, the transform shows the value field to the transforms after it as a String.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_data_types_of_the_new_fields"><a class="link" href="#_data_types_of_the_new_fields">Data types of the new fields</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -3135,8 +3146,12 @@ Before Hop 2.20, a new field took the data type of the first input field filling
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of the type field (<strong>key</strong> in the example below).</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the field that holds the values when the <strong>Fields table</strong> is empty and every input field is normalised. The default is <strong>value</strong>. Give it a name other than the type field&#8217;s: otherwise it is renamed in the output, to <strong>value_1</strong> for example.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Fields table</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A list of the fields you want to normalize; you must set the following properties for each selected field:</p>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A list of the fields you want to normalize. Leave it empty to normalise every input field into the <strong>Value field</strong>. You must set the following properties for each listed field:</p>
 <p class="tableblock">* Fieldname: Name of the fields to normalize, as you get them from the input transform.
 * Type: Give a string to classify the field (you can use the same field names, or input custom strings).
 * New field: You can give one or more fields where the new value should transferred to (<strong>value</strong> in our example).</p></td>
@@ -3194,7 +3209,7 @@ Before Hop 2.20, a new field took the data type of the first input field filling
 <div class="sect2">
 <h3 id="_normalized_data_example_1"><a class="link" href="#_normalized_data_example_1">Normalized data (example 1)</a></h3>
 <div class="paragraph">
-<p>Set <strong>Typefield</strong> = "key" and use the <strong>Get Fields</strong> button to load all the fields for normalization, set also <strong>New field</strong> = "value" in all rows. The result is:</p>
+<p>Set <strong>Typefield</strong> = "key" and <strong>Value field</strong> = "value", and leave the <strong>Fields table</strong> empty. The result is the same as using the <strong>Get Fields</strong> button to list all the fields and setting <strong>New field</strong> = "value" in all rows, but it follows the fields of the input, whatever they are:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -3262,7 +3277,7 @@ Before Hop 2.20, a new field took the data type of the first input field filling
 <div class="sect2">
 <h3 id="_normalized_data_example_2"><a class="link" href="#_normalized_data_example_2">Normalized data (example 2)</a></h3>
 <div class="paragraph">
-<p>Similar to example 1, but remove the <strong>RecordID</strong> field from the <strong>Fields table</strong>. The result is:</p>
+<p>Set <strong>Typefield</strong> = "key", use the <strong>Get Fields</strong> button to list all the fields, remove the <strong>RecordID</strong> row from the <strong>Fields table</strong> and set <strong>New field</strong> = "value" in the other rows. <strong>RecordID</strong> is not listed, so it is passed on unchanged. The result is:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
