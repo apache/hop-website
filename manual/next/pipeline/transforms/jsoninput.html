@@ -3558,6 +3558,24 @@ You can search for a field name by entering the field name in the Search box.</p
 <p>Click Select fields from snippet button and paste the entire JSON text and it will populate the Name, Path, Type columns in the Fields tab. Example: This is useful when copying JSON from a previous REST client’s output result.</p>
 </div>
 <div class="paragraph">
+<p><strong>Numbers</strong></p>
+</div>
+<div class="paragraph">
+<p>A JSON number, such as <code>199.5</code> or <code>12</code>, is read as the number it is into an Integer, Number or BigNumber field. The Format, Decimal and Group of the field are not used for it: they say how the field is shown, and how a number that the JSON holds as a string, such as <code>"1.234,50"</code>, is read. A number with decimals read into an Integer field loses its fraction.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Before Hop 2.21, some JSON numbers were read with the Decimal and Group of the field. Where the comma is the decimal symbol, set on the field or by the locale, <code>199.5</code> could come out as <code>1995</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
 <p><strong>Dates and Timestamps</strong></p>
 </div>
 <div class="paragraph">

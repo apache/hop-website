@@ -3017,6 +3017,17 @@ In this logging pipeline, you can process the logging information and e.g. write
 </div>
 </div>
 <div class="sect1">
+<h2 id="_when_changes_take_effect"><a class="link" href="#_when_changes_take_effect">When changes take effect</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A run reads the pipeline logs once, when it first needs them, and every pipeline and workflow it starts uses what it read: the child pipelines of a Pipeline executor, the pipelines of a workflow, a mapping and so on. A run is a top-level pipeline or workflow, the one that Hop Run, Hop GUI, Hop Server or the API starts.</p>
+</div>
+<div class="paragraph">
+<p>A pipeline log that you add or change while a run is going on takes effect with the next run. This matters for runs that go on for a long time, such as a workflow that loops for hours or a streaming pipeline.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
 <div class="sectionbody">
 <div class="paragraph">

@@ -4198,7 +4198,7 @@ Examples: sorted <strong>Group By</strong> (use <strong>Memory Group By</strong>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Spark SQL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Not supported</strong> as a first-class surface. You cannot submit arbitrary Spark SQL / <code>DataFrame</code> queries from Hop metadata; the engine only builds a Dataset graph from the Hop transform graph (plus native handlers for a fixed set of transforms).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Supported</strong> through the <a href="../transforms/spark-sql.html" class="xref page">Spark SQL</a> transform: it runs a <code>spark.sql</code> statement over the incoming Datasets, each registered as a temporary view, and requires an explicit output field list. Arbitrary <code>DataFrame</code> API code cannot be submitted from Hop metadata.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MLlib / Spark ML</p></td>

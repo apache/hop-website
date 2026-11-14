@@ -3390,6 +3390,24 @@ You can search for a field name by entering it in the Search box.</p>
 <p>Click <strong>Select fields from snippet</strong> and paste JSON text—typically <strong>one representative object</strong> (one element of the array your <strong>Record JsonPath</strong> selects)—to populate the <strong>Name</strong>, <strong>Path</strong>, and <strong>Type</strong> columns in the Fields tab. This helps discover flattened paths after your Content-tab settings (separator, depth, array handling) are applied.</p>
 </div>
 <div class="paragraph">
+<p><strong>Numbers</strong></p>
+</div>
+<div class="paragraph">
+<p>A JSON number, such as <code>199.5</code> or <code>12</code>, is read as the number it is into an Integer, Number or BigNumber field. The Format, Decimal and Group of the field are not used for it: they say how the field is shown, and how a number that the JSON holds as a string, such as <code>"1.234,50"</code>, is read. A number with decimals read into an Integer field loses its fraction.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Before Hop 2.21, every JSON number was read with the Format, Decimal and Group of the field. Where the comma is the decimal symbol, set on the field or by the locale, <code>199.5</code> came out as <code>1995</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
 <p><strong>Dates and timestamps</strong></p>
 </div>
 <div class="paragraph">

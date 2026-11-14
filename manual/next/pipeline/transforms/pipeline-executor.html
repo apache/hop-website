@@ -3206,7 +3206,8 @@ Click <strong>Open</strong> to open it in Hop Gui. When the dialog has unsaved c
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Run configuration</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specify the Pipeline Run Configuration to be used for execution.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specify the Pipeline Run Configuration to be used for execution.
+The transform reads the run configuration when it starts its first child pipeline and uses it for every child pipeline that follows: a change to the run configuration while the pipeline runs takes effect with the next run.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Stop after (milliseconds)</p></td>
