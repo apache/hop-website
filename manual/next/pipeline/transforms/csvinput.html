@@ -3186,6 +3186,25 @@ All fields identified will be added to the Fields Table.</p></td>
 </table>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>transforms/csvinput-basic.hpl</code>, which reads <code>files/books-tiny-file.csv</code> and adds a row number.
+Run <code>transforms/textfileoutput-tiny-file.hpl</code> first: it creates that file.</p>
+</li>
+<li>
+<p><code>workflows/write-read-huge-file.hwf</code>, which writes a file of 25 million rows with <code>workflows/textfileoutput-huge-file.hpl</code> and reads it back with <code>workflows/csvinput-huge-file.hpl</code>: CSV input with 4 copies and parallel reading.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/pipeline/transforms/creditcardvalidator.html"><span>Previous</span><strong>Credit card validator</strong></a>

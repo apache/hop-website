@@ -4054,7 +4054,10 @@ Values are stored as a <code>float[]</code>.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>That form is both valid JSON and the literal syntax pgvector accepts, so a vector survives a round trip through a text file, a Data Grid, a JSON document or a database column without a conversion step in between.</p>
+<p>That form is both valid JSON and the literal syntax pgvector accepts, so a vector survives a round trip through a text file, a Data Grid, a JSON document or a database column without a conversion step in between.
+Each element must be a plain decimal or scientific number (<code>0.1</code>, <code>-2</code>, <code>1.5e-3</code>).
+Java float literals (<code>1f</code>, <code>2d</code>, <code>0x1p3</code>) and non-finite values (<code>NaN</code>, <code>Infinity</code>) are rejected.
+Text File Output quotes Vector values when they contain the field separator, so a comma-separated file can be read back.</p>
 </div>
 <div class="paragraph">
 <p><strong>Conversions</strong></p>

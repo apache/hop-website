@@ -3067,6 +3067,85 @@
 <div class="paragraph">
 <p>The HTML 2 Text Transform allows you to parse an HTML page and convert the content to text</p>
 </div>
+<div class="paragraph">
+<p>For every row, the transform reads the HTML from a field and adds a field with the text of that HTML, or, with <strong>Clean HTML Only</strong>, with the HTML cleaned of everything the safelist does not allow.</p>
+</div>
+<div class="paragraph">
+<p>A row whose HTML field is empty, holds only white space or is null passes on with an empty text.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Before Hop 2.21, rows with empty HTML were dropped: they did not reach the output.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_options"><a class="link" href="#_options">Options</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transform name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the transform, unique in the pipeline.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Html text field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The field that holds the HTML.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Output text field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the new field with the text, or the cleaned HTML.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clean HTML Only</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keep the HTML and remove the elements and attributes that the safelist does not allow, instead of turning the HTML into text.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Safelist</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With <strong>Clean HTML Only</strong>: what the cleaned HTML may keep. <strong>None</strong> keeps only the text, <strong>Simple text</strong> adds bold, italic and underline, <strong>Basic</strong> adds links, lists, quotes and paragraphs, <strong>Basic with images</strong> adds images, and <strong>Relaxed</strong> adds headings, tables, divisions and other structural elements.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Normalize Text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For text: replace runs of white space, line breaks included, with a single space. Without it the text keeps its white space.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A row that cannot be converted stops the transform. When the transform has error handling, the row goes to the error hop instead.</p>
+</div>
+<div class="paragraph">
+<p>To convert rows on several threads, give the transform more copies: each copy converts the rows it gets on a thread of its own.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Before Hop 2.21, the transform had a <strong>Use Parallelism</strong> option that converted rows on a thread pool shared by the whole JVM. That option is gone: a transform that had it on converts its rows on one thread per copy now. Set the number of copies to use more threads.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
     </article>
