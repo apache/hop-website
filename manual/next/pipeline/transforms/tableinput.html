@@ -3406,6 +3406,19 @@ Variable substitution happens before execution and does not protect against SQL 
 <div class="sect1">
 <h2 id="parallel-reading"><a class="link" href="#parallel-reading">Parallel reading</a></h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_built_in_partitioned_read"><a class="link" href="#_built_in_partitioned_read">Built-in partitioned read</a></h3>
+<div class="paragraph">
+<p>Set all four JDBC partition options on the <strong>Options</strong> tab to split a query over a numeric result column.
+The lower and upper bounds determine the partition stride; they do not filter the result, and the first partition includes null values.
+The query must be valid as a subquery and expose the partition column.
+On the classic engine, set the number of transform copies to at least the configured number of partitions; each copy uses a separate connection unless the run configuration shares connections.
+On native Spark, a compatible source uses Spark JDBC partitions; configurations with incoming rows, named parameters, per-row execution or a row limit fall back to the generic handler.
+Concurrent connections may observe different database snapshots, so use an appropriate consistency strategy.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_manual_partitioning"><a class="link" href="#_manual_partitioning">Manual partitioning</a></h3>
 <div class="paragraph">
 <p>Keep <code>NR_COPIES</code> as a parameter of the pipeline. On the pipeline properties <strong>Parameters</strong> tab, give it a default and a description so the copy count is documented with the pipeline and easy to change for a run. Changing that one value lets you test the limit of the source database&#8217;s capacity. See <a href="../../fields-parameters-variables.html#_parameters" class="xref page">Parameters</a>.</p>
 </div>
@@ -3414,6 +3427,7 @@ Variable substitution happens before execution and does not protect against SQL 
 </div>
 <div class="paragraph">
 <p>Every row has to land in exactly one copy. Each copy reads its own snapshot; for a consistent result, read from a table that isn&#8217;t being changed during the run. Build the predicate so that it maps a key onto the copy number.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_setup"><a class="link" href="#_setup">Setup</a></h3>
@@ -3446,7 +3460,7 @@ Variable substitution happens before execution and does not protect against SQL 
 <p>The next transform receives the rows from every copy. One copy of that transform merges the slices into a single stream.</p>
 </div>
 <div class="paragraph">
-<p>Leave Table Input unpartitioned. A partition schema sets the number of copies itself.</p>
+<p>For this manual approach, leave the JDBC partition options empty. A Hop partition schema sets the number of copies itself.</p>
 </div>
 </div>
 <div class="sect2">
@@ -3792,6 +3806,22 @@ For better performance with large datasets you can use indexed columns in <code>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Limit size</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Maximum number of rows to return from the query. <code>0</code> means no limit. See <a href="#limit-size-vs-sql-limit">Limit size vs. SQL LIMIT</a> below.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JDBC partition column</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Numeric column exposed by the query used to split the read.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JDBC lower bound</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lower bound for calculating partition strides, not a row filter.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JDBC upper bound</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Upper bound for calculating partition strides, not a row filter.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JDBC number of partitions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of partitions; classic execution requires at least this many transform copies.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Specify output fields</p></td>
