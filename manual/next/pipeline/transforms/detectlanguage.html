@@ -3104,8 +3104,74 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the transform.
 This name must be unique throughout the pipeline.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Corpus text field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The field with the text to examine.
+A variable is allowed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use Parallelism</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Detect the language of several rows at the same time.
+The rows can leave the transform in another order than they came in.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Low accuracy mode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use only the three-letter language models.
+This is faster and uses far less memory, but it is less accurate: short texts of a few words are often given the wrong language.
+Use it for longer texts.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Languages to detect</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The languages the text can be in, by their Lingua name (<code>ENGLISH</code>, <code>FRENCH</code>, &#8230;&#8203;).
+A variable is allowed.
+Leave the list empty to detect every spoken language.
+List at least two languages.</p></td>
+</tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_output_fields"><a class="link" href="#_output_fields">Output fields</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">detected_language</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the detected language, for example <code>ENGLISH</code>, or <code>UNKNOWN</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">detected_language_confidence</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lingua&#8217;s score for that language, relative to the other languages.
+The detected language is the one with the highest score, so the value is always 1: it is not a probability and does not tell how sure the detection is.
+Empty when the language is <code>UNKNOWN</code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A row with an empty text passes with <code>UNKNOWN</code> and no confidence.
+The language is also <code>UNKNOWN</code> when the two most likely languages score exactly the same.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_performance"><a class="link" href="#_performance">Performance</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Detecting every spoken language loads the models of all 74 spoken languages: about 1.4 GB of memory, released when the transform finishes.
+When you know which languages the data can contain, list them: with five languages the transform is about 2.5 times as fast and needs about 175 MB.
+A text in a language that is not listed is given one of the listed languages, or <code>UNKNOWN</code>.</p>
+</div>
 </div>
 </div>
 <div class="sect1">

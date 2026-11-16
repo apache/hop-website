@@ -3123,6 +3123,47 @@
 <div class="paragraph">
 <p>When a field cannot be masked and the transform has error handling, the error row has that field and every masked field after it set to null.</p>
 </div>
+<div class="sect2">
+<h3 id="_data_catalog"><a class="link" href="#_data_catalog">Data catalog</a></h3>
+<div class="paragraph">
+<p>These options mask fields by the tags and glossary terms a <a href="../../metadata-types/data-catalog.html" class="xref page">Data Catalog</a>, such as DataHub, has on them. They are experimental. Leave <strong>Data catalog</strong> empty not to use them.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data catalog</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The data catalog that says which fields carry a tag or term.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dataset type, Dataset connection, Dataset schema, Dataset</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The dataset whose fields the catalog labels: a table of a relational connection, a file, or the id of the dataset in the catalog. A table and a file are found the way <a href="../../metadata-types/data-catalog.html#_how_datasets_are_found" class="xref page">a data catalog finds datasets</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tag or term, Masking rule</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every incoming field that the catalog labels with the tag or glossary term on a row is masked with that row&#8217;s Masking pattern. A tag is matched by its name or URN (<code>PII</code>, <code>urn:li:tag:PII</code>), a term by its name, its URN or its path in the glossary, the term groups above it followed by its name (<code>Personal</code>, <code>Classification.Personal</code>), without regard to case. The first row that matches a field wins.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>When the transform starts, it reads the fields of the dataset from the catalog. When the first row arrives, it masks every incoming field whose name matches a labelled field, without regard to case: <code>EMAIL</code> in the stream matches <code>email</code> in the catalog. A field that only shows up at run time is masked too. The log has a line for every field masked this way, with its tag or term.</p>
+</div>
+<div class="paragraph">
+<p>A field that also has a row in the fields table keeps the pattern of that row.</p>
+</div>
+<div class="paragraph">
+<p>When the catalog can&#8217;t be reached, refuses the token, doesn&#8217;t have the dataset or has no fields for it, or a tag or term holds a variable that is not set, the transform doesn&#8217;t start: it doesn&#8217;t guess which fields to mask.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">

@@ -3066,7 +3066,8 @@ neither the tasks nor what they read and write.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A run of any of these</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A <strong>run</strong> (DataProcessInstance) named <code>&lt;name&gt; &lt;time&gt;</code>, for example <code>nightly/Load orders
 2026-10-18T07:34Z</code>, with its start, its end, its outcome (success or failure) and the run that
-started it. A run whose end Hop never reported, such as an action that stopped with an error, is
+started it. A transform&#8217;s run lists its row counts (<code>linesInput</code>, <code>linesOutput</code>, <code>linesUpdated</code>,
+<code>linesRejected</code>, &#8230;&#8203;) in its properties, a pipeline&#8217;s run the totals of its transforms. A run whose end Hop never reported, such as an action that stopped with an error, is
 ended as failed when the sink shuts down.</p></td>
 </tr>
 <tr>
@@ -3085,6 +3086,20 @@ a local file as its path on <code>file</code>.</p></td>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Column mappings (SQL <code>INSERT … SELECT</code>, Table Input → Table Output)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Column-level lineage, on the task and on the dataset.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A file or table a run wrote</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An <strong>operation</strong> on the dataset when the run succeeds: <code>INSERT</code>, <code>UPDATE</code> or <code>DELETE</code>, or <code>CREATE</code>,
+<code>DROP</code> or <code>ALTER</code> for a dataset created, deleted, moved or renamed, with the number of rows when Hop
+knows them (see <a href="../openlineage/index.html#_row_counts" class="xref page">Row counts</a>). A pipeline reports
+one operation per dataset when it completes, with the rows of all the transforms and copies that
+wrote it; an action reports the files it wrote when it completes. DataHub shows when a dataset last
+changed from its operations, and the freshness check of a
+<a href="../../workflow/actions/checkdatacatalog.html" class="xref page">Check data catalog</a> action reads them, so a dataset that
+only Hop writes has a freshness too. A failed or stopped run reports no operation: a half-written table
+doesn&#8217;t look up to date. Neither does a run that inserted, updated or deleted no rows; a table
+truncated or a file rewritten with nothing written was emptied, and gets a <code>DELETE</code> without a row
+count.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A file copied or moved (Copy files, Move files)</p></td>

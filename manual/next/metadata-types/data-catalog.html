@@ -3006,7 +3006,8 @@
 The catalog stays the owner of that metadata. Hop only reads it.</p>
 </div>
 <div class="paragraph">
-<p>The <a href="../workflow/actions/checkdatacatalog.html" class="xref page">Check data catalog</a> action uses a Data Catalog to check datasets before a workflow goes on.</p>
+<p>The <a href="../workflow/actions/checkdatacatalog.html" class="xref page">Check data catalog</a> action uses a Data Catalog to check datasets before a workflow goes on.
+The <a href="../pipeline/transforms/maskfields.html" class="xref page">Mask fields</a> transform can use one to mask the fields that carry a tag or glossary term, such as <code>PII</code>.</p>
 </div>
 <div class="paragraph">
 <p>This metadata type is experimental: its options and what the catalog types can answer may still change.</p>
@@ -3147,11 +3148,15 @@ Use the same one as the DataHub lineage sink (<code>HOP_LINEAGE_DATAHUB_ENV</cod
 <li>
 <p><strong>Last change</strong>: the newest operation DataHub has for the dataset.
 DataHub learns about operations from the sources that report them, such as the usage ingestion of some warehouses or dbt.
-The DataHub lineage sink of Hop doesn&#8217;t report them yet, so a table that only Hop writes has none.</p>
+The <a href="../technology/datahub/index.html" class="xref page">DataHub lineage sink</a> reports one for each file and table a successful Hop run writes, so a dataset that only Hop writes has a last change too.</p>
 </li>
 <li>
 <p><strong>Assertions</strong>: the latest run of each assertion on the dataset, up to 100 assertions.
 The assertions themselves are defined and run in DataHub.</p>
+</li>
+<li>
+<p><strong>Fields</strong>: the fields of the dataset&#8217;s schema, with the tags and glossary terms on them, both the ones that came with the ingested schema and the ones added in DataHub.
+The <a href="../pipeline/transforms/maskfields.html" class="xref page">Mask fields</a> transform uses them.</p>
 </li>
 </ul>
 </div>

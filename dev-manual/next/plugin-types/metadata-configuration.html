@@ -795,7 +795,7 @@ The API is experimental.</p>
 </dd>
 <dt class="hdlist1">Implement</dt>
 <dd>
-<p><code>IDataCatalog</code>, plus the <code>ICatalogCapability</code> interfaces for what the catalog can answer: <code>IDeprecationCapability</code>, <code>IFreshnessCapability</code>, <code>IAssertionCapability</code></p>
+<p><code>IDataCatalog</code>, plus the <code>ICatalogCapability</code> interfaces for what the catalog can answer: <code>IDeprecationCapability</code>, <code>IFreshnessCapability</code>, <code>IAssertionCapability</code>, <code>ISchemaCapability</code></p>
 </dd>
 <dt class="hdlist1">Plugin type</dt>
 <dd>
@@ -820,7 +820,8 @@ A catalog that can&#8217;t answer is a normal outcome, not an exception; the cal
 <div class="paragraph">
 <p>A dataset is a <code>DatasetRef</code>.
 Build it with <code>DatasetRef.ofTable(&#8230;&#8203;)</code> or <code>ofFile(&#8230;&#8203;)</code>: those give a table or a file the OpenLineage namespace and name that lineage gives it, so <code>resolve()</code> finds the dataset lineage wrote.
-<code>ofCatalogId(&#8230;&#8203;)</code> names a dataset by the catalog&#8217;s own id.</p>
+<code>ofCatalogId(&#8230;&#8203;)</code> names a dataset by the catalog&#8217;s own id.
+A transform or action that lets the user pick a dataset stores a <code>CatalogDataset</code> (type, connection, schema, name) and calls <code>toRef(variables, metadataProvider)</code>, which also reports a dataset that can&#8217;t be named.</p>
 </div>
 </div>
 </div>

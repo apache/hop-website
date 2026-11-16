@@ -3306,6 +3306,46 @@ job facet with the subject type and the pipeline, workflow, transform or action 
 A job name such as <code>nightly/Load orders</code> cannot be split back reliably, so a collector that models
 pipelines and transforms separately reads those names from the facet.</p>
 </div>
+<div class="sect2">
+<h3 id="_row_counts"><a class="link" href="#_row_counts">Row counts</a></h3>
+<div class="paragraph">
+<p>A transform&#8217;s <code>COMPLETE</code> or <code>FAIL</code> event carries the row counters of that transform copy in a
+<code>hopRowCounts</code> run facet: <code>linesRead</code> and <code>linesWritten</code> (rows from and to other transforms),
+<code>linesInput</code> and <code>linesOutput</code> (rows read from and written to files and tables), <code>linesUpdated</code> and
+<code>linesRejected</code>. These are the transform&#8217;s own counters, the numbers it logs as <code>I=</code>, <code>O=</code>, <code>R=</code>,
+<code>W=</code> and <code>U=</code>; Text File Output counts its header and footer lines as output too, so a file with a
+header shows one line more than it has rows. A pipeline&#8217;s event carries the sum over all its
+transforms and copies of the counters that add up: <code>linesInput</code>, <code>linesOutput</code>, <code>linesUpdated</code> and
+<code>linesRejected</code>. That sum is not the pipeline result Hop logs, which takes the highest value of each
+counter, and a Metadata Injection transform counts the rows of the pipeline it runs too. Only the
+local pipeline engine sends counters; Beam, Spark and remote runs don&#8217;t have final ones when their
+run ends.</p>
+</div>
+<div class="paragraph">
+<p>A dataset gets the standard <code>inputStatistics</code> or <code>outputStatistics</code> facet with its <code>rowCount</code> when
+the count is known to be its own: the transforms that read (or wrote) it read (or wrote) nothing
+else. The rows written are the rows output plus the rows updated. A transform that writes several
+files or tables, such as Text File Output with a file per copy or Table Output with the table in a
+field, gives them no row count rather than a wrong one. On a pipeline&#8217;s event a dataset&#8217;s count is
+the sum over its transforms and their copies; with transform jobs on, each copy&#8217;s event counts the
+rows of that copy. Rows a transform deleted from a table (Delete, an Execute SQL with a single
+<code>DELETE</code> statement) are not rows written; a table emptied and reloaded in one run counts the rows
+loaded. An Execute SQL script of several statements gives no count, as its counters add all of them
+up, and neither does a transform that counts 0 while it does handle rows (not every transform counts
+what it reads or writes).</p>
+</div>
+<div class="paragraph">
+<p>A pipeline&#8217;s <code>COMPLETE</code> or <code>FAIL</code> event also lists every dataset the run wrote, once, in a
+<code>hopWrites</code> run facet: its <code>namespace</code> and <code>name</code>, its <code>operationType</code> (<code>INSERT</code>, <code>UPDATE</code>,
+<code>DELETE</code>, <code>CREATE</code>, <code>DROP</code> or <code>ALTER</code>) and, when known, its <code>rows</code>. The DataHub sink turns these
+into operations. A pipeline that was stopped (Stop, Abort, or a failing parent pipeline stopping
+it) says so with <code>stopped</code> in its <code>hopRowCounts</code> facet and lists no writes.</p>
+</div>
+<div class="paragraph">
+<p>Apache Beam and Spark run the transforms of a pipeline in small local pipelines on their workers.
+With lineage on in the JVM of those workers, as with the Beam DirectRunner or Spark in local mode,
+each of those reports a run of its own, with the counts and writes of its bundle or partition.</p>
+</div>
 <div class="paragraph">
 <p>The run id is the executing subject&#8217;s log-channel id. By default file I/O is correlated to
 the parent pipeline run, so inputs and outputs appear on the pipeline job in Marquez. Every run also
@@ -3313,6 +3353,7 @@ names the run that started it: a transform&#8217;s <code>ParentRunFacet</code> p
 its workflow, and a pipeline&#8217;s at the action that ran it (or at the parent pipeline, for a
 sub-pipeline). Actions are jobs of their own, named <code>&lt;workflow&gt;/&lt;action&gt;</code>, so a workflow with several
 actions no longer files them all under the workflow&#8217;s job.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="job-hierarchy"><a class="link" href="#job-hierarchy">Job hierarchy</a></h3>
