@@ -3115,6 +3115,19 @@ See <a href="../beam/getting-started-with-beam.html#_unsupported_transforms" cla
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
+With several copies of this transform, set the transforms of the other streams to Copy rows.
+Otherwise each copy only receives a part of those streams and combinations go missing.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
 The transform gives the same result on the <a href="../pipeline-run-configurations/single-threaded-pipeline-engine.html" class="xref page">single threaded engine</a> as on the Hop engine.
 That engine runs the previous transforms first, so all the rows of the other streams are there when Join Rows starts.
 </td>

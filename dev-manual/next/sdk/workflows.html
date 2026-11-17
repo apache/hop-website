@@ -736,7 +736,7 @@ workflowMeta.addWorkflowHop(hop);</code></pre>
 </div>
 </li>
 <li>
-<p><strong>On Success (Conditional)</strong>: Action B executes only if Action A returned a successful result (<code>result.getResult() == true</code>):</p>
+<p><strong>On Success (Conditional)</strong>: Action B executes only if Action A returned a successful result (<code>result.isResult() == true</code>):</p>
 <div class="listingblock">
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java">hop.setUnconditional(<span class="hljs-literal">false</span>);
@@ -745,7 +745,7 @@ hop.setEvaluation(<span class="hljs-literal">true</span>);</code></pre>
 </div>
 </li>
 <li>
-<p><strong>On Failure (Conditional)</strong>: Action B executes only if Action A failed (<code>result.getResult() == false</code>):</p>
+<p><strong>On Failure (Conditional)</strong>: Action B executes only if Action A failed (<code>result.isResult() == false</code>):</p>
 <div class="listingblock">
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java">hop.setUnconditional(<span class="hljs-literal">false</span>);
@@ -789,7 +789,7 @@ Like pipeline engines, workflow engines are created via the <code>WorkflowEngine
 <span class="hljs-type">Result</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> workflowEngine.startExecution();
 
 <span class="hljs-comment">// Inspect outcome</span>
-<span class="hljs-keyword">if</span> (result.getResult() &amp;&amp; result.getNrErrors() == <span class="hljs-number">0</span>) {
+<span class="hljs-keyword">if</span> (result.isResult() &amp;&amp; result.getNrErrors() == <span class="hljs-number">0</span>) {
   System.out.println(<span class="hljs-string">&quot;Workflow succeeded!&quot;</span>);
 } <span class="hljs-keyword">else</span> {
   System.err.println(<span class="hljs-string">&quot;Workflow failed with &quot;</span> + result.getNrErrors() + <span class="hljs-string">&quot; errors.&quot;</span>);
