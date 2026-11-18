@@ -713,11 +713,9 @@ svn commit -m <span class="hljs-string">&#x27;Move release files for Apache hop 
 <h2 id="_creating_dockerhub_artifacts"><a class="link" href="#_creating_dockerhub_artifacts">Creating Dockerhub Artifacts</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To create the docker images you can use the build used to create the client, go to the folder with the code and do following steps</p>
-</div>
-<div class="paragraph">
-<p>first take a copy of the source code release and build the software
-(could be that you still have the build from the creating a release steps)</p>
+<p>To create the docker images you can use the build that created the client: the
+<code>target/checkout</code> folder <code>release:perform</code> left behind. Go to that folder and do the following steps.
+If it is gone, take a copy of the source code release and build the software first.</p>
 </div>
 <div class="listingblock">
 <div class="content">

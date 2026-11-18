@@ -744,11 +744,10 @@ assembly with <code>appendAssemblyId=false</code>).</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>assemblies</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>assemblies/</code> reactor — <code>hop-assemblies-plugins</code> and the hop-client / hop-web
-products — plus the <code>hop-core</code> / <code>hop-engine</code> / <code>hop-ui</code> / <code>hop-ui-rcp</code> zips, which exist
-only to be unpacked into those products. None of these are staged to Maven Central; the
-client and the source release go to dist.apache.org. The release turns this off via
-<code>-P=-assemblies</code>, so a normal build still produces everything <code>assemblies/client</code> needs.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>assemblies/</code> reactor: <code>hop-client</code>, <code>hop-assemblies-web</code> (<code>hop.war</code>),
+<code>hop-assemblies-plugins</code>, <code>hop-assemblies-static</code> and <code>hop-assemblies-debug</code>. The release
+builds it, and only <code>hop-client</code> is deployed. The <code>assemblies</code> parent sets
+<code>maven.deploy.skip</code>, and <code>hop-client</code> switches it back off.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>module.zips</code></p></td>
@@ -758,8 +757,13 @@ artifact the marketplace installs, so a release must <strong>never</strong> disa
 </tbody>
 </table>
 <div class="paragraph">
-<p>Net effect on a release: every plugin zip is staged, and no <code>hop-assemblies-*</code> or
-core/engine/ui/rcp zip is.</p>
+<p>Net effect on a release: every plugin zip is staged, and so is <code>hop-client-&lt;version&gt;.zip</code>.
+The other <code>assemblies/</code> modules are built but not staged.</p>
+</div>
+<div class="paragraph">
+<p>The staged <code>hop-client</code> POM is flattened: it has no parent and no dependencies, so
+<code>org.apache.hop:hop-client:&lt;version&gt;:zip</code> resolves on its own. Its dependencies are only
+inputs for the assembly and are left out of the deployed POM.</p>
 </div>
 <div class="paragraph">
 <p>They used to share the single <code>assemblies</code> property, so one <code>-Dassemblies=false</code> silently
@@ -773,10 +777,12 @@ zips are missing from Maven Central for 2.12.0-2.14.0 and 2.16.0-2.18.1.</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Do not add <code>-Dassemblies=false</code>, <code>-Dmodule.zips=false</code> or <code>-P=-assembly</code> to the
-release commands, and do not pass <code>-Darguments="&#8230;&#8203;"</code> on the command line — it replaces the
-<code>&lt;arguments&gt;</code> configured in the root pom wholesale, taking the <code>-P=-assemblies</code> with it.
-Older versions of this guide included both; that is the bug described above.
+Do not add <code>-Dmodule.zips=false</code> or <code>-P=-assembly</code> (singular) to the release
+commands: either one drops every plugin zip while the build still reports <code>BUILD SUCCESS</code>.
+Do not add <code>-Dassemblies=false</code> or <code>-P=-assemblies</code> (plural) either: that leaves
+<code>hop-client</code> out of the staging repository. And do not pass <code>-Darguments="&#8230;&#8203;"</code> on the
+command line, because it replaces the <code>&lt;arguments&gt;</code> configured in the root pom wholesale.
+Older versions of this guide passed <code>-P=-assemblies</code>; the root pom no longer does.
 </td>
 </tr>
 </table>
@@ -903,7 +909,8 @@ git push origin tag &lt;tag_name&gt;</pre>
 <p>Find Staged release its name will be orgapachehop-&lt;number&gt;</p>
 </li>
 <li>
-<p>Do a quick check the repository contains the artifacts</p>
+<p>Do a quick check the repository contains the artifacts, including
+<code>org/apache/hop/hop-client/&lt;version&gt;/hop-client-&lt;version&gt;.zip</code></p>
 </li>
 <li>
 <p>Select the repository and click on the Close button</p>
@@ -1015,22 +1022,18 @@ gpg --verify apache-hop-X.XX-src.tar.gz.asc
 <div class="sect2">
 <h3 id="_creating_the_client"><a class="link" href="#_creating_the_client">Creating the client</a></h3>
 <div class="paragraph">
-<p>The client included in the release has to be build using the source code in the release.
-Use the source you just prepared to generate the client.</p>
+<p>Use the client that <code>release:perform</code> built and staged in Nexus. It was built from the
+release tag, and copying it means dist.apache.org and Maven Central serve the same file.
+<code>release:perform</code> leaves it in <code>target/checkout</code> of the folder you ran it from.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash"><span class="hljs-comment"># Copy source to temp build location</span>
-<span class="hljs-built_in">cd</span> apache-hop-X.XX/
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash"><span class="hljs-comment"># Copy the staged client (and rename)</span>
+<span class="hljs-built_in">cp</span> &lt;release working <span class="hljs-built_in">dir</span>&gt;/target/checkout/assemblies/client/target/hop-client-X.XX.zip apache-hop-client-X.XX.zip
 
-<span class="hljs-comment"># Run Build</span>
-mvn -T 4 clean install -DskipTests=<span class="hljs-literal">true</span>
-
-<span class="hljs-comment"># Copy client back (and rename)</span>
-<span class="hljs-built_in">cp</span> assemblies/client/target/hop-client-X.XX.zip ../apache-hop-client-X.XX.zip
-
-<span class="hljs-comment"># Go back to root of your working dir</span>
-<span class="hljs-built_in">cd</span> ..</code></pre>
+<span class="hljs-comment"># Check it is the same file as the one in the staging repository</span>
+curl -s https://repository.apache.org/content/repositories/orgapachehop-XXXX/org/apache/hop/hop-client/X.XX/hop-client-X.XX.zip | <span class="hljs-built_in">sha512sum</span>
+<span class="hljs-built_in">sha512sum</span> apache-hop-client-X.XX.zip</code></pre>
 </div>
 </div>
 <div class="paragraph">

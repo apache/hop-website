@@ -836,6 +836,24 @@ repository if this was only a dry-run validation.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_client_zip_nexus_staging"><a class="link" href="#_client_zip_nexus_staging">Client zip (Nexus staging)</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The client is also staged in Nexus, and the release manager copies that same file to
+dist.apache.org. Check that the two match:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">curl -s https://repository.apache.org/content/repositories/orgapachehop-XXXX/org/apache/hop/hop-client/X.XX/hop-client-X.XX.zip | <span class="hljs-built_in">sha512sum</span>
+<span class="hljs-built_in">cat</span> apache-hop-client-X.XX.zip.sha512</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Both should print the same checksum.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_extra_checks"><a class="link" href="#_extra_checks">Extra checks</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
