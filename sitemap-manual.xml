@@ -514,6 +514,9 @@
 <loc>https://hop.apache.org/manual/next/metadata-types/jms-connection.html</loc>
 </url>
 <url>
+<loc>https://hop.apache.org/manual/next/metadata-types/lineage-sink.html</loc>
+</url>
+<url>
 <loc>https://hop.apache.org/manual/next/metadata-types/mail-server-connection.html</loc>
 </url>
 <url>
@@ -2027,6 +2030,9 @@
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/workflow/actions/processresultfilenames.html</loc>
+</url>
+<url>
+<loc>https://hop.apache.org/manual/next/workflow/actions/publishtodatahub.html</loc>
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/workflow/actions/repeat-end.html</loc>

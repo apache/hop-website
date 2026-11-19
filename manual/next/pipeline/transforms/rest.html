@@ -1871,6 +1871,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/publishtodatahub.html">Publish to DataHub</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/ftpput.html">Put a file with FTP</a>
     
   </li>
@@ -2386,6 +2390,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/spark-catalog.html">Lakehouse catalog</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/lineage-sink.html">Lineage Sink</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3587,7 +3595,10 @@ Values are percent-encoded for a path segment, so a space becomes <code>%20</cod
 <div class="ulist">
 <ul>
 <li>
-<p>the connection strategy reports no further page (no <code>rel="next"</code> link, empty page, or missing cursor),</p>
+<p>the connection strategy reports no further page (no <code>rel="next"</code> link, empty page, or missing cursor). For <code>PAGE_NUMBER</code>, <code>OFFSET_LIMIT</code> and <code>CURSOR</code>, a page is empty when the connection&#8217;s items path finds nothing in it, or else when this transform&#8217;s split path finds nothing, or else when the body is empty (see <a href="../../metadata-types/rest-connection.html" class="xref page">REST connection</a>, <strong>When paging stops</strong>),</p>
+</li>
+<li>
+<p>the connection&#8217;s total count path says every item was read,</p>
 </li>
 <li>
 <p>HTTP status is outside the 2xx range,</p>

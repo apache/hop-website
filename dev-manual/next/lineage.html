@@ -650,7 +650,7 @@ The design keeps third-party integrations (OpenLineage, Datadog, custom exporter
 <p><strong>Central entry point</strong> — Producers call <code>LineageHub.getInstance().emit(&#8230;&#8203;)</code> instead of talking to each backend directly.</p>
 </li>
 <li>
-<p><strong>Safe defaults</strong> — The hub is <strong>off</strong> until <code>HOP_LINEAGE_ENABLED</code> is set to <code>Y</code>.</p>
+<p><strong>Safe defaults</strong> — The hub is <strong>off</strong> until <code>HOP_LINEAGE_ENABLED</code> is set to <code>Y</code>, or a run selects a lineage sink in its run configuration.</p>
 </li>
 <li>
 <p><strong>Non-blocking pipelines</strong> — Events are queued and dispatched on a dedicated worker thread; sinks run in batch with per-sink error isolation.</p>
@@ -854,6 +854,23 @@ what Hop emits — worth knowing before investigating a dataset that looks empty
 </li>
 </ol>
 </div>
+<div class="sect2">
+<h3 id="_sinks_selected_in_run_configurations"><a class="link" href="#_sinks_selected_in_run_configurations">Sinks selected in run configurations</a></h3>
+<div class="paragraph">
+<p>A <code>lineage-sink</code> metadata object (<code>org.apache.hop.lineage.metadata.LineageSink</code>) holds the configuration of one sink: an <code>ILineageSinkConfiguration</code> the sink plugin hands out with <code>ILineageSink.newConfiguration()</code>. A pipeline or workflow run configuration selects one in <code>lineageSinkName</code>.</p>
+</div>
+<div class="paragraph">
+<p>When a run&#8217;s first lineage context is built, <code>LineageSinkRoutes</code> works out the run&#8217;s sinks: the one of its run configuration, plus the ones of the run that started it. It resolves each with the run&#8217;s variables (<code>ILineageSinkConfiguration.toSettings()</code>) into a <code>LineageSinkTarget</code>, registers it with <code>LineageHub.useSink()</code>, and keeps the keys with the run. Every <code>LineageContext</code> of the run carries them in <code>sinks</code>.</p>
+</div>
+<div class="paragraph">
+<p>The hub delivers an event to the sinks loaded from variables, as above, and to the sinks of the keys it carries. Such a sink is created and initialized, with the target&#8217;s settings as its only variables, on the first event for it. A sink that fails to start is logged and tried again a minute later, and the other sinks carry on; <code>LineageHub.failure(key)</code> lets the next runs log it too.</p>
+</div>
+<div class="paragraph">
+<p>Code that does extra work only to build an event asks <code>LineageSinkRoutes.isEnabled(run or transform)</code>: lineage enabled with variables, or this run has sinks of its own. <code>LineageHub.isEnabled()</code> only answers the first half.</p>
+</div>
+<div class="paragraph">
+<p>A run holds its sinks in the hub (<code>useSink</code> and <code>hold</code>) and lets go of them when it ends (<code>LineageSinkRoutes.release</code>, which queues the release behind the run&#8217;s last event). A sink no run holds whose name a newer target took, after its settings were edited, is shut down.</p>
+</div>
 <div class="paragraph">
 <p><strong><code>flush()</code></strong> blocks until queued events (and coalesced flush markers) have been processed. <strong><code>flushQuietly()</code></strong> catches and logs errors. <strong><code>flushIfBacklogged()</code></strong> flushes only once the queue is at least half full: a nested run calls it, so that a run per row does not drain the hub after every row, but still waits for the sinks before the queue overflows and events are dropped.</p>
 </div>
@@ -865,6 +882,7 @@ what Hop emits — worth knowing before investigating a dataset that looks empty
 </div>
 <div class="paragraph">
 <p>The queue is allocated lazily on the first <code>emit</code> from the resolved configuration, so <code>HOP_LINEAGE_QUEUE_CAPACITY</code> applies to the singleton as well as to isolated test hubs. The capacity is fixed for the lifetime of the queue; to change it, restart the JVM (or call <code>shutdown()</code> and emit again in tests).</p>
+</div>
 </div>
 </div>
 </div>
@@ -985,6 +1003,12 @@ what Hop emits — worth knowing before investigating a dataset that looks empty
 <li>
 <p><strong><code>shutdown()</code></strong> — Optional cleanup.</p>
 </li>
+<li>
+<p><strong><code>health()</code></strong> — Optional; a <code>LineageSinkHealth</code> with the counts (sent, failed attempts, rejected, dropped, waiting, on disk) and the last error, for <strong>Tools</strong> &gt; <strong>Lineage sinks</strong> in Hop GUI and the Hop Server status page (<code>LineageHub.sinkStatus()</code>). Called from any thread: keep it cheap.</p>
+</li>
+<li>
+<p><strong><code>newConfiguration()</code></strong> — Optional; a new <code>ILineageSinkConfiguration</code>, an object with <code>@HopMetadataProperty</code> and <code>@GuiWidgetElement</code> fields (parent <code>LineageSink.GUI_PLUGIN_ELEMENT_PARENT_ID</code>), so the sink can be a <code>lineage-sink</code> metadata object. Its <code>toSettings()</code> gives the variables <code>init</code> then reads. Null, the default, means variables only.</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
@@ -995,6 +1019,36 @@ what Hop emits — worth knowing before investigating a dataset that looks empty
 </div>
 <div class="paragraph">
 <p>No sink implementations ship with the engine. Integrators implement <code>ILineageSink</code>, annotate the class with <code>@LineageSinkPlugin(id = "&#8230;&#8203;")</code>, and package it as a Hop plugin. With no sinks loaded, the hub remains a no-op even when <code>HOP_LINEAGE_ENABLED=Y</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_declaring_files_and_sql"><a class="link" href="#_declaring_files_and_sql">Declaring files and SQL</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A transform whose metadata tells which files it reads or writes, or which SQL it runs, implements <code>org.apache.hop.lineage.api.IDeclaresLineage</code>: <code>declaredLineage(variables, inputRowMeta)</code> returns <code>DeclaredFile</code> (operation, file name, layout) and <code>DeclaredSql</code> (operation, connection, SQL) entries, with variables resolved. Return what a run reports: the same file name and the same layout, so one dataset describes the file whether a run or a publication described it. Declare nothing a run doesn&#8217;t write under that name, such as a file name with the date of the run. <code>inputRowMeta</code> holds the fields that reach the transform only when they can be worked out without a database, that is when no transform upstream has a relational connection; it is empty otherwise, and for unit test results and the AI Assistant, which only need the names. Text file input, CSV input, Text file output and Table input implement it; tables are declared with <code>@RelationalLineage</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>LineageDefinitions.ofPipeline()</code> and <code>ofWorkflow()</code> turn a pipeline or workflow into the events a run would emit, from those declarations, with the <code>lineageDefinition</code> attribute set: their run is made up, and a sink that records runs must not record it. Pass the variables a run of the file would have: its internal variables (<code>setInternalHopVariables</code>) and its parameters' defaults, as <code>DataHubPublisher.variablesOf()</code> sets them. The DataHub plugin&#8217;s <code>DataHubPublisher</code> sends them through a DataHub sink that writes definitions only.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_unit_test_results"><a class="link" href="#_unit_test_results">Unit test results</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When a pipeline unit test ends, the testing plugin calls <code>LineageUnitTestEmitter.emit()</code> for each golden data set: a <code>UNIT_TEST</code> event on the tested transform&#8217;s run with an <code>UnitTestLineagePayload</code> (test, data set, result, comment, and the IO the transform declares, read from the pipeline as it was before the test changed it). The result is <code>PASSED</code>, <code>FAILED</code>, or <code>ERROR</code> when the rows were not compared, for example because the golden data set could not be read. The OpenLineage mapper turns it into the <code>hopUnitTest</code> run facet; the DataHub sink into an assertion and an assertion run per declared dataset.</p>
+</div>
+<div class="paragraph">
+<p>A unit test runs a changed copy of the pipeline, without a file name. Its other events don&#8217;t reach the sinks of run configurations: <code>LineageSinkRoutes.of()</code> is empty for a run with <code><em>UnitTest_Run</em>=Y</code>, and <code>LineageSinkRoutes.ofUnitTest()</code> gives the sinks for the results. The sinks configured with variables get the run&#8217;s events as before.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_documentation"><a class="link" href="#_documentation">Documentation</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When <code>DataHubPublisher</code> publishes a project with documentation, it sends a <code>DOCUMENTATION</code> event for each pipeline and workflow once every definition is delivered, with a <code>DocumentationLineagePayload</code>: a title, the Markdown <code>DocMarkdown</code> (documentation plugin) builds the way <code>hop doc</code> does, the project name, and the names of the transforms or actions. Runs never emit it. The OpenLineage mapper turns it into the <code>hopDocumentation</code> run facet of an <code>OTHER</code> event; the DataHub sink into a <code>document</code> entity related to the flow and its tasks, under a document of the project.</p>
 </div>
 </div>
 </div>

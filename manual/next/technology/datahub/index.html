@@ -1871,6 +1871,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/publishtodatahub.html">Publish to DataHub</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/ftpput.html">Put a file with FTP</a>
     
   </li>
@@ -2386,6 +2390,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/spark-catalog.html">Lakehouse catalog</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/lineage-sink.html">Lineage Sink</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3081,11 +3089,19 @@ transform.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">File, table</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A <strong>dataset</strong>, named the way DataHub&#8217;s own sources name it: a table on its database platform
 (<code>postgres</code>, <code>mssql</code>, …) with its qualified name, an object as <code>bucket/key</code> on <code>s3</code>, <code>gcs</code> or <code>abs</code>,
-a local file as its path on <code>file</code>.</p></td>
+a local file as its path on <code>file</code>. A table on a database server with a platform instance is named
+with it, see <a href="#_database_platform_instances">Database platform instances</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Column mappings (SQL <code>INSERT … SELECT</code>, Table Input → Table Output)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Column-level lineage, on the task and on the dataset.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SQL a transform ran (Table Input, Execute SQL), expressions it calculated fields with (Formula, Calculator)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The SQL is the task&#8217;s <strong>transformation logic</strong>, when the run ran exactly one statement; a run that
+ran none, or several, leaves it empty. DataHub only takes SQL there, so a Formula&#8217;s or Calculator&#8217;s expressions are <strong>properties</strong> of the task instead:
+<code>logic.&lt;field&gt;</code> with the expression, such as <code>logic.total</code> = <code>[price] * [qty]</code>, or
+<code>MULTIPLY(total, rate)</code> for a calculation.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A file or table a run wrote</p></td>
@@ -3119,7 +3135,11 @@ not every input paired with every output.</p>
 <h2 id="_enabling_the_sink"><a class="link" href="#_enabling_the_sink">Enabling the sink</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The lineage hub is off by default. Enable it and select the DataHub sink with these variables, as
+<p>The simplest way is a <a href="../../metadata-types/lineage-sink.html" class="xref page">Lineage Sink</a> of type DataHub, selected in a pipeline or workflow run configuration. It writes to the DataHub of a DataHub <a href="../../metadata-types/data-catalog.html" class="xref page">Data Catalog</a>, with its URL, token and environment, so Hop reads from the same DataHub it writes to. The runs of that configuration report their lineage to it, and no variables are needed.</p>
+</div>
+<div class="paragraph">
+<p>The sink can also be configured with variables, for every run of a Hop process.
+The lineage hub is off by default. Enable it and select the DataHub sink with these variables, as
 environment variables or in the Hop configuration (<em>Tools</em> &gt; <em>Edit config variables</em>):</p>
 </div>
 <div class="listingblock">
@@ -3185,6 +3205,11 @@ its URL, which stops lineage delivery for every sink.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Keeps the pipelines of several Hop installations, or of projects with the same folder layout, apart in one DataHub: their ids are prefixed with it (<code>emea.flows/nightly.hwf</code>).</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HOP_LINEAGE_DATAHUB_DATABASE_INSTANCES</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>(empty)</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The platform instances of database servers, as <code>&lt;namespace&gt;=&lt;instance&gt;</code> pairs separated by commas, such as <code>postgres://db.example.com:5432=warehouse</code>; see <a href="#_database_platform_instances">Database platform instances</a>. A sink of a <a href="../../metadata-types/lineage-sink.html" class="xref page">Lineage Sink</a> takes them from its data catalog instead.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>HOP_LINEAGE_DATAHUB_DATASET_SCHEMA</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>missing</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">When a dataset&#8217;s schema is written; see <a href="#dataset-schemas">Dataset schemas</a>. <code>missing</code>, <code>always</code> or <code>never</code>.</p></td>
@@ -3226,6 +3251,28 @@ its URL, which stops lineage delivery for every sink.</p>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_database_platform_instances"><a class="link" href="#_database_platform_instances">Database platform instances</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A DataHub ingestion source can have a <code>platform_instance</code>, to keep apart two database servers that
+hold databases and tables of the same name. Its tables are then named with it:
+<code>warehouse.sales.public.orders</code> instead of <code>sales.public.orders</code>. For Hop&#8217;s lineage to land on those
+datasets, give the server the same instance in Hop: list its connection and the instance under
+<strong>Database platform instances</strong> in the DataHub <a href="../../metadata-types/data-catalog.html" class="xref page">Data Catalog</a>.</p>
+</div>
+<div class="paragraph">
+<p>A table on that server is then named <code>&lt;instance&gt;.&lt;database&gt;.&lt;schema&gt;.&lt;table&gt;</code> and shows under its
+instance, by the sink of a Lineage Sink that uses the catalog, by
+<a href="#_publishing_a_project_without_running_it">publishing</a>, and when Hop reads the catalog
+(Check data catalog, Mask fields, the AI Assistant). Without instances, nothing changes. The
+instance belongs to the server (host and port): every connection to it, and every database on it,
+gets the same one. A sink configured with variables takes them from
+<code>HOP_LINEAGE_DATAHUB_DATABASE_INSTANCES</code>, with the namespace Hop gives the server
+(<code>postgres://db.example.com:5432</code>, the host in lower case and the port).</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -3297,11 +3344,114 @@ on its <strong>Tasks</strong> tab and its runs on the <strong>Runs</strong> tab 
 pipeline wrote shows the tasks and datasets upstream of it.</p>
 </div>
 <div class="paragraph">
+<p><strong>Tools</strong> &gt; <strong>Lineage sinks</strong> in Hop GUI, and the status page of a Hop Server, show what the sink sent, what waits and the last error; see <a href="../../metadata-types/lineage-sink.html#_sink_health" class="xref page">Sink health</a>.</p>
+</div>
+<div class="paragraph">
 <p>The sink logs one line when it starts:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>DataHub lineage sink initialized: gms=http://localhost:8080, env=PROD, dataset schemas=missing, lifecycle=off, spool=off</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_unit_test_results"><a class="link" href="#_unit_test_results">Unit test results</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <a href="../../pipeline/pipeline-unit-testing.html" class="xref page">pipeline unit test</a> that runs with lineage, for example from the <strong>Run pipeline unit tests</strong> action in a workflow whose run configuration selects a DataHub lineage sink, reports each golden data set as an assertion run in DataHub: passed or failed, with what the comparison found, or an error when the rows could not be compared, for example because the golden data set could not be read.
+The test&#8217;s run itself, of a changed copy of the pipeline, is not reported to a lineage sink selected in a run configuration; a sink configured with <code>HOP_LINEAGE_*</code> variables gets it, as it gets every run.</p>
+</div>
+<div class="paragraph">
+<p>The assertion is on the tables and files the tested transform writes, as its metadata declares them: a test usually replaces that transform, so it is about what the transform would write. DataHub shows it on the dataset&#8217;s <strong>Quality</strong> tab, and the <a href="../../workflow/actions/checkdatacatalog.html" class="xref page">Check data catalog</a> action can check it before a workflow reads the dataset.</p>
+</div>
+<div class="paragraph">
+<p>DataHub only takes assertions on datasets: a test of a transform that writes no table or file is not sent.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_publishing_a_project_without_running_it"><a class="link" href="#_publishing_a_project_without_running_it">Publishing a project without running it</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <a href="../../workflow/actions/publishtodatahub.html" class="xref page">Publish to DataHub</a> action, or <code>hop datahub-publish</code> on the command line, publishes a project&#8217;s pipelines and workflows to DataHub without running them: their tasks, the tables and files they declare, and the layouts of those files as dataset schemas.
+It writes through a <a href="../../metadata-types/lineage-sink.html" class="xref page">Lineage Sink</a> of type DataHub, so the pipelines, tasks and datasets are the ones the runs report to.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">hop datahub-publish -j my-project -e prod -s prod-datahub
+hop datahub-publish -j my-project -s prod-datahub -f <span class="hljs-string">&#x27;${PROJECT_HOME}/flows&#x27;</span>
+hop datahub-publish -j my-project -s prod-datahub -d -ip</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-s</code>, <code>--sink</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The lineage sink of type DataHub to publish to. Required.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-f</code>, <code>--folder</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The folder with the pipelines and workflows, with its subfolders. The default is the project&#8217;s home folder.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-d</code>, <code>--include-documentation</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Also publish the documentation of each pipeline and workflow as a DataHub document. Needs DataHub 1.7 or later. See <a href="#_documentation">Documentation</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-ip</code>, <code>--include-parameters</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With <code>-d</code>: list the parameters of each pipeline and workflow, with their default values, in its document, as <code>hop doc -ip</code> does.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-in</code>, <code>--include-notes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With <code>-d</code>: add the text of the notes of each pipeline and workflow to its document, as <code>hop doc -in</code> does.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-j</code>, <code>-e</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The project and environment, as for <code>hop doc</code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The command exits with 1 when a file can&#8217;t be read or DataHub didn&#8217;t accept everything.</p>
+</div>
+<div class="sect2">
+<h3 id="_documentation"><a class="link" href="#_documentation">Documentation</a></h3>
+<div class="paragraph">
+<p>With <code>-d</code>, or <strong>Include documentation</strong> in the action, each pipeline and workflow also becomes a DataHub document.
+The document holds what <a href="../../hop-tools/hop-doc.html" class="xref page">hop doc</a> writes for the file: its description and extended description, its file name relative to the published folder, and when it was last changed.
+Its parameters, with their default values, and the text of its notes are only added when asked for (<code>-ip</code>, <code>-in</code>, or <strong>Include parameters</strong> and <strong>Include notes</strong> in the action), as with <code>hop doc</code>: they end up in a catalog that more people read than the project.
+The image of the graph is left out: DataHub shows the tasks itself.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The document is related to the pipeline or workflow and to each of its tasks, so it appears on their pages in DataHub.</p>
+</li>
+<li>
+<p>The documents of a project sit under one document named <code>Hop project &lt;name&gt;</code>.</p>
+</li>
+<li>
+<p>Publishing again updates the same documents.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Documents need DataHub 1.7 or later. Earlier versions, such as 1.0, have no documents and refuse them.
+The documents are sent after every pipeline and workflow is delivered, and the first one alone: when DataHub doesn&#8217;t take it, the others are not sent, and the publication fails with that reason. The pipelines, tasks and datasets are published all the same.
+Leave the option off for those versions.
+A document stays in DataHub when its pipeline or workflow is deleted.</p>
 </div>
 </div>
 </div>
@@ -3314,7 +3464,9 @@ pipeline wrote shows the tasks and datasets upstream of it.</p>
 workflows can read what DataHub knows about a dataset. The
 <a href="../../workflow/actions/checkdatacatalog.html" class="xref page">Check data catalog</a> action uses it to check, before a
 workflow goes on, that datasets exist in DataHub, aren&#8217;t deprecated, changed recently enough and
-passed their assertions.</p>
+passed their assertions. The
+<a href="../../hop-gui/perspective-ai-advisor.html#data-catalog-context" class="xref page">AI Assistant</a> uses it to include the
+descriptions, owners, tags, glossary terms and deprecation of a pipeline&#8217;s datasets in its questions.</p>
 </div>
 <div class="paragraph">
 <p>A Data Catalog has its own URL and token: it doesn&#8217;t use the <code>HOP_LINEAGE_DATAHUB_*</code> variables. Give

@@ -1871,6 +1871,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/publishtodatahub.html">Publish to DataHub</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/ftpput.html">Put a file with FTP</a>
     
   </li>
@@ -2386,6 +2390,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/spark-catalog.html">Lakehouse catalog</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/lineage-sink.html">Lineage Sink</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3109,7 +3117,7 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Bearer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Bearer token</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Adds an <code>Authorization: Bearer &lt;token&gt;</code> header automatically.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds an <code>Authorization: Bearer &lt;token&gt;</code> header automatically. Hop cannot renew a fixed token: when the server rejects it with a <code>401</code>, Hop logs a hint to use <strong>OAuth 2</strong> for tokens that expire.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">OAuth 2</p></td>
@@ -3308,9 +3316,48 @@ If the provider returns no refresh token, Hop reports it rather than appearing t
 <p>Hop refreshes 30 seconds before the <code>expires_in</code> the server reported, to absorb clock skew; if the server reports no expiry, the token is treated as lasting five minutes.</p>
 </div>
 <div class="paragraph">
+<p><strong>A rejected token is replaced once.</strong> A server can stop accepting a token before its expiry time: it was revoked, rotated, or replaced because another client asked for a new one. When a request carrying a token Hop fetched gets a <code>401</code>, Hop drops that token, fetches a new one and sends the request once more. A second <code>401</code> is reported as usual, and Hop does not renew that new token again on later requests: the server objects to something a new token does not fix, such as a missing permission or scope. When fetching the new token fails, Hop logs the error and the request keeps its <code>401</code>. This applies to every request made through the connection: the REST client transform (also while paging or streaming), the HTTP client and HTTP POST transforms, the HTTP action and the connection test. A request whose body cannot be read a second time, such as a file the HTTP action uploads, is not sent again; it keeps its <code>401</code>, and the next request gets a new token. An <code>Authorization</code> header that the transform or an input row sets itself is never replaced. When several copies get the <code>401</code> at the same time, only the first fetches a new token; the others use it.</p>
+</div>
+<div class="paragraph">
 <p>The token request goes out through the same client as the API call, so it uses the connection&#8217;s proxy, TLS settings and timeouts.</p>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_headers"><a class="link" href="#_headers">Headers</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <strong>Headers</strong> tab lists headers that go out on every request made through the connection, including the connection test. Use it for headers an API needs on every call, for example the <code>x-as-user-email</code> header some APIs require next to an OAuth 2 client-credentials token.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Header name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the header. Supports variables.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value of the header. Supports variables, for example <code>${API_USER_EMAIL}</code>. Values are stored encrypted in the connection file, like the connection&#8217;s passwords and secrets.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A header with the same name set on the transform or action, or by an input row, wins. A default the transform only adds when nothing else set the header does not: a static <code>Accept</code> replaces the REST client&#8217;s default <code>Accept</code>, and a static <code>Content-Type</code> replaces HTTP POST&#8217;s default <code>text/xml</code> (a content type picked on the transform still wins). So does the header of the authentication type: a static <code>Authorization</code> header is not sent when the connection already authenticates. Like the credentials, the headers are only sent to the host of the base URL when one is set, so a request to another host, for example a URL taken from an input field, goes out without them.</p>
+</div>
+<div class="paragraph">
+<p>The headers are sent by the REST client, HTTP client and HTTP POST transforms and by the HTTP action when they use the connection.</p>
 </div>
 </div>
 </div>
@@ -3405,12 +3452,20 @@ If the provider returns no refresh token, Hop reports it rather than appearing t
 <td class="tableblock halign-left valign-top"><p class="tableblock">Query parameter for the starting index in <code>OFFSET_LIMIT</code> paging. Defaults to <code>offset</code> when blank.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">First page number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The page number <code>PAGE_NUMBER</code> starts at. Leave empty for <code>1</code>. Use <code>0</code> for an API that counts pages from zero. Supports variables.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Page size parameter name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Query parameter that carries the page size with <code>PAGE_NUMBER</code> (for example <code>pageSize</code>). The value is the default batch size. Leave empty to send no page size, which is what page-number paging always did.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Limit / batch size parameter name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Parameter for the batch size, used by <code>OFFSET_LIMIT</code>, <code>BODY_CURSOR</code> and <code>HEADER_CURSOR</code>. Defaults to <code>limit</code> when blank.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parameter for the batch size, used by <code>OFFSET_LIMIT</code>, <code>BODY_CURSOR</code> and <code>HEADER_CURSOR</code>. Defaults to <code>limit</code> when blank. Not used by <code>PAGE_NUMBER</code>, which has its own page size parameter name.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Default batch size</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Page size sent with <code>OFFSET_LIMIT</code>, <code>BODY_CURSOR</code> and <code>HEADER_CURSOR</code>. When <code>0</code>, Hop falls back to an internal default (100).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Page size sent with <code>OFFSET_LIMIT</code>, <code>BODY_CURSOR</code> and <code>HEADER_CURSOR</code>. When <code>0</code>, Hop falls back to an internal default (100). <code>PAGE_NUMBER</code> sends it as the page size, only when the page size parameter name is filled in as well.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Cursor JsonPath</p></td>
@@ -3428,8 +3483,92 @@ If the provider returns no refresh token, Hop reports it rather than appearing t
 <td class="tableblock halign-left valign-top"><p class="tableblock">Next page URL XPath</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">XPath expression that reads the next page URL out of an XML response body (<code>BODY_NEXT_URL</code>).</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Items JsonPath / XPath</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Where the items are in a page, for example <code>$.list</code> or <code>/envelope/list/item</code>. Used by <code>PAGE_NUMBER</code>, <code>OFFSET_LIMIT</code> and <code>CURSOR</code>: a page where this finds nothing ends paging. Leave empty to keep the default rule. See <strong>When paging stops</strong> below. When both paths are set, an XML response uses the XPath and any other response the JsonPath; the same goes for the total count paths. An XPath is only used with an XML application type; otherwise the transform logs that it is not used.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Total count JsonPath / XPath</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Where the API reports the total number of items, for example <code>$.count</code> or <code>/envelope/count</code>. Used by <code>PAGE_NUMBER</code>, <code>OFFSET_LIMIT</code> and <code>CURSOR</code>: paging stops once that many items were read, so the last, empty, page is never requested. The items are counted with the items path, so the total count is only used together with an items path; without one, the transform logs that the total count is not used. It does not count the rows of the result split path, because a split path can give more than one row per item. A page where the count cannot be read, or is not a whole number, is logged and paging goes on until a page has no items.</p></td>
+</tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="_when_paging_stops"><a class="link" href="#_when_paging_stops">When paging stops</a></h3>
+<div class="paragraph">
+<p><code>PAGE_NUMBER</code>, <code>OFFSET_LIMIT</code> and <code>CURSOR</code> request pages until one comes back empty. What counts as empty:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>When <strong>Items JsonPath</strong> (or <strong>Items XPath</strong>) is set: a page where it finds no items.</p>
+</li>
+<li>
+<p>Otherwise, when the REST client transform has a result split path: a page where the split path finds nothing.</p>
+</li>
+<li>
+<p>Otherwise: a page with an empty response body.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Many APIs wrap their items in an envelope that is never empty, for example <code>{"page":3,"pageSize":20,"count":46,"list":[]}</code>. Without an items path or a split path, Hop keeps requesting pages until the transform&#8217;s maximum number of page requests is reached. Set the items path to <code>$.list</code> for such an API, also when the transform has no split path because it wants one row per page. The items path decides when paging stops; the split path still decides how a page is split into rows.</p>
+</div>
+<div class="paragraph">
+<p>A JsonPath to an array, such as <code>$.list</code>, counts the elements of that array. An XPath counts the nodes it selects, so select the items themselves, for example <code>/envelope/list/item</code>. An XPath to the element around the items, such as <code>/envelope/list</code>, still ends paging on the empty <code>&lt;list/&gt;</code> of the last page, but counts every page as one item, so a total count cannot stop paging early with it.</p>
+</div>
+<div class="paragraph">
+<p>When the transform also has a split path, the two should point at the same items. If the items path finds items in a page where the split path gives no rows, or finds nothing in a first page where the split path does give rows, the transform logs both paths once.</p>
+</div>
+<div class="paragraph">
+<p>A non-2xx response always ends the loop, and the transform&#8217;s maximum number of page requests (256 by default) is a safeguard for every strategy.</p>
+</div>
+<div class="paragraph">
+<p>Example for an API that counts pages from zero and takes a page size (<code>GET /workflows?page=0&amp;pageSize=100</code>):</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pagination strategy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PAGE_NUMBER</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Page / cursor parameter name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">First page number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Page size parameter name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pageSize</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default batch size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>100</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Items JsonPath</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>$.list</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Total count JsonPath</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>$.count</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="sect2">
 <h3 id="_pagination_strategies"><a class="link" href="#_pagination_strategies">Pagination strategies</a></h3>
 <table class="tableblock frame-all grid-all stretch">
@@ -3458,7 +3597,7 @@ If the provider returns no refresh token, Hop reports it rather than appearing t
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>PAGE_NUMBER</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a page query parameter starting at <code>1</code> and increments it after each successful non-empty page. An empty page ends the loop.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds a page query parameter starting at the first page number (<code>1</code> by default) and increments it after each successful non-empty page. When the page size parameter name and the default batch size are both filled in, the page size is sent as well. An empty page ends the loop.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>CURSOR</code></p></td>

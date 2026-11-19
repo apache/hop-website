@@ -1871,6 +1871,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/publishtodatahub.html">Publish to DataHub</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/ftpput.html">Put a file with FTP</a>
     
   </li>
@@ -2386,6 +2390,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/spark-catalog.html">Lakehouse catalog</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/lineage-sink.html">Lineage Sink</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3030,7 +3038,11 @@ and, with a spool configured, survives a collector outage or a restart — see <
 <h2 id="_enabling_the_sink"><a class="link" href="#_enabling_the_sink">Enabling the sink</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The lineage hub is disabled by default. Enable it and select the OpenLineage sink with these
+<p>The simplest way is a <a href="../../metadata-types/lineage-sink.html" class="xref page">Lineage Sink</a> of type OpenLineage, selected in a pipeline or workflow run configuration: the runs of that configuration report their lineage to it, with the options of the sink, and no variables are needed.</p>
+</div>
+<div class="paragraph">
+<p>The sink can also be configured with variables, for every run of a Hop process.
+The lineage hub is disabled by default. Enable it and select the OpenLineage sink with these
 <strong>engine-scoped</strong> variables (see <a href="../../../../dev-manual/next/lineage.html" class="xref page">the lineage hub</a> for the hub-wide
 variables):</p>
 </div>
@@ -3306,6 +3318,12 @@ job facet with the subject type and the pipeline, workflow, transform or action 
 A job name such as <code>nightly/Load orders</code> cannot be split back reliably, so a collector that models
 pipelines and transforms separately reads those names from the facet.</p>
 </div>
+<div class="paragraph">
+<p>A transform that ran exactly one SQL statement (Table Input, Execute SQL) has it in the standard
+<code>sql</code> job facet. A Formula or Calculator lists the expressions it calculates its fields with in a
+<code>hopTransformLogic</code> job facet: <code>fields</code>, each with its <code>field</code>, its <code>language</code> (<code>formula</code> or
+<code>calculator</code>) and its <code>expression</code>, such as <code>[price] * [qty]</code> or <code>MULTIPLY(total, rate)</code>.</p>
+</div>
 <div class="sect2">
 <h3 id="_row_counts"><a class="link" href="#_row_counts">Row counts</a></h3>
 <div class="paragraph">
@@ -3524,6 +3542,17 @@ collector deployments, not two namespaces.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_unit_test_results"><a class="link" href="#_unit_test_results">Unit test results</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A pipeline unit test that runs with lineage reports each golden data set as an <code>OTHER</code> event with a <code>hopUnitTest</code> run facet: the test, the data set, whether it passed, <code>error</code> when the rows could not be compared at all, what the comparison found, and the datasets the transform declares it writes. Those datasets are not the event&#8217;s outputs: the test run didn&#8217;t write them. The event belongs to the tested transform&#8217;s run with <code>HOP_LINEAGE_OPENLINEAGE_TRANSFORM_JOBS=Y</code>, to the pipeline&#8217;s run otherwise.</p>
+</div>
+<div class="paragraph">
+<p>A unit test runs a changed copy of the pipeline. A lineage sink selected in a run configuration only gets the test&#8217;s results, not the lineage of that copy.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_dataset_identity"><a class="link" href="#_dataset_identity">Dataset identity</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -3556,7 +3585,8 @@ Output) and confirm the input/output table datasets — and, for an <code>INSERT
 </ol>
 </div>
 <div class="paragraph">
-<p>On startup the sink logs <code>OpenLineage lineage sink initialized: url=…, namespace=…</code>.</p>
+<p>On startup the sink logs <code>OpenLineage lineage sink initialized: url=…, namespace=…</code>.
+<strong>Tools</strong> &gt; <strong>Lineage sinks</strong> in Hop GUI, and the status page of a Hop Server, show what the sink sent, what waits and the last error; see <a href="../../metadata-types/lineage-sink.html#_sink_health" class="xref page">Sink health</a>.</p>
 </div>
 </div>
 </div>

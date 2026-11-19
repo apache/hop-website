@@ -1871,6 +1871,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/publishtodatahub.html">Publish to DataHub</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/ftpput.html">Put a file with FTP</a>
     
   </li>
@@ -2386,6 +2390,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/spark-catalog.html">Lakehouse catalog</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/lineage-sink.html">Lineage Sink</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3078,6 +3086,11 @@
 <div class="sect1">
 <h2 id="_options"><a class="link" href="#_options">Options</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>The options are grouped the way the dialog shows them.
+The XML field options list the fields of the transform selected above them. You can also type a field name or a variable.
+When exactly two transforms send rows to the XML Join, picking one of them as the target or the source fills in the other when it is still empty.</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -3095,41 +3108,64 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the transform.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Target XML Transform</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Transform that sends the target document to the join.</p></td>
+<th class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">Target document (one row)</p></th>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Target XML Field</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Field that contains the XML structure.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transform</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The transform that sends the XML document to add the elements to. Only its first row is used.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Source XML Transform</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Transform that send the XML structure(s) to the join that need to be added to the target.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XML field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The field of the target transform that holds the XML document.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Source XML Field</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Field that contains the XML structures that get added to the target.</p></td>
+<th class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">Source elements (one per row)</p></th>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">XPath Statement</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An XPath statement used to find the node in the target document where the new tags start to be inserted.
-When the complex join is enabled, a single ? character is used as a placeholder.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transform</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The transform that sends the XML elements to add, one element per row.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Complex Join</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Flag to enable the complex join syntax, using the placeholder in the XPath Statement</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XML field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The field of the source transform that holds the XML element to add.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Join Comparison Field</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Field that contains the values that get replaced in the XPath Statement</p></td>
+<th class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">Where to add them</p></th>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Result XML field</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The field that will contain the result.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Join by key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Off: every element is added to the node the XPath statement finds.</p>
+<p class="tableblock">On: every <code>?</code> in the XPath statement is replaced by the key field of each row, so each element goes under the node of its key.
+Older versions called this a complex join.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XPath statement</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Where in the target document to add the elements, for example <code>//orders</code>.
+To join by key, every <code>?</code> is replaced by the key field of each row, for example <code>//order[@id='?']/lines</code>.
+The key field can also hold the whole XPath statement: set the XPath statement to <code>?</code>.</p>
+<p class="tableblock">The line under the XPath statement checks it as you type, once the target document is loaded (see below).
+In green it names the node the elements go under and its parent, and when joining by key the key that node has.
+In red it says that the statement finds no node, or why it is not a valid XPath statement.
+When joining by key it also warns when other nodes have the same key as the highlighted node: the transform puts the elements for that key under the first of them.
+Before the document is loaded, it says what the statement does and what is missing.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The field of the source transform whose value replaces <code>?</code> in the XPath statement.
+Only used to join by key.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">Result</p></th>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XML field</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The field that holds the joined XML document. The output row has the fields of the target transform plus this field.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Encoding</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Character encoding to be used in the XML Header and to transform the XML</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The encoding written in the XML header.
+Characters the encoding cannot hold are written as character references, for example <code>&amp;#8364;</code> for the euro sign in ISO-8859-1.
+Leave empty for UTF-8.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Omit XML header</p></td>
@@ -3137,13 +3173,48 @@ When the complex join is enabled, a single ? character is used as a placeholder.
 The character encoding of the target XML is preserved regardless of whether the header is included.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Omit null values from XML</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Omit null values</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Whether null values are removed from the output. If this option is not selected, null values are included in the XML output as an empty element, such as &lt;abc/&gt;.
-When this option is selected, the null values are completely omitted from the output and no empty elements exist.
+When this option is selected, empty elements without attributes are removed, and so is an element that is left with no attributes, elements or text.
+Whitespace counts as text: in an indented document, an element whose empty children were removed keeps the whitespace between them, and stays.
 This is useful to save space in the output file (for high volume transactions) or to use the empty tags for special conditions in the output.</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_target_document"><a class="link" href="#_target_document">Target document</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Beside the options, <strong>Load</strong> shows the XML document in the first row of the target transform as a tree.
+Only the target transform and the transforms before it run for this, in preview.
+When any of them may write or run something else, such as a Table output, an Execute SQL script or a Pipeline executor, Load names them and asks before it runs them.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Expand all</strong> and <strong>Collapse all</strong>, the icons beside <strong>Load</strong>, open or close every node under the selected node, or the whole document when no node is selected.
+In a large document, <strong>Expand all</strong> opens level by level and stops at 5,000 nodes.</p>
+</li>
+<li>
+<p>Click the node to add the elements to, and the XPath statement for it is filled in.</p>
+</li>
+<li>
+<p>To join by key, also choose the attribute or text that holds the key below the tree.
+When the key field is empty, a key with the name of a source field is chosen, and that field becomes the key field.
+Choosing another key field afterwards chooses the key with its name, when the node has one.</p>
+</li>
+<li>
+<p>The node the XPath statement finds is highlighted, also for a statement you type, and the line under the XPath statement says which node that is.
+Without join by key, that is the first node the statement finds, the one the elements go under.
+The tree lists the first 200 elements under a node; the line says when the node the statement finds is not among them.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When you switch Join by key on or off, a statement written by a click is written again for the new setting. A statement you typed stays as it is.</p>
+</div>
 </div>
 </div>
     </article>

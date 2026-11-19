@@ -1871,6 +1871,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/publishtodatahub.html">Publish to DataHub</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/ftpput.html">Put a file with FTP</a>
     
   </li>
@@ -2386,6 +2390,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/spark-catalog.html">Lakehouse catalog</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/lineage-sink.html">Lineage Sink</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3305,6 +3313,12 @@ Local folders are sent as variables: the project folder as <code>${PROJECT_HOME}
 <td class="tableblock halign-left valign-top"><p class="tableblock">Every turn while checked</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">JSON of metadata objects you pick with <strong>Select metadata…</strong> (connections, run configurations, and so on). Default is none. Use this when the question is about a named connection or similar. Passwords and API keys are redacted; still prefer variables over literals. Do not select objects that hold personal data unless the question needs them.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Include data catalog context</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Off</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every turn while checked (pipelines)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What a <a href="../metadata-types/data-catalog.html" class="xref page">Data Catalog</a> you pick says about the tables and files the pipeline reads and writes: their descriptions, owners, tags, glossary terms and deprecation. See <a href="#data-catalog-context">Data catalog context</a>.</p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
@@ -3316,6 +3330,32 @@ It is a last line of defence, not a reason to send more than you need.</p>
 The tree lists metadata types that have at least one object.
 Check only the elements the current question needs, then OK.
 <strong>None</strong> clears the selection.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="data-catalog-context"><a class="link" href="#data-catalog-context">Data catalog context</a></h3>
+<div class="paragraph">
+<p>Checking <strong>Include data catalog context</strong> opens a list of the project&#8217;s data catalogs; pick the one to read, for example DataHub.
+The assistant can then answer questions such as who owns the table a pipeline loads, what a file is for, or whether a source is deprecated.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The datasets are the files and tables the transforms declare: the files of Text file input and output and CSV input, and the tables of Table output, Insert/Update, the bulk loaders and similar. They are named the way lineage names them, so they match what the lineage sinks write to the catalog.</p>
+</li>
+<li>
+<p>The tables a Table input reads are found by parsing its SQL, as the lineage sinks do. That needs the OpenLineage plugin: without it these tables are not looked up. With <strong>Include transform / action settings</strong> on, the model still sees the SQL itself.</p>
+</li>
+<li>
+<p>The datasets are worked out and the catalog is read when the question is sent, in the background, so Hop GUI doesn&#8217;t wait for them. <strong>Show what is sent…</strong> shows where the catalog&#8217;s answers go, not the answers.</p>
+</li>
+<li>
+<p>At most 40 datasets are looked up per question, and the answers are kept within the room the question has left in the model&#8217;s context, with a margin: with no room left, the catalog is not asked. A catalog that can&#8217;t be reached adds a note saying so instead of failing the question.</p>
+</li>
+<li>
+<p>What the catalog holds goes to the language model: descriptions and names written by the people of your organisation. Use it only with a provider you may send that to.</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
