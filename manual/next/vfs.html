@@ -2032,6 +2032,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../manual/next/vfs/sharepoint-vfs.html">Microsoft SharePoint</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../manual/next/vfs/databricks-vfs.html">Databricks Volumes / Workspace</a>
     
   </li>
@@ -2402,6 +2406,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../manual/next/metadata-types/masking-pattern.html">Masking Pattern</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../manual/next/metadata-types/sharepoint-connection.html">SharePoint Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3097,6 +3105,11 @@ Click the File system name to access more detailed file system documentation.</p
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;connectionName&gt;:///path</code></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="vfs/sharepoint-vfs.html" class="xref page">Microsoft SharePoint</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Named <a href="metadata-types/sharepoint-connection.html" class="xref page">SharePoint Connection</a> to the document libraries of SharePoint sites (marketplace plugin <code>hop-tech-microsoft365</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;connectionName&gt;:///sites/site/library/path</code></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="vfs/smb-vfs.html" class="xref page">SMB</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Named connection to an SMB2/SMB3 file share</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;connectionName&gt;:///path</code></p></td>
@@ -3710,6 +3723,18 @@ Server-side restrictions (read-only mounts, bucket policies, account permissions
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;hdfs-conn&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✗</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✓</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✗</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">✗</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">read</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;sharepoint-conn&gt;</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">✓</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">✓</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">✗</p></td>

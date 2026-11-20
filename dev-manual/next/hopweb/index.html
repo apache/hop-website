@@ -678,7 +678,7 @@ Hop Web is built with <a href="https://eclipse.dev/rap/demos/" rel="noopener" ta
 <h2 id="_build_hop"><a class="link" href="#_build_hop">Build Hop</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Hop currently doesn&#8217;t offer any standalone Hop Web builds.</p>
+<p>Each release publishes a war and a plugins zip for your own Tomcat (<code>org.apache.hop:hop-web</code> on Maven Central). The <a href="../../../manual/next/hop-gui/hop-web.html#hop-web-tomcat" class="xref page">user manual</a> explains how to deploy them. This page covers building them yourself.</p>
 </div>
 <div class="paragraph">
 <p>Running your own Hop Web environment is straightforward but requires you to build Hop. Follow the <a href="../setup-dev-environment.html" class="xref page">development environment setup</a> guide to get the Hop source code and build Hop.</p>
@@ -704,172 +704,43 @@ This should get you started to make modifications or create your own version ent
 <p>We&#8217;ll use Apache Tomcat in this example. If you use another application server, the process should be similar.</p>
 </div>
 <div class="paragraph">
-<p>This version of Hop is built with Java 21, so you&#8217;ll need to <a href="https://tomcat.apache.org/download-10.cgi" rel="noopener" target="_blank">download the latest Tomcat 10</a> (or use the official Tomcat 10 Docker image).</p>
+<p>This version of Hop is built with Java 21, so you&#8217;ll need <a href="https://tomcat.apache.org/download-10.cgi" rel="noopener" target="_blank">Tomcat 10.1 or later</a> (or the official Tomcat 10 Docker image).</p>
 </div>
 <div class="paragraph">
-<p>Copy or extract the following files from your Hop build, where <code>$CATALINA_HOME</code> is your Tomcat installation folder.</p>
+<p>The build puts Hop Web for Tomcat in <code>assemblies/web-war</code>: <code>hop-web-&lt;version&gt;.war</code> and <code>hop-web-&lt;version&gt;-plugins.zip</code> in <code>target</code>, and the same content unpacked in <code>target/webapp</code> (the web application) and <code>target/tomcat</code> (<code>plugins</code> and <code>jdbc-drivers</code>).
+The scripts in the war already have the right classpath, <code>hop-ui-rcp</code> is left out, and <code>hop-config.json</code> registers the projects under <code>${HOP_CONFIG_FOLDER}</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash"><span class="hljs-comment"># Set CATALINA_HOME if it&#x27;s not already set (replace with your actual Tomcat installation path)</span>
 <span class="hljs-built_in">export</span> CATALINA_HOME=<span class="hljs-string">&quot;<span class="hljs-variable">${CATALINA_HOME:-/path/to/your/tomcat}</span>&quot;</span>
 
-<span class="hljs-comment"># Step 1: Extract webapp to ROOT directory (not /hop/)</span>
-unzip -o assemblies/web/target/hop.war -d <span class="hljs-variable">$CATALINA_HOME</span>/webapps/ROOT/
+<span class="hljs-comment"># The web application, as ROOT (not /hop/)</span>
+<span class="hljs-built_in">cp</span> assemblies/web-war/target/hop-web-*.war <span class="hljs-variable">$CATALINA_HOME</span>/webapps/ROOT.war
 
-<span class="hljs-comment"># Step 2: Extract client distribution (contains config, libs, plugins, JDBC drivers)</span>
-unzip -o assemblies/client/target/hop-client-*.zip -d /tmp/hop-client/
-
-<span class="hljs-comment"># Step 3: Copy config folder</span>
-<span class="hljs-built_in">cp</span> -r /tmp/hop-client/hop/config <span class="hljs-variable">$CATALINA_HOME</span>/webapps/ROOT/
-
-<span class="hljs-comment"># Step 4: Copy core libraries</span>
-<span class="hljs-comment"># lib/core already includes Beam SDKs when the Beam marketplace plugin is installed into the</span>
-<span class="hljs-comment"># client (plugins/engines/beam/lib-beam is a legacy path and is no longer created).</span>
-<span class="hljs-built_in">cp</span> -r /tmp/hop-client/hop/lib/core/* <span class="hljs-variable">$CATALINA_HOME</span>/webapps/ROOT/WEB-INF/lib/
-
-<span class="hljs-comment"># Step 4b: Remove RCP jar (RCP is for desktop GUI, not web)</span>
-<span class="hljs-built_in">rm</span> -f <span class="hljs-variable">$CATALINA_HOME</span>/webapps/ROOT/WEB-INF/lib/hop-ui-rcp-*.jar
-
-<span class="hljs-comment"># Step 5: Copy plugins</span>
-<span class="hljs-built_in">cp</span> -r /tmp/hop-client/hop/plugins <span class="hljs-variable">$CATALINA_HOME</span>/
-
-<span class="hljs-comment"># Step 6: Copy JDBC drivers</span>
-<span class="hljs-built_in">mkdir</span> -p <span class="hljs-variable">$CATALINA_HOME</span>/jdbc-drivers
-<span class="hljs-built_in">cp</span> -r /tmp/hop-client/hop/lib/jdbc/* <span class="hljs-variable">$CATALINA_HOME</span>/jdbc-drivers/
-
-<span class="hljs-comment"># Step 7: Cleanup</span>
-<span class="hljs-built_in">rm</span> -rf /tmp/hop-client</code></pre>
+<span class="hljs-comment"># plugins/ and jdbc-drivers/</span>
+unzip -o assemblies/web-war/target/hop-web-*-plugins.zip -d <span class="hljs-variable">$CATALINA_HOME</span></code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_modify_startup_script"><a class="link" href="#_modify_startup_script">Modify startup script</a></h3>
+<h3 id="_settings"><a class="link" href="#_settings">Settings</a></h3>
 <div class="paragraph">
-<p>Configure Tomcat to run Hop by adding the information below to <code>$CATALINA_HOME/bin/startup.sh</code>.</p>
-</div>
-<div class="paragraph">
-<p><strong>Important</strong>: You must insert these environment variables and <code>CATALINA_OPTS</code> <strong>before</strong> the <code>exec</code> line that starts Tomcat. The <code>exec</code> line should be the last line in the file and looks like:</p>
+<p>Hop Web finds <code>config</code> in the web application and <code>plugins</code> and <code>jdbc-drivers</code> in <code>$CATALINA_BASE</code> by itself (<code>HopWebDefaults</code>), so it starts without further settings.
+To change a folder or set other options, pass them as system properties in <code>$CATALINA_HOME/bin/setenv.sh</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash"><span class="hljs-built_in">exec</span> <span class="hljs-string">&quot;<span class="hljs-variable">$PRGDIR</span>&quot;</span>/<span class="hljs-string">&quot;<span class="hljs-variable">$EXECUTABLE</span>&quot;</span> start <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>To find the correct insertion point:
-1. Open <code>$CATALINA_HOME/bin/startup.sh</code> in a text editor
-2. Search for the line containing <code>exec "$PRGDIR"/"$EXECUTABLE" start "$@"</code>
-3. Insert the code block below <strong>immediately before</strong> that line
-4. Ensure there is only <strong>one</strong> <code>exec</code> line in the file (if you see multiple, remove any duplicates after the first one)</p>
-</div>
-<div class="paragraph">
-<p>Add the following code block:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash"><span class="hljs-built_in">export</span> HOP_AES_ENCODER_KEY=
-<span class="hljs-comment"># specify where Hop should store audit information</span>
-<span class="hljs-built_in">export</span> HOP_AUDIT_FOLDER=<span class="hljs-string">&quot;<span class="hljs-variable">${CATALINA_HOME}</span>/webapps/ROOT/audit&quot;</span>
-<span class="hljs-comment"># specify where Hop should manage configuration metadata (e.g. projects and environments information).</span>
-<span class="hljs-built_in">export</span> HOP_CONFIG_FOLDER=<span class="hljs-string">&quot;<span class="hljs-variable">${CATALINA_HOME}</span>/webapps/ROOT/config&quot;</span>
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash"><span class="hljs-comment"># specify where Hop should store audit information</span>
+HOP_AUDIT_FOLDER=<span class="hljs-string">&quot;<span class="hljs-variable">${CATALINA_HOME}</span>/webapps/ROOT/audit&quot;</span>
 <span class="hljs-comment"># specify the hop log level</span>
-<span class="hljs-built_in">export</span> HOP_LOG_LEVEL=<span class="hljs-string">&quot;Basic&quot;</span>
-<span class="hljs-comment"># any additional JRE settings you want to pass on</span>
-<span class="hljs-comment">#export HOP_OPTIONS=</span>
-<span class="hljs-comment"># default Hop password encoder plugin</span>
-<span class="hljs-built_in">export</span> HOP_PASSWORD_ENCODER_PLUGIN=<span class="hljs-string">&quot;Hop&quot;</span>
-<span class="hljs-comment"># point Hop to the plugins folder</span>
-<span class="hljs-built_in">export</span> HOP_PLUGIN_BASE_FOLDERS=<span class="hljs-string">&quot;<span class="hljs-variable">${CATALINA_HOME}</span>/plugins&quot;</span>
-<span class="hljs-comment"># path to jdbc drivers</span>
-<span class="hljs-built_in">export</span> HOP_SHARED_JDBC_FOLDERS=<span class="hljs-string">&quot;<span class="hljs-variable">${CATALINA_HOME}</span>/jdbc-drivers&quot;</span>
+HOP_LOG_LEVEL=<span class="hljs-string">&quot;Basic&quot;</span>
 
-<span class="hljs-comment"># Set TOMCAT start variables</span>
-<span class="hljs-comment"># Note: Use double quotes so shell variables are expanded before being passed to JVM</span>
-<span class="hljs-built_in">export</span> CATALINA_OPTS=<span class="hljs-string">&quot;<span class="hljs-variable">${HOP_OPTIONS}</span> -DHOP_AES_ENCODER_KEY=\&quot;<span class="hljs-variable">${HOP_AES_ENCODER_KEY}</span>\&quot; -DHOP_AUDIT_FOLDER=\&quot;<span class="hljs-variable">${HOP_AUDIT_FOLDER}</span>\&quot; -DHOP_CONFIG_FOLDER=\&quot;<span class="hljs-variable">${HOP_CONFIG_FOLDER}</span>\&quot; -DHOP_LOG_LEVEL=\&quot;<span class="hljs-variable">${HOP_LOG_LEVEL}</span>\&quot; -DHOP_PASSWORD_ENCODER_PLUGIN=\&quot;<span class="hljs-variable">${HOP_PASSWORD_ENCODER_PLUGIN}</span>\&quot; -DHOP_PLUGIN_BASE_FOLDERS=\&quot;<span class="hljs-variable">${HOP_PLUGIN_BASE_FOLDERS}</span>\&quot; -DHOP_SHARED_JDBC_FOLDERS=\&quot;<span class="hljs-variable">${HOP_SHARED_JDBC_FOLDERS}</span>\&quot;&quot;</span></code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_project_settings"><a class="link" href="#_project_settings">Project settings</a></h3>
-<div class="paragraph">
-<p>If you want to run Hop Web with the <code>default</code> and <code>samples</code> projects, make sure the project root path in <code>hop-config.json</code> is set to <code>${HOP_CONFIG_FOLDER}</code>.</p>
-</div>
-<div class="paragraph">
-<p>On Linux, use the following sed command to fix this in one line:</p>
-</div>
-<div class="paragraph">
-<p><code>sed -i 's/config\/projects/${HOP_CONFIG_FOLDER}\/projects/g' ${CATALINA_HOME}/webapps/ROOT/config/hop-config.json</code></p>
-</div>
-<div class="paragraph">
-<p>On macOS, use (note the empty string '' after -i):</p>
-</div>
-<div class="paragraph">
-<p><code>sed -i '' 's/config\/projects/${HOP_CONFIG_FOLDER}\/projects/g' ${CATALINA_HOME}/webapps/ROOT/config/hop-config.json</code></p>
-</div>
-<div class="paragraph">
-<p>On Windows, modify <code>hop-config.json</code> to make sure <code>projectsConf</code> looks like the one below:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>json</div><pre class="highlightjs highlight is-highlighted"><code class="language-json hljs" data-lang="json">  <span class="hljs-attr">&quot;projectsConfig&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-    <span class="hljs-attr">&quot;enabled&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;projectMandatory&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;defaultProject&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;default&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;standardParentProject&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;default&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;projectConfigurations&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span> <span class="hljs-punctuation">{</span>
-      <span class="hljs-attr">&quot;projectName&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;default&quot;</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">&quot;projectHome&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;${HOP_CONFIG_FOLDER}/projects/default&quot;</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">&quot;configFilename&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;project-config.json&quot;</span>
-    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span> <span class="hljs-punctuation">{</span>
-      <span class="hljs-attr">&quot;projectName&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;samples&quot;</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">&quot;projectHome&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;${HOP_CONFIG_FOLDER}/projects/samples&quot;</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">&quot;configFilename&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;project-config.json&quot;</span>
-    <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">]</span>
-  <span class="hljs-punctuation">}</span></code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_script_classpaths"><a class="link" href="#_script_classpaths">Script classpaths</a></h3>
-<div class="paragraph">
-<p>To make sure all hop scripts are accessible and work correctly with Hop Web, update their classpaths:</p>
-</div>
-<div class="paragraph">
-<p>This can be done with a couple of <code>sed</code> commands. On Linux:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">sed -i <span class="hljs-string">&#x27;s&amp;lib/core/*&amp;../../lib/*:WEB-INF/lib/*:lib/core/*&amp;g&#x27;</span> <span class="hljs-variable">${CATALINA_HOME}</span>/webapps/ROOT/hop-run.sh
-sed -i <span class="hljs-string">&#x27;s&amp;lib/core/*&amp;../../lib/*:WEB-INF/lib/*:lib/core/*&amp;g&#x27;</span> <span class="hljs-variable">${CATALINA_HOME}</span>/webapps/ROOT/hop-conf.sh
-sed -i <span class="hljs-string">&#x27;s&amp;lib/core/*&amp;../../lib/*:WEB-INF/lib/*:lib/core/*&amp;g&#x27;</span> <span class="hljs-variable">${CATALINA_HOME}</span>/webapps/ROOT/hop-search.sh
-sed -i <span class="hljs-string">&#x27;s&amp;lib/core/*&amp;../../lib/*:WEB-INF/lib/*:lib/core/*&amp;g&#x27;</span> <span class="hljs-variable">${CATALINA_HOME}</span>/webapps/ROOT/hop-encrypt.sh
-sed -i <span class="hljs-string">&#x27;s&amp;lib/core/*&amp;../../lib/*:WEB-INF/lib/*:lib/core/*&amp;g&#x27;</span> <span class="hljs-variable">${CATALINA_HOME}</span>/webapps/ROOT/hop-import.sh</code></pre>
+CATALINA_OPTS=<span class="hljs-string">&quot;<span class="hljs-variable">${CATALINA_OPTS}</span> -DHOP_AUDIT_FOLDER=<span class="hljs-variable">${HOP_AUDIT_FOLDER}</span> -DHOP_LOG_LEVEL=<span class="hljs-variable">${HOP_LOG_LEVEL}</span>&quot;</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>On macOS, use (note the empty string '' after -i):</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">sed -i <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-string">&#x27;s&amp;lib/core/*&amp;../../lib/*:WEB-INF/lib/*:lib/core/*&amp;g&#x27;</span> <span class="hljs-variable">${CATALINA_HOME}</span>/webapps/ROOT/hop-run.sh
-sed -i <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-string">&#x27;s&amp;lib/core/*&amp;../../lib/*:WEB-INF/lib/*:lib/core/*&amp;g&#x27;</span> <span class="hljs-variable">${CATALINA_HOME}</span>/webapps/ROOT/hop-conf.sh
-sed -i <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-string">&#x27;s&amp;lib/core/*&amp;../../lib/*:WEB-INF/lib/*:lib/core/*&amp;g&#x27;</span> <span class="hljs-variable">${CATALINA_HOME}</span>/webapps/ROOT/hop-search.sh
-sed -i <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-string">&#x27;s&amp;lib/core/*&amp;../../lib/*:WEB-INF/lib/*:lib/core/*&amp;g&#x27;</span> <span class="hljs-variable">${CATALINA_HOME}</span>/webapps/ROOT/hop-encrypt.sh
-sed -i <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-string">&#x27;s&amp;lib/core/*&amp;../../lib/*:WEB-INF/lib/*:lib/core/*&amp;g&#x27;</span> <span class="hljs-variable">${CATALINA_HOME}</span>/webapps/ROOT/hop-import.sh</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>CLASSPATH</code> lines in the various scripts should look similar to the one below after editing:</p>
-</div>
-<div class="paragraph">
-<p><code>CLASSPATH="../../lib/<strong>:WEB-INF/lib/</strong>:lib/core/<strong>*:lib/swt/osx/arm64/</strong>"</code></p>
-</div>
-<div class="paragraph">
-<p>Once the classpaths have been updated, make sure to make the scripts executable:</p>
-</div>
-<div class="paragraph">
-<p><code>chmod +x ${CATALINA_HOME}/webapps/ROOT/*.sh</code></p>
+<p>The user manual lists the folder settings and their defaults.</p>
 </div>
 </div>
 <div class="sect2">
@@ -952,13 +823,10 @@ Open <a href="http://localhost:8080/ui" class="bare" rel="noopener" target="_bla
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Verify libraries copied</strong>: <code>ls $CATALINA_HOME/webapps/ROOT/WEB-INF/lib/ | wc -l</code> (should show 100+ files)</p>
+<p><strong>Verify the war was unpacked</strong>: <code>ls $CATALINA_HOME/webapps/ROOT/WEB-INF/lib/ | wc -l</code> (should show 100+ files)</p>
 </li>
 <li>
-<p><strong>Check core/beam libraries</strong>: Ensure Step 4 and Step 5 completed successfully</p>
-</li>
-<li>
-<p><strong>Verify script classpaths</strong>: Check that sed commands updated the CLASSPATH in scripts</p>
+<p><strong>Check the plugins folder</strong>: <code>$CATALINA_HOME/plugins</code> should exist, or <code>HOP_PLUGIN_BASE_FOLDERS</code> should point to one</p>
 </li>
 </ul>
 </div>
@@ -984,26 +852,23 @@ Open <a href="http://localhost:8080/ui" class="bare" rel="noopener" target="_bla
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Remove RCP jar</strong>: Ensure Step 4b removed <code>hop-ui-rcp-*.jar</code></p>
-</li>
-<li>
-<p><strong>Verify removal</strong>: <code>ls $CATALINA_HOME/webapps/ROOT/WEB-INF/lib/<strong>rcp</strong></code> (should show nothing)</p>
+<p><strong>No RCP jar</strong>: <code>ls $CATALINA_HOME/webapps/ROOT/WEB-INF/lib/<strong>rcp</strong></code> should show nothing. The war leaves <code>hop-ui-rcp</code> out; a jar copied in by hand brings the error back.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_environment_variables_not_working"><a class="link" href="#_environment_variables_not_working">Environment variables not working</a></h3>
+<h3 id="_settings_not_picked_up"><a class="link" href="#_settings_not_picked_up">Settings not picked up</a></h3>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Check startup.sh</strong>: Verify variables were added before the <code>exec</code> line</p>
+<p><strong>Check setenv.sh</strong>: <code>grep HOP_ $CATALINA_HOME/bin/setenv.sh</code></p>
 </li>
 <li>
-<p><strong>Verify syntax</strong>: <code>grep HOP_CONFIG_FOLDER $CATALINA_HOME/bin/startup.sh</code></p>
+<p><strong>Check the log</strong>: at startup Hop Web logs each folder it chose itself, for example <code>HOP_PLUGIN_BASE_FOLDERS=&#8230;&#8203; (default)</code></p>
 </li>
 <li>
-<p><strong>Restart Tomcat</strong>: Always restart after modifying <code>startup.sh</code></p>
+<p><strong>Restart Tomcat</strong>: Always restart after modifying <code>setenv.sh</code></p>
 </li>
 </ul>
 </div>
@@ -1013,7 +878,7 @@ Open <a href="http://localhost:8080/ui" class="bare" rel="noopener" target="_bla
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Check hop-config.json</strong>: Verify paths were updated with sed command</p>
+<p><strong>Check hop-config.json</strong>: the project paths should start with <code>${HOP_CONFIG_FOLDER}</code></p>
 </li>
 <li>
 <p><strong>Verify variable substitution</strong>: <code>grep HOP_CONFIG_FOLDER $CATALINA_HOME/webapps/ROOT/config/hop-config.json</code></p>

@@ -565,6 +565,9 @@
 <loc>https://hop.apache.org/manual/next/metadata-types/sftp-connection.html</loc>
 </url>
 <url>
+<loc>https://hop.apache.org/manual/next/metadata-types/sharepoint-connection.html</loc>
+</url>
+<url>
 <loc>https://hop.apache.org/manual/next/metadata-types/smb-connection.html</loc>
 </url>
 <url>
@@ -1856,6 +1859,9 @@
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/vfs/minio-vfs.html</loc>
+</url>
+<url>
+<loc>https://hop.apache.org/manual/next/vfs/sharepoint-vfs.html</loc>
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/vfs/smb-vfs.html</loc>

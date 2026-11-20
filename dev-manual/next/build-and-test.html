@@ -704,9 +704,9 @@
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1"><code>base</code> / <code>assemblies</code></dt>
+<dt class="hdlist1"><code>base</code> / <code>assemblies</code> / <code>web-tests</code></dt>
 <dd>
-<p>Decide which module sets are in the reactor. Both are on unless you pass <code>-Dbase=false</code> or <code>-Dassemblies=false</code>.</p>
+<p>Decide which module sets are in the reactor. All are on unless you pass <code>-Dbase=false</code>, <code>-Dassemblies=false</code> or <code>-Dweb-tests=false</code>.</p>
 </dd>
 <dt class="hdlist1"><code>swt-unix</code> / <code>swt-mac</code> / <code>swt-windows</code></dt>
 <dd>
@@ -737,7 +737,7 @@
 </dd>
 <dt class="hdlist1"><code>webtest</code></dt>
 <dd>
-<p>The Selenium tests that drive Hop Web in a container. They need Docker and take minutes, so they are out of the normal build: <code>mvn -Pwebtest -pl web-tests test</code>.</p>
+<p>The Selenium tests that drive Hop Web in a container. The <code>web-tests</code> module is always in the reactor, so version changes and releases update it, but its tests are skipped unless you ask for them: they need Docker and take minutes. Run them with <code>mvn -Dwebtest -pl web-tests test</code>.</p>
 </dd>
 <dt class="hdlist1"><code>apache-release</code> / <code>deploy-snapshots</code></dt>
 <dd>

@@ -720,7 +720,7 @@ If it is gone, take a copy of the source code release and build the software fir
 <div class="listingblock">
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">unzip ./assemblies/client/target/hop-client-*.zip -d ./assemblies/client/target/
-unzip ./assemblies/web/target/hop.war -d ./assemblies/web/target/webapp
+<span class="hljs-comment"># docker/web.Dockerfile takes Hop Web from assemblies/web-war/target as the build left it</span>
 
 <span class="hljs-comment"># Create and push Dataflow template</span>
 <span class="hljs-comment"># Create hop-fatjar.jar</span>

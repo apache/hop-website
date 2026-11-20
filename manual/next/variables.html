@@ -2032,6 +2032,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../manual/next/vfs/sharepoint-vfs.html">Microsoft SharePoint</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../manual/next/vfs/databricks-vfs.html">Databricks Volumes / Workspace</a>
     
   </li>
@@ -2402,6 +2406,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../manual/next/metadata-types/masking-pattern.html">Masking Pattern</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../manual/next/metadata-types/sharepoint-connection.html">SharePoint Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3471,6 +3479,11 @@ See also the variable HOP_AGGREGATION_ALL_NULLS_ARE_ZERO.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HOP_ALLOW_UNCONSUMED_MAIN_INPUT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Set this variable to Y to start a pipeline that has main hops into transforms that do not consume input (for example existing files whose upstream produces no rows). Default N fails init and stops on leftover input. Verify still reports an error. See <a href="pipeline/pipeline-sources.html" class="xref page">Pipeline sources</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HOP_AVRO_RECORD_STRING_WITH_SCHEMA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set this variable to Y to write an Avro record as text with its schema and its data in Avro&#8217;s JSON encoding: <code>{ "schema" : &#8230;&#8203;, "data" : &#8230;&#8203; }</code>. That text converts back to the record without a schema, for example in <a href="pipeline/transforms/selectvalues.html" class="xref page">Select values</a>. With N only the data is written, as a record&#8217;s <code>toString()</code> gives it; that converts back only to a field that has a schema.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HOP_BINARY_FIELDS_AVOID_HEX_PREVIEW</p></td>

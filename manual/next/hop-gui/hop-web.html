@@ -2032,6 +2032,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/vfs/sharepoint-vfs.html">Microsoft SharePoint</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/vfs/databricks-vfs.html">Databricks Volumes / Workspace</a>
     
   </li>
@@ -2402,6 +2406,10 @@
   </li>
   <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/masking-pattern.html">Masking Pattern</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/sharepoint-connection.html">SharePoint Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3052,6 +3060,140 @@ You&#8217;ll feel right at home!</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="hop-web-tomcat"><a class="link" href="#hop-web-tomcat">Running Hop Web on your own Tomcat</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Each release publishes Hop Web for a servlet container to Maven Central, as <code>org.apache.hop:hop-web</code>:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">File</th>
+<th class="tableblock halign-left valign-top">Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop-web-&lt;version&gt;.war</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The web application: Hop with its libraries, the configuration folder with the <code>default</code> and <code>samples</code> projects, and the Hop tools (<code>hop-conf.sh</code>, <code>hop-run.sh</code> and the others).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop-web-&lt;version&gt;-plugins.zip</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>plugins</code> and <code>jdbc-drivers</code> folders, and Hop&#8217;s license files in <code>hop-licenses</code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Both are at <code><a href="https://repo1.maven.org/maven2/org/apache/hop/hop-web/&lt;version&gt;/" class="bare" rel="noopener" target="_blank">https://repo1.maven.org/maven2/org/apache/hop/hop-web/&lt;version&gt;/</a></code>.
+A Hop build leaves them in <code>assemblies/web-war/target</code>.</p>
+</div>
+<div class="paragraph">
+<p>You need Java 21 and Tomcat 10.1 or later.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Copy the war to <code>$CATALINA_BASE/webapps/ROOT.war</code>.
+Hop Web has to be the <code>ROOT</code> web application: the interface is at <code>/ui</code>, and the Hop tools look for Tomcat&#8217;s libraries in <code>../../lib</code>.</p>
+</li>
+<li>
+<p>Unzip the plugins zip into <code>$CATALINA_BASE</code>. That creates <code>$CATALINA_BASE/plugins</code> and <code>$CATALINA_BASE/jdbc-drivers</code>.</p>
+</li>
+<li>
+<p>Start Tomcat and open <a href="http://localhost:8080/ui" class="bare" rel="noopener" target="_blank">http://localhost:8080/ui</a>.</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash"><span class="hljs-built_in">cp</span> hop-web-&lt;version&gt;.war <span class="hljs-string">&quot;<span class="hljs-variable">$CATALINA_BASE</span>/webapps/ROOT.war&quot;</span>
+unzip hop-web-&lt;version&gt;-plugins.zip -d <span class="hljs-string">&quot;<span class="hljs-variable">$CATALINA_BASE</span>&quot;</span>
+<span class="hljs-string">&quot;<span class="hljs-variable">$CATALINA_HOME</span>/bin/startup.sh&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Tomcat has to unpack the war, which it does by default (<code>unpackWARs="true"</code> on the <code>Host</code>): Hop reads its configuration and runs its tools from the web application folder.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="../hop-tools/index.html" class="xref page">Hop tools</a> are in <code>$CATALINA_BASE/webapps/ROOT</code>.
+Tomcat does not keep file permissions when it unpacks a war, so make them executable once after each deployment:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash"><span class="hljs-built_in">chmod</span> +x <span class="hljs-string">&quot;<span class="hljs-variable">$CATALINA_BASE</span>&quot;</span>/webapps/ROOT/hop <span class="hljs-string">&quot;<span class="hljs-variable">$CATALINA_BASE</span>&quot;</span>/webapps/ROOT/*.sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The tools use the same folders as Hop Web: <code>config</code> in the web application, <code>plugins</code> and <code>jdbc-drivers</code> two levels up.</p>
+</div>
+<div class="sect2">
+<h3 id="_folders"><a class="link" href="#_folders">Folders</a></h3>
+<div class="paragraph">
+<p>Without further settings, Hop Web uses these folders:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Setting</th>
+<th class="tableblock halign-left valign-top">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HOP_CONFIG_FOLDER</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>$CATALINA_BASE/webapps/ROOT/config</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HOP_PLUGIN_BASE_FOLDERS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>$CATALINA_BASE/plugins</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HOP_SHARED_JDBC_FOLDERS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>$CATALINA_BASE/jdbc-drivers</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>To use another folder, set a Java system property or an environment variable with the same name, for example in <code>$CATALINA_BASE/bin/setenv.sh</code>.
+A system property wins over an environment variable.
+<code>HOP_PLUGIN_BASE_FOLDERS</code> and <code>HOP_SHARED_JDBC_FOLDERS</code> take a comma-separated list, so you can add your own folders next to the default ones.</p>
+</div>
+<div class="paragraph">
+<p>Tomcat replaces <code>webapps/ROOT</code> when you deploy a new war, and the configuration folder with it.
+Set <code>HOP_CONFIG_FOLDER</code> to a folder outside Tomcat for anything you want to keep, and copy <code>webapps/ROOT/config</code> there first: its <code>hop-config.json</code> registers the <code>default</code> and <code>samples</code> projects under <code>${HOP_CONFIG_FOLDER}/projects</code>.</p>
+</div>
+<div class="paragraph">
+<p>The other settings of the <code>apache/hop-web</code> image work the same way, for example <code>HOP_AUDIT_FOLDER</code>, <code>HOP_AES_ENCODER_KEY</code>, <code>HOP_LOG_LEVEL</code> and <code>HOP_PASSWORD_ENCODER_PLUGIN</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash"><span class="hljs-comment"># $CATALINA_BASE/bin/setenv.sh</span>
+CATALINA_OPTS=<span class="hljs-string">&quot;<span class="hljs-variable">$CATALINA_OPTS</span> -DHOP_CONFIG_FOLDER=/srv/hop/config -DHOP_AUDIT_FOLDER=/srv/hop/audit&quot;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_marketplace_plugins_and_fonts"><a class="link" href="#_marketplace_plugins_and_fonts">Marketplace plugins and fonts</a></h3>
+<div class="paragraph">
+<p>The plugins zip has the same plugins as the Hop client.
+To add a marketplace plugin, unzip its zip into a scratch folder, copy its <code>plugins</code> folder into <code>$CATALINA_BASE/plugins</code> and the jars in its <code>lib/core</code> folder, if it has one, into <code>webapps/ROOT/WEB-INF/lib</code>.</p>
+</div>
+<div class="paragraph">
+<p>Hop Web draws the pipeline and workflow canvas on the server.
+Install a font with Chinese, Japanese and Korean characters on the server, such as Noto CJK, if names use those scripts; without one they are measured and laid out too narrow.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_working_with_server_files_and_browser_files"><a class="link" href="#_working_with_server_files_and_browser_files">Working with server files and browser files</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -3208,7 +3350,7 @@ gzip shrinks these responses four to five times, which keeps the interface respo
 </div>
 <div class="paragraph">
 <p>The <code>apache/hop-web</code> image enables compression on its Tomcat connector; its <code>conf/server.xml</code> is <code>docker/resources/server.xml</code> in the Hop source tree.
-If you deploy <code>hop.war</code> on your own Tomcat, add it to the HTTP connector in <code>conf/server.xml</code>; <code>image/svg+xml</code> is not in Tomcat&#8217;s default list:</p>
+If you deploy Hop Web on your own Tomcat (see <a href="#hop-web-tomcat">Running Hop Web on your own Tomcat</a>), add it to the HTTP connector in <code>conf/server.xml</code>; <code>image/svg+xml</code> is not in Tomcat&#8217;s default list:</p>
 </div>
 <div class="listingblock">
 <div class="content">
