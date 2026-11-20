@@ -692,6 +692,14 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>./mvnw test -pl core</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Unit tests of a single module.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>./mvnw -pl bom test</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Runs the BOM maintenance tests.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>./mvnw apache-rat:check -Drat.skip=false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Runs the Apache RAT license check explicitly.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -845,6 +853,67 @@ See <a href="setup-dev-environment.html" class="xref page">Setting up your devel
 <p>JUnit 5 through Surefire. UI tests are tagged and can be included or excluded, see below.</p>
 </dd>
 </dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_generating_the_hop_bom"><a class="link" href="#_generating_the_hop_bom">Generating the Hop BOM</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>bom</code> module publishes the <code>org.apache.hop:hop-bom</code> POM for consumers to import into <code>dependencyManagement</code>.
+See <a href="architecture/dependencies-and-classloading.html" class="xref page">Dependencies and classloading</a> for the import and versionless dependency examples.
+The module has <code>pom</code> packaging and is included by the default <code>base</code> profile, so normal CI builds generate and check it as well as release builds.
+Incremental CI forces the BOM module to run even when another module changes.
+The maintenance test follows declared modules, including profile modules, rather than scanning the filesystem, so nested worktrees do not affect coverage.</p>
+</div>
+<div class="paragraph">
+<p><code>eu.maveniverse.maven.plugins:bom-builder3</code> automatically generates <code>bom/target/bom-pom.xml</code> during <code>generate-resources</code>.
+The checked-in <code>bom/pom.xml</code> is only the publication configuration; there is no dependency list or generator to maintain manually.
+New library modules in the release reactor are included automatically.
+The plugin replaces the module POM for installation and deployment with the generated standalone POM, without modifying the source POM.
+The generated POM preserves publication metadata such as licenses and SCM information, but has no parent, inherited dependencies, third-party dependency management, or build configuration.
+Consumers do not need any of Hop&#8217;s build profiles.</p>
+</div>
+<div class="paragraph">
+<p>Only reactor main artifacts are collected; direct and transitive dependencies are disabled.
+<code>includePoms=false</code> excludes POM aggregators, the BOM itself, distribution modules, and the unpublished local Eclipse wrappers.
+Attached ZIPs, sources, Javadoc and test JARs are not collected, and ZIP dependencies declared by assembly modules are not followed.
+The build-time <code>hop-config-doc</code> and browser-test <code>hop-web-integration-tests</code> artifacts are excluded explicitly by group and artifact ID.
+These exclusions match coordinates, not artifact types; a future module whose main artifact is a ZIP would need an explicit exclusion.
+Keep exclusions narrow rather than hiding published libraries.</p>
+</div>
+<div class="paragraph">
+<p>The maintenance tests check that the generated BOM covers all declared library modules, contains only Hop JARs at the current version, and has standalone publication metadata without inherited dependencies or build configuration.
+The explicit tooling exclusion list is checked against the plugin configuration and source modules so stale exclusions fail the build.
+Update the configuration and the documented exclusions in <code>HopBomTest</code> together when a new non-library JAR module is added.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Publish the BOM only with all library profiles enabled and incremental reactor reduction disabled (<code>gib.disable=true</code>, the default).
+The generator reads Maven&#8217;s complete project list, so <code>-pl bom</code> from the project root still generates a complete BOM without building the libraries.
+A standalone <code>-f bom/pom.xml</code> build or disabled library profiles can generate an incomplete BOM; the maintenance tests reject missing libraries.
+Do not skip these tests when validating a release BOM.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Normal CI and release builds generate and check the BOM automatically; no separate regeneration command is needed.
+For local inspection without installing or deploying, run from the project root:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./mvnw -pl bom <span class="hljs-built_in">test</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Inspect <code>bom/target/bom-pom.xml</code> before publication.
+The CycloneDX software bill of materials generated by the release profile is separate from this Maven dependency BOM and remains unchanged.</p>
 </div>
 </div>
 </div>
