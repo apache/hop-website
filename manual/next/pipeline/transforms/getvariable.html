@@ -3272,6 +3272,27 @@ This is <strong>not</strong> a row group.</p></td>
 </table>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>transforms/get-variables-basic.hpl</code>, which gets a file name built on <code>${PROJECT_HOME}</code>, the Java version, <code>${HOP_CONFIG_FOLDER}</code>, <code>${HOP_PLATFORM_OS}</code>, <code>${user.home}</code> and <code>${user.dir}</code>, and writes them to the log.</p>
+</li>
+<li>
+<p><code>pipelines/pipeline-with-parameter.hpl</code>, which gets the value of its parameter <code>PRM_EXAMPLE</code> and of the variable <code>ENV_VARIABLE</code>, and writes them to the log.</p>
+</li>
+<li>
+<p><code>loops/child-check-set-counter-value.hpl</code>, which gets <code>${COUNTER}</code> as an integer each time the <strong>repeat pipeline</strong> action of <code>loops/repeat-action.hwf</code> runs it.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/pipeline/transforms/gettablenames.html"><span>Previous</span><strong>Get table names</strong></a>

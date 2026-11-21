@@ -3114,6 +3114,31 @@ Scope such a rule with <code>appliesTo</code>, naming the metadata key — the f
 <div class="paragraph">
 <p><code>hop lint --list-metadata-types</code> prints the keys this installation has registered.</p>
 </div>
+<div class="paragraph">
+<p>A <code>DATABASE_CONNECTION</code> rule is narrowed by database type, the connection&#8217;s plugin id:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>yaml</div><pre class="highlightjs highlight is-highlighted"><code class="language-yaml hljs" data-lang="yaml">  <span class="hljs-attr">ACME-DB-001:</span>
+    <span class="hljs-attr">target:</span> <span class="hljs-string">DATABASE_CONNECTION</span>
+    <span class="hljs-attr">appliesTo:</span> [<span class="hljs-string">POSTGRESQL</span>]
+    <span class="hljs-attr">allOf:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">targetField:</span> <span class="hljs-string">attributes</span>
+        <span class="hljs-attr">condition:</span> <span class="hljs-string">OPTION_MATCHES</span>
+        <span class="hljs-attr">conditionValue:</span> <span class="hljs-string">&quot;sslmode=(require|verify-ca|verify-full)&quot;</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">targetField:</span> <span class="hljs-string">url</span>
+        <span class="hljs-attr">condition:</span> <span class="hljs-string">MATCHES_PATTERN</span>
+        <span class="hljs-attr">conditionValue:</span> <span class="hljs-string">&quot;.*[?&amp;]sslmode=(require|verify-ca|verify-full)(&amp;.*)?&quot;</span>
+    <span class="hljs-attr">severity:</span> <span class="hljs-string">ERROR</span>
+    <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;PostgreSQL Connection Without TLS&quot;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The rule reports a PostgreSQL connection that sets <code>sslmode</code> neither as an extra option nor in its manual URL.</p>
+</div>
+<div class="paragraph">
+<p><code>rdbms</code>, the metadata key, still covers every connection.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -3167,8 +3192,21 @@ Scope such a rule with <code>appliesTo</code>, naming the metadata key — the f
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>MUST_BE_TRUE</code>, <code>MUST_BE_FALSE</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">is a boolean with the required value</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HAS_OPTION</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">is a map of options, such as a connection&#8217;s <code>attributes</code>, that holds the option named in <code>conditionValue</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OPTION_MATCHES</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">is a map of options in which the option is set and its whole value matches the regular expression, both written in <code>conditionValue</code> as <code>name=regex</code>, such as <code>sslmode=(require|verify-ca|verify-full)</code></p></td>
+</tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>The option conditions find an option by its own name, also when the map stores it under a prefix: a connection keeps its extra options as <code>EXTRA_OPTION_POSTGRESQL.sslmode</code>, and <code>sslmode</code> finds it.
+An option counts exactly when Hop puts it in the connection&#8217;s URL. An option without a value, or one stored for another database type, does not count. Store an option under the connection&#8217;s own type: Hop uses an option stored for the type a connection&#8217;s type extends, such as a PostgreSQL option on a Redshift connection, only when the two types are loaded together, which is not the case in Hop GUI or <code>hop-run</code>. The rule follows what Hop does.
+A value such as <code>${PG_SSLMODE}</code> is compared as written, so it does not match <code>require</code>.</p>
+</div>
 <div class="paragraph">
 <p><code>conditionValue</code> is used as written: variables are not resolved in it.
 A value the condition cannot use, such as <code>abc</code> or <code>3,0</code> for <code>MAX_VALUE</code>, or <code>[a-</code> for <code>MATCHES_PATTERN</code>, would make the rule report nothing at all.
@@ -3236,12 +3274,24 @@ The same goes for a condition that does not fit one of the fields the linter pro
 <td class="tableblock halign-left valign-top"><p class="tableblock">The names of the transforms or actions that the enabled hops lead to</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>actionsWithoutFailurePath</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The names of the workflow&#8217;s actions, other than Start, that lead on when they succeed but have neither a hop followed on failure nor an unconditional hop. When one of them fails, the workflow stops there. An action that does not evaluate its result, such as Dummy, follows only its unconditional hops and is not listed. Require it to be empty with <code>MAX_COLLECTION_SIZE</code> <code>0</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>category</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The transform&#8217;s category in English, such as <code>Input</code>, <code>Output</code> or <code>Transform</code>, whatever language Hop runs in</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>databaseType</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The type of a database connection, as its plugin id, for example <code>POSTGRESQL</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>attributes</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The attributes of a database connection, including its extra options. A finding lists the attribute names, not their values</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The JDBC URL Hop builds for a database connection: the manual URL when there is one, otherwise the type&#8217;s URL with the extra options appended. Variables and variable resolvers are left as written. A finding never shows the URL, which carries the option values. When the type cannot build the URL, the rule reports an error for that connection</p></td>
 </tr>
 </tbody>
 </table>
@@ -3375,6 +3425,10 @@ Each clause names its own field, condition and value, and the finding says which
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>fieldPatterns</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A <code>NO_HARDCODED</code> rule on <code>TRANSFORM</code> or <code>ACTION</code> whose <code>targetField</code> is <code>password</code>, <code>secret</code> or <code>credential</code>. The list of field name endings that hold a secret, replacing the default list</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>passwordFields</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The same rules. <code>true</code> also reports every text field Hop stores as a password, whatever its name. Off unless the rule sets it; <code>SEC-002</code> and <code>SEC-003</code> do</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>blockingTransforms</code></p></td>
@@ -3607,7 +3661,8 @@ An orphaned transform does run: Hop starts every transform in a pipeline, connec
 A pipeline that deliberately runs two independent streams can accept the finding on that transform, see <a href="#accept-on-transform">Accepting findings on a single transform or action</a>.</p>
 </div>
 <div class="paragraph">
-<p><code>SEC-002</code> and <code>SEC-003</code> look at every text field of the transform or action whose name ends in one of the rule&#8217;s <code>fieldPatterns</code>, such as <code>password</code>, <code>token</code> or <code>passphrase</code>.
+<p><code>SEC-002</code> and <code>SEC-003</code> look at every text field of the transform or action whose name ends in one of the rule&#8217;s <code>fieldPatterns</code>, such as <code>password</code>, <code>token</code>, <code>privateKey</code> or <code>connectionString</code>.
+With <code>passwordFields: true</code> they also look at every text field Hop stores as a password, whatever its name, such as the Azure Event Hubs transforms' SAS key.
 They also look inside the settings the transform or action stores in the file, such as the list of files PGP Decrypt Files decrypts, each with its own passphrase.
 <code>DB-001</code>, <code>SEC-002</code> and <code>SEC-003</code> count an <code>Encrypted</code> value as hardcoded.</p>
 </div>

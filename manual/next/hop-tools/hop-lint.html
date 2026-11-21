@@ -3204,8 +3204,25 @@ hop lint --max-warnings 20 .</code></pre>
 <div class="paragraph">
 <p><code>sarif</code> is the format GitHub code scanning, Azure DevOps and most review tooling read, so findings show up as annotations on the pull request.
 <code>json</code> is there for everything else.
-Both carry the tags a rule pack gives its rules; see <a href="../linting/lint-rules.html#tags" class="xref page">Tags and help links</a>.
-Stdout carries only the report, in every format, so it can be piped or redirected.
+Both carry the tags a rule pack gives its rules; see <a href="../linting/lint-rules.html#tags" class="xref page">Tags and help links</a>.</p>
+</div>
+<div class="paragraph">
+<p>A <code>sarif</code> report declares every enabled rule, the same rules <code>--list-rules</code> shows as enabled, also those that found nothing.
+A rule missing from the report was switched off or not installed.
+<code>runs[0].invocations</code> records how the run went and how it was set up:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>executionSuccessful</code> is <code>true</code> when the run completed, with findings or without, and <code>exitCode</code> is what <code>hop lint</code> exits with.</p>
+</li>
+<li>
+<p><code>properties</code> holds the <code>hop-lint.yml</code> or <code>--config</code> file the rules were read with (<code>configFile</code>, relative to the folder linted, <code>../hop-lint.yml</code> when it is above it), <code>severity</code>, <code>failOn</code>, <code>maxWarnings</code>, <code>includeMetadata</code>, the <code>baseline</code> file with the number of findings it hid (<code>baselineHidden</code>; a remote baseline is recorded without the user, password and query in its URL), and <code>rulePacks</code>: the id, name, version and owner of each installed rule pack.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Stdout carries only the report, in every format, so it can be piped or redirected.
 Hop&#8217;s log lines and notes such as the baseline count go to stderr.</p>
 </div>
 <div class="paragraph">

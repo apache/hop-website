@@ -3054,6 +3054,7 @@ Packs exist so that policy can live outside Apache Hop: a company can hold its h
   <span class="hljs-attr">name:</span> <span class="hljs-string">ACME</span> <span class="hljs-string">Standard</span> <span class="hljs-string">Lint</span> <span class="hljs-string">Rules</span>
   <span class="hljs-attr">owner:</span> <span class="hljs-string">VENDOR</span>
   <span class="hljs-attr">priority:</span> <span class="hljs-number">200</span>
+  <span class="hljs-attr">version:</span> <span class="hljs-string">&quot;1.0.0&quot;</span>
 
 <span class="hljs-attr">rules:</span>
   <span class="hljs-attr">ACME-001:</span>
@@ -3101,6 +3102,10 @@ Give rules <code>tags</code> and a <code>helpUri</code> to carry your own catego
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>overrides</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Rule ids from another pack that this pack deliberately replaces.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>version</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The pack&#8217;s version, recorded in SARIF reports so a report shows which rules a run used. Quote it, so YAML does not read <code>1.10</code> as a number. Hop&#8217;s core pack has Hop&#8217;s version. A pack registered in Java by extending <code>AbstractYamlRulePack</code> that sets none takes the version of its jar; any other pack without one has no version.</p></td>
 </tr>
 </tbody>
 </table>

@@ -3347,6 +3347,24 @@ The measure type depends on the algorithm and match mode:</p>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>transforms/fuzzy-match-rename.hpl</code>, which looks up the <code>name</code> of a row in the <code>new_name</code> field of a second Data grid with Jaro-Winkler, and returns the lookup fields <code>new_id</code> and <code>new_name</code> as <code>user_id</code> and <code>user_name</code>, and <code>new_address</code> under its own name.</p>
+</li>
+<li>
+<p><code>transforms/fuzzy-match-soundex.hpl</code>, which matches 14 names to 12 reference names by how they sound (Soundex), for example <code>Ay See Dee Ci</code> to <code>AC/DC</code>; <code>Hole</code> and <code>Hour</code> get no match.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/pipeline/transforms/openformula.html"><span>Previous</span><strong>OpenFormula</strong></a>

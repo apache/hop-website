@@ -3174,6 +3174,10 @@ use the generated install spec at the installation root:</p>
 <p>After install, apply, or uninstall, <strong>restart Hop</strong> so the plugin registry reloads.</p>
 </div>
 <div class="paragraph">
+<p>Installing another version of a plugin that the marketplace installed replaces it: files that only the previous version had are removed.
+Shared jars in <code>lib/core</code> stay in place.</p>
+</div>
+<div class="paragraph">
 <p>Coordinates for <code>install</code>: <code>artifactId</code>, <code>artifactId:version</code>, or <code>groupId:artifactId:version</code>.
 Optional <code>--repo &lt;id&gt;</code> forces a single repository (skips the fallback chain).</p>
 </div>

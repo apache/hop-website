@@ -3128,10 +3128,10 @@ Lists also works on numeric values like integers. In this case, the list of valu
 <p>The filter rows transform detects only fields in the input stream. If you want to filter rows based on a variable value, you can modify the previous transform. For example, a table input transform can include the variable in the SQL as another field such as “select field1, field2, ${myvar} as field3 from table1”, then in the filter row condition you can say field1 = field3. Alternatively, you can use a ‘Get Variables’ transform to set parameters in fields. There are various SQL query statements that will always return results using IF EXISTS or IS NULL for example if you always require field(s) and results to be returned.</p>
 </div>
 <div class="paragraph">
-<p>An example is found in the samples project called “filter-rows-basic.hpl”.</p>
+<p>The samples project has examples, see <a href="#_samples">Samples</a>.</p>
 </div>
 <div class="paragraph">
-<p>If you cannot select the field you would like because it does not exist yet because of metadata injection, see this doc: <a href="https://hop.apache.org//manual/latest/pipeline/transforms/filterrows.html#_mdi_example" class="bare">https://hop.apache.org//manual/latest/pipeline/transforms/filterrows.html#_mdi_example</a> and the example in the samples project: metadata-injection/filter-rows-mdi-parent.hpl.</p>
+<p>If you cannot select the field you would like because it does not exist yet because of metadata injection, see <a href="#_mdi_example">MDI Example</a>.</p>
 </div>
 <div class="paragraph">
 <p>Essentially, to use an MDI field that is not selectable yet (say in a Filter rows transform), you can setup a transform with a similar field and with a similar condition. Then open the pipeline in a text editor and update the field name to the MDI field name that does not exist yet.</p>
@@ -3254,7 +3254,7 @@ In some cases it will be better to use a where filter in a SQL query than use a 
 You can use this transform with ETL Metadata Injection to pass metadata to your pipeline at runtime.</p>
 </div>
 <div class="paragraph">
-<p>If you cannot select the field you would like because it does not exist yet because of metadata injection, see this doc: <a href="https://hop.apache.org//manual/latest/pipeline/transforms/filterrows.html#_mdi_example" class="bare">https://hop.apache.org//manual/latest/pipeline/transforms/filterrows.html#_mdi_example</a> and this example in the samples project: metadata-injection/filter-rows-mdi-parent.hpl.</p>
+<p>If you cannot select the field you would like because it does not exist yet because of metadata injection, see <a href="#_mdi_example">MDI Example</a>.</p>
 </div>
 <div class="paragraph">
 <p>Essentially, to use an MDI field that is not selectable yet (say in a Filter rows transform), you can setup a transform with a similar field and with a similar condition. Then open the pipeline in a text editor and update the field name to the MDI field name that does not exist yet.</p>
@@ -3291,10 +3291,26 @@ Alternatively, you can store the .HPL, and then open the .HPL in a text editor.<
 </div>
 </div>
 <div class="sect1">
-<h2 id="_sample"><a class="link" href="#_sample">Sample</a></h2>
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The samples project demonstrates some concepts in file "filter-rows-basic.hpl".</p>
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>transforms/filter-rows-basic.hpl</code>, which checks 10 rows from a Data grid against <code>(id &lt; 5 OR group = GR03) AND NOT desc = d</code>: one Filter rows sends the 5 matching rows to one Dummy and the other 5 to another, and the second one only passes on the 5 matching rows.</p>
+</li>
+<li>
+<p><code>metadata-injection/filter-rows-mdi-parent.hpl</code>, which injects the condition shown under <a href="#_mdi_example">MDI Example</a> into the Filter rows of <code>metadata-injection/filter-rows-mdi-child.hpl</code>, which reads <code>files/customers-100.txt</code>.</p>
+</li>
+<li>
+<p><code>loops/child-check-set-counter-value.hpl</code>, which the <strong>repeat pipeline</strong> action of <code>loops/repeat-action.hwf</code> runs again and again: while <code>${COUNTER}</code> is 10 or less it adds 1 to it, and when it is higher it sets <code>${END_LOOP}</code>, which ends the repeat.</p>
+</li>
+<li>
+<p><code>pipelines/read-transactions.hpl</code>, which uses the sheet row number to split the header row of each Excel file from its data rows.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -3305,7 +3321,7 @@ Alternatively, you can store the .HPL, and then open the .HPL in a text editor.<
 <p>The example filter condition below injects the following filter conditions into a Filter Rows transform.</p>
 </div>
 <div class="paragraph">
-<p>The full example pipelines are available in the samples project as <code>metadata-injection/filter-rows-mdi-parent.hpl</code> and <code>metadata-injection/filter-rows-mdi-child.hpl</code></p>
+<p>The full example pipelines are listed under <a href="#_samples">Samples</a>.</p>
 </div>
 <div class="listingblock">
 <div class="content">

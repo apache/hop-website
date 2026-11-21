@@ -3198,6 +3198,24 @@ Otherwise, leave blank.</p>
 </table>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>transforms/get-rows-from-result.hpl</code>, which reads the rows that a parent workflow or pipeline passed to it as the result, so it returns no rows when you run it on its own.</p>
+</li>
+<li>
+<p><code>loops/child-loops-get-rows-from-result.hpl</code>, which counts the distinct <code>random_string</code> values of the rows it gets from <code>loops/child-generate-1000-rows.hpl</code> and writes the count to the log.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/pipeline/transforms/getrecordsfromstream.html"><span>Previous</span><strong>Get records from stream</strong></a>
