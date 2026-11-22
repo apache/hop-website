@@ -430,6 +430,9 @@
 <loc>https://hop.apache.org/manual/next/metadata-types/ai-provider.html</loc>
 </url>
 <url>
+<loc>https://hop.apache.org/manual/next/metadata-types/airflow-connection.html</loc>
+</url>
+<url>
 <loc>https://hop.apache.org/manual/next/metadata-types/async-web-service.html</loc>
 </url>
 <url>
@@ -1877,6 +1880,9 @@
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/workflow/actions/addresultfilenames.html</loc>
+</url>
+<url>
+<loc>https://hop.apache.org/manual/next/workflow/actions/airflow-trigger-dag-run.html</loc>
 </url>
 <url>
 <loc>https://hop.apache.org/manual/next/workflow/actions/as400command.html</loc>

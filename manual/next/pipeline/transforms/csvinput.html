@@ -1943,6 +1943,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/airflow-trigger-dag-run.html">Trigger Airflow DAG run</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/truncatetables.html">Truncate tables</a>
     
   </li>
@@ -2280,6 +2284,10 @@
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/ai-provider.html">AI Provider</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/airflow-connection.html">Airflow Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3197,6 +3205,12 @@ WARNING: For technical reasons, parallel reading of CSV files is only supported 
 <td class="tableblock halign-left valign-top"><p class="tableblock">Get Fields button</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Click to return a list of fields from the target file based on the current settings (i.e. Delimiter, Enclosure, etc.).
 All fields identified will be added to the Fields Table.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get fields from data catalog button</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shown when the project has a <a href="../../metadata-types/data-catalog.html" class="xref page">Data Catalog</a>.
+Fills the Fields Table with the fields a data catalog, such as DataHub, has for the file: names, types, lengths and precisions. Dates get no format, so they use Hop&#8217;s default format: check it against the file.
+See <a href="../../metadata-types/data-catalog.html#_get_fields_from_a_data_catalog" class="xref page">Get fields from a data catalog</a>.</p></td>
 </tr>
 </tbody>
 </table>

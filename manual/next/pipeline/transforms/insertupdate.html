@@ -1943,6 +1943,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/airflow-trigger-dag-run.html">Trigger Airflow DAG run</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/truncatetables.html">Truncate tables</a>
     
   </li>
@@ -2280,6 +2284,10 @@
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/ai-provider.html">AI Provider</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/airflow-connection.html">Airflow Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3150,6 +3158,14 @@ Avoid updates on certain fields by specifying N in the update column.</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has <code>transforms/insertupdate-basic.hpl</code>, which writes 7 rows from a Data grid to the table <code>INSERTUPDATE</code> of the <code>hop-samples</code> connection, with <code>id</code> as the key: 5 rows are inserted, and the 2 rows with an <code>id</code> that is already in the table update <code>col_bool</code> and <code>col_string</code>, but not <code>col_date</code>.</p>
+</div>
 </div>
 </div>
     </article>

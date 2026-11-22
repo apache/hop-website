@@ -1943,6 +1943,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/airflow-trigger-dag-run.html">Trigger Airflow DAG run</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/truncatetables.html">Truncate tables</a>
     
   </li>
@@ -2280,6 +2284,10 @@
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/ai-provider.html">AI Provider</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/airflow-connection.html">Airflow Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3268,8 +3276,7 @@ It builds a Spark SQL Dataset graph from the pipeline and runs transforms via na
 <h3 id="transforms-not-supported-on-native-spark"><a class="link" href="#transforms-not-supported-on-native-spark">Transforms not supported on Native Spark</a></h3>
 <div class="paragraph">
 <p>Most classic Hop transforms run on Native Spark via native Dataset handlers or generic <code>mapPartitions</code>.
-The list below is taken from each transform’s <strong>Supported Engines</strong> table (<strong>Native Spark</strong> = Not Supported).
-When in doubt, open the transform page — that table is the source of truth.</p>
+Each transform page says in its <strong>Supported Engines</strong> table whether it runs on Native Spark: <strong>yes</strong> when the integration tests give the same rows as on the Hop engine, <strong>no</strong> when it doesn&#8217;t work, and <strong>maybe</strong> when no test shows it either way.</p>
 </div>
 <div class="paragraph">
 <p>For broader design limits (copy/distribute, streaming, Spark SQL, MLlib), see
@@ -3331,106 +3338,150 @@ When in doubt, open the transform page — that table is the source of truth.</p
 </div>
 </div>
 <div class="sect3">
-<h4 id="_barriers_stream_ordering_and_merge_style_transforms"><a class="link" href="#_barriers_stream_ordering_and_merge_style_transforms">Barriers, stream ordering, and merge-style transforms</a></h4>
+<h4 id="_refused_by_the_engine"><a class="link" href="#_refused_by_the_engine">Refused by the engine</a></h4>
 <div class="paragraph">
-<p>These rely on waiting for other transforms, full-stream ordering, or multi-stream merge semantics that do not map cleanly to a Spark Dataset graph.</p>
+<p>The engine refuses to run a pipeline with one of these transforms, and names the transform and the reason.
+Each of them gives wrong rows or no rows when it runs in Spark partitions.</p>
+</div>
+<div class="paragraph">
+<p>Transforms that need all the rows in one place, or the rows in their original order:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="../transforms/analyticquery.html" class="xref page">Analytic Query</a></p>
+<p><a href="../transforms/groupby.html" class="xref page">Group By</a>: use <a href="../transforms/memgroupby.html" class="xref page">Memory Group By</a> (native Spark <code>groupBy</code>) instead</p>
 </li>
 <li>
-<p><a href="../transforms/append.html" class="xref page">Append Streams</a></p>
+<p><a href="../transforms/uniquerowsbyhashset.html" class="xref page">Unique Rows (HashSet)</a>: use <a href="../transforms/uniquerows.html" class="xref page">Unique Rows</a> (native Spark <code>distinct</code>) or Memory Group By instead</p>
+</li>
+<li>
+<p><a href="../transforms/joinrows.html" class="xref page">Join Rows (cartesian product)</a>: add the same constant field to both inputs and use <a href="../transforms/mergejoin.html" class="xref page">Merge Join</a> on that field instead</p>
+</li>
+<li>
+<p><a href="../transforms/maskfields.html" class="xref page">Mask fields</a>: every partition would keep its own mapping, so the same value would not get the same token</p>
+</li>
+<li>
+<p><a href="../transforms/closure.html" class="xref page">Closure generator</a></p>
+</li>
+<li>
+<p><a href="../transforms/addfieldschangesequence.html" class="xref page">Add value fields changing sequence</a>: its counter restarts in every partition</p>
+</li>
+<li>
+<p><a href="../transforms/sortedmerge.html" class="xref page">Sorted Merge</a> and <a href="../transforms/sortedschemamerge.html" class="xref page">Sorted schema merge</a>: use <a href="../transforms/sort.html" class="xref page">Sort rows</a> (native Spark sort) on the combined rows instead</p>
+</li>
+<li>
+<p><a href="../transforms/rulesaccumulator.html" class="xref page">Rules accumulator</a></p>
+</li>
+<li>
+<p><a href="../transforms/analyticquery.html" class="xref page">Analytic Query</a>: LAG and LEAD read the rows before and after in one ordered stream</p>
+</li>
+<li>
+<p><a href="../transforms/append.html" class="xref page">Append Streams</a>: the rows of the head stream come before those of the tail stream</p>
 </li>
 <li>
 <p><a href="../transforms/blockingtransform.html" class="xref page">Blocking transform</a></p>
 </li>
 <li>
-<p><a href="../transforms/blockuntiltransformsfinish.html" class="xref page">Blocking until transforms finish</a></p>
+<p><a href="../transforms/detectemptystream.html" class="xref page">Detect Empty Stream</a>: every partition without rows would report an empty stream</p>
 </li>
 <li>
-<p><a href="../transforms/detectemptystream.html" class="xref page">Detect Empty Stream</a></p>
-</li>
-<li>
-<p><a href="../transforms/identifylastrow.html" class="xref page">Identify last row in a stream</a></p>
-</li>
-<li>
-<p><a href="../transforms/joinrows.html" class="xref page">Join Rows (cartesian product)</a> — add the same constant field to both inputs and use <a href="../transforms/mergejoin.html" class="xref page">Merge Join</a> on that field instead</p>
+<p><a href="../transforms/identifylastrow.html" class="xref page">Identify last row in a stream</a>: every partition would mark its own last row</p>
 </li>
 <li>
 <p><a href="../transforms/mergerows.html" class="xref page">Merge rows (diff)</a></p>
 </li>
 <li>
-<p><a href="../transforms/multimerge.html" class="xref page">Multiway Merge Join</a></p>
+<p><a href="../transforms/multimerge.html" class="xref page">Multiway Merge Join</a>: use <a href="../transforms/mergejoin.html" class="xref page">Merge Join</a> (native Spark join) instead</p>
 </li>
 <li>
-<p><a href="../transforms/sortedmerge.html" class="xref page">Sorted Merge</a></p>
+<p><a href="../transforms/repeatfields.html" class="xref page">Repeat fields</a></p>
 </li>
 <li>
-<p><a href="../transforms/sortedschemamerge.html" class="xref page">Sorted schema merge</a></p>
-</li>
-<li>
-<p><a href="../transforms/streamschemamerge.html" class="xref page">Stream schema merge</a></p>
+<p><a href="../transforms/streamschemamerge.html" class="xref page">Stream schema merge</a>: when Spark combines inputs with different layouts, rows go missing</p>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_sorted_aggregation_and_hash_set_unique"><a class="link" href="#_sorted_aggregation_and_hash_set_unique">Sorted aggregation and hash-set unique</a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="../transforms/groupby.html" class="xref page">Group By</a> — use <a href="../transforms/memgroupby.html" class="xref page">Memory Group By</a> (native Spark <code>groupBy</code>) instead</p>
-</li>
-<li>
-<p><a href="../transforms/uniquerowsbyhashset.html" class="xref page">Unique Rows (HashSet)</a> — use <a href="../transforms/uniquerows.html" class="xref page">Unique Rows</a> where possible</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_workflow_pipeline_result_and_control_transforms"><a class="link" href="#_workflow_pipeline_result_and_control_transforms">Workflow / pipeline result and control transforms</a></h4>
 <div class="paragraph">
-<p>Result-row and result-file hops, injectors, and metadata injection are not supported as Native Spark graph nodes.</p>
+<p>Transforms that work with other transforms of the same Hop pipeline, which a Spark partition doesn&#8217;t have:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="../transforms/copyrowstoresult.html" class="xref page">Copy rows to result</a></p>
-</li>
-<li>
-<p><a href="../transforms/filesfromresult.html" class="xref page">Files from result</a></p>
-</li>
-<li>
-<p><a href="../transforms/filestoresult.html" class="xref page">Files to result</a></p>
-</li>
-<li>
-<p><a href="../transforms/getrowsfromresult.html" class="xref page">Get Rows from Result</a></p>
-</li>
-<li>
-<p><a href="../transforms/injector.html" class="xref page">Injector</a></p>
+<p><a href="../transforms/blockuntiltransformsfinish.html" class="xref page">Blocking until transforms finish</a></p>
 </li>
 <li>
 <p><a href="../transforms/metainject.html" class="xref page">Metadata Injection</a></p>
 </li>
 <li>
-<p><a href="../transforms/pipeline-data-probe.html" class="xref page">Pipeline Data Probe</a></p>
+<p><a href="../transforms/multi-mapping.html" class="xref page">Mapping (multiple inputs/outputs)</a></p>
 </li>
 <li>
-<p><a href="../transforms/repeatfields.html" class="xref page">Repeat fields</a></p>
+<p><a href="../transforms/xmljoin.html" class="xref page">XML join</a></p>
+</li>
+<li>
+<p><a href="../transforms/pipeline-data-probe.html" class="xref page">Pipeline Data Probe</a>: probes attach to Hop&#8217;s own pipeline engine only</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Transforms that exchange rows, files or variables with the workflow or pipeline executor. A Spark run doesn&#8217;t pass its previous result to the partitions, its result carries no rows or files, and variables set in a partition don&#8217;t reach the parent:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../transforms/getrowsfromresult.html" class="xref page">Get Rows from Result</a></p>
+</li>
+<li>
+<p><a href="../transforms/getrecordsfromstream.html" class="xref page">Get records from stream</a></p>
+</li>
+<li>
+<p><a href="../transforms/filesfromresult.html" class="xref page">Files from result</a></p>
+</li>
+<li>
+<p><a href="../transforms/copyrowstoresult.html" class="xref page">Copy rows to result</a></p>
+</li>
+<li>
+<p><a href="../transforms/filestoresult.html" class="xref page">Files to result</a></p>
+</li>
+<li>
+<p><a href="../transforms/setvariable.html" class="xref page">Set Variables</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Other:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../transforms/injector.html" class="xref page">Injector</a>: it receives the rows an application hands to Hop&#8217;s own pipeline engine</p>
+</li>
+<li>
+<p><a href="../transforms/kafkaconsumer.html" class="xref page">Kafka consumer</a>: the engine has no support for unbounded streams; use the Beam Kafka transforms on a Beam engine</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_other"><a class="link" href="#_other">Other</a></h4>
+<h4 id="_limits_of_the_engine"><a class="link" href="#_limits_of_the_engine">Limits of the engine</a></h4>
+<div class="paragraph">
+<p>Some transforms work, but not with every kind of value or hop:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="../transforms/kafkaconsumer.html" class="xref page">Kafka consumer</a> — no native Spark structured-streaming / Kafka Dataset I/O; use Beam Kafka transforms on a Beam engine for Kafka pipelines</p>
+<p>Values of type JSON, UUID, Graph and Vector can&#8217;t be converted to Spark rows.</p>
+</li>
+<li>
+<p>Error hops are not supported, and a transform can only have several outgoing hops when they are target streams (for example the true and false outputs of Filter Rows).</p>
+</li>
+<li>
+<p>Transforms of separately installed plugins (Kafka, Mail) can fail to load inside Spark&#8217;s generated code.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>A transform marked <strong>maybe</strong> on its page has no test that shows it works on the native Spark engine, mostly because it needs an outside service.</p>
 </div>
 </div>
 </div>

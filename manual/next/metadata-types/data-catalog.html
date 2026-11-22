@@ -1943,6 +1943,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/airflow-trigger-dag-run.html">Trigger Airflow DAG run</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/truncatetables.html">Truncate tables</a>
     
   </li>
@@ -2280,6 +2284,10 @@
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/ai-provider.html">AI Provider</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/airflow-connection.html">Airflow Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3024,7 +3032,8 @@ The catalog stays the owner of that metadata. Hop only reads it.</p>
 <div class="paragraph">
 <p>The <a href="../workflow/actions/checkdatacatalog.html" class="xref page">Check data catalog</a> action uses a Data Catalog to check datasets before a workflow goes on.
 The <a href="../pipeline/transforms/maskfields.html" class="xref page">Mask fields</a> transform can use one to mask the fields that carry a tag or glossary term, such as <code>PII</code>.
-The <a href="../hop-gui/perspective-ai-advisor.html#data-catalog-context" class="xref page">AI Assistant</a> can include what a Data Catalog says about the tables and files of a pipeline (descriptions, owners, tags, glossary terms, deprecation) in its questions.</p>
+The <a href="../hop-gui/perspective-ai-advisor.html#data-catalog-context" class="xref page">AI Assistant</a> can include what a Data Catalog says about the tables and files of a pipeline (descriptions, owners, tags, glossary terms, deprecation) in its questions.
+<a href="../pipeline/transforms/csvinput.html" class="xref page">CSV file input</a> and <a href="../pipeline/transforms/textfileinput.html" class="xref page">Text file input</a> can fill their fields from one.</p>
 </div>
 <div class="paragraph">
 <p>This metadata type is experimental: its options and what the catalog types can answer may still change.</p>
@@ -3089,6 +3098,27 @@ A connection without a host, such as an embedded database or a connection with a
 Use it for a dataset that Hop doesn&#8217;t read or write itself.</p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_get_fields_from_a_data_catalog"><a class="link" href="#_get_fields_from_a_data_catalog">Get fields from a data catalog</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When the project has a Data Catalog, the CSV file input and Text file input dialogs have a <strong>Get fields from data catalog</strong> button.
+It asks for the Data Catalog and the dataset, which starts as the file of the transform, reads the fields the catalog has for it and fills the field table, after asking whether to add the new fields, add all of them or replace the table.
+A file that a Hop pipeline wrote with the DataHub lineage plugin enabled has its fields in DataHub, so the pipeline that reads it can start from them.</p>
+</div>
+<div class="paragraph">
+<p>This happens only in the dialog: the transform keeps the fields it was given, and nothing is read from the catalog when the pipeline runs, so a change in the catalog never changes a run.</p>
+</div>
+<div class="paragraph">
+<p>The native type of a field gives its Hop type, length and precision: <code>VARCHAR(255)</code> is a String of length 255, <code>DECIMAL(10,2)</code> a BigNumber with length 10 and precision 2, <code>NUMERIC(10)</code> an Integer, <code>TIMESTAMP</code> a Timestamp, <code>TIME</code> a Date, <code>BIT</code> a Boolean and <code>BIT(8)</code> a String of length 8.
+A length too large for Hop, such as <code>varchar(4294967295)</code>, leaves the field without a length.
+Modifiers such as <code>UNSIGNED</code> don&#8217;t change the type, except that a <code>BIGINT UNSIGNED</code> is a BigNumber, as when Hop reads it from a database.
+Dialect names such as <code>INT64</code>, <code>FLOAT64</code>, <code>TIMESTAMP_NTZ</code> and <code>DATETIMEOFFSET</code> are known too.
+A native type Hop doesn&#8217;t know falls back to the catalog&#8217;s own type, and to a String after that.
+A catalog has no formats, so a date gets none and uses Hop&#8217;s default format, <code>yyyy/MM/dd HH:mm:ss.SSS</code>. That is what Hop writes to a file when the output has no format of its own; check it against the file.</p>
 </div>
 </div>
 </div>

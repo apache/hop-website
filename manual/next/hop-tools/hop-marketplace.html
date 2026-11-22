@@ -1943,6 +1943,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/workflow/actions/airflow-trigger-dag-run.html">Trigger Airflow DAG run</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/workflow/actions/truncatetables.html">Truncate tables</a>
     
   </li>
@@ -2280,6 +2284,10 @@
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/ai-provider.html">AI Provider</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/airflow-connection.html">Airflow Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3175,7 +3183,13 @@ use the generated install spec at the installation root:</p>
 </div>
 <div class="paragraph">
 <p>Installing another version of a plugin that the marketplace installed replaces it: files that only the previous version had are removed.
-Shared jars in <code>lib/core</code> stay in place.</p>
+Shared jars in <code>lib/core</code> stay in place.
+A file of the previous version that is still in use (Windows locks loaded jars) stays listed in the receipt and is removed by the next install, apply, or uninstall.
+Uninstall removes the rest of the plugin in that case; run it again after closing Hop to remove that file.</p>
+</div>
+<div class="paragraph">
+<p>The marketplace keeps an install receipt for each plugin in <code>plugins/.marketplace/</code>, with a SHA-256 checksum of every file it installed.
+When a plugin replaces a jar in <code>lib/core</code> that has other content, the old jar is first backed up to a new folder under <code>plugins/.marketplace/backup/&lt;plugin&gt;/&lt;version&gt;/</code>, where <code>&lt;version&gt;</code> is the version being installed.</p>
 </div>
 <div class="paragraph">
 <p>Coordinates for <code>install</code>: <code>artifactId</code>, <code>artifactId:version</code>, or <code>groupId:artifactId:version</code>.

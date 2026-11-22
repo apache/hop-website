@@ -1943,6 +1943,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/airflow-trigger-dag-run.html">Trigger Airflow DAG run</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/truncatetables.html">Truncate tables</a>
     
   </li>
@@ -2280,6 +2284,10 @@
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/ai-provider.html">AI Provider</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/airflow-connection.html">Airflow Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3098,6 +3106,24 @@ A child used from <a href="multi-mapping.html" class="xref page">Multi Mapping</
 <div class="paragraph">
 <p>The fields described in this transform are those that you want to refer to in this pipeline.
 When you use the mapping you can map input to these field names to arrive at a re-usable part of a pipeline.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>transforms/simple-mapping-child.hpl</code>, whose Mapping input receives <code>firstName</code> and <code>lastName</code>; <code>transforms/simple-mapping-parent.hpl</code> runs it for 4 names.</p>
+</li>
+<li>
+<p><code>transforms/multi-mapping-child.hpl</code>, the same mapping, which <code>transforms/multi-mapping-parent.hpl</code> runs for 4 names.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

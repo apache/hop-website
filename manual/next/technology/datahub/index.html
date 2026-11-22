@@ -1943,6 +1943,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/airflow-trigger-dag-run.html">Trigger Airflow DAG run</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/truncatetables.html">Truncate tables</a>
     
   </li>
@@ -2280,6 +2284,10 @@
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/ai-provider.html">AI Provider</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/airflow-connection.html">Airflow Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3472,7 +3480,10 @@ A document stays in DataHub when its pipeline or workflow is deleted.</p>
 workflows can read what DataHub knows about a dataset. The
 <a href="../../workflow/actions/checkdatacatalog.html" class="xref page">Check data catalog</a> action uses it to check, before a
 workflow goes on, that datasets exist in DataHub, aren&#8217;t deprecated, changed recently enough and
-passed their assertions. The
+passed their assertions.
+<a href="../../pipeline/transforms/maskfields.html" class="xref page">Mask fields</a> uses it to mask the fields DataHub tags as
+personal data, and CSV file input and Text file input can fill their fields from the schema DataHub
+has for a file. The
 <a href="../../hop-gui/perspective-ai-advisor.html#data-catalog-context" class="xref page">AI Assistant</a> uses it to include the
 descriptions, owners, tags, glossary terms and deprecation of a pipeline&#8217;s datasets in its questions.</p>
 </div>

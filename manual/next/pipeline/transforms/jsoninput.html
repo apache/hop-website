@@ -1943,6 +1943,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/airflow-trigger-dag-run.html">Trigger Airflow DAG run</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/truncatetables.html">Truncate tables</a>
     
   </li>
@@ -2280,6 +2284,10 @@
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/ai-provider.html">AI Provider</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/airflow-connection.html">Airflow Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3142,20 +3150,7 @@
 </ul>
 </div>
 <div class="paragraph">
-<p>Check the <code>json-input-nested-elements.hpl</code> sample in the Samples project for an example.</p>
-</div>
-<div class="paragraph">
-<p><strong>Samples (Samples project):</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>json-input-basic.hpl</p>
-</li>
-<li>
-<p>json-input-nested-elements.hpl</p>
-</li>
-</ul>
+<p>The samples project has examples, see <a href="#_samples">Samples</a>.</p>
 </div>
 </div>
 </div>
@@ -3832,6 +3827,32 @@ Name 4</code></pre>
 </div>
 <div class="paragraph">
 <p>After restarting Hop, when we run the pipeline once again you will have 3 rows resulting because the null values will be omitted.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>pipelines/read-transactions.hpl</code>, which reads <code>Account</code>, <code>Amount</code>, <code>Company</code> and <code>Report_Date</code> from the JSON array built for each Excel file.</p>
+</li>
+<li>
+<p><code>transforms/json-input-basic.hpl</code>, which reads the settings of the pipeline log <code>metadata/pipeline-log/pipeline-log-example.json</code>.</p>
+</li>
+<li>
+<p><code>transforms/json-input-nested-elements.hpl</code>, which reads the Dataflow run configuration <code>metadata/pipeline-run-configuration/DataFlow.json</code>, and then reads its configuration variables from a field with a second JSON Input.
+This file comes with the Beam plugin, so without that plugin the pipeline returns no rows.</p>
+</li>
+<li>
+<p><code>transforms/json-input-public-holidays-from-rest.hpl</code>, which gets the public holidays of <code>${PRM_COUNTRY}</code> (default <code>BE</code>) in 2023 from the Nager.Date REST API, and reads the date, the names, the type and the other fields of each holiday.
+It needs network access.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

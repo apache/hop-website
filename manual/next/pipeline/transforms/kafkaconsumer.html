@@ -1943,6 +1943,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/airflow-trigger-dag-run.html">Trigger Airflow DAG run</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/truncatetables.html">Truncate tables</a>
     
   </li>
@@ -2280,6 +2284,10 @@
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/ai-provider.html">AI Provider</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/airflow-connection.html">Airflow Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3501,6 +3509,15 @@ Here are some options you need to set to make this work on a Confluent Cloud Kaf
 <p><a href="../../how-to-guides/cdc-log-sniffing.html" class="xref page">CDC: log sniffing</a> — consuming Debezium, GoldenGate, or similar change events from a Kafka topic</p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has <code>transforms/kafka-consumer-read-pokemon-data.hpl</code>, which reads messages from the topic <code>${KAFKA_TOPIC}</code> in batches of 1000 messages or 1 second, and passes each batch to <code>transforms/kafka-consumer-read-pokemon-data-child.hpl</code>, which reads the user ID, the Pokémon name and location, and the detection date from the JSON of each message.
+Set the variables <code>KAFKA_SERVER</code>, <code>KAFKA_TOPIC</code> and <code>KAFKA_CLIENT_ID</code> before you run it.</p>
 </div>
 </div>
 </div>

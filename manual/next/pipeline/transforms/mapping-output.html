@@ -1943,6 +1943,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/airflow-trigger-dag-run.html">Trigger Airflow DAG run</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/truncatetables.html">Truncate tables</a>
     
   </li>
@@ -2280,6 +2284,10 @@
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/ai-provider.html">AI Provider</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/airflow-connection.html">Airflow Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3089,6 +3097,24 @@
 <div class="paragraph">
 <p>A child used from <a href="simple-mapping.html" class="xref page">Simple Mapping</a> must contain exactly one Mapping output.
 A child used from <a href="multi-mapping.html" class="xref page">Multi Mapping</a> may contain zero or more Mapping output transforms.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>transforms/simple-mapping-child.hpl</code>, whose Mapping output returns the full name in <code>name</code>; <code>transforms/simple-mapping-parent.hpl</code> gets it back as <code>resultName</code>.</p>
+</li>
+<li>
+<p><code>transforms/multi-mapping-child.hpl</code>, the same mapping, which <code>transforms/multi-mapping-parent.hpl</code> runs and gets <code>resultName</code> back from.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

@@ -1943,6 +1943,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/airflow-trigger-dag-run.html">Trigger Airflow DAG run</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/truncatetables.html">Truncate tables</a>
     
   </li>
@@ -2280,6 +2284,10 @@
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/ai-provider.html">AI Provider</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/airflow-connection.html">Airflow Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3237,6 +3245,23 @@ There is an option to exclude the field containing the tablename from being inse
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_several_copies_partitions_or_bundles"><a class="link" href="#_several_copies_partitions_or_bundles">Several copies, partitions or bundles</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When the transform runs in several copies on the local engine, or on the native Spark and Beam engines, <strong>Truncate table</strong> and <strong>Automatically update table structure</strong> happen once per run, before any row is written: on the local engine on the first copy, on the native Spark and Beam engines on the driver, before the job starts.
+The copies, Spark partitions or Beam bundles then only insert, so they don&#8217;t truncate each other&#8217;s rows or change the table at the same time.
+The table structure then follows the fields the previous transforms declare, as the <strong>SQL</strong> button does.</p>
+</div>
+<div class="paragraph">
+<p>A single copy on the local engine still does both when the first row arrives, and the table structure follows the fields of that row.</p>
+</div>
+<div class="paragraph">
+<p><strong>Truncate on first row</strong> still truncates when the first row arrives, as only then is it known that rows arrive.
+In a transactional pipeline the truncate and table changes also wait for the first row, so they stay inside the transaction.</p>
+</div>
 </div>
 </div>
     </article>

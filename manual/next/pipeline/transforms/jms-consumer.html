@@ -1943,6 +1943,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/airflow-trigger-dag-run.html">Trigger Airflow DAG run</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/truncatetables.html">Truncate tables</a>
     
   </li>
@@ -2280,6 +2284,10 @@
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/ai-provider.html">AI Provider</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/airflow-connection.html">Airflow Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3218,6 +3226,15 @@ Acknowledging after <code>putRow</code> guarantees the row was <strong>handed to
 <div class="sectionbody">
 <div class="paragraph">
 <p>Only <code>TextMessage</code> bodies are read. Any other message type still produces a row with its identifiers, destination, timestamp and properties, but the body field is left null rather than guessing at an encoding.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has <code>transforms/jms-consumer.hpl</code>, which reads up to 10 messages from the queue <code>sample-queue</code>, and stops earlier when no message comes within 1 second.
+Create a JMS connection named <code>sample-jms</code> before you run it.</p>
 </div>
 </div>
 </div>

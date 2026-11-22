@@ -821,7 +821,9 @@ A catalog that can&#8217;t answer is a normal outcome, not an exception; the cal
 <p>A dataset is a <code>DatasetRef</code>.
 Build it with <code>DatasetRef.ofTable(&#8230;&#8203;)</code> or <code>ofFile(&#8230;&#8203;)</code>: those give a table or a file the OpenLineage namespace and name that lineage gives it, so <code>resolve()</code> finds the dataset lineage wrote.
 <code>ofCatalogId(&#8230;&#8203;)</code> names a dataset by the catalog&#8217;s own id.
-A transform or action that lets the user pick a dataset stores a <code>CatalogDataset</code> (type, connection, schema, name) and calls <code>toRef(variables, metadataProvider)</code>, which also reports a dataset that can&#8217;t be named.</p>
+A transform or action that lets the user pick a dataset stores a <code>CatalogDataset</code> (type, connection, schema, name) and calls <code>toRef(variables, metadataProvider)</code>, which also reports a dataset that can&#8217;t be named.
+<code>CatalogSchemas.read(&#8230;&#8203;)</code> reads the fields of such a dataset and throws a <code>HopException</code> that says why when the catalog can&#8217;t give them; <code>CatalogFieldTypes.toRowMeta(&#8230;&#8203;)</code> turns them into Hop fields.
+A transform dialog with a field table gets the <strong>Get fields from data catalog</strong> button with <code>CatalogFieldsDialog.getFields(&#8230;&#8203;)</code> from the <code>ui</code> module, shown when <code>CatalogFieldsDialog.isAvailable(metadataProvider)</code>.</p>
 </div>
 </div>
 </div>

@@ -1943,6 +1943,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/airflow-trigger-dag-run.html">Trigger Airflow DAG run</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/truncatetables.html">Truncate tables</a>
     
   </li>
@@ -2280,6 +2284,10 @@
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/ai-provider.html">AI Provider</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/airflow-connection.html">Airflow Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3150,6 +3158,9 @@ These will not merge on these nodes, nor will it create or update relationships 
 Use the provided button in the graph model editor to generate the Graph index and Graph constraint actions which will handle this for you.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>With <strong>Create indexes</strong>, the indexes are created once per run, before any row is written: on the native Spark and Beam engines on the driver, before the job starts, so the partitions or bundles don&#8217;t create the same constraints at the same time.</p>
 </div>
 </div>
 </div>

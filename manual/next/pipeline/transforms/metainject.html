@@ -1943,6 +1943,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/airflow-trigger-dag-run.html">Trigger Airflow DAG run</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/truncatetables.html">Truncate tables</a>
     
   </li>
@@ -2280,6 +2284,10 @@
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/ai-provider.html">AI Provider</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/airflow-connection.html">Airflow Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3098,17 +3106,7 @@
 <p>Basically, the ETL Metadata Injection transform overrules the default behavior for the named pipeline. Not all incoming streams need to have the same layout. It is perfectly OK to provide input to the metadata injection transform from different streams with different layouts.</p>
 </div>
 <div class="paragraph">
-<p><strong>Sample files:</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Configure MDI:</strong> read-and-inject-metadata.hpl</p>
-</li>
-<li>
-<p><strong>Read and fill in Template:</strong> read-file-template.hpl</p>
-</li>
-</ul>
+<p>The samples project has examples, see <a href="#_samples">Samples</a>.</p>
 </div>
 <div class="paragraph">
 <p><a href="../metadata-injection.html" class="xref page">Read more on metadata injection</a></p>
@@ -3313,6 +3311,25 @@ This replaces the legacy <strong>Allow empty stream to run the resulting pipelin
 <div class="paragraph">
 <p>For the exact rules that decide which value a parameter ends up with, see <a href="../../variables/parameter-passing.html" class="xref page">Passing parameters to a child pipeline or workflow</a>.</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>metadata-injection/process-files-with-mdi.hpl</code>, which reads the layout of <code>files/person-info-${PRM_TYPE}.csv</code> with File metadata and injects it into <code>metadata-injection/process-files-with-mdi-template.hpl</code>, which appends the names, the email, the zip code and the country to <code>output/unified-person-data.csv</code>.
+Run it with <code>PRM_TYPE</code> set to 1 and then to 2: the two files have different layouts.</p>
+</li>
+<li>
+<p><code>metadata-injection/read-and-inject-metadata.hpl</code>, which reads the layout of <code>files/customers-100.txt</code> with File metadata and injects it into <code>metadata-injection/read-file-template.hpl</code>, which counts the distinct zip codes per state.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

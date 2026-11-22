@@ -1943,6 +1943,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/airflow-trigger-dag-run.html">Trigger Airflow DAG run</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/truncatetables.html">Truncate tables</a>
     
   </li>
@@ -2280,6 +2284,10 @@
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/ai-provider.html">AI Provider</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/airflow-connection.html">Airflow Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3034,15 +3042,15 @@
     Single Threaded
     <span class="visually-hidden">supported</span>
   </li>
-  <li class="engine engine--supported" data-engine="native-spark">
+  <li class="engine engine--unknown" data-engine="native-spark">
     <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
       
-      <path d="M2 6.4 4.6 9 10 3.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
       
       
+      <path d="M4.1 4.3a1.9 1.9 0 1 1 2.6 1.8c-.5.2-.7.6-.7 1.1v.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="6" cy="9.3" r=".85" fill="currentColor"/>
     </svg>
     Native Spark
-    <span class="visually-hidden">supported</span>
+    <span class="visually-hidden">support unknown</span>
   </li>
   <li class="engine engine--unknown" data-engine="beam-spark">
     <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
@@ -3271,6 +3279,15 @@ Here are some options you need to set to make this work on a Confluent Cloud Kaf
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has <code>transforms/kafka-producer-create-pokemon-data.hpl</code>, which builds a JSON message with a user ID, a Pokémon name and location, and the detection date every second, and sends it to the topic <code>${KAFKA_TOPIC}</code> with <code>id</code> as the key, until you stop it.
+Set the variables <code>KAFKA_SERVER</code>, <code>KAFKA_TOPIC</code> and <code>KAFKA_CLIENT_ID</code> before you run it.</p>
 </div>
 </div>
 </div>

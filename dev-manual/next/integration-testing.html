@@ -780,8 +780,17 @@ mvn clean install</pre>
 # comma-separated lists are supported). Quote globs so the shell does not expand them.
 
 ./run-tests-docker.sh PROJECT_NAME=transforms TEST_FILTER=0077-merge-rows
-./run-tests-docker.sh PROJECT_NAME=transforms TEST_FILTER='*0077*'</pre>
+./run-tests-docker.sh PROJECT_NAME=transforms TEST_FILTER='*0077*'
+
+# Run a project's tests on the native Spark engine instead of the local engine
+# (Spark local[4]: sources run as one partition, native shuffles spread the rows over 4).
+# The report is &lt;project&gt;-spark-native.
+
+./run-tests-docker.sh PROJECT_NAME=database HOP_IT_ENGINE=spark-native</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>With <code>HOP_IT_ENGINE=spark-native</code>, <code>run-tests.sh</code> copies the project to a temporary folder and replaces its <code>local</code> pipeline run configuration, which the test workflows run their pipelines with, by <code>integration-tests/scripts/run-configurations/spark-native-local.json</code>. The project&#8217;s own <code>local</code> becomes <code>hop-local</code>, which the suite driver keeps using. The tests and their checks stay the project&#8217;s own, so a failure is a difference between the engines. Projects that choose their own engines (<code>spark*</code>, <code>beam*</code>) or have no plain <code>local</code> run configuration are skipped.</p>
 </div>
 </li>
 <li>

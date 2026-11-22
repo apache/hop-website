@@ -1943,6 +1943,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/airflow-trigger-dag-run.html">Trigger Airflow DAG run</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/truncatetables.html">Truncate tables</a>
     
   </li>
@@ -2280,6 +2284,10 @@
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/ai-provider.html">AI Provider</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/airflow-connection.html">Airflow Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3726,6 +3734,39 @@ json.<span class="hljs-property">sourceProperties</span>.<span class="hljs-prope
 <span class="hljs-keyword">var</span> myBodyJson = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(json);</code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>pipelines/read-transactions.hpl</code>, which builds a JSON line for each data row of an Excel file with the labels of its header row, and puts the lines of each file in a JSON array.</p>
+</li>
+<li>
+<p><code>transforms/javascript-create-xml-with-e4x.hpl</code>, which builds a <code>person</code> XML element with E4X for each of 2 rows from a Data grid.</p>
+</li>
+<li>
+<p><code>transforms/javascript-cross-convert-between-julian-dates-and-iso-dates.hpl</code>, which converts 6 ISO dates (<code>yyyy-MM-dd</code>) to JD Edwards Julian dates (<code>CYYDDD</code>) and 6 Julian dates back to ISO dates, and flags the leap years.</p>
+</li>
+<li>
+<p><code>transforms/javascript-dynamic-fields.hpl</code>, which reads the field names and the values of 3 rows in a script, and writes them as a header line and 3 data lines to a CSV file.</p>
+</li>
+<li>
+<p><code>transforms/javascript-field-name-with-spaces.hpl</code>, which reads the field <code>field name with spaces</code> with <code>this["field name with spaces"]</code>.</p>
+</li>
+<li>
+<p><code>transforms/javascript-get-environment-variable.hpl</code>, which reads the environment variable <code>PATH</code> into a field.</p>
+</li>
+<li>
+<p><code>transforms/javascript-sum-over-all-rows.hpl</code>, which uses a start, a transform and an end script to add up the values 1 to 10 of a Data grid, and returns only the total, 55.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

@@ -1943,6 +1943,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/airflow-trigger-dag-run.html">Trigger Airflow DAG run</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/truncatetables.html">Truncate tables</a>
     
   </li>
@@ -2280,6 +2284,10 @@
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/ai-provider.html">AI Provider</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/airflow-connection.html">Airflow Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -4333,6 +4341,12 @@ You can try both DOS and UNIX formats to verify the correct format.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Retrieves the fields as defined by the settings in the File and Content tabs.
 In case of a CSV file, this is performed almost automatically using the columns defined in the header row to define the fields
 In the case of a file with fixed length fields, you must specify the field boundaries using a wizard.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get fields from data catalog</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shown when the project has a <a href="../../metadata-types/data-catalog.html" class="xref page">Data Catalog</a>.
+Fills the fields with the fields a data catalog, such as DataHub, has for the file of the first row: names, types, lengths and precisions. With a wildcard, that is the first file the wildcard matches in that folder, without looking in subfolders. Dates get no format, so they use Hop&#8217;s default format: check it against the file.
+See <a href="../../metadata-types/data-catalog.html#_get_fields_from_a_data_catalog" class="xref page">Get fields from a data catalog</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Preview rows</p></td>

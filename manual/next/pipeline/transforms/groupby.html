@@ -1943,6 +1943,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/airflow-trigger-dag-run.html">Trigger Airflow DAG run</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/truncatetables.html">Truncate tables</a>
     
   </li>
@@ -2280,6 +2284,10 @@
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/ai-provider.html">AI Provider</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/airflow-connection.html">Airflow Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3272,6 +3280,24 @@ Here are the available aggregation methods :</p>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>pipelines/read-transactions.hpl</code>, which groups the JSON lines of the data rows by Excel file and joins them with commas, so that a script can put them in one JSON array per file.</p>
+</li>
+<li>
+<p><code>transforms/group-by-median-and-percentile.hpl</code>, which computes the median, the average and the 90th, 75th, 50th and 25th percentiles of 15 values for 10 groups, once with Group by and once with Memory group by.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
     </article>

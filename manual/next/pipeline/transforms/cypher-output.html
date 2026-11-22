@@ -1943,6 +1943,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/workflow/actions/airflow-trigger-dag-run.html">Trigger Airflow DAG run</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/workflow/actions/truncatetables.html">Truncate tables</a>
     
   </li>
@@ -2280,6 +2284,10 @@
     <ul class="doc-nav__list">
   <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/ai-provider.html">AI Provider</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/airflow-connection.html">Airflow Connection</a>
     
   </li>
   <li class="doc-nav__item">
@@ -3192,7 +3200,9 @@ separator and enclosure settings.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Create indexes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">creates unique field constraints for all Primary properties in the nodes to make sure performance stays good when dealing with merges and lookup of nodes for relationships.
 <strong>NOTE:</strong> Please consider only using this when doing prototyping and testing.
-It&#8217;s better to put the index creation statements explicitly in a Graph script action to make sure you never forget it even when moving to a new database.</p></td>
+It&#8217;s better to put the index creation statements explicitly in a Graph script action to make sure you never forget it even when moving to a new database.
+The indexes of fixed labels are created once per run, before any row is written: on the native Spark and Beam engines on the driver, so the partitions or bundles don&#8217;t create the same constraints at the same time.
+The indexes of labels taken from a field are created on the first row.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Array separator</p></td>
