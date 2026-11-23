@@ -3354,8 +3354,17 @@ PROJECT_HOME is as good as any variable to use.</p>
 <h2 id="_flink_embedded"><a class="link" href="#_flink_embedded">Flink embedded</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You can specify a master of <code>[local]</code> to run using an embedded Flink engine.
-It&#8217;s primarily used for testing locally.</p>
+<p>A master of <code>[local]</code> runs your pipeline on an embedded Flink engine, a Flink mini cluster in the Hop JVM.
+It&#8217;s the way to try a pipeline on Flink before you run it on a cluster: you need no Flink installation and no fat jar.</p>
+</div>
+<div class="paragraph">
+<p>Flink loads the classes of a job in a class loader of its own, which doesn&#8217;t see the plugins of Hop.
+For a <code>[local]</code> master Hop adds the jar files of the Beam plugin to the job&#8217;s class path (<code>pipeline.classpaths</code>), on top of any class path your Flink configuration sets, wherever the plugin is installed.
+It also makes Flink look up classes in the Hop class path first (<code>classloader.resolve-order: parent-first</code>), so a library that is in the lib folder of a plugin as well is loaded once.
+If the Flink configuration in <code>FLINK_CONF_DIR</code> sets <code>classloader.resolve-order</code> to <code>child-first</code>, Hop keeps it and logs a warning: a pipeline can then fail with a <code>ClassCastException</code> or a <code>LinkageError</code>.</p>
+</div>
+<div class="paragraph">
+<p>A master of <code>[collection]</code> runs the pipeline in the Hop JVM as well, but not as a Flink job: it&#8217;s only a quick check of a pipeline, and doesn&#8217;t show how it behaves on Flink.</p>
 </div>
 </div>
 </div>

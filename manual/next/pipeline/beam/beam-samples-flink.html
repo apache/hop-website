@@ -3114,7 +3114,7 @@ Starting taskexecutor daemon on host &lt;HOSTNAME&gt;.</code></pre>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Running Hop pipelines on embedded Flink through Hop Gui will work just fine but is intended for testing purposes and won&#8217;t show in your Flink dashboard. You can leave the default Flink master to <code>[local]</code> to run the embedded Flink engine from Hop Gui.
+To try a pipeline on Flink without a cluster, set the Flink master to <code>[local]</code>: Hop Gui then runs it on an embedded Flink engine, without a fat jar. It&#8217;s meant for testing and doesn&#8217;t show in your Flink dashboard. A master of <code>[collection]</code> doesn&#8217;t run a Flink job at all, so use it only as a quick check.
 </td>
 </tr>
 </table>

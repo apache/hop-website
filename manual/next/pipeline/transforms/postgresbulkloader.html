@@ -3115,6 +3115,42 @@ binary stream fields (for example a 16-byte hash key) are serialized as PostgreS
 </tr>
 </table>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+the data is always sent in UTF-8 and the <code>COPY</code> command declares it with <code>ENCODING 'UTF8'</code>, so the connection&#8217;s <code>client_encoding</code> does not matter. The server converts the text to the database encoding, and a character the database cannot store fails the load.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+the "Date" and "DateTime" date masks always write ISO dates with Gregorian years and ASCII digits, whatever the regional settings. "Pass through" writes the date in the stream field&#8217;s own format.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+numbers read with lazy conversion are copied as they were read when PostgreSQL reads that text the same way: a plain format with a decimal point, no grouping symbol in the value, and an encoding that keeps ASCII digits as ASCII. Other values, for example with a decimal comma, are converted first.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>COPY error messages rarely name the stream field and value. Put <a href="databasevaluevalidation.html" class="xref page">Database value validation</a> in front of this transform to catch over-long strings, encoding problems, numeric overflow and invalid UUID/JSON before COPY runs.</p>
 </div>
@@ -3177,11 +3213,11 @@ Insert inserts, truncate first truncates the table.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enclosure</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">the enclosure character to use in the <code>QUOTE AS</code> part of the copy command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the enclosure character to use in the <code>QUOTE</code> option of the copy command</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Delimiter</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">the delimiter character to use in the <code>DELIMITER AS</code> part of the copy command</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the delimiter character to use in the <code>DELIMITER</code> option of the copy command</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Stop on error</p></td>
