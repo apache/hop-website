@@ -3126,27 +3126,27 @@
 <h2 id="_2_start_a_spark_standalone_cluster"><a class="link" href="#_2_start_a_spark_standalone_cluster">2. Start a Spark standalone cluster</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The cluster runs the same Spark version the engine is built with: <strong>4.1.3</strong>, Scala 2.13.</p>
+<p>The cluster runs the same Spark version the engine is built with: <strong>4.1.4</strong>, Scala 2.13.</p>
 </div>
 <div class="sect2">
 <h3 id="_download_spark"><a class="link" href="#_download_spark">Download Spark</a></h3>
 <div class="listingblock">
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash"><span class="hljs-built_in">mkdir</span> -p ~/spark &amp;&amp; <span class="hljs-built_in">cd</span> ~/spark
-curl -fLO https://dlcdn.apache.org/spark/spark-4.1.3/spark-4.1.3-bin-hadoop3.tgz
-curl -fLO https://downloads.apache.org/spark/spark-4.1.3/spark-4.1.3-bin-hadoop3.tgz.sha512
-<span class="hljs-built_in">sha512sum</span> -c spark-4.1.3-bin-hadoop3.tgz.sha512   <span class="hljs-comment"># macOS: shasum -a 512 -c ...</span>
-tar xzf spark-4.1.3-bin-hadoop3.tgz</code></pre>
+curl -fLO https://dlcdn.apache.org/spark/spark-4.1.4/spark-4.1.4-bin-hadoop3.tgz
+curl -fLO https://downloads.apache.org/spark/spark-4.1.4/spark-4.1.4-bin-hadoop3.tgz.sha512
+<span class="hljs-built_in">sha512sum</span> -c spark-4.1.4-bin-hadoop3.tgz.sha512   <span class="hljs-comment"># macOS: shasum -a 512 -c ...</span>
+tar xzf spark-4.1.4-bin-hadoop3.tgz</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If the <code>dlcdn</code> link no longer works, the release is kept at <code><a href="https://archive.apache.org/dist/spark/spark-4.1.3/" class="bare" rel="noopener" target="_blank">https://archive.apache.org/dist/spark/spark-4.1.3/</a></code>.</p>
+<p>If the <code>dlcdn</code> link no longer works, the release is kept at <code><a href="https://archive.apache.org/dist/spark/spark-4.1.4/" class="bare" rel="noopener" target="_blank">https://archive.apache.org/dist/spark/spark-4.1.4/</a></code>.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_configure_the_cluster"><a class="link" href="#_configure_the_cluster">Configure the cluster</a></h3>
 <div class="paragraph">
-<p>Create <code>~/spark/spark-4.1.3-bin-hadoop3/conf/spark-env.sh</code>. The start scripts read it, so the settings apply every time you start or stop the cluster.</p>
+<p>Create <code>~/spark/spark-4.1.4-bin-hadoop3/conf/spark-env.sh</code>. The start scripts read it, so the settings apply every time you start or stop the cluster.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3177,7 +3177,7 @@ SPARK_WORKER_OPTS=<span class="hljs-string">&quot;-Dspark.worker.cleanup.enabled
 <div class="listingblock">
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash"><span class="hljs-built_in">mkdir</span> -p ~/spark/local
-<span class="hljs-built_in">export</span> SPARK_HOME=~/spark/spark-4.1.3-bin-hadoop3
+<span class="hljs-built_in">export</span> SPARK_HOME=~/spark/spark-4.1.4-bin-hadoop3
 <span class="hljs-variable">$SPARK_HOME</span>/sbin/start-master.sh
 <span class="hljs-variable">$SPARK_HOME</span>/sbin/start-worker.sh spark://localhost:7077</code></pre>
 </div>
@@ -3436,7 +3436,7 @@ Use <code>start-master.sh</code> and <code>start-worker.sh</code> as above, not 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">Created SparkSession version=4.1.3 master=spark://localhost:7077 (owned)
+<pre class="highlightjs highlight"><code class="language-none hljs">Created SparkSession version=4.1.4 master=spark://localhost:7077 (owned)
 ...
 Spark pipeline finished, result row count=0</code></pre>
 </div>
@@ -3528,7 +3528,7 @@ Spark pipeline finished, result row count=0</code></pre>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash"><span class="hljs-built_in">export</span> SPARK_HOME=~/spark/spark-4.1.3-bin-hadoop3
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash"><span class="hljs-built_in">export</span> SPARK_HOME=~/spark/spark-4.1.4-bin-hadoop3
 <span class="hljs-variable">$SPARK_HOME</span>/sbin/stop-worker.sh
 <span class="hljs-variable">$SPARK_HOME</span>/sbin/stop-master.sh</code></pre>
 </div>
@@ -3550,7 +3550,7 @@ Spark pipeline finished, result row count=0</code></pre>
 <p>into <code>SPARK_LOCAL_DIRS</code> while it fetches it. With the default <code>/tmp</code>, a few parallel copies of a 900 MB jar can fill a small or quota-limited <code>/tmp</code> (for example a <code>tmpfs</code>). The executors then fail with <code>Disk quota exceeded</code> or <code>No space left on device</code>, and Spark keeps starting new executors that fail the same way, so the pipeline never ends. Stop it, set <code>SPARK_LOCAL_DIRS</code> to a folder on disk, and restart the workers.</p>
 </li>
 <li>
-<p>into the worker&#8217;s <code>work/&lt;application id&gt;/&lt;executor id&gt;/</code> folder, where it stays after the application ends. Four executors use about 3.5 GB per run. The <code>spark.worker.cleanup.<strong></code> settings in <code>spark-env.sh</code> remove those folders some time after an application has finished. You can also delete <code>~/spark/spark-4.1.3-bin-hadoop3/work/app-</strong></code> yourself while no application is running.</p>
+<p>into the worker&#8217;s <code>work/&lt;application id&gt;/&lt;executor id&gt;/</code> folder, where it stays after the application ends. Four executors use about 3.5 GB per run. The <code>spark.worker.cleanup.<strong></code> settings in <code>spark-env.sh</code> remove those folders some time after an application has finished. You can also delete <code>~/spark/spark-4.1.4-bin-hadoop3/work/app-</strong></code> yourself while no application is running.</p>
 </li>
 </ul>
 </div>
@@ -3639,7 +3639,7 @@ Spark pipeline finished, result row count=0</code></pre>
 <p><a href="../../hop-tools/hop-marketplace.html" class="xref page">Hop Marketplace</a></p>
 </li>
 <li>
-<p><a href="https://spark.apache.org/docs/4.1.3/spark-standalone.html" rel="noopener" target="_blank">Spark standalone mode</a> (Apache Spark documentation)</p>
+<p><a href="https://spark.apache.org/docs/4.1.4/spark-standalone.html" rel="noopener" target="_blank">Spark standalone mode</a> (Apache Spark documentation)</p>
 </li>
 </ul>
 </div>

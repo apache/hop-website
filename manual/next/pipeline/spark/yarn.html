@@ -3155,7 +3155,7 @@
 <p>It passes every property in the <code><strong>-site.xml</code> files to Spark as <code>spark.hadoop.&lt;property&gt;</code>. A <code>spark.hadoop.</strong></code> line in <strong>Spark config</strong> overrides the same property from the files.</p>
 </li>
 <li>
-<p>It sets <code>spark.yarn.jars</code> to its own Spark runtime: the jars in <code>plugins/engines/spark/lib</code> plus the SLF4J and Jackson jars from <code>lib/core</code>, about 285 MB. Spark uploads them to the YARN staging folder on HDFS for every run, so the containers run exactly the Spark version Hop runs (4.1.3). If you set <code>spark.yarn.jars</code> or <code>spark.yarn.archive</code> in <strong>Spark config</strong> yourself, they must point at Spark 4.1.3 for Scala 2.13 and include those SLF4J and Jackson jars.</p>
+<p>It sets <code>spark.yarn.jars</code> to its own Spark runtime: the jars in <code>plugins/engines/spark/lib</code> plus the SLF4J and Jackson jars from <code>lib/core</code>, about 285 MB. Spark uploads them to the YARN staging folder on HDFS for every run, so the containers run exactly the Spark version Hop runs (4.1.4). If you set <code>spark.yarn.jars</code> or <code>spark.yarn.archive</code> in <strong>Spark config</strong> yourself, they must point at Spark 4.1.4 for Scala 2.13 and include those SLF4J and Jackson jars.</p>
 </li>
 </ul>
 </div>
@@ -3174,7 +3174,7 @@
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">Read &lt;n&gt; Hadoop configuration properties from file:///etc/hadoop/conf/core-site.xml, ...
 YARN containers get the engine's Spark runtime: &lt;n&gt; jars in spark.yarn.jars
-Created SparkSession version=4.1.3 master=yarn (owned)
+Created SparkSession version=4.1.4 master=yarn (owned)
 ...
 Spark pipeline finished, result row count=0</code></pre>
 </div>
@@ -3331,7 +3331,7 @@ spark.yarn.appMasterEnv.JAVA_HOME=/opt/java21</code></pre>
 <p><a href="paths-and-filesystems.html" class="xref page">Paths and file systems on native Spark</a></p>
 </li>
 <li>
-<p><a href="https://spark.apache.org/docs/4.1.3/running-on-yarn.html" rel="noopener" target="_blank">Running Spark on YARN</a> (Apache Spark documentation)</p>
+<p><a href="https://spark.apache.org/docs/4.1.4/running-on-yarn.html" rel="noopener" target="_blank">Running Spark on YARN</a> (Apache Spark documentation)</p>
 </li>
 </ul>
 </div>
