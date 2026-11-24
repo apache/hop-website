@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Extension points and when they fire | Apache Hop</title>
+<meta name="description" content="Every extension point Hop fires, in the order a pipeline or workflow run fires them, which engines fire which, and what each hands to a plugin.">
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Apache Hop">
+<meta property="og:title" content="Extension points and when they fire">
+<meta property="og:description" content="Every extension point Hop fires, in the order a pipeline or workflow run fires them, which engines fire which, and what each hands to a plugin.">
+
+<meta property="og:image" content="https://hop.apache.org/img/social-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hop.apache.org/img/social-card.png">
+
+<link rel="icon" href="../../../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="196x196" href="../../../favicon-196x196.png">
+<link rel="manifest" href="../../../site.webmanifest">
+<link rel="stylesheet" href="../../../_/css/site.css">
+
+<script>(function(){try{var t=localStorage.getItem('hop-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+</head>
+<body class="doc-page">
+<a class="skip-link" href="#main" data-pagefind-ignore>Skip to main content</a>
+<header class="site-header" data-pagefind-ignore>
+  <div class="site-header__inner">
+    <a class="brand" href="../../../" aria-label="Apache Hop home">
+      <img src="../../../img/hop-logo.svg" alt="" width="34" height="34" aria-hidden="true">
+      <span class="brand__name">Apache Hop</span>
+    </a>
+
+    <nav class="mainnav" id="mainnav" aria-label="Main">
+      <ul class="mainnav__list">
+        <li><a href="../../../blog/">Blog</a></li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-docs">
+            Documentation <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-docs">
+            <li><a href="../../../manual/latest/getting-started/">Getting started</a></li>
+            <li><a href="../../../manual/latest/">User manual</a></li>
+            <li><a href="../../../dev-manual/latest/">Developer documentation</a></li>
+            <li><a href="../../../docs/architecture/">Architecture</a></li>
+            <li><a href="../../../docs/roadmap/">Roadmap</a></li>
+          </ul>
+        </li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-community">
+            Community <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-community">
+            <li><a href="../../../community/contributing/">Contributing</a></li>
+            <li><a href="../../../community/mailing-list/">Mailing lists</a></li>
+            <li><a href="../../../community/tools/">Tools & chat</a></li>
+            <li><a href="../../../community/events/">Events & user groups</a></li>
+            <li><a href="../../../community/team/">Team</a></li>
+            <li><a href="../../../community/support/">Support</a></li>
+            <li><a href="../../../community/commercial/">Commercial support</a></li>
+            <li><a href="../../../community/ethos/">Ethos</a></li>
+            <li><a href="../../../security/">Security advisories</a></li>
+          </ul>
+        </li>
+        <li class="has-menu">
+          <button type="button" class="mainnav__toggle" aria-expanded="false" aria-controls="menu-asf">
+            Apache <svg class="chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="submenu" id="menu-asf">
+            <li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li>
+            <li><a href="https://www.apache.org/events/current-event" rel="noopener" target="_blank">Events</a></li>
+            <li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li>
+            <li><a href="https://www.apache.org/security/" rel="noopener" target="_blank">Security</a></li>
+            <li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li>
+            <li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li>
+            <li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-tools">
+      <div class="search" role="search">
+        <label class="visually-hidden" for="search-input">Search Apache Hop</label>
+        <input id="search-input" type="search" placeholder="Search" autocomplete="off">
+      </div>
+      <span class="socials">
+        <a class="icon-btn" href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+        <a class="icon-btn" href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"/></svg></a>
+        <a class="icon-btn" href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"/></svg></a>
+        <a class="icon-btn" href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg></a>
+      </span>
+      <a class="mainnav__cta" href="../../../download/">Download</a>
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Switch theme" title="Switch theme">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+      </button>
+      <button type="button" id="nav-burger" class="icon-btn burger" aria-expanded="false" aria-controls="mainnav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="doc-shell">
+<div class="doc-nav" id="doc-nav" data-pagefind-ignore>
+  <button type="button" class="doc-nav__close icon-btn" aria-label="Close navigation">&times;</button>
+  <nav aria-label="Documentation">
+    <div class="doc-nav__group">
+      
+      <ul class="doc-nav__list">
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Getting started section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Getting started</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/getting-started.html">The Hop codebase</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/setup-dev-environment.html">Setting up your development environment</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/build-and-test.html">Building and testing</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/contributing.html">Contributing changes</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/writing-documentation.html">Writing documentation</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Architecture section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Architecture</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/execution-model.html">How a pipeline and a workflow run</a>
+    
+  </li>
+  <li class="doc-nav__item is-current">
+    <a href="../../../dev-manual/next/architecture/extension-points.html">Extension points and when they fire</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/variables-and-metadata.html">Variables, parameters and metadata</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/dependencies-and-classloading.html">Dependencies and classloading</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/logging-and-debugging.html">Logging and debugging</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/performance.html">Performance on the row hot path</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/security.html">Security for developers</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Plugin development section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Plugin development</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-development.html">How plugins work</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Plugin types section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/plugin-types/index.html">Plugin types</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/pipeline-workflow.html">Pipelines and workflows</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/data-connectivity.html">Data and connectivity</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/metadata-configuration.html">Metadata and configuration</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/execution-observability.html">Execution and observability</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/gui.html">GUI</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/compression-formats.html">Compression formats</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/diagram-exporters.html">Diagram exporters</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/ai-advisor-plugins.html">AI advisor plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/metadata-plugins.html">Metadata plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/metadata-serialization.html">Metadata serialization</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/metadata-injection.html">Metadata injection</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/value-types.html">Value types</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Database plugins section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/database/index.html">Database plugins</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/creating-a-dialect.html">Creating a dialect</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/column-types.html">Column types and type rules</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/value-bindings.html">Moving values across JDBC</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/extending-another-dialect.html">Extending a dialect you don&#8217;t own</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/testing.html">Testing a database plugin</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/database/migrating-from-variants.html">Migrating from isXVariant()</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/gui-plugins-toolbars.html">GUI plugins and toolbars</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-types/canvas-overlays.html">Canvas overlays</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/annotation-derived-widgets.html">Annotation derived widgets</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/engine-compatibility.html">Engine compatibility</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/lineage.html">Lineage observation hub</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/internationalisation.html">Internationalisation (i18n)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/svg-files.html">SVG files</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/plugin-samples.html">Plugin samples</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/start-your-own-plugin.html">Creating a plugin outside the Hop repository</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/marketplace-publish-plugin.html">Publishing a plugin to Nexus (marketplace)</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/porting-kettle-plugins.html">Porting Kettle plugins</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Testing section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Testing</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/testing/unit-testing.html">Unit tests</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/integration-testing.html">Integration tests</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/testing/ui-testing.html">UI tests with SWTBot</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Embedding and interfaces section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Embedding and interfaces</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle The Hop SDK section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/sdk/index.html">The Hop SDK</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/pipelines.html">Pipelines API</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/workflows.html">Workflows API</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/metadata.html">Metadata and Providers</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/vfs.html">File Handling with HopVFS</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/logging.html">Logging Subsystem</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Plugin Development Guide section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/sdk/plugins/index.html">Plugin Development Guide</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/transforms.html">Transforms</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/actions.html">Actions</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/metadata.html">Metadata Elements</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/databases.html">Database Dialects</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/gui.html">GUI Plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/file-types.html">Hop File Types</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/variable-resolvers.html">Variable Resolvers</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/extension-points.html">Extension Points</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/commands.html">Hop Commands</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/configuration.html">Configuration Plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/perspectives.html">Perspectives</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/vfs.html">VFS Plugins</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/value-types.html">Value Types</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/servlets.html">Hop Server Servlets</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/plugins/execution-info.html">Execution Information Locations</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/sdk/hop-sdk.html">Legacy SDK Guide</a>
+    
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Hop Web section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/hopweb/index.html">Hop Web</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/hopweb/developer-guide.html">Hop Web Developer Guide</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/hopweb/hopweb-antipatterns.html">Hop Web Antipatterns</a>
+    
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Distribution and release section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <span>Distribution and release</span>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/docker-build.html">Docker Build Script</a>
+    
+  </li>
+  <li class="doc-nav__item is-parent">
+    <button type="button" class="doc-nav__expand" aria-expanded="false" aria-label="Toggle Apache Release Process section">
+      <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <a href="../../../dev-manual/next/apache-release/index.html">Apache Release Process</a>
+    <ul class="doc-nav__list">
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/apache-release/creating-a-release.html">Creating a Release</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/apache-release/promoting-a-release.html">Promoting a Release</a>
+    
+  </li>
+  <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/apache-release/checking-a-release.html">Checking a Release</a>
+    
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+  </li>
+</ul>
+
+    </div>
+  </nav>
+<div class="nav-foot">
+  <details class="explore">
+    <summary>
+      <span class="explore__now">
+        <span class="explore__component">Development Documentation</span>
+        <span class="explore__version">2.21.0</span>
+      </span>
+      <svg class="explore__chev" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </summary>
+    <div class="explore__body">
+      <div class="explore__group">
+  <p class="explore__title"></p>
+  <ul>
+    <li class="is-current">
+      <a href="../../../dev-manual/next/architecture/extension-points.html">2.21.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/latest/index.html" title="This page does not exist in 2.20.0; opens the start page">2.20.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/2.19.0/index.html" title="This page does not exist in 2.19.0; opens the start page">2.19.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/2.18.1/index.html" title="This page does not exist in 2.18.1; opens the start page">2.18.1</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/2.18.0/index.html" title="This page does not exist in 2.18.0; opens the start page">2.18.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/2.17.0/index.html" title="This page does not exist in 2.17.0; opens the start page">2.17.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/2.16.0/index.html" title="This page does not exist in 2.16.0; opens the start page">2.16.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/2.15.0/index.html" title="This page does not exist in 2.15.0; opens the start page">2.15.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/2.14.0/index.html" title="This page does not exist in 2.14.0; opens the start page">2.14.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/2.13.0/index.html" title="This page does not exist in 2.13.0; opens the start page">2.13.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/2.12.0/index.html" title="This page does not exist in 2.12.0; opens the start page">2.12.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/2.11.0/index.html" title="This page does not exist in 2.11.0; opens the start page">2.11.0</a>
+    </li>
+    <li class="is-missing">
+      <a href="../../../dev-manual/2.10.0/index.html" title="This page does not exist in 2.10.0; opens the start page">2.10.0</a>
+    </li>
+  </ul>
+</div>
+
+        
+        <div class="explore__group">
+  <p class="explore__title">User manual</p>
+  <ul>
+    <li>
+      <a href="../../../manual/next/index.html">2.21.0 (pre-release)</a>
+    </li>
+    <li>
+      <a href="../../../manual/latest/index.html">2.20.0</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.19.0/index.html">2.19.0</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.18.1/index.html">2.18.1</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.18.0/index.html">2.18.0</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.17.0/index.html">2.17.0</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.16.0/index.html">2.16.0</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.15.0/index.html">2.15.0</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.14.0/index.html">2.14.0</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.13.0/index.html">2.13.0</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.12.0/index.html">2.12.0</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.11.0/index.html">2.11.0</a>
+    </li>
+    <li>
+      <a href="../../../manual/2.10.0/index.html">2.10.0</a>
+    </li>
+  </ul>
+</div>
+
+    </div>
+  </details>
+
+  <a class="nav-foot__edit" href="https://github.com/apache/hop/edit/main/docs/hop-dev-manual/modules/ROOT/pages/architecture/extension-points.adoc" rel="noopener" target="_blank">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758zm1.414 1.06a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354zM11.189 6.25 9.75 4.81l-6.286 6.287a.25.25 0 0 0-.064.108l-.558 1.953 1.953-.558a.25.25 0 0 0 .108-.064z"/></svg>
+    Edit this page
+  </a>
+</div>
+</div>
+  <main class="doc-main" id="main">
+    <button type="button" class="doc-nav__open" aria-expanded="false" aria-controls="doc-nav" data-pagefind-ignore>
+      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      Documentation menu
+    </button>
+<nav class="breadcrumbs" data-pagefind-ignore aria-label="Breadcrumb">
+  <ol>
+    <li><a href="../../../">Home</a></li>
+    <li><span aria-current="page">Architecture</span></li>
+    <li><a href="../../../dev-manual/next/architecture/extension-points.html">Extension points and when they fire</a></li>
+  </ol>
+</nav>
+    <article class="doc">
+      <h1>Extension points and when they fire</h1>
+      <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>An extension point is a named moment at which Hop calls every plugin listening for it.
+How to write such a plugin is on the <a href="../plugin-types/execution-observability.html#_extension_point" class="xref page">Execution and observability</a> page.
+This page is about the moments themselves: when each one fires, in which order, on which engine, and what it hands over.</p>
+</div>
+<div class="paragraph">
+<p>The names are the constants of two enums:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>HopExtensionPoint</code> in <code>org.apache.hop.core.extension</code> (core): runs, files, metadata, the command line tools and most of Hop GUI.</p>
+</li>
+<li>
+<p><code>HopGuiExtensionPoint</code> in <code>org.apache.hop.ui.hopgui</code> (ui): file dialogs, the explorer and a few Hop GUI updates.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A listener names the moment in <code>extensionPointId</code>; the generic type of <code>IExtensionPoint&lt;T&gt;</code> is the object Hop hands over.
+Extension points run on the thread that fires them, one listener after the other, so a slow listener slows down the run.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_a_pipeline_run_on_the_local_engine"><a class="link" href="#_a_pipeline_run_on_the_local_engine">A pipeline run on the local engine</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The local engine (<code>Pipeline</code>, <code>LocalPipelineEngine</code>) fires the full set, in this order:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 33.3333%;">
+<col style="width: 50.0001%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Extension point</th>
+<th class="tableblock halign-left valign-top">Object</th>
+<th class="tableblock halign-left valign-top">When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PipelinePrepareExecution</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IPipelineEngine</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>prepareExecution()</code> has checked the pipeline against the engine (engine compatibility), and is about to activate the parameters, create the row sets and the transform copies.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TransformBeforeInitialize</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TransformInitThread</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For every transform copy, right before its <code>init()</code> starts on an init thread of its own.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TransformAfterInitialize</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TransformInitThread</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For every transform copy, once its init thread is done. All copies initialize at the same time, so the order between copies is not fixed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TransformFailed</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ExecutionFailure</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A transform copy failed to initialize. The pipeline does not start.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PipelineStartThreads</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IPipelineEngine</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>startThreads()</code> begins: before the execution started listeners and before any transform thread starts.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TransformBeforeStart</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TransformMetaDataCombi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For every transform copy, right before its thread starts.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PipelineStart</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IPipelineEngine</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All transform threads were started. Rows may already be flowing.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TransformFinished</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TransformMetaDataCombi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A transform copy finished. Fired from the copy&#8217;s finished listener, ahead of the pipeline&#8217;s own detection of the end of the run.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TransformFailed</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ExecutionFailure</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A transform copy failed while processing rows: it threw an exception, or it finished with errors.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PipelineFinish</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IPipelineEngine</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The last transform copy finished. This is the first execution finished listener: the others run after it.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PipelineFailed</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ExecutionFailure</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The run failed: after all execution finished listeners, before <code>PipelineCompleted</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PipelineCompleted</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IPipelineEngine</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Everything is done: the result, the status and the failures are final. <code>waitUntilFinished()</code> returns after this, so a caller such as <code>hop-run</code> can leave the JVM straight after it: work that has to happen at the end of a run, such as flushing lineage, belongs here.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code>PipelineMetaLoaded</code> fires earlier, whenever a <code>PipelineMeta</code> is read from a file, also when nothing runs it.</p>
+</div>
+<div class="paragraph">
+<p>The single-threaded pipeline type runs the transforms one at a time in an executor, without threads of their own.
+It fires the same extension points; <code>TransformBeforeStart</code> comes for every copy before <code>PipelineStart</code>, and <code>TransformFinished</code> when the executor disposes the copies at the end of the run.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_which_engine_fires_what"><a class="link" href="#_which_engine_fires_what">Which engine fires what</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6669%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Extension point</th>
+<th class="tableblock halign-left valign-top">Local</th>
+<th class="tableblock halign-left valign-top">Remote (Hop Server)</th>
+<th class="tableblock halign-left valign-top">Beam</th>
+<th class="tableblock halign-left valign-top">Native Spark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PipelinePrepareExecution</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PipelineStartThreads</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PipelineStart</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PipelineFinish</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PipelineCompleted</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PipelineFailed</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TransformBeforeInitialize</code>, <code>TransformAfterInitialize</code>, <code>TransformBeforeStart</code>, <code>TransformFinished</code>, <code>TransformFailed</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The <strong>remote</strong> engine sends the pipeline to a Hop Server.
+The server runs it on its own local engine, which fires the full set in the server&#8217;s JVM; the client only sees the start and the end.</p>
+</div>
+<div class="paragraph">
+<p>The <strong>Beam</strong> and <strong>native Spark</strong> engines fire the pipeline-level points at the same moments as the local engine, once per run, but no transform-level points: a transform there is a step in a Beam or Spark job, not a copy with a thread.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Beam and native Spark run a Hop transform without a native implementation inside a small local pipeline: on Beam one per transform and worker, on native Spark one per transform and partition.
+These are local engines of the single-threaded type, and they fire the local engine&#8217;s extension points, pipeline and transform level, for every bundle or partition they run.
+A listener that only wants the run itself sees these too.
+They have no dedicated marker yet: their pipeline is named after the transform, their run configuration is named <code>beam-transform-local (&#8230;&#8203;)</code> or <code>spark-transform-local (&#8230;&#8203;)</code>, and their type is <code>SingleThreaded</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_a_workflow_run_on_the_local_engine"><a class="link" href="#_a_workflow_run_on_the_local_engine">A workflow run on the local engine</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The local workflow engine (<code>Workflow</code>, <code>LocalWorkflowEngine</code>) fires:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 33.3333%;">
+<col style="width: 50.0001%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Extension point</th>
+<th class="tableblock halign-left valign-top">Object</th>
+<th class="tableblock halign-left valign-top">When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WorkflowStart</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IWorkflowEngine</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The workflow has checked its actions against the engine (engine compatibility), after the execution started listeners, before the first action.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WorkflowBeginProcessing</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WorkflowExecutionExtension</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Right after <code>WorkflowStart</code>: the start of processing.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WorkflowBeforeActionExecution</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WorkflowExecutionExtension</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Before every action. A listener can stop the action from running: set <code>executeAction</code> to false.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ActionFailed</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ExecutionFailure</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The action threw an exception, raised its error count, or ran a child pipeline or workflow that failed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WorkflowAfterActionExecution</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WorkflowExecutionExtension</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">After every action, with its result.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WorkflowFailed</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ExecutionFailure</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The workflow ended with a false result, unless someone stopped it and nothing went wrong.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WorkflowFinish</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IWorkflowEngine</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The workflow ended, successfully or not. The execution finished listeners run after it.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code>WorkflowMetaLoaded</code> fires whenever a <code>WorkflowMeta</code> is read from a file.</p>
+</div>
+<div class="paragraph">
+<p>The remote workflow engine fires none of these on the client: the Hop Server runs the workflow on its local engine, which fires them there.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>A child workflow that a Workflow action runs fires <code>WorkflowFinish</code> twice: once at the end of its own run, and once more from the thread the action runs it on (<code>ActionWorkflowRunner</code>).
+A listener on <code>WorkflowFinish</code> should not assume it is called once per run.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_before_and_around_a_run"><a class="link" href="#_before_and_around_a_run">Before and around a run</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Extension point</th>
+<th class="tableblock halign-left valign-top">When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopRunCalculateFilename</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop-run</code> has worked out the file to run, before it uses it.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopRunStart</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop-run</code> starts, before it loads the metadata and runs the file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopRunEnd</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop-run</code> is done.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiPipelineMetaExecutionStart</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hop GUI starts to run a pipeline (<code>PipelineMeta</code>).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiPipelineExecutionConfiguration</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Right before Hop GUI shows the run configuration of a pipeline.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiPipelineBeforeStart</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Right before Hop GUI starts the pipeline engine.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiWorkflowMetaExecutionStart</code>, <code>HopGuiWorkflowExecutionConfiguration</code>, <code>HopGuiWorkflowBeforeStart</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The same for a workflow. <code>HopGuiWorkflowBeforeStart</code> also fires in <code>hop-run</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiRunConfiguration</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A dialog that picks a run configuration (run options, Pipeline and Workflow actions, Pipeline and Workflow executor, Metadata injection) fills its list: the extension point gets the list, so a plugin can add to it.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiPipelineFinished</code> (<code>HopGuiExtensionPoint</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pipeline that Hop GUI ran has finished.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_checks_database_connections_and_metadata"><a class="link" href="#_checks_database_connections_and_metadata">Checks, database connections and metadata</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Extension point</th>
+<th class="tableblock halign-left valign-top">When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BeforeCheckTransforms</code>, <code>AfterCheckTransforms</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Before and after the transforms of a pipeline are verified.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BeforeCheckTransform</code>, <code>AfterCheckTransform</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Before and after each transform is verified.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AfterCheckActions</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">After the actions of a workflow were verified.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GetFieldsExtension</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The output fields of a transform are worked out and its <code>getFields()</code> added or changed none: a plugin can supply them.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DatabaseCreated</code>, <code>DatabaseConnected</code>, <code>DatabaseDisconnected</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A <code>Database</code> was created, connected, or disconnected.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopEnvironmentAfterInit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopEnvironment.init()</code> is done: plugins can register extra plugins or metadata here.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopProjectEnvironmentAfterEnabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A project and its lifecycle environment were enabled.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ProjectHome</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The home folder of a project is being worked out.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_hop_server"><a class="link" href="#_hop_server">Hop Server</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Extension point</th>
+<th class="tableblock halign-left valign-top">When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopServerCalculateFilename</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The server worked out its configuration file, before it uses it.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopServerInit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Right before the server starts.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopServerStartup</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The server has started and is fully up.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopServerShutdown</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Right before the server shuts down.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopServerTerminate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The server has shut down.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_import_tool"><a class="link" href="#_the_import_tool">The import tool</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>HopImportStart</code> and <code>HopImportEnd</code> fire at the start and the end of <code>hop-import</code>.
+In between, <code>HopImportTargetMetadataReady</code> fires once the metadata of the target exists, <code>HopImportRewriteMetadata</code> once the imported files and connections are written, and <code>HopImportCreateProject</code> to register a project for the target folder.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_hop_gui"><a class="link" href="#_hop_gui">Hop GUI</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>These fire in Hop GUI (and Hop Web), not during a run.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Extension point</th>
+<th class="tableblock halign-left valign-top">When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiInit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Before the main window is created.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiStart</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hop GUI has started.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiProjectAfterEnabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A project was enabled in Hop GUI.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PipelineAfterOpen</code>, <code>WorkflowAfterOpen</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pipeline or workflow file was opened.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PipelineBeforeSave</code>, <code>PipelineAfterSave</code>, <code>PipelineAfterSaveAs</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pipeline file is about to be saved, was saved, or was saved under a new name.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WorkflowBeforeSave</code>, <code>WorkflowAfterSave</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A workflow file is about to be saved, or was saved.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PipelineTransformRenamed</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A transform was renamed.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PipelineBeforeDeleteTransforms</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transforms are about to be deleted from a pipeline.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PipelinePainterStart</code>, <code>PipelinePainterTransform</code>, <code>PipelinePainterArrow</code>, <code>PipelinePainterEnd</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The pipeline canvas is drawn: before everything, on each transform icon, on each hop, and on top of everything.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WorkflowPainterStart</code>, <code>WorkflowPainterAction</code>, <code>WorkflowPainterArrow</code>, <code>WorkflowPainterEnd</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The same for the workflow canvas.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PipelineGraphMouseDown</code>, <code>PipelineGraphMouseUp</code>, <code>PipelineGraphMouseMoved</code>, <code>PipelineGraphMouseDoubleClick</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mouse events on the pipeline canvas.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WorkflowGraphMouseDown</code>, <code>WorkflowGraphMouseUp</code>, <code>WorkflowGraphMouseDoubleClick</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mouse events on the workflow canvas.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiPipelineGraphAreaHover</code>, <code>HopGuiWorkflowGraphAreaHover</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The mouse hovers over a drawn area of a canvas: a plugin can add a tooltip.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiNewPipelineTab</code>, <code>HopGuiNewWorkflowTab</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The explorer works out the tab name of a pipeline or workflow.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiMetadataObjectCreateBeforeDialog</code>, <code>HopGuiMetadataObjectCreated</code>, <code>HopGuiMetadataObjectUpdated</code>, <code>HopGuiMetadataObjectDeleted</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A metadata object is about to be created (before its dialog), was created, updated or deleted.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiGetSearchablesLocations</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Search collects the places it searches.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiGetControlSpaceSortOrderPrefix</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The variable list (<code>CTRL-SPACE</code>) is sorted.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiLifecycleEnvironmentDialogTabs</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The lifecycle environment dialog collects its tabs.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiSearchMarketplace</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Open the marketplace searching for a plugin, from a dialog about a missing transform or action.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiAiAdvisorOpenSession</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Open a session of the AI advisor.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiFileBeforeCommit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Files are about to be committed to git.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ProblemsForceRefresh</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The problems tab refreshes, after the database cache was cleared.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>And the ones in <code>HopGuiExtensionPoint</code>:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Extension point</th>
+<th class="tableblock halign-left valign-top">When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiFileOpenDialog</code>, <code>HopGuiFileOpenedDialog</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Before a file open dialog is shown, and after a file was picked in it.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiFileDirectoryDialog</code>, <code>HopGuiDirectorySelected</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Before a folder dialog is shown, and after a folder was picked in it.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiDetermineExplorerRoot</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The explorer works out its root folder.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiWorkflowClipboardFilePaste</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A file name is pasted onto a workflow.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiPipelineGraphUpdateGui</code>, <code>HopGuiWorkflowGraphUpdateGui</code>, <code>PipelineExecutionViewerUpdate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A canvas or execution viewer updates: a plugin can enable or disable widgets.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiSystemVariablesSaved</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system variables were saved from the configuration perspective.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_declared_but_not_fired"><a class="link" href="#_declared_but_not_fired">Declared but not fired</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>These constants exist, and some have listeners, but nothing in Hop fires them at the moment.
+A plugin that listens to one of them is never called:</p>
+</div>
+<div class="paragraph">
+<p><code>HopGuiEnd</code>, <code>OpenRecent</code>, <code>PipelineHeartbeat</code>, <code>PipelineBeforeClose</code>, <code>PipelineAfterClose</code>, <code>PipelineChanged</code>, <code>PipelineTransformRightClick</code>, <code>RunConfigurationSelection</code>, <code>RunConfigurationIsRemote</code>, <code>WorkflowBeforeOpen</code>, <code>WorkflowBeforeClose</code>, <code>WorkflowAfterClose</code>, <code>WorkflowChanged</code>, <code>WorkflowDialogShowRetrieveLogTableFields</code>, <code>HopGuiPipelineAfterClose</code>, <code>HopGuiWorkflowAfterClose</code>, and in <code>HopGuiExtensionPoint</code> <code>HopGuiFileSaveDialog</code> and <code>HopGuiNewPipelineTab</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_firing_your_own"><a class="link" href="#_firing_your_own">Firing your own</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Anything can fire an extension point, by name:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>java</div><pre class="highlightjs highlight is-highlighted"><code class="language-java hljs" data-lang="java">ExtensionPointHandler.callExtensionPoint(
+    log, variables, HopExtensionPoint.PipelineStart.id, pipeline);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A plugin may define a name of its own and fire it; listeners find it by that name.
+When an engine fires the run&#8217;s extension points, it should fire them at the moments in the tables above, each once per run, with the same object type: listeners rely on that order, and on <code>PipelineCompleted</code> being the last call before <code>waitUntilFinished()</code> returns.</p>
+</div>
+</div>
+</div>
+    </article>
+<nav class="pagination" data-pagefind-ignore aria-label="Page">
+  <a class="pagination__prev" href="../../../dev-manual/next/architecture/execution-model.html"><span>Previous</span><strong>How a pipeline and a workflow run</strong></a>
+  <a class="pagination__next" href="../../../dev-manual/next/architecture/variables-and-metadata.html"><span>Next</span><strong>Variables, parameters and metadata</strong></a>
+</nav>
+  </main>
+
+<aside class="doc-toc" data-pagefind-ignore aria-label="On this page" data-levels="2">
+  <p class="doc-toc__title">On this page</p>
+  <div class="doc-toc__body"></div>
+</aside>
+</div>
+<footer class="site-footer" data-pagefind-ignore>
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <img src="../../../img/hop-logo.svg" alt="" width="30" height="30" aria-hidden="true">
+      <div>
+        <p>The Hop Orchestration Platform &mdash; visual data and metadata orchestration, designed once and run anywhere.</p>
+        <ul class="site-footer__socials">
+        <li><a href="https://github.com/apache/hop" aria-label="Apache Hop on GitHub" title="GitHub" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/company/apachehop/" aria-label="Apache Hop on LinkedIn" title="LinkedIn" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14M7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"/></svg></a></li>
+        <li><a href="https://bsky.app/profile/hop.apache.org" aria-label="Apache Hop on Bluesky" title="Bluesky" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078 2.67.297 5.568-.628 6.383-3.364C23.622 9.418 24 4.458 24 3.768c0-.688-.139-1.86-.902-2.203-.659-.299-1.664-.621-4.3 1.24C16.046 4.747 13.087 8.686 12 10.8z"/></svg></a></li>
+        <li><a href="https://www.youtube.com/channel/UCGlcYslwe03Y2zbZ1W6DAGA" aria-label="Apache Hop on YouTube" title="YouTube" rel="noopener" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg></a></li>
+        </ul>
+      </div>
+    </div>
+    <nav class="site-footer__nav" aria-label="Footer">
+      <div>
+        <h2>Documentation</h2>
+        <ul>
+          <li><a href="../../../manual/latest/getting-started/">Getting started</a></li>
+          <li><a href="../../../manual/latest/">User manual</a></li>
+          <li><a href="../../../dev-manual/latest/">Developer docs</a></li>
+          <li><a href="../../../download/">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Community</h2>
+        <ul>
+          <li><a href="../../../community/contributing/">Contributing</a></li>
+          <li><a href="../../../community/mailing-list/">Mailing lists</a></li>
+          <li><a href="../../../community/events/">Events</a></li>
+          <li><a href="../../../community/support/">Support</a></li>
+          <li><a href="../../../community/commercial/">Commercial support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Apache</h2>
+        <ul>
+          <li><a href="https://www.apache.org/" rel="noopener" target="_blank">Foundation</a></li>
+          <li><a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">License</a></li>
+          <li><a href="https://privacy.apache.org/policies/privacy-policy-public.html" rel="noopener" target="_blank">Privacy</a></li>
+          <li><a href="https://www.apache.org/foundation/sponsorship.html" rel="noopener" target="_blank">Sponsorship</a></li>
+          <li><a href="https://www.apache.org/foundation/thanks.html" rel="noopener" target="_blank">Thanks</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="site-footer__legal">
+    <p>
+      Copyright &copy; 2019&ndash;2026 <a href="https://www.apache.org/" rel="noopener" target="_blank">The Apache Software Foundation</a>,
+      licensed under the <a href="https://www.apache.org/licenses/" rel="noopener" target="_blank">Apache License, Version 2.0</a>.
+    </p>
+    <p>
+      Apache, Apache Hop, Hop, and the Apache feather logo are either registered trademarks or
+      trademarks of the Apache Software Foundation in the United States and/or other countries.
+    </p>
+  </div>
+</footer>
+
+<script src="../../../js/site.js"></script>
+<script src="../../../js/matomo.js"></script>
+<script src="../../../_/js/tabs.js"></script>
+</body>
+</html>

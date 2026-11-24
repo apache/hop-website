@@ -150,6 +150,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/extension-points.html">Extension points and when they fire</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../dev-manual/next/architecture/variables-and-metadata.html">Variables, parameters and metadata</a>
     
   </li>
@@ -713,7 +717,8 @@ The <code>Result</code> carries success, error count, and the rows and filenames
 <div class="sectionbody">
 <div class="paragraph">
 <p>The lifecycle is exposed through <a href="../plugin-types/execution-observability.html" class="xref page">extension points</a> — <code>PipelinePrepareExecution</code>, <code>PipelineStart</code>, <code>TransformBeforeStart</code>, <code>PipelineFinish</code>, <code>PipelineCompleted</code> and their workflow equivalents.
-These are how logging, execution information, lineage and live status all attach without the engine knowing about them.</p>
+These are how logging, execution information, lineage and live status all attach without the engine knowing about them.
+<a href="extension-points.html" class="xref page">Extension points and when they fire</a> lists every one of them, in the order a run fires them, and which engines fire which.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -774,7 +779,7 @@ Binding to the concrete class works on the local engine and throws a <code>Class
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../dev-manual/next/writing-documentation.html"><span>Previous</span><strong>Writing documentation</strong></a>
-  <a class="pagination__next" href="../../../dev-manual/next/architecture/variables-and-metadata.html"><span>Next</span><strong>Variables, parameters and metadata</strong></a>
+  <a class="pagination__next" href="../../../dev-manual/next/architecture/extension-points.html"><span>Next</span><strong>Extension points and when they fire</strong></a>
 </nav>
   </main>
 

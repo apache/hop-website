@@ -3272,6 +3272,44 @@ In a transactional pipeline the truncate and table changes also wait for the fir
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_batches_and_error_handling"><a class="link" href="#_batches_and_error_handling">Batches and error handling</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>With <strong>Use batch update for inserts</strong> on, rows are sent to the database in batches of the commit size.
+When a row in a batch fails, what happened to the other rows of the batch depends on the database&#8217;s JDBC driver: some run the other rows, some stop at the failing row, and some lose the whole batch.</p>
+</div>
+<div class="paragraph">
+<p>On a database whose driver&#8217;s behaviour has been measured, the transform uses it to work out which rows of a failed batch are in the database, and with an error hop attached it sends each row to exactly one stream: the main output for rows that were written, the error hop for rows that were refused.
+A row only appears on the main output after the database has committed it, and the rows keep their input order.
+Batches without errors run as before.
+On such a database the transform also keeps batching when an error hop is attached, where it otherwise writes row by row.</p>
+</div>
+<div class="paragraph">
+<p>The databases measured so far, with their default connection options, are listed in the development manual under "Creating a dialect".
+On every other database, and when a connection option changes how the driver handles a failed batch, the transform handles a failed batch as it always did.</p>
+</div>
+<div class="paragraph">
+<p>To go back to that behaviour on a measured database:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>set <strong>When a batch fails, the driver</strong> on the <strong>Advanced</strong> tab of the connection to <strong>As before</strong>, or</p>
+</li>
+<li>
+<p>set the variable <code>HOP_DATABASE_BATCH_RECOVERY</code> to <code>LEGACY</code>, for every connection.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The same option can name what the driver does, for a connection whose options change it.</p>
+</div>
+<div class="paragraph">
+<p>When a failed batch is worked out this way, rows can be sent to the database more than once, so a failed batch can use up extra sequence values and fire non-transactional triggers again.</p>
+</div>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/pipeline/transforms/tableinput.html"><span>Previous</span><strong>Table Input</strong></a>

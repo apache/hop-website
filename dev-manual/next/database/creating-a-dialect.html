@@ -150,6 +150,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/extension-points.html">Extension points and when they fire</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../dev-manual/next/architecture/variables-and-metadata.html">Variables, parameters and metadata</a>
     
   </li>
@@ -748,6 +752,10 @@ They are ordinary methods with sensible defaults, and the ones that matter most 
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getLimitClausePrefix(int)</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The clause placed directly after <code>SELECT</code> instead, such as <code>" TOP 10"</code>. Databases use one form or the other, so override this or <code>getLimitClause</code>, not both.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>getBatchFailureContract()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What the JDBC driver does with a batch when one of its rows fails, measured against a real server, or <code>null</code> when nobody has measured it. See <a href="#_batch_failure_contract">Batch failure contract</a>.</p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
@@ -757,6 +765,126 @@ A dialect that offers neither still works: the row count is capped while reading
 <div class="paragraph">
 <p>Prefer overriding a capability over overriding behaviour.
 A capability is a fact about the database that Hop can act on in several places; overridden behaviour only fixes the one place you overrode.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_batch_failure_contract"><a class="link" href="#_batch_failure_contract">Batch failure contract</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When a row in a JDBC batch fails, drivers disagree about what happened to the other rows of the batch, and about what <code>BatchUpdateException.getUpdateCounts()</code> means.
+A dialect that knows what its driver does returns it from <code>getBatchFailureContract()</code>, and Table output then uses it to keep batching with an error hop attached and still send every row of a failed batch to exactly one stream, in input order:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>MARKS_FAILED_ROWS</code></dt>
+<dd>
+<p>The driver runs every row and marks the failed ones with <code>EXECUTE_FAILED</code>.
+The rows it applied are committed, and the failed ones are rejected.</p>
+</dd>
+<dt class="hdlist1"><code>KEEPS_PREFIX</code></dt>
+<dd>
+<p>The driver stops at the first failing row; the counts array is as long as the rows before it, and the rows behind it were never sent.
+The prefix is committed, the failing row rejected, and the rest is sent again.</p>
+</dd>
+<dt class="hdlist1"><code>LOSES_WHOLE_BATCH</code></dt>
+<dd>
+<p>No row of the batch survives.
+The batch is rolled back and run again in halves until the failing rows are isolated.
+The failed batch entry a driver names in its message (<code>getFailedBatchEntry</code>) can save most of those round trips.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>A dialect that returns <code>null</code>, the default, is treated as <code>UNKNOWN</code>: a failed batch is handled the way Hop always handled it.
+Users get that behaviour back on a dialect with a contract by choosing <strong>As before</strong> for <strong>When a batch fails, the driver</strong> on the <strong>Advanced</strong> tab of the connection, or with the variable <code>HOP_DATABASE_BATCH_RECOVERY=LEGACY</code> for every connection.</p>
+</div>
+<div class="sect2">
+<h3 id="_measure_dont_guess"><a class="link" href="#_measure_dont_guess">Measure, don&#8217;t guess</a></h3>
+<div class="paragraph">
+<p>Return a contract only after measuring the driver against a real server, with the driver version Hop ships and the connection options the dialect writes.
+<code>org.apache.hop.core.database.batch.BatchContractProbe</code> does the measurement on any open connection: it commits two rows into a scratch table, sends a batch of ten rows of which two repeat those keys, commits, and reports the update counts and the rows that survived.
+Put the failing rows at the start, in the middle and at the end of a batch, and also try a batch large enough for the driver to split it into several statements or packets.</p>
+</div>
+<div class="paragraph">
+<p>A contract often only holds for some connection options.
+Read them with <code>getConnectionOption(name)</code>, which looks at the extra options and a manual URL, and return <code>null</code> for any option value that was not measured.
+Return the contract for your own dialect class only (<code>getClass() == MyDatabaseMeta.class</code>), so a dialect that extends yours doesn&#8217;t inherit a contract nobody measured for its driver.</p>
+</div>
+<div class="paragraph">
+<p>Every declared contract is checked against the real driver in a test that uses <code>org.apache.hop.junit.batch.DialectContractCheck</code> from the hop-core test jar: the probe must see exactly what the dialect declares, through the URL the dialect builds, and a batch recovered by that contract must report exactly the rows that end up in the table, also for a batch the driver splits.
+For a connection option that makes the dialect declare nothing, the check confirms the driver indeed behaves differently with it.
+The drivers that run in process are checked in unit tests, for example <code>H2BatchContractTest</code> and <code>DerbyNetworkBatchContractTest</code>.
+PostgreSQL, MySQL, SQL Server and Oracle are checked in <code>*BatchContractIT</code> classes in their plugins, in Testcontainers images; the drivers Hop downloads on demand are fetched at the dialect&#8217;s <code>DriverDownload</code> version.
+The MySQL, SQL Server and Oracle ones run with <code>-Dhop.it.batchContracts=true</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_what_was_measured"><a class="link" href="#_what_was_measured">What was measured</a></h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 30%;">
+<col style="width: 30%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Dialect</th>
+<th class="tableblock halign-left valign-top">Driver</th>
+<th class="tableblock halign-left valign-top">Contract</th>
+<th class="tableblock halign-left valign-top">Not declared with</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PostgreSQL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pgjdbc 42.7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOSES_WHOLE_BATCH</code>, also with <code>reWriteBatchedInserts</code> and every <code>autosave</code> setting</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SQL Server (Microsoft driver)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mssql-jdbc 13.4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MARKS_FAILED_ROWS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>useBulkCopyForBatchInsert=true</code>, <code>XACT_ABORT</code> in the connection SQL</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Oracle</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ojdbc11 23.26</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>KEEPS_PREFIX</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MySQL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connector/J 9.7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MARKS_FAILED_ROWS</code>; <code>KEEPS_PREFIX</code> with <code>continueBatchOnError=false</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rewriteBatchedStatements=true</code>, another driver class</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">H2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">H2 2.5 (memory, file and TCP)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MARKS_FAILED_ROWS</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Derby</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Derby 10.17</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MARKS_FAILED_ROWS</code> with a hostname (network client), <code>KEEPS_PREFIX</code> without (embedded)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DuckDB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DuckDB JDBC 1.5.6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LOSES_WHOLE_BATCH</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Not declared, after measuring: SQLite (it stops at the failed row but reports no counts), MariaDB with its own driver (a batch that spans several packets keeps the other packets while every row is reported as failed), and SQL Server through jTDS.
+The dialects that extend PostgreSQL and MySQL (Greenplum, Redshift, CockroachDB, CrateDB, MariaDB, Doris, Infobright) declare nothing either: their drivers or servers were not measured.</p>
+</div>
 </div>
 </div>
 </div>
@@ -836,6 +964,9 @@ Declare the dependency as <code>provided</code> in the module&#8217;s <code>pom.
 </li>
 <li>
 <p>There is a page in the user manual, and <code>documentationUrl</code> points at it.</p>
+</li>
+<li>
+<p><code>getBatchFailureContract()</code> returns a measured value, or <code>null</code> if nobody has measured the driver.</p>
 </li>
 </ul>
 </div>

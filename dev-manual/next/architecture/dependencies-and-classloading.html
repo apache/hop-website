@@ -150,6 +150,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/extension-points.html">Extension points and when they fire</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../dev-manual/next/architecture/variables-and-metadata.html">Variables, parameters and metadata</a>
     
   </li>
@@ -786,6 +790,50 @@ Without it, an object created by one classloader will not cast to the class the 
 </div>
 </div>
 <div class="sect1">
+<h2 id="_the_plugin_manifest"><a class="link" href="#_the_plugin_manifest">The plugin manifest</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Every plugin zip carries a record of what it installs: <code>plugins/&lt;category&gt;/&lt;plugin&gt;/plugin-manifest.json</code>, next to <code>version.xml</code>.
+A module whose zip only fills <code>lib/core</code>, such as <code>hop-misc-naming</code> or <code>hop-misc-static-schema</code>, carries the same record as <code>lib/core/&lt;artifactId&gt;-manifest.json</code>.
+The client describes its own base the same way, in <code>lib/core/hop-client-manifest.json</code>: the jars <code>hop-core</code>, <code>hop-engine</code>, <code>hop-ui</code> and <code>hop-ui-rcp</code> bring along, and the SWT jars, but not the plugins it bundles (their own manifests describe those).</p>
+</div>
+<div class="paragraph">
+<p>The build generates it by inspecting the finished zip, so it can never disagree with what actually ships: the routing above stays the only place that decides placement, the manifest just writes the outcome down.
+For every file in the zip it records the location (<code>PLUGIN</code>, <code>PRIVATE</code>, <code>SHARED</code> for <code>lib/core</code>, <code>JDBC</code>, or <code>OTHER</code> for things like sample projects), the Maven coordinates and scope when the build could resolve them, the size and a SHA-256.
+Around that it lists:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>pluginIds</code></dt>
+<dd>
+<p>The ids the module registers, per annotation (<code>Transform</code>, <code>Action</code>, <code>DatabaseMetaPlugin</code>, <code>HopMetadata</code>, &#8230;&#8203;), read from the jar&#8217;s Jandex index.</p>
+</dd>
+<dt class="hdlist1"><code>requiresArtifacts</code> / <code>requiresFolders</code></dt>
+<dd>
+<p>The other Hop modules the plugin compiles against, and the plugin folders its <code>dependencies.xml</code> puts on its classpath.
+When the two disagree, one of them is probably wrong — a compile dependency the plugin never uses, or a runtime folder nobody declared.</p>
+</dd>
+<dt class="hdlist1"><code>notShipped</code></dt>
+<dd>
+<p>Direct dependencies that are declared but deliberately not in the zip, such as a proprietary JDBC driver the user has to supply.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The generator is <code>org.apache.hop.core.plugins.manifest.PluginManifestGenerator</code>.
+The build runs it with the goal <code>hop:manifest</code> of <code>org.apache.hop:hop-maven-plugin</code> (module <code>maven-plugin</code>) right after the assembly step (root pom, profile <code>assembly</code>); aggregate assemblies set <code>hop.manifest.skip=true</code>.
+A plugin built outside the Hop repository binds the same goal, see <a href="../marketplace-publish-plugin.html#_plugin_manifest" class="xref page">Plugin manifest</a>.
+The manifest is added without rewriting the zip: the other entries keep their bytes and the manifest takes their time, so with <code>project.build.outputTimestamp</code> every build gives the same zip.
+It warns when a jar&#8217;s scope and location disagree, for example a <code>provided</code> dependency that ended up in a private <code>lib/</code>.
+To see what a plugin shipped, read its manifest — <code>target/plugin-manifest.json</code> after a build, or the copy inside the zip.</p>
+</div>
+<div class="paragraph">
+<p>The manifest is what lets an installation reason about shared jars: a <code>lib/core</code> jar can only go when no remaining manifest, the client&#8217;s base or a plugin&#8217;s, still lists it.
+<code>org.apache.hop.core.plugins.manifest.PluginManifestScanner</code> reads every manifest of an installation and maps each file to the manifests that claim it.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_size"><a class="link" href="#_size">Size</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -815,9 +863,6 @@ Adding a heavy dependency to a widely-used module is a distribution-wide cost.</
 </li>
 <li>
 <p>Adding a dependency: the ASF category A/B/X rules and what they mean in practice.</p>
-</li>
-<li>
-<p>Reading a plugin zip to check what shipped, before you open the pull request.</p>
 </li>
 </ul>
 </div>

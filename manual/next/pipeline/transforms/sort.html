@@ -3060,35 +3060,35 @@
     Native Spark
     <span class="visually-hidden">native implementation</span>
   </li>
-  <li class="engine engine--unsupported" data-engine="beam-spark">
+  <li class="engine engine--unknown" data-engine="beam-spark">
     <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
       
       
-      <path d="M3 3l6 6M9 3l-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
       
+      <path d="M4.1 4.3a1.9 1.9 0 1 1 2.6 1.8c-.5.2-.7.6-.7 1.1v.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="6" cy="9.3" r=".85" fill="currentColor"/>
     </svg>
     Beam Spark
-    <span class="visually-hidden">not supported</span>
+    <span class="visually-hidden">support unknown</span>
   </li>
-  <li class="engine engine--unsupported" data-engine="beam-flink">
+  <li class="engine engine--unknown" data-engine="beam-flink">
     <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
       
       
-      <path d="M3 3l6 6M9 3l-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
       
+      <path d="M4.1 4.3a1.9 1.9 0 1 1 2.6 1.8c-.5.2-.7.6-.7 1.1v.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="6" cy="9.3" r=".85" fill="currentColor"/>
     </svg>
     Beam Flink
-    <span class="visually-hidden">not supported</span>
+    <span class="visually-hidden">support unknown</span>
   </li>
-  <li class="engine engine--unsupported" data-engine="beam-dataflow">
+  <li class="engine engine--unknown" data-engine="beam-dataflow">
     <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
       
       
-      <path d="M3 3l6 6M9 3l-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
       
+      <path d="M4.1 4.3a1.9 1.9 0 1 1 2.6 1.8c-.5.2-.7.6-.7 1.1v.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="6" cy="9.3" r=".85" fill="currentColor"/>
     </svg>
     Beam Dataflow
-    <span class="visually-hidden">not supported</span>
+    <span class="visually-hidden">support unknown</span>
   </li>
 </ul>
     <article class="doc">
@@ -3122,12 +3122,13 @@ You use can use multiple copies of the Sort Rows transform to speed up large sor
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Sort Rows is not supported on the Beam engines.
-A Beam pipeline spreads rows over many workers and re-shuffles them to maximize parallelism, so this transform can only order the rows a single worker happens to hold at that moment, never the data set as a whole.</p>
+<p>On the Beam engines Sort Rows passes its rows on as they are, unsorted.
+A Beam pipeline spreads rows over many workers and does not keep their order from one transform to the next, so a sort would be lost right after this transform.
+<a href="mergejoin.html" class="xref page">Merge Join</a> and <a href="memgroupby.html" class="xref page">Memory Group By</a> don&#8217;t need sorted rows on Beam, so a pipeline that sorts in front of them for the Hop engine runs unchanged on Beam.</p>
 </div>
 <div class="paragraph">
-<p>If you need sorted input for a downstream transform, that transform will not work on Beam either.
-Use an alternative that does not depend on row order, such as <a href="memgroupby.html" class="xref page">Memory Group By</a> in place of <a href="groupby.html" class="xref page">Group By</a>.
+<p>With <strong>Only pass unique rows</strong> Sort Rows is refused on Beam: use <a href="uniquerowsbyhashset.html" class="xref page">Unique Rows (HashSet)</a> or Memory Group By instead.
+A transform that needs its rows in order, such as <a href="groupby.html" class="xref page">Group By</a> with group fields, does not work on Beam either.
 See <a href="../beam/getting-started-with-beam.html#_unsupported_transforms" class="xref page">Getting started with Beam</a>.</p>
 </div>
 <div class="paragraph">

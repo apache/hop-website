@@ -3060,35 +3060,35 @@
     Native Spark
     <span class="visually-hidden">not supported</span>
   </li>
-  <li class="engine engine--unsupported" data-engine="beam-spark">
+  <li class="engine engine--supported" data-engine="beam-spark">
     <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
       
+      <path d="M2 6.4 4.6 9 10 3.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
       
-      <path d="M3 3l6 6M9 3l-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
       
     </svg>
     Beam Spark
-    <span class="visually-hidden">not supported</span>
+    <span class="visually-hidden">supported</span>
   </li>
-  <li class="engine engine--unsupported" data-engine="beam-flink">
+  <li class="engine engine--supported" data-engine="beam-flink">
     <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
       
+      <path d="M2 6.4 4.6 9 10 3.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
       
-      <path d="M3 3l6 6M9 3l-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
       
     </svg>
     Beam Flink
-    <span class="visually-hidden">not supported</span>
+    <span class="visually-hidden">supported</span>
   </li>
-  <li class="engine engine--unsupported" data-engine="beam-dataflow">
+  <li class="engine engine--supported" data-engine="beam-dataflow">
     <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
       
+      <path d="M2 6.4 4.6 9 10 3.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
       
-      <path d="M3 3l6 6M9 3l-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
       
     </svg>
     Beam Dataflow
-    <span class="visually-hidden">not supported</span>
+    <span class="visually-hidden">supported</span>
   </li>
 </ul>
     <article class="doc">
@@ -3122,14 +3122,20 @@ When using this transform on larger sets of data there is a risk of hash collisi
 </td>
 <td class="content">
 <div class="paragraph">
-<p>This transform is not supported on the distributed pipeline engines: neither the Beam engines nor the native Spark engine.
-The hash set it uses to spot duplicates lives in the memory of a single worker, and these engines spread the rows over many workers, so duplicates that end up on different workers would survive.
-Both refuse the transform with an error rather than hand you that incomplete result.</p>
+<p>The hash set this transform uses to spot duplicates lives in the memory of a single worker, and the distributed pipeline engines spread the rows over many workers.</p>
 </div>
-<div class="paragraph">
-<p>Use a <a href="memgroupby.html" class="xref page">Memory Group By</a> to get distinct rows instead: it is translated into the engine&#8217;s own grouping operation and covers the whole data set.
-On the native Spark engine <a href="uniquerows.html" class="xref page">Unique Rows</a> is an option too, because that engine maps it onto its own distinct operation; on the Beam engines it is not, as it is refused there as well.
-See <a href="../beam/getting-started-with-beam.html#_unsupported_transforms" class="xref page">Getting started with Beam</a>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The Beam engines give this transform all the rows of its input at once, on one worker, so it sees every duplicate.
+That worker holds the rows in memory, and the transform is not available in a streaming pipeline.
+See <a href="../beam/getting-started-with-beam.html#_whole_stream_transforms" class="xref page">Transforms that need the whole stream</a>.</p>
+</li>
+<li>
+<p>The native Spark engine refuses the transform with an error.
+Use a <a href="memgroupby.html" class="xref page">Memory Group By</a> or <a href="uniquerows.html" class="xref page">Unique Rows</a> there: that engine maps both onto its own operations, which cover the whole data set.</p>
+</li>
+</ul>
 </div>
 </td>
 </tr>

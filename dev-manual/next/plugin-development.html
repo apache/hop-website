@@ -150,6 +150,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../dev-manual/next/architecture/extension-points.html">Extension points and when they fire</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../dev-manual/next/architecture/variables-and-metadata.html">Variables, parameters and metadata</a>
     
   </li>
@@ -837,7 +841,7 @@ Pick this category only when the other ones don&#8217;t fit.</p>
 <p>Create the plugin as a new Maven sub-module with the category pom as its parent, and add it to that pom&#8217;s <code>&lt;modules&gt;</code>.</p>
 </div>
 <div class="paragraph">
-<p>The category parent already gives you everything a plugin needs: <code>hop-core</code>, <code>hop-engine</code>, <code>hop-ui</code> and SWT as <code>provided</code> dependencies, the Jandex index, the shared archive resources, and the SWTBot UI test stack on the test classpath.
+<p>The category parent already gives you everything a plugin needs: <code>hop-core</code>, <code>hop-engine</code>, <code>hop-ui</code> and SWT as <code>provided</code> dependencies, the Jandex index, the plugin manifest, the shared archive resources, and the SWTBot UI test stack on the test classpath.
 A plugin pom is usually no more than a parent, an artifactId, a name, and whatever extra dependencies the plugin itself needs.</p>
 </div>
 <div class="paragraph">

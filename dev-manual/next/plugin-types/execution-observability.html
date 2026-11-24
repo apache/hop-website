@@ -150,6 +150,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../dev-manual/next/architecture/extension-points.html">Extension points and when they fire</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../dev-manual/next/architecture/variables-and-metadata.html">Variables, parameters and metadata</a>
     
   </li>
@@ -693,6 +697,9 @@ There are about a hundred named points, from <code>HopGuiStart</code> through <c
 <p><strong>which</strong> hook to listen to. The names are the constants of the <code>HopExtensionPoint</code> enum in <code>org.apache.hop.core.extension</code>, which is also the list of what is available. Anything can fire an extension point, so a plugin may define and announce its own.</p>
 </dd>
 </dl>
+</div>
+<div class="paragraph">
+<p>When each of them fires, in which order and on which engine is on <a href="../architecture/extension-points.html" class="xref page">Extension points and when they fire</a>.</p>
 </div>
 <div class="paragraph">
 <p>The generic parameter is the object Hop hands over, and it decides where your plugin will and will not work:</p>

@@ -150,6 +150,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../dev-manual/next/architecture/extension-points.html">Extension points and when they fire</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../dev-manual/next/architecture/variables-and-metadata.html">Variables, parameters and metadata</a>
     
   </li>
@@ -856,6 +860,36 @@ config/projects/samples/… # optional samples</code></pre>
 <p>Apache Hop in-tree plugins use a shared component (<code>assemblies/shared/hop-plugin-libs.xml</code>) and <code>${hop.plugin.libdir}</code>; third-party projects usually inline the layout as above.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_plugin_manifest"><a class="link" href="#_plugin_manifest">Plugin manifest</a></h3>
+<div class="paragraph">
+<p>Add the plugin manifest to the zip: a list of every file it installs, with its location, Maven coordinates, size and SHA-256, the plugin ids and the Hop plugins it needs.
+An installation needs it to tell which plugins a shared <code>lib/core</code> jar belongs to, see <a href="architecture/dependencies-and-classloading.html#_the_plugin_manifest" class="xref page">The plugin manifest</a>.
+The Hop Maven plugin writes it; bind its <code>manifest</code> goal in the same phase as the assembly, and declare it after <code>maven-assembly-plugin</code> (executions of one phase run in pom order):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>xml</div><pre class="highlightjs highlight is-highlighted"><code class="language-xml hljs" data-lang="xml"><span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.hop<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>hop-maven-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>${hop.version}<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">executions</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">execution</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">phase</span>&gt;</span>package<span class="hljs-tag">&lt;/<span class="hljs-name">phase</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">goals</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">goal</span>&gt;</span>manifest<span class="hljs-tag">&lt;/<span class="hljs-name">goal</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">goals</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">execution</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">executions</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The goal describes <code>{artifactId}-{version}.zip</code> in <code>target/</code>, or else the one zip the build attached; set <code>&lt;zip&gt;</code> in its configuration to pick another.
+After the build the zip holds <code>plugins/&lt;category&gt;/&lt;plugin&gt;/plugin-manifest.json</code>, and <code>target/plugin-manifest.json</code> is a copy.
+The manifest takes its time from the files already in the zip, so a build with <code>project.build.outputTimestamp</code> stays reproducible.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1351,6 +1385,9 @@ Prefer <strong>anonymous read</strong> for marketplace installs. Wrong Basic aut
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> No hop-core / hop-engine / hop-ui jars inside the zip</p>
+</li>
+<li>
+<p><i class="fa fa-square-o"></i> <code>hop:manifest</code> bound after the assembly, so the zip carries <code>plugin-manifest.json</code></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> Third-party libs reviewed (size, license, overlap with Hop)</p>

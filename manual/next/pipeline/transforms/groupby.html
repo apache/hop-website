@@ -3060,35 +3060,35 @@
     Native Spark
     <span class="visually-hidden">not supported</span>
   </li>
-  <li class="engine engine--unsupported" data-engine="beam-spark">
+  <li class="engine engine--unknown" data-engine="beam-spark">
     <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
       
       
-      <path d="M3 3l6 6M9 3l-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
       
+      <path d="M4.1 4.3a1.9 1.9 0 1 1 2.6 1.8c-.5.2-.7.6-.7 1.1v.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="6" cy="9.3" r=".85" fill="currentColor"/>
     </svg>
     Beam Spark
-    <span class="visually-hidden">not supported</span>
+    <span class="visually-hidden">support unknown</span>
   </li>
-  <li class="engine engine--unsupported" data-engine="beam-flink">
+  <li class="engine engine--unknown" data-engine="beam-flink">
     <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
       
       
-      <path d="M3 3l6 6M9 3l-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
       
+      <path d="M4.1 4.3a1.9 1.9 0 1 1 2.6 1.8c-.5.2-.7.6-.7 1.1v.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="6" cy="9.3" r=".85" fill="currentColor"/>
     </svg>
     Beam Flink
-    <span class="visually-hidden">not supported</span>
+    <span class="visually-hidden">support unknown</span>
   </li>
-  <li class="engine engine--unsupported" data-engine="beam-dataflow">
+  <li class="engine engine--unknown" data-engine="beam-dataflow">
     <svg class="engine__mark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
       
       
-      <path d="M3 3l6 6M9 3l-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
       
+      <path d="M4.1 4.3a1.9 1.9 0 1 1 2.6 1.8c-.5.2-.7.6-.7 1.1v.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="6" cy="9.3" r=".85" fill="currentColor"/>
     </svg>
     Beam Dataflow
-    <span class="visually-hidden">not supported</span>
+    <span class="visually-hidden">support unknown</span>
   </li>
 </ul>
     <article class="doc">
@@ -3125,13 +3125,20 @@
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Group By does not run on the distributed pipeline engines.
-Both the Beam engines and the native Spark engine refuse the transform and stop the pipeline with an error.</p>
-</div>
-<div class="paragraph">
-<p>The reason is the sorted input this transform relies on.
+<p>Group By needs its input sorted on the group fields, and the distributed pipeline engines do not give it that.
 A distributed engine spreads the rows over many workers and re-shuffles them to maximize parallelism, so a sort upstream only ever orders the rows one worker happens to hold.
 The groups would be formed per worker and the aggregates would be silently wrong.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The native Spark engine refuses the transform and stops the pipeline with an error.</p>
+</li>
+<li>
+<p>The Beam engines refuse a Group By with group fields.
+A Group By without group fields aggregates the whole stream: the Beam engines run it with all the rows at once, see <a href="../beam/getting-started-with-beam.html#_whole_stream_transforms" class="xref page">Transforms that need the whole stream</a>.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>Use <a href="memgroupby.html" class="xref page">Memory Group By</a> instead.
