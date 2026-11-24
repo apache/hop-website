@@ -3094,7 +3094,7 @@
 <p>About 10 GB of free disk: 600 MB for Spark, 900 MB for the fat jar, and room for executor copies of that jar, about 3.5 GB per run (see <a href="#disk-space">Disk space</a>).</p>
 </li>
 <li>
-<p>A Hop client with the native Spark engine and the Apache Beam engine plugins (next section).</p>
+<p>A Hop client with the native Spark engine and the Apache Beam engine plugins (next section). The Beam plugin is only there for the sample data.</p>
 </li>
 </ul>
 </div>
@@ -3104,7 +3104,7 @@
 <h2 id="_1_install_the_engine_plugins"><a class="link" href="#_1_install_the_engine_plugins">1. Install the engine plugins</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The native Spark engine is not part of the default Hop client download. Install it from the <a href="../../hop-tools/hop-marketplace.html" class="xref page">marketplace</a>, together with the Apache Beam engine: the fat jar builder you need in step 3 ships with the Beam plugin.</p>
+<p>The native Spark engine is not part of the default Hop client download. Install it from the <a href="../../hop-tools/hop-marketplace.html" class="xref page">marketplace</a>, together with the Apache Beam engine, whose sample data the example pipeline reads.</p>
 </div>
 <div class="paragraph">
 <p>From the Hop installation folder:</p>
@@ -3204,7 +3204,7 @@ Use <code>start-master.sh</code> and <code>start-worker.sh</code> as above, not 
 <h2 id="_3_build_the_fat_jar"><a class="link" href="#_3_build_the_fat_jar">3. Build the fat jar</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Executors do not have Hop installed. Hop sends them a <strong>fat jar</strong> with Hop and all its plugins when the pipeline starts. Build it with the <code>native-provided</code> mode, which leaves Spark out because the cluster already has it.</p>
+<p>Executors do not have Hop installed. Hop sends them a <strong>fat jar</strong> with Hop and all its plugins when the pipeline starts. Build it for the native Spark engine, which leaves Spark out because the cluster already has it.</p>
 </div>
 <div class="paragraph">
 <p>Run this from the Hop installation folder:</p>
@@ -3213,7 +3213,7 @@ Use <code>start-master.sh</code> and <code>start-worker.sh</code> as above, not 
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./hop-conf.sh \
   --generate-fat-jar=<span class="hljs-variable">$HOME</span>/spark/hop-native-provided.jar \
-  --spark-client-version=native-provided</code></pre>
+  --fat-jar-engine=spark</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3225,12 +3225,9 @@ Use <code>start-master.sh</code> and <code>start-worker.sh</code> as above, not 
 <p>Build the jar again after you install, remove, or upgrade plugins. The executors run the plugins in the jar, not the ones in your Hop installation.</p>
 </li>
 <li>
-<p>Use the command line. <strong>Tools</strong> &#8594; <strong>Generate a Hop fat jar</strong> in Hop GUI does not ask for the mode; it uses the <code>HOP_SPARK_CLIENT_VERSION</code> environment variable and, without it, builds a jar for the Beam Spark runner instead.</p>
+<p><strong>Tools</strong> &#8594; <strong>Generate a Hop fat jar</strong> in Hop GUI builds the same jar: pick <strong>Native Spark engine</strong> when it asks for the engine.</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>If <code>hop-conf.sh</code> reports <code>Unknown options: '--generate-fat-jar=&#8230;&#8203;'</code>, the Beam engine plugin is missing (step 1).</p>
 </div>
 </div>
 </div>
@@ -3574,10 +3571,6 @@ Spark pipeline finished, result row count=0</code></pre>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hop-conf.sh</code> reports <code>Unknown options: '--generate-fat-jar=&#8230;&#8203;'</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The fat jar builder ships with the Beam engine plugin. Install <code>hop-engines-beam</code> (step 1).</p></td>
-</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Native Spark pipeline engine</strong> is not in the <strong>Engine type</strong> list</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Install <code>hop-engines-spark</code> and restart Hop.</p></td>

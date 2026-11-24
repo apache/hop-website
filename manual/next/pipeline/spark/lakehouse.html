@@ -3240,7 +3240,7 @@
 <div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash"><span class="hljs-built_in">export</span> SPARK_HOME=/path/to/spark-4.1.x-bin-hadoop3
 
 ./hop-conf.sh --generate-fat-jar=/tmp/hop-native-provided.jar \
-  --spark-client-version=native-provided
+  --fat-jar-engine=spark
 
 <span class="hljs-comment"># Export project metadata (run config + any lakehouse catalog entries) to JSON, then:</span>
 <span class="hljs-string">&quot;<span class="hljs-variable">${SPARK_HOME}</span>/bin/spark-submit&quot;</span> \

@@ -3983,17 +3983,27 @@ Run <code>hop-conf.sh -h</code> for the complete list of your installation.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The configuration filename for new projects.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock"><strong>Beam and Spark</strong>, when the Beam plugin is installed</p></td>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock"><strong>Fat jars</strong>, for the native Spark engine or the Beam engines</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-fj</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>--generate-fat-jar=&lt;fatJarFilename&gt;</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Generate a fat jar with the given filename from your current Hop installation, for the Beam and Spark engines.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generate a fat jar with the given filename from your current Hop installation. Needs the engine plugin of the chosen engine.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-fje</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--fat-jar-engine=&lt;engine&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The engine the fat jar is for. <code>spark</code>: the native Spark engine, without the jars a Spark distribution of the engine&#8217;s Spark version ships (the cluster provides them), the Beam engine, and the SWT jars of all but one platform (plugin classes reference SWT, so its classes stay); this is the jar Databricks <strong>Deploy &amp; run</strong> builds and caches itself, so a current one is copied from the cache. <code>beam</code>: the Beam engines, with the Spark client pack of the Beam Spark runner, without the native Spark engine. A jar for one engine leaves out the other engine&#8217;s plugin folder and every jar in <code>lib/core</code> that, according to the plugin manifests, only that engine installs; a jar the engine shares with another plugin stays. Default: <code>beam</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-fjsr</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--include-spark-runtime</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With <code>--fat-jar-engine=spark</code>: also embed Spark 4 and Scala, for a JVM without Spark that starts the Spark session itself. Not for <code>spark-submit</code> or a cluster.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-scv</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>--spark-client-version=&lt;sparkClientVersion&gt;</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The Spark client pack to embed in the fat jar: a version (folder <code>lib/spark-clients/&lt;version&gt;</code>), <code>native</code> or <code>native-provided</code>. When omitted, <code>HOP_SPARK_CLIENT_VERSION</code> or the default pack in <code>lib/spark-client</code> is used.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With <code>--fat-jar-engine=beam</code>: the Spark client pack of the Beam Spark runner (folder <code>lib/spark-clients/&lt;version&gt;</code>). When omitted, <code>HOP_SPARK_CLIENT_VERSION</code> or the default pack in <code>lib/spark-client</code> is used. The former values <code>native-provided</code> and <code>native</code> still select <code>--fat-jar-engine=spark</code>, without and with <code>--include-spark-runtime</code>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock"><strong>Graph database connections</strong></p></td>

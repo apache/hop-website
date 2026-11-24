@@ -3063,6 +3063,33 @@ installed as well: it shares that plugin&#8217;s lineage mapping, asynchronous d
 </div>
 </div>
 <div class="sect1">
+<h2 id="_quick_start"><a class="link" href="#_quick_start">Quick start</a></h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Install the <strong>DataHub</strong> and <strong>OpenLineage</strong> plugins with the <a href="../../hop-tools/hop-marketplace.html" class="xref page">Marketplace</a>. The DataHub plugin needs the OpenLineage one.</p>
+</li>
+<li>
+<p>Create a <a href="../../metadata-types/data-catalog.html" class="xref page">Data Catalog</a> of type DataHub with the URL of DataHub&#8217;s metadata service (GMS), for example <code><a href="http://localhost:8080" class="bare" rel="noopener" target="_blank">http://localhost:8080</a></code>, or <code><a href="https://&lt;your-company&gt;.acryl.io/gms" class="bare" rel="noopener" target="_blank">https://&lt;your-company&gt;.acryl.io/gms</a></code> on DataHub Cloud, and a personal access token. <strong>Test</strong> checks both.</p>
+</li>
+<li>
+<p>Create a <a href="../../metadata-types/lineage-sink.html" class="xref page">Lineage Sink</a> of type DataHub that uses that data catalog.</p>
+</li>
+<li>
+<p>Select the sink in the <strong>Lineage sink</strong> option of your pipeline and workflow run configurations.</p>
+</li>
+<li>
+<p>Run a workflow. In DataHub, its pipelines are listed under the <strong>Apache Hop</strong> platform, with their tasks, their runs and the datasets they read and write.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>To put a whole project in DataHub without running it, see <a href="#_publishing_a_project_without_running_it">Publishing a project without running it</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_what_you_see_in_datahub"><a class="link" href="#_what_you_see_in_datahub">What you see in DataHub</a></h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
@@ -3082,7 +3109,11 @@ installed as well: it shares that plugin&#8217;s lineage mapping, asynchronous d
 <td class="tableblock halign-left valign-top"><p class="tableblock">A <strong>pipeline</strong> (DataFlow) on the <strong>Apache Hop</strong> platform, of type <code>Pipeline</code> or <code>Workflow</code>, with the
 name and description from its metadata. It is identified by its file: the path in the project
 (<code>pipelines/load.hpl</code>), or the full path outside a project. Two files that hold pipelines of the
-same name are two pipelines in DataHub.</p></td>
+same name are two pipelines in DataHub.</p>
+<p class="tableblock">The sink writes the <strong>Apache Hop</strong> platform itself, with its name and logo, when DataHub doesn&#8217;t have
+it yet, and checks again every ten minutes. A DataHub that has the platform keeps its own, also one
+an older Hop version wrote. To get the current name and logo, delete the platform in DataHub
+(<code>datahub delete --urn urn:li:dataPlatform:hop --hard</code>).</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Transform, action</p></td>
@@ -3513,8 +3544,10 @@ name; map them to other column names in the Table Output field list. A field ren
 in Select values for example, has no column lineage.</p>
 </li>
 <li>
-<p>The lineage settings are the same for the whole Hop process: one DataHub and one environment per
-JVM. A project environment (<code>-e</code>) cannot select a different DataHub or <code>HOP_LINEAGE_DATAHUB_ENV</code>.</p>
+<p>A sink configured with the <code>HOP_LINEAGE_DATAHUB_*</code> variables is the same for the whole Hop
+process: one DataHub and one environment per JVM, which a project environment (<code>-e</code>) can&#8217;t change.
+To send runs to different DataHubs or environments, select a
+<a href="../../metadata-types/lineage-sink.html" class="xref page">Lineage Sink</a> in their run configurations instead.</p>
 </li>
 <li>
 <p>A pipeline or workflow file that is moved, renamed or deleted stays in DataHub under its old path;

@@ -3509,7 +3509,7 @@ You will notice this in your metrics view in the Hop GUI when executing.</p>
 <div class="paragraph">
 <p>A fat jar is often used to package up all the code you need for a particular project.
 The Spark, Flink and Dataflow execution engines like it since it massively simplifies the Java classpath when executing pipelines.
-Apache Hop allows you to create a fat jar in the Hop GUI with the <code>Tools/Generate a Hop fat jar&#8230;&#8203;</code> menu or using the following command:</p>
+Apache Hop allows you to create a fat jar in the Hop GUI with the <code>Tools/Generate a Hop fat jar&#8230;&#8203;</code> menu (choose <strong>Apache Beam engines</strong> if Hop asks for the engine) or using the following command:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3519,6 +3519,7 @@ Apache Hop allows you to create a fat jar in the Hop GUI with the <code>Tools/Ge
 <div class="paragraph">
 <p>The path to this fat jar can then be referenced in the various Beam runtime configurations.
 Note that the current version of Hop and all its plugins are used to build the fat jar.
+The native Spark engine is left out: its plugin folder, and the jars in <code>lib/core</code> that only that engine installs according to the plugin manifests.
 If you install or remove plugins or update Hop itself make sure to remember to generate a new fat jar or to update it.</p>
 </div>
 </div>

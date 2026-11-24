@@ -3352,9 +3352,6 @@
 <p>Apache Hop <strong>2.19+</strong> with the <code>hop-engines-spark</code> plugin. It is not part of the default client download: install it with <code>./hop marketplace install hop-engines-spark</code> (see <a href="../../hop-tools/hop-marketplace.html" class="xref page">Hop Marketplace</a>) and restart Hop.</p>
 </li>
 <li>
-<p>For cluster runs, also the <code>hop-engines-beam</code> plugin: the fat jar builder ships with it.</p>
-</li>
-<li>
 <p><strong>Java 21</strong>.</p>
 </li>
 <li>
@@ -3560,17 +3557,14 @@ For Iceberg <strong>TABLE</strong> mode, create a <a href="../../metadata-types/
 <p>On a real cluster you must <strong>not</strong> embed a second copy of Spark inside the application jar. The cluster already provides Spark 4.1. Embedding Spark leads to dual classpaths and failures on Java 21.</p>
 </div>
 <div class="paragraph">
-<p>Use the special fat-jar token <strong><code>native-provided</code></strong>: Hop and plugins go into the jar; <strong>Spark stays out</strong>.</p>
-</div>
-<div class="paragraph">
-<p>The fat jar builder ships with the Apache Beam engine plugin. Without <code>hop-engines-beam</code> installed, <code>hop-conf.sh</code> reports <code>Unknown options: '--generate-fat-jar=&#8230;&#8203;'</code>.</p>
+<p>Generate the fat jar for the <strong>native Spark engine</strong>: Hop and its plugins go into the jar; <strong>everything a Spark distribution ships (Spark, Scala, the Hadoop client and their libraries), and the Beam engine stay out</strong>. The engine plugin knows what a Spark distribution of its version ships from its own dependency tree, <code>plugins/engines/spark/spark-dependencies.txt</code>. The Beam engine is its plugin folder and every jar in <code>lib/core</code> that, according to the plugin manifests, only the Beam engine installs: a jar Beam shares with another installed plugin stays. It is the same jar Databricks <strong>Deploy &amp; run</strong> builds and caches, so when the cached one is current, generating it only copies that file.</p>
 </div>
 <div class="sect3">
 <h4 id="_from_hop_gui"><a class="link" href="#_from_hop_gui">From Hop GUI</a></h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Start Hop GUI with the environment variable <code>HOP_SPARK_CLIENT_VERSION=native-provided</code>. <strong>Tools</strong> → <strong>Generate a Hop fat jar</strong> does not ask for the packaging; without that variable it builds a jar for the Beam Spark runner, not for the native engine.</p>
+<p><strong>Tools</strong> → <strong>Generate a Hop fat jar</strong>. When the Beam engines are installed too, Hop asks which engine the jar is for: pick <strong>Native Spark engine</strong>.</p>
 </li>
 <li>
 <p>Save the jar <strong>outside</strong> the project (or gitignore it). Fat jars are large.</p>
@@ -3585,35 +3579,12 @@ For Iceberg <strong>TABLE</strong> mode, create a <a href="../../metadata-types/
 <div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash"><span class="hljs-comment"># From your Hop installation directory</span>
 ./hop-conf.sh \
   --generate-fat-jar=/tmp/hop-native-spark4-submit.jar \
-  --spark-client-version=native-provided</code></pre>
+  --fat-jar-engine=spark</code></pre>
 </div>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 20%;">
-<col style="width: 40%;">
-<col style="width: 40%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Token</th>
-<th class="tableblock halign-left valign-top">When to use</th>
-<th class="tableblock halign-left valign-top">Spark runtime</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>native-provided</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spark-submit</code> on a cluster</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Cluster provides Spark 4.1.x (<strong>do not</strong> embed)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>native</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Rare: fat jar that <strong>includes</strong> Spark 4 from <code>plugins/engines/spark/lib</code> (not for normal cluster submit)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Embedded Spark 4</p></td>
-</tr>
-</tbody>
-</table>
+<div class="paragraph">
+<p>Add <code>--include-spark-runtime</code> only for a JVM without Spark that starts the Spark session itself: it embeds Spark 4 and Scala. Never use it for <code>spark-submit</code> or a cluster.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -4393,7 +4364,7 @@ Examples: sorted <strong>Group By</strong> (use <strong>Memory Group By</strong>
 <p><i class="fa fa-square-o"></i> Execution information location attached if you need history and samples</p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Cluster: fat jar with <code>--spark-client-version=native-provided</code></p>
+<p><i class="fa fa-square-o"></i> Cluster: fat jar with <code>--fat-jar-engine=spark</code></p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> Cluster: <code>SPARK_HOME</code> pinned to Spark <strong>4.1.x</strong></p>

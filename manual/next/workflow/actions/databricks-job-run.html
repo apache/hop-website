@@ -3213,7 +3213,7 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Fat jar / Pipeline / Run configuration</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Deploy mode: local fat jar (prefer <code>hop-conf --generate-fat-jar … --spark-client-version=native-provided</code>), entry pipeline path, and Native Spark run configuration name present in the metadata export (or project package)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deploy mode: local fat jar (leave it empty to upload the fat jar of this installation, which Hop builds once and caches; or a jar from <code>hop-conf --generate-fat-jar … --fat-jar-engine=spark</code>), entry pipeline path, and Native Spark run configuration name present in the metadata export (or project package)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DBFS / Volume base directory</p></td>
@@ -3345,7 +3345,7 @@
 <p>See the full guide: <a href="../../pipeline/spark/databricks.html" class="xref page">Native Spark on Databricks</a>.</p>
 </li>
 <li>
-<p>Generate a fat jar with <code>hop-conf.sh --generate-fat-jar=… --spark-client-version=native-provided</code> when the cluster already provides Spark.</p>
+<p>Leave the fat jar empty to upload the cached fat jar of this installation, or generate one with <code>hop-conf.sh --generate-fat-jar=… --fat-jar-engine=spark</code>.</p>
 </li>
 <li>
 <p>The run configuration name must exist in the project metadata that is exported at deploy time.</p>
