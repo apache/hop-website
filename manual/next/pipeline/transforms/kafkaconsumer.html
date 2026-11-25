@@ -3178,7 +3178,7 @@ Click <strong>Open</strong> to open it in Hop Gui. When the dialog has unsaved c
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Bootstrap servers</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Comma separated list of bootstrap servers in a Kafka cluster</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comma separated list of bootstrap servers in a Kafka cluster. Leave it empty to use a <code>bootstrap.servers</code> option on the <strong>Options</strong> tab; when both are set, this field is used.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Topics</p></td>
@@ -3505,6 +3505,17 @@ Here are some options you need to set to make this work on a Confluent Cloud Kaf
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lineage"><a class="link" href="#_lineage">Lineage</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>With a <a href="../../metadata-types/lineage-sink.html" class="xref page">lineage sink</a>, the transform reports the topics it
+reads, named after the first bootstrap server (<code>kafka://&lt;host&gt;:&lt;port&gt;</code>) and the topic, once Kafka
+has assigned partitions of the topic to it. A topic that doesn&#8217;t exist or that the transform may not
+read gets none and is not reported: see <a href="../../technology/openlineage/index.html#_kafka_topics" class="xref page">Kafka topics</a>.</p>
 </div>
 </div>
 </div>

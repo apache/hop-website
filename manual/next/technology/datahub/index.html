@@ -3148,6 +3148,12 @@ a local file as its path on <code>file</code>. A table on a database server with
 with it, see <a href="#_database_platform_instances">Database platform instances</a>.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kafka topic (Kafka Consumer, Kafka Producer)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A <strong>dataset</strong> on the <code>kafka</code> platform named after the topic, as DataHub&#8217;s Kafka source names it. A
+consumer runs until it is stopped: its task lists the topic as soon as it starts reading, before
+the run ends.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Column mappings (SQL <code>INSERT … SELECT</code>, Table Input → Table Output)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Column-level lineage, on the task and on the dataset.</p></td>
 </tr>
@@ -3292,7 +3298,7 @@ its URL, which stops lineage delivery for every sink.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>HOP_LINEAGE_DATAHUB_SQL_PARSE</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Y</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Parse the SQL of Table Input and Execute SQL to find the tables and columns it reads and writes.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parse the SQL of Table Input, Database Join, Execute SQL, Execute row SQL script and the SQL action to find the tables and columns it reads and writes.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>HOP_LINEAGE_DATAHUB_MAX_RETRIES</code>, <code>…_RETRY_BACKOFF_MS</code>, <code>…_CONNECT_TIMEOUT_MS</code>, <code>…_READ_TIMEOUT_MS</code>, <code>…_BUFFER_SIZE</code>, <code>…_OVERFLOW_POLICY</code>, <code>…_ENQUEUE_TIMEOUT_MS</code>, <code>…_SHUTDOWN_DRAIN_MS</code>, <code>…_METRICS_INTERVAL_MS</code></p></td>

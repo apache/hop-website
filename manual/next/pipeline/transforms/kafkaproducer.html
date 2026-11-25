@@ -3291,6 +3291,20 @@ Here are some options you need to set to make this work on a Confluent Cloud Kaf
 </div>
 </div>
 <div class="sect1">
+<h2 id="_lineage"><a class="link" href="#_lineage">Lineage</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>With a <a href="../../metadata-types/lineage-sink.html" class="xref page">lineage sink</a>, the transform reports each topic it
+writes once Kafka has accepted the first row for it, up to 1000 per run. A topic Kafka refuses, for
+example because it doesn&#8217;t exist or the transform may not write to it, is not reported, and the
+transform&#8217;s row count is then not put on the topics it did report. The topic is
+named after the first bootstrap server (<code>kafka://&lt;host&gt;:&lt;port&gt;</code>), taken from a <code>bootstrap.servers</code>
+option when one is set, and the topic: see
+<a href="../../technology/openlineage/index.html#_kafka_topics" class="xref page">Kafka topics</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
 <div class="sectionbody">
 <div class="paragraph">

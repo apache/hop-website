@@ -3478,7 +3478,8 @@ of the same table land on <strong>one</strong> node in the lineage graph.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Reads</strong> — <strong>Table Input</strong> (its <code>SELECT</code> is parsed to recover the source tables and column lineage).</p>
+<p><strong>Reads</strong> — <strong>Table Input</strong> (its <code>SELECT</code> is parsed to recover the source tables and column lineage),
+<strong>Database Join</strong> (its query is parsed the same way), and <strong>Database Lookup</strong> (its lookup table).</p>
 </li>
 <li>
 <p><strong>Writes</strong> — <strong>Table Output</strong>, <strong>Insert / Update</strong>, <strong>Update</strong>, <strong>Dimension Lookup/Update</strong>,
@@ -3490,16 +3491,28 @@ PostgreSQL, Vertica).</p>
 carries neither a column schema nor column lineage.</p>
 </li>
 <li>
-<p><strong>Reads and writes</strong> — <strong>Execute SQL</strong> (its statements are parsed for both input and output tables).</p>
+<p><strong>Reads and writes</strong> — <strong>Execute SQL</strong> (its statements are parsed for both input and output tables),
+and <strong>Execute row SQL script</strong>, which reports the distinct scripts it ran as one script when it
+ends: up to 1000 scripts and 1 MiB of SQL. A script file is read when it runs.</p>
+</li>
+<li>
+<p><strong>Workflow actions</strong> — the <strong>SQL</strong> action reports the tables of its SQL, or of its SQL file, on the
+action&#8217;s run.</p>
 </li>
 </ul>
 </div>
 <div class="sect2">
 <h3 id="_sql_parsing"><a class="link" href="#_sql_parsing">SQL parsing</a></h3>
 <div class="paragraph">
-<p>For transforms that only provide a SQL statement (Table Input, Execute SQL), the sink recovers the
+<p>For transforms and actions that only provide SQL (Table Input, Database Join, Execute SQL, Execute
+row SQL script, the SQL action), the sink recovers the
 tables — and, for an <code>INSERT … SELECT</code>, the column-level lineage — by parsing the statement with the
 OpenLineage SQL parser. Parsing is on by default and controlled by <code>HOP_LINEAGE_OPENLINEAGE_SQL_PARSE</code>.
+A script is parsed one statement at a time, so a statement the parser can&#8217;t read only loses its own
+tables. A statement with <code>?</code> parameters, such as the query Database Join prepares, is parsed with
+<code>NULL</code> in their place: the parser takes no <code>?</code> for a value. What counts as a parameter is what Hop
+counts when it runs the statement, so a <code>?</code> in text or comments and PostgreSQL&#8217;s <code>??</code>, <code>?|</code> and <code>?&amp;</code>
+stay as they are.
 Tables named without a schema or catalog are qualified using the connection&#8217;s default database and
 preferred schema, so a bare <code>SELECT … FROM orders</code> shares one identity with a schema-qualified write
 of the same table.</p>
@@ -3543,6 +3556,20 @@ stream source and carry no column lineage.</p>
 type descriptions. A type with no honest OpenLineage equivalent (<code>Serializable</code>, or a type a plugin
 invented) is left out instead of guessed.</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_kafka_topics"><a class="link" href="#_kafka_topics">Kafka topics</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Kafka Consumer</strong> reports a topic it reads once Kafka has assigned partitions of it to the consumer,
+and <strong>Kafka Producer</strong> a topic it writes once Kafka has accepted the first row for it, up to 1000 per
+run. When Kafka refuses a row, the producer&#8217;s row count is not put on the topics it reported, since
+it also counts the refused rows. A topic is named as the
+OpenLineage naming spec names it: the namespace <code>kafka://&lt;host&gt;:&lt;port&gt;</code> of the first bootstrap server,
+and the topic. A consumer runs until it is stopped, so the topic does not wait for the end of the
+run: it is sent on a <code>RUNNING</code> event of the run right away, and again with the run&#8217;s end.</p>
 </div>
 </div>
 </div>
