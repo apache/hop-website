@@ -3540,6 +3540,19 @@ writes for it. Its token only needs the privilege to view the datasets and their
 </div>
 </div>
 <div class="sect1">
+<h2 id="_runs_on_hop_server"><a class="link" href="#_runs_on_hop_server">Runs on Hop Server</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A pipeline or workflow that runs on a Hop Server through a remote run configuration appears as one
+run, as a local run does: the server reports it as the client&#8217;s run, with its transforms, the
+datasets they read and write, the client&#8217;s file and the task that started it. It reports to the
+sinks of the client&#8217;s run configuration and to its own. See
+<a href="../openlineage/index.html#_runs_on_hop_server" class="xref page">Runs on Hop Server</a> on the OpenLineage
+page for how that works and which sinks the server can use.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_limitations"><a class="link" href="#_limitations">Limitations</a></h2>
 <div class="sectionbody">
 <div class="ulist">
@@ -3560,9 +3573,9 @@ To send runs to different DataHubs or environments, select a
 the file in its new place is a new pipeline. Renaming the pipeline itself only changes its name.</p>
 </li>
 <li>
-<p>A pipeline run on a remote Hop Server reports its run to the client&#8217;s DataHub sink, but not its
-transforms. Enable the DataHub sink on the Hop Server as well to get those; the server&#8217;s run of
-the pipeline then appears as a run of its own.</p>
+<p>A pipeline or workflow run on a Hop Server gets its transforms in DataHub only when the server
+has the DataHub plugin; without it the client reports the run without its transforms. The
+server also has to reach the sink&#8217;s DataHub URL; see <a href="#_runs_on_hop_server">Runs on Hop Server</a>.</p>
 </li>
 <li>
 <p>A pipeline run on Apache Beam or Spark reports its run, not its transforms or their datasets:

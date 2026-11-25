@@ -3360,8 +3360,8 @@ header shows one line more than it has rows. A pipeline&#8217;s event carries th
 transforms and copies of the counters that add up: <code>linesInput</code>, <code>linesOutput</code>, <code>linesUpdated</code> and
 <code>linesRejected</code>. That sum is not the pipeline result Hop logs, which takes the highest value of each
 counter, and a Metadata Injection transform counts the rows of the pipeline it runs too. Only the
-local pipeline engine sends counters; Beam, Spark and remote runs don&#8217;t have final ones when their
-run ends.</p>
+local pipeline engine sends counters, also when it runs a pipeline on a Hop Server; Beam and Spark
+runs don&#8217;t have final ones when their run ends.</p>
 </div>
 <div class="paragraph">
 <p>A dataset gets the standard <code>inputStatistics</code> or <code>outputStatistics</code> facet with its <code>rowCount</code> when
@@ -3589,6 +3589,42 @@ does not appear in its job identity at all.</p>
 dataset it receives with one environment, whichever engine sent it, which is what lets a Hop file
 dataset and a Spark file dataset join up. Two environments that must not merge therefore need two
 collector deployments, not two namespaces.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_runs_on_hop_server"><a class="link" href="#_runs_on_hop_server">Runs on Hop Server</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A pipeline or workflow that runs on a Hop Server through a remote run configuration is one run, as
+a local run is. The client passes its run to the server with the variables it sends: the run id,
+the file, the run that started it and the lineage sinks of its run configuration. The server then
+reports the run under that id, with its transforms and the datasets they read and write, to those
+sinks and to its own. Once the server started the run, the client leaves the run&#8217;s events for those
+sinks to the server. When the server doesn&#8217;t start the run, the client reports it, as it fails. A
+server that doesn&#8217;t report the client&#8217;s run (an older Hop) runs it as before: the client reports
+the run without its transforms, and the server reports what it runs, if it has a sink, as a run of
+its own.</p>
+</div>
+<div class="paragraph">
+<p>The server looks each sink up by name in the run&#8217;s metadata: its own, and the client&#8217;s metadata
+that comes with the run, sent as XML or as an export. It reports the run to a sink only when its
+sink of that name, resolved with the run&#8217;s variables on the server, has the same type and settings
+as the client&#8217;s: the same URL, namespace and credentials. It leaves out a sink with a name it
+doesn&#8217;t find, a sink of the same name that sends elsewhere, for example a server project&#8217;s
+<code>catalog</code> sink pointing to another Marquez, and a sink whose type&#8217;s plugin isn&#8217;t installed on the
+server, such as a DataHub sink on a server without the DataHub plugin. Each is logged on the
+server&#8217;s run, and the client keeps reporting the run to those sinks itself, without its
+transforms. A sink&#8217;s URL has to be reachable from the server: <code>localhost</code> on the server is the
+server itself.</p>
+</div>
+<div class="paragraph">
+<p>Sinks set up with the <code>HOP_LINEAGE_*</code> variables report what runs where they are set: on the server
+every run it runs, under the client&#8217;s run id when it reports the client&#8217;s run, and on the client
+the client&#8217;s run, without its transforms. When the client and the server have the same sinks
+started this way, with the same <code>HOP_LINEAGE_*</code> settings (sink ids, URLs, namespace, environment,
+credentials), only the server reports the run there, so it ends once. With any difference, or
+when the server&#8217;s sinks failed to start, both report as before.</p>
 </div>
 </div>
 </div>
