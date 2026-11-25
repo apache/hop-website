@@ -1104,6 +1104,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/mergeintotable.html">Merge into table</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/mergejoin.html">Merge Join</a>
     
   </li>
@@ -3179,14 +3183,7 @@ You can launch multiple copies of the transform to run in parallel.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Samples (samples project):</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>loops/pipeline-executor.hpl</p>
-</li>
-</ul>
+<p>The samples project has examples, see <a href="#_samples">Samples</a>.</p>
 </div>
 </div>
 </div>
@@ -3522,6 +3519,27 @@ If there is a difference an error will be thrown.</p>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>transforms/pipeline-executor.hpl</code>, which runs <code>transforms/pipeline-executor-child.hpl</code> once for each of 3 rows from a Data grid, and gets the row that the child copies to the result back on the <code>child rows</code> stream, and the execution statistics on the <code>execution results</code> stream.</p>
+</li>
+<li>
+<p><code>loops/pipeline-executor.hpl</code>, which runs <code>loops/child-loops-log-counter.hpl</code> once for each of 10 generated rows, with the row number in the parameter <code>PRM_COUNTER</code>, and gets the execution results, the result rows and a copy of the input rows on separate streams.</p>
+</li>
+<li>
+<p><code>loops/child-generate-1000-rows.hpl</code>, which passes 1,000 generated rows to <code>loops/child-loops-get-rows-from-result.hpl</code> in groups of 100.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

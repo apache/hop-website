@@ -1104,6 +1104,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/mergeintotable.html">Merge into table</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/mergejoin.html">Merge Join</a>
     
   </li>
@@ -3587,6 +3591,14 @@ Before Hop 2.20, a new field took the data type of the first input field filling
 <div class="paragraph">
 <p>A column added to the input, <code>Apr</code> for example, is normalised as well without changing the transform.</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has <code>transforms/row-normaliser.hpl</code>, which turns each row with an amount for <code>Q1</code>, <code>Q2</code>, <code>Q3</code> and <code>Q4</code> into 4 rows with the quarter in <code>quarter</code> and the value in <code>amount</code>.</p>
 </div>
 </div>
 </div>

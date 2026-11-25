@@ -1192,6 +1192,9 @@
 <loc>https://hop.apache.org/manual/next/pipeline/transforms/memgroupby.html</loc>
 </url>
 <url>
+<loc>https://hop.apache.org/manual/next/pipeline/transforms/mergeintotable.html</loc>
+</url>
+<url>
 <loc>https://hop.apache.org/manual/next/pipeline/transforms/mergejoin.html</loc>
 </url>
 <url>

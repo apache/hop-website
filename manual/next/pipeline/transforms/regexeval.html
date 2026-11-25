@@ -1104,6 +1104,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/mergeintotable.html">Merge into table</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/mergejoin.html">Merge Join</a>
     
   </li>
@@ -3526,6 +3530,14 @@ By default, these expressions only match at the beginning and the end of the ent
 <div class="paragraph">
 <p>If the number of capture groups in the regular expression does not match the number of fields specified, the transform will fail and an error is written to the log.</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has <code>transforms/regex-evaluation.hpl</code>, which checks 3 phrases from a Data grid against <code>.<strong>hop.</strong></code>, ignoring case, and sets the field <code>contains_hop</code> to <code>Y</code> or <code>N</code>.</p>
 </div>
 </div>
 </div>

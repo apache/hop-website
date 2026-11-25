@@ -1104,6 +1104,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/mergeintotable.html">Merge into table</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/mergejoin.html">Merge Join</a>
     
   </li>
@@ -3195,16 +3199,16 @@ Click <strong>Edit</strong> to open it in Hop Gui. When the dialog has unsaved c
 <div class="paragraph">
 <p>You can close every input or output tab. A mapping with no inputs is a generator. A mapping with no outputs is a sink.</p>
 </div>
+<div class="paragraph">
+<p>For the exact rules that decide which value a parameter ends up with, see <a href="../../variables/parameter-passing.html" class="xref page">Passing parameters to a child pipeline or workflow</a>.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_sample"><a class="link" href="#_sample">Sample</a></h2>
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The samples project contains parent/child examples under <code>transforms/</code> for a single stream, a generator, a join, an info lookup, and multiple target outputs.</p>
-</div>
-<div class="paragraph">
-<p>For the exact rules that decide which value a parameter ends up with, see <a href="../../variables/parameter-passing.html" class="xref page">Passing parameters to a child pipeline or workflow</a>.</p>
+<p>The samples project has <code>transforms/multi-mapping-parent.hpl</code>, which sends the first and last names of 4 rows from a Data grid to <code>transforms/multi-mapping-child.hpl</code> through Multi Mapping, and gets the full name back as <code>resultName</code>.</p>
 </div>
 </div>
 </div>

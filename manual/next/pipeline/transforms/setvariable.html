@@ -1104,6 +1104,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/mergeintotable.html">Merge into table</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/mergejoin.html">Merge Join</a>
     
   </li>
@@ -3218,6 +3222,24 @@ Otherwise no formatting is done.</p></td>
 </td>
 </tr>
 </table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>transforms/set-variables-basic.hpl</code>, which sets the pipeline variable <code>MY_COLOR</code> to the value of the field <code>color</code>, <code>blue</code>.</p>
+</li>
+<li>
+<p><code>loops/child-check-set-counter-value.hpl</code>, which the <strong>repeat pipeline</strong> action of <code>loops/repeat-action.hwf</code> runs again and again: while <code>${COUNTER}</code> is 10 or less it sets <code>${COUNTER}</code> to the next value, and when it is higher it sets <code>${END_LOOP}</code>, which ends the repeat.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

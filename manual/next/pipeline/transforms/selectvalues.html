@@ -1104,6 +1104,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/mergeintotable.html">Merge into table</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/mergejoin.html">Merge Join</a>
     
   </li>
@@ -3330,6 +3334,24 @@ This happens when previewing the data, but also when data is bulk loaded or conv
 </li>
 </ol>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>pipelines/read-transactions.hpl</code>, which keeps the file name and the <code>Account</code>, <code>Amount</code>, <code>Company</code> and <code>Report_Date</code> fields at the end.</p>
+</li>
+<li>
+<p><code>transforms/select-values-basic.hpl</code>, which renames and reorders fields, removes a field, and casts a String to a Date in three branches; the row with the date <code>2025-13-01</code> goes to the error stream of the cast.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

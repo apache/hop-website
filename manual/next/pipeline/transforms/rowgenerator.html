@@ -1104,6 +1104,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/pipeline/transforms/mergeintotable.html">Merge into table</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/pipeline/transforms/mergejoin.html">Merge Join</a>
     
   </li>
@@ -3289,6 +3293,39 @@ See <a href="../../concepts.html#data-types" class="xref page">Data types</a>.</
 </div>
 <div class="paragraph">
 <p>To emit several different rows of sample data, use <a href="datagrid.html" class="xref page">Data Grid</a> instead.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>transforms/generate-rows.hpl</code>, which generates 10 empty rows.</p>
+</li>
+<li>
+<p><code>loops/child-generate-1000-rows.hpl</code>, which generates 1,000 rows and passes them to <code>loops/child-loops-get-rows-from-result.hpl</code> in groups of 100.</p>
+</li>
+<li>
+<p><code>loops/child-loops-copy-rows-to-result.hpl</code>, which generates 10 rows with a counter and copies them to the result.</p>
+</li>
+<li>
+<p><code>loops/child-loops-log-counter.hpl</code>, which generates one row, writes the parameter <code>PRM_COUNTER</code> to the log and copies the row to the result.</p>
+</li>
+<li>
+<p><code>loops/pipeline-executor.hpl</code>, which generates the 10 rows that it runs <code>loops/child-loops-log-counter.hpl</code> for.</p>
+</li>
+<li>
+<p><code>loops/workflow-executor.hpl</code>, which generates the 10 rows that it runs <code>loops/child-workflow-executor.hwf</code> for.</p>
+</li>
+<li>
+<p><code>workflows/parallel/sample-pipeline.hpl</code>, which generates 100 rows with the number <code>4.5487</code> and adds a sequence; <code>workflows/parallel/parallel-workflow.hwf</code> runs it twice at the same time.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
