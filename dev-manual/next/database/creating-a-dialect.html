@@ -773,7 +773,7 @@ A capability is a fact about the database that Hop can act on in several places;
 <div class="sectionbody">
 <div class="paragraph">
 <p>When a row in a JDBC batch fails, drivers disagree about what happened to the other rows of the batch, and about what <code>BatchUpdateException.getUpdateCounts()</code> means.
-A dialect that knows what its driver does returns it from <code>getBatchFailureContract()</code>, and Table output then uses it to keep batching with an error hop attached and still send every row of a failed batch to exactly one stream, in input order:</p>
+A dialect that knows what its driver does returns it from <code>getBatchFailureContract()</code>, and Table output and Update then use it to keep batching with an error hop attached and still send every row of a failed batch to exactly one stream, in input order:</p>
 </div>
 <div class="dlist">
 <dl>
