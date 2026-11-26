@@ -3226,6 +3226,15 @@ Avoids forcing unique sequencing across multiple transforms.</p></td>
 <li>
 <p><code>transforms/add-sequence-cyclic-id.hpl</code>, which counts from 1 to 10 and then starts at 1 again, because the maximum value is 10.</p>
 </li>
+<li>
+<p><code>loops/child-loops-copy-rows-to-result.hpl</code>, which numbers 10 generated rows from 1 to 10 in the field <code>counter</code> and copies them to the result.</p>
+</li>
+<li>
+<p><code>loops/pipeline-executor.hpl</code> and <code>loops/workflow-executor.hpl</code>, which number 10 generated rows from 1 to 10 and run a child pipeline or workflow once for each row, with the number in the parameter <code>PRM_COUNTER</code>.</p>
+</li>
+<li>
+<p><code>workflows/parallel/sample-pipeline.hpl</code>, which numbers 100 generated rows in the field <code>seq</code>; <code>workflows/parallel/parallel-workflow.hwf</code> runs it twice at the same time.</p>
+</li>
 </ul>
 </div>
 </div>

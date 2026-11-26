@@ -3155,7 +3155,20 @@ this transform is mainly available for historical reasons. There are newer and b
 <h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The samples project has <code>transforms/copy-rows-to-result.hpl</code>, which copies the two rows of a Data grid to the result of the pipeline, for a parent workflow or pipeline to pick up.</p>
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>transforms/copy-rows-to-result.hpl</code>, which copies the two rows of a Data grid to the result of the pipeline, for a parent workflow or pipeline to pick up.</p>
+</li>
+<li>
+<p><code>loops/child-loops-copy-rows-to-result.hpl</code>, which copies 10 numbered rows to the result; <code>loops/loops-process-rows-from-memory.hwf</code> then runs <code>loops/child-loops-log-counter.hpl</code> once for each of them.</p>
+</li>
+<li>
+<p><code>loops/child-loops-log-counter.hpl</code>, which writes the parameter <code>PRM_COUNTER</code> to the log and copies its one row to the result; <code>loops/pipeline-executor.hpl</code> gets these rows on its result rows stream.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

@@ -3167,8 +3167,18 @@ For the default number of copies (1), the CopyNr is always 0.</p></td>
 <h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The samples project has <code>transforms/block-until-transforms-finish-basic.hpl</code>: the row from <strong>1 row</strong> waits until <strong>Found GOD!</strong> has finished before it goes on to a JavaScript transform.
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>transforms/block-until-transforms-finish-basic.hpl</code>: the row from <strong>1 row</strong> waits until <strong>Found GOD!</strong> has finished before it goes on to a JavaScript transform.
 <strong>Found GOD!</strong> gets 1,000 rows, each delayed by one second, so the pipeline takes about 17 minutes.</p>
+</li>
+<li>
+<p><code>pipelines/read-transactions.hpl</code>, where the data rows of the Excel files wait in <strong>Block Headers</strong> until <strong>Headers</strong> has received all the header rows, before Stream lookup adds the header labels to them.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

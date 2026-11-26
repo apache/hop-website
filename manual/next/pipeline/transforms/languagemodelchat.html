@@ -3641,6 +3641,36 @@ in its <code>output</code> field.</p></td>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>transforms/languagemodelchat/zero-shot/ollama.hpl</code>, which sends 3 questions about age and racial bias in job descriptions from a Data grid to the model <code>phi3</code> of a local Ollama server, and writes the answers, the token counts and the inference time to a CSV file.</p>
+</li>
+<li>
+<p><code>transforms/languagemodelchat/zero-shot/anthropic.hpl</code>, which turns a system message and the question "What is the He and Glorot initialisation?" from a Data grid into JSON and sends it to <code>claude-sonnet-5</code>, with the API key in <code>${ANTHROPIC_API_KEY}</code>.</p>
+</li>
+<li>
+<p><code>transforms/languagemodelchat/zero-shot/mistral.hpl</code>, which sends the same system message and question to <code>mistral-large-latest</code> as chat JSON, with the API key in <code>${MISTRAL_API_KEY}</code>.</p>
+</li>
+<li>
+<p><code>transforms/languagemodelchat/zero-shot/huggingface.hpl</code>, which asks <code>meta-llama/Llama-3.3-70B-Instruct</code> on Hugging Face, as a deadpan assistant, for the wonders of the planet in no more than 20 words, with the access token in <code>${HF_ACCESS_TOKEN}</code>.</p>
+</li>
+<li>
+<p><code>transforms/languagemodelchat/zero-shot/openai.hpl</code>, which asks <code>gpt-5.6-luna</code>, as a Spanish teacher, what it sees in an image from Wikimedia Commons, with the API key in <code>${OPENAI_API_KEY}</code>.</p>
+</li>
+<li>
+<p><code>transforms/languagemodelchat/fact-checking/bespoke-minicheck.hpl</code>, which has <code>gpt-5.6-luna</code> and <code>meta-llama/Llama-3.3-70B-Instruct</code> answer "How many people live in Toronto?", checks each answer against a short grounding document with the model <code>bespoke-minicheck</code> of a local Ollama server, and writes each answer with its response to a CSV file for <code>Yes</code>, one for <code>No</code> and one for any other response.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/pipeline/transforms/spark-lake-table-output.html"><span>Previous</span><strong>Lake table output</strong></a>
