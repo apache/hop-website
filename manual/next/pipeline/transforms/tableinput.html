@@ -3293,8 +3293,7 @@ This restores the 2.19 behavior for SQL without placeholders and keeps the 2.20 
 <p>You can also combine named or positional parameters with variable substitution.</p>
 </div>
 <div class="paragraph">
-<p>Sample pipeline:
-<a href="https://github.com/apache/hop/blob/main/plugins/transforms/tableinput/src/main/samples/transforms/tableinput-named-parameters.hpl" rel="noopener" target="_blank">tableinput-named-parameters.hpl</a></p>
+<p>The samples project has this example, <code>transforms/tableinput-named-parameters.hpl</code>, see <a href="#_samples">Samples</a>.</p>
 </div>
 <div class="sect2">
 <h3 id="_examples"><a class="link" href="#_examples">Examples</a></h3>
@@ -3320,8 +3319,7 @@ This restores the 2.19 behavior for SQL without placeholders and keeps the 2.20 
 </ul>
 </div>
 <div class="paragraph">
-<p>Sample pipeline:
-<a href="https://github.com/apache/hop/blob/main/plugins/transforms/tableinput/src/main/samples/transforms/tableinput-accept-input.hpl" rel="noopener" target="_blank">tableinput-accept-input.hpl</a></p>
+<p>The samples project has this example, <code>transforms/tableinput-accept-input.hpl</code>, see <a href="#_samples">Samples</a>.</p>
 </div>
 <div class="paragraph">
 <div class="title">Using a date range from a system transform:</div>
@@ -3406,8 +3404,7 @@ Variable substitution happens before execution and does not protect against SQL 
 </ul>
 </div>
 <div class="paragraph">
-<p>Sample pipeline:
-<a href="https://github.com/apache/hop/blob/main/plugins/transforms/tableinput/src/main/samples/transforms/tableinput-variables.hpl" rel="noopener" target="_blank">tableinput-variables.hpl</a></p>
+<p>The samples project has this example, <code>transforms/tableinput-variables.hpl</code>, see <a href="#_samples">Samples</a>.</p>
 </div>
 </div>
 </div>
@@ -3965,6 +3962,30 @@ You can combine both: keep a SQL <code>LIMIT</code> for server-side control, and
 </tr>
 </table>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>transforms/tableinput-basic.hpl</code>, which reads the 5 rows of the table <code>public.tableinput</code> of the <code>hop-samples</code> connection.</p>
+</li>
+<li>
+<p><code>transforms/tableinput-accept-input.hpl</code>, which reads the rows with an <code>id</code> greater than 2, the value that a Data grid passes to the <code>?</code> of the query.</p>
+</li>
+<li>
+<p><code>transforms/tableinput-named-parameters.hpl</code>, which does the same with the named parameter <code>{id}</code>.</p>
+</li>
+<li>
+<p><code>transforms/tableinput-variables.hpl</code>, which reads the rows with an <code>id</code> greater than the pipeline parameter <code>${PRM_ID}</code>, 2 by default, with variable replacement in the query.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

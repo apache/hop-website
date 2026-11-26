@@ -3634,6 +3634,24 @@ String fields will no longer be padded to their specified length.</p></td>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>transforms/textfileoutput-tiny-file.hpl</code>, which writes 100 rows of fake book data to <code>files/books-tiny-file.csv</code>.</p>
+</li>
+<li>
+<p><code>workflows/write-read-huge-file.hwf</code>, which writes 25 million rows of fake book data to <code>files/books-huge-file.csv</code> with <code>workflows/textfileoutput-huge-file.hpl</code>, and reads the file back with <code>workflows/csvinput-huge-file.hpl</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/pipeline/transforms/textfileinput.html"><span>Previous</span><strong>Text File Input</strong></a>

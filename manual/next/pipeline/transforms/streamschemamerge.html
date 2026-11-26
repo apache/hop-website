@@ -3145,6 +3145,14 @@ If you want to make sure fields keep their original data type, make sure to conv
 </table>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has <code>transforms/merge-empty-stream.hpl</code>, which sends 3 rows from a Data grid to the streams <code>A</code>, <code>B</code> and <code>Default</code> with Switch / case, adds <code>new_field_A</code> on stream <code>A</code> and <code>new_field_B</code> on stream <code>B</code>, and merges the three streams: the result has the fields of all of them, also <code>new_field_B</code>, although stream <code>B</code> gets no rows.</p>
+</div>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/pipeline/transforms/streamlookup.html"><span>Previous</span><strong>Stream Lookup</strong></a>

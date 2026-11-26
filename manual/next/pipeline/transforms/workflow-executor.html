@@ -3146,14 +3146,7 @@ See <a href="../../fields-parameters-variables.html" class="xref page">Fields, p
 </ul>
 </div>
 <div class="paragraph">
-<p>Samples (samples project)</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>loops/workflow-executor.hpl</p>
-</li>
-</ul>
+<p>The samples project has examples, see <a href="#_samples">Samples</a>.</p>
 </div>
 </div>
 </div>
@@ -3464,6 +3457,24 @@ If you don&#8217;t need a certain result simply leave a blank input field.</p>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>loops/workflow-executor.hpl</code>, which runs <code>loops/child-workflow-executor.hwf</code> once for each of 10 generated rows, with the row number in the parameter <code>PRM_COUNTER</code>, and gets the execution results, the result rows and the result file names on separate streams.</p>
+</li>
+<li>
+<p><code>transforms/workflow-executor-basic.hpl</code>, which runs <code>transforms/workflow-executor-child.hwf</code> once for each of 3 rows from a Data grid, with the value in the parameter <code>PARAM</code>, and gets the execution results on the <code>Results</code> stream and the result file names on the <code>Result files</code> stream: the child adds every file of the project to the result.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

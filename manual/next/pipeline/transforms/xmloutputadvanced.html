@@ -3524,6 +3524,45 @@ See <a href="../formatting-values.html" class="xref page">Formatting numbers and
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has these examples, which write to <code>${java.io.tmpdir}</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>transforms/xml-output-advanced-basic.hpl</code>, which writes 4 customers from a Data grid as <code>customer</code> elements with an <code>id</code> attribute to <code>xml-output-advanced-basic.xml</code>, and an <code>.xsd</code> file that describes it.</p>
+</li>
+<li>
+<p><code>transforms/xml-output-advanced-compact.hpl</code>, which writes 3 products without whitespace; the <code>currency</code> attribute is always created with its default value, and a null <code>discontinued</code> attribute or <code>note</code> element gets its default value.</p>
+</li>
+<li>
+<p><code>transforms/xml-output-advanced-document-fragment.hpl</code>, which inserts the XML fragment of the field <code>extras</code> into each <code>product</code> element as XML nodes, not as escaped text.</p>
+</li>
+<li>
+<p><code>transforms/xml-output-advanced-grouped.hpl</code>, which sorts order lines on <code>orderId</code> and writes one <code>order</code> element per order with its lines nested inside, with a default namespace, a DOCTYPE declaration, an <code>xml-stylesheet</code> processing instruction and an <code>.xsd</code> file.</p>
+</li>
+<li>
+<p><code>transforms/xml-output-advanced-multi-group-by.hpl</code>, which groups order lines first by region and then by order.</p>
+</li>
+<li>
+<p><code>transforms/xml-output-advanced-person-addresses.hpl</code>, which builds the <code>addresses</code> element of each person in a field with a first XML output (Advanced), and inserts it into the <code>person</code> elements with a second one, which writes <code>xml-output-advanced-person-addresses.xml</code>.</p>
+</li>
+<li>
+<p><code>transforms/xml-output-advanced-chained.hpl</code>, the same two transforms, which write <code>xml-output-advanced-chained.xml</code>.</p>
+</li>
+<li>
+<p><code>transforms/xml-output-advanced-split.hpl</code>, which writes 12 events in files of 5 rows: <code>xml-output-advanced-split_0_00001.xml</code> to <code>xml-output-advanced-split_0_00003.xml</code>.</p>
+</li>
+<li>
+<p><code>transforms/xml-output-advanced-zipped.hpl</code>, which writes transactions to a zip file whose name has the date and time in the format <code>yyyy-MM-dd_HH-mm-ss</code>, with the <code>.xsd</code> file next to it.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/pipeline/transforms/xmloutput.html"><span>Previous</span><strong>XML Output</strong></a>

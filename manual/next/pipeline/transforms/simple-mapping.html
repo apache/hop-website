@@ -3175,6 +3175,9 @@ Remove any outgoing hop before enabling the option.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>For the exact rules that decide which value a parameter ends up with, see <a href="../../variables/parameter-passing.html" class="xref page">Passing parameters to a child pipeline or workflow</a>.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -3202,16 +3205,10 @@ Remove any outgoing hop before enabling the option.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_sample"><a class="link" href="#_sample">Sample</a></h2>
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In the samples project you can find two examples of the Simple Mapping transform, the transforms/files/simple-mapping-child.hpl and simple-mapping-parent.hpl pipelines.</p>
-</div>
-<div class="paragraph">
-<p>In the sample files discussed above, the parent pipeline sends first and last name fields to the child, a calculation is performed and then a field is populated with the calculation and sent back.</p>
-</div>
-<div class="paragraph">
-<p>For the exact rules that decide which value a parameter ends up with, see <a href="../../variables/parameter-passing.html" class="xref page">Passing parameters to a child pipeline or workflow</a>.</p>
+<p>The samples project has <code>transforms/simple-mapping-parent.hpl</code>, which sends the first and last names of 4 rows from a Data grid to <code>transforms/simple-mapping-child.hpl</code> through Simple Mapping, and gets the full name back as <code>resultName</code>.</p>
 </div>
 </div>
 </div>

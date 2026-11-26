@@ -3222,6 +3222,33 @@ In the example below, this value has been set to false, so only the actual value
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>loops/child-check-set-counter-value.hpl</code>, which the <strong>repeat pipeline</strong> action of <code>loops/repeat-action.hwf</code> runs again and again: while <code>${COUNTER}</code> is 10 or less it writes the next value to the log and sets <code>${COUNTER}</code> to it, and when it is higher it sets <code>${END_LOOP}</code>, which ends the repeat.</p>
+</li>
+<li>
+<p><code>loops/child-loops-get-rows-from-result.hpl</code>, which writes the number of distinct <code>random_string</code> values it gets from <code>loops/child-generate-1000-rows.hpl</code> to the log.</p>
+</li>
+<li>
+<p><code>loops/child-loops-log-counter.hpl</code>, which writes the parameter <code>PRM_COUNTER</code> to the log; <code>loops/pipeline-executor.hpl</code> runs it 10 times.</p>
+</li>
+<li>
+<p><code>pipelines/pipeline-with-parameter.hpl</code>, which writes the parameter <code>PRM_EXAMPLE</code> and the variable <code>ENV_VARIABLE</code> to the log.</p>
+</li>
+<li>
+<p><code>transforms/write-to-log-basic.hpl</code>, which writes the first and last names of 2 rows from a Data grid to the log after the message <code>Writing sample rows to the log:</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/pipeline/transforms/workflow-logging.html"><span>Previous</span><strong>Workflow logging</strong></a>
