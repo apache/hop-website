@@ -3997,7 +3997,7 @@ Run <code>hop-conf.sh -h</code> for the complete list of your installation.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-fje</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>--fat-jar-engine=&lt;engine&gt;</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The engine the fat jar is for. <code>spark</code>: the native Spark engine, without the jars a Spark distribution of the engine&#8217;s Spark version ships (the cluster provides them), the Beam engine, and the SWT jars of all but one platform (plugin classes reference SWT, so its classes stay); this is the jar Databricks <strong>Deploy &amp; run</strong> builds and caches itself, so a current one is copied from the cache. <code>beam</code>: the Beam engines, with the Spark client pack of the Beam Spark runner, without the native Spark engine. A jar for one engine leaves out the other engine&#8217;s plugin folder and every jar in <code>lib/core</code> that, according to the plugin manifests, only that engine installs; a jar the engine shares with another plugin stays. Default: <code>beam</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The engine the fat jar is for. <code>spark</code>: the native Spark engine, without the jars a Spark distribution of the engine&#8217;s Spark version ships (the cluster provides them), the Beam engine, and the SWT jars of all but one platform (plugin classes reference SWT, so its classes stay); this is the jar Hop builds and caches itself when the fat jar of a native Spark run configuration or of Databricks <strong>Deploy &amp; run</strong> is empty, so a current one is copied from the cache. <code>beam</code>: the Beam engines, with the Spark client pack of the Beam Spark runner, without the native Spark engine. A jar for one engine leaves out the other engine&#8217;s plugin folder and every jar in <code>lib/core</code> that, according to the plugin manifests, only that engine installs; a jar the engine shares with another plugin stays. Default: <code>beam</code>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-fjsr</code></p></td>
@@ -4008,6 +4008,57 @@ Run <code>hop-conf.sh -h</code> for the complete list of your installation.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-scv</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>--spark-client-version=&lt;sparkClientVersion&gt;</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">With <code>--fat-jar-engine=beam</code>: the Spark client pack of the Beam Spark runner (folder <code>lib/spark-clients/&lt;version&gt;</code>). When omitted, <code>HOP_SPARK_CLIENT_VERSION</code> or the default pack in <code>lib/spark-client</code> is used. The former values <code>native-provided</code> and <code>native</code> still select <code>--fat-jar-engine=spark</code>, without and with <code>--include-spark-runtime</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock"><strong>Cluster staging folders</strong>, where cluster runs upload fat jars and project packages</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-stl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--staging-list=&lt;folder&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List the files Hop staged in the folder with their size, last use and whether a cleanup removes them.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-stc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--staging-cleanup=&lt;folder&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Remove the files Hop staged in the folder that no run used within the retention, with their sidecars. Other files are never touched. A named VFS connection resolves from the metadata in <code>HOP_METADATA_FOLDER</code>. See <a href="../../pipeline/pipeline-run-configurations/native-spark-pipeline-engine.html#staging-cleanup" class="xref page">Cleaning up the staging folder</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-str</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--staging-retention-days=&lt;days&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Days a staged file is kept after its last use. Default: <code>HOP_STAGING_RETENTION_DAYS</code>, else 14.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock"><strong>Spark project packages</strong>, for the native Spark engine (needs the engine plugin)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-esp</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--export-spark-project=&lt;zip&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Export a project package for the native Spark engine: the project tree with a <code>metadata.json</code> at its root, without <code>datasets/</code>. The project home comes from <code>--export-spark-project-home</code>, or from <code>PROJECT_HOME</code> after <code>-j &lt;project&gt;</code>. See <a href="../../pipeline/spark/paths-and-filesystems.html" class="xref page">Paths and file systems</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--export-spark-project-home=&lt;folder&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The project home to package.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--export-spark-project-exclude-dirs=&lt;dir&gt;[,&#8230;&#8203;]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">More folder names to leave out, added to the defaults and <code>spark-package.json</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--export-spark-project-exclude-globs=&lt;glob&gt;[,&#8230;&#8203;]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Globs relative to the project home to leave out, for example <code><strong>*/</strong>.jar</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--export-spark-project-include=&lt;path&gt;[,&#8230;&#8203;]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Relative paths to include even under a folder that is left out.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--export-spark-project-replace-default-excludes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Leave out only what <code>spark-package.json</code> and <code>--export-spark-project-exclude-dirs</code> name, not the built-in folders (<code>work</code>, <code>datasets</code>, <code>target</code>, &#8230;&#8203;).</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" colspan="3"><p class="tableblock"><strong>Graph database connections</strong></p></td>

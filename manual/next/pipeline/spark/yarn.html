@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Run native Spark pipelines on YARN | Apache Hop</title>
-<meta name="description" content="Run native Spark pipelines on a Hadoop YARN cluster from Hop GUI, hop-run or Hop Server, with Hop as the Spark driver.">
+<meta name="description" content="Run native Spark pipelines on a Hadoop YARN cluster from Hop GUI, hop-run or Hop Server, with Hop as the Spark driver or with the driver in YARN.">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/pipeline/spark/yarn.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
 <meta property="og:title" content="Run native Spark pipelines on YARN">
-<meta property="og:description" content="Run native Spark pipelines on a Hadoop YARN cluster from Hop GUI, hop-run or Hop Server, with Hop as the Spark driver.">
+<meta property="og:description" content="Run native Spark pipelines on a Hadoop YARN cluster from Hop GUI, hop-run or Hop Server, with Hop as the Spark driver or with the driver in YARN.">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/pipeline/spark/yarn.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -3055,6 +3055,7 @@
 <li><a href="#_run_it">Run it</a></li>
 <li><a href="#_run_it_through_hop_server">Run it through Hop Server</a></li>
 <li><a href="#yarn-docker">Try it with a single-node YARN cluster in Docker</a></li>
+<li><a href="#cluster-mode">Cluster mode</a></li>
 <li><a href="#_troubleshooting">Troubleshooting</a></li>
 <li><a href="#_related_pages">Related pages</a></li>
 </ul>
@@ -3062,10 +3063,10 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>The native Spark engine can run a pipeline on a Hadoop YARN cluster while Hop itself is the Spark driver: you start the pipeline from Hop GUI, <code>hop-run</code> or Hop Server, and the executors run in YARN containers. Spark calls this <strong>client deploy mode</strong>.</p>
+<p>The native Spark engine can run a pipeline on a Hadoop YARN cluster while Hop itself is the Spark driver: you start the pipeline from Hop GUI, <code>hop-run</code> or Hop Server, and the executors run in YARN containers. Spark calls this <strong>client deploy mode</strong>. In <strong>cluster deploy mode</strong> Hop submits the driver to YARN as well and follows it; see <a href="#cluster-mode">Cluster mode</a>.</p>
 </div>
 <div class="paragraph">
-<p>The alternative is <code>spark-submit --master yarn</code> on a machine with a Spark installation, with a fat jar and a project package; see <a href="getting-started-with-native-spark.html" class="xref page">Getting started with the native Spark engine</a>.</p>
+<p>You can also start a pipeline yourself with <code>spark-submit --master yarn</code> on a machine with a Spark installation, with a fat jar and a project package; see <a href="getting-started-with-native-spark.html" class="xref page">Getting started with the native Spark engine</a>.</p>
 </div>
 <div class="paragraph">
 <p>Set up a <a href="local-standalone-cluster.html" class="xref page">local standalone cluster</a> first if you have not run a pipeline on a cluster before: the fat jar, the run configuration and the troubleshooting there apply to YARN as well.</p>
@@ -3078,7 +3079,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Hop 2.20 or later with the <code>hop-engines-spark</code> plugin (see <a href="local-standalone-cluster.html" class="xref page">Local standalone cluster</a>, steps 1 and 3), and a <code>native-provided</code> fat jar.</p>
+<p>Hop 2.20 or later with the <code>hop-engines-spark</code> plugin (see <a href="local-standalone-cluster.html" class="xref page">Local standalone cluster</a>, steps 1 and 3). Hop builds the fat jar for the native Spark engine itself when <strong>Fat jar file location</strong> is empty.</p>
 </li>
 <li>
 <p>The Hadoop client configuration of the cluster on the Hop machine: a folder with <code>core-site.xml</code>, <code>hdfs-site.xml</code> and <code>yarn-site.xml</code>. On a cluster edge node this is often <code>/etc/hadoop/conf</code>.</p>
@@ -3131,8 +3132,8 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Fat jar file location</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The absolute path of a <code>native-provided</code> fat jar</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The executors load Hop from it.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Empty, or the absolute path of a <code>native-provided</code> fat jar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The executors load Hop from it. When empty, Hop builds and caches the jar of this installation.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Executor memory / Executor cores</p></td>
@@ -3140,13 +3141,14 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Must fit in a YARN container (<code>yarn.scheduler.maximum-allocation-mb</code> and <code>-vcores</code>).</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Spark config (key=value lines)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spark.ui.enabled=false</code><br>
-<code>spark.submit.deployMode=client</code><br>
-<code>spark.driver.host=&lt;address of the Hop machine&gt;</code><br>
-<code>spark.executorEnv.JAVA_HOME=&lt;Java 21 on the nodes&gt;</code><br>
-<code>spark.yarn.appMasterEnv.JAVA_HOME=&lt;Java 21 on the nodes&gt;</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spark.driver.host</code> must be an address of the Hop machine that the YARN nodes can reach. The two <code>JAVA_HOME</code> lines are only needed when the nodes' default Java is older than 21.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deploy mode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Client</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hop is the Spark driver.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spark settings</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rows (key, value): <code>spark.ui.enabled</code> = <code>false</code>, <code>spark.driver.host</code> = <code>&lt;address of the Hop machine&gt;</code>, <code>spark.executorEnv.JAVA_HOME</code> = <code>&lt;Java 21 on the nodes&gt;</code>, <code>spark.yarn.appMasterEnv.JAVA_HOME</code> = <code>&lt;Java 21 on the nodes&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spark.driver.host</code> must be an address of the Hop machine that the YARN nodes can reach. The two <code>JAVA_HOME</code> rows are only needed when the nodes' default Java is older than 21. The <strong>YARN client</strong> template adds a <code>spark.submit.deployMode</code> = <code>client</code> row: remove it and use <strong>Deploy mode</strong>, or it overrides <strong>Deploy mode</strong> Cluster later.</p></td>
 </tr>
 </tbody>
 </table>
@@ -3156,10 +3158,10 @@
 <div class="ulist">
 <ul>
 <li>
-<p>It passes every property in the <code><strong>-site.xml</code> files to Spark as <code>spark.hadoop.&lt;property&gt;</code>. A <code>spark.hadoop.</strong></code> line in <strong>Spark config</strong> overrides the same property from the files.</p>
+<p>It passes every property in the <code><strong>-site.xml</code> files to Spark as <code>spark.hadoop.&lt;property&gt;</code>. A <code>spark.hadoop.</strong></code> row in <strong>Spark settings</strong> overrides the same property from the files.</p>
 </li>
 <li>
-<p>It sets <code>spark.yarn.jars</code> to its own Spark runtime: the jars in <code>plugins/engines/spark/lib</code> plus the SLF4J and Jackson jars from <code>lib/core</code>, about 285 MB. Spark uploads them to the YARN staging folder on HDFS for every run, so the containers run exactly the Spark version Hop runs (4.1.4). If you set <code>spark.yarn.jars</code> or <code>spark.yarn.archive</code> in <strong>Spark config</strong> yourself, they must point at Spark 4.1.4 for Scala 2.13 and include those SLF4J and Jackson jars.</p>
+<p>It sets <code>spark.yarn.archive</code> to one zip of its own Spark runtime: the jars in <code>plugins/engines/spark/lib</code> plus the libraries Hop shares with Spark from <code>lib/core</code> (Netty, log4j, Jackson, &#8230;&#8203;), without Hop, Beam or Hadoop jars. Hop builds it once per installation, next to the fat jar in its cache. Spark uploads it to the YARN staging folder on HDFS for every run, so the containers run exactly the Spark version Hop runs (4.1.4). If you set <code>spark.yarn.jars</code> or <code>spark.yarn.archive</code> in <strong>Spark settings</strong> yourself, they must point at Spark 4.1.4 for Scala 2.13 and include those libraries.</p>
 </li>
 </ul>
 </div>
@@ -3177,7 +3179,7 @@
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">Read &lt;n&gt; Hadoop configuration properties from file:///etc/hadoop/conf/core-site.xml, ...
-YARN containers get the engine's Spark runtime: &lt;n&gt; jars in spark.yarn.jars
+YARN containers get the engine's Spark runtime from /home/&lt;you&gt;/.hop/fat-jars/hop-spark-yarn-runtime-&lt;fingerprint&gt;.zip
 Created SparkSession version=4.1.4 master=yarn (owned)
 ...
 Spark pipeline finished, result row count=0</code></pre>
@@ -3216,7 +3218,7 @@ Spark pipeline finished, result row count=0</code></pre>
 <h2 id="yarn-docker"><a class="link" href="#yarn-docker">Try it with a single-node YARN cluster in Docker</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Hop source tree has a single-node HDFS and YARN cluster for Docker on Linux: <code>docker/integration-tests/integration-tests-spark-native-yarn.yaml</code>. Its Hadoop configuration in <code>docker/integration-tests/spark-yarn/conf</code> serves both the container and Hop on the Docker host.</p>
+<p>The Hop source tree has a single-node HDFS and YARN cluster for Docker on Linux (it also runs on Apple Silicon, emulated and slowly): <code>docker/integration-tests/integration-tests-spark-native-yarn.yaml</code>. Its Hadoop configuration in <code>docker/integration-tests/spark-yarn/conf</code> serves both the container and Hop on the Docker host.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -3242,14 +3244,13 @@ docker <span class="hljs-built_in">exec</span> <span class="hljs-variable">$C</s
 </div>
 </li>
 <li>
-<p>Create the run configuration with <strong>Hadoop configuration folder</strong> <code>&lt;hop source&gt;/docker/integration-tests/spark-yarn/conf</code>, your fat jar, and these <strong>Spark config</strong> lines:</p>
+<p>Create the run configuration with <strong>Hadoop configuration folder</strong> <code>&lt;hop source&gt;/docker/integration-tests/spark-yarn/conf</code>, an empty <strong>Fat jar file location</strong>, <strong>Deploy mode</strong> Client, and these <strong>Spark settings</strong> rows (key, value):</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">spark.ui.enabled=false
-spark.submit.deployMode=client
-spark.driver.host=172.31.250.1
-spark.executorEnv.JAVA_HOME=/opt/java21
-spark.yarn.appMasterEnv.JAVA_HOME=/opt/java21</code></pre>
+<pre class="highlightjs highlight"><code class="language-none hljs">spark.ui.enabled                    false
+spark.driver.host                   172.31.250.1
+spark.executorEnv.JAVA_HOME         /opt/java21
+spark.yarn.appMasterEnv.JAVA_HOME   /opt/java21</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3271,6 +3272,66 @@ spark.yarn.appMasterEnv.JAVA_HOME=/opt/java21</code></pre>
 </div>
 <div class="paragraph">
 <p>Stop the cluster with <code>docker compose -f docker/integration-tests/integration-tests-spark-native-yarn.yaml down</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cluster-mode"><a class="link" href="#cluster-mode">Cluster mode</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In client mode Hop is the Spark driver, and the YARN containers connect back to it. In <a href="../pipeline-run-configurations/native-spark-pipeline-engine.html#cluster-mode" class="xref page">cluster mode</a> the driver runs in the YARN application master instead: Hop only submits the run and follows it, and nothing on the cluster has to reach the Hop machine.</p>
+</div>
+<div class="paragraph">
+<p>Hop submits with Spark&#8217;s own YARN client inside the Hop process (no Spark installation needed), follows the application through the ResourceManager, and kills it on <strong>Stop</strong>. It uploads three things to the staging folder, each named after its content so that it is uploaded once:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the fat jar of this installation;</p>
+</li>
+<li>
+<p>the Spark runtime for the YARN containers, as one archive in <code>spark.yarn.archive</code>: the Spark 4 jars of the engine plugin plus the libraries Hop shares with Spark (Netty, log4j, Jackson, &#8230;&#8203;), without Hop, Beam or Hadoop jars. Without it YARN would upload a few hundred MB for every run;</p>
+</li>
+<li>
+<p>the project package with the variables of the run.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Change these options of the run configuration:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deploy mode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cluster</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Staging folder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A folder in HDFS through a VFS connection of the project, for example an HDFS connection <code>hdfs-staging</code> (WebHDFS) and the folder <code>hdfs-staging://hop-staging</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Staging folder URL for the cluster</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The same folder as the cluster reads it, for example <code>hdfs://namenode:8020/hop-staging</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spark settings</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spark.yarn.appMasterEnv.JAVA_HOME</code> and <code>spark.executorEnv.JAVA_HOME</code> when the NodeManagers run an older Java than 21; the driver now runs in the application master too. No <code>spark.submit.deployMode</code> row: it would override <strong>Deploy mode</strong>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A failed run is not retried: Hop sets <code>spark.yarn.maxAppAttempts=1</code> unless the Spark settings say otherwise, so a pipeline never writes its output twice. On YARN a path without a scheme is a path in HDFS (the default file system of the cluster): write <code><a href="file:///&#8230;&#8203" class="bare">file:///&#8230;&#8203</a>;</code> for a local path that every node has.</p>
 </div>
 </div>
 </div>
@@ -3303,7 +3364,7 @@ spark.yarn.appMasterEnv.JAVA_HOME=/opt/java21</code></pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>NoClassDefFoundError: org/slf4j/LoggerFactory</code> in the first container</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spark.yarn.jars</code> or <code>spark.yarn.archive</code> in <strong>Spark config</strong> leave out SLF4J or Jackson. Remove them to use Hop&#8217;s default, or add those jars.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spark.yarn.jars</code> or <code>spark.yarn.archive</code> in <strong>Spark settings</strong> leave out libraries the Spark runtime needs, such as SLF4J or Jackson. Remove those rows to use the archive Hop builds.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Could not replicate "file:///tmp/export_&#8230;&#8203;zip" as it does not exist</code> from a transform on Hop Server</p></td>

@@ -3062,7 +3062,7 @@ Airflow reads a changed file again every 30 seconds by default (<code>min_file_p
 </div>
 <div class="paragraph">
 <p>The result of the workflow is the outcome of the run in Airflow, with the counters of the task that ended last: as in Hop, each action passes them on to the next.
-Each action of the workflow is a task in Airflow: see <a href="../../hop-tools/hop-airflow-bundle.html#_tasks" class="xref page">Tasks</a>.</p>
+Each action of the workflow is a task in Airflow (see <a href="../../hop-tools/hop-airflow-bundle.html#_tasks" class="xref page">Tasks</a>), unless <strong>Tasks</strong> asks for one task for the whole workflow.</p>
 </div>
 <div class="paragraph">
 <p>Airflow must already read the bundle folder as a DAG bundle, and its workers must have Hop and a Java coordinator: see <a href="../../hop-tools/hop-airflow-bundle.html#_set_up_airflow" class="xref page">Set up Airflow</a>.
@@ -3116,6 +3116,12 @@ Default: <code>local</code>.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DAG id prefix</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The start of every DAG id.
 Default: the project name followed by two underscores.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tasks</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One task per action, or one task for the whole workflow: see <a href="../../hop-tools/hop-airflow-bundle.html#_one_task_for_the_whole_workflow" class="xref page">One task for the whole workflow</a>.
+The setting applies to every workflow in the bundle: a publish with another setting changes the DAGs of all of them.
+Default: one task per action.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Unpause a paused DAG?</p></td>

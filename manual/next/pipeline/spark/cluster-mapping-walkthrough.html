@@ -3145,7 +3145,7 @@
 <p>Docker with Compose v2</p>
 </li>
 <li>
-<p>Hop client <strong>2.19+</strong> with the native Spark plugin (from a built assembly or install)</p>
+<p>Hop client <strong>2.21+</strong> with the native Spark plugin (from a built assembly or install)</p>
 </li>
 <li>
 <p>Enough disk to download Spark 4.1.x images (~1 GB first build)</p>
@@ -3174,7 +3174,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p><code>hop-native-spark4-submit.jar</code> — fat jar with token <strong><code>native-provided</code></strong> (no embedded Spark)</p>
+<p><code>hop-native-spark4-submit.jar</code> — native Spark fat jar (<code>--fat-jar-engine=spark</code>, no embedded Spark)</p>
 </li>
 <li>
 <p><code>spark-demo.zip</code> — Native Spark project package</p>
@@ -3233,7 +3233,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Tools</strong> → <strong>Generate a Hop fat jar</strong> with native-provided packaging, and</p>
+<p><strong>Tools</strong> → <strong>Generate a Hop fat jar</strong>, choosing <strong>Native Spark engine</strong>, and</p>
 </li>
 <li>
 <p><strong>Tools</strong> → <strong>Export project package for Native Spark…</strong> after opening the sample project.</p>

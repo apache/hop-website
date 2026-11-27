@@ -980,6 +980,10 @@ A listener on <code>WorkflowFinish</code> should not assume it is called once pe
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopGuiPipelineFinished</code> (<code>HopGuiExtensionPoint</code>)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A pipeline that Hop GUI ran has finished.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SparkClusterTarget</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The native Spark engine submits a run to a cluster type that another plugin provides, or <strong>Test configuration</strong> checks a run configuration of that type. The object is a <code>SparkClusterTarget</code> (<code>org.apache.hop.core.cluster</code>) with the code of the cluster type and the resolved settings of the run configuration (<code>connection</code>, <code>compute</code>, <code>runtime</code>, <code>nodeType</code>, <code>workers</code>, <code>stagingFolder</code>). The plugin of that cluster type sets the submitter (<code>ISparkClusterSubmitter</code>) and the staging store (<code>IStagingStore</code>); the others leave it alone. The Databricks plugin answers for <code>DATABRICKS</code>, so the Spark engine plugin does not depend on it.</p></td>
+</tr>
 </tbody>
 </table>
 </div>

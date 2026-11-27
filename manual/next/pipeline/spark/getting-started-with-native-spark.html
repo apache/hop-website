@@ -3158,7 +3158,7 @@
 <a href="cluster-mapping-walkthrough.html" class="xref page">Cluster demo walk-through</a>.</p>
 </div>
 <div class="paragraph">
-<p>To deploy <strong>MainSpark</strong> JAR jobs to a <strong>Databricks</strong> workspace (classic clusters, UC Volumes, Job Run Deploy &amp; run):
+<p>To run pipelines on a <strong>Databricks</strong> cluster, from Hop GUI, <code>hop-run</code> or Hop Server with the cluster type <strong>Databricks</strong>, or in the jobs of the Databricks job run action:
 <a href="databricks.html" class="xref page">Native Spark on Databricks</a>.</p>
 </div>
 </div>
@@ -3286,7 +3286,7 @@
 </div>
 <div class="paragraph">
 <p>Each transform&#8217;s reference page says which of the two it gets: a double check on the <strong>Native Spark</strong> tag means the engine has its own implementation (<a href="../transforms/sort.html" class="xref page">Sort rows</a>, <a href="../transforms/mergejoin.html" class="xref page">Merge join</a>, <a href="../transforms/memgroupby.html" class="xref page">Memory group by</a>, <a href="../transforms/uniquerows.html" class="xref page">Unique rows</a>, the Spark file and lake table transforms and <a href="../transforms/spark-sql.html" class="xref page">Spark SQL</a>); a single check means the Hop transform runs wrapped, one partition at a time. Wrapped transforms work, but anything that needs to see the whole dataset — grouping, deduplicating, sorting — must be done by a native transform or preceded by one.
-. Transform metrics are collected via Spark accumulators and shown in Hop like any other engine.</p>
+. Transform metrics are collected via Spark accumulators and shown in Hop like any other engine when Hop is the Spark driver (client mode). Runs in cluster mode and on Databricks show the state of the run, not yet the metrics per transform.</p>
 </div>
 <div class="paragraph">
 <p>You still design pipelines <strong>visually</strong> in Hop. Spark’s role is the distributed execution engine and the Dataset runtime under the hood.</p>
@@ -3362,11 +3362,11 @@
 <p>Familiarity with Hop pipelines, metadata, and run configurations.</p>
 </li>
 <li>
-<p>For cluster submit:</p>
+<p>For <code>spark-submit</code>:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>A <strong>Spark 4.1.x</strong> distribution (<code>SPARK_HOME</code> pinned to that tree).</p>
+<p>A <strong>Spark 4.1.x</strong> distribution (<code>SPARK_HOME</code> pinned to that tree). Runs that Hop submits itself, to a standalone, YARN or Kubernetes cluster or to Databricks, need no Spark installation.</p>
 </li>
 <li>
 <p>Network access to the master and workers.</p>
@@ -3399,7 +3399,7 @@
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-On the Native Spark engine options tab, <strong>Load configuration template</strong> can pre-fill common setups (<strong>Local execution</strong>, <strong>Spark standalone server</strong>, <strong>spark-submit</strong>, <strong>Databricks</strong>, <strong>YARN</strong>, …). See <a href="../pipeline-run-configurations/native-spark-pipeline-engine.html" class="xref page">Native Spark pipeline engine</a>.
+On the Native Spark engine options tab, <strong>Load configuration template</strong> can pre-fill common setups (<strong>Local execution</strong>, <strong>Spark standalone server</strong>, <strong>spark-submit (cluster)</strong>, <strong>Databricks</strong>, <strong>YARN client</strong>, …). See <a href="../pipeline-run-configurations/native-spark-pipeline-engine.html" class="xref page">Native Spark pipeline engine</a>.
 </td>
 </tr>
 </table>
@@ -3445,6 +3445,10 @@ For Iceberg <strong>TABLE</strong> mode, create a <a href="../../metadata-types/
 </thead>
 <tbody>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cluster type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Local: Spark in this Hop process</strong></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Spark master</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>local[*]</code> (or <code>local[4]</code> to cap cores)</p></td>
 </tr>
@@ -3453,23 +3457,14 @@ For Iceberg <strong>TABLE</strong> mode, create a <a href="../../metadata-types/
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Apache Hop</code> (or your project name)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fat jar file location</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Leave <strong>empty</strong> for pure <code>local[*]</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Spark config</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Optional; one <code>key=value</code> per line (advanced tuning)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Driver / executor memory &amp; cores</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Optional; leave empty for local defaults</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Temp location</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Optional; defaults to the JVM temp directory</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spark settings</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional; a key and a value per row on the <strong>Spark settings</strong> tab (advanced tuning)</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>For a local run the dialog doesn&#8217;t show the fat jar, staging and executor options: they only apply to a cluster.</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3558,10 +3553,13 @@ For Iceberg <strong>TABLE</strong> mode, create a <a href="../../metadata-types/
 <div class="sect2">
 <h3 id="_build_a_fat_jar_for_cluster_submit"><a class="link" href="#_build_a_fat_jar_for_cluster_submit">Build a fat jar for cluster submit</a></h3>
 <div class="paragraph">
+<p>Runs that Hop starts on a cluster (Hop GUI, <code>hop-run</code>, Hop Server, client or cluster deploy mode) do not need this: with an empty <strong>Fat jar file location</strong> Hop builds and caches the <code>native-provided</code> fat jar of the installation. Build one yourself for <code>spark-submit</code>.</p>
+</div>
+<div class="paragraph">
 <p>On a real cluster you must <strong>not</strong> embed a second copy of Spark inside the application jar. The cluster already provides Spark 4.1. Embedding Spark leads to dual classpaths and failures on Java 21.</p>
 </div>
 <div class="paragraph">
-<p>Generate the fat jar for the <strong>native Spark engine</strong>: Hop and its plugins go into the jar; <strong>everything a Spark distribution ships (Spark, Scala, the Hadoop client and their libraries), and the Beam engine stay out</strong>. The engine plugin knows what a Spark distribution of its version ships from its own dependency tree, <code>plugins/engines/spark/spark-dependencies.txt</code>. The Beam engine is its plugin folder and every jar in <code>lib/core</code> that, according to the plugin manifests, only the Beam engine installs: a jar Beam shares with another installed plugin stays. It is the same jar Databricks <strong>Deploy &amp; run</strong> builds and caches, so when the cached one is current, generating it only copies that file.</p>
+<p>Generate the fat jar for the <strong>native Spark engine</strong>: Hop and its plugins go into the jar; <strong>everything a Spark distribution ships (Spark, Scala, the Hadoop client and their libraries), and the Beam engine stay out</strong>. The engine plugin knows what a Spark distribution of its version ships from its own dependency tree, <code>plugins/engines/spark/spark-dependencies.txt</code>. The Beam engine is its plugin folder and every jar in <code>lib/core</code> that, according to the plugin manifests, only the Beam engine installs: a jar Beam shares with another installed plugin stays. It is the same jar the engine and Databricks <strong>Deploy &amp; run</strong> build and cache for themselves, so when the cached one is current, generating it only copies that file.</p>
 </div>
 <div class="sect3">
 <h4 id="_from_hop_gui"><a class="link" href="#_from_hop_gui">From Hop GUI</a></h4>
@@ -3589,12 +3587,15 @@ For Iceberg <strong>TABLE</strong> mode, create a <a href="../../metadata-types/
 <div class="paragraph">
 <p>Add <code>--include-spark-runtime</code> only for a JVM without Spark that starts the Spark session itself: it embeds Spark 4 and Scala. Never use it for <code>spark-submit</code> or a cluster.</p>
 </div>
+<div class="paragraph">
+<p>The former <code>--spark-client-version=native-provided</code> and <code>--spark-client-version=native</code> still work: <code>native-provided</code> is <code>--fat-jar-engine=spark</code>, <code>native</code> adds <code>--include-spark-runtime</code>.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_export_project_metadata"><a class="link" href="#_export_project_metadata">Export project metadata</a></h3>
 <div class="paragraph">
-<p>Cluster runs need your Hop metadata (run configurations, execution locations, connections, etc.) as a single JSON file.</p>
+<p>A <code>spark-submit</code> run needs your Hop metadata (run configurations, execution locations, connections, etc.) as a single JSON file, or a project package (<code>hop-conf --export-spark-project</code>). Runs that Hop submits itself stage the project package for you.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -3638,7 +3639,7 @@ For Iceberg <strong>TABLE</strong> mode, create a <a href="../../metadata-types/
 <p>Engine = <strong>Native Spark pipeline engine</strong> (not Beam Spark)</p>
 </li>
 <li>
-<p><strong>Master</strong> blank (so <code>spark-submit --master</code> wins) <strong>or</strong> set to <code>spark://host:7077</code>. For YARN, submit with <code>--master yarn</code> from a machine where <code>HADOOP_CONF_DIR</code> points at the cluster&#8217;s configuration; <code>spark-submit</code> reads it from there.</p>
+<p><strong>Cluster type</strong> <strong>spark-submit</strong>: the master stays empty, so <code>spark-submit --master</code> wins. For YARN, submit with <code>--master yarn</code> from a machine where <code>HADOOP_CONF_DIR</code> points at the cluster&#8217;s configuration; <code>spark-submit</code> reads it from there.</p>
 </li>
 <li>
 <p><strong>Fat jar</strong> field empty (the submit jar already carries Hop)</p>
@@ -3923,7 +3924,7 @@ For Iceberg <strong>TABLE</strong> mode, create a <a href="../../metadata-types/
 <div class="sect2">
 <h3 id="_classic_hop_io_and_internal_transform_id"><a class="link" href="#_classic_hop_io_and_internal_transform_id">Classic Hop I/O and <code>${Internal.Transform.ID}</code></a></h3>
 <div class="paragraph">
-<p>You can still use classic transforms such as <strong>Text File Input</strong>, <strong>Text File Output</strong>, <strong>Get File Names</strong>, or <strong>Microsoft Excel Input</strong> on the generic mapPartitions path (useful for POCs and small lookups). Those plugins are staged for the Spark engine via <code>plugins/engines/spark/dependencies.xml</code>.</p>
+<p>You can still use classic transforms such as <strong>Text File Input</strong>, <strong>Text File Output</strong>, <strong>Get File Names</strong>, or <strong>Microsoft Excel Input</strong> on the generic mapPartitions path (useful for POCs and small lookups). On <code>local[*]</code> they load from the plugin classpath of the Spark engine (<code>plugins/engines/spark/dependencies.xml</code>); on a cluster the fat jar carries every installed plugin.</p>
 </div>
 <div class="paragraph">
 <p><strong>Sources with no previous hop</strong> (for example Get File Names, or Excel/Text Input reading a fixed file list) run on a <strong>single</strong> partition so the same small file is not listed or opened once per executor — the same idea as Beam’s single-thread pattern for non-Beam inputs.</p>
@@ -3993,7 +3994,7 @@ For Iceberg <strong>TABLE</strong> mode, create a <a href="../../metadata-types/
 <div class="sect2">
 <h3 id="_live_metrics_in_the_pipeline_editor"><a class="link" href="#_live_metrics_in_the_pipeline_editor">Live metrics in the pipeline editor</a></h3>
 <div class="paragraph">
-<p>While a native Spark pipeline runs (and when it finishes), Hop shows transform-level metrics on the graph — lines read/written/input/output, errors, and running/finished state — similar to the local engine. Values are aggregated on the <strong>driver</strong> from Spark accumulators.</p>
+<p>While a native Spark pipeline runs with Hop as the Spark driver (local and client mode), and when it finishes, Hop shows transform-level metrics on the graph — lines read/written/input/output, errors, and running/finished state — similar to the local engine. Values are aggregated on the <strong>driver</strong> from Spark accumulators.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -4136,7 +4137,7 @@ When a chain of Join / Filter / Calculator transforms exists only to express ana
 <p>Partition rows are injected; outputs are collected back into a Dataset.</p>
 </li>
 <li>
-<p>Plugin JARs used by those transforms must be on the Spark classpath (<code>dependencies.xml</code> for the engine plugin, and the fat jar on the cluster).</p>
+<p>Plugin JARs used by those transforms must be on the Spark classpath: the plugin classpath of the engine (<code>dependencies.xml</code>) locally, and the fat jar, which carries every installed plugin, on a cluster.</p>
 </li>
 </ol>
 </div>
@@ -4225,7 +4226,7 @@ Examples: sorted <strong>Group By</strong> (use <strong>Memory Group By</strong>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Plugins in mapPartitions</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Must be present on the Spark classpath (staged list + fat jar). Missing plugins fail at runtime on the executor.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Must be installed in the Hop that builds the fat jar: the fat jar carries every installed plugin. Missing plugins fail at runtime on the executor.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Beam-only transforms</p></td>
@@ -4368,13 +4369,13 @@ Examples: sorted <strong>Group By</strong> (use <strong>Memory Group By</strong>
 <p><i class="fa fa-square-o"></i> Execution information location attached if you need history and samples</p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Cluster: fat jar with <code>--fat-jar-engine=spark</code></p>
+<p><i class="fa fa-square-o"></i> <code>spark-submit</code>: fat jar with <code>--fat-jar-engine=spark</code> (runs started by Hop build it themselves)</p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> Cluster: <code>SPARK_HOME</code> pinned to Spark <strong>4.1.x</strong></p>
 </li>
 <li>
-<p><i class="fa fa-square-o"></i> Cluster: metadata JSON exported; run configuration name matches submit args</p>
+<p><i class="fa fa-square-o"></i> <code>spark-submit</code>: metadata JSON or project package exported; run configuration name matches submit args</p>
 </li>
 <li>
 <p><i class="fa fa-square-o"></i> No sorted Group By; no reliance on Copy/Distribute multi-hop behaviour</p>

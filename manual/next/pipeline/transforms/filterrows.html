@@ -3322,7 +3322,7 @@ Alternatively, you can store the .HPL, and then open the .HPL in a text editor.<
 <p><code>transforms/filter-rows-basic.hpl</code>, which checks 10 rows from a Data grid against <code>(id &lt; 5 OR group = GR03) AND NOT desc = d</code>: one Filter rows sends the 5 matching rows to one Dummy and the other 5 to another, and the second one only passes on the 5 matching rows.</p>
 </li>
 <li>
-<p><code>metadata-injection/filter-rows-mdi-parent.hpl</code>, which injects the condition shown under <a href="#_mdi_example">MDI Example</a> into the Filter rows of <code>metadata-injection/filter-rows-mdi-child.hpl</code>, which reads <code>files/customers-100.txt</code>.</p>
+<p><code>metadata-injection/filter-rows-mdi-parent.hpl</code>, which injects the condition shown under <a href="#_mdi_example">MDI Example</a> into the Filter rows of <code>metadata-injection/filter-rows-mdi-child.hpl</code>, which reads <code>files/customers-100.txt</code>: the one customer that matches goes to True, the other 99 go to False.</p>
 </li>
 <li>
 <p><code>loops/child-check-set-counter-value.hpl</code>, which the <strong>repeat pipeline</strong> action of <code>loops/repeat-action.hwf</code> runs again and again: while <code>${COUNTER}</code> is 10 or less it adds 1 to it, and when it is higher it sets <code>${END_LOOP}</code>, which ends the repeat.</p>
@@ -3345,7 +3345,7 @@ Alternatively, you can store the .HPL, and then open the .HPL in a text editor.<
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">stateCode = FL
+<div class="code-lang" data-pagefind-ignore>shell</div><pre class="highlightjs highlight is-highlighted"><code class="language-shell hljs" data-lang="shell">stateCode = CA
 AND
 housenr &gt; 100</code></pre>
 </div>
@@ -3363,7 +3363,7 @@ housenr &gt; 100</code></pre>
                     <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>
                         <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>constant<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span>
                         <span class="hljs-tag">&lt;<span class="hljs-name">type</span>&gt;</span>String<span class="hljs-tag">&lt;/<span class="hljs-name">type</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-name">text</span>&gt;</span>FL<span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">text</span>&gt;</span>CA<span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span>
                         <span class="hljs-tag">&lt;<span class="hljs-name">length</span>&gt;</span>-1<span class="hljs-tag">&lt;/<span class="hljs-name">length</span>&gt;</span>
                         <span class="hljs-tag">&lt;<span class="hljs-name">precision</span>&gt;</span>-1<span class="hljs-tag">&lt;/<span class="hljs-name">precision</span>&gt;</span>
                         <span class="hljs-tag">&lt;<span class="hljs-name">isnull</span>&gt;</span>N<span class="hljs-tag">&lt;/<span class="hljs-name">isnull</span>&gt;</span>

@@ -3067,26 +3067,26 @@ If you use a variable name for the file to repeat, ensure a default parameter is
 </tr>
 </table>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-A variable set with a scope of 'valid in the JVM' in a pipeline will not be accessible upstream of a repeating pipeline.
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_example"><a class="link" href="#_example">Example</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The samples project example: <code>/loops/repeat-action.hwf</code> and <code>child-check-set-counter-value.hpl</code> runs a pipeline that increments a <code>${COUNTER}</code> variable with each run. If the variable values exceeds 10, a variable <code>${END_LOOP}</code> is set.
-This variable is detected by the Repeat action, and the loop stops. Because the Variable scope of <code>COUNTER</code> in the workflow is set to “Valid in the current workflow”, when you set <code>COUNTER</code> in the child the new value goes upstream.</p>
+<p>The samples project has <code>loops/repeat-action.hwf</code>, which sets <code>${COUNTER}</code> to 1 and then runs two Repeat actions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>repeat pipeline</strong> runs <code>loops/child-check-set-counter-value.hpl</code> again and again. While <code>${COUNTER}</code> is 10 or less, the pipeline adds 1 to it. When it is higher, the pipeline sets <code>${END_LOOP}</code>, which stops the repeat. The pipeline sets both variables with the scope <strong>Valid in the Java Virtual Machine</strong>, which also sets them in the workflow, so each run of the pipeline gets the new counter.</p>
+</li>
+<li>
+<p><strong>reset ${COUNTER} to 1</strong> sets <code>${COUNTER}</code> back to 1 and empties <code>${END_LOOP}</code>: a Repeat action does not run at all when its variable is already set.</p>
+</li>
+<li>
+<p><strong>repeat workflow</strong> runs <code>loops/end-repeat-pipeline.hwf</code> again and again. That workflow writes the counter to the log and runs the same pipeline while <code>${COUNTER}</code> is 5 or less, and runs an End repeat action when it is higher. <strong>Keep variable values after executions</strong> is on, so each run of the workflow starts with the counter of the run before it.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>

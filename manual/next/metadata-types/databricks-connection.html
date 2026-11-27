@@ -3054,7 +3054,20 @@
 It is <strong>not</strong> the same as the <a href="../database/databases/databricks.html" class="xref page">Databricks JDBC</a> relational connection (SQL warehouse).</p>
 </div>
 <div class="paragraph">
-<p>Use this metadata type when orchestrating jobs from Hop (for example the upcoming <strong>Databricks job run</strong> workflow action) or when testing Jobs API access from the connection editor.</p>
+<p>Hop uses it to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>run native Spark pipelines on a Databricks cluster: the native Spark run configuration with the cluster type <strong>Databricks</strong> names the connection, see <a href="../pipeline/spark/databricks.html" class="xref page">Native Spark on Databricks</a>;</p>
+</li>
+<li>
+<p>create, run and follow Databricks jobs with the <a href="../workflow/actions/databricks-job-run.html" class="xref page">Databricks job run</a> and <a href="../workflow/actions/databricks-job-wait.html" class="xref page">Databricks job wait</a> actions;</p>
+</li>
+<li>
+<p>read and write volumes and workspace files through a <a href="databricks-vfs-connection.html" class="xref page">Databricks VFS Connection</a>.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -3087,7 +3100,7 @@ It is <strong>not</strong> the same as the <a href="../database/databases/databr
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Personal access token</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Databricks PAT (stored as a password field). Prefer Hop variables / secret backends for production. Tokens are never written to Hop logs by the Jobs client.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Databricks PAT (stored as a password field). Prefer a variable such as <code>${DATABRICKS_TOKEN}</code>, set in an environment configuration file of the project, outside the project folder: operating system environment variables are not Hop variables. Tokens are never written to Hop logs by the Jobs client.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">API base path</p></td>
@@ -3095,6 +3108,64 @@ It is <strong>not</strong> the same as the <a href="../database/databases/databr
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_token_and_permissions"><a class="link" href="#_token_and_permissions">Token and permissions</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Create the token under <strong>Settings</strong> → <strong>Developer</strong> → <strong>Access tokens</strong> in the workspace. Hop calls these REST APIs with it:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">API</th>
+<th class="tableblock halign-left valign-top">Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jobs (<code>/api/2.1/jobs/&#8230;&#8203;</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Submitting a run and following and cancelling it (native Spark, cluster type <strong>Databricks</strong>); creating, updating and running jobs (Databricks job run).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Files (<code>/api/2.0/fs/files</code>, <code>/api/2.0/fs/directories</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Uploading the fat jar and the project package to a Unity Catalog volume, and the Databricks VFS.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Libraries (<code>/api/2.0/libraries/&#8230;&#8203;</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Native Spark on an all-purpose cluster: finding fat jars of earlier Hop runs that the cluster still has installed, and having them removed at the next restart. Without access a run still works, without this help.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Current user (<code>/api/2.0/preview/scim/v2/Me</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test connection</strong>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DBFS (<code>/api/2.0/dbfs/&#8230;&#8203;</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Only for <code>dbfs:/</code> paths instead of volumes.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>With a scoped token, the scopes have to cover these APIs. The scopes are named <code>jobs</code>, <code>files</code>, <code>unity-catalog</code> (volumes), <code>libraries</code> and <code>scim</code>; <code>GET /api/2.0/token-scopes</code> lists all scope names of a workspace. The user of the token also needs:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>on the volume Hop stages in: <code>USE CATALOG</code>, <code>USE SCHEMA</code>, <code>READ VOLUME</code> and <code>WRITE VOLUME</code>;</p>
+</li>
+<li>
+<p>on an all-purpose cluster: the cluster assigned to them in Dedicated access mode, or <strong>Can attach to</strong> and <strong>Can restart</strong>; to have fat jars of earlier runs removed, also <strong>Can manage</strong>;</p>
+</li>
+<li>
+<p>to create jobs and job runs: any workspace user may, unless an administrator limited it.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect1">

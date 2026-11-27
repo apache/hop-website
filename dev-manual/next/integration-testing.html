@@ -796,6 +796,15 @@ mvn clean install</pre>
 <div class="paragraph">
 <p>With <code>HOP_IT_ENGINE=spark-native</code>, <code>run-tests.sh</code> copies the project to a temporary folder and replaces its <code>local</code> pipeline run configuration, which the test workflows run their pipelines with, by <code>integration-tests/scripts/run-configurations/spark-native-local.json</code>. The project&#8217;s own <code>local</code> becomes <code>hop-local</code>, which the suite driver keeps using. The tests and their checks stay the project&#8217;s own, so a failure is a difference between the engines. Projects that choose their own engines (<code>spark*</code>, <code>beam*</code>) or have no plain <code>local</code> run configuration are skipped.</p>
 </div>
+<div class="paragraph">
+<p>Projects with a <code>disabled.txt</code> are skipped unless the run opts in with <code>INCLUDE_DISABLED=true</code>, or with a list of project names (<code>INCLUDE_DISABLED=oracle,vertica</code>). The native Spark cluster projects are opt-in this way, because they start a cluster: <code>spark-native-standalone</code> starts a Spark standalone master, two workers and SeaweedFS as the staging store, <code>spark-native-kubernetes</code> starts k3s in a privileged container and builds the Spark image for the pods. In both, Hop builds and stages the fat jar and the project package itself and submits the pipelines in cluster mode:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./run-tests-docker.sh PROJECT_NAME=spark-native-standalone INCLUDE_DISABLED=<span class="hljs-literal">true</span>
+./run-tests-docker.sh PROJECT_NAME=spark-native-kubernetes INCLUDE_DISABLED=<span class="hljs-literal">true</span></code></pre>
+</div>
+</div>
 </li>
 <li>
 <p>Surefire Reports</p>

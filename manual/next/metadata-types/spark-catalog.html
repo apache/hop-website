@@ -3241,7 +3241,7 @@ spark.sql.catalog.lake.warehouse=file:///tmp/wh</pre>
 <h2 id="_spark_submit"><a class="link" href="#_spark_submit">spark-submit</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Export project metadata JSON that includes every lakehouse catalog entry referenced by the pipeline (and any used only via run configuration). Alternatively, pass equivalent <code>--conf spark.sql.catalog.…</code> flags on the submit command. Paths and warehouses must be reachable from the driver and executors.</p>
+<p>Export project metadata JSON that includes every lakehouse catalog entry referenced by the pipeline (and any used only via run configuration), or a project package (<code>hop-conf --export-spark-project</code>, passed to <code>MainSpark</code> as <code>--HopProjectPackage</code>), whose <code>metadata.json</code> carries the catalogs. Runs that Hop submits itself ship the project package, catalogs included. Alternatively, pass equivalent <code>--conf spark.sql.catalog.…</code> flags on the submit command. Paths and warehouses must be reachable from the driver and executors.</p>
 </div>
 </div>
 </div>

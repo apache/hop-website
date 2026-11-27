@@ -3129,6 +3129,12 @@ The runs then use an environment called <code>airflow</code> with these files.</
 <td class="tableblock halign-left valign-top"><p class="tableblock">The start of every DAG id.
 Default: the project name and two underscores.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--tasks</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The tasks of the DAGs: <code>PER_ACTION</code>, one task per action, or <code>WHOLE_WORKFLOW</code>, one task that runs the whole workflow.
+See <a href="#_one_task_for_the_whole_workflow">One task for the whole workflow</a>.
+Default: <code>PER_ACTION</code>.</p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
@@ -3294,6 +3300,75 @@ Keep passwords and other secrets out of them: put them in the environment files 
 </div>
 <div class="paragraph">
 <p>The DAG processor&#8217;s log says why.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_one_task_for_the_whole_workflow"><a class="link" href="#_one_task_for_the_whole_workflow">One task for the whole workflow</a></h3>
+<div class="paragraph">
+<p>With <code>--tasks WHOLE_WORKFLOW</code>, or <strong>Tasks</strong> in the <a href="../workflow/workflow-run-configurations/airflow-workflow-engine.html" class="xref page">Apache Airflow run configuration</a>, every workflow of the bundle runs as one task, <code>run_workflow</code>.
+The task runs the workflow as <code>hop run</code> does.
+The DAG processor and the workers need Hop 2.21 or later: an older Hop ignores the setting and makes one task per action.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top">One task per action (default)</th>
+<th class="tableblock halign-left valign-top">One task for the whole workflow</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In Airflow</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Each action is a task, with its own state and log.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One task, with the log of the whole workflow.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A retry, or clearing a task</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Runs that action again, and the actions after it.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Runs the whole workflow again.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Starting Hop</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every task starts Hop, which takes a few seconds per action.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hop starts once.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">More than one worker (Celery or Kubernetes executor)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tasks can run on different machines: a file that one action writes to a local disk is not there for the next action.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All actions run on the same machine.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">What actions pass on</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result rows, files, counters and variables, through XCom: at most 1 MB, readable in Airflow.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Everything, as in Hop, including JVM-scope variables.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Choose one task for the whole workflow when:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the workflow has many short actions, and starting Hop for each of them takes longer than the actions themselves.</p>
+</li>
+<li>
+<p>actions pass files on a local disk to each other, and Airflow has more than one worker.</p>
+</li>
+<li>
+<p>actions pass more on than fits in XCom, or values that should not show in Airflow.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Keep one task per action to see, retry and clear the actions one by one in Airflow.
+Either way, the Apache Airflow run configuration shows the actions on the canvas of Hop GUI as they run.</p>
 </div>
 </div>
 </div>

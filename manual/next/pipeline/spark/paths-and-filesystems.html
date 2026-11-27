@@ -3226,7 +3226,7 @@ Spark never calls <code>HopVfs</code> for Dataset <code>load</code> / <code>save
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>${PROJECT_HOME}/data.csv</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Resolved, then Hop VFS or local rules</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Resolved, then Hadoop default FS / local path</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">On cluster submit, set <code>PROJECT_HOME</code> in the env config to a <strong>Spark-visible</strong> URI (for object storage prefer <code>s3a://…</code>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">On a cluster <code>PROJECT_HOME</code> is the project package (see <a href="#spark-project-package">Project package (nested pipelines / mappings)</a>): put data in <code>HOP_DATA</code> or an explicit Spark URI (<code>s3a://…</code>, <code>hdfs://…</code>)</p></td>
 </tr>
 </tbody>
 </table>
@@ -3247,17 +3247,39 @@ Spark never calls <code>HopVfs</code> for Dataset <code>load</code> / <code>save
 <p>Put objects under a URI Spark’s S3A client can open, typically <code>s3a://bucket/prefix/…</code>.</p>
 </li>
 <li>
-<p>Point S3A at your endpoint with run-configuration <strong>Spark config</strong> lines, for example:</p>
+<p>Point S3A at your endpoint with rows in the <strong>Spark settings</strong> table of the run configuration, for example:</p>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spark.hadoop.fs.s3a.endpoint</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://minio.example.com:9000" class="bare" rel="noopener" target="_blank">https://minio.example.com:9000</a></code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spark.hadoop.fs.s3a.path.style.access</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spark.hadoop.fs.s3a.access.key</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&#8230;&#8203;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spark.hadoop.fs.s3a.secret.key</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&#8230;&#8203;</code></p></td>
+</tr>
+</tbody>
+</table>
 </li>
 </ol>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">spark.hadoop.fs.s3a.endpoint=https://minio.example.com:9000
-spark.hadoop.fs.s3a.path.style.access=true
-spark.hadoop.fs.s3a.access.key=...
-spark.hadoop.fs.s3a.secret.key=...</code></pre>
-</div>
 </div>
 <div class="paragraph">
 <p>(Exact keys depend on your Hadoop/Spark version and security model; prefer IAM roles on cloud clusters over embedding keys when possible.)</p>
@@ -3268,7 +3290,7 @@ spark.hadoop.fs.s3a.secret.key=...</code></pre>
 <h2 id="spark-project-package"><a class="link" href="#spark-project-package">Project package (nested pipelines / mappings)</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Native Spark ships only the <strong>top-level</strong> pipeline XML plus metadata JSON by default. Transforms such as <strong>Simple Mapping</strong> and <strong>Pipeline Executor</strong> load child <code>.hpl</code> files at runtime via Hop VFS using paths like <code>${PROJECT_HOME}/mappings/child.hpl</code>. On a cluster those files must exist where every executor can open them.</p>
+<p>When Hop runs a pipeline on a cluster (client or cluster mode, or the cluster type <strong>Databricks</strong>), it exports and ships the project package itself. Export one by hand only for <code>spark-submit</code> and for Databricks <strong>Deploy &amp; run</strong> with <strong>Upload Spark project package</strong>. Without a package only the <strong>top-level</strong> pipeline XML plus metadata JSON go to the cluster, and transforms such as <strong>Simple Mapping</strong> and <strong>Pipeline Executor</strong> load child <code>.hpl</code> files at runtime via Hop VFS using paths like <code>${PROJECT_HOME}/mappings/child.hpl</code>. On a cluster those files must exist where every executor can open them.</p>
 </div>
 <div class="sect2">
 <h3 id="_export_a_spark_project_package"><a class="link" href="#_export_a_spark_project_package">Export a Spark project package</a></h3>
@@ -3437,7 +3459,7 @@ spark.hadoop.fs.s3a.secret.key=...</code></pre>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>With a project package, <strong><code>PROJECT_HOME</code> is the extracted definition tree</strong>, not your object-store data root.</p>
+<p>With a project package, <strong><code>PROJECT_HOME</code> is the extracted definition tree</strong>, not your object-store data root. A JVM that sees the client&#8217;s project folder itself, on the same machine or on a shared file system, keeps using that folder.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -3450,7 +3472,7 @@ spark.hadoop.fs.s3a.secret.key=...</code></pre>
 </ul>
 </div>
 <div class="paragraph">
-<p>The path scheme map (<code>s3=s3a</code>) is independent: it rewrites Dataset schemes only.</p>
+<p>The path scheme map (<code>s3</code> to <code>s3a</code>) is independent: it rewrites Dataset schemes only.</p>
 </div>
 </td>
 </tr>
@@ -3463,26 +3485,44 @@ spark.hadoop.fs.s3a.secret.key=...</code></pre>
 <div class="sect2">
 <h3 id="_path_scheme_map_run_configuration"><a class="link" href="#_path_scheme_map_run_configuration">Path scheme map (run configuration)</a></h3>
 <div class="paragraph">
-<p>The Native Spark pipeline run configuration includes an optional <strong>Path scheme map</strong> field: multi-line <code>from=to</code> entries applied <strong>only</strong> to <strong>Spark file input/output</strong> and <strong>Lake Table PATH</strong> URIs after variable resolution (not to classic Hop VFS / mapPartitions paths).</p>
+<p>The Native Spark pipeline run configuration has an optional <strong>Path scheme map</strong> table on its <strong>Spark settings</strong> tab: a <strong>From scheme</strong> and a <strong>To scheme</strong> per row, applied <strong>only</strong> to <strong>Spark file input/output</strong> and <strong>Lake Table PATH</strong> URIs (Delta, Iceberg) after variable resolution, not to classic Hop VFS / mapPartitions paths.</p>
 </div>
 <div class="paragraph">
-<p>Example:</p>
+<p>Example, Hop VFS and named schemes to Spark/Hadoop schemes:</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs"># Hop VFS / named schemes -&gt; Spark/Hadoop schemes
-s3=s3a
-minio=s3a
-azure=abfs</code></pre>
-</div>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">From scheme</th>
+<th class="tableblock halign-left valign-top">To scheme</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>s3</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>s3a</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>minio</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>s3a</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>azure</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>abfs</code></p></td>
+</tr>
+</tbody>
+</table>
 <div class="ulist">
 <ul>
 <li>
-<p>Tokens may be written as <code>s3</code> or <code>s3://</code> (normalized to bare scheme names).</p>
+<p>Schemes may be written as <code>s3</code> or <code>s3://</code> (normalized to bare scheme names).</p>
 </li>
 <li>
-<p>Lines starting with <code>#</code> are comments.</p>
+<p>A run configuration saved with the older <code>from=to</code> text loads its lines as rows.</p>
 </li>
 <li>
 <p>Mapping only rewrites the scheme; it does <strong>not</strong> inject credentials or endpoints — still set <code>spark.hadoop.fs.s3a.<strong></code> (or other FS config) for the *target</strong> scheme.</p>
@@ -3499,16 +3539,16 @@ azure=abfs</code></pre>
 <h2 id="_cluster_environment_variables"><a class="link" href="#_cluster_environment_variables">Cluster environment variables</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When you <code>spark-submit</code> with an environment configuration file, remap project variables to <strong>Spark URIs</strong>, not Hop-only VFS schemes:</p>
+<p>When you <code>spark-submit</code> with an environment configuration file, give data variables <strong>Spark URIs</strong>, not Hop-only VFS schemes. Leave <code>PROJECT_HOME</code> to the project package:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>json</div><pre class="highlightjs highlight is-highlighted"><code class="language-json hljs" data-lang="json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;variables&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
-      <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;PROJECT_HOME&quot;</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;s3a://hop-project/&quot;</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Project root on object storage (Hadoop S3A URI for executors)&quot;</span>
+      <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;HOP_DATA&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;s3a://hop-project/data/&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Input data on object storage (Hadoop S3A URI for executors)&quot;</span>
     <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
     <span class="hljs-punctuation">{</span>
       <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;OUTPUT_ROOT&quot;</span><span class="hljs-punctuation">,</span>

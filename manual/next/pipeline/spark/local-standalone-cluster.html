@@ -3059,11 +3059,12 @@
 <li><a href="#_start_the_master_and_the_workers">Start the master and the workers</a></li>
 </ul>
 </li>
-<li><a href="#_3_build_the_fat_jar">3. Build the fat jar</a></li>
+<li><a href="#_3_the_fat_jar">3. The fat jar</a></li>
 <li><a href="#_4_create_the_run_configuration">4. Create the run configuration</a></li>
 <li><a href="#_5_build_a_pipeline">5. Build a pipeline</a></li>
 <li><a href="#_6_run_it">6. Run it</a></li>
 <li><a href="#hop-server">7. Optional: run it through Hop Server</a></li>
+<li><a href="#cluster-mode">8. Optional: run it in cluster mode</a></li>
 <li><a href="#_stop_the_cluster">Stop the cluster</a></li>
 <li><a href="#disk-space">Disk space</a></li>
 <li><a href="#troubleshooting">Troubleshooting</a></li>
@@ -3095,7 +3096,7 @@
 <p>Java 21, both for Hop and for the Spark processes. Spark 4.1 also runs on Java 17, but the Hop classes in the fat jar need 21.</p>
 </li>
 <li>
-<p>About 10 GB of free disk: 600 MB for Spark, 900 MB for the fat jar, and room for executor copies of that jar, about 3.5 GB per run (see <a href="#disk-space">Disk space</a>).</p>
+<p>About 10 GB of free disk: 600 MB for Spark, about 600 MB for the fat jar, and room for executor copies of that jar, about 2.5 GB per run (see <a href="#disk-space">Disk space</a>).</p>
 </li>
 <li>
 <p>A Hop client with the native Spark engine and the Apache Beam engine plugins (next section). The Beam plugin is only there for the sample data.</p>
@@ -3205,33 +3206,31 @@ Use <code>start-master.sh</code> and <code>start-worker.sh</code> as above, not 
 </div>
 </div>
 <div class="sect1">
-<h2 id="_3_build_the_fat_jar"><a class="link" href="#_3_build_the_fat_jar">3. Build the fat jar</a></h2>
+<h2 id="_3_the_fat_jar"><a class="link" href="#_3_the_fat_jar">3. The fat jar</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Executors do not have Hop installed. Hop sends them a <strong>fat jar</strong> with Hop and all its plugins when the pipeline starts. Build it for the native Spark engine, which leaves Spark out because the cluster already has it.</p>
+<p>Executors do not have Hop installed. Hop sends them a <strong>fat jar</strong> with Hop and all its plugins when the pipeline starts. You do not have to build it: when <strong>Fat jar file location</strong> in the run configuration is empty and the master is a cluster, Hop builds a <code>native-provided</code> fat jar of your installation, which leaves Spark out because the cluster already has it.</p>
 </div>
 <div class="paragraph">
-<p>Run this from the Hop installation folder:</p>
+<p>Hop builds it on the first run, which then takes one to two minutes longer, and reuses it afterwards. The log shows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">./hop-conf.sh \
-  --generate-fat-jar=<span class="hljs-variable">$HOME</span>/spark/hop-native-provided.jar \
-  --fat-jar-engine=spark</code></pre>
+<pre class="highlightjs highlight"><code class="language-none hljs">Building fat jar /home/&lt;you&gt;/.hop/fat-jars/hop-native-provided-&lt;fingerprint&gt;.jar from &lt;n&gt; jar files. This happens once per installation change.</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>This takes two to three minutes and produces a jar of roughly 900 MB.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Build the jar again after you install, remove, or upgrade plugins. The executors run the plugins in the jar, not the ones in your Hop installation.</p>
+<p>After you install, remove or upgrade plugins, the next run builds a new jar: the executors always run the plugins of your installation.</p>
 </li>
 <li>
-<p><strong>Tools</strong> &#8594; <strong>Generate a Hop fat jar</strong> in Hop GUI builds the same jar: pick <strong>Native Spark engine</strong> when it asks for the engine.</p>
+<p>The jar is several hundred MB. It is kept in <code>.hop/fat-jars</code> in your home folder; set the <code>HOP_FAT_JAR_CACHE_FOLDER</code> variable or environment variable to keep it somewhere else.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>To get the jar as a file, for example for <code>spark-submit</code>, run <code>./hop-conf.sh --generate-fat-jar=&lt;file&gt; --fat-jar-engine=spark</code> from the Hop installation folder, or use <strong>Tools</strong> &#8594; <strong>Generate a Hop fat jar</strong> and choose <strong>Native Spark engine</strong>. Both copy the cached jar when it is current.</p>
 </div>
 </div>
 </div>
@@ -3274,11 +3273,6 @@ Use <code>start-master.sh</code> and <code>start-worker.sh</code> as above, not 
 <td class="tableblock halign-left valign-top"><p class="tableblock">The template uses <code>spark://host:7077</code> as a placeholder.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fat jar file location</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The absolute path of the jar from step 3, for example <code>/home/&lt;you&gt;/spark/hop-native-provided.jar</code> (<code>/Users/&lt;you&gt;/&#8230;&#8203;</code> on macOS)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The template leaves this empty. Without it the executors cannot load Hop (see <a href="#troubleshooting">Troubleshooting</a>).</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Executor memory</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>1g</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Must fit in one worker (<code>SPARK_WORKER_MEMORY</code>).</p></td>
@@ -3289,13 +3283,15 @@ Use <code>start-master.sh</code> and <code>start-worker.sh</code> as above, not 
 <td class="tableblock halign-left valign-top"><p class="tableblock">With the cluster above this gives four executors of one core each.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Spark config (key=value lines)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spark.ui.enabled=false</code><br>
-<code>spark.driver.host=localhost</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spark settings</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Two rows (key, value): <code>spark.ui.enabled</code> = <code>false</code> (from the template) and <code>spark.driver.host</code> = <code>localhost</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The executors connect back to the driver, which is Hop. <code>localhost</code> keeps that connection on your machine, also when a VPN or several network interfaces are active.</p></td>
 </tr>
 </tbody>
 </table>
+</li>
+<li>
+<p>Click <strong>Test configuration</strong>: it checks the settings, the Spark and Java versions and that the master answers, without running anything. <strong>Test with a test job</strong> also runs a small pipeline on the cluster.</p>
 </li>
 <li>
 <p>Save the run configuration.</p>
@@ -3433,7 +3429,7 @@ Use <code>start-master.sh</code> and <code>start-worker.sh</code> as above, not 
 <p>From Hop GUI, the first run starts the application and Hop GUI keeps it running, with all its cores, until you close Hop GUI. Later runs from Hop GUI reuse it. Close Hop GUI before you run on the cluster with <code>hop-run</code> or through Hop Server (step 7), or those runs wait for cores.</p>
 </div>
 <div class="paragraph">
-<p>The Spark application UI (jobs, stages and tasks) is off by default. Add <code>spark.ui.enabled=true</code> to <strong>Spark config</strong> to see it at <a href="http://localhost:4040" class="bare" rel="noopener" target="_blank">http://localhost:4040</a> while the application runs.</p>
+<p>The Spark application UI (jobs, stages and tasks) is off by default. Set the <code>spark.ui.enabled</code> row of <strong>Spark settings</strong> to <code>true</code> to see it at <a href="http://localhost:4040" class="bare" rel="noopener" target="_blank">http://localhost:4040</a> while the application runs.</p>
 </div>
 <div class="paragraph">
 <p>The log shows the session connecting to the cluster:</p>
@@ -3446,7 +3442,7 @@ Spark pipeline finished, result row count=0</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The log also warns that a Spark File path references <code>PROJECT_HOME</code>. That warning is about <a href="paths-and-filesystems.html#spark-project-package" class="xref page">Spark project packages</a> for <code>spark-submit</code>; on a single machine you can ignore it.</p>
+<p>The log also warns that a Spark File path references <code>PROJECT_HOME</code>. Hop ships a <a href="paths-and-filesystems.html#spark-project-package" class="xref page">Spark project package</a> to the executors, and executors that see the project folder, as on one machine, keep using that folder: you can ignore the warning here.</p>
 </div>
 <div class="paragraph">
 <p>The result is one CSV part file under <code>config/projects/samples/output/customers-per-state/</code>:</p>
@@ -3523,7 +3519,70 @@ Spark pipeline finished, result row count=0</code></pre>
 <p>The Hop Server status page at <a href="http://localhost:8181/hop/status/" class="bare" rel="noopener" target="_blank">http://localhost:8181/hop/status/</a> lists the workflow as <code>Finished</code>, and the same CSV file as in step 6 is written.</p>
 </div>
 <div class="paragraph">
-<p>Like Hop GUI, Hop Server keeps the Spark application it started running until Hop Server stops. Later native Spark runs on that Hop Server reuse it: they start faster, but they also run with the master, fat jar and Spark config of the first run, and on the cluster the application keeps its cores. The Spark master UI shows it under <strong>Running Applications</strong>. Restart Hop Server after you change a native Spark run configuration, and stop it when you need the cluster for other work.</p>
+<p>Like Hop GUI, Hop Server keeps the Spark application it started running until Hop Server stops. Later native Spark runs on that Hop Server reuse it: they start faster, but they also run with the master, fat jar and Spark settings of the first run, and on the cluster the application keeps its cores. The Spark master UI shows it under <strong>Running Applications</strong>. Restart Hop Server after you change a native Spark run configuration, and stop it when you need the cluster for other work.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cluster-mode"><a class="link" href="#cluster-mode">8. Optional: run it in cluster mode</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>So far Hop was the Spark driver: Hop GUI or <code>hop-run</code> had to keep running for the whole run. In <a href="../pipeline-run-configurations/native-spark-pipeline-engine.html#cluster-mode" class="xref page">cluster mode</a> Hop submits the driver to the cluster and only follows it.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Enable the REST submission server of the master. Add this line to <code>$SPARK_HOME/conf/spark-env.sh</code> and restart the master:</p>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">SPARK_MASTER_OPTS=<span class="hljs-string">&quot;-Dspark.master.rest.enabled=true&quot;</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Duplicate the <code>spark-standalone</code> run configuration as <code>spark-standalone-cluster</code> and change:</p>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 33.3333%;">
+<col style="width: 50.0001%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Option</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deploy mode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cluster</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hop submits the driver instead of being it.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Staging folder</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A folder of your own, for example <code>/home/&lt;you&gt;/spark/staging</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hop uploads the fat jar and the project there. The workers run on the same machine, so they read it at the same path. On a cluster of several machines use a location every worker reads, such as HDFS or an object store, and set <strong>Staging folder URL for the cluster</strong>.</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Run the pipeline with <code>spark-standalone-cluster</code>. The log shows the upload and the driver:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">Staged /home/&lt;you&gt;/spark/staging/hop-native-&lt;hash&gt;.jar (...)
+Submitted driver driver-&lt;timestamp&gt;-0000 to http://localhost:6066 (master spark://localhost:7077, pipeline spark/customers-per-state.hpl)
+Driver driver-&lt;timestamp&gt;-0000 is RUNNING at &lt;worker host:port&gt;
+Driver driver-&lt;timestamp&gt;-0000 finished successfully</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The fat jar is uploaded once; later runs only upload the small project package. The master UI lists the run under <strong>Completed Drivers</strong>, with a link to the driver log on its worker. The driver sees the project folder on this machine, so the result is in <code>config/projects/samples/output/customers-per-state/</code> as before.</p>
 </div>
 </div>
 </div>
@@ -3551,10 +3610,10 @@ Spark pipeline finished, result row count=0</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>into <code>SPARK_LOCAL_DIRS</code> while it fetches it. With the default <code>/tmp</code>, a few parallel copies of a 900 MB jar can fill a small or quota-limited <code>/tmp</code> (for example a <code>tmpfs</code>). The executors then fail with <code>Disk quota exceeded</code> or <code>No space left on device</code>, and Spark keeps starting new executors that fail the same way, so the pipeline never ends. Stop it, set <code>SPARK_LOCAL_DIRS</code> to a folder on disk, and restart the workers.</p>
+<p>into <code>SPARK_LOCAL_DIRS</code> while it fetches it. With the default <code>/tmp</code>, a few parallel copies of a 600 MB jar can fill a small or quota-limited <code>/tmp</code> (for example a <code>tmpfs</code>). The executors then fail with <code>Disk quota exceeded</code> or <code>No space left on device</code>, and Spark keeps starting new executors that fail the same way, so the pipeline never ends. Stop it, set <code>SPARK_LOCAL_DIRS</code> to a folder on disk, and restart the workers.</p>
 </li>
 <li>
-<p>into the worker&#8217;s <code>work/&lt;application id&gt;/&lt;executor id&gt;/</code> folder, where it stays after the application ends. Four executors use about 3.5 GB per run. The <code>spark.worker.cleanup.<strong></code> settings in <code>spark-env.sh</code> remove those folders some time after an application has finished. You can also delete <code>~/spark/spark-4.1.4-bin-hadoop3/work/app-</strong></code> yourself while no application is running.</p>
+<p>into the worker&#8217;s <code>work/&lt;application id&gt;/&lt;executor id&gt;/</code> folder, where it stays after the application ends. Four executors use about 2.5 GB per run. The <code>spark.worker.cleanup.<strong></code> settings in <code>spark-env.sh</code> remove those folders some time after an application has finished. You can also delete <code>~/spark/spark-4.1.4-bin-hadoop3/work/app-</strong></code> yourself while no application is running.</p>
 </li>
 </ul>
 </div>
@@ -3581,7 +3640,7 @@ Spark pipeline finished, result row count=0</code></pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The run fails with <code>ClassCastException: cannot assign instance of java.lang.invoke.SerializedLambda to field org.apache.spark.rdd.MapPartitionsRDD.f</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The executors cannot load Hop classes: <strong>Fat jar file location</strong> is empty or points to a file that does not exist.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The executors cannot load Hop classes: <strong>Fat jar file location</strong> points to a file that does not exist or to a jar of another Hop installation. Leave it empty to let Hop build the jar of this installation.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Executors fail with <code>Disk quota exceeded</code> or <code>No space left on device</code>, and the run never ends</p></td>
@@ -3597,7 +3656,7 @@ Spark pipeline finished, result row count=0</code></pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The log shows <code>WARNING: run configuration '&#8230;&#8203;' asks for Spark master '&#8230;&#8203;', but this process already has a Spark session on '&#8230;&#8203;'</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An earlier native Spark run in the same Hop GUI, Hop Server or workflow left its Spark session running, and this run reuses it with that run&#8217;s master, fat jar and Spark config. Restart Hop GUI or Hop Server after switching between native Spark run configurations.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An earlier native Spark run in the same Hop GUI, Hop Server or workflow left its Spark session running, and this run reuses it with that run&#8217;s master, fat jar and Spark settings. Restart Hop GUI or Hop Server after switching between native Spark run configurations.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">After a run from Hop GUI or through Hop Server, the application stays under <strong>Running Applications</strong> in the Spark master UI and keeps its cores</p></td>
@@ -3612,8 +3671,12 @@ Spark pipeline finished, result row count=0</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The project has a <strong>Workflow Log</strong> that lists specific workflows (the samples project does), and the workflow was sent without its file. Turn on <strong>Export linked resources to server</strong> in the remote workflow run configuration, or disable the Workflow Log.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The run stops with <code>Run configuration '&#8230;&#8203;' has the cluster type 'spark-submit: &#8230;&#8203;': it is for pipelines that you start with spark-submit, not Hop</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The run configuration was made with the <strong>spark-submit (cluster)</strong> template, which is for <code>spark-submit</code>. Choose the cluster type <strong>Spark standalone cluster</strong> and set the master, for example <code>spark://localhost:7077</code>.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The log shows <code>WARNING: run configuration '&#8230;&#8203;' has no Spark master and this pipeline does not run under spark-submit</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An empty <strong>Spark master</strong> means <code>local[*]</code> inside the Hop process (Hop GUI, <code>hop-run</code> or Hop Server). Set the master, for example <code>spark://localhost:7077</code>. The <strong>spark-submit (cluster)</strong> template leaves it empty on purpose, for <code>spark-submit</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A run configuration saved before the <strong>Cluster type</strong> option existed, with an empty <strong>Spark master</strong>: it runs on <code>local[*]</code> inside the Hop process. Choose the cluster type <strong>Spark standalone cluster</strong> and set the master, for example <code>spark://localhost:7077</code>.</p></td>
 </tr>
 </tbody>
 </table>

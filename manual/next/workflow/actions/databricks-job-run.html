@@ -3056,6 +3056,18 @@
 <div class="paragraph">
 <p>Use a <a href="../../metadata-types/databricks-connection.html" class="xref page">Databricks Connection</a> (workspace host + personal access token). This is <strong>not</strong> the JDBC SQL warehouse connection.</p>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+To run a native Spark pipeline on Databricks from Hop without creating a job, use a native Spark run configuration with the cluster type <strong>Databricks</strong> and run the pipeline itself: see <a href="../../pipeline/spark/databricks.html#run-from-hop" class="xref page">Run a pipeline on Databricks from Hop</a>. Use this action to keep the pipeline as a job in Databricks, to run an existing job, or to submit a run of your own JSON.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -3083,7 +3095,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Deploy &amp; run</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Uploads fat jar, pipeline <code>.hpl</code>, and exported metadata JSON to a Volume or DBFS base path (optionally a <strong>Spark project package</strong> zip and <strong>environment config</strong> file), then creates or updates a JAR job (<code>org.apache.hop.spark.run.MainSpark</code>) with classic existing / <code>new_cluster</code> or serverless compute and runs it. See <a href="../../pipeline/spark/databricks.html" class="xref page">Native Spark on Databricks</a>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Uploads the fat jar and either the pipeline <code>.hpl</code> with the exported metadata JSON, or a <strong>Spark project package</strong> zip (plus an optional <strong>environment config</strong> file), to a Volume or DBFS base path, then creates a JAR job (or updates it, with <strong>Update existing job</strong>; without it every run creates another job) (<code>org.apache.hop.spark.run.MainSpark</code>) with classic existing / <code>new_cluster</code> or serverless compute and runs it. See <a href="../../pipeline/spark/databricks.html" class="xref page">Native Spark on Databricks</a>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -3115,7 +3127,7 @@
 </tbody>
 </table>
 <div class="paragraph">
-<p>If the parent workflow is stopped while waiting, the action attempts to cancel the Databricks run.</p>
+<p>If the parent workflow is stopped, or the timeout is reached, while the action waits, it cancels the Databricks run.</p>
 </div>
 </div>
 </div>
@@ -3217,11 +3229,11 @@
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Fat jar / Pipeline / Run configuration</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Deploy mode: local fat jar (leave it empty to upload the fat jar of this installation, which Hop builds once and caches; or a jar from <code>hop-conf --generate-fat-jar … --fat-jar-engine=spark</code>), entry pipeline path, and Native Spark run configuration name present in the metadata export (or project package)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deploy mode: local fat jar (leave it empty to upload the fat jar of this installation, which Hop builds once and caches; or a jar from <code>hop-conf --generate-fat-jar … --fat-jar-engine=spark</code>), entry pipeline path, and the name of a Native Spark run configuration present in the metadata export (or project package): one with the cluster type <strong>Databricks</strong>, the same that runs the pipeline from Hop</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">DBFS / Volume base directory</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Upload root for deploy artifacts. Fat jar: content-addressed <code>hop-native-&lt;sha12&gt;.jar</code> (+ <code>.sha256</code> sidecar) so Databricks job libraries refresh when jar bytes change (fixed-name overwrite is not enough on long-lived Dedicated clusters — see <a href="../../pipeline/spark/databricks.html#lesson-fat-jar-library-uri" class="xref page">Databricks lessons</a>). Per entry pipeline stem: <code>pipeline-{stem}.hpl</code>, <code>metadata-{stem}.json</code>, <code>hop-spark-package-{stem}.zip</code>, <code>env-config-{stem}.json</code>. Prefer a Unity Catalog volume when public DBFS root is disabled, e.g. <code>/Volumes/catalog/schema/volume/hop</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Upload base directory (Volume or DBFS)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Upload root for deploy artifacts. The default <code>dbfs:/FileStore/hop</code> fails where the DBFS root is disabled: use a volume folder. The fat jar gets a <code>.keep</code> sidecar, so the staging cleanup of runs from Hop never removes it while a job uses it (see <a href="../../pipeline/pipeline-run-configurations/native-spark-pipeline-engine.html#staging-cleanup" class="xref page">Cleaning up the staging folder</a>). Fat jar: content-addressed <code>hop-native-&lt;sha12&gt;.jar</code> (+ <code>.sha256</code> sidecar) so Databricks job libraries refresh when jar bytes change (fixed-name overwrite is not enough on long-lived Dedicated clusters — see <a href="../../pipeline/spark/databricks.html#lesson-fat-jar-library-uri" class="xref page">Databricks lessons</a>). Per entry pipeline stem: <code>pipeline-{stem}.hpl</code>, <code>metadata-{stem}.json</code>, <code>hop-spark-package-{stem}.zip</code>, <code>env-config-{stem}.json</code>. Prefer a Unity Catalog volume when public DBFS root is disabled, e.g. <code>/Volumes/catalog/schema/volume/hop</code>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -3250,7 +3262,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Environment config file</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Optional described-variables JSON uploaded as <code>env-config.json</code> and passed to MainSpark as <code>--HopConfigFile</code> (same as MainSpark’s optional env argument).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional described-variables JSON uploaded as <code>env-config-{stem}.json</code> and passed to MainSpark as <code>--HopConfigFile</code> (same as MainSpark’s optional env argument).</p></td>
 </tr>
 </tbody>
 </table>
@@ -3275,7 +3287,7 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">new_cluster spark_version / node_type_id / num_workers / JSON</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Used when compute is <code>new_cluster</code>. Defaults: <code>18.2.x-scala2.13</code>, <code>i3.xlarge</code> (AWS), <code>1</code>. Prefer <code>i3.*</code> on AWS (local NVMe); <code>m5.xlarge</code> often needs EBS. Optional full JSON can set <code>spark_conf</code> (e.g. match <code>spark.executor.cores</code> / <code>spark.driver.cores</code> to the node’s vCPUs — see <a href="../../pipeline/spark/databricks.html#spark-conf-cores" class="xref page">Native Spark on Databricks</a>).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used when compute is <code>new_cluster</code>. Defaults: <code>18.x-scala2.13</code> (Runtime 18 LTS), <code>i3.xlarge</code> (AWS), <code>1</code>. Prefer <code>i3.*</code> on AWS (local NVMe); <code>m5.xlarge</code> often needs EBS. Optional full JSON can set <code>spark_conf</code> (e.g. match <code>spark.executor.cores</code> / <code>spark.driver.cores</code> to the node’s vCPUs — see <a href="../../pipeline/spark/databricks.html#spark-conf-cores" class="xref page">Native Spark on Databricks</a>).</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Serverless environment_key / client</p></td>
@@ -3303,8 +3315,8 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Wait for completion or fire and forget</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Timeout (seconds)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum wait; <code>0</code> disables the timeout. For <strong>Deploy &amp; run</strong> with classic <code>new_cluster</code>, allow for first jar upload <strong>and</strong> job cluster cold start (often <strong>many minutes</strong> of Pending/Initializing — see <a href="../../pipeline/spark/databricks.html" class="xref page">Native Spark on Databricks</a>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Timeout (seconds, 0=none)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum wait; <code>0</code> disables the timeout. Default <code>3600</code>; a value that is not a number counts as <code>3600</code>. For <strong>Deploy &amp; run</strong> with classic <code>new_cluster</code>, allow for first jar upload <strong>and</strong> job cluster cold start (often <strong>many minutes</strong> of Pending/Initializing — see <a href="../../pipeline/spark/databricks.html" class="xref page">Native Spark on Databricks</a>)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Poll interval (seconds)</p></td>

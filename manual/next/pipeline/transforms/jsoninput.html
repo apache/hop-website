@@ -3857,8 +3857,7 @@ Name 4</code></pre>
 <p><code>transforms/json-input-basic.hpl</code>, which reads the settings of the pipeline log <code>metadata/pipeline-log/pipeline-log-example.json</code>.</p>
 </li>
 <li>
-<p><code>transforms/json-input-nested-elements.hpl</code>, which reads the Dataflow run configuration <code>metadata/pipeline-run-configuration/DataFlow.json</code>, and then reads its configuration variables from a field with a second JSON Input.
-This file comes with the Beam plugin, so without that plugin the pipeline returns no rows.</p>
+<p><code>transforms/json-input-nested-elements.hpl</code>, which reads <code>data/dataflow-run-configuration.json</code>, a copy of the Dataflow pipeline run configuration of the Beam plugin, and then reads its configuration variables from a field with a second JSON Input.</p>
 </li>
 <li>
 <p><code>transforms/json-input-public-holidays-from-rest.hpl</code>, which gets the public holidays of <code>${PRM_COUNTRY}</code> (default <code>BE</code>) in 2023 from the Nager.Date REST API, and reads the date, the names, the type and the other fields of each holiday.
