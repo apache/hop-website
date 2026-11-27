@@ -3052,6 +3052,10 @@ hop <span class="hljs-built_in">export</span> -f pipelines/load-orders.hpl -o di
 <span class="hljs-comment"># One file as Mermaid</span>
 hop <span class="hljs-built_in">export</span> -f workflows/main.hwf --format mermaid -o diagrams/main.mmd
 
+<span class="hljs-comment"># Generate positions for an SVG diagram</span>
+hop <span class="hljs-built_in">export</span> -f pipelines/load-orders.hpl -o diagrams/load-orders.svg --layout-policy ALWAYS --layout-algorithm LAYERED
+
+
 <span class="hljs-comment"># Every pipeline and workflow in a folder and its subfolders</span>
 hop <span class="hljs-built_in">export</span> -s /path/to/project -t /path/to/diagrams --recursive
 
@@ -3105,8 +3109,16 @@ hop <span class="hljs-built_in">export</span> --list-exporters</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Scale an SVG diagram, for example <code>2</code> for twice the size. The default is <code>1.0</code>. Mermaid diagrams are not scaled.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--layout-policy &lt;policy&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Automatic layout for SVG: <code>NONE</code> (default), <code>ALWAYS</code> or <code>ON_MISSING</code>. See <a href="#_automatic_layout">Automatic layout</a>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--layout-algorithm &lt;algorithm&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LAYERED</code> (default) or <code>GRID</code>. Ignored when the layout policy is <code>NONE</code>.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-in</code>, <code>--include-notes</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Notes are included by default. Use <code>-in=false</code> to leave them out of a Mermaid diagram. Giving <code>-in</code> without a value also leaves them out. SVG diagrams always show the notes.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Notes are included by default. Use <code>-in=false</code> to leave them out of the diagram. Giving <code>-in</code> without a value also leaves them out.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>--list-exporters</code></p></td>
@@ -3139,7 +3151,7 @@ hop <span class="hljs-built_in">export</span> --list-exporters</code></pre>
 <h2 id="_formats"><a class="link" href="#_formats">Formats</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Hop has an SVG and a Mermaid exporter for both pipelines and workflows.
+<p>Hop has SVG and Mermaid exporters for both pipelines and workflows.
 Plugins can add more; <code>--list-exporters</code> shows what your installation has.</p>
 </div>
 <div class="listingblock">
@@ -3166,6 +3178,56 @@ Available Diagram Exporters (4):
 <p><strong>Mermaid</strong> writes a text flowchart (<code>.mmd</code>) with a node per transform or action and an arrow per hop. You can keep it next to the project in version control, or paste it into a page that renders Mermaid.</p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_automatic_layout"><a class="link" href="#_automatic_layout">Automatic layout</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>SVG exports can generate positions instead of relying on the saved diagram coordinates.
+The same options apply to single-file and batch exports, and are available in <strong>File &gt; Export diagram</strong> in Hop Gui.
+Use the uppercase enum codes shown below on the command line.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Policy</th>
+<th class="tableblock halign-left valign-top">Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>NONE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keep saved positions; do not generate a layout. This is the default, preserving existing export behavior.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ALWAYS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generate a layout regardless of saved positions.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ON_MISSING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lay out the whole graph when any node lacks valid explicit coordinates; otherwise keep saved positions. An explicitly saved <code>(0,0)</code> is not missing.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code>LAYERED</code>, the default algorithm, arranges nodes in layers following the graph connections.
+<code>GRID</code> arranges nodes in a grid.
+Both algorithms are deterministic for the same ordered input and options; changing the input order can change the generated positions.
+Export uses a detached drawing model when changes are needed and does not change the original pipeline or workflow.
+SVG layout accounts for measured node labels, decorations, and note sizes including their text and borders.
+<code>GRID</code> packs included notes after the executable nodes in the same grid.
+<code>LAYERED</code> repacks included notes in a separate annotation band above the execution graph.
+Saved note positions do not affect generated layouts, and missing note positions alone do not trigger <code>ON_MISSING</code>.
+Hops are not routed around obstacles.
+Font availability can affect measured footprints, so output is not guaranteed to be identical across machines.
+The algorithm is ignored with policy <code>NONE</code>, and the GUI disables its selector until another policy is selected.
+Mermaid uses its own renderer for layout and does not use these options.</p>
 </div>
 </div>
 </div>

@@ -865,10 +865,28 @@ Do not use <code>java.io.File</code>.</p>
 <dd>
 <p>whether canvas notes belong in the diagram.</p>
 </dd>
+<dt class="hdlist1"><code>layoutPolicy</code></dt>
+<dd>
+<p><code>DiagramLayoutPolicy.NONE</code> (default) keeps saved positions, <code>ALWAYS</code> generates a layout regardless of saved positions, and <code>ON_MISSING</code> generates a layout when positions are missing.</p>
+</dd>
+<dt class="hdlist1"><code>layoutAlgorithm</code></dt>
+<dd>
+<p><code>DiagramLayoutAlgorithm.LAYERED</code> (default) arranges nodes in graph layers; <code>GRID</code> arranges nodes in a grid. Ignored when <code>layoutPolicy</code> is <code>NONE</code>.</p>
+</dd>
 <dt class="hdlist1"><code>direction</code> / <code>theme</code> / <code>extraOptions</code></dt>
 <dd>
 <p>optional; Mermaid uses <code>direction</code> (<code>LR</code> / <code>TD</code>).
-Put plugin-specific keys in <code>extraOptions</code> rather than subclassing the options bean unless you have to.</p>
+Put plugin-specific keys in <code>extraOptions</code> rather than subclassing the options bean unless you have to.
+The built-in SVG exporters support the layout options; Mermaid delegates layout to its renderer.
+Generated positions are deterministic for the same ordered input and options, not necessarily for a reordered graph.
+The exporters prepare detached drawing models when changes are needed, otherwise rendering the source directly without changing the original metadata.
+Layout uses measured node footprints including labels and decorations, with fixed export defaults independent of GUI layout preferences.
+Included notes use measured painted sizes and borders: <code>GRID</code> packs them after executable nodes, while <code>LAYERED</code> repacks them in an annotation band above the execution graph.
+Missing note positions alone do not trigger <code>ON_MISSING</code>, and excluded notes do not affect layout.
+Node layout does not route hops around obstacles.
+Font availability can affect measured footprints, so identical output across machines or font installations is not guaranteed.
+Both layout enums implement <code>IEnumHasCodeAndDescription</code>: their codes are stable enum names and their GUI descriptions come from localized resource bundles.
+Keep these codes independent of translated labels.</p>
 </dd>
 </dl>
 </div>
@@ -904,7 +922,8 @@ If that returns your model object, and your exporter&#8217;s <code>supportedSubj
 </div>
 <div class="paragraph">
 <p>The dialog itself is a <code>@GuiPlugin</code> options bean (<code>DiagramExportDialogModel</code>) built with <code>GuiCompositeWidgets</code>.
-It shows format, target file, magnification and include-notes for every exporter.
+It shows format, target file, magnification, include-notes, layout policy and layout algorithm for every exporter.
+The algorithm combo is disabled when the policy is <code>NONE</code>.
 It does not currently instantiate <code>getOptionsClass()</code>; keep extra settings in <code>DiagramExportOptions.extraOptions</code> or accept the shared fields.</p>
 </div>
 <div class="paragraph">
@@ -1025,7 +1044,8 @@ hop <span class="hljs-built_in">export</span> --list-exporters</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Useful flags: <code>-f</code> / <code>--file</code>, <code>-o</code> / <code>--output-file</code>, <code>--format</code>, <code>-s</code> / <code>--source-folder</code>, <code>-t</code> / <code>--target-folder</code>, <code>-r</code> / <code>--recursive</code>, <code>-m</code> / <code>--magnification</code>, <code>-in</code> / <code>--include-notes</code>.</p>
+<p>Useful flags: <code>-f</code> / <code>--file</code>, <code>-o</code> / <code>--output-file</code>, <code>--format</code>, <code>-s</code> / <code>--source-folder</code>, <code>-t</code> / <code>--target-folder</code>, <code>-r</code> / <code>--recursive</code>, <code>-m</code> / <code>--magnification</code>, <code>-in</code> / <code>--include-notes</code>, <code>--layout-policy</code>, <code>--layout-algorithm</code>.
+The CLI accepts the uppercase layout enum codes, with defaults <code>NONE</code> and <code>LAYERED</code>, and passes both options to single-file and batch exporters.</p>
 </div>
 <div class="paragraph">
 <p>Project and environment options (<code>-j</code>, <code>-e</code>) are mixed in from <code>@ConfigPlugin</code> beans with <code>category = ConfigPlugin.CATEGORY_EXPORT</code>.
