@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Run workflows and pipelines in Apache Airflow | Apache Hop</title>
-<meta name="description" content="This how-to explains how to run Apache Hop workflows and pipelines in Apache Airflow with the DockerOperator">
+<meta name="description" content="This how-to explains how to run Apache Hop workflows and pipelines in Apache Airflow 3 with the DockerOperator or the KubernetesPodOperator">
 
 <link rel="canonical" href="https://hop.apache.org/manual/latest/how-to-guides/run-hop-in-apache-airflow.html">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Apache Hop">
 <meta property="og:title" content="Run workflows and pipelines in Apache Airflow">
-<meta property="og:description" content="This how-to explains how to run Apache Hop workflows and pipelines in Apache Airflow with the DockerOperator">
+<meta property="og:description" content="This how-to explains how to run Apache Hop workflows and pipelines in Apache Airflow 3 with the DockerOperator or the KubernetesPodOperator">
 <meta property="og:url" content="https://hop.apache.org/manual/latest/how-to-guides/run-hop-in-apache-airflow.html">
 <meta property="og:image" content="https://hop.apache.org/img/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -3040,6 +3040,16 @@
 <p>This is the Airflow-specific how-to.
 For cron, systemd, Jenkins, a Kubernetes CronJob and the hop-run contract they all share, see <a href="scheduling-workflows-and-pipelines.html" class="xref page">Scheduling workflows and pipelines</a>.</p>
 </div>
+<div class="paragraph">
+<p>The examples on this page are written for and tested with Apache Airflow 3.4.0 and Apache Hop 2.20.0.</p>
+</div>
+<div class="paragraph">
+<p>To go the other way and start an Airflow DAG from a Hop workflow, use the <a href="../workflow/actions/airflow-trigger-dag-run.html" class="xref page">Trigger Airflow DAG run</a> action.</p>
+</div>
+<div class="paragraph">
+<p>This page writes a DAG in Python that runs a whole workflow or pipeline in one task.
+Since Hop 2.21, Airflow can also run the workflows of a project without a DAG file, with one Airflow task per action: see <a href="../hop-tools/hop-airflow-bundle.html" class="xref page">hop airflow-bundle</a> and the <a href="../workflow/workflow-run-configurations/airflow-workflow-engine.html" class="xref page">Apache Airflow workflow engine</a>.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -3054,13 +3064,13 @@ Airflow is a platform created by the community to programmatically author, sched
 </blockquote>
 </div>
 <div class="paragraph">
-<p>Airflow uses Directed Acyclic Graphs (or <a href="https://airflow.apache.org/docs/apache-airflow/1.10.10/concepts.html" target="_blank" rel="noopener">DAGs</a>). A DAG  is a collection of all the tasks you want to run, organized in a way that reflects their relationships and dependencies.</p>
+<p>Airflow runs Directed Acyclic Graphs, or <a href="https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html" target="_blank" rel="noopener">DAGs</a>. A DAG is a collection of tasks, organized in a way that reflects their relationships and dependencies.</p>
 </div>
 <div class="paragraph">
-<p>A DAG is defined in a Python script, which represents the DAGs structure (tasks and their dependencies) as code.</p>
+<p>A DAG is defined in a Python script, which represents the DAG&#8217;s structure (tasks and their dependencies) as code.</p>
 </div>
 <div class="paragraph">
-<p>From an Apache Hop point of view, our focus is different: Apache Hop wants to enable citizen developers to be productive data engineers without the need to write code. With that in mind, we don&#8217;t need all the bells and whistles Apache Airflow provides (but don&#8217;t let that stop you from using Apache Airflow to its full potential!).</p>
+<p>From an Apache Hop point of view, our focus is different: Apache Hop wants to enable citizen developers to be productive data engineers without the need to write code. With that in mind, we only use a small part of what Apache Airflow can do: Airflow starts a Hop container, Hop runs the workflow or pipeline.</p>
 </div>
 </div>
 </div>
@@ -3068,54 +3078,91 @@ Airflow is a platform created by the community to programmatically author, sched
 <h2 id="_run_apache_airflow_in_docker_compose"><a class="link" href="#_run_apache_airflow_in_docker_compose">Run Apache Airflow in Docker Compose</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The goal of this page is to get a basic Airflow setup running to demonstrate how Apache Airflow and Apache Hop can be used together. Check out the different <a href="https://airflow.apache.org/docs/apache-airflow/stable/installation/index.html" target="_blank" rel="noopener">installation options</a> if you want to build a production-ready Apache Airflow installation.</p>
+<p>The goal of this page is to get a basic Airflow setup running to show how Apache Airflow and Apache Hop work together. Check out the <a href="https://airflow.apache.org/docs/apache-airflow/stable/installation/index.html" target="_blank" rel="noopener">installation options</a> if you want to build a production-ready Apache Airflow installation.</p>
 </div>
 <div class="paragraph">
-<p>To keep things simple, we&#8217;ll use Docker Compose to get Apache Airflow up and running in a matter of minutes. Even though <a href="https://docs.docker.com/compose/" target="_blank" rel="noopener">Docker Compose</a> has been said to be on the verge of extinction for quite a while now, it still is a quick and convenient way to experiment with data platforms that would otherwise be time-consuming and difficult to set up.</p>
+<p>We use Docker Compose to get Apache Airflow up and running in a couple of minutes.</p>
 </div>
 <div class="paragraph">
-<p>Apache Airflow provides a <a href="https://airflow.apache.org/docs/apache-airflow/2.9.1/docker-compose.yaml" target="_blank" rel="noopener">docker-compose.yaml</a> file. Our goal is to run Apache Hop workflows and pipelines in Apache Airflow, so we&#8217;re not interested in the Airflow sample DAGs that come with this docker-compose file.</p>
+<p>Apache Airflow provides a <a href="https://airflow.apache.org/docs/apache-airflow/3.4.0/docker-compose.yaml" target="_blank" rel="noopener">docker-compose.yaml</a> file (see <a href="https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html" target="_blank" rel="noopener">Running Airflow in Docker</a>).
+The <a href="https://github.com/apache/hop/blob/main/docs/hop-user-manual/modules/ROOT/assets/files/how-to-guides/apache-airflow/docker-compose.yaml" target="_blank" rel="noopener">docker-compose.yaml</a> file in the Hop repository is that file with these changes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>AIRFLOW__CORE__LOAD_EXAMPLES</strong> is "false": we don&#8217;t need the Airflow sample DAGs.</p>
+</li>
+<li>
+<p>The <code>airflow-worker</code> service, which runs the tasks, mounts the Docker socket <strong>/var/run/docker.sock</strong>, so the DockerOperator can start <code>apache/hop</code> containers.</p>
+</li>
+<li>
+<p>The <code>airflow-worker</code> service is added to the group in <strong>DOCKER_GID</strong>, so it is allowed to use the Docker socket.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Mounting the Docker socket gives the Airflow worker, and every DAG it runs, root-equivalent access to the Docker host. Only do this on a machine you use for testing. On a shared or production platform, use the <a href="#kubernetes">KubernetesPodOperator</a> instead.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Change the <strong>AIRFLOW__CORE__LOAD_EXAMPLES</strong> variable to "false" in the default file, and add an additional line <strong>/var/run/docker.sock:/var/run/docker.sock</strong> in the volumes section.
-All of this has already been done if you use the <a href="https://github.com/apache/hop/tree/master/docs/hop-user-manual/modules/ROOT/assets/files/how-to-guides/apache-airflow/docker-compose.yaml" rel="noopener" target="_blank">the file</a> in our github repository.</p>
+<p>Save the file in an empty folder.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you followed an earlier version of this page (Airflow 2 with Postgres 13), run <code>docker compose down -v</code> in the old folder first, or use a folder with another name.
+Postgres 16 can&#8217;t read the Postgres 13 database in the old <code>postgres-db-volume</code> volume and keeps restarting, so Airflow never starts.
+<code>down -v</code> deletes that old Airflow database.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>To run Apache Airflow from this docker-compose file, go the directory where you saved this file and run</p>
+<p>Airflow needs an <code>.env</code> file next to it.
+On Linux, put your user id and the group id of the Docker socket in it, so the files Airflow creates are yours and the worker can use the Docker socket:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">docker compose up</code></pre>
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash"><span class="hljs-built_in">mkdir</span> -p ./dags ./logs ./plugins ./config
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;AIRFLOW_UID=<span class="hljs-subst">$(id -u)</span>&quot;</span> &gt; .<span class="hljs-built_in">env</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;DOCKER_GID=<span class="hljs-subst">$(getent group docker | cut -d: -f3)</span>&quot;</span> &gt;&gt; .<span class="hljs-built_in">env</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The various Apache Airflow need a couple of moments to start. Once you see a couple of lines like the ones below in the logs, we&#8217;re good to go.</p>
+<p>On macOS and Windows (Docker Desktop), an <code>.env</code> file with <code>AIRFLOW_UID=50000</code> is enough.</p>
+</div>
+<div class="paragraph">
+<p>To run Apache Airflow, go to the folder where you saved the file and run</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">apache-airflow-airflow-triggerer-1  | [2024-05-07 07:50:08 +0000] [24] [INFO] Booting worker with pid: 24
-apache-airflow-airflow-triggerer-1  | [2024-05-07 07:50:08 +0000] [25] [INFO] Booting worker with pid: 25
-apache-airflow-airflow-scheduler-1  |   ____________       _____________
-apache-airflow-airflow-scheduler-1  |  ____    |__( )_________  __/__  /________      __
-apache-airflow-airflow-scheduler-1  | ____  /| |_  /__  ___/_  /_ __  /_  __ \_ | /| / /
-apache-airflow-airflow-scheduler-1  | ___  ___ |  / _  /   _  __/ _  / / /_/ /_ |/ |/ /
-apache-airflow-airflow-scheduler-1  |  _/_/  |_/_/  /_/    /_/    /_/  \____/____/|__/
-apache-airflow-airflow-scheduler-1  | [2024-05-07T07:50:08.601+0000] {executor_loader.py:114} INFO - Loaded executor: CeleryExecutor
-apache-airflow-airflow-scheduler-1  | [2024-05-07T07:50:08.652+0000] {scheduler_job_runner.py:823} INFO - Starting the scheduler
-apache-airflow-airflow-scheduler-1  | [2024-05-07T07:50:08.653+0000] {scheduler_job_runner.py:830} INFO - Processing each file at most -1 <span class="hljs-built_in">times</span>
-apache-airflow-airflow-scheduler-1  | [2024-05-07T07:50:08.657+0000] {manager.py:165} INFO - Launched DagFileProcessorManager with pid: 34
-apache-airflow-airflow-scheduler-1  | [2024-05-07T07:50:08.658+0000] {scheduler_job_runner.py:1576} INFO - Resetting orphaned tasks <span class="hljs-keyword">for</span> active dag runs
-apache-airflow-airflow-scheduler-1  | [2024-05-07T07:50:08.660+0000] {settings.py:60} INFO - Configured default timezone Timezone(<span class="hljs-string">&#x27;UTC&#x27;</span>)</code></pre>
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">docker compose up -d</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Go to <a href="http://localhost:8080/home" class="bare" rel="noopener" target="_blank">http://localhost:8080/home</a> in your browser and log on with username "airflow" and password "airflow".</p>
+<p>The first start takes a couple of minutes: <code>airflow-init</code> creates the database and the user, then the other services start.
+<code>docker compose ps</code> shows all services as <code>healthy</code> when Airflow is ready.</p>
 </div>
 <div class="paragraph">
-<p>Even though we&#8217;re not running in production, the username and password can be easily changed from the docker-compose file. Just change the values for the <strong>AIRFLOW_WWW_USER_USERNAME</strong> and <strong>AIRFLOW_WWW_USER_PASSWORD</strong> variables in the docker-compose file or use any of the available ways to <a href="https://docs.docker.com/compose/environment-variables/set-environment-variables/" target="_blank" rel="noopener">work with variables</a> in Docker compose.</p>
+<p>Go to <a href="http://localhost:8080" class="bare" rel="noopener" target="_blank">http://localhost:8080</a> in your browser and log in with username "airflow" and password "airflow".</p>
 </div>
 <div class="paragraph">
-<p>After you logged on, Apache Airflow will show you an empty list of DAGs. We&#8217;re ready for the real fun.</p>
+<p>To use another username and password, set the <strong>_AIRFLOW_WWW_USER_USERNAME</strong> and <strong>_AIRFLOW_WWW_USER_PASSWORD</strong> variables in the <code>.env</code> file, or use any of the other ways to <a href="https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/" target="_blank" rel="noopener">set variables</a> in Docker Compose.</p>
+</div>
+<div class="paragraph">
+<p>After you log in, Apache Airflow shows an empty list of DAGs.</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="../_images/how-to-guides/run-hop-in-apache-airflow/apache-airflow-empty-server.png" alt="Apache Airflow - Empty server" width="75%"></span></p>
@@ -3142,21 +3189,22 @@ To have Airflow submit work to a running Hop Server instead (remote run configur
 </table>
 </div>
 <div class="paragraph">
-<p>We&#8217;ll use the Apache Airflow <a href="https://airflow.apache.org/docs/apache-airflow-providers-docker/stable/_api/airflow/providers/docker/operators/docker/index.html" target="_blank" rel="noopener">DockerOperator</a> to run Apache Hop workflows and pipelines from an embedded container in Apache Airflow.</p>
+<p>We&#8217;ll use the Apache Airflow <a href="https://airflow.apache.org/docs/apache-airflow-providers-docker/stable/_api/airflow/providers/docker/operators/docker/index.html" target="_blank" rel="noopener">DockerOperator</a> to run Apache Hop workflows and pipelines in a container.</p>
 </div>
 <div class="paragraph">
-<p>Again, you don&#8217;t need to be an Apache Airflow, Docker, or Python expert to create DAGs, we&#8217;ll treat DAGs as just another text file.
-Since we&#8217;ll use a container to run our workflows and pipelines, the configuration in our DAG will look very similar to the environment variables you&#8217;ll pass to the  <a href="../docker-container.html" class="xref page">short-lived Apache Hop container</a>.</p>
+<p>You don&#8217;t need to be an Apache Airflow, Docker, or Python expert to create DAGs: we&#8217;ll treat DAGs as just another text file.
+Since we use a container to run our workflows and pipelines, the configuration in our DAG looks very similar to the environment variables you pass to the <a href="../docker-container.html" class="xref page">short-lived Apache Hop container</a>.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s take a closer look at a couple of things in the DAG we&#8217;ll use. This will look very familiar if you&#8217;ve even run Apache Hop workflows and pipelines in containers:</p>
+<p>The examples use the <code>samples</code> project that comes with Apache Hop: the <code>config/projects/samples</code> folder in your Hop installation.</p>
 </div>
 <div class="paragraph">
-<p>Import the DockerOperator into your DAG:</p>
+<p>Import the DockerOperator and the <code>Mount</code> type in your DAG:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>python</div><pre class="highlightjs highlight is-highlighted"><code class="language-python hljs" data-lang="python"><span class="hljs-keyword">from</span> airflow.operators.docker_operator <span class="hljs-keyword">import</span> DockerOperator</code></pre>
+<div class="code-lang" data-pagefind-ignore>python</div><pre class="highlightjs highlight is-highlighted"><code class="language-python hljs" data-lang="python"><span class="hljs-keyword">from</span> airflow.providers.docker.operators.docker <span class="hljs-keyword">import</span> DockerOperator
+<span class="hljs-keyword">from</span> docker.types <span class="hljs-keyword">import</span> Mount</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3164,14 +3212,17 @@ Since we&#8217;ll use a container to run our workflows and pipelines, the config
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>python</div><pre class="highlightjs highlight is-highlighted"><code class="language-python hljs" data-lang="python">mounts=[Mount(source=<span class="hljs-string">&#x27;LOCAL_PATH_TO_PROJECT_FOLDER&#x27;</span>, target=<span class="hljs-string">&#x27;/project&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;bind&#x27;</span>),
-        Mount(source=<span class="hljs-string">&#x27;LOCAL_PATH_TO_ENV_FOLDER&#x27;</span>, target=<span class="hljs-string">&#x27;/project-config&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;bind&#x27;</span>)],</code></pre>
+<div class="code-lang" data-pagefind-ignore>python</div><pre class="highlightjs highlight is-highlighted"><code class="language-python hljs" data-lang="python">mounts=[
+    Mount(source=<span class="hljs-string">&quot;LOCAL_PATH_TO_PROJECT_FOLDER&quot;</span>, target=<span class="hljs-string">&quot;/project&quot;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;bind&quot;</span>),
+],</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The mounts section is where we&#8217;ll link your project and environment folders to the container.
-<strong>LOCAL_PATH_TO_PROJECT_FOLDER</strong> is the path to the project folder on your local file system (the folder where you keep your hop-config.json file, metadata folder and workflows and pipelines). This folder will be mounted as /project inside the container.
-<strong>LOCAL_PATH_TO_ENV_FOLDER</strong> is similar but points to the folder where your environment configuration (json) files are. This folder will be mounted as /project-config inside the container.</p>
+<p>The mounts section is where we link your project folder to the container.
+<strong>LOCAL_PATH_TO_PROJECT_FOLDER</strong> is the absolute path to the project folder (the folder with your <code>project-config.json</code> file, <code>metadata</code> folder, workflows and pipelines). This folder is mounted as <code>/project</code> inside the container.</p>
+</div>
+<div class="paragraph">
+<p>The Hop container is started by the Docker daemon on the host, not inside the Airflow worker, so this is a path on the Docker host, not a path in the Airflow container.</p>
 </div>
 <div class="paragraph">
 <p>Define and configure the pipeline in your DAG task:</p>
@@ -3179,21 +3230,15 @@ Since we&#8217;ll use a container to run our workflows and pipelines, the config
 <div class="listingblock">
 <div class="content">
 <div class="code-lang" data-pagefind-ignore>python</div><pre class="highlightjs highlight is-highlighted"><code class="language-python hljs" data-lang="python">hop = DockerOperator(
-        task_id=<span class="hljs-string">&#x27;sample-pipeline&#x27;</span>,
-        <span class="hljs-comment"># use the Apache Hop Docker image. Add your tags here in the default apache/hop: syntax</span>
-        image=<span class="hljs-string">&#x27;apache/hop&#x27;</span>,
-        api_version=<span class="hljs-string">&#x27;auto&#x27;</span>,
-        auto_remove=<span class="hljs-literal">True</span>,
-        environment= {
-            <span class="hljs-string">&#x27;HOP_RUN_PARAMETERS&#x27;</span>: <span class="hljs-string">&#x27;INPUT_DIR=&#x27;</span>,
-            <span class="hljs-string">&#x27;HOP_LOG_LEVEL&#x27;</span>: <span class="hljs-string">&#x27;Basic&#x27;</span>,
-            <span class="hljs-string">&#x27;HOP_FILE_PATH&#x27;</span>: <span class="hljs-string">&#x27;${PROJECT_HOME}/transforms/null-if-basic.hpl&#x27;</span>,
-            <span class="hljs-string">&#x27;HOP_PROJECT_DIRECTORY&#x27;</span>: <span class="hljs-string">&#x27;/project&#x27;</span>,
-            <span class="hljs-string">&#x27;HOP_PROJECT_NAME&#x27;</span>: <span class="hljs-string">&#x27;hop-airflow-sample&#x27;</span>,
-            <span class="hljs-string">&#x27;HOP_ENVIRONMENT_NAME&#x27;</span>: <span class="hljs-string">&#x27;env-hop-airflow-sample.json&#x27;</span>,
-            <span class="hljs-string">&#x27;HOP_ENVIRONMENT_CONFIG_FILE_NAME_PATHS&#x27;</span>: <span class="hljs-string">&#x27;/project-config/env-hop-airflow-sample.json&#x27;</span>,
-            <span class="hljs-string">&#x27;HOP_RUN_CONFIG&#x27;</span>: <span class="hljs-string">&#x27;local&#x27;</span>
-        },</code></pre>
+    task_id=<span class="hljs-string">&quot;sample-pipeline&quot;</span>,
+    image=<span class="hljs-string">&quot;apache/hop:2.20.0&quot;</span>,
+    environment={
+        <span class="hljs-string">&quot;HOP_LOG_LEVEL&quot;</span>: <span class="hljs-string">&quot;Basic&quot;</span>,
+        <span class="hljs-string">&quot;HOP_FILE_PATH&quot;</span>: <span class="hljs-string">&quot;${PROJECT_HOME}/transforms/null-if-basic.hpl&quot;</span>,
+        <span class="hljs-string">&quot;HOP_PROJECT_FOLDER&quot;</span>: <span class="hljs-string">&quot;/project&quot;</span>,
+        <span class="hljs-string">&quot;HOP_PROJECT_NAME&quot;</span>: <span class="hljs-string">&quot;hop-airflow-sample&quot;</span>,
+        <span class="hljs-string">&quot;HOP_RUN_CONFIG&quot;</span>: <span class="hljs-string">&quot;local&quot;</span>,
+    },</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3205,35 +3250,26 @@ Since we&#8217;ll use a container to run our workflows and pipelines, the config
 <p><strong>task_id</strong>: a unique id for this Airflow task in the DAG</p>
 </li>
 <li>
-<p><strong>image</strong>: we use "apache/hop" in this example, which will always grab the latest release. Add a tag to use a specific Apache Hop release, e.g. "apache/hop:2.4.0" or "apache/hop:Development" for the very latest development version</p>
+<p><strong>image</strong>: the Apache Hop image to use. Pin a release, e.g. "apache/hop:2.20.0". "apache/hop:latest" changes with every release, and "apache/hop:Development" is the latest development build.</p>
 </li>
 <li>
-<p><strong>environment</strong> is where we&#8217;ll tell the DockerOperator which pipeline to run and provide additional configuration. The environment variables used here are exactly what you would pass to a standalone short-lived container without Airflow:</p>
+<p><strong>environment</strong> tells the container which pipeline to run and how. These are the same environment variables you pass to a short-lived container without Airflow:</p>
 <div class="ulist">
 <ul>
-<li>
-<p>HOP_RUN_PARAMETERS: parameters to pass to the workflow or pipeline</p>
-</li>
 <li>
 <p>HOP_LOG_LEVEL: the logging level to use with your workflow or pipeline</p>
 </li>
 <li>
-<p>HOP_FILE_PATH: the path to the workflow or pipeline you want to use. This is the path in the container and is relative to the project folder</p>
+<p>HOP_FILE_PATH: the path to the workflow or pipeline you want to run. <code>${PROJECT_HOME}</code> is the project folder in the container.</p>
 </li>
 <li>
-<p>HOP_PROJECT_DIRECTORY: the folder where your project files live. In this example, this is the /project folder we mounted in the previous section.</p>
+<p>HOP_PROJECT_FOLDER: the folder where your project files live. In this example, this is the <code>/project</code> folder we mounted in the previous section.</p>
 </li>
 <li>
-<p>HOP_PROJECT_NAME: your Apache Hop project&#8217;s name. This will only be used internally (and will show in the logs). Your project name is not necessarily the same name you used to develop the project in Hop Gui, but keeping things consistent never hurts.</p>
+<p>HOP_PROJECT_NAME: your Apache Hop project&#8217;s name. This is only used in the container (and shows in the logs). It does not have to be the name you use in Hop Gui, but keeping things consistent never hurts.</p>
 </li>
 <li>
-<p>HOP_ENVIRONMENT_NAME: similar to the project name, this is the name for the environment that will be created through hop-conf when the container starts.</p>
-</li>
-<li>
-<p>HOP_ENVIRONMENT_CONFIG_FILE_NAME_PATHS: the paths to your environment configuration files. These file paths should be relative to the /project-config folder we mounted in the previous section.</p>
-</li>
-<li>
-<p>HOP_RUN_CONFIG: the workflow or pipeline run configuration to use. Your mileage may vary, but in the vast majority of cases, using a local run configuration will be what you need.</p>
+<p>HOP_RUN_CONFIG: the workflow or pipeline run configuration to use. In most cases, this is a local run configuration.</p>
 </li>
 </ul>
 </div>
@@ -3241,58 +3277,54 @@ Since we&#8217;ll use a container to run our workflows and pipelines, the config
 </ul>
 </div>
 <div class="paragraph">
-<p>That&#8217;s everything we need to specify for a first run. This DAG will look like the one below:</p>
+<p>The <a href="../docker-container.html" class="xref page">Docker container</a> page lists all the variables.</p>
+</div>
+<div class="paragraph">
+<p>That&#8217;s everything we need for a first run. The full DAG looks like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>python</div><pre class="highlightjs highlight is-highlighted"><code class="language-python hljs" data-lang="python"><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime, timedelta
-<span class="hljs-keyword">from</span> airflow <span class="hljs-keyword">import</span> DAG
-<span class="hljs-keyword">from</span> airflow.operators.bash_operator <span class="hljs-keyword">import</span> BashOperator
-<span class="hljs-keyword">from</span> airflow.operators.docker_operator <span class="hljs-keyword">import</span> DockerOperator
-<span class="hljs-keyword">from</span> airflow.operators.python_operator <span class="hljs-keyword">import</span> BranchPythonOperator
-<span class="hljs-keyword">from</span> airflow.operators.dummy_operator <span class="hljs-keyword">import</span> DummyOperator
-<span class="hljs-keyword">from</span> docker.types <span class="hljs-keyword">import</span> Mount
-default_args = {
-<span class="hljs-string">&#x27;owner&#x27;</span>                 : <span class="hljs-string">&#x27;airflow&#x27;</span>,
-<span class="hljs-string">&#x27;description&#x27;</span>           : <span class="hljs-string">&#x27;sample-pipeline&#x27;</span>,
-<span class="hljs-string">&#x27;depend_on_past&#x27;</span>        : <span class="hljs-literal">False</span>,
-<span class="hljs-string">&#x27;start_date&#x27;</span>            : datetime(<span class="hljs-number">2022</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>),
-<span class="hljs-string">&#x27;email_on_failure&#x27;</span>      : <span class="hljs-literal">False</span>,
-<span class="hljs-string">&#x27;email_on_retry&#x27;</span>        : <span class="hljs-literal">False</span>,
-<span class="hljs-string">&#x27;retries&#x27;</span>               : <span class="hljs-number">1</span>,
-<span class="hljs-string">&#x27;retry_delay&#x27;</span>           : timedelta(minutes=<span class="hljs-number">5</span>)
-}
+<div class="code-lang" data-pagefind-ignore>python</div><pre class="highlightjs highlight is-highlighted"><code class="language-python hljs" data-lang="python"><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime
 
-<span class="hljs-keyword">with</span> DAG(<span class="hljs-string">&#x27;sample-pipeline&#x27;</span>, default_args=default_args, schedule_interval=<span class="hljs-literal">None</span>, catchup=<span class="hljs-literal">False</span>, is_paused_upon_creation=<span class="hljs-literal">False</span>) <span class="hljs-keyword">as</span> dag:
-    start_dag = DummyOperator(
-        task_id=<span class="hljs-string">&#x27;start_dag&#x27;</span>
-        )
-    end_dag = DummyOperator(
-        task_id=<span class="hljs-string">&#x27;end_dag&#x27;</span>
-        )
+<span class="hljs-keyword">from</span> airflow.providers.docker.operators.docker <span class="hljs-keyword">import</span> DockerOperator
+<span class="hljs-keyword">from</span> airflow.providers.standard.operators.empty <span class="hljs-keyword">import</span> EmptyOperator
+<span class="hljs-keyword">from</span> airflow.sdk <span class="hljs-keyword">import</span> DAG
+<span class="hljs-keyword">from</span> docker.types <span class="hljs-keyword">import</span> Mount
+
+<span class="hljs-keyword">with</span> DAG(
+    dag_id=<span class="hljs-string">&quot;sample-pipeline&quot;</span>,
+    start_date=datetime(<span class="hljs-number">2026</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>),
+    schedule=<span class="hljs-literal">None</span>,
+    catchup=<span class="hljs-literal">False</span>,
+    is_paused_upon_creation=<span class="hljs-literal">False</span>,
+) <span class="hljs-keyword">as</span> dag:
+    start_dag = EmptyOperator(task_id=<span class="hljs-string">&quot;start_dag&quot;</span>)
+    end_dag = EmptyOperator(task_id=<span class="hljs-string">&quot;end_dag&quot;</span>)
     hop = DockerOperator(
-        task_id=<span class="hljs-string">&#x27;sample-pipeline&#x27;</span>,
-        <span class="hljs-comment"># use the Apache Hop Docker image. Add your tags here in the default apache/hop: syntax</span>
-        image=<span class="hljs-string">&#x27;apache/hop&#x27;</span>,
-        api_version=<span class="hljs-string">&#x27;auto&#x27;</span>,
-        auto_remove=<span class="hljs-literal">True</span>,
-        environment= {
-            <span class="hljs-string">&#x27;HOP_RUN_PARAMETERS&#x27;</span>: <span class="hljs-string">&#x27;INPUT_DIR=&#x27;</span>,
-            <span class="hljs-string">&#x27;HOP_LOG_LEVEL&#x27;</span>: <span class="hljs-string">&#x27;Basic&#x27;</span>,
-            <span class="hljs-string">&#x27;HOP_FILE_PATH&#x27;</span>: <span class="hljs-string">&#x27;${PROJECT_HOME}/transforms/null-if-basic.hpl&#x27;</span>,
-            <span class="hljs-string">&#x27;HOP_PROJECT_DIRECTORY&#x27;</span>: <span class="hljs-string">&#x27;/project&#x27;</span>,
-            <span class="hljs-string">&#x27;HOP_PROJECT_NAME&#x27;</span>: <span class="hljs-string">&#x27;hop-airflow-sample&#x27;</span>,
-            <span class="hljs-string">&#x27;HOP_ENVIRONMENT_NAME&#x27;</span>: <span class="hljs-string">&#x27;env-hop-airflow-sample.json&#x27;</span>,
-            <span class="hljs-string">&#x27;HOP_ENVIRONMENT_CONFIG_FILE_NAME_PATHS&#x27;</span>: <span class="hljs-string">&#x27;/project-config/env-hop-airflow-sample.json&#x27;</span>,
-            <span class="hljs-string">&#x27;HOP_RUN_CONFIG&#x27;</span>: <span class="hljs-string">&#x27;local&#x27;</span>
+        task_id=<span class="hljs-string">&quot;sample-pipeline&quot;</span>,
+        image=<span class="hljs-string">&quot;apache/hop:2.20.0&quot;</span>,
+        environment={
+            <span class="hljs-string">&quot;HOP_LOG_LEVEL&quot;</span>: <span class="hljs-string">&quot;Basic&quot;</span>,
+            <span class="hljs-string">&quot;HOP_FILE_PATH&quot;</span>: <span class="hljs-string">&quot;${PROJECT_HOME}/transforms/null-if-basic.hpl&quot;</span>,
+            <span class="hljs-string">&quot;HOP_PROJECT_FOLDER&quot;</span>: <span class="hljs-string">&quot;/project&quot;</span>,
+            <span class="hljs-string">&quot;HOP_PROJECT_NAME&quot;</span>: <span class="hljs-string">&quot;hop-airflow-sample&quot;</span>,
+            <span class="hljs-string">&quot;HOP_RUN_CONFIG&quot;</span>: <span class="hljs-string">&quot;local&quot;</span>,
         },
         docker_url=<span class="hljs-string">&quot;unix://var/run/docker.sock&quot;</span>,
         network_mode=<span class="hljs-string">&quot;bridge&quot;</span>,
-        mounts=[Mount(source=<span class="hljs-string">&#x27;LOCAL_PATH_TO_PROJECT_FOLDER&#x27;</span>, target=<span class="hljs-string">&#x27;/project&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;bind&#x27;</span>), Mount(source=<span class="hljs-string">&#x27;LOCAL_PATH_TO_ENV_FOLDER&#x27;</span>, target=<span class="hljs-string">&#x27;/project-config&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;bind&#x27;</span>)],
-        force_pull=<span class="hljs-literal">False</span>
-        )
+        mounts=[
+            Mount(source=<span class="hljs-string">&quot;LOCAL_PATH_TO_PROJECT_FOLDER&quot;</span>, target=<span class="hljs-string">&quot;/project&quot;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;bind&quot;</span>),
+        ],
+        mount_tmp_dir=<span class="hljs-literal">False</span>,
+        auto_remove=<span class="hljs-string">&quot;success&quot;</span>,
+    )
     start_dag &gt;&gt; hop &gt;&gt; end_dag</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p><code>mount_tmp_dir=False</code> stops the DockerOperator from mounting a temporary folder of the worker into the Hop container. That folder does not exist on the Docker host.
+<code>auto_remove="success"</code> removes the Hop container after the run, also when the run fails. The Hop output is in the Airflow task log.
+To keep the container, for example to check it with <code>docker logs</code>, use <code>auto_remove="never"</code> and remove it yourself afterwards.</p>
 </div>
 </div>
 </div>
@@ -3300,13 +3332,17 @@ default_args = {
 <h2 id="_deploy_and_run_your_first_dag"><a class="link" href="#_deploy_and_run_your_first_dag">Deploy and run your first DAG</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>All it takes to deploy your dag is to put it in Airflow&#8217;s dags folder. Our docker-compose setup has created a dags folder in the directory where you started the compose file. Airflow will scan this folder every two minutes by default.</p>
+<p>To deploy your DAG, put it in Airflow&#8217;s <code>dags</code> folder: the <code>dags</code> folder next to the <code>docker-compose.yaml</code> file.
+Airflow checks this folder for new DAG files every five minutes by default.</p>
 </div>
 <div class="paragraph">
-<p>Save the DAG we just created in your dags folder as apache-hop-dag-simple.py. After a short wait, your DAG will show up in the list of dags.</p>
+<p>Save the DAG we just created in your dags folder as <code>apache-hop-dag-simple.py</code>. After a short wait, your DAG shows up in the list of DAGs.</p>
 </div>
 <div class="paragraph">
-<p>If there are any syntax errors in your DAG, Airflow will let you know. Expand the error dialog for more details about the error, as shown in the image below. Don&#8217;t worry, you shouldn&#8217;t have any errors with the DAG we just created.</p>
+<p>If there are any syntax errors in your DAG, Airflow shows a red import error badge next to the number of DAGs. Click it for the details, as shown in the image below.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/how-to-guides/run-hop-in-apache-airflow/apache-airflow-dag-error.png" alt="Apache Airflow - DAG error" width="60%"></span></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -3315,53 +3351,53 @@ default_args = {
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you&#8217;re using <code>DockerOperator</code> and need to access a database or service running on your host machine, be sure to set the host as <code>host.docker.internal</code> in the Hop connection configuration to allow the container to access the host services.
+If the Hop container needs to reach a database or service on your host machine, use <code>host.docker.internal</code> as the host name in the Hop connection. On Linux, also add <code>extra_hosts={"host.docker.internal": "host-gateway"}</code> to the DockerOperator.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../_images/how-to-guides/run-hop-in-apache-airflow/apache-airflow-dag-error.png" alt="Apache Airflow - DAG error" width="45%"></span></p>
-</div>
-<div class="paragraph">
-<p>If your DAG is deployed correctly (it should), you&#8217;ll see it show up in the list of available DAGs.</p>
+<p>If your DAG is deployed correctly, it shows up in the list of DAGs.</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="../_images/how-to-guides/run-hop-in-apache-airflow/apache-airflow-dag-available.png" alt="Apache Airflow - DAG available" width="75%"></span></p>
 </div>
 <div class="paragraph">
-<p>Click on the <strong>sample-pipeline</strong> DAG to see more details about it. From the tab list at the top of the page, select "Code" to review the DAG you just deployed, or "Graph" to see the graph representation of the DAG. This graph is extremely simple, but we&#8217;re exploring Apache Airflow, so that&#8217;s intentional.</p>
+<p>Click the <strong>sample-pipeline</strong> DAG to see more details about it. The "Code" tab shows the DAG you just deployed. The graph button at the top of the left panel shows the graph of the DAG. This graph is very simple, which is intentional.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../_images/how-to-guides/run-hop-in-apache-airflow/apache-airflow-dag-graph.png" alt="Apache Airflow - DAG graph" width="65%"></span></p>
+<p><span class="image"><img src="../_images/how-to-guides/run-hop-in-apache-airflow/apache-airflow-dag-graph.png" alt="Apache Airflow - DAG graph" width="75%"></span></p>
 </div>
 <div class="paragraph">
-<p>To run this DAG, click the play icon with the <strong>Trigger DAG</strong> option. The icon is available from multiple locations in the Apache Airflow user interface. It is almost always available in the upper right corner.</p>
+<p>To run this DAG, click the <strong>Trigger</strong> button in the upper right corner of the DAG page, or the play icon in the list of DAGs. Click <strong>Trigger</strong> in the dialog.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../_images/how-to-guides/run-hop-in-apache-airflow/apache-airflow-dag-run.png" alt="Apache Airflow - trigger DAG" width="45%"></span></p>
+<p><span class="image"><img src="../_images/how-to-guides/run-hop-in-apache-airflow/apache-airflow-dag-run.png" alt="Apache Airflow - trigger DAG" width="60%"></span></p>
 </div>
 <div class="paragraph">
-<p>Your DAG will run in the background. To follow up and check the logs, click on your DAG name to go to its details page.</p>
+<p>Your DAG runs in the background. Airflow opens the page of the new run. Click the <strong>sample-pipeline</strong> task to see its log. The output of the Hop container is in the task log:</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../_images/how-to-guides/run-hop-in-apache-airflow/apache-airflow-dag-logs.png" alt="Apache Airflow - DAG logs" width="45%"></span></p>
+<p><span class="image"><img src="../_images/how-to-guides/run-hop-in-apache-airflow/apache-airflow-dag-logs.png" alt="Apache Airflow - DAG logs" width="75%"></span></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">2024-05-07, 13:54:39 UTC] {docker.py:391} INFO - 2023/05/07 13:54:39 - Ouput.0 - Finished processing (I=0, O=0, R=5, W=5, U=0, E=0)
-[2024-05-07, 13:54:39 UTC] {docker.py:391} INFO - 2023/05/07 13:54:39 - null-if-basic - Pipeline duration : 0.45 seconds [  0.450 ]
-[2024-05-07, 13:54:39 UTC] {docker.py:391} INFO - HopRun <span class="hljs-built_in">exit</span>.
-[2024-05-07, 13:54:39 UTC] {docker.py:391} INFO - 2023/05/07 13:54:39 - null-if-basic - Execution finished on a <span class="hljs-built_in">local</span> pipeline engine with run configuration <span class="hljs-string">&#x27;local&#x27;</span>
-[2024-05-07, 13:54:40 UTC] {taskinstance.py:1373} INFO - Marking task as SUCCESS. dag_id=sample-pipeline, task_id=sample-pipeline, execution_date=20230507T135409, start_date=20230507T135411, end_date=20230507T135440
-[2024-05-07, 13:54:40 UTC] {local_task_job_runner.py:232} INFO - Task exited with <span class="hljs-built_in">return</span> code 0</code></pre>
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">[2026-11-22 14:03:28] INFO - 2026/11/22 14:03:28 - HopRun - Starting pipeline: /project/transforms/null-if-basic.hpl
+[2026-11-22 14:03:28] INFO - 2026/11/22 14:03:28 - null-if-basic - Executing this pipeline using the Local Pipeline Engine with run configuration <span class="hljs-string">&#x27;local&#x27;</span>
+[2026-11-22 14:03:28] INFO - 2026/11/22 14:03:28 - null-if-basic - Execution started <span class="hljs-keyword">for</span> pipeline [null-if-basic]
+[2026-11-22 14:03:28] INFO - 2026/11/22 14:03:28 - Test Data.0 - Finished processing (I=0, O=0, R=0, W=5, U=0, E=0)
+[2026-11-22 14:03:28] INFO - 2026/11/22 14:03:28 - Null <span class="hljs-keyword">if</span> two, four.0 - Finished processing (I=0, O=0, R=5, W=5, U=0, E=0)
+[2026-11-22 14:03:28] INFO - 2026/11/22 14:03:28 - Ouput.0 - Finished processing (I=0, O=0, R=5, W=5, U=0, E=0)
+[2026-11-22 14:03:28] INFO - 2026/11/22 14:03:28 - null-if-basic - Pipeline duration : 0.083 seconds [  0.083<span class="hljs-string">&quot; ]
+[2026-11-22 14:03:28] INFO - HopRun exit.
+[2026-11-22 14:03:28] INFO - 2026/11/22 14:03:28 - null-if-basic - Execution finished on a local pipeline engine with run configuration &#x27;local&#x27;</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>When you return to the Airflow home screen, your DAG will now show green circles for successful runs.</p>
+<p>When you return to the list of DAGs, your DAG shows the successful run.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="../_images/how-to-guides/run-hop-in-apache-airflow/apache-airflow-dag-runs.png" alt="Apache Airflow - DAG logs" width="90%"></span></p>
+<p><span class="image"><img src="../_images/how-to-guides/run-hop-in-apache-airflow/apache-airflow-dag-runs.png" alt="Apache Airflow - DAG runs" width="75%"></span></p>
 </div>
 </div>
 </div>
@@ -3369,13 +3405,12 @@ If you&#8217;re using <code>DockerOperator</code> and need to access a database 
 <h2 id="_using_variables_and_parameters_in_a_dag"><a class="link" href="#_using_variables_and_parameters_in_a_dag">Using variables and parameters in a DAG</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Your real-life pipelines will be more complex than the extremely simple example pipeline we just ran.</p>
+<p>Your real-life pipelines will be more complex than the very simple example pipeline we just ran.
+You&#8217;ll want to use variables from your environment configuration files, and pass parameters to your pipelines and workflows.</p>
 </div>
 <div class="paragraph">
-<p>In the basic example we just ran, we passed an environment file but didn&#8217;t use it. In a lot of cases, you&#8217;ll want to not only use variables from your environment files, you may also want to pass parameters to your pipelines and workflows. Let&#8217;s have a closer look at that.</p>
-</div>
-<div class="paragraph">
-<p>Create the environment configuration below to a config folder next to your project folder. We&#8217;ll use the pipeline <code>pipelines/pipeline-with-parameter.hpl</code> from the samples project to print a pipeline parameter and a variable from the environment configuration file to the logs. Again, these examples are extremely simple, your real-life projects will be more complex, but the process remains the same.</p>
+<p>Save the environment configuration file below as <code>hop-airflow-config.json</code> in a config folder next to your project folder.
+We&#8217;ll use the pipeline <code>pipelines/pipeline-with-parameter.hpl</code> from the samples project to print a pipeline parameter and a variable from the environment configuration file to the logs.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3389,93 +3424,225 @@ If you&#8217;re using <code>DockerOperator</code> and need to access a database 
 </div>
 </div>
 <div class="paragraph">
-<p>This pipeline is again very basic. All we&#8217;ll do is accept a parameter and print it in the logs:</p>
+<p>This pipeline accepts a parameter <code>PRM_EXAMPLE</code> and writes it and the <code>ENV_VARIABLE</code> variable to the logs:</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="../_images/how-to-guides/run-hop-in-apache-airflow/apache-airflow-pipeline-with-parameter.png" alt="Apache Airflow - run a pipeline with parameters" width="75%"></span></p>
 </div>
 <div class="paragraph">
-<p>We&#8217;ll create a new DAG for this example. Most of it will be the same or similar to the previous example, with some minor changes:</p>
+<p>We&#8217;ll create a new DAG for this example. Most of it is the same as the previous example.</p>
 </div>
 <div class="paragraph">
-<p>First of all, we&#8217;ll need to add one additional import at the start of the DAG:</p>
+<p>First, declare the parameter in the DAG with <code>params</code>.
+Airflow shows it as a field in the trigger form and uses the default value for scheduled runs.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>python</div><pre class="highlightjs highlight is-highlighted"><code class="language-python hljs" data-lang="python"><span class="hljs-keyword">from</span> airflow <span class="hljs-keyword">import</span> DAG
-<span class="hljs-keyword">from</span> airflow.models <span class="hljs-keyword">import</span> Variable
-<span class="hljs-keyword">from</span> airflow.operators.bash_operator <span class="hljs-keyword">import</span> BashOperator</code></pre>
+<div class="code-lang" data-pagefind-ignore>python</div><pre class="highlightjs highlight is-highlighted"><code class="language-python hljs" data-lang="python">params={<span class="hljs-string">&quot;prm_example&quot;</span>: Param(<span class="hljs-string">&quot;default value&quot;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;string&quot;</span>)},</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Next, we&#8217;ll need to add the parameter in this pipeline and tell Airflow to pick up the values from the run configuration we&#8217;ll pass to the DAG later on.</p>
+<p>Then pass the value to the pipeline.
+The <code>environment</code> of the DockerOperator is a template, so <code>{{ params.prm_example }}</code> is replaced with the value of the run.
+<code>HOP_RUN_PARAMETERS</code> is a comma-separated list of <code>NAME=value</code> pairs, so the value can&#8217;t contain a comma.</p>
 </div>
 <div class="paragraph">
-<p>We&#8217;ll also use logging level Detailed to make sure we can see the parameters we&#8217;ll pass to the pipeline.</p>
+<p>We also add the environment: <code>HOP_ENVIRONMENT_NAME</code> is the name of the environment the container creates, <code>HOP_ENVIRONMENT_CONFIG_FILE_NAME_PATHS</code> is the path of the environment configuration file in the container.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>python</div><pre class="highlightjs highlight is-highlighted"><code class="language-python hljs" data-lang="python">environment= {
-            <span class="hljs-string">&#x27;HOP_RUN_PARAMETERS&#x27;</span>: <span class="hljs-string">&#x27;PRM_EXAMPLE=&#x27;</span>,
-            <span class="hljs-string">&#x27;HOP_LOG_LEVEL&#x27;</span>: <span class="hljs-string">&#x27;Detailed&#x27;</span>,
-            <span class="hljs-string">&#x27;HOP_FILE_PATH&#x27;</span>: <span class="hljs-string">&#x27;${PROJECT_HOME}/hop/pipeline-with-parameter.hpl&#x27;</span>,
-            <span class="hljs-string">&#x27;HOP_PROJECT_DIRECTORY&#x27;</span>: <span class="hljs-string">&#x27;/project&#x27;</span>,
-            <span class="hljs-string">&#x27;HOP_PROJECT_NAME&#x27;</span>: <span class="hljs-string">&#x27;hop-airflow-sample&#x27;</span>,
-            <span class="hljs-string">&#x27;HOP_ENVIRONMENT_NAME&#x27;</span>: <span class="hljs-string">&#x27;env-hop-airflow-sample.json&#x27;</span>,
-            <span class="hljs-string">&#x27;HOP_ENVIRONMENT_CONFIG_FILE_NAME_PATHS&#x27;</span>: <span class="hljs-string">&#x27;/project-config/hop-airflow-config.json&#x27;</span>,
-            <span class="hljs-string">&#x27;HOP_RUN_CONFIG&#x27;</span>: <span class="hljs-string">&#x27;local&#x27;</span>
-        },</code></pre>
+<div class="code-lang" data-pagefind-ignore>python</div><pre class="highlightjs highlight is-highlighted"><code class="language-python hljs" data-lang="python">environment={
+    <span class="hljs-string">&quot;HOP_RUN_PARAMETERS&quot;</span>: <span class="hljs-string">&quot;PRM_EXAMPLE={{ params.prm_example }}&quot;</span>,
+    <span class="hljs-string">&quot;HOP_LOG_LEVEL&quot;</span>: <span class="hljs-string">&quot;Basic&quot;</span>,
+    <span class="hljs-string">&quot;HOP_FILE_PATH&quot;</span>: <span class="hljs-string">&quot;${PROJECT_HOME}/pipelines/pipeline-with-parameter.hpl&quot;</span>,
+    <span class="hljs-string">&quot;HOP_PROJECT_FOLDER&quot;</span>: <span class="hljs-string">&quot;/project&quot;</span>,
+    <span class="hljs-string">&quot;HOP_PROJECT_NAME&quot;</span>: <span class="hljs-string">&quot;hop-airflow-sample&quot;</span>,
+    <span class="hljs-string">&quot;HOP_ENVIRONMENT_NAME&quot;</span>: <span class="hljs-string">&quot;hop-airflow-sample-env&quot;</span>,
+    <span class="hljs-string">&quot;HOP_ENVIRONMENT_CONFIG_FILE_NAME_PATHS&quot;</span>: <span class="hljs-string">&quot;/project-config/hop-airflow-config.json&quot;</span>,
+    <span class="hljs-string">&quot;HOP_RUN_CONFIG&quot;</span>: <span class="hljs-string">&quot;local&quot;</span>,
+},</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Also, we really need the environment configuration file this time, so make sure your mounts are correct.</p>
+<p>The environment configuration file has to be in the container, so mount the config folder as <code>/project-config</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>python</div><pre class="highlightjs highlight is-highlighted"><code class="language-python hljs" data-lang="python">mounts=[Mount(source=<span class="hljs-string">&#x27;&lt;YOUR_PROJECT_PATH&gt;/&#x27;</span>, target=<span class="hljs-string">&#x27;/project&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;bind&#x27;</span>),
-                Mount(source=<span class="hljs-string">&#x27;&lt;YOUR_CONFIG_PATH&gt;/config/&#x27;</span>, target=<span class="hljs-string">&#x27;/project-config&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;bind&#x27;</span>)],</code></pre>
+<div class="code-lang" data-pagefind-ignore>python</div><pre class="highlightjs highlight is-highlighted"><code class="language-python hljs" data-lang="python">mounts=[
+    Mount(source=<span class="hljs-string">&quot;LOCAL_PATH_TO_PROJECT_FOLDER&quot;</span>, target=<span class="hljs-string">&quot;/project&quot;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;bind&quot;</span>),
+    Mount(source=<span class="hljs-string">&quot;LOCAL_PATH_TO_CONFIG_FOLDER&quot;</span>, target=<span class="hljs-string">&quot;/project-config&quot;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;bind&quot;</span>),
+],</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Add this new DAG to your dags folder and wait for it to appear in your Apache Airflow console.</p>
-</div>
-<div class="paragraph">
-<p>To run this DAG with parameters, we&#8217;ll use the <strong>Trigger DAG w/ config</strong> option. We&#8217;ll specify the <strong>prm_example</strong> value that Airflow will pass to the <strong>PRM_EXAMPLE</strong> parameter in the pipeline. The syntax to use is shown below. Click "Trigger" when you&#8217;re done.</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="../_images/how-to-guides/run-hop-in-apache-airflow/apache-airflow-two-dags.png" alt="Apache Airflow - two DAGs" width="90%"></span></p>
-</div>
-<table class="tableblock frame-none grid-none fit-content">
-<colgroup>
-<col>
-<col>
-<col>
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="../_images/how-to-guides/run-hop-in-apache-airflow/apache-airflow-trigger-dag-with-config.png" alt="Apache Airflow - trigger DAG with config"></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="../_images/how-to-guides/run-hop-in-apache-airflow/apache-airflow-run-config.png" alt="Apache Airflow - trigger DAG with config"></span></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="../_images/how-to-guides/run-hop-in-apache-airflow/apache-airflow-trigger.png" alt="Apache Airflow - trigger DAG with config"></span></p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>Your DAG logs will now show the environment variable and the parameter we used in this example:</p>
+<p>The full DAG:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">[2024-05-08, 08:21:34 UTC] {docker.py:391} INFO - 2023/05/08 08:21:34 - pipeline-with-parameter - Pipeline has allocated 5 threads and 4 rowsets.
-[2024-05-08, 08:21:34 UTC] {docker.py:391} INFO - 2023/05/08 08:21:34 - generate 1 row.0 - Starting to run...
-[2024-05-08, 08:21:34 UTC] {docker.py:391} INFO - 2023/05/08 08:21:34 - generate 1 row.0 - Finished processing (I=0, O=0, R=0, W=1, U=0, E=0)
-[2024-05-08, 08:21:34 UTC] {docker.py:391} INFO - 2023/05/08 08:21:34 - get <span class="hljs-variable">${PRM_EXAMPLE}</span>.0 - field [example] has value [EXAMPLE VALUE]
-[2024-05-08, 08:21:34 UTC] {docker.py:391} INFO - 2023/05/08 08:21:34 - get <span class="hljs-variable">${PRM_EXAMPLE}</span>.0 - Finished processing (I=0, O=0, R=1, W=1, U=0, E=0)
-[2024-05-08, 08:21:34 UTC] {docker.py:391} INFO - 2023/05/08 08:21:34 - write parameter to log.0 -
-[2024-05-08, 08:21:34 UTC] {docker.py:391} INFO - 2023/05/08 08:21:34 - get <span class="hljs-variable">${ENV_VARIABLE}</span>.0 - field [env_variable] has value [variable value]
-[2024-05-08, 08:21:34 UTC] {docker.py:391} INFO - 2023/05/08 08:21:34 - write env_variable to log.0 -
-[2024-05-08, 08:21:34 UTC] {docker.py:391} INFO - 2023/05/08 08:21:34 - write parameter to log.0 - Finished processing (I=0, O=0, R=1, W=1, U=0, E=0)
-[2024-05-08, 08:21:34 UTC] {docker.py:391} INFO - 2023/05/08 08:21:34 - get <span class="hljs-variable">${ENV_VARIABLE}</span>.0 - Finished processing (I=0, O=0, R=1, W=1, U=0, E=0)
-[2024-05-08, 08:21:34 UTC] {docker.py:391} INFO - 2023/05/08 08:21:34 - write env_variable to log.0 - Finished processing (I=0, O=0, R=1, W=1, U=0, E=0)</code></pre>
+<div class="code-lang" data-pagefind-ignore>python</div><pre class="highlightjs highlight is-highlighted"><code class="language-python hljs" data-lang="python"><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime
+
+<span class="hljs-keyword">from</span> airflow.providers.docker.operators.docker <span class="hljs-keyword">import</span> DockerOperator
+<span class="hljs-keyword">from</span> airflow.providers.standard.operators.empty <span class="hljs-keyword">import</span> EmptyOperator
+<span class="hljs-keyword">from</span> airflow.sdk <span class="hljs-keyword">import</span> DAG, Param
+<span class="hljs-keyword">from</span> docker.types <span class="hljs-keyword">import</span> Mount
+
+<span class="hljs-keyword">with</span> DAG(
+    dag_id=<span class="hljs-string">&quot;pipeline-with-parameter&quot;</span>,
+    start_date=datetime(<span class="hljs-number">2026</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>),
+    schedule=<span class="hljs-literal">None</span>,
+    catchup=<span class="hljs-literal">False</span>,
+    is_paused_upon_creation=<span class="hljs-literal">False</span>,
+    params={<span class="hljs-string">&quot;prm_example&quot;</span>: Param(<span class="hljs-string">&quot;default value&quot;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;string&quot;</span>)},
+) <span class="hljs-keyword">as</span> dag:
+    start_dag = EmptyOperator(task_id=<span class="hljs-string">&quot;start_dag&quot;</span>)
+    end_dag = EmptyOperator(task_id=<span class="hljs-string">&quot;end_dag&quot;</span>)
+    hop = DockerOperator(
+        task_id=<span class="hljs-string">&quot;pipeline-with-parameter&quot;</span>,
+        image=<span class="hljs-string">&quot;apache/hop:2.20.0&quot;</span>,
+        environment={
+            <span class="hljs-string">&quot;HOP_RUN_PARAMETERS&quot;</span>: <span class="hljs-string">&quot;PRM_EXAMPLE={{ params.prm_example }}&quot;</span>,
+            <span class="hljs-string">&quot;HOP_LOG_LEVEL&quot;</span>: <span class="hljs-string">&quot;Basic&quot;</span>,
+            <span class="hljs-string">&quot;HOP_FILE_PATH&quot;</span>: <span class="hljs-string">&quot;${PROJECT_HOME}/pipelines/pipeline-with-parameter.hpl&quot;</span>,
+            <span class="hljs-string">&quot;HOP_PROJECT_FOLDER&quot;</span>: <span class="hljs-string">&quot;/project&quot;</span>,
+            <span class="hljs-string">&quot;HOP_PROJECT_NAME&quot;</span>: <span class="hljs-string">&quot;hop-airflow-sample&quot;</span>,
+            <span class="hljs-string">&quot;HOP_ENVIRONMENT_NAME&quot;</span>: <span class="hljs-string">&quot;hop-airflow-sample-env&quot;</span>,
+            <span class="hljs-string">&quot;HOP_ENVIRONMENT_CONFIG_FILE_NAME_PATHS&quot;</span>: <span class="hljs-string">&quot;/project-config/hop-airflow-config.json&quot;</span>,
+            <span class="hljs-string">&quot;HOP_RUN_CONFIG&quot;</span>: <span class="hljs-string">&quot;local&quot;</span>,
+        },
+        docker_url=<span class="hljs-string">&quot;unix://var/run/docker.sock&quot;</span>,
+        network_mode=<span class="hljs-string">&quot;bridge&quot;</span>,
+        mounts=[
+            Mount(source=<span class="hljs-string">&quot;LOCAL_PATH_TO_PROJECT_FOLDER&quot;</span>, target=<span class="hljs-string">&quot;/project&quot;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;bind&quot;</span>),
+            Mount(source=<span class="hljs-string">&quot;LOCAL_PATH_TO_CONFIG_FOLDER&quot;</span>, target=<span class="hljs-string">&quot;/project-config&quot;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;bind&quot;</span>),
+        ],
+        mount_tmp_dir=<span class="hljs-literal">False</span>,
+        auto_remove=<span class="hljs-string">&quot;success&quot;</span>,
+    )
+    start_dag &gt;&gt; hop &gt;&gt; end_dag</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Save it in your dags folder as <code>apache-hop-dag-with-parameter.py</code> and wait for it to appear in the list of DAGs.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/how-to-guides/run-hop-in-apache-airflow/apache-airflow-two-dags.png" alt="Apache Airflow - two DAGs" width="75%"></span></p>
+</div>
+<div class="paragraph">
+<p>Click the play icon of the <strong>pipeline-with-parameter</strong> DAG. The trigger form now has a <strong>prm_example</strong> field. Enter a value and click <strong>Trigger</strong>.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../_images/how-to-guides/run-hop-in-apache-airflow/apache-airflow-trigger-dag-with-config.png" alt="Apache Airflow - trigger DAG with a parameter" width="60%"></span></p>
+</div>
+<div class="paragraph">
+<p>You can also trigger the DAG from the command line, with the value in the run configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">docker compose <span class="hljs-built_in">exec</span> airflow-scheduler \
+  airflow dags trigger pipeline-with-parameter -c <span class="hljs-string">&#x27;{&quot;prm_example&quot;: &quot;hello from airflow&quot;}&#x27;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The task log now shows the parameter value and the environment variable:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">[2026-11-22 18:05:14] INFO - 2026/11/22 18:05:14 - write parameter to log.0 - we received <span class="hljs-string">&#x27;hello from airflow&#x27;</span> as the value <span class="hljs-keyword">for</span> this pipeline<span class="hljs-string">&#x27;s parameter.
+[2026-11-22 18:05:14] INFO - 2026/11/22 18:05:14 - write parameter to log.0 -
+[2026-11-22 18:05:14] INFO - 2026/11/22 18:05:14 - write parameter to log.0 - example = hello from airflow
+[2026-11-22 18:05:14] INFO - 2026/11/22 18:05:14 - write env_variable to log.0 - the value for variable ENV_VARIABLE is variable value
+[2026-11-22 18:05:14] INFO - 2026/11/22 18:05:14 - write env_variable to log.0 -
+[2026-11-22 18:05:14] INFO - 2026/11/22 18:05:14 - write env_variable to log.0 - env_variable = variable value
+[2026-11-22 18:05:14] INFO - 2026/11/22 18:05:14 - pipeline-with-parameter - Pipeline duration : 0.283 seconds [  0.283&quot; ]</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See <a href="https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/params.html" target="_blank" rel="noopener">Params</a> in the Airflow documentation for parameter types, validation and the trigger form.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="kubernetes"><a class="link" href="#kubernetes">Run Hop on Kubernetes with the KubernetesPodOperator</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Managed Airflow services such as Amazon MWAA, Google Cloud Composer and Astronomer do not give you a Docker socket, so the DockerOperator doesn&#8217;t work there.
+Use the <a href="https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html" target="_blank" rel="noopener">KubernetesPodOperator</a> instead: it runs the same <code>apache/hop</code> image as a pod in a Kubernetes cluster.
+It is in the <code>apache-airflow-providers-cncf-kubernetes</code> package, which the official Airflow image already contains.</p>
+</div>
+<div class="paragraph">
+<p>A pod can&#8217;t mount a folder from your machine. Put the project in an image (see <a href="../hop-server/deploy-project-image.html" class="xref page">Project in a Docker image</a>) and the environment configuration file in a ConfigMap, in the namespace the pod runs in (see below):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>bash</div><pre class="highlightjs highlight is-highlighted"><code class="language-bash hljs" data-lang="bash">kubectl create configmap hop-airflow-config --from-file=hop-airflow-config.json -n NAMESPACE</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The DAG below runs the pipeline with parameter from the previous section in a pod.
+<code>registry.example.com/your-project:1.0</code> is an image of the samples project, with the project in <code>/your-project</code>.
+For an image of your own project, point <code>HOP_FILE_PATH</code> at a pipeline or workflow in that project.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>python</div><pre class="highlightjs highlight is-highlighted"><code class="language-python hljs" data-lang="python"><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime
+
+<span class="hljs-keyword">from</span> airflow.providers.cncf.kubernetes.operators.pod <span class="hljs-keyword">import</span> KubernetesPodOperator
+<span class="hljs-keyword">from</span> airflow.sdk <span class="hljs-keyword">import</span> DAG, Param
+<span class="hljs-keyword">from</span> kubernetes.client <span class="hljs-keyword">import</span> models <span class="hljs-keyword">as</span> k8s
+
+<span class="hljs-keyword">with</span> DAG(
+    dag_id=<span class="hljs-string">&quot;pipeline-with-parameter-k8s&quot;</span>,
+    start_date=datetime(<span class="hljs-number">2026</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>),
+    schedule=<span class="hljs-literal">None</span>,
+    catchup=<span class="hljs-literal">False</span>,
+    is_paused_upon_creation=<span class="hljs-literal">False</span>,
+    params={<span class="hljs-string">&quot;prm_example&quot;</span>: Param(<span class="hljs-string">&quot;default value&quot;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;string&quot;</span>)},
+) <span class="hljs-keyword">as</span> dag:
+    hop = KubernetesPodOperator(
+        task_id=<span class="hljs-string">&quot;pipeline-with-parameter&quot;</span>,
+        name=<span class="hljs-string">&quot;hop-pipeline-with-parameter&quot;</span>,
+        image=<span class="hljs-string">&quot;registry.example.com/your-project:1.0&quot;</span>,
+        env_vars={
+            <span class="hljs-string">&quot;HOP_RUN_PARAMETERS&quot;</span>: <span class="hljs-string">&quot;PRM_EXAMPLE={{ params.prm_example }}&quot;</span>,
+            <span class="hljs-string">&quot;HOP_LOG_LEVEL&quot;</span>: <span class="hljs-string">&quot;Basic&quot;</span>,
+            <span class="hljs-string">&quot;HOP_FILE_PATH&quot;</span>: <span class="hljs-string">&quot;${PROJECT_HOME}/pipelines/pipeline-with-parameter.hpl&quot;</span>,
+            <span class="hljs-string">&quot;HOP_PROJECT_FOLDER&quot;</span>: <span class="hljs-string">&quot;/your-project&quot;</span>,
+            <span class="hljs-string">&quot;HOP_PROJECT_NAME&quot;</span>: <span class="hljs-string">&quot;hop-airflow-sample&quot;</span>,
+            <span class="hljs-string">&quot;HOP_ENVIRONMENT_NAME&quot;</span>: <span class="hljs-string">&quot;hop-airflow-sample-env&quot;</span>,
+            <span class="hljs-string">&quot;HOP_ENVIRONMENT_CONFIG_FILE_NAME_PATHS&quot;</span>: <span class="hljs-string">&quot;/project-config/hop-airflow-config.json&quot;</span>,
+            <span class="hljs-string">&quot;HOP_RUN_CONFIG&quot;</span>: <span class="hljs-string">&quot;local&quot;</span>,
+        },
+        volumes=[
+            k8s.V1Volume(
+                name=<span class="hljs-string">&quot;hop-config&quot;</span>,
+                config_map=k8s.V1ConfigMapVolumeSource(name=<span class="hljs-string">&quot;hop-airflow-config&quot;</span>),
+            )
+        ],
+        volume_mounts=[
+            k8s.V1VolumeMount(name=<span class="hljs-string">&quot;hop-config&quot;</span>, mount_path=<span class="hljs-string">&quot;/project-config&quot;</span>, read_only=<span class="hljs-literal">True</span>)
+        ],
+        get_logs=<span class="hljs-literal">True</span>,
+        on_finish_action=<span class="hljs-string">&quot;delete_succeeded_pod&quot;</span>,
+    )</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>get_logs=True</code> copies the Hop output to the task log.
+<code>on_finish_action="delete_succeeded_pod"</code> keeps a failed pod, so you can check it with <code>kubectl logs</code>.</p>
+</div>
+<div class="paragraph">
+<p>How Airflow connects to the cluster depends on where it runs.
+On Cloud Composer and Astronomer, the default connection runs the pod in the Airflow cluster itself.
+On MWAA, and on your own Airflow outside the cluster, set <code>kubernetes_conn_id</code> or <code>config_file</code> to point the operator at your cluster.</p>
+</div>
+<div class="paragraph">
+<p>The DAG doesn&#8217;t set a <code>namespace</code>, so the operator uses the namespace of the Kubernetes connection, then the namespace Airflow itself runs in, then <code>default</code>.
+Platforms often only let Airflow create pods in one namespace, such as the deployment namespace on Astronomer or <code>composer-user-workloads</code> on Cloud Composer 3.
+If yours does, set <code>namespace</code> on the operator to that namespace.
+Create the ConfigMap in the same namespace, or the pod can&#8217;t find it.</p>
+</div>
+<div class="paragraph">
+<p>See the KubernetesPodOperator documentation and the documentation of your platform.</p>
 </div>
 </div>
 </div>
@@ -3483,27 +3650,33 @@ If you&#8217;re using <code>DockerOperator</code> and need to access a database 
 <h2 id="_scheduling_a_dag_in_apache_airflow"><a class="link" href="#_scheduling_a_dag_in_apache_airflow">Scheduling a DAG in Apache Airflow</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>So far, we&#8217;ve looked at DAG that we ran manually and ad-hoc. There are lots of <a href="https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/index.html" target="_blank" rel="noopener">well-documented</a> options to schedule DAGs in Apache Airflow.  Since scheduling your DAGs is not really Apache Hop related, we&#8217;ll only cover this briefly here.</p>
+<p>So far, we&#8217;ve triggered DAGs manually. There are lots of <a href="https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/index.html" target="_blank" rel="noopener">well-documented</a> options to schedule DAGs in Apache Airflow. Since scheduling your DAGs is not really Apache Hop related, we&#8217;ll only cover this briefly here.</p>
 </div>
 <div class="paragraph">
 <p>For the same hop-run / short-lived-container contract with cron, systemd, Jenkins or a Kubernetes CronJob, see <a href="scheduling-workflows-and-pipelines.html" class="xref page">Scheduling workflows and pipelines</a>.</p>
 </div>
 <div class="paragraph">
-<p>One option is to provide a cron string to schedule your DAG execution. For example, to run a specific DAG at 10:00 am every morning, we&#8217;ll change the schedule_interval from None to a cron expression in the "with DAG" line in our DAG (line breaks added for readability):</p>
+<p>One option is a cron expression. For example, to run a DAG at 10:00 UTC every morning, change <code>schedule</code> from <code>None</code> to a cron expression in the <code>with DAG</code> line of your DAG:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<div class="code-lang" data-pagefind-ignore>python</div><pre class="highlightjs highlight is-highlighted"><code class="language-python hljs" data-lang="python">  <span class="hljs-keyword">with</span> DAG(
-      <span class="hljs-string">&#x27;sample-pipeline&#x27;</span>,
-      default_args=default_args,
-      schedule_interval=<span class="hljs-string">&#x27;0 10 * * *&#x27;</span>,
-      catchup=<span class="hljs-literal">False</span>,
-      is_paused_upon_creation=<span class="hljs-literal">False</span>
-    ) <span class="hljs-keyword">as</span> dag:</code></pre>
+<div class="code-lang" data-pagefind-ignore>python</div><pre class="highlightjs highlight is-highlighted"><code class="language-python hljs" data-lang="python"><span class="hljs-keyword">with</span> DAG(
+    dag_id=<span class="hljs-string">&quot;sample-pipeline&quot;</span>,
+    start_date=datetime(<span class="hljs-number">2026</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>),
+    schedule=<span class="hljs-string">&quot;0 10 * * *&quot;</span>,
+    catchup=<span class="hljs-literal">False</span>,
+    is_paused_upon_creation=<span class="hljs-literal">False</span>,
+) <span class="hljs-keyword">as</span> dag:</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>For a more detailed description of the scheduling options in Apache Airflow, you may find <a href="https://medium.com/@thehippieandtheboss/how-to-define-the-dag-schedule-interval-parameter-cb2d81d2a02e" target="_blank" rel="noopener">this Medium post</a> helpful.</p>
+<p>Airflow reads the cron expression in UTC, because the Docker Compose setup sets no default time zone and <code>start_date</code> has none.
+To schedule in local time, give <code>start_date</code> a time zone, for example <code>pendulum.datetime(2026, 1, 1, tz="Europe/Brussels")</code> (with <code>import pendulum</code>).
+See <a href="https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/timezone.html" target="_blank" rel="noopener">Time zones</a> in the Airflow documentation.</p>
+</div>
+<div class="paragraph">
+<p>Scheduled runs use the default values of the DAG&#8217;s <code>params</code>.
+See <a href="https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/cron.html" target="_blank" rel="noopener">Cron &amp; Time Intervals</a> in the Airflow documentation for cron expressions, presets such as <code>@daily</code>, and other ways to schedule a DAG.</p>
 </div>
 </div>
 </div>
@@ -3511,14 +3684,32 @@ If you&#8217;re using <code>DockerOperator</code> and need to access a database 
 <h2 id="_summary"><a class="link" href="#_summary">Summary</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We&#8217;ve covered the basics of running Apache Hop pipelines (or workflows) in Apache Airflow with the DockerOperator.</p>
+<p>We&#8217;ve covered the basics of running Apache Hop pipelines (or workflows) in Apache Airflow with the DockerOperator and the KubernetesPodOperator.</p>
 </div>
 <div class="paragraph">
-<p>There are other options: you could use Airflow&#8217;s <a href="https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/bash.html" target="_blank" rel="noopener">BashOperator</a> to use <a href="../hop-run/index.html" class="xref page">hop-run</a> directly or the <a href="https://airflow.apache.org/docs/apache-airflow-providers-http/stable/operators.html" target="_blank" rel="noopener">HTTP operator</a> to run pipelines or workflows on a remote hop server.</p>
+<p>There are other options:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../hop-tools/hop-airflow-bundle.html" class="xref page">hop airflow-bundle</a> turns every workflow of a project into a DAG with one task per action, and the <a href="../workflow/workflow-run-configurations/airflow-workflow-engine.html" class="xref page">Apache Airflow workflow engine</a> runs and follows such a DAG from Hop GUI (Hop 2.21 and later).</p>
+</li>
+<li>
+<p>Airflow&#8217;s <a href="https://airflow.apache.org/docs/apache-airflow-providers-standard/stable/operators/bash.html" target="_blank" rel="noopener">BashOperator</a> runs <a href="../hop-run/index.html" class="xref page">hop-run</a> directly, if Hop is installed on the Airflow workers.</p>
+</li>
+<li>
+<p>The <a href="https://airflow.apache.org/docs/apache-airflow-providers-http/stable/operators.html" target="_blank" rel="noopener">HTTP operator</a> runs pipelines or workflows on a remote <a href="../hop-server/index.html" class="xref page">Hop Server</a>, for example through its <a href="../hop-server/web-service.html" class="xref page">web services</a> or <a href="../hop-server/json-api.html" class="xref page">JSON API</a>.
+Hop Server requires authentication: store the Hop Server user and password in the Airflow HTTP connection.
+Since Hop 2.20, this includes the JSON API.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>Airflow is one scheduler among several.
 <a href="scheduling-workflows-and-pipelines.html" class="xref page">Scheduling workflows and pipelines</a> covers cron, <code>at</code>, systemd, Windows Task Scheduler, Jenkins and Kubernetes CronJob against the same hop-run contract.</p>
+</div>
+<div class="paragraph">
+<p>To start an Airflow DAG from a Hop workflow, see <a href="../workflow/actions/airflow-trigger-dag-run.html" class="xref page">Trigger Airflow DAG run</a>.</p>
 </div>
 </div>
 </div>
