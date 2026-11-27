@@ -3128,6 +3128,15 @@ The action reads the DOCTYPE of the file, which Hop refuses by default: the vari
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has <code>actions/requires-setup/dtd-validator.hwf</code>, which validates <code>files/xml-actions/orders.xml</code> against the separate DTD <code>files/xml-actions/orders.dtd</code>.
+Hop does not allow DOCTYPE declarations by default: set the variable <code>XML_ALLOW_DOCTYPE_DECL</code> to <code>Y</code> before you run it, or the validation fails and the workflow follows the failure hop.</p>
+</div>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/workflow/actions/deletefolders.html"><span>Previous</span><strong>Delete folders</strong></a>

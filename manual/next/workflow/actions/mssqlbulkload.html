@@ -3277,6 +3277,15 @@ SQL Server on Linux only accepts the RAW <strong>Codepage</strong>: the default,
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has <code>actions/requires-setup/mssql-bulk-load.hwf</code>, which empties the table <code>dbo.customers</code> and loads the comma-separated file <code>/data/customers.csv</code> into it with <code>BULK INSERT</code>, skipping the header line.
+Create a connection named <code>mssql</code>, the table and the file before you run it. The database server reads the file, but the action first checks that the file exists, so it must be at the same path on the machine that runs Hop too.</p>
+</div>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/workflow/actions/mysqlbulkfile.html"><span>Previous</span><strong>Bulk load from MySQL into file</strong></a>

@@ -3119,6 +3119,15 @@ This only changes the logging: the workflow is marked as failed either way.</p><
 </table>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_samples"><a class="link" href="#_samples">Samples</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The samples project has <code>actions/abort.hwf</code>, which checks that <code>project-config.json</code> exists in the project folder and writes a message to the log.
+The Abort action is on the failure hop of that check: change the file name to a file that does not exist, and it stops the workflow with an error.</p>
+</div>
+</div>
+</div>
     </article>
 <nav class="pagination" data-pagefind-ignore aria-label="Page">
   <a class="pagination__prev" href="../../../../manual/next/workflow/actions.html"><span>Previous</span><strong>Actions</strong></a>
