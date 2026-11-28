@@ -436,6 +436,9 @@
 <loc>https://hop.apache.org/manual/next/metadata-types/airflow-connection.html</loc>
 </url>
 <url>
+<loc>https://hop.apache.org/manual/next/metadata-types/airflow-dag.html</loc>
+</url>
+<url>
 <loc>https://hop.apache.org/manual/next/metadata-types/async-web-service.html</loc>
 </url>
 <url>

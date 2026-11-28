@@ -2299,6 +2299,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../manual/next/metadata-types/airflow-dag.html">Airflow DAG</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../manual/next/metadata-types/async-web-service.html">Asynchronous Web Service</a>
     
   </li>
@@ -3147,6 +3151,10 @@ Otherwise the DAGs can fail to load: Airflow then reports an import error, and t
 <div class="sect1">
 <h2 id="_what_airflow_gets"><a class="link" href="#_what_airflow_gets">What Airflow gets</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>A workflow with an <a href="../metadata-types/airflow-dag.html" class="xref page">Airflow DAG</a> becomes the DAGs those objects describe, with their schedule, DAG id, display name, tags, limits and parameter values.
+Without one:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -3160,7 +3168,7 @@ Otherwise the DAGs can fail to load: Airflow then reports an import error, and t
 <p><strong>Description</strong>: the description of the workflow.</p>
 </li>
 <li>
-<p><strong>Schedule</strong>: none.
+<p><strong>Schedule</strong>: none, unless an Airflow DAG sets one.
 Start the DAGs from Airflow, through its REST API, with the <a href="../workflow/actions/airflow-trigger-dag-run.html" class="xref page">Trigger Airflow DAG run</a> action, or with the <a href="../workflow/workflow-run-configurations/airflow-workflow-engine.html" class="xref page">Apache Airflow run configuration</a>.
 The schedule of the <a href="../workflow/actions/start.html" class="xref page">Start</a> action is not used: a Start action that repeats runs the workflow once.</p>
 </li>
@@ -3169,7 +3177,8 @@ The schedule of the <a href="../workflow/actions/start.html" class="xref page">S
 Key <code>hop_workflow_version</code> is the exception: the Apache Airflow run configuration sets it to the version of the workflow it published, and the tasks of a run fail when the bundle holds another version.
 Text is passed as it is, including commas; numbers, lists and objects are passed as JSON.
 A key with <code>=</code> fails the task: <code>hop run</code> would split it in the wrong place.
-The Java SDK cannot declare DAG params, so the trigger form in Airflow shows no fields: pass the values as JSON.</p>
+The Java SDK cannot declare DAG params, so the trigger form in Airflow shows no fields: pass the values as JSON.
+An Airflow DAG can give parameters a value for every run; a key of the conf wins.</p>
 </li>
 <li>
 <p><strong>Result</strong>: every task keeps the outcome of its run in XCom <code>hop_outcome</code>, including <code>success</code>, <code>exitCode</code>, <code>name</code>, <code>executionId</code>, <code>startDate</code>, <code>endDate</code>, the counters, and <code>error</code> when the run failed.

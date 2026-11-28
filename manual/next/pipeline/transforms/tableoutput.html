@@ -2299,6 +2299,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/airflow-dag.html">Airflow DAG</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/async-web-service.html">Asynchronous Web Service</a>
     
   </li>
@@ -3230,6 +3234,11 @@ This feature groups inserts statements to limit round trips to the database.
 This is the fastest option and is enabled by default.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rows per statement</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With batch updates, the number of rows one INSERT statement carries, on a database type with a multi-row INSERT whose failed batches are recovered (see above). 100 for a new transform; a transform saved before this option existed inserts one row per statement. Variables are allowed.
+See <a href="#multirow">Several rows per statement</a>.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Is the name of the table defined in a field?</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Use these options to split the data over one or more tables; the name of the target table is defined in the field you specify.
 For example if you store customer data in the field gender, the data might end up in tables M and F (Male and Female).
@@ -3311,6 +3320,39 @@ On every other database, and when a connection option changes how the driver han
 </div>
 <div class="paragraph">
 <p>When a failed batch is worked out this way, rows can be sent to the database more than once, so a failed batch can use up extra sequence values and fire non-transactional triggers again.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="multirow"><a class="link" href="#multirow">Several rows per statement</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>With batch updates and <strong>Rows per statement</strong> above 1, the rows of a batch are written as <code>INSERT INTO t (a, b) VALUES (?, ?), (?, ?), &#8230;&#8203;</code>, each table of <strong>Is the name of the table defined in a field?</strong> or of the partitioning with its own batch.
+This is done on the database types whose multi-row INSERT and failed batches have been checked: PostgreSQL, MySQL, Microsoft SQL Server (native), H2, DuckDB and Apache Derby.
+Oracle writes one row per statement: there an INSERT of several rows is no faster than the batch the driver already sends, and the more values it carries, the longer Oracle takes to parse it.
+A remainder shorter than the rows per statement is sent as a few statements of smaller sizes, and a database&#8217;s limits on rows or parameters per statement lower the rows per statement where needed.
+On MySQL a statement also has to fit in the server&#8217;s <code>max_allowed_packet</code> (or the connection&#8217;s lower <code>maxAllowedPacket</code>): a statement is cut short before its values would take it past that, so large rows go fewer to a statement.
+When a multi-row statement fails, its rows are run again one by one, so with an error hop exactly the refused rows go to the error hop (error code <code>TOP0002</code>) and the others are committed; without one the transform stops and the failed batch is rolled back.
+Work done earlier in the same transaction, such as <strong>Truncate table</strong>, is kept.
+A value that can&#8217;t be bound is found when the batch is sent, not when the row arrives; it then goes to the error hop with error code <code>TOP001</code>, or stops the transform, as with one row per statement.</p>
+</div>
+<div class="paragraph">
+<p>Statement-level triggers fire once per statement and see all of its rows: every trigger on SQL Server, and <code>FOR EACH STATEMENT</code> triggers on PostgreSQL, H2 and Derby.
+A trigger that expects one row per INSERT needs <strong>Rows per statement</strong> 1.
+Row-level triggers (MySQL&#8217;s, and <code>FOR EACH ROW</code> triggers elsewhere) still fire once per row.</p>
+</div>
+<div class="paragraph">
+<p>One row per statement is used, as before, without batch updates (also with <strong>Return auto-generated key</strong>, a commit size of 0 or a connection shared by a transactional pipeline), with <strong>Ignore insert errors</strong>, on a database without transactions, when two fields write the same column, on MySQL outside strict SQL mode or into a table without transactions (MyISAM, MEMORY, &#8230;&#8203;), or when the database type declares no multi-row INSERT or its limit on parameters leaves room for one row only.
+The detailed log says which, and how many rows per statement are used.</p>
+</div>
+<div class="paragraph">
+<p>On PostgreSQL, the driver option <code>reWriteBatchedInserts=true</code> also applies to these statements: the driver folds a batch of multi-row INSERTs into larger multi-row INSERTs.
+The rows written are the same.
+When a row fails, though, the driver doesn&#8217;t say which statement of the batch caused it, so the rows of that batch are run again one by one, which takes more round trips than without the option.</p>
+</div>
+<div class="paragraph">
+<p>To go back to one row per statement without changing any transform, tick <strong>Write one row per statement</strong> on the <strong>Advanced</strong> tab of the connection, or set the variable <code>HOP_DATABASE_MULTI_ROW_DML</code> to <code>DISABLED</code> for every connection.
+<code>HOP_DATABASE_BATCH_RECOVERY=LEGACY</code> does the same, because several rows per statement are only written where failed batches are recovered.</p>
 </div>
 </div>
 </div>

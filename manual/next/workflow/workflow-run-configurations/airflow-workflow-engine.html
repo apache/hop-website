@@ -2299,6 +2299,10 @@
     
   </li>
   <li class="doc-nav__item">
+    <a href="../../../../manual/next/metadata-types/airflow-dag.html">Airflow DAG</a>
+    
+  </li>
+  <li class="doc-nav__item">
     <a href="../../../../manual/next/metadata-types/async-web-service.html">Asynchronous Web Service</a>
     
   </li>
@@ -3046,7 +3050,7 @@
 <p>It publishes the project as a DAG bundle, as <a href="../../hop-tools/hop-airflow-bundle.html" class="xref page">hop airflow-bundle</a> with <code>--target</code> does.</p>
 </li>
 <li>
-<p>It waits until Airflow shows the DAG of the workflow as it was just published, and unpauses it when it is paused.
+<p>It waits until Airflow shows the DAG of the workflow as it was just published, and unpauses it when it is paused and has no schedule.
 Airflow reads a changed file again every 30 seconds by default (<code>min_file_process_interval</code>).</p>
 </li>
 <li>
@@ -3121,12 +3125,22 @@ Default: the project name followed by two underscores.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Tasks</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">One task per action, or one task for the whole workflow: see <a href="../../hop-tools/hop-airflow-bundle.html#_one_task_for_the_whole_workflow" class="xref page">One task for the whole workflow</a>.
 The setting applies to every workflow in the bundle: a publish with another setting changes the DAGs of all of them.
+An <a href="../../metadata-types/airflow-dag.html" class="xref page">Airflow DAG</a> can set its own tasks.
 Default: one task per action.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Airflow DAG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="../../metadata-types/airflow-dag.html" class="xref page">Airflow DAG</a> to run, for a workflow that has more than one.
+A workflow with one Airflow DAG runs that one, and a workflow without one runs the DAG it gets from the bundle.
+For any other workflow this field is not used.
+Parameter values you set for the run win over those of the Airflow DAG; a parameter you leave empty gets the value of the Airflow DAG.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Unpause a paused DAG?</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Airflow can pause new DAGs, and a run of a paused DAG stays queued.
-With this option the DAG is unpaused before the run starts; without it the workflow fails without starting a run.</p></td>
+With this option the DAG is unpaused before the run starts; without it the workflow fails without starting a run.
+A paused DAG with a schedule, from an <a href="../../metadata-types/airflow-dag.html" class="xref page">Airflow DAG</a>, is never unpaused: that would also start its schedule, and with catch up Airflow would start a run for every interval since the start date.
+The workflow then fails without starting a run: unpause the DAG in Airflow when its schedule should start.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Wait for a new DAG (seconds)</p></td>

@@ -745,6 +745,10 @@ They are ordinary methods with sensible defaults, and the ones that matter most 
 <td class="tableblock halign-left valign-top"><p class="tableblock">Set this false for databases that invalidate a statement, or the whole connection, when a statement fails. SQLite is the example in the tree.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>getDmlSyntax()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The upsert forms (<code>MERGE</code>, <code>ON CONFLICT</code>, <code>ON DUPLICATE KEY</code>) and the INSERT of several rows the database has, or <code>null</code> for plain one-row statements only. See <a href="#_dml_statements">DML statements</a>.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getLimitClause(int)</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The clause appended <strong>after</strong> the FROM clause to limit rows, such as <code>" LIMIT 10"</code>.</p></td>
 </tr>
@@ -889,6 +893,176 @@ The dialects that extend PostgreSQL and MySQL (Greenplum, Redshift, CockroachDB,
 </div>
 </div>
 <div class="sect1">
+<h2 id="_dml_statements"><a class="link" href="#_dml_statements">DML statements</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hop writes upsert statements, and INSERT statements of several rows, through one builder, <code>org.apache.hop.core.database.dml.DmlStatementBuilder</code>.
+What a dialect declares in the <code>DmlSyntax</code> it returns from <code>getDmlSyntax()</code> decides which forms are used; an INSERT it doesn&#8217;t declare is written one row per statement, which every database runs.</p>
+</div>
+<div class="paragraph">
+<p>An upsert is written in one of the declared <code>upserts</code>, in order of preference.
+The standard <code>MERGE</code> needs nothing but the statement:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<div class="code-lang" data-pagefind-ignore>sql</div><pre class="highlightjs highlight is-highlighted"><code class="language-sql hljs" data-lang="sql"><span class="hljs-keyword">MERGE</span> <span class="hljs-keyword">INTO</span> target t
+<span class="hljs-keyword">USING</span> (<span class="hljs-keyword">VALUES</span> (?, ?, ?)) <span class="hljs-keyword">AS</span> s (id, name, amount)
+<span class="hljs-keyword">ON</span> (t.id <span class="hljs-operator">=</span> s.id)
+<span class="hljs-keyword">WHEN</span> MATCHED [<span class="hljs-keyword">AND</span> (changed)] <span class="hljs-keyword">THEN</span> <span class="hljs-keyword">UPDATE</span> <span class="hljs-keyword">SET</span> name <span class="hljs-operator">=</span> s.name, amount <span class="hljs-operator">=</span> s.amount
+<span class="hljs-keyword">WHEN</span> <span class="hljs-keyword">NOT</span> MATCHED <span class="hljs-keyword">THEN</span> <span class="hljs-keyword">INSERT</span> (id, name, amount) <span class="hljs-keyword">VALUES</span> (s.id, s.name, s.amount)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>ON_CONFLICT</code> (<code>INSERT &#8230;&#8203; ON CONFLICT (keys) DO UPDATE SET c = EXCLUDED.c</code>) needs a primary key or unique index on exactly the key columns, and <code>ON_DUPLICATE_KEY</code> (<code>INSERT &#8230;&#8203; ON DUPLICATE KEY UPDATE c = VALUES(c)</code>) needs that to be the table&#8217;s only unique index, since MySQL reacts to any of them.
+<code>org.apache.hop.core.database.dml.DmlSupport.plan(&#8230;&#8203;)</code> checks this on the open connection and picks the first form that qualifies, or the one the user asked for.</p>
+</div>
+<div class="paragraph">
+<p>An INSERT can carry several rows: generating one <code>INSERT &#8230;&#8203; VALUES (&#8230;&#8203;), (&#8230;&#8203;)</code> in Hop is cheaper than sending N one-row statements.
+<code>DmlSupport.planStatements(&#8230;&#8203;)</code> picks the rows per INSERT for a connection: the rows asked for, capped by the dialect&#8217;s limits.</p>
+</div>
+<div class="paragraph">
+<p>What a <code>DmlSyntax</code> holds:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>rowSource</code></dt>
+<dd>
+<p>How a row of parameters becomes a derived table, aliased <code>s</code>: <code>VALUES</code> (<code>(VALUES (?, ?)) AS s (a, b)</code>: H2, DuckDB, PostgreSQL, SQL Server, DB2), <code>SELECT</code> (<code>(SELECT ? AS a, ? AS b) s</code>) or <code>SELECT_FROM_DUAL</code> (Oracle).
+It is the source of a <code>MERGE</code>.</p>
+</dd>
+<dt class="hdlist1"><code>castParameters</code></dt>
+<dd>
+<p>Whether each parameter of that derived table is written as <code>CAST(? AS type)</code>. PostgreSQL, SQL Server and DB2 need this: pgjdbc sends timestamps, and strings bound for other columns, untyped, and PostgreSQL turns an untyped value in a <code>VALUES</code> list into text. The types come from the table, through <code>DmlColumns.fromTable(&#8230;&#8203;)</code>, and the dialect writes each as a cast target in <code>IDatabase.getDmlCastType(&#8230;&#8203;)</code>. A cast must change no value: the column must still decide whether the value fits, as it does for a plain INSERT. Check a new dialect with <code>RealDriverCastScenario</code>, which writes overlong and over-precise values through every declared form and through the plain one-row statements and compares the outcomes. The plain <code>VALUES</code> list of an INSERT is not cast.</p>
+</dd>
+<dt class="hdlist1"><code>castValuesLists</code></dt>
+<dd>
+<p>Also cast the plain <code>VALUES</code> list of an INSERT when it carries several rows. SQL Server needs it: it types a multi-row <code>VALUES</code> list from its parameters before it assigns the rows, mssql-jdbc declares a <code>BigDecimal</code> as <code>decimal(38, scale)</code>, and two scales together overflow 38 digits, so <code>1</code> and <code>2.25</code> are silently written as <code>1.00</code> and <code>2.00</code> into a <code>numeric(10,2)</code> column.
+Each parameter is cast to <code>IDatabase.getDmlValuesListCastType(&#8230;&#8203;)</code>, by default the column&#8217;s cast type. SQL Server casts character types to <code>nvarchar(max)</code> there: a cast to <code>varchar</code> converts the value to the code page of the database&#8217;s default collation, so a column with another collation (a <code>_UTF8</code> one, say) would get <code>?</code> for every character that code page lacks, without an error.</p>
+</dd>
+<dt class="hdlist1"><code>upserts</code></dt>
+<dd>
+<p><code>DmlSyntax.Upsert</code> entries, each with its <code>form</code>, <code>minimumMajorVersion</code> and <code>minimumMinorVersion</code> (checked against <code>DatabaseMetaData</code> when the transform connects), the <code>terminator</code> of a <code>MERGE</code> (SQL Server wants <code>;</code>), its <code>changedCondition</code> and <code>rowAlias</code>.</p>
+</dd>
+<dt class="hdlist1"><code>insertForm</code></dt>
+<dd>
+<p>How several rows go into one INSERT: <code>VALUES_LIST</code> (<code>INSERT INTO t (a, b) VALUES (?, ?), (?, ?)</code>). <code>null</code> inserts one row per statement.</p>
+</dd>
+<dt class="hdlist1"><code>maxParameters</code>, <code>maxRowsPerStatement</code></dt>
+<dd>
+<p>Limits of one statement, 0 for none: PostgreSQL and MySQL (with server-side prepared statements) take 65535 parameters, SQL Server 2098 parameters with mssql-jdbc (the server&#8217;s 2100 less two of the driver&#8217;s) and 1000 rows in an INSERT, SQLite 32766 parameters, H2 100000 parameters.
+Derby compiles a statement to Java bytecode and refuses one that is too complex (42ZA0): its budget is about 6 per row plus 1 per parameter, so it declares 50000 parameters and 1000 rows, which stay well inside it for every column type.
+The rows per statement are the number asked for, capped by both limits, so on a wide table the parameters decide: 1000 columns on PostgreSQL leave 65 rows per statement.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>What the verified dialects declare for an INSERT of several rows:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Database</th>
+<th class="tableblock halign-left valign-top">INSERT</th>
+<th class="tableblock halign-left valign-top">Casts</th>
+<th class="tableblock halign-left valign-top">Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PostgreSQL 14, 18</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VALUES_LIST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">65535 parameters</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SQL Server 2022</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VALUES_LIST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">every parameter of every row</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2098 parameters, 1000 rows</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MySQL 9</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VALUES_LIST</code> (strict SQL mode, InnoDB and NDB tables only)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">65535 parameters, <code>max_allowed_packet</code> bytes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">H2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VALUES_LIST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">100000 parameters</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DuckDB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VALUES_LIST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SQLite (see below)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VALUES_LIST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32766 parameters, 500 rows</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Derby</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VALUES_LIST</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">50000 parameters, 1000 rows</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Oracle declares no INSERT of several rows and writes one row per statement.
+Measured against Oracle Database 23 Free, <code>INSERT &#8230;&#8203; SELECT &#8230;&#8203; FROM dual UNION ALL</code> of several rows is no faster than a batch of one-row INSERTs, which the driver already sends as one array execution, while its hard parse grows with the square of its binds (about a second at 10,000 binds, 50 seconds at 65,000).
+The driver&#8217;s parameter metadata, which Hop asks for to bind a string to a VARCHAR2, NVARCHAR2 or CLOB column, did not finish on a statement of 65 rows of 1000 columns.
+With strict mode off, MySQL writes the implicit default into a NOT NULL column for a row of a multi-row INSERT and only warns, where a one-row INSERT fails; a table without transactions (MyISAM, MEMORY, &#8230;&#8203;) does the same in <code>STRICT_TRANS_TABLES</code> mode, and keeps the rows before a bad one in <code>STRICT_ALL_TABLES</code> mode.
+<code>IDatabase.getMultiRowDmlRefusal(&#8230;&#8203;)</code> is asked for every target table on the open connection; MySQL&#8217;s reads the session&#8217;s <code>sql_mode</code> and the table&#8217;s engine (<code>SHOW CREATE TABLE</code>) and falls back to one row per statement for either, or when it can&#8217;t read them.
+<code>IDatabase.getMaxDmlStatementBytes(&#8230;&#8203;)</code> gives the most bytes one statement may take on the connection; MySQL&#8217;s is <code>max_allowed_packet</code>, since Connector/J refuses a larger statement where a batch of one-row statements only needs each row to fit. <code>MultiRowBatch</code> then closes a statement early, at a power of two of rows, before an estimate of its values would pass the limit.
+SQLite declares the multi-row INSERT and <code>SqliteDmlTest</code> runs it, but SQLite has no batch failure contract (see above), so Table output writes one row per statement there.</p>
+</div>
+<div class="paragraph">
+<p>Return <code>null</code>, the default, when the database has none of these, or when you have not run them.
+Declare the syntax only for the dialect itself (<code>if (getClass() != MyDatabaseMeta.class) return null;</code>): a dialect that extends it, such as Greenplum, CockroachDB, CrateDB and Redshift for PostgreSQL, talks to another server and declares its own.</p>
+</div>
+<div class="paragraph">
+<p>The rows go through <code>org.apache.hop.core.database.batch.MultiRowBatch</code>, the multi-row counterpart of <code>RecoverableBatch</code>, and only on a connection whose batch failure contract is validated (see above).
+It cuts the rows into statements of the chosen size, and sends a shorter remainder as statements of power-of-two sizes.
+When a statement of several rows fails, which it does as a whole on every database, its rows are run again one by one so that exactly the bad rows go to the error hop; work done earlier in the transaction is kept.
+A row of a multi-row INSERT is reported with an update count of 1.</p>
+</div>
+<div class="paragraph">
+<p>Users can go back to one row per statement on a dialect that declares an INSERT of several rows: with <strong>Write one row per statement</strong> on the <strong>Advanced</strong> tab of the connection, with the variable <code>HOP_DATABASE_MULTI_ROW_DML=DISABLED</code> for every connection, or with <code>HOP_DATABASE_BATCH_RECOVERY=LEGACY</code>, since only recovered batches carry several rows. <code>DmlSupport.planStatements(&#8230;&#8203;)</code> checks the first two when it is given the transform&#8217;s variables, so a transform must pass them.</p>
+</div>
+<div class="paragraph">
+<p>Verify the declaration against a real database before returning it.
+The hop-core test jar has the scenarios:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>org.apache.hop.junit.merge.RealDriverMergeScenario</code> runs the one-row <code>MERGE</code> through a <code>PreparedStatement</code> and checks the table after each step.</p>
+</li>
+<li>
+<p><code>org.apache.hop.junit.dml.RealDriverDmlScenario</code> runs the declared INSERT of several rows through a <code>MultiRowBatch</code>, with rows that fail on their own and amounts of different scales in one statement, and checks both the table and the verdict of every row. <code>runAtLimits(&#8230;&#8203;)</code> writes full statements at the dialect&#8217;s <code>maxParameters</code> and <code>maxRowsPerStatement</code>, so a limit that is too high fails the test. <code>runWide(&#8230;&#8203;)</code> does the same on a table as wide as the database allows, without recovering a failure, so a statement the server or the driver refuses for its size fails the test, and reads every value back. <code>measure(&#8230;&#8203;)</code> times one row per statement against several.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Copy <code>H2MergeTest</code> and <code>H2DmlTest</code> for an embedded database, or <code>PostgreSqlMergeIT</code> and <code>PostgreSqlDmlIT</code> for one in a Testcontainers image. The <code>*DmlIT</code> classes of SQL Server (in the mssqlnative plugin) and MySQL run with <code>-Dhop.it.dml=true</code>, with drivers Hop downloads.</p>
+</div>
+<div class="paragraph">
+<p>pgjdbc&#8217;s <code>reWriteBatchedInserts=true</code> also folds a JDBC batch of Hop&#8217;s multi-row INSERTs into larger INSERTs (in powers of two) and then reports <code>SUCCESS_NO_INFO</code>. The rows come out the same; the failed batch entry pgjdbc names then counts its own statements, so the dialect gives no hint for a failed INSERT of several rows and the batch is recovered without one.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_sql_differences"><a class="link" href="#_sql_differences">SQL differences</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -961,6 +1135,9 @@ Declare the dependency as <code>provided</code> in the module&#8217;s <code>pom.
 </li>
 <li>
 <p>There is a golden test for the generated DDL, see <a href="testing.html" class="xref page">Testing a database plugin</a>.</p>
+</li>
+<li>
+<p><code>getDmlSyntax()</code> declares only forms that a test ran against the database, or returns <code>null</code>, and only for the dialect&#8217;s own class.</p>
 </li>
 <li>
 <p>There is a page in the user manual, and <code>documentationUrl</code> points at it.</p>
